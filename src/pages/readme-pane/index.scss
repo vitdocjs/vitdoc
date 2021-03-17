@@ -1,0 +1,112 @@
+#public-component-show-container {
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: #f2f3f7;
+  padding: 20px;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  .component-main {
+    position: relative;
+    display: flex;
+  }
+  .component-part {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .component-name {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    font-size: 3.5em;
+    font-weight: 800;
+    outline: 0;
+    vertical-align: baseline;
+    line-height: 1.2;
+  }
+  .component-sub-title {
+    font-size: 1em;
+    font-weight: 600;
+    vertical-align: baseline;
+    margin-bottom: 8px;
+    display: block;
+    color: #6f6f6f;
+    > span {
+      margin-right: 1em;
+    }
+  }
+
+  .component-block {
+    background: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px #ccc solid;
+    border-bottom: unset;
+    border-top: unset;
+
+    $borderRadius: 7px;
+    &:first-child {
+      border-radius: $borderRadius $borderRadius 0 0;
+      border-top: 1px #ccc solid;
+    }
+    &:last-child {
+      border-radius: 0 0 $borderRadius $borderRadius;
+      border-bottom: 1px #ccc solid;
+    }
+    &:first-child:last-child {
+      border-radius: $borderRadius;
+      border: 1px #ccc solid;
+    }
+  }
+
+  .component-container {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .component-description {
+    font-size: 14px;
+    > .block-title {
+      font-size: 1.3em;
+      display: block;
+      line-height: 2;
+    }
+    > code {
+      border: 1px solid #e7e9ed;
+      background-color: #f8fafc;
+      display: block;
+      padding: 5px 10px;
+      margin: 5px 0;
+      word-break: break-all;
+      word-wrap: break-word;
+      border-radius: 2px;
+      color: #5b6169;
+      font-size: 13px;
+      line-height: 1.6em;
+    }
+    padding: 20px;
+  }
+
+  .ant-tabs-bottom .ant-tabs-bottom-bar {
+    margin-top: 0;
+  }
+  .ant-tabs-nav .ant-tabs-tab {
+    margin: 0;
+  }
+
+  .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {
+    padding: 8px 16px;
+  }
+
+  @media screen and (max-width: 750px) {
+    padding: 20px 0;
+    .component-block {
+      border-radius: 0 !important;
+    }
+  }
+}

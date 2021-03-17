@@ -1,0 +1,1197 @@
+dependencies:
+  react: 17.0.1
+  react-dom: 17.0.1_react@17.0.1
+devDependencies:
+  '@alife/intl-comp-highLighter': 1.0.14_react@17.0.1
+  '@alife/json-2-vision': 1.0.28
+  '@alife/mtop-mock-hook': 1.0.6_react-dom@17.0.1+react@17.0.1
+  '@ant-design/icons': 4.5.0_react-dom@17.0.1+react@17.0.1
+  '@vitejs/plugin-react-refresh': 1.3.1
+  sass: 1.32.8
+  vite: 2.0.5
+lockfileVersion: 5.2
+packages:
+  /@alife/intl-comp-highLighter/1.0.14_react@17.0.1:
+    dependencies:
+      lodash: 4.17.21
+      react-copy-to-clipboard: 5.0.3_react@17.0.1
+      react-syntax-highlighter: 12.2.1_react@17.0.1
+    dev: true
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha1-2cg3H4iKxSDc84PIgR2l7EFVrrY=
+      tarball: '@alife/intl-comp-highLighter/download/@alife/intl-comp-highLighter-1.0.14.tgz'
+  /@alife/json-2-vision/1.0.28:
+    dependencies:
+      '@types/react-dom': 16.9.11
+      lodash: 4.17.21
+    dev: true
+    resolution:
+      integrity: sha1-kgAhj8Lll0Nv6ifCEHaAAhSWg7g=
+      tarball: '@alife/json-2-vision/download/@alife/json-2-vision-1.0.28.tgz'
+  /@alife/mtop-mock-hook/1.0.6_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      '@alife/next': 0.19.81_react-dom@17.0.1+react@17.0.1
+      lodash: 4.17.21
+    dev: true
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    resolution:
+      integrity: sha1-CN9srr/Zw4BIdgcbvmRbV0Ojpcg=
+      tarball: '@alife/mtop-mock-hook/download/@alife/mtop-mock-hook-1.0.6.tgz'
+  /@alife/next/0.19.81_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      async-validator: 1.10.1
+      classnames: 2.2.6
+      cropperjs: 0.7.2
+      enquire.js: 2.1.6
+      object-assign: 4.1.1
+      prop-types: 15.7.2
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      react-transition-group: 1.2.1_react-dom@17.0.1+react@17.0.1
+    dev: true
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0
+      react-dom: ^15.0.0 || ^16.0.0
+    resolution:
+      integrity: sha1-BjdujNEEWsN0avBbeGARpLLyWaw=
+      tarball: '@alife/next/download/@alife/next-0.19.81.tgz'
+  /@ant-design/colors/6.0.0:
+    dependencies:
+      '@ctrl/tinycolor': 3.4.0
+    dev: true
+    resolution:
+      integrity: sha1-m5NmJXz/zEfbQrnQIDu1ksE8Apg=
+      tarball: '@ant-design/colors/download/@ant-design/colors-6.0.0.tgz'
+  /@ant-design/icons-svg/4.1.0:
+    dev: true
+    resolution:
+      integrity: sha1-SAsCX0sg73/o9H1KSEbk/uhOoGw=
+      tarball: '@ant-design/icons-svg/download/@ant-design/icons-svg-4.1.0.tgz'
+  /@ant-design/icons/4.5.0_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      '@ant-design/colors': 6.0.0
+      '@ant-design/icons-svg': 4.1.0
+      '@babel/runtime': 7.13.10
+      classnames: 2.2.6
+      insert-css: 2.0.0
+      rc-util: 5.8.1_react-dom@17.0.1+react@17.0.1
+      react: 17.0.1
+    dev: true
+    engines:
+      node: '>=8'
+    peerDependencies:
+      react: '>=16.0.0'
+      react-dom: '*'
+    resolution:
+      integrity: sha1-3Fzv+FUDkyJlFD3FwwExZ9qj91Q=
+      tarball: '@ant-design/icons/download/@ant-design/icons-4.5.0.tgz'
+  /@babel/code-frame/7.12.13:
+    dependencies:
+      '@babel/highlight': 7.13.10
+    dev: true
+    resolution:
+      integrity: sha1-3PyCa+72XnXFDiHTg319lXmN1lg=
+      tarball: '@babel/code-frame/download/@babel/code-frame-7.12.13.tgz'
+  /@babel/compat-data/7.13.8:
+    dev: true
+    resolution:
+      integrity: sha1-W3g7mAjxXO9xVH8baR80+P9gA6Y=
+      tarball: '@babel/compat-data/download/@babel/compat-data-7.13.8.tgz'
+  /@babel/core/7.13.10:
+    dependencies:
+      '@babel/code-frame': 7.12.13
+      '@babel/generator': 7.13.9
+      '@babel/helper-compilation-targets': 7.13.10_@babel+core@7.13.10
+      '@babel/helper-module-transforms': 7.13.0
+      '@babel/helpers': 7.13.10
+      '@babel/parser': 7.13.10
+      '@babel/template': 7.12.13
+      '@babel/traverse': 7.13.0
+      '@babel/types': 7.13.0
+      convert-source-map: 1.7.0
+      debug: 4.3.1
+      gensync: 1.0.0-beta.2
+      json5: 2.2.0
+      lodash: 4.17.21
+      semver: 6.3.0
+      source-map: 0.5.7
+    dev: true
+    engines:
+      node: '>=6.9.0'
+    resolution:
+      integrity: sha1-B94FC72Bk/zYo8J5GMCJBhOpRVk=
+      tarball: '@babel/core/download/@babel/core-7.13.10.tgz'
+  /@babel/generator/7.13.9:
+    dependencies:
+      '@babel/types': 7.13.0
+      jsesc: 2.5.2
+      source-map: 0.5.7
+    dev: true
+    resolution:
+      integrity: sha1-Onqpb577jivkLTjYDizrTGTY3jk=
+      tarball: '@babel/generator/download/@babel/generator-7.13.9.tgz'
+  /@babel/helper-compilation-targets/7.13.10_@babel+core@7.13.10:
+    dependencies:
+      '@babel/compat-data': 7.13.8
+      '@babel/core': 7.13.10
+      '@babel/helper-validator-option': 7.12.17
+      browserslist: 4.16.3
+      semver: 6.3.0
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0
+    resolution:
+      integrity: sha1-ExChZ4y4QnwHp1N1DaT4zkQr3Qw=
+      tarball: '@babel/helper-compilation-targets/download/@babel/helper-compilation-targets-7.13.10.tgz'
+  /@babel/helper-function-name/7.12.13:
+    dependencies:
+      '@babel/helper-get-function-arity': 7.12.13
+      '@babel/template': 7.12.13
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-k61lbbPDwiMlWf17LD29y+DrN3o=
+      tarball: '@babel/helper-function-name/download/@babel/helper-function-name-7.12.13.tgz'
+  /@babel/helper-get-function-arity/7.12.13:
+    dependencies:
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-vGNFHUA6OzCCuX4diz/lvUCR5YM=
+      tarball: '@babel/helper-get-function-arity/download/@babel/helper-get-function-arity-7.12.13.tgz'
+  /@babel/helper-member-expression-to-functions/7.13.0:
+    dependencies:
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-aqS7Z44PjCL1jNt5RR0wSURhsJE=
+      tarball: '@babel/helper-member-expression-to-functions/download/@babel/helper-member-expression-to-functions-7.13.0.tgz'
+  /@babel/helper-module-imports/7.12.13:
+    dependencies:
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-7GfkQE9BdQRj5FXMMgP2oy6T/LA=
+      tarball: '@babel/helper-module-imports/download/@babel/helper-module-imports-7.12.13.tgz'
+  /@babel/helper-module-transforms/7.13.0:
+    dependencies:
+      '@babel/helper-module-imports': 7.12.13
+      '@babel/helper-replace-supers': 7.13.0
+      '@babel/helper-simple-access': 7.12.13
+      '@babel/helper-split-export-declaration': 7.12.13
+      '@babel/helper-validator-identifier': 7.12.11
+      '@babel/template': 7.12.13
+      '@babel/traverse': 7.13.0
+      '@babel/types': 7.13.0
+      lodash: 4.17.21
+    dev: true
+    resolution:
+      integrity: sha1-QutL2O6mi6tGdRISw1e/7YtA9vE=
+      tarball: '@babel/helper-module-transforms/download/@babel/helper-module-transforms-7.13.0.tgz'
+  /@babel/helper-optimise-call-expression/7.12.13:
+    dependencies:
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-XALRcbTIYVsecWP4iMHIHDCiquo=
+      tarball: '@babel/helper-optimise-call-expression/download/@babel/helper-optimise-call-expression-7.12.13.tgz'
+  /@babel/helper-plugin-utils/7.13.0:
+    dev: true
+    resolution:
+      integrity: sha1-gGUmzhJa7QM3O8QWqCgyHjpqM68=
+      tarball: '@babel/helper-plugin-utils/download/@babel/helper-plugin-utils-7.13.0.tgz'
+  /@babel/helper-replace-supers/7.13.0:
+    dependencies:
+      '@babel/helper-member-expression-to-functions': 7.13.0
+      '@babel/helper-optimise-call-expression': 7.12.13
+      '@babel/traverse': 7.13.0
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-YDS3tRlDCUy0FieEjLIZywK+HSQ=
+      tarball: '@babel/helper-replace-supers/download/@babel/helper-replace-supers-7.13.0.tgz'
+  /@babel/helper-simple-access/7.12.13:
+    dependencies:
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-hHi8xcrPaqFnKyUcHS3eXM1hpsQ=
+      tarball: '@babel/helper-simple-access/download/@babel/helper-simple-access-7.12.13.tgz'
+  /@babel/helper-split-export-declaration/7.12.13:
+    dependencies:
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-6UML4AuvPoiw4T5vnU6vITY3KwU=
+      tarball: '@babel/helper-split-export-declaration/download/@babel/helper-split-export-declaration-7.12.13.tgz'
+  /@babel/helper-validator-identifier/7.12.11:
+    dev: true
+    resolution:
+      integrity: sha1-yaHwIZF9y1zPDU5FPjmQIpgfye0=
+      tarball: '@babel/helper-validator-identifier/download/@babel/helper-validator-identifier-7.12.11.tgz'
+  /@babel/helper-validator-option/7.12.17:
+    dev: true
+    resolution:
+      integrity: sha1-0fvwEuGnm37rv9xtJwuq+NnrmDE=
+      tarball: '@babel/helper-validator-option/download/@babel/helper-validator-option-7.12.17.tgz'
+  /@babel/helpers/7.13.10:
+    dependencies:
+      '@babel/template': 7.12.13
+      '@babel/traverse': 7.13.0
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-/Y4rp0iFM83qxFzBWOnryl48ffg=
+      tarball: '@babel/helpers/download/@babel/helpers-7.13.10.tgz'
+  /@babel/highlight/7.13.10:
+    dependencies:
+      '@babel/helper-validator-identifier': 7.12.11
+      chalk: 2.4.2
+      js-tokens: 4.0.0
+    dev: true
+    resolution:
+      integrity: sha1-qLKmYUj1sn1maxXYF3Q0enMdUtE=
+      tarball: '@babel/highlight/download/@babel/highlight-7.13.10.tgz'
+  /@babel/parser/7.13.10:
+    dev: true
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha1-j4+b97Ovo+q9Bh96W830/sPEhAk=
+      tarball: '@babel/parser/download/@babel/parser-7.13.10.tgz'
+  /@babel/plugin-transform-react-jsx-self/7.12.13_@babel+core@7.13.10:
+    dependencies:
+      '@babel/core': 7.13.10
+      '@babel/helper-plugin-utils': 7.13.0
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha1-Qi2Z0SLVkqyrnDXqIqbP2b8Yn2A=
+      tarball: '@babel/plugin-transform-react-jsx-self/download/@babel/plugin-transform-react-jsx-self-7.12.13.tgz'
+  /@babel/plugin-transform-react-jsx-source/7.12.13_@babel+core@7.13.10:
+    dependencies:
+      '@babel/core': 7.13.10
+      '@babel/helper-plugin-utils': 7.13.0
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha1-BR12EmvuXJpqo7o3vi9sFpiFa8s=
+      tarball: '@babel/plugin-transform-react-jsx-source/download/@babel/plugin-transform-react-jsx-source-7.12.13.tgz'
+  /@babel/runtime/7.13.10:
+    dependencies:
+      regenerator-runtime: 0.13.7
+    dev: true
+    resolution:
+      integrity: sha1-R9QqV7YJX0Ro2kQDiP262L6/DX0=
+      tarball: '@babel/runtime/download/@babel/runtime-7.13.10.tgz'
+  /@babel/template/7.12.13:
+    dependencies:
+      '@babel/code-frame': 7.12.13
+      '@babel/parser': 7.13.10
+      '@babel/types': 7.13.0
+    dev: true
+    resolution:
+      integrity: sha1-UwJlvooliduzdSOETFvLVZR/syc=
+      tarball: '@babel/template/download/@babel/template-7.12.13.tgz'
+  /@babel/traverse/7.13.0:
+    dependencies:
+      '@babel/code-frame': 7.12.13
+      '@babel/generator': 7.13.9
+      '@babel/helper-function-name': 7.12.13
+      '@babel/helper-split-export-declaration': 7.12.13
+      '@babel/parser': 7.13.10
+      '@babel/types': 7.13.0
+      debug: 4.3.1
+      globals: 11.12.0
+      lodash: 4.17.21
+    dev: true
+    resolution:
+      integrity: sha1-bZV1JHX4bufe0GU23jCaZfyJZsw=
+      tarball: '@babel/traverse/download/@babel/traverse-7.13.0.tgz'
+  /@babel/types/7.13.0:
+    dependencies:
+      '@babel/helper-validator-identifier': 7.12.11
+      lodash: 4.17.21
+      to-fast-properties: 2.0.0
+    dev: true
+    resolution:
+      integrity: sha1-dEJNKBbwFxtBAPCrNOmjdO/ff4A=
+      tarball: '@babel/types/download/@babel/types-7.13.0.tgz'
+  /@ctrl/tinycolor/3.4.0:
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha1-w8WuVDyJfKqcKmhjC+01W+X5mQ8=
+      tarball: '@ctrl/tinycolor/download/@ctrl/tinycolor-3.4.0.tgz'
+  /@types/prop-types/15.7.3:
+    dev: true
+    resolution:
+      integrity: sha1-KrDV2i5YFflLC51LldHl8kOrLKc=
+      tarball: '@types/prop-types/download/@types/prop-types-15.7.3.tgz'
+  /@types/react-dom/16.9.11:
+    dependencies:
+      '@types/react': 16.14.5
+    dev: true
+    resolution:
+      integrity: sha1-dS4iOhWSosEPJmiyFaDgZn9PqrE=
+      tarball: '@types/react-dom/download/@types/react-dom-16.9.11.tgz'
+  /@types/react/16.14.5:
+    dependencies:
+      '@types/prop-types': 15.7.3
+      '@types/scheduler': 0.16.1
+      csstype: 3.0.7
+    dev: true
+    resolution:
+      integrity: sha1-LDm1yt769IKYGPkhnl4JMyWXn00=
+      tarball: '@types/react/download/@types/react-16.14.5.tgz'
+  /@types/scheduler/0.16.1:
+    dev: true
+    resolution:
+      integrity: sha1-GIRSBehv8AOFF6q3oYpiprn3EnU=
+      tarball: '@types/scheduler/download/@types/scheduler-0.16.1.tgz'
+  /@vitejs/plugin-react-refresh/1.3.1:
+    dependencies:
+      '@babel/core': 7.13.10
+      '@babel/plugin-transform-react-jsx-self': 7.12.13_@babel+core@7.13.10
+      '@babel/plugin-transform-react-jsx-source': 7.12.13_@babel+core@7.13.10
+      react-refresh: 0.9.0
+    dev: true
+    engines:
+      node: '>=12.0.0'
+    resolution:
+      integrity: sha1-39sX6ZJLpX/ElRrIguOWKAUaMPQ=
+      tarball: '@vitejs/plugin-react-refresh/download/@vitejs/plugin-react-refresh-1.3.1.tgz'
+  /ansi-styles/3.2.1:
+    dependencies:
+      color-convert: 1.9.3
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-QfuyAkPlCxK+DwS43tvwdSDOhB0=
+      tarball: ansi-styles/download/ansi-styles-3.2.1.tgz
+  /anymatch/3.1.1:
+    dependencies:
+      normalize-path: 3.0.0
+      picomatch: 2.2.2
+    dev: true
+    engines:
+      node: '>= 8'
+    resolution:
+      integrity: sha1-xV7PAhheJGklk5kxDBc84xIzsUI=
+      tarball: anymatch/download/anymatch-3.1.1.tgz
+  /async-validator/1.10.1:
+    dependencies:
+      babel-runtime: 6.26.0
+    dev: true
+    resolution:
+      integrity: sha1-QemwufjnGebt+UY3LwGKlYwucPM=
+      tarball: async-validator/download/async-validator-1.10.1.tgz
+  /babel-runtime/6.26.0:
+    dependencies:
+      core-js: 2.6.12
+      regenerator-runtime: 0.11.1
+    dev: true
+    resolution:
+      integrity: sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
+      tarball: babel-runtime/download/babel-runtime-6.26.0.tgz
+  /binary-extensions/2.2.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-dfUC7q+f/eQvyYgpZFvk6na9ni0=
+      tarball: binary-extensions/download/binary-extensions-2.2.0.tgz
+  /braces/3.0.2:
+    dependencies:
+      fill-range: 7.0.1
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-NFThpGLujVmeI23zNs2epPiv4Qc=
+      tarball: braces/download/braces-3.0.2.tgz
+  /browserslist/4.16.3:
+    dependencies:
+      caniuse-lite: 1.0.30001200
+      colorette: 1.2.2
+      electron-to-chromium: 1.3.687
+      escalade: 3.1.1
+      node-releases: 1.1.71
+    dev: true
+    engines:
+      node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7
+    hasBin: true
+    resolution:
+      integrity: sha1-NAqkaUDX24eHSFZ8XeokpI3fNxc=
+      tarball: browserslist/download/browserslist-4.16.3.tgz
+  /caniuse-lite/1.0.30001200:
+    dev: true
+    resolution:
+      integrity: sha1-JUNa9rqQfCqchtIc6ElQ1IJOZiA=
+      tarball: caniuse-lite/download/caniuse-lite-1.0.30001200.tgz
+  /chain-function/1.0.1:
+    dev: true
+    resolution:
+      integrity: sha1-xjBF5bS2Y/uG8cbhhq2vHeQCocw=
+      tarball: chain-function/download/chain-function-1.0.1.tgz
+  /chalk/2.4.2:
+    dependencies:
+      ansi-styles: 3.2.1
+      escape-string-regexp: 1.0.5
+      supports-color: 5.5.0
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-zUJUFnelQzPPVBpJEIwUMrRMlCQ=
+      tarball: chalk/download/chalk-2.4.2.tgz
+  /character-entities-legacy/1.1.4:
+    dev: true
+    resolution:
+      integrity: sha1-lLwYRdznClu50uzHSHJWYSk9j8E=
+      tarball: character-entities-legacy/download/character-entities-legacy-1.1.4.tgz
+  /character-entities/1.2.4:
+    dev: true
+    resolution:
+      integrity: sha1-4Sw5Obfq9OWxXnrUxeKOHUjFsWs=
+      tarball: character-entities/download/character-entities-1.2.4.tgz
+  /character-reference-invalid/1.1.4:
+    dev: true
+    resolution:
+      integrity: sha1-CDMpzaDq4nKrPbvzfpo4LBOvFWA=
+      tarball: character-reference-invalid/download/character-reference-invalid-1.1.4.tgz
+  /chokidar/3.5.1:
+    dependencies:
+      anymatch: 3.1.1
+      braces: 3.0.2
+      glob-parent: 5.1.2
+      is-binary-path: 2.1.0
+      is-glob: 4.0.1
+      normalize-path: 3.0.0
+      readdirp: 3.5.0
+    dev: true
+    engines:
+      node: '>= 8.10.0'
+    optionalDependencies:
+      fsevents: 2.3.2
+    resolution:
+      integrity: sha1-7pznu+vSt59J8wR5nVRo4x4U5oo=
+      tarball: chokidar/download/chokidar-3.5.1.tgz
+  /classnames/2.2.6:
+    dev: true
+    resolution:
+      integrity: sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=
+      tarball: classnames/download/classnames-2.2.6.tgz
+  /clipboard/2.0.8:
+    dependencies:
+      good-listener: 1.2.2
+      select: 1.1.2
+      tiny-emitter: 2.1.0
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-/8bBA90pZ6gwBfP2GXaqRlWkzbo=
+      tarball: clipboard/download/clipboard-2.0.8.tgz
+  /color-convert/1.9.3:
+    dependencies:
+      color-name: 1.1.3
+    dev: true
+    resolution:
+      integrity: sha1-u3GFBpDh8TZWfeYp0tVHHe2kweg=
+      tarball: color-convert/download/color-convert-1.9.3.tgz
+  /color-name/1.1.3:
+    dev: true
+    resolution:
+      integrity: sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
+      tarball: color-name/download/color-name-1.1.3.tgz
+  /colorette/1.2.2:
+    dev: true
+    resolution:
+      integrity: sha1-y8x51emcrqLb8Q6zom/Ys+as+pQ=
+      tarball: colorette/download/colorette-1.2.2.tgz
+  /comma-separated-tokens/1.0.8:
+    dev: true
+    resolution:
+      integrity: sha1-YyuAthF4Z6FY8QgK1Jiy++fj9eo=
+      tarball: comma-separated-tokens/download/comma-separated-tokens-1.0.8.tgz
+  /convert-source-map/1.7.0:
+    dependencies:
+      safe-buffer: 5.1.2
+    dev: true
+    resolution:
+      integrity: sha1-F6LLiC1/d9NJBYXizmxSRCSjpEI=
+      tarball: convert-source-map/download/convert-source-map-1.7.0.tgz
+  /copy-to-clipboard/3.3.1:
+    dependencies:
+      toggle-selection: 1.0.6
+    dev: true
+    resolution:
+      integrity: sha1-EVqhqZmP+rYZb5MHatbaO5E2Yq4=
+      tarball: copy-to-clipboard/download/copy-to-clipboard-3.3.1.tgz
+  /core-js/2.6.12:
+    deprecated: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
+    dev: true
+    requiresBuild: true
+    resolution:
+      integrity: sha1-2TM9+nsGXjR8xWgiGdb2kIWcwuw=
+      tarball: core-js/download/core-js-2.6.12.tgz
+  /cropperjs/0.7.2:
+    dev: true
+    resolution:
+      integrity: sha1-atinHbAGKbqULZzt5lKyeXXp50o=
+      tarball: cropperjs/download/cropperjs-0.7.2.tgz
+  /csstype/3.0.7:
+    dev: true
+    resolution:
+      integrity: sha1-Kl+3XhAV6E3RVpL3HomhRQKQlQs=
+      tarball: csstype/download/csstype-3.0.7.tgz
+  /debug/4.3.1:
+    dependencies:
+      ms: 2.1.2
+    dev: true
+    engines:
+      node: '>=6.0'
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    resolution:
+      integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=
+      tarball: debug/download/debug-4.3.1.tgz
+  /delegate/3.2.0:
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-tmtxwxWFIuirV0T3INjKDCr1kWY=
+      tarball: delegate/download/delegate-3.2.0.tgz
+  /dom-helpers/3.4.0:
+    dependencies:
+      '@babel/runtime': 7.13.10
+    dev: true
+    resolution:
+      integrity: sha1-6bNpcA+Vn2Ls3lprq95LzNkWmvg=
+      tarball: dom-helpers/download/dom-helpers-3.4.0.tgz
+  /electron-to-chromium/1.3.687:
+    dev: true
+    resolution:
+      integrity: sha1-wzYYS3q3BCf/4u556urtvBrYw3Q=
+      tarball: electron-to-chromium/download/electron-to-chromium-1.3.687.tgz
+  /enquire.js/2.1.6:
+    dev: true
+    resolution:
+      integrity: sha1-PoeAybi4NQhMP2DhZtvDwqPImBQ=
+      tarball: enquire.js/download/enquire.js-2.1.6.tgz
+  /esbuild/0.8.57:
+    dev: true
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha1-pC0CvCtXxwvNDviX/iRHZrtt2SY=
+      tarball: esbuild/download/esbuild-0.8.57.tgz
+  /escalade/3.1.1:
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha1-2M/ccACWXFoBdLSoLqpcBVJ0LkA=
+      tarball: escalade/download/escalade-3.1.1.tgz
+  /escape-string-regexp/1.0.5:
+    dev: true
+    engines:
+      node: '>=0.8.0'
+    resolution:
+      integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
+      tarball: escape-string-regexp/download/escape-string-regexp-1.0.5.tgz
+  /fault/1.0.4:
+    dependencies:
+      format: 0.2.2
+    dev: true
+    resolution:
+      integrity: sha1-6vz8Cm0hT8lGAeFw3ymVSk+ELxM=
+      tarball: fault/download/fault-1.0.4.tgz
+  /fill-range/7.0.1:
+    dependencies:
+      to-regex-range: 5.0.1
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-GRmmp8df44ssfHflGYU12prN2kA=
+      tarball: fill-range/download/fill-range-7.0.1.tgz
+  /format/0.2.2:
+    dev: true
+    engines:
+      node: '>=0.4.x'
+    resolution:
+      integrity: sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=
+      tarball: format/download/format-0.2.2.tgz
+  /fsevents/2.3.2:
+    dev: true
+    engines:
+      node: ^8.16.0 || ^10.6.0 || >=11.0.0
+    optional: true
+    resolution:
+      integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=
+      tarball: fsevents/download/fsevents-2.3.2.tgz
+  /function-bind/1.1.1:
+    dev: true
+    resolution:
+      integrity: sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
+      tarball: function-bind/download/function-bind-1.1.1.tgz
+  /gensync/1.0.0-beta.2:
+    dev: true
+    engines:
+      node: '>=6.9.0'
+    resolution:
+      integrity: sha1-MqbudsPX9S1GsrGuXZP+qFgKJeA=
+      tarball: gensync/download/gensync-1.0.0-beta.2.tgz
+  /glob-parent/5.1.2:
+    dependencies:
+      is-glob: 4.0.1
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha1-hpgyxYA0/mikCTwX3BXoNA2EAcQ=
+      tarball: glob-parent/download/glob-parent-5.1.2.tgz
+  /globals/11.12.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-q4eVM4hooLq9hSV1gBjCp+uVxC4=
+      tarball: globals/download/globals-11.12.0.tgz
+  /good-listener/1.2.2:
+    dependencies:
+      delegate: 3.2.0
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-1TswzfkxPf+33JoNR3CWqm0UXFA=
+      tarball: good-listener/download/good-listener-1.2.2.tgz
+  /has-flag/3.0.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
+      tarball: has-flag/download/has-flag-3.0.0.tgz
+  /has/1.0.3:
+    dependencies:
+      function-bind: 1.1.1
+    dev: true
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=
+      tarball: has/download/has-1.0.3.tgz
+  /hast-util-parse-selector/2.2.5:
+    dev: true
+    resolution:
+      integrity: sha1-1Xwj9NoWrjxjs7bKRhZoMxNJnDo=
+      tarball: hast-util-parse-selector/download/hast-util-parse-selector-2.2.5.tgz
+  /hastscript/5.1.2:
+    dependencies:
+      comma-separated-tokens: 1.0.8
+      hast-util-parse-selector: 2.2.5
+      property-information: 5.6.0
+      space-separated-tokens: 1.1.5
+    dev: true
+    resolution:
+      integrity: sha1-veLC5W0Exi3SToxd8ojQUKNV+4o=
+      tarball: hastscript/download/hastscript-5.1.2.tgz
+  /highlight.js/9.15.10:
+    deprecated: Version no longer supported. Upgrade to @latest
+    dev: true
+    resolution:
+      integrity: sha1-exjtdckDSMBF7vntCMoTGaIhmtI=
+      tarball: highlight.js/download/highlight.js-9.15.10.tgz
+  /insert-css/2.0.0:
+    dev: true
+    resolution:
+      integrity: sha1-610Ql7dUL0x56jBg067gfQU4gPQ=
+      tarball: insert-css/download/insert-css-2.0.0.tgz
+  /is-alphabetical/1.0.4:
+    dev: true
+    resolution:
+      integrity: sha1-nn1rlJFr4iFTdF0YTCmMv5hqaG0=
+      tarball: is-alphabetical/download/is-alphabetical-1.0.4.tgz
+  /is-alphanumerical/1.0.4:
+    dependencies:
+      is-alphabetical: 1.0.4
+      is-decimal: 1.0.4
+    dev: true
+    resolution:
+      integrity: sha1-frmiQx+FX2se8aeOMm31FWlsTb8=
+      tarball: is-alphanumerical/download/is-alphanumerical-1.0.4.tgz
+  /is-binary-path/2.1.0:
+    dependencies:
+      binary-extensions: 2.2.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha1-6h9/O4DwZCNug0cPhsCcJU+0Wwk=
+      tarball: is-binary-path/download/is-binary-path-2.1.0.tgz
+  /is-core-module/2.2.0:
+    dependencies:
+      has: 1.0.3
+    dev: true
+    resolution:
+      integrity: sha1-lwN+89UiJNhRY/VZeytj2a/tmBo=
+      tarball: is-core-module/download/is-core-module-2.2.0.tgz
+  /is-decimal/1.0.4:
+    dev: true
+    resolution:
+      integrity: sha1-ZaOllYocW2OnBuGzM9fNn2MNP6U=
+      tarball: is-decimal/download/is-decimal-1.0.4.tgz
+  /is-extglob/2.1.1:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-qIwCU1eR8C7TfHahueqXc8gz+MI=
+      tarball: is-extglob/download/is-extglob-2.1.1.tgz
+  /is-glob/4.0.1:
+    dependencies:
+      is-extglob: 2.1.1
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-dWfb6fL14kZ7x3q4PEopSCQHpdw=
+      tarball: is-glob/download/is-glob-4.0.1.tgz
+  /is-hexadecimal/1.0.4:
+    dev: true
+    resolution:
+      integrity: sha1-zDXJdYjaS9Saju3WvECC1E3LI6c=
+      tarball: is-hexadecimal/download/is-hexadecimal-1.0.4.tgz
+  /is-number/7.0.0:
+    dev: true
+    engines:
+      node: '>=0.12.0'
+    resolution:
+      integrity: sha1-dTU0W4lnNNX4DE0GxQlVUnoU8Ss=
+      tarball: is-number/download/is-number-7.0.0.tgz
+  /js-tokens/4.0.0:
+    resolution:
+      integrity: sha1-GSA/tZmR35jjoocFDUZHzerzJJk=
+      tarball: js-tokens/download/js-tokens-4.0.0.tgz
+  /jsesc/2.5.2:
+    dev: true
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha1-gFZNLkg9rPbo7yCWUKZ98/DCg6Q=
+      tarball: jsesc/download/jsesc-2.5.2.tgz
+  /json5/2.2.0:
+    dependencies:
+      minimist: 1.2.5
+    dev: true
+    engines:
+      node: '>=6'
+    hasBin: true
+    resolution:
+      integrity: sha1-Lf7+cgxrpSXZ69kJlQ8FFTFsiaM=
+      tarball: json5/download/json5-2.2.0.tgz
+  /lodash/4.17.21:
+    dev: true
+    resolution:
+      integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
+      tarball: lodash/download/lodash-4.17.21.tgz
+  /loose-envify/1.4.0:
+    dependencies:
+      js-tokens: 4.0.0
+    hasBin: true
+    resolution:
+      integrity: sha1-ce5R+nvkyuwaY4OffmgtgTLTDK8=
+      tarball: loose-envify/download/loose-envify-1.4.0.tgz
+  /lowlight/1.12.1:
+    dependencies:
+      fault: 1.0.4
+      highlight.js: 9.15.10
+    dev: true
+    resolution:
+      integrity: sha1-AUrPjdc6Nw4C/xzGHevN47sWges=
+      tarball: lowlight/download/lowlight-1.12.1.tgz
+  /minimist/1.2.5:
+    dev: true
+    resolution:
+      integrity: sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
+      tarball: minimist/download/minimist-1.2.5.tgz
+  /ms/2.1.2:
+    dev: true
+    resolution:
+      integrity: sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
+      tarball: ms/download/ms-2.1.2.tgz
+  /nanoid/3.1.21:
+    dev: true
+    engines:
+      node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1
+    hasBin: true
+    resolution:
+      integrity: sha1-Jb/uc0CsQYWGb7+yyQBtKZ2hvn8=
+      tarball: nanoid/download/nanoid-3.1.21.tgz
+  /node-releases/1.1.71:
+    dev: true
+    resolution:
+      integrity: sha1-yxM0sXmJaxyJ7P3UtyX7e738fbs=
+      tarball: node-releases/download/node-releases-1.1.71.tgz
+  /normalize-path/3.0.0:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=
+      tarball: normalize-path/download/normalize-path-3.0.0.tgz
+  /object-assign/4.1.1:
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+      tarball: object-assign/download/object-assign-4.1.1.tgz
+  /parse-entities/1.2.2:
+    dependencies:
+      character-entities: 1.2.4
+      character-entities-legacy: 1.1.4
+      character-reference-invalid: 1.1.4
+      is-alphanumerical: 1.0.4
+      is-decimal: 1.0.4
+      is-hexadecimal: 1.0.4
+    dev: true
+    resolution:
+      integrity: sha1-wxvw9lO2ZhNU+Jc1WcuG3R1e31A=
+      tarball: parse-entities/download/parse-entities-1.2.2.tgz
+  /path-parse/1.0.6:
+    dev: true
+    resolution:
+      integrity: sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
+      tarball: path-parse/download/path-parse-1.0.6.tgz
+  /picomatch/2.2.2:
+    dev: true
+    engines:
+      node: '>=8.6'
+    resolution:
+      integrity: sha1-IfMz6ba46v8CRo9RRupAbTRfTa0=
+      tarball: picomatch/download/picomatch-2.2.2.tgz
+  /postcss/8.2.8:
+    dependencies:
+      colorette: 1.2.2
+      nanoid: 3.1.21
+      source-map: 0.6.1
+    dev: true
+    engines:
+      node: ^10 || ^12 || >=14
+    resolution:
+      integrity: sha1-C5D5OC79pCTE8PaaLq1vaDDQjs4=
+      tarball: postcss/download/postcss-8.2.8.tgz
+  /prismjs/1.17.1:
+    dev: true
+    optionalDependencies:
+      clipboard: 2.0.8
+    resolution:
+      integrity: sha1-5mn8vUzdhzw1ECiBwzsU0NaFGb4=
+      tarball: prismjs/download/prismjs-1.17.1.tgz
+  /prismjs/1.23.0:
+    dev: true
+    optionalDependencies:
+      clipboard: 2.0.8
+    resolution:
+      integrity: sha1-07OWf31yRAaQSXZSqdQP8EYGfzM=
+      tarball: prismjs/download/prismjs-1.23.0.tgz
+  /prop-types/15.7.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: true
+    resolution:
+      integrity: sha1-UsQedbjIfnK52TYOAga5ncv/psU=
+      tarball: prop-types/download/prop-types-15.7.2.tgz
+  /property-information/5.6.0:
+    dependencies:
+      xtend: 4.0.2
+    dev: true
+    resolution:
+      integrity: sha1-YWdVRfsjAC8kXGVA7EYHfU2j7Wk=
+      tarball: property-information/download/property-information-5.6.0.tgz
+  /rc-util/5.8.1_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      '@babel/runtime': 7.13.10
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      react-is: 16.13.1
+      shallowequal: 1.1.0
+    dev: true
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    resolution:
+      integrity: sha1-42MKv7krQL7LMUds7hNtZegOAuA=
+      tarball: rc-util/download/rc-util-5.8.1.tgz
+  /react-copy-to-clipboard/5.0.3_react@17.0.1:
+    dependencies:
+      copy-to-clipboard: 3.3.1
+      prop-types: 15.7.2
+      react: 17.0.1
+    dev: true
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0 || ^17.0.0
+    resolution:
+      integrity: sha1-KgYjsRFaHYyEFE6UNNM0K1r0GrQ=
+      tarball: react-copy-to-clipboard/download/react-copy-to-clipboard-5.0.3.tgz
+  /react-dom/17.0.1_react@17.0.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react: 17.0.1
+      scheduler: 0.20.1
+    dev: false
+    peerDependencies:
+      react: 17.0.1
+    resolution:
+      integrity: sha1-HeJWBHTsnw4zQoVmLt5S28VCb8Y=
+      tarball: react-dom/download/react-dom-17.0.1.tgz
+  /react-is/16.13.1:
+    dev: true
+    resolution:
+      integrity: sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
+      tarball: react-is/download/react-is-16.13.1.tgz
+  /react-refresh/0.9.0:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-cYYzN63D5cL4pr/d0Srjv+Mqr78=
+      tarball: react-refresh/download/react-refresh-0.9.0.tgz
+  /react-syntax-highlighter/12.2.1_react@17.0.1:
+    dependencies:
+      '@babel/runtime': 7.13.10
+      highlight.js: 9.15.10
+      lowlight: 1.12.1
+      prismjs: 1.23.0
+      react: 17.0.1
+      refractor: 2.10.1
+    dev: true
+    peerDependencies:
+      react: '>= 0.14.0'
+    resolution:
+      integrity: sha1-FNeDUtocHD+TxmmLcOx8cGuDST4=
+      tarball: react-syntax-highlighter/download/react-syntax-highlighter-12.2.1.tgz
+  /react-transition-group/1.2.1_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      chain-function: 1.0.1
+      dom-helpers: 3.4.0
+      loose-envify: 1.4.0
+      prop-types: 15.7.2
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      warning: 3.0.0
+    dev: true
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0
+      react-dom: ^15.0.0 || ^16.0.0
+    resolution:
+      integrity: sha1-4R9yslf5IbITIpp3TfRmEjRsfKY=
+      tarball: react-transition-group/download/react-transition-group-1.2.1.tgz
+  /react/17.0.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-bgYAQWvVdXTj+G2S7bo9kAhyYSc=
+      tarball: react/download/react-17.0.1.tgz
+  /readdirp/3.5.0:
+    dependencies:
+      picomatch: 2.2.2
+    dev: true
+    engines:
+      node: '>=8.10.0'
+    resolution:
+      integrity: sha1-m6dMAZsV02UnjS6Ru4xI17TULJ4=
+      tarball: readdirp/download/readdirp-3.5.0.tgz
+  /refractor/2.10.1:
+    dependencies:
+      hastscript: 5.1.2
+      parse-entities: 1.2.2
+      prismjs: 1.17.1
+    dev: true
+    resolution:
+      integrity: sha1-Fmwy8RTtFv2WGQrSHVGT06/H004=
+      tarball: refractor/download/refractor-2.10.1.tgz
+  /regenerator-runtime/0.11.1:
+    dev: true
+    resolution:
+      integrity: sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=
+      tarball: regenerator-runtime/download/regenerator-runtime-0.11.1.tgz
+  /regenerator-runtime/0.13.7:
+    dev: true
+    resolution:
+      integrity: sha1-ysLazIoepnX+qrrriugziYrkb1U=
+      tarball: regenerator-runtime/download/regenerator-runtime-0.13.7.tgz
+  /resolve/1.20.0:
+    dependencies:
+      is-core-module: 2.2.0
+      path-parse: 1.0.6
+    dev: true
+    resolution:
+      integrity: sha1-YpoBP7P3B1XW8LeTXMHCxTeLGXU=
+      tarball: resolve/download/resolve-1.20.0.tgz
+  /rollup/2.41.2:
+    dev: true
+    engines:
+      node: '>=10.0.0'
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    resolution:
+      integrity: sha1-t9tct8IcLVJOiybvOcfpgIopDH4=
+      tarball: rollup/download/rollup-2.41.2.tgz
+  /safe-buffer/5.1.2:
+    dev: true
+    resolution:
+      integrity: sha1-mR7GnSluAxN0fVm9/St0XDX4go0=
+      tarball: safe-buffer/download/safe-buffer-5.1.2.tgz
+  /sass/1.32.8:
+    dependencies:
+      chokidar: 3.5.1
+    dev: true
+    engines:
+      node: '>=8.9.0'
+    hasBin: true
+    resolution:
+      integrity: sha1-8WqavY3FMK3Yg05QaHiigIwDe9w=
+      tarball: sass/download/sass-1.32.8.tgz
+  /scheduler/0.20.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+    dev: false
+    resolution:
+      integrity: sha1-2guQfiQCawEYHsvHXv3H8ntaAAw=
+      tarball: scheduler/download/scheduler-0.20.1.tgz
+  /select/1.1.2:
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-DnNQrN7ICxEIUoeG7B1EGNEbOW0=
+      tarball: select/download/select-1.1.2.tgz
+  /semver/6.3.0:
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=
+      tarball: semver/download/semver-6.3.0.tgz
+  /shallowequal/1.1.0:
+    dev: true
+    resolution:
+      integrity: sha1-GI1SHelbkIdAT9TctosT3wrk5/g=
+      tarball: shallowequal/download/shallowequal-1.1.0.tgz
+  /source-map/0.5.7:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
+      tarball: source-map/download/source-map-0.5.7.tgz
+  /source-map/0.6.1:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-dHIq8y6WFOnCh6jQu95IteLxomM=
+      tarball: source-map/download/source-map-0.6.1.tgz
+  /space-separated-tokens/1.1.5:
+    dev: true
+    resolution:
+      integrity: sha1-hfMsPRDZaCAH6RdBTdxcJtGqaJk=
+      tarball: space-separated-tokens/download/space-separated-tokens-1.1.5.tgz
+  /supports-color/5.5.0:
+    dependencies:
+      has-flag: 3.0.0
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-4uaaRKyHcveKHsCzW2id9lMO/I8=
+      tarball: supports-color/download/supports-color-5.5.0.tgz
+  /tiny-emitter/2.1.0:
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-HRpW7fxRxD6GPLtTgqcjMONVVCM=
+      tarball: tiny-emitter/download/tiny-emitter-2.1.0.tgz
+  /to-fast-properties/2.0.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
+      tarball: to-fast-properties/download/to-fast-properties-2.0.0.tgz
+  /to-regex-range/5.0.1:
+    dependencies:
+      is-number: 7.0.0
+    dev: true
+    engines:
+      node: '>=8.0'
+    resolution:
+      integrity: sha1-FkjESq58jZiKMmAY7XL1tN0DkuQ=
+      tarball: to-regex-range/download/to-regex-range-5.0.1.tgz
+  /toggle-selection/1.0.6:
+    dev: true
+    resolution:
+      integrity: sha1-bkWxJj8gF/oKzH2J14sVuL932jI=
+      tarball: toggle-selection/download/toggle-selection-1.0.6.tgz
+  /vite/2.0.5:
+    dependencies:
+      esbuild: 0.8.57
+      postcss: 8.2.8
+      resolve: 1.20.0
+      rollup: 2.41.2
+    dev: true
+    engines:
+      node: '>=12.0.0'
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    resolution:
+      integrity: sha1-rEaFej+oaG0HeSHmG9SKmGkx3x0=
+      tarball: vite/download/vite-2.0.5.tgz
+  /warning/3.0.0:
+    dependencies:
+      loose-envify: 1.4.0
+    dev: true
+    resolution:
+      integrity: sha1-MuU3fLVy3kqwR1O9+IIcAe1gW3w=
+      tarball: warning/download/warning-3.0.0.tgz
+  /xtend/4.0.2:
+    dev: true
+    engines:
+      node: '>=0.4'
+    resolution:
+      integrity: sha1-u3J3n1+kZRhrH0OPZ0+jR/2121Q=
+      tarball: xtend/download/xtend-4.0.2.tgz
+specifiers:
+  '@alife/intl-comp-highLighter': ^1.0.14
+  '@alife/json-2-vision': ^1.0.28
+  '@alife/mtop-mock-hook': ^1.0.6
+  '@ant-design/icons': ^4.5.0
+  '@vitejs/plugin-react-refresh': ^1.3.1
+  react: ^17.0.0
+  react-dom: ^17.0.0
+  sass: ^1.32.8
+  vite: ^2.0.5

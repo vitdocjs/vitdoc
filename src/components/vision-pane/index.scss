@@ -1,0 +1,43 @@
+.vision-property-container {
+  position: relative;
+  z-index: 999;
+
+  @media screen and (max-width: 750px) {
+    position: fixed;
+    z-index: 3;
+    height: 100vh;
+    right: 0;
+    top: 0;
+  }
+
+  .ant-drawer-header {
+    border-bottom: 0;
+  }
+  .ant-drawer-title {
+    display: flex;
+    align-items: center;
+  }
+  .ant-drawer-wrapper-body {
+    margin-left: 15px;
+    height: 100%;
+    width: 300px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .ant-drawer-body {
+      position: relative;
+      flex: 1;
+    }
+  }
+  .vision-title-icon {
+    width: 1.2em;
+    margin-right: 0.3em;
+  }
+  .icon-vision-property-show {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+  }
+}
