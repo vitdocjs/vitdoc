@@ -1,5 +1,5 @@
 {
-  "name": "comp-image",
+  "name": "comp-avatar",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",

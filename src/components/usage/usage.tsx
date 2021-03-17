@@ -1,22 +1,22 @@
 import * as React from "react";
-// import HighLight from "@alife/intl-comp-highLighter";
+import HighLight from "@alife/intl-comp-highLighter/dist/index";
+import "@alife/intl-comp-highLighter/dist/index.css";
+
 import "./index.scss";
-import { jsonToJSX } from "./utils";
 import { USAGE_DEFAULT_TAB } from "../../constants";
+
+import {
+  useComponentInfo,
+  useDocsSourceCode,
+  useTypeFile,
+} from "../../utils/loaders";
 
 // @ts-ignore
 const { Tabs } = window.antd;
 
-export function getReactContent({
-  isLibraryComponent,
-  componentProps,
-  packageName,
-  componentName,
-}) {
+export function getReactContent({ packageName, sourceCode }) {
   let imports = "";
-  imports += `import ${
-    isLibraryComponent ? "Components" : "Component"
-  } from '${packageName}';\n`;
+  imports += `import Component from '${packageName}';\n`;
   imports += `import React from 'react';\n`;
   imports += `import ReactDOM from 'react-dom';\n`;
   imports += `\n`;
@@ -24,36 +24,24 @@ export function getReactContent({
   imports += `// import '${packageName}/dist/index.css';\n`;
   imports += `\n`;
 
-  if (isLibraryComponent) {
-    imports += `const Component = Components['${componentName}'];\n`;
+  if (sourceCode) {
+    imports += sourceCode;
   }
-
-  imports += `\n`;
-
-  const { children, ...restProps } = componentProps;
-
-  const jsx = jsonToJSX({ type: "Component", props: restProps, children });
-
-  imports += `ReactDOM.render(${jsx}, mountNode);\n`;
 
   return imports;
 }
 
-export function Usage({
-  packageName,
-  isLibraryComponent,
-  docsRender,
-  componentName,
-  componentProps,
-}) {
-  if (!docsRender) {
-    return null;
-  }
-
+export function Usage({ prefix = "", componentProps }) {
   delete componentProps.itemData;
 
+  const propertyTypes = useTypeFile();
+
+  const raw = useDocsSourceCode(prefix);
+
+  const { packageName } = useComponentInfo() || {};
+
   const dadaSchema = {
-    uiType: componentName,
+    uiType: propertyTypes?.displayName,
     ...componentProps,
   };
 
@@ -62,10 +50,8 @@ export function Usage({
       type: "React",
       lang: "jsx",
       content: getReactContent({
-        isLibraryComponent,
         packageName,
-        componentProps,
-        componentName,
+        sourceCode: raw,
       }),
     },
     {
@@ -91,7 +77,7 @@ export function Usage({
         {dataSource.map(({ lang, type, content }, index) => (
           <Tabs.TabPane tab={type} key={index}>
             <div className={`code-pane language-${lang}`}>
-              <div lang={lang}>{content}</div>
+              <HighLight lang={lang}>{content}</HighLight>
             </div>
           </Tabs.TabPane>
         ))}

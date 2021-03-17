@@ -16,12 +16,12 @@ export const hashRE = /#.*$/;
 
 export const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
 
-const path = "/packages/Image/index.html";
+const path = location.pathname;
 const srcPath = "src";
 
 // @ts-ignore
 const lscWindowConfig: ILscWindowConfig = {
-  route: cleanUrl(path).replace(/\/[^/]+?$/, `/${srcPath}`),
+  route: `${cleanUrl(path)}/${srcPath}`,
 };
 
 export default lscWindowConfig;

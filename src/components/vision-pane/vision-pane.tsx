@@ -12,7 +12,7 @@ const { Bundle, Node, ui } = window.VisualEngine;
 const { Button } = window.antd;
 
 export default class VisionPane extends React.PureComponent<{
-  componentName: string;
+  componentName?: string;
   properties: any;
   defaultProps?: Record<string, any>;
   onPropsChange?: (props: Record<string, any>) => void;

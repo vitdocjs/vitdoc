@@ -1,12 +1,7 @@
 // @ts-ignore
 import * as path from "path";
-import ts from "typescript";
 import * as parser from "@ali/react-docgen-typescript-loader-add-tag/dist/docgen-typescript";
-
-export const queryRE = /\?.*$/;
-export const hashRE = /#.*$/;
-
-export const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
+import { cleanUrl } from "./utils";
 
 const alias = {
   js: "application/javascript",
