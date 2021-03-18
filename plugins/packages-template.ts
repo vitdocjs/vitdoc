@@ -1,8 +1,9 @@
 // @ts-ignore
 import * as path from "path";
-import * as fs from "fs";
+import fs, { promises as fsp } from "fs";
+import get from "lodash/get";
 import { send } from "vite/dist/node";
-import { cleanUrl, isHTMLProxy } from "./utils";
+import {cleanUrl, getAssetHash, isCSSRequest, isHTMLProxy} from "./utils"
 
 let memMap = {};
 const fsExist = (path: string) => {
@@ -16,6 +17,25 @@ const fsExist = (path: string) => {
 const packagesTemplate = () => {
   return {
     name: "vite:packages-template",
+    handleHotUpdate({ file, modules, server }) {
+      if (
+        isCSSRequest(file) ||
+        !new RegExp(`^${path.resolve(process.cwd(), "packages")}`).test(file)
+      ) {
+        return;
+      }
+      const url = cleanUrl(get(modules, "0.url", ""));
+
+      fsp.readFile(file).then((content) => {
+        const hash = getAssetHash(content);
+        server.ws.send({
+          type: "custom",
+          event: "packages-update",
+          data: { url, hash },
+        });
+      });
+      return [];
+    },
     configureServer({ middlewares, transformIndexHtml }) {
       middlewares.use(async (req, res, next) => {
         if (

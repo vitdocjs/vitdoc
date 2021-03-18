@@ -8,22 +8,21 @@ import { ComponentArea } from "../../components/component-area";
 import { useComponentInfo, useTypeFile } from "../../utils/loaders";
 import { Usage } from "../../components/usage/usage";
 
-
 export default function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
   const [tabKey, setTabKey] = useState();
 
   const propertyTypes = useTypeFile();
-  const { packageName, packageVersion } = useComponentInfo() || ({} as any);
+  const compInfo = useComponentInfo();
 
   return (
     <div id="public-component-show-container">
       <div className="component-page">
         <h1 className="component-name">{propertyTypes?.displayName}</h1>
         <span className="component-sub-title">
-          <span>Package: {packageName}</span>
-          <span>Version: {packageVersion}</span>
+          <span>Package: {compInfo?.packageName}</span>
+          <span>Version: {compInfo?.packageVersion}</span>
         </span>
         <div className="component-main">
           <div className="component-part">

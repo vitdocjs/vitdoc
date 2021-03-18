@@ -16,6 +16,19 @@ export const hashRE = /#.*$/;
 
 export const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
 
+export const addUrlParams = (url: string, params: Record<string, string>) => {
+  const paramsStr = Object.entries(params).reduce(
+    (previousValue, [key, val]) => (previousValue + val ? `${key}=${val}` : ""),
+    ""
+  );
+
+  if (!paramsStr) {
+    return url;
+  }
+
+  return /[?|&]/.test(url) ? `${url}&${paramsStr}` : `${url}?${paramsStr}`;
+};
+
 const path = location.pathname;
 const srcPath = "src";
 

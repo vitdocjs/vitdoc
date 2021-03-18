@@ -1,4 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useComponents } from "../../utils/loaders";
 
 const { Tabs } = window["antd"];
@@ -31,7 +36,6 @@ export function ComponentArea(props) {
     const [Comp, DocsFn] = Components;
 
     const Component = (props) => {
-
       useEffect(() => {
         onSetDefaultProps && onSetDefaultProps(props);
       }, []);

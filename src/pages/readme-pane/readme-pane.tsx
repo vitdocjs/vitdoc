@@ -1,12 +1,12 @@
 import Properties from "../../components/property";
 import VisionPane from "../../components/vision-pane/vision-pane";
+// import { DevDescription } from "./dev-desc";
 import React, { useState } from "react";
 
 import "./index.scss";
 import { ComponentArea } from "../../components/component-area";
 import { useComponentInfo, useTypeFile } from "../../utils/loaders";
 import { Usage } from "../../components/usage/usage";
-
 
 export default function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
@@ -15,6 +15,8 @@ export default function ReadmePane() {
 
   const propertyTypes = useTypeFile();
   const { packageName, packageVersion } = useComponentInfo() || ({} as any);
+
+  console.log("########", packageName);
 
   return (
     <div id="public-component-show-container">

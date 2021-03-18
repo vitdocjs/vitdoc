@@ -31,11 +31,15 @@ export default class VisionPane extends React.PureComponent<{
     const localStoryValue = +localStorage.getItem(PANE_VISIBLE);
     this.state.propertyDrawerShow =
       localStoryValue !== undefined ? !!localStoryValue : true;
+    this.init();
+  }
 
+  init() {
+    const props = this.props;
     getVisionConfig(props.properties).then((prototypeOptions) => {
-      console.log("typeFile:", this.props.properties);
-
-      console.log("vision config:", prototypeOptions);
+      // console.log("typeFile:", this.props.properties);
+      //
+      // console.log("vision config:", prototypeOptions);
 
       this.prototype = Bundle.createPrototype(transform(prototypeOptions));
 
@@ -59,6 +63,22 @@ export default class VisionPane extends React.PureComponent<{
         })
       );
     });
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<{
+      componentName?: string;
+      properties: any;
+      defaultProps?: Record<string, any>;
+      onPropsChange?: (props: Record<string, any>) => void;
+    }>,
+    prevState: Readonly<{}>,
+    snapshot?: any
+  ) {
+    if (prevProps.properties !== this.props.properties) {
+      this.disposeArr && this.disposeArr.forEach((dispose) => dispose());
+      this.init();
+    }
   }
 
   setPropertyDrawerShow = (visible) => {

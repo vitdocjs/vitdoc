@@ -1,41 +1,57 @@
 import { useMemo, useState } from "react";
-import lscWindowConfig from "./lscConfig";
+import lscWindowConfig, { addUrlParams, cleanUrl } from "./lscConfig";
 import keyBy from "lodash/keyBy";
 import { getDocsSource } from "./strings";
 
 const { route } = lscWindowConfig;
+
+const registryMap: Record<
+  string,
+  Array<(hash: string, payload?: any) => void>
+> = {};
+function addRegistry(p, fn) {
+  if (!registryMap[p]) {
+    registryMap[p] = [];
+  }
+  registryMap[p].push(fn);
+}
+
+// @ts-ignore
+if (import.meta.hot) {
+  // @ts-ignore
+  import.meta.hot.on("packages-update", (payload) => {
+    const { url, hash } = payload;
+    if (url in registryMap) {
+      console.log(`[vite] hot updated: ${url}`);
+      registryMap[url].forEach((fn) => fn(hash, payload));
+    }
+  });
+}
 
 export function useAsyncImport(
   path: string | string[],
   cb = ({ default: Comp }: any) => Comp
 ) {
   const [Component, setComponent] = useState();
+  const [hash, update] = useState("");
 
   useMemo(async () => {
-    // @ts-ignore
-    // import.meta.hot.accept(path, (cb) => {
-    //   console.log("#########", cb);
-    // });
+    const paths = Array.isArray(path) ? path : [path];
 
-    const result = await (Array.isArray(path)
-      ? Promise.all(
-          path.map(
-            (p) =>
-              import(
-                /* @vite-ignore */
-                p
-              )
-          )
-        )
-      : import(
+    const result = await Promise.all(
+      paths.map((p) => {
+        addRegistry(cleanUrl(p), update);
+        return import(
           /* @vite-ignore */
-          path
-        ));
+          addUrlParams(p, { hash: `${hash}` })
+        );
+      })
+    );
 
-    const Comp = cb(result);
+    const Comp = cb(Array.isArray(path) ? result : result[0]);
 
     setComponent(() => Comp);
-  }, []);
+  }, [hash]);
 
   return Component;
 }
