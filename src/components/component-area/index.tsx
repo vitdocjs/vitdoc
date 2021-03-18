@@ -31,9 +31,15 @@ export function ComponentArea(props) {
     const [Comp, DocsFn] = Components;
 
     const Component = (props) => {
-      onSetDefaultProps && onSetDefaultProps(props);
+
+      useEffect(() => {
+        onSetDefaultProps && onSetDefaultProps(props);
+      }, []);
       return React.createElement(Comp, props);
     };
+    // @ts-ignore
+
+    // window.$RefreshReg$ && window.$RefreshReg$(Comp, "Image");
 
     const isMultiple = typeof DocsFn === "object";
 

@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import TypeFile from "./plugins/type-file";
-// import reactRefresh from "@vitejs/plugin-react-refresh";
+import reactRefresh from "@vitejs/plugin-react-refresh";
 import path from "path";
 import packagesTemplate from "./plugins/packages-template";
 
@@ -17,5 +17,5 @@ export default defineConfig({
   server: {
     cors: true,
   },
-  plugins: [ packagesTemplate(), TypeFile()],
+  plugins: [reactRefresh(), packagesTemplate(), TypeFile()],
 });

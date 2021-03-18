@@ -12,6 +12,11 @@ export function useAsyncImport(
   const [Component, setComponent] = useState();
 
   useMemo(async () => {
+    // @ts-ignore
+    // import.meta.hot.accept(path, (cb) => {
+    //   console.log("#########", cb);
+    // });
+
     const result = await (Array.isArray(path)
       ? Promise.all(
           path.map(
