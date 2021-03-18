@@ -7,13 +7,14 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
     "@alife/intl-comp-highLighter": "^1.0.14",
-    "@alife/json-2-vision": "^1.0.28",
+    "@alife/json-2-vision": "^1.0.29",
     "@alife/mtop-mock-hook": "^1.0.6",
     "@ant-design/icons": "^4.5.0",
     "@types/node": "^14.14.35",

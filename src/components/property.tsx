@@ -1,6 +1,7 @@
 // @ts-ignore
 const { Table } = window.antd;
-import React from "react";
+// @ts-ignore
+import React from "/mock/react";
 
 
 export default function renderProperty({ properties }) {

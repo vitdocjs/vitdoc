@@ -77,7 +77,7 @@ export function useTypeFile(): any {
 export function useComponentInfo(): any {
   const rootPath = route.replace(/(.+packages\/.+)\/.+/, "$1");
   return useAsyncImport(
-    `${rootPath}/package.json`,
+    `${rootPath}/package.json?import`,
     ({ default: packageInfo }) => {
       return {
         packageName: packageInfo.name,
