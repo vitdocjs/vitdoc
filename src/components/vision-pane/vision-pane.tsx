@@ -1,4 +1,8 @@
-import { getVisionConfig, transform } from "./getVisionConfig";
+import { getVisionConfig } from "./getVisionConfig";
+import { transform } from "@alife/json-2-vision";
+
+import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
+import CloseOutlined from "@ant-design/icons/CloseOutlined";
 
 import "./index.scss";
 import { PANE_VISIBLE } from "../../constants";
@@ -122,7 +126,7 @@ export default class VisionPane extends React.PureComponent<{
                   className="ant-drawer-close"
                   onClick={() => this.setPropertyDrawerShow(false)}
                 >
-                  X
+                  <CloseOutlined />
                 </button>
               </div>
               <div className="ant-drawer-body">
@@ -136,7 +140,7 @@ export default class VisionPane extends React.PureComponent<{
             onClick={() => this.setPropertyDrawerShow(true)}
           >
             <Button>
-              {/*<DoubleLeftOutlined />*/}
+              <DoubleLeftOutlined />
               Vision 面板
             </Button>
           </div>
