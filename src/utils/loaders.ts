@@ -5,10 +5,8 @@ import { getDocsSource } from "./strings";
 
 const { route } = lscWindowConfig;
 
-const registryMap: Record<
-  string,
-  Array<(hash: string, payload?: any) => void>
-> = {};
+const registryMap: Record<string, Array<(payload?: any) => void>> = {};
+const registryHashMap: Record<string, any> = {};
 function addRegistry(p, fn) {
   if (!registryMap[p]) {
     registryMap[p] = [];
@@ -20,10 +18,14 @@ function addRegistry(p, fn) {
 if (import.meta.hot) {
   // @ts-ignore
   import.meta.hot.on("packages-update", (payload) => {
-    const { url, hash } = payload;
+    const { url, ...restPayload } = payload;
+
     if (url in registryMap) {
       console.log(`[vite] hot updated: ${url}`);
-      registryMap[url].forEach((fn) => fn(hash, payload));
+      registryMap[url].forEach((fn) => {
+        registryHashMap[url] = restPayload;
+        fn(restPayload);
+      });
     }
   });
 }
@@ -33,7 +35,7 @@ export function useAsyncImport(
   cb = ({ default: Comp }: any) => Comp
 ) {
   const [Component, setComponent] = useState();
-  const [hash, update] = useState("");
+  const [params, update] = useState({});
 
   useMemo(async () => {
     const paths = Array.isArray(path) ? path : [path];
@@ -41,9 +43,10 @@ export function useAsyncImport(
     const result = await Promise.all(
       paths.map((p) => {
         addRegistry(cleanUrl(p), update);
+        const hashParams = registryHashMap[p] || {};
         return import(
           /* @vite-ignore */
-          addUrlParams(p, { hash: `${hash}` })
+          addUrlParams(p, hashParams)
         );
       })
     );
@@ -51,7 +54,7 @@ export function useAsyncImport(
     const Comp = cb(Array.isArray(path) ? result : result[0]);
 
     setComponent(() => Comp);
-  }, [hash]);
+  }, [params]);
 
   return Component;
 }

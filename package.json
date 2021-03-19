@@ -9,7 +9,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",

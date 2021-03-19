@@ -12,10 +12,11 @@ export default defineConfig({
       "react-dom": path.resolve(__dirname, "/mock/react-dom.js"),
       moment: path.resolve(__dirname, "/mock/moment"),
       "@alife/dada-vision-utils": path.resolve(__dirname, "/mock/vision-utils"),
+      "@alife/next": path.resolve(__dirname, "/mock/next"),
     },
   },
   server: {
     cors: true,
   },
-  plugins: [ packagesTemplate(), TypeFile()],
+  plugins: [packagesTemplate(), TypeFile()],
 });

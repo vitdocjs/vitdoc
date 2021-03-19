@@ -12,6 +12,11 @@ const cssLangs = `\\.(css|less|sass|scss|styl|stylus|postcss)($|\\?)`;
 const cssLangRE = new RegExp(cssLangs);
 const directRequestRE = /(\?|&)direct\b/;
 
+
+export const isJsx = (request: string) =>
+  new RegExp(`\\.[j|t]sx($|\\?)`).test(request) ;
+
+
 export const isCSSRequest = (request: string) =>
   cssLangRE.test(request) && !directRequestRE.test(request);
 

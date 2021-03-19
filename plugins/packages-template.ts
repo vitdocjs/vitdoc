@@ -1,9 +1,9 @@
 // @ts-ignore
 import * as path from "path";
-import fs, { promises as fsp } from "fs";
+import fs from "fs";
 import get from "lodash/get";
 import { send } from "vite/dist/node";
-import {cleanUrl, getAssetHash, isCSSRequest, isHTMLProxy} from "./utils"
+import { cleanUrl, isCSSRequest, isHTMLProxy } from "./utils";
 
 let memMap = {};
 const fsExist = (path: string) => {
@@ -14,29 +14,49 @@ const fsExist = (path: string) => {
   return memMap[path];
 };
 
+const getImporter = (loadModule) => {
+  const { importers } = loadModule;
+  const importerArr = Array.from(importers);
+  if (!importerArr.length) {
+    return loadModule;
+  }
+
+  for (const nextModule of importerArr) {
+    return getImporter(nextModule);
+  }
+};
+
 const packagesTemplate = () => {
   return {
     name: "vite:packages-template",
     handleHotUpdate({ file, modules, server }) {
-      if (
-        isCSSRequest(file) ||
-        !new RegExp(`^${path.resolve(process.cwd(), "packages")}`).test(file)
-      ) {
+      if (isCSSRequest(file)) {
         return;
       }
-      const url = cleanUrl(get(modules, "0.url", ""));
 
-      fsp.readFile(file).then((content) => {
-        const hash = getAssetHash(content);
-        server.ws.send({
-          type: "custom",
-          event: "packages-update",
-          data: { url, hash },
-        });
+      modules.forEach((payload) => {
+        const importer = getImporter(payload);
+        const url = cleanUrl(get(importer, "url", ""));
+
+        if (url) {
+          payload.isSelfAccepting = true;
+          setTimeout(() => {
+            payload.isSelfAccepting = false;
+          });
+
+          server.ws.send({
+            type: "custom",
+            event: "packages-update",
+            data: { url, t: new Date().valueOf() },
+          });
+        }
       });
-      return [];
+
+      return;
     },
-    configureServer({ middlewares, transformIndexHtml }) {
+    configureServer(server) {
+      const { middlewares, transformIndexHtml } = server;
+
       middlewares.use(async (req, res, next) => {
         if (
           req.method !== "GET" ||
@@ -47,13 +67,11 @@ const packagesTemplate = () => {
         }
 
         const url = cleanUrl(req.url);
-        if (!/^\/packages/.test(url)) {
-          return next();
-        }
 
         const exist = fsExist(
           path.resolve(process.cwd(), url.replace(/^\//, ""), "src/index.tsx")
         );
+
         if (!exist) {
           return next();
         }

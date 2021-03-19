@@ -1,7 +1,13 @@
 // @ts-ignore
 import * as path from "path";
 import * as parser from "@ali/react-docgen-typescript-loader-add-tag/dist/docgen-typescript";
-import { cleanUrl, getAssetHash, getQueryParams, isCSSRequest } from "./utils";
+import {
+  cleanUrl,
+  getAssetHash,
+  getQueryParams,
+  isCSSRequest,
+  isJsx,
+} from "./utils";
 
 const alias = {
   js: "application/javascript",
@@ -12,6 +18,7 @@ const alias = {
 
 const TypeFile = ({ prefix = ".type.json" } = {}) => {
   let lastDoc: Record<string, any> = {};
+  const requestedUrlMap = {};
   function getComponentDocs(fileName) {
     // console.time("get docs");
 
@@ -43,19 +50,14 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
   return {
     name: "vite:type-file",
     handleHotUpdate({ file, server }) {
-      if (
-        isCSSRequest(file) ||
-        !new RegExp(
-          `^${path.resolve(process.cwd(), "packages", ".+/index.tsx")}`
-        ).test(file)
-      ) {
+      const url = "/" + cleanUrl(path.relative(process.cwd(), file));
+      if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
       }
 
       setTimeout(() => {
-        const url = cleanUrl(path.relative(process.cwd(), file));
         const beforeHash = Object.keys(lastDoc)[0];
-        const { hash } = getComponentDocs(url);
+        const { hash } = getComponentDocs(url.replace(/^\//, ""));
 
         if (hash === beforeHash) {
           return;
@@ -64,13 +66,13 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
         server.ws.send({
           type: "custom",
           event: "packages-update",
-          data: { url: `/${url}${prefix}`, hash },
+          data: { url: `${url}${prefix}`, hash },
         });
       }, 50);
 
       return [];
     },
-    configureServer({ pluginContainer, middlewares, moduleGraph }) {
+    configureServer({ middlewares }) {
       middlewares.use(async (req, res, next) => {
         if (
           req.method !== "GET"
@@ -83,6 +85,8 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
         if (!new RegExp(`${prefix}$`).test(url)) {
           return next();
         }
+
+        requestedUrlMap[url.replace(new RegExp(`${prefix}$`), "")] = true;
 
         const { hash } = getQueryParams(req.url);
 
