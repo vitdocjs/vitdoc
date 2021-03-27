@@ -1,18 +1,13 @@
 // @ts-ignore
 import * as path from "path";
-import fs from "fs";
 import get from "lodash/get";
-import { send } from "vite/dist/node";
-import { cleanUrl, isCSSRequest, isHTMLProxy } from "./utils";
+import Swig from "swig";
 
-let memMap = {};
-const fsExist = (path: string) => {
-  if (path in memMap) {
-    return memMap[path];
-  }
-  memMap[path] = fs.existsSync(path);
-  return memMap[path];
-};
+import { send } from "vite/dist/node";
+import { cleanUrl, fsExist, isCSSRequest, isHTMLProxy } from "../utils";
+import { getConfig } from "../utils/config";
+
+
 
 const getImporter = (loadModule) => {
   const { importers } = loadModule;
@@ -26,7 +21,7 @@ const getImporter = (loadModule) => {
   }
 };
 
-const packagesTemplate = () => {
+const componentsTemplate = () => {
   return {
     name: "vite:packages-template",
     handleHotUpdate({ file, modules, server }) {
@@ -57,6 +52,16 @@ const packagesTemplate = () => {
     configureServer(server) {
       const { middlewares, transformIndexHtml } = server;
 
+      const createHtml = Swig.compileFile(
+        path.resolve(__dirname, "./plugins/components-template/index.html"),
+        {
+          // cache: false,
+          autoescape: false,
+        }
+      );
+
+      const { extendTemplate: externalHtml } = getConfig();
+
       middlewares.use(async (req, res, next) => {
         if (
           req.method !== "GET" ||
@@ -69,21 +74,18 @@ const packagesTemplate = () => {
         const url = cleanUrl(req.url);
 
         const exist = fsExist(
-          path.resolve(process.cwd(), url.replace(/^\//, ""), "src/index.tsx")
+          path.resolve(process.cwd(), url.replace(/^\//, ""), "index.tsx")
         );
 
         if (!exist) {
           return next();
         }
 
-        let html = fs.readFileSync(
-          path.resolve(__dirname, "./index.html"),
-          "utf-8"
-        );
+        let html = createHtml({ externalHtml, __dirname });
         html = await transformIndexHtml(url, html);
         return send(req, res, html, "html");
       });
     },
   };
 };
-export default packagesTemplate;
+export default componentsTemplate;

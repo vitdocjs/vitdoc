@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import fs from "fs"
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -37,3 +38,12 @@ export function getQueryParams(url: string): any {
   });
   return vars;
 }
+
+let memMap = {};
+export const fsExist = (path: string) => {
+  if (path in memMap) {
+    return memMap[path];
+  }
+  memMap[path] = fs.existsSync(path);
+  return memMap[path];
+};

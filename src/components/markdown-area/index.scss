@@ -1,0 +1,29 @@
+.markdown-area {
+  .clickable-block {
+    cursor: pointer;
+    border: 2px solid transparent;
+    &:not(.selected-block):hover {
+      > .code-pane {
+        box-shadow: 0 2px 8px 0 rgb(100 149 249);
+      }
+    }
+  }
+  .selected-block {
+    position: relative;
+
+    > .ant-tag {
+      position: absolute;
+      z-index: 1;
+      border-radius: 6px 0 6px 0;
+      top: 0;
+      background: #6495f9;
+      border-color: #6495f9;
+      color: #fff;
+      font-weight: 500;
+    }
+    > .code-pane {
+      box-shadow: 0 2px 18px 0 rgb(0 0 0 / 40%);
+      border: 2px solid #6495f9;
+    }
+  }
+}

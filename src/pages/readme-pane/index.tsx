@@ -5,53 +5,60 @@ import React, { useState } from "react";
 
 import "./index.scss";
 import { ComponentArea } from "../../components/component-area";
-import { useComponentInfo, useTypeFile } from "../../utils/loaders";
-import { Usage } from "../../components/usage/usage";
+import {
+  RendererContext,
+  useComponentInfo,
+  useTypeFile,
+} from "../../utils/loaders";
+import { MarkdownArea } from "../../components/markdown-area";
 
 export default function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
-  const [tabKey, setTabKey] = useState();
 
   const propertyTypes = useTypeFile();
   const compInfo = useComponentInfo();
 
+  const [renderer, setRenderer] = useState<() => void>();
+
   return (
     <div id="public-component-show-container">
-      <div className="component-page">
-        <h1 className="component-name">{propertyTypes?.displayName}</h1>
-        <span className="component-sub-title">
-          <span>Package: {compInfo?.packageName}</span>
-          <span>Version: {compInfo?.packageVersion}</span>
-        </span>
-        <div className="component-main">
-          <div className="component-part">
-            <ComponentArea
-              onSwitch={setTabKey}
-              componentProps={visionProps}
-              onSetDefaultProps={setVisionDefaultProps}
-            />
-            <div className="component-description component-block ">
-              <Usage
-                prefix={tabKey}
-                componentProps={Object.assign(
-                  {},
-                  visionDefaultProps,
-                  visionProps
-                )}
+      <RendererContext.Provider value={{ renderer, setRenderer }}>
+        <div className="component-page">
+          <h1 className="component-name">{propertyTypes?.displayName}</h1>
+          <span className="component-sub-title">
+            <span>Package: {compInfo?.packageName}</span>
+            <span>Version: {compInfo?.packageVersion}</span>
+          </span>
+          <div className="component-main">
+            <div className="component-part">
+              <ComponentArea
+                componentProps={visionProps}
+                onSetDefaultProps={setVisionDefaultProps}
               />
-              <Properties properties={propertyTypes} />
+              <div className="component-description component-block ">
+                <MarkdownArea />
+                {/*<Usage*/}
+                {/*  prefix={tabKey}*/}
+                {/*  componentProps={Object.assign(*/}
+                {/*    {},*/}
+                {/*    visionDefaultProps,*/}
+                {/*    visionProps*/}
+                {/*  )}*/}
+                {/*/>*/}
+                <Properties properties={propertyTypes} />
+              </div>
             </div>
+            {propertyTypes && visionDefaultProps && (
+              <VisionPane
+                properties={propertyTypes}
+                defaultProps={visionDefaultProps}
+                onPropsChange={setVisionProps}
+              />
+            )}
           </div>
-          {propertyTypes && visionDefaultProps && (
-            <VisionPane
-              properties={propertyTypes}
-              defaultProps={visionDefaultProps}
-              onPropsChange={setVisionProps}
-            />
-          )}
         </div>
-      </div>
+      </RendererContext.Provider>
     </div>
   );
 }

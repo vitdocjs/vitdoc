@@ -6,14 +6,19 @@
     "build": "vite build",
     "serve": "vite preview"
   },
+  "bin": {
+    "vite-comp": "./bin/index.js"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "swig": "^1.4.2"
   },
   "devDependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
+    "@alifd/next": "^1.22.14",
     "@alife/intl-comp-highLighter": "^1.0.14",
     "@alife/json-2-vision": "^1.0.29",
     "@alife/mtop-mock-hook": "^1.0.6",
@@ -21,8 +26,15 @@
     "@types/node": "^14.14.35",
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "lodash": "^4.17.21",
+    "marked": "^2.0.1",
+    "mdast": "^3.0.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "react-markdown": "^5.0.3",
     "sass": "^1.32.8",
+    "shelljs.exec": "^1.1.8",
     "typescript": "^4.2.3",
-    "vite": "^2.0.5"
+    "vite": "^2.0.5",
+    "vite-plugin-cdn-externals": "^1.0.3"
   }
 }

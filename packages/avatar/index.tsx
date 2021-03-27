@@ -38,7 +38,6 @@ function Avatar({
       href={href}
       title={text}
     >
-      <D />
       <div
         className={classnames("avatar-content", shape)}
         style={{

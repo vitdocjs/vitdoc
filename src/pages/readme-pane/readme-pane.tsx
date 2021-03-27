@@ -16,8 +16,6 @@ export default function ReadmePane() {
   const propertyTypes = useTypeFile();
   const { packageName, packageVersion } = useComponentInfo() || ({} as any);
 
-  console.log("########", packageName);
-
   return (
     <div id="public-component-show-container">
       <div className="component-page">

@@ -32,11 +32,6 @@
     <script src="//g.alicdn.com/code/lib/moment.js/2.24.0/moment.min.js"></script>
     <script src="//g.alicdn.com/code/lib/antd/4.0.4/antd.min.js"></script>
 
-
-    <link rel="stylesheet" href="https://g.alicdn.com/intl-dada/dada-core/0.3.21/dpl-ae.css" />
-    <script src="https://assets.alicdn.com/g/lazada/static/0.0.5/moment/moment.min.js"></script>
-    <script src="https://g.alicdn.com/next/next/1.13.9/next.min.js"></script>
-
     <script>
       window.pageConfig = {};
     </script>
@@ -45,7 +40,10 @@
     <script src="https://g.alicdn.com/intl-dada/dada-visualengine/0.0.1/engine.js"></script>
     <script src="https://g.alicdn.com/intl-dada/dada-vision-utils/4.1.2/engine-utils.min.js"></script>
 
-    <script type="module" src="/src/runtime.tsx"></script>
+    {{ externalHtml }}
+
+    <script type="module" src="{{__dirname}}/src/runtime.tsx"></script>
+
     <!--    <script type="module" crossorigin src="/dist/assets/index.57deb56b.js"></script>-->
     <!--    <link rel="modulepreload" href="/dist/assets/vendor.3babbe4d.js">-->
     <!--    <link rel="stylesheet" href="/dist/assets/index.4c19ac32.css">-->

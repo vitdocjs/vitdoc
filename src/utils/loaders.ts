@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import lscWindowConfig, { addUrlParams, cleanUrl } from "./lscConfig";
 import keyBy from "lodash/keyBy";
 import { getDocsSource } from "./strings";
+import { runEsModuleCode } from "./esmodule";
 
 const { route } = lscWindowConfig;
 
@@ -99,14 +100,59 @@ export function useTypeFile(): any {
 }
 
 export function useComponentInfo(): any {
-  const rootPath = route.replace(/(.+packages\/.+)\/.+/, "$1");
-  return useAsyncImport(
-    `${rootPath}/package.json?import`,
+  return useAsyncImport(`/package.json?import`, ({ default: packageInfo }) => {
+    return {
+      packageName: packageInfo.name,
+      packageVersion: packageInfo.version,
+    };
+  });
+}
+
+export const RendererContext = createContext<{
+  renderer?: () => void;
+  setRenderer: (renderer: () => void) => void;
+}>({
+  setRenderer: () => {},
+});
+
+let moduleMaps = {};
+export function useMarkdown(): any {
+  const { renderer, setRenderer } = useContext(RendererContext);
+
+  const results: any = useAsyncImport(
+    `${route}/README.md`,
     ({ default: packageInfo }) => {
-      return {
-        packageName: packageInfo.name,
-        packageVersion: packageInfo.version,
-      };
+      return packageInfo;
     }
   );
+
+  if (!results) {
+    return null;
+  }
+
+  let moduleMap = moduleMaps[results.content];
+
+  if (!moduleMap) {
+    moduleMap = results.modules.reduce(
+      (previousValue, currentValue) =>
+        Object.assign(previousValue, {
+          [currentValue.sourcesContent.trim()]: () => {
+            runEsModuleCode(currentValue.code);
+          },
+        }),
+      {}
+    );
+
+    if (results && !renderer) {
+      setRenderer(() => Object.values(moduleMap)[0] as any);
+    }
+
+    moduleMaps[results.content] = moduleMap;
+  }
+
+  if (!results) {
+    return;
+  }
+
+  return { content: results.content, moduleMap, renderer, setRenderer };
 }

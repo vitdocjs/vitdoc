@@ -30,11 +30,10 @@ export const addUrlParams = (url: string, params: Record<string, string>) => {
 };
 
 const path = location.pathname;
-const srcPath = "src";
 
 // @ts-ignore
 const lscWindowConfig: ILscWindowConfig = {
-  route: `${cleanUrl(path)}/${srcPath}`,
+  route: cleanUrl(path),
 };
 
 export default lscWindowConfig;
