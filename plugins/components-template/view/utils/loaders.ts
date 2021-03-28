@@ -3,6 +3,7 @@ import lscWindowConfig, { addUrlParams, cleanUrl } from "./lscConfig";
 import keyBy from "lodash/keyBy";
 import { getDocsSource } from "./strings";
 import { runEsModuleCode } from "./esmodule";
+import { isCSSLang, isJsx } from "../../../utils/lang";
 
 const { route } = lscWindowConfig;
 
@@ -146,15 +147,20 @@ export function useMarkdown() {
   let moduleMap = moduleMaps[results?.hash];
 
   if (!moduleMap && results) {
-    moduleMap = results.modules.reduce(
-      (previousValue, currentValue) =>
-        Object.assign(previousValue, {
-          [currentValue.sourcesContent.trim()]: () => {
-            runEsModuleCode(currentValue.code);
-          },
-        }),
-      {}
-    );
+    const styleModules = results.modules.filter(({ lang }) => isCSSLang(lang));
+    moduleMap = results.modules.reduce((previousValue, currentValue) => {
+      if (!isJsx(currentValue.lang)) {
+        return previousValue;
+      }
+      return Object.assign(previousValue, {
+        [currentValue.sourcesContent.trim()]: () => {
+          runEsModuleCode(currentValue.code);
+          styleModules.forEach((mod) => {
+            runEsModuleCode(mod.code);
+          });
+        },
+      });
+    }, {});
     moduleMaps = { [results.hash]: moduleMap };
     if (renderIndex === undefined) {
       setRenderIndex(0);
@@ -167,7 +173,15 @@ export function useMarkdown() {
 
   const renderer = Object.values(moduleMap)?.[renderIndex || 0];
 
+  let error: ModuleLoadError | undefined;
+  if (!results?.modules?.length) {
+    error = new ModuleLoadError(
+      "You should add some code block in your .md file.\n Support `jsx` or `tsx` language for now."
+    );
+  }
+
   return {
+    error,
     content: results.content,
     moduleMap,
     renderer: renderer,

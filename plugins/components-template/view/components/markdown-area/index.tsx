@@ -2,8 +2,15 @@ import React from "react";
 import { useMarkdown, useRealComponent } from "../../utils/loaders";
 import ReactMarkdown from "react-markdown";
 import HighLight from "@alife/intl-comp-highLighter/dist/index";
+import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
+import scss from "react-syntax-highlighter/dist/esm/languages/prism/scss";
+import less from "react-syntax-highlighter/dist/esm/languages/prism/less";
 import "@alife/intl-comp-highLighter/dist/index.css";
 import classNames from "classnames";
+
+HighLight.registerLanguage("tsx", tsx);
+HighLight.registerLanguage("scss", scss);
+HighLight.registerLanguage("less", less);
 
 // @ts-ignore
 const { Tag } = window.antd;
@@ -24,18 +31,20 @@ export function MarkdownArea() {
   const code = ({ language, value = "" }) => {
     const fn = moduleMap?.[value.trim()];
 
-    let onChange = function (tabIndex) {
-      setRenderIndex(tabIndex);
-    }.bind(null, index);
+    const clickable = /^[j|t]sx$/.test(language);
+    let onChange = () => {};
+    if (clickable) {
+      onChange = function (tabIndex) {
+        setRenderIndex(tabIndex);
+      }.bind(null, index);
 
-    index++;
-    if (language === "tsx") {
-      language = "jsx";
+      index++;
     }
+
     return (
       <div
         className={classNames({
-          "clickable-block": /^[j|t]sx$/.test(language),
+          "clickable-block": clickable,
           "selected-block": renderer === fn,
         })}
         onClick={onChange}

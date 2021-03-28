@@ -1,7 +1,6 @@
 import { createHash } from "crypto";
 import fs from "fs";
-import type { ModuleNode } from "vite";
-import { ViteDevServer } from "_vite@2.1.2@vite";
+import type { ModuleNode, ViteDevServer } from "vite";
 import path from "path";
 
 export const queryRE = /\?.*$/;

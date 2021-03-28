@@ -4,7 +4,6 @@ import fs from "fs";
 import fromMarkdown from "mdast-util-from-markdown";
 import {
   cleanUrl,
-  fsExist,
   getAssetHash,
   getImporter,
   isCSSRequest,
@@ -14,6 +13,7 @@ import {
 import { send } from "vite";
 import type { ModuleNode, ViteDevServer } from "vite";
 import get from "lodash/get";
+import { isJsx, isCSSLang } from "../utils/lang";
 
 function invalidate(mod: ModuleNode, timestamp: number, seen: Set<ModuleNode>) {
   if (seen.has(mod)) {
@@ -91,7 +91,7 @@ const mdjsx = () => {
         }
 
         const filePath = path.resolve(process.cwd(), "./" + url);
-        const exist = fsExist(filePath);
+        const exist = await server.pluginContainer.resolveId(filePath);
 
         if (!exist) {
           return next();
@@ -104,13 +104,18 @@ const mdjsx = () => {
         const tasks = fromMarkdown(content)
           .children.filter(
             ({ type, lang = "" }) =>
-              type === "code" && /^[t|j]sx$/.test(<string>lang)
+              type === "code" &&
+              (isJsx(<string>lang) || isCSSLang(<string>lang))
           )
           .map(async (item, index) => {
             const content = <string>item.value || "";
+            const lang = item.lang;
 
-            const modPath = `${filePath}.[${index}].${item.lang}`;
-            markdownMap[modPath] = content;
+            const modPath = `${filePath}.[${index}].${lang}`;
+            markdownMap[modPath] = {
+              lang,
+              content,
+            };
 
             const mod = await moduleGraph.ensureEntryFromUrl(modPath);
             readmeMod.importedModules.add(mod);
@@ -120,17 +125,22 @@ const mdjsx = () => {
               new Set(),
               false
             );
+            const code = await pluginContainer
+              .transform(content, modPath)
+              .then(({ code }) => code);
+
+            markdownMap[modPath].code = code;
 
             return {
-              code: await pluginContainer
-                .transform(content, modPath)
-                .then(({ code }) => code),
+              lang,
+              code,
               // .catch(() => Promise.resolve("")),
               sourcesContent: content,
             };
           });
 
         const modules = await Promise.all(tasks);
+
         const hash = getAssetHash(
           modules.reduce(
             (previousValue, currentValue) =>
@@ -138,7 +148,6 @@ const mdjsx = () => {
             ""
           )
         );
-        // console.log(modules);
 
         return send(
           req,

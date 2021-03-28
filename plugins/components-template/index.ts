@@ -6,8 +6,10 @@ import { send } from "vite/dist/node";
 import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../utils";
 import { getConfig } from "../utils/config";
 
+const currentPath = path.resolve(__dirname, "plugins/components-template");
+
 export const createHtml = Swig.compileFile(
-  path.resolve(__dirname, "./plugins/components-template/index.html"),
+  path.resolve(currentPath, "./index.html"),
   {
     // cache: false,
     autoescape: false,
@@ -27,13 +29,13 @@ const componentsTemplate = () => {
           req.method !== "GET" ||
           isHTMLProxy(req.url) ||
           !(req.headers.accept || "").includes("text/html") ||
-          !/(\.md|\.html|\/\w+)$/.test(cleanUrl(req.url))
+          !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
         ) {
           return next();
         }
 
         let url = cleanUrl(req.url);
-        if (/\/\w+/.test(url)) {
+        if (/\/[\w|_|-]+$/.test(url)) {
           url = path.join(url, "index.html");
         }
 
@@ -48,7 +50,7 @@ const componentsTemplate = () => {
           ".."
         );
 
-        let html = createHtml({ externalHtml, __dirname, route });
+        let html = createHtml({ externalHtml, __dirname: currentPath, route });
 
         html = await transformIndexHtml(url, html);
 

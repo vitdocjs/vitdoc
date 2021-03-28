@@ -16,6 +16,7 @@ export const hashRE = /#.*$/;
 
 export const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
 
+
 export const addUrlParams = (url: string, params: Record<string, string>) => {
   const paramsStr = Object.entries(params).reduce(
     (previousValue, [key, val]) => (previousValue + val ? `${key}=${val}` : ""),
@@ -28,7 +29,6 @@ export const addUrlParams = (url: string, params: Record<string, string>) => {
 
   return /[?|&]/.test(url) ? `${url}&${paramsStr}` : `${url}?${paramsStr}`;
 };
-
 
 // @ts-ignore
 const lscWindowConfig: ILscWindowConfig = {
