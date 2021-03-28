@@ -10,9 +10,7 @@ const { Tag } = window.antd;
 
 import "./index.scss";
 
-interface IProps {}
-
-export function MarkdownArea(props: IProps) {
+export function MarkdownArea() {
   const component = useRealComponent();
   const res = useMarkdown();
 
@@ -20,14 +18,17 @@ export function MarkdownArea(props: IProps) {
     return null;
   }
 
-  const { moduleMap, content, renderer, setRenderer } = res;
+  const { moduleMap, content, renderer, setRenderIndex } = res;
 
+  let index = 0;
   const code = ({ language, value = "" }) => {
-    const fn = moduleMap[value.trim()];
+    const fn = moduleMap?.[value.trim()];
 
-    const onChange = () => {
-      setRenderer(() => fn);
-    };
+    let onChange = function (tabIndex) {
+      setRenderIndex(tabIndex);
+    }.bind(null, index);
+
+    index++;
     if (language === "tsx") {
       language = "jsx";
     }

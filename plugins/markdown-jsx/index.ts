@@ -5,35 +5,57 @@ import fromMarkdown from "mdast-util-from-markdown";
 import {
   cleanUrl,
   fsExist,
+  getAssetHash,
   getImporter,
   isCSSRequest,
   isHTMLProxy,
 } from "../utils";
 import { send } from "vite";
+import type { ModuleNode } from "vite";
 import get from "lodash/get";
+
+function invalidate(mod: ModuleNode, timestamp: number, seen: Set<ModuleNode>) {
+  if (seen.has(mod)) {
+    return;
+  }
+  seen.add(mod);
+  mod.lastHMRTimestamp = timestamp;
+  mod.transformResult = null;
+  mod.importers.forEach((importer) => {
+    if (!importer.acceptedHmrDeps.has(mod)) {
+      invalidate(importer, timestamp, seen);
+    }
+  });
+}
 
 const mdjsx = () => {
   const markdownMap = {};
   return {
     name: "vite:markdown-jsx",
-    handleHotUpdate({ file, modules, server }) {
+    handleHotUpdate(mod) {
+      const { file, modules, timestamp, server } = mod;
+
       if (isCSSRequest(file)) {
         return;
       }
 
-      modules.forEach(async (payload) => {
+      if (/\.md$/.test(file) && modules.length) {
+        modules.forEach((payload) => {
+          payload.importedModules.forEach((val) => {
+            invalidate(val, timestamp, new Set<ModuleNode>());
+          });
+        });
+      }
+
+      for (const payload of modules) {
+        invalidate(payload, timestamp, new Set<ModuleNode>());
+
         const importer = getImporter(payload);
         const url = cleanUrl(get(importer, "url", ""));
 
-        if (url) {
-          const mod = await server.moduleGraph.getModuleByUrl(
-            path.resolve(url, "../index")
-          );
-          console.log(path.resolve(url, "./index"), mod);
-          mod.isSelfAccepting = true;
+        if (/\.md$/.test(url)) {
           payload.isSelfAccepting = true;
           setTimeout(() => {
-            mod.isSelfAccepting = false;
             payload.isSelfAccepting = false;
           });
 
@@ -42,10 +64,10 @@ const mdjsx = () => {
             event: "packages-update",
             data: { url, t: new Date().valueOf() },
           });
+          return [];
         }
-      });
-
-      return [];
+      }
+      return;
     },
     configureServer(server) {
       const { middlewares, pluginContainer, moduleGraph } = server;
@@ -88,7 +110,6 @@ const mdjsx = () => {
             markdownMap[modPath] = content;
 
             const mod = await moduleGraph.ensureEntryFromUrl(modPath);
-            mod.isSelfAccepting = true;
             readmeMod.importedModules.add(mod);
             await moduleGraph.updateModuleInfo(
               readmeMod,
@@ -107,12 +128,20 @@ const mdjsx = () => {
           });
 
         const modules = await Promise.all(tasks);
+        const hash = getAssetHash(
+          modules.reduce(
+            (previousValue, currentValue) =>
+              previousValue.concat(currentValue.code),
+            ""
+          )
+        );
         // console.log(modules);
 
         return send(
           req,
           res,
           `export default ${JSON.stringify({
+            hash,
             content,
             modules,
           })}`,

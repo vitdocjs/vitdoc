@@ -1,5 +1,6 @@
 import { createHash } from "crypto";
 import fs from "fs";
+import type { ModuleNode } from "vite";
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -45,10 +46,15 @@ export const fsExist = (path: string) => {
   memMap[path] = fs.existsSync(path);
   return memMap[path];
 };
-export const getImporter = (loadModule) => {
+
+export const getImporter = (
+  loadModule: ModuleNode,
+  condition: (mod: ModuleNode) => boolean = () => true
+) => {
   const { importers } = loadModule;
+
   const importerArr = Array.from(importers);
-  if (!importerArr.length) {
+  if (!importerArr.length && condition(loadModule)) {
     return loadModule;
   }
 

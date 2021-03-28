@@ -109,15 +109,15 @@ export function useComponentInfo(): any {
 }
 
 export const RendererContext = createContext<{
-  renderer?: () => void;
-  setRenderer: (renderer: () => void) => void;
+  renderIndex?: number;
+  setRenderIndex: (index: number) => void;
 }>({
-  setRenderer: () => {},
+  setRenderIndex: () => {},
 });
 
 let moduleMaps = {};
-export function useMarkdown(): any {
-  const { renderer, setRenderer } = useContext(RendererContext);
+export function useMarkdown() {
+  const { renderIndex, setRenderIndex } = useContext(RendererContext);
 
   const results: any = useAsyncImport(
     `${route}/README.md`,
@@ -126,13 +126,9 @@ export function useMarkdown(): any {
     }
   );
 
-  if (!results) {
-    return null;
-  }
+  let moduleMap = moduleMaps[results?.hash];
 
-  let moduleMap = moduleMaps[results.content];
-
-  if (!moduleMap) {
+  if (!moduleMap && results) {
     moduleMap = results.modules.reduce(
       (previousValue, currentValue) =>
         Object.assign(previousValue, {
@@ -142,17 +138,22 @@ export function useMarkdown(): any {
         }),
       {}
     );
-
-    if (results && !renderer) {
-      setRenderer(() => Object.values(moduleMap)[0] as any);
+    moduleMaps = { [results.hash]: moduleMap };
+    if (renderIndex === undefined) {
+      setRenderIndex(0);
     }
-
-    moduleMaps[results.content] = moduleMap;
   }
 
   if (!results) {
-    return;
+    return null;
   }
 
-  return { content: results.content, moduleMap, renderer, setRenderer };
+  const renderer = Object.values(moduleMap)?.[renderIndex || 0];
+
+  return {
+    content: results.content,
+    moduleMap,
+    renderer: renderer,
+    setRenderIndex: setRenderIndex,
+  };
 }

@@ -19,11 +19,11 @@ export default function ReadmePane() {
   const propertyTypes = useTypeFile();
   const compInfo = useComponentInfo();
 
-  const [renderer, setRenderer] = useState<() => void>();
+  const [renderIndex, setRenderIndex] = useState<number>();
 
   return (
     <div id="public-component-show-container">
-      <RendererContext.Provider value={{ renderer, setRenderer }}>
+      <RendererContext.Provider value={{ renderIndex, setRenderIndex }}>
         <div className="component-page">
           <h1 className="component-name">{propertyTypes?.displayName}</h1>
           <span className="component-sub-title">

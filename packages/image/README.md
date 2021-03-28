@@ -1,5 +1,3 @@
-# Image
-
 Some Image Component description
 
 ```jsx
@@ -7,12 +5,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Component from "./index";
 
-
 ReactDOM.render(
   <div
     style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
   >
-    
     <Component
       width={300}
       height={300}
