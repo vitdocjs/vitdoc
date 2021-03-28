@@ -1,6 +1,8 @@
 import { createHash } from "crypto";
 import fs from "fs";
 import type { ModuleNode } from "vite";
+import { ViteDevServer } from "_vite@2.1.2@vite";
+import path from "path";
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -60,5 +62,19 @@ export const getImporter = (
 
   for (const nextModule of importerArr) {
     return getImporter(nextModule);
+  }
+};
+
+export const resolveMainComponent = async (
+  server: ViteDevServer,
+  mdPath: string
+) => {
+  const mainPath = path.join(mdPath, "../index");
+  const result = await server.pluginContainer.resolveId(mainPath);
+  if (result || path.dirname(mdPath) === "/") {
+    return result;
+  }
+  if (!result) {
+    return resolveMainComponent(server, path.join(mdPath, "../../R.md"));
   }
 };

@@ -31,33 +31,46 @@ if (import.meta.hot) {
   });
 }
 
+export class ModuleLoadError extends Error {}
+
 export function useAsyncImport(
   path: string | string[],
   cb = ({ default: Comp }: any) => Comp
 ) {
-  const [Component, setComponent] = useState();
+  const [Module, setModule] = useState<any>();
   const [params, update] = useState({});
 
   useMemo(async () => {
     const paths = Array.isArray(path) ? path : [path];
 
-    const result = await Promise.all(
-      paths.map((p) => {
-        addRegistry(cleanUrl(p), update);
-        const hashParams = registryHashMap[p] || {};
-        return import(
-          /* @vite-ignore */
-          addUrlParams(p, hashParams)
-        );
-      })
-    );
+    try {
+      const result = await Promise.all(
+        paths.map((p) => {
+          addRegistry(cleanUrl(p), update);
+          const hashParams = registryHashMap[p] || {};
+          return import(
+            /* @vite-ignore */
+            addUrlParams(p, hashParams)
+          );
+        })
+      );
 
-    const Comp = cb(Array.isArray(path) ? result : result[0]);
+      const Comp = cb(Array.isArray(path) ? result : result[0]);
 
-    setComponent(() => Comp);
+      setModule(() => Comp);
+    } catch (e) {
+      setModule({
+        error: new ModuleLoadError(
+          [
+            `Please make sure follow files exist in your project`,
+            ...paths.map((path) => `   -  ${path}`),
+          ].join("\n")
+        ),
+      });
+    }
   }, [params]);
 
-  return Component;
+  return Module;
 }
 
 export function useComponents() {
@@ -120,11 +133,15 @@ export function useMarkdown() {
   const { renderIndex, setRenderIndex } = useContext(RendererContext);
 
   const results: any = useAsyncImport(
-    `${route}/README.md`,
+    /\.md$/.test(location.pathname) ? location.pathname : `${route}/README.md`,
     ({ default: packageInfo }) => {
       return packageInfo;
     }
   );
+
+  if (results?.error) {
+    return results;
+  }
 
   let moduleMap = moduleMaps[results?.hash];
 

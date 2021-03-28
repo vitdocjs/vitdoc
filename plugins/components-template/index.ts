@@ -1,88 +1,57 @@
 // @ts-ignore
 import * as path from "path";
-import get from "lodash/get";
 import Swig from "swig";
 
 import { send } from "vite/dist/node";
-import {
-  cleanUrl,
-  fsExist,
-  getImporter,
-  isCSSRequest,
-  isHTMLProxy,
-} from "../utils";
+import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../utils";
 import { getConfig } from "../utils/config";
+
+export const createHtml = Swig.compileFile(
+  path.resolve(__dirname, "./plugins/components-template/index.html"),
+  {
+    // cache: false,
+    autoescape: false,
+  }
+);
 
 const componentsTemplate = () => {
   return {
     name: "vite:packages-template",
-    // handleHotUpdate({ file, modules, server }) {
-    //   if (isCSSRequest(file)) {
-    //     return;
-    //   }
-    //   console.log("@@@@@@@", file, modules);
-    //
-    //   modules.forEach(async (payload) => {
-    //     const importer = getImporter(payload);
-    //     const url = cleanUrl(get(importer, "url", ""));
-    //
-    //     if (url) {
-    //       const mod = await server.moduleGraph.getModuleByUrl(
-    //         path.resolve(url, "../index")
-    //       );
-    //
-    //       mod && (mod.isSelfAccepting = true);
-    //       payload.isSelfAccepting = true;
-    //       setTimeout(() => {
-    //         mod && (mod.isSelfAccepting = false);
-    //         payload.isSelfAccepting = false;
-    //       });
-    //
-    //       server.ws.send({
-    //         type: "custom",
-    //         event: "packages-update",
-    //         data: { url, t: new Date().valueOf() },
-    //       });
-    //     }
-    //   });
-    //
-    //   return;
-    // },
-
     configureServer(server) {
       const { middlewares, transformIndexHtml } = server;
-
-      const createHtml = Swig.compileFile(
-        path.resolve(__dirname, "./plugins/components-template/index.html"),
-        {
-          // cache: false,
-          autoescape: false,
-        }
-      );
 
       const { extendTemplate: externalHtml } = getConfig();
 
       middlewares.use(async (req, res, next) => {
         if (
           req.method !== "GET" ||
-          isHTMLProxy(req.url)
-          //  || req.headers.accept?.includes("text/html")
+          isHTMLProxy(req.url) ||
+          !(req.headers.accept || "").includes("text/html") ||
+          !/(\.md|\.html|\/\w+)$/.test(cleanUrl(req.url))
         ) {
           return next();
         }
 
-        const url = cleanUrl(req.url);
+        let url = cleanUrl(req.url);
+        if (/\/\w+/.test(url)) {
+          url = path.join(url, "index.html");
+        }
 
-        const exist = fsExist(
-          path.resolve(process.cwd(), url.replace(/^\//, ""), "index.tsx")
-        );
+        const exist = await resolveMainComponent(server, path.join(url));
 
         if (!exist) {
           return next();
         }
+        const route = path.join(
+          "/",
+          path.relative(process.cwd(), exist.id),
+          ".."
+        );
 
-        let html = createHtml({ externalHtml, __dirname });
+        let html = createHtml({ externalHtml, __dirname, route });
+
         html = await transformIndexHtml(url, html);
+
         return send(req, res, html, "html");
       });
     },

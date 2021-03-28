@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import { useMarkdown } from "../../utils/loaders";
 
 import "./index.scss";
+const { Result } = window["antd"];
 
 export function ComponentArea(props) {
   const { componentProps, onSetDefaultProps } = props;
@@ -37,7 +38,19 @@ export function ComponentArea(props) {
 
   return (
     <div className="component-block">
-      <div className="component-container code-box-demo" ref={componentRef} />
+      {Components?.error ? (
+        <Result
+          status="warning"
+          title="Resource load failed"
+          subTitle={
+            <span style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
+              {Components?.error.message}
+            </span>
+          }
+        />
+      ) : (
+        <div className="component-container code-box-demo" ref={componentRef} />
+      )}
     </div>
   );
 }

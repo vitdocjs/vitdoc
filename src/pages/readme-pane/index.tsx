@@ -1,6 +1,5 @@
 import Properties from "../../components/property";
 import VisionPane from "../../components/vision-pane/vision-pane";
-// import { DevDescription } from "./dev-desc";
 import React, { useState } from "react";
 
 import "./index.scss";
@@ -38,14 +37,6 @@ export default function ReadmePane() {
               />
               <div className="component-description component-block ">
                 <MarkdownArea />
-                {/*<Usage*/}
-                {/*  prefix={tabKey}*/}
-                {/*  componentProps={Object.assign(*/}
-                {/*    {},*/}
-                {/*    visionDefaultProps,*/}
-                {/*    visionProps*/}
-                {/*  )}*/}
-                {/*/>*/}
                 <Properties properties={propertyTypes} />
               </div>
             </div>

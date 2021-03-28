@@ -9,9 +9,10 @@ import {
   getImporter,
   isCSSRequest,
   isHTMLProxy,
+  resolveMainComponent,
 } from "../utils";
 import { send } from "vite";
-import type { ModuleNode } from "vite";
+import type { ModuleNode, ViteDevServer } from "vite";
 import get from "lodash/get";
 
 function invalidate(mod: ModuleNode, timestamp: number, seen: Set<ModuleNode>) {
@@ -30,6 +31,7 @@ function invalidate(mod: ModuleNode, timestamp: number, seen: Set<ModuleNode>) {
 
 const mdjsx = () => {
   const markdownMap = {};
+  let _server: ViteDevServer;
   return {
     name: "vite:markdown-jsx",
     handleHotUpdate(mod) {
@@ -71,12 +73,13 @@ const mdjsx = () => {
     },
     configureServer(server) {
       const { middlewares, pluginContainer, moduleGraph } = server;
+      _server = server;
 
       middlewares.use(async (req, res, next) => {
         if (
           req.method !== "GET" ||
-          isHTMLProxy(req.url)
-          //  || req.headers.accept?.includes("text/html")
+          isHTMLProxy(req.url) ||
+          (req.headers.accept || "").includes("text/html")
         ) {
           return next();
         }
@@ -154,7 +157,7 @@ const mdjsx = () => {
         return id;
       }
     },
-    transform(code, id) {
+    async transform(code, id) {
       if (!/\.md\.\[\d]\.[t|j]sx$/.test(id)) {
         return;
       }
@@ -162,9 +165,15 @@ const mdjsx = () => {
       const before = code.slice(0, index);
       const after = code.slice(index);
 
+      const mainModule = await resolveMainComponent(_server, id);
+
       return `${before.replace("import React ", "import React$ ")}
       
-      import $_Component from './index';
+      ${
+        mainModule
+          ? `import $_Component from '${mainModule.id}';`
+          : `const $_Component = {};`
+      }
       const React = {...React$};
       
       const beforeCreateElement = React.createElement;
