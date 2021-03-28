@@ -1,37 +1,43 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useComponents, useMarkdown } from "../../utils/loaders";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useMarkdown } from "../../utils/loaders";
 
-const { Tabs } = window["antd"];
-
-const { TabPane } = Tabs;
+import "./index.scss";
 
 export function ComponentArea(props) {
-  const { componentProps, onSwitch = () => {}, onSetDefaultProps } = props;
+  const { componentProps, onSetDefaultProps } = props;
   const componentRef = useRef() as any;
 
   const Components: any = useMarkdown();
 
-  if (Components) {
-    // return null;
-  }
+  const invoked = useRef(false);
+
+  const wrapProps = useCallback(
+    (Component) => (props) => {
+      if (!invoked.current) {
+        onSetDefaultProps && onSetDefaultProps(props);
+        invoked.current = true;
+      }
+      const finalProps = Object.assign({}, props, componentProps);
+      return React.createElement(Component, finalProps);
+    },
+    [componentProps]
+  );
+
+  useEffect(() => {
+    // @ts-ignore
+    window.$_ComponentWrap = wrapProps;
+  }, [componentProps]);
 
   useEffect(() => {
     const renderer = Components?.renderer;
     // @ts-ignore
     window.mountNode = componentRef.current;
     renderer?.();
-  }, [Components?.renderer]);
+  }, [Components?.renderer, componentProps]);
 
   return (
     <div className="component-block">
       <div className="component-container code-box-demo" ref={componentRef} />
-      {/*{keys.length ? (*/}
-      {/*  <Tabs tabPosition="bottom" size="small" onChange={setTab}>*/}
-      {/*    {keys.map((key) => (*/}
-      {/*      <TabPane tab={key} key={key} />*/}
-      {/*    ))}*/}
-      {/*  </Tabs>*/}
-      {/*) : null}*/}
     </div>
   );
 }

@@ -132,6 +132,7 @@ class Image extends Component<IProps> {
       : {};
 
     const tag = href ? "a" : "div";
+    return 'DD';
 
     return React.createElement(
       tag,

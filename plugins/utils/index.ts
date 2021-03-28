@@ -1,5 +1,5 @@
 import { createHash } from "crypto";
-import fs from "fs"
+import fs from "fs";
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -13,10 +13,8 @@ const cssLangs = `\\.(css|less|sass|scss|styl|stylus|postcss)($|\\?)`;
 const cssLangRE = new RegExp(cssLangs);
 const directRequestRE = /(\?|&)direct\b/;
 
-
 export const isJsx = (request: string) =>
-  new RegExp(`\\.[j|t]sx($|\\?)`).test(request) ;
-
+  new RegExp(`\\.[j|t]sx($|\\?)`).test(request);
 
 export const isCSSRequest = (request: string) =>
   cssLangRE.test(request) && !directRequestRE.test(request);
@@ -46,4 +44,15 @@ export const fsExist = (path: string) => {
   }
   memMap[path] = fs.existsSync(path);
   return memMap[path];
+};
+export const getImporter = (loadModule) => {
+  const { importers } = loadModule;
+  const importerArr = Array.from(importers);
+  if (!importerArr.length) {
+    return loadModule;
+  }
+
+  for (const nextModule of importerArr) {
+    return getImporter(nextModule);
+  }
 };

@@ -4,51 +4,51 @@ import get from "lodash/get";
 import Swig from "swig";
 
 import { send } from "vite/dist/node";
-import { cleanUrl, fsExist, isCSSRequest, isHTMLProxy } from "../utils";
+import {
+  cleanUrl,
+  fsExist,
+  getImporter,
+  isCSSRequest,
+  isHTMLProxy,
+} from "../utils";
 import { getConfig } from "../utils/config";
-
-
-
-const getImporter = (loadModule) => {
-  const { importers } = loadModule;
-  const importerArr = Array.from(importers);
-  if (!importerArr.length) {
-    return loadModule;
-  }
-
-  for (const nextModule of importerArr) {
-    return getImporter(nextModule);
-  }
-};
 
 const componentsTemplate = () => {
   return {
     name: "vite:packages-template",
-    handleHotUpdate({ file, modules, server }) {
-      if (isCSSRequest(file)) {
-        return;
-      }
+    // handleHotUpdate({ file, modules, server }) {
+    //   if (isCSSRequest(file)) {
+    //     return;
+    //   }
+    //   console.log("@@@@@@@", file, modules);
+    //
+    //   modules.forEach(async (payload) => {
+    //     const importer = getImporter(payload);
+    //     const url = cleanUrl(get(importer, "url", ""));
+    //
+    //     if (url) {
+    //       const mod = await server.moduleGraph.getModuleByUrl(
+    //         path.resolve(url, "../index")
+    //       );
+    //
+    //       mod && (mod.isSelfAccepting = true);
+    //       payload.isSelfAccepting = true;
+    //       setTimeout(() => {
+    //         mod && (mod.isSelfAccepting = false);
+    //         payload.isSelfAccepting = false;
+    //       });
+    //
+    //       server.ws.send({
+    //         type: "custom",
+    //         event: "packages-update",
+    //         data: { url, t: new Date().valueOf() },
+    //       });
+    //     }
+    //   });
+    //
+    //   return;
+    // },
 
-      modules.forEach((payload) => {
-        const importer = getImporter(payload);
-        const url = cleanUrl(get(importer, "url", ""));
-
-        if (url) {
-          payload.isSelfAccepting = true;
-          setTimeout(() => {
-            payload.isSelfAccepting = false;
-          });
-
-          server.ws.send({
-            type: "custom",
-            event: "packages-update",
-            data: { url, t: new Date().valueOf() },
-          });
-        }
-      });
-
-      return;
-    },
     configureServer(server) {
       const { middlewares, transformIndexHtml } = server;
 

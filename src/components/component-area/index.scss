@@ -1,0 +1,13 @@
+.component-block {
+  .component-container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  > .ant-affix {
+    background: #fff;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+}

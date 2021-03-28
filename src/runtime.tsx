@@ -9,5 +9,5 @@ ReactDOM.render(
   <>
     <ReadmePane />
   </>,
-  document.querySelector("#lsc-comp-root")
+  document.querySelector("#component-root")
 );

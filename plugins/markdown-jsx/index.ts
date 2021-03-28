@@ -5,41 +5,48 @@ import fromMarkdown from "mdast-util-from-markdown";
 import {
   cleanUrl,
   fsExist,
-  getAssetHash,
-  isDirectCSSRequest,
+  getImporter,
+  isCSSRequest,
   isHTMLProxy,
 } from "../utils";
 import { send } from "vite";
-
-class ModuleNode {
-  /**
-   * Public served url path, starts with /
-   */
-  url: string;
-  /**
-   * Resolved file system path + query
-   */
-  id: string | null = null;
-  file: string | null = null;
-  type: "js" | "css";
-  importers = new Set<ModuleNode>();
-  importedModules = new Set<ModuleNode>();
-  acceptedHmrDeps = new Set<ModuleNode>();
-  isSelfAccepting = false;
-  transformResult: null = null;
-  ssrTransformResult: null = null;
-  ssrModule: Record<string, any> | null = null;
-  lastHMRTimestamp = 0;
-
-  constructor(url: string) {
-    this.url = url;
-    this.type = isDirectCSSRequest(url) ? "css" : "js";
-  }
-}
+import get from "lodash/get";
 
 const mdjsx = () => {
+  const markdownMap = {};
   return {
-    name: "vite:packages-template",
+    name: "vite:markdown-jsx",
+    handleHotUpdate({ file, modules, server }) {
+      if (isCSSRequest(file)) {
+        return;
+      }
+
+      modules.forEach(async (payload) => {
+        const importer = getImporter(payload);
+        const url = cleanUrl(get(importer, "url", ""));
+
+        if (url) {
+          const mod = await server.moduleGraph.getModuleByUrl(
+            path.resolve(url, "../index")
+          );
+          console.log(path.resolve(url, "./index"), mod);
+          mod.isSelfAccepting = true;
+          payload.isSelfAccepting = true;
+          setTimeout(() => {
+            mod.isSelfAccepting = false;
+            payload.isSelfAccepting = false;
+          });
+
+          server.ws.send({
+            type: "custom",
+            event: "packages-update",
+            data: { url, t: new Date().valueOf() },
+          });
+        }
+      });
+
+      return [];
+    },
     configureServer(server) {
       const { middlewares, pluginContainer, moduleGraph } = server;
 
@@ -67,6 +74,8 @@ const mdjsx = () => {
 
         const content = fs.readFileSync(filePath, "utf-8");
 
+        const readmeMod = await moduleGraph.ensureEntryFromUrl(url);
+
         const tasks = fromMarkdown(content)
           .children.filter(
             ({ type, lang = "" }) =>
@@ -74,23 +83,31 @@ const mdjsx = () => {
           )
           .map(async (item, index) => {
             const content = <string>item.value || "";
-            const hash = getAssetHash(content);
 
             const modPath = `${filePath}.[${index}].${item.lang}`;
-            const mod = new ModuleNode(modPath);
-            moduleGraph.idToModuleMap.set(modPath, mod);
+            markdownMap[modPath] = content;
+
+            const mod = await moduleGraph.ensureEntryFromUrl(modPath);
+            mod.isSelfAccepting = true;
+            readmeMod.importedModules.add(mod);
+            await moduleGraph.updateModuleInfo(
+              readmeMod,
+              readmeMod.importedModules,
+              new Set(),
+              false
+            );
 
             return {
               code: await pluginContainer
                 .transform(content, modPath)
-                .then(({ code }) => code)
-                .catch(() => Promise.resolve("")),
+                .then(({ code }) => code),
+              // .catch(() => Promise.resolve("")),
               sourcesContent: content,
-              hash,
             };
           });
 
         const modules = await Promise.all(tasks);
+        // console.log(modules);
 
         return send(
           req,
@@ -102,6 +119,38 @@ const mdjsx = () => {
           "js"
         );
       });
+    },
+    resolveId(id) {
+      if (markdownMap[id]) {
+        return id;
+      }
+    },
+    transform(code, id) {
+      if (!/\.md\.\[\d]\.[t|j]sx$/.test(id)) {
+        return;
+      }
+      const index = code.indexOf("ReactDOM.render");
+      const before = code.slice(0, index);
+      const after = code.slice(index);
+
+      return `${before.replace("import React ", "import React$ ")}
+      
+      import $_Component from './index';
+      const React = {...React$};
+      
+      const beforeCreateElement = React.createElement;
+      React.createElement = (Comp,...rest) => {
+        const wrap = window.$_ComponentWrap;
+        let NextComp = Comp;
+
+        if(NextComp === $_Component && wrap) { 
+          NextComp = wrap(Comp);
+        }
+        
+        return beforeCreateElement(NextComp, ...rest);
+      };
+
+      ${after}`;
     },
   };
 };

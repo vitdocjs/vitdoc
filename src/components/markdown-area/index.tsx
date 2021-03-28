@@ -19,16 +19,18 @@ export function MarkdownArea(props: IProps) {
   if (!res || !component) {
     return null;
   }
-  console.log(component);
-
 
   const { moduleMap, content, renderer, setRenderer } = res;
 
   const code = ({ language, value = "" }) => {
     const fn = moduleMap[value.trim()];
+
     const onChange = () => {
       setRenderer(() => fn);
     };
+    if (language === "tsx") {
+      language = "jsx";
+    }
     return (
       <div
         className={classNames({

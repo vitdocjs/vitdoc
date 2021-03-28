@@ -49,7 +49,7 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
 
   return {
     name: "vite:type-file",
-    handleHotUpdate({ file, server }) {
+    handleHotUpdate({ file, modules, server }) {
       const url = "/" + cleanUrl(path.relative(process.cwd(), file));
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
@@ -70,7 +70,7 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
         });
       }, 50);
 
-      return [];
+      return;
     },
     configureServer({ middlewares }) {
       middlewares.use(async (req, res, next) => {
