@@ -6,12 +6,16 @@ import { send } from "vite/dist/node";
 import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
 
-// const isDebug = process.env.DEBUG;
+const isDebug = process.env.DEBUG;
 
-const currentPath = path.resolve(__dirname, "plugins/components-template");
+const pluginRoot = path.resolve(__dirname, "plugins/components-template");
+
+const currentPath = isDebug
+  ? path.resolve(pluginRoot, "./")
+  : path.resolve(pluginRoot, "./dist");
 
 export const createHtml = Swig.compileFile(
-  path.resolve(currentPath, "./index.html"),
+  path.resolve(pluginRoot, "./index.html"),
   {
     // cache: false,
     autoescape: false,
@@ -52,12 +56,24 @@ const componentsTemplate = () => {
           ".."
         );
 
-        let html = createHtml({ externalHtml, __dirname: currentPath, route });
+        let html = createHtml({
+          externalHtml,
+          __dirname: currentPath,
+          route,
+          isDebug,
+        });
 
         html = await transformIndexHtml(url, html);
 
         return send(req, res, html, "html");
       });
+    },
+    transform(code, id) {
+      if (!new RegExp(`^${currentPath}`).test(id) && !/\.js$/.test(id)) {
+        return;
+      }
+
+      return code.replace(/import_meta\["hot"]/g, "import.meta.hot");
     },
   };
 };

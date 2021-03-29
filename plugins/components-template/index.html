@@ -38,7 +38,7 @@
 
     <script>
       window.pageConfig = {
-        route: '{{route}}'
+        route: "{{route}}",
       };
     </script>
     <script src="https://g.alicdn.com/code/lib/lodash.js/4.17.15/lodash.min.js"></script>
@@ -47,11 +47,10 @@
     <script src="https://g.alicdn.com/intl-dada/dada-vision-utils/4.1.2/engine-utils.min.js"></script>
 
     {{ externalHtml }}
-    
-    <script type="module" src="{{__dirname}}/view/runtime"></script>
-    <script type="module">
-      import '{{__dirname}}/view/style.css';
-    </script>
 
+    <script type="module" src="{{__dirname}}/view/runtime"></script>
+    {% if !isDebug %}
+      <script type="module" src="{{__dirname}}/view/style.css"></script>
+    {% endif %}
   </body>
 </html>

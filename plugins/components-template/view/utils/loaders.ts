@@ -17,9 +17,9 @@ function addRegistry(p, fn) {
 }
 
 // @ts-ignore
-if (import.meta.hot) {
+if (import.meta['hot']) {
   // @ts-ignore
-  import.meta.hot.on("packages-update", (payload) => {
+  import.meta['hot'].on("packages-update", (payload) => {
     const { url, ...restPayload } = payload;
 
     if (url in registryMap) {

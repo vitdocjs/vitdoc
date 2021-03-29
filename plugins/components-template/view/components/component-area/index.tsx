@@ -13,13 +13,13 @@ export function ComponentArea(props) {
   const invoked = useRef(false);
 
   const wrapProps = useCallback(
-    (Component) => (props) => {
+    (Component, { React: OutReact }) => (props) => {
       if (!invoked.current) {
         onSetDefaultProps && onSetDefaultProps(props);
         invoked.current = true;
       }
       const finalProps = Object.assign({}, props, componentProps);
-      return React.createElement(Component, finalProps);
+      return OutReact.createElement(Component, finalProps);
     },
     [componentProps]
   );

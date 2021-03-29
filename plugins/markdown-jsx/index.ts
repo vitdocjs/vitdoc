@@ -191,7 +191,7 @@ const mdjsx = () => {
         let NextComp = Comp;
 
         if(NextComp === $_Component && wrap) { 
-          NextComp = wrap(Comp);
+          NextComp = wrap(Comp, { React: React$ });
         }
         
         return beforeCreateElement(NextComp, ...rest);

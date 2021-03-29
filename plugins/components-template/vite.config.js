@@ -11,6 +11,7 @@ export default defineConfig({
   },
   build: {
     minify: false,
+    outDir: "dist/view",
     lib: {
       name: "runtime",
       entry: "./view/runtime.tsx",
