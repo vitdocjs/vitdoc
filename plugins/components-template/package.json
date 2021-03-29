@@ -1,0 +1,25 @@
+{
+  "name": "vite-plugin-components-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "@types/node": "^14.14.35",
+    "esbuild-node-tsc": "^1.2.0",
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.3"
+  },
+  "scripts": {
+    "build": "vite build && etsc",
+    "dev": "etsc",
+    "watch": "nodemon",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}

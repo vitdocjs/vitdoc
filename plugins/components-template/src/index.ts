@@ -3,8 +3,10 @@ import * as path from "path";
 import Swig from "swig";
 
 import { send } from "vite/dist/node";
-import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../utils";
-import { getConfig } from "../utils/config";
+import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
+import { getConfig } from "../../utils/config";
+
+// const isDebug = process.env.DEBUG;
 
 const currentPath = path.resolve(__dirname, "plugins/components-template");
 
