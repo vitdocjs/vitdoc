@@ -1,6 +1,9 @@
 {
-  "name": "vite-comp",
+  "name": "@ali/vite-comp",
   "version": "1.0.0",
+  "publishConfig": {
+    "registry": "https://registry.npm.alibaba-inc.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,9 +17,6 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "styled-components": "^5.2.1",
-    "swig": "^1.4.2"
-  },
-  "devDependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
     "@alifd/next": "^1.22.14",
     "@alife/intl-comp-highLighter": "^1.0.14",
@@ -36,6 +36,8 @@
     "shelljs.exec": "^1.1.8",
     "typescript": "^4.2.3",
     "vite": "^2.0.5",
-    "vite-plugin-cdn-externals": "^1.0.3"
-  }
+    "vite-plugin-cdn-externals": "^1.0.3",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {}
 }
