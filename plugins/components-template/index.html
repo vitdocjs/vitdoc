@@ -48,9 +48,9 @@
 
     {{ externalHtml }}
 
-    <script type="module" src="{{__dirname}}/view/runtime"></script>
     {% if !isDebug %}
-      <script type="module" src="{{__dirname}}/view/style.css"></script>
+    <script type="module" src="{{__dirname}}/view/style.css"></script>
     {% endif %}
+    <script type="module" src="{{__dirname}}/view/runtime"></script>
   </body>
 </html>

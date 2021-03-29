@@ -49,6 +49,8 @@ __export(exports, {
 });
 var path = __toModule(require("path"));
 var import_swig = __toModule(require("swig"));
+var import_glob = __toModule(require("glob"));
+var import_vite = __toModule(require("vite"));
 var import_node = __toModule(require("vite/dist/node"));
 var import_utils = __toModule(require("../../utils"));
 var import_config = __toModule(require("../../utils/config"));
@@ -58,14 +60,53 @@ const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(plug
 const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./index.html"), {
   autoescape: false
 });
-const componentsTemplate = (options, isBuild) => {
+const componentsTemplate = () => {
+  let input;
+  const external = [
+    path.resolve(currentPath, "view/runtime.js"),
+    path.resolve(currentPath, "view/style.css")
+  ];
   return {
     name: "vite:packages-template",
-    configResolved(resolvedConfig) {
-      const {command} = resolvedConfig;
-      const isBuild2 = command === "build";
-      if (!isBuild2) {
+    mode: "pre",
+    config(resolvedConfig, {command}) {
+      const isBuild = command === "build";
+      if (!isBuild) {
         return;
+      }
+      const files = import_glob.default.sync("packages/*/index.tsx", {
+        cwd: process.cwd()
+      });
+      input = files.reduce((previousValue, currentValue) => Object.assign(previousValue, {
+        [path.join(currentValue, "..")]: path.join(currentValue, "../index.html")
+      }), {});
+      return (0, import_vite.mergeConfig)(resolvedConfig, {
+        build: {
+          rollupOptions: {
+            external,
+            input
+          }
+        }
+      });
+    },
+    getAssetFileName(id) {
+      console.log("E", id);
+    },
+    resolveId(id) {
+      if (Object.values(input).includes(id)) {
+        return id;
+      }
+    },
+    load(id) {
+      if (Object.values(input).includes(id)) {
+        const {extendTemplate: externalHtml} = (0, import_config.getConfig)();
+        const route = path.join("/", path.relative(process.cwd(), id), "..");
+        return createHtml({
+          externalHtml,
+          __dirname: currentPath,
+          route,
+          isDebug
+        });
       }
     },
     configureServer(server) {

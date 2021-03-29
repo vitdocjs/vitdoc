@@ -18,6 +18,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
+      external:['vite/dynamic-import-polyfill'],
       output: {
         entryFileNames: "[name].js",
       },

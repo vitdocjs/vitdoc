@@ -1,12 +1,12 @@
 // @ts-ignore
 import * as path from "path";
 import Swig from "swig";
-import glob from "glob";
 
 import { mergeConfig } from "vite";
 import { send } from "vite/dist/node";
 import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
+import { getComponentFiles } from "../../utils/rules";
 
 const isDebug = process.env.DEBUG;
 
@@ -26,10 +26,6 @@ export const createHtml = Swig.compileFile(
 
 const componentsTemplate = () => {
   let input;
-  const external = [
-    path.resolve(currentPath, "view/runtime.js"),
-    path.resolve(currentPath, "view/style.css"),
-  ];
   return {
     name: "vite:packages-template",
     mode: "pre",
@@ -39,31 +35,24 @@ const componentsTemplate = () => {
       if (!isBuild) {
         return;
       }
-      const files = glob.sync("packages/*/index.tsx", {
-        cwd: process.cwd(),
-      });
-      input = files.reduce(
-        (previousValue, currentValue) =>
-          Object.assign(previousValue, {
-            [path.join(currentValue, "..")]: path.join(
-              currentValue,
-              "../index.html"
-            ),
-          }),
-        {}
-      );
+      const files = getComponentFiles();
+
+      input = files.reduce((previousValue, currentValue) => {
+        return Object.assign(previousValue, {
+          [path.join(currentValue, "..")]: path.join(
+            currentValue,
+            "../index.html"
+          ),
+        });
+      }, {});
 
       return mergeConfig(resolvedConfig, {
         build: {
           rollupOptions: {
-            external,
             input,
           },
         },
       });
-    },
-    getAssetFileName(id) {
-      console.log("E", id);
     },
     resolveId(id) {
       if (Object.values(input).includes(id)) {
@@ -131,7 +120,9 @@ const componentsTemplate = () => {
         return;
       }
 
-      return code.replace(/import_meta\["hot"]/g, "import.meta.hot");
+      return code
+        .replace(/import_meta\["hot"]/g, "import.meta.hot")
+        .replace(/const __vitePreload/g, "var __vitePreload2");
     },
   };
 };
