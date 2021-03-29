@@ -106,6 +106,9 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
         return res.end(`export default ${JSON.stringify(componentDoc)}`);
       });
     },
+    generateBundle(options, bundle) {
+      // console.log(bundle);
+    },
   };
 };
 export default TypeFile;

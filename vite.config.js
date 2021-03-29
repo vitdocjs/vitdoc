@@ -15,9 +15,6 @@ try {
 // https://vitejs.dev/config/
 export default mergeConfig(
   {
-    define: {
-      import_meta: "import.meta",
-    },
     server: {
       cors: true,
     },
@@ -26,10 +23,6 @@ export default mergeConfig(
       TypeFile(),
       mdjsx(),
       cdnExternals({
-        react: "React",
-        "react-dom": "ReactDOM",
-        moment: "moment",
-        "moment-timezone": "moment",
         "@alifd/next": {
           windowName: "Next",
           find: /^@alif[e|d]\/next$/,

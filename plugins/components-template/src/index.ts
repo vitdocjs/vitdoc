@@ -1,7 +1,9 @@
 // @ts-ignore
 import * as path from "path";
 import Swig from "swig";
+import glob from "glob";
 
+import { mergeConfig } from "vite";
 import { send } from "vite/dist/node";
 import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
@@ -23,8 +25,64 @@ export const createHtml = Swig.compileFile(
 );
 
 const componentsTemplate = () => {
+  let input;
+  const external = [
+    path.resolve(currentPath, "view/runtime.js"),
+    path.resolve(currentPath, "view/style.css"),
+  ];
   return {
     name: "vite:packages-template",
+    mode: "pre",
+    config(resolvedConfig, { command }) {
+      // store the resolved config
+      const isBuild = command === "build";
+      if (!isBuild) {
+        return;
+      }
+      const files = glob.sync("packages/*/index.tsx", {
+        cwd: process.cwd(),
+      });
+      input = files.reduce(
+        (previousValue, currentValue) =>
+          Object.assign(previousValue, {
+            [path.join(currentValue, "..")]: path.join(
+              currentValue,
+              "../index.html"
+            ),
+          }),
+        {}
+      );
+
+      return mergeConfig(resolvedConfig, {
+        build: {
+          rollupOptions: {
+            external,
+            input,
+          },
+        },
+      });
+    },
+    getAssetFileName(id) {
+      console.log("E", id);
+    },
+    resolveId(id) {
+      if (Object.values(input).includes(id)) {
+        return id;
+      }
+    },
+    load(id) {
+      if (Object.values(input).includes(id)) {
+        const { extendTemplate: externalHtml } = getConfig();
+        const route = path.join("/", path.relative(process.cwd(), id), "..");
+
+        return createHtml({
+          externalHtml,
+          __dirname: currentPath,
+          route,
+          isDebug,
+        });
+      }
+    },
     configureServer(server) {
       const { middlewares, transformIndexHtml } = server;
 

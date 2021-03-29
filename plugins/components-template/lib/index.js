@@ -52,15 +52,22 @@ var import_swig = __toModule(require("swig"));
 var import_node = __toModule(require("vite/dist/node"));
 var import_utils = __toModule(require("../../utils"));
 var import_config = __toModule(require("../../utils/config"));
-const isDebug = process.env.DEBUG || true;
+const isDebug = process.env.DEBUG;
 const pluginRoot = path.resolve(__dirname, "plugins/components-template");
 const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(pluginRoot, "./dist");
 const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./index.html"), {
   autoescape: false
 });
-const componentsTemplate = () => {
+const componentsTemplate = (options, isBuild) => {
   return {
     name: "vite:packages-template",
+    configResolved(resolvedConfig) {
+      const {command} = resolvedConfig;
+      const isBuild2 = command === "build";
+      if (!isBuild2) {
+        return;
+      }
+    },
     configureServer(server) {
       const {middlewares, transformIndexHtml} = server;
       const {extendTemplate: externalHtml} = (0, import_config.getConfig)();
@@ -86,6 +93,12 @@ const componentsTemplate = () => {
         html = yield transformIndexHtml(url, html);
         return (0, import_node.send)(req, res, html, "html");
       }));
+    },
+    transform(code, id) {
+      if (!new RegExp(`^${currentPath}`).test(id) && !/\.js$/.test(id)) {
+        return;
+      }
+      return code.replace(/import_meta\["hot"]/g, "import.meta.hot");
     }
   };
 };
