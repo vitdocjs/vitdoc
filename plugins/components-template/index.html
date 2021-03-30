@@ -48,6 +48,51 @@
 
     {{ externalHtml }}
 
+    <script type="module">
+      import { createHotContext } from "/@vite/client";
+
+      window.RuntimeLoadMap$ = {
+        // "{{route}}/index.tsx": import("{{route}}/index.tsx"),
+        "{{route}}/index.tsx.jsxType.json": import(
+          "{{route}}/index.tsx.jsxType.json"
+        ),
+        "/package.json": import("/package.json"),
+        "{{route}}/README.md": import("{{route}}/README.md"),
+      };
+      if (!window.$RegistryFns) {
+        window.$RegistryFns = {};
+      }
+
+      const __updateFns = window.$RegistryFns;
+      window.RegistryMap$ = (p, cb) => {
+        if (!__updateFns[p]) {
+          __updateFns[p] = new Set();
+        }
+        const fn = (newModule) => {
+          cb(new Date().valueOf(), newModule);
+          __updateFns[p].delete(fn);
+        };
+        __updateFns[p].add(fn);
+      };
+      if (import.meta.hot) {
+        Object.keys(window.RuntimeLoadMap$).forEach((file) => {
+          createHotContext(file).accept((newModule) => {
+            console.log("###HOT LOAD", file);
+            window.RuntimeLoadMap$[file] = newModule;
+            const tasks = __updateFns[file] || new Set();
+
+            [...tasks].forEach((fn) => fn(newModule));
+          });
+        });
+        import.meta.hot.accept(() => {
+          console.log(__updateFns);
+          const tasks = __updateFns["{{route}}/README.md"] || new Set();
+
+          [...tasks].forEach((fn) => fn());
+        });
+      }
+    </script>
+
     {% if !isDebug %}
     <script type="module" src="{{__dirname}}/view/style.css"></script>
     {% endif %}

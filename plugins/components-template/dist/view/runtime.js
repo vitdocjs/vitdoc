@@ -1,19 +1,3 @@
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __rest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
-const import_meta = {};
 var modules$1 = window["React"];
 const Fragment$1 = modules$1["Fragment"];
 const StrictMode$1 = modules$1["StrictMode"];
@@ -88,7 +72,7 @@ modules["unstable_batchedUpdates"];
 modules["unstable_createPortal"];
 modules["unstable_renderSubtreeIntoContainer"];
 modules["version"];
-var _default$2 = mtopHook;
+var _default$3 = mtopHook;
 function _slicedToArray$1(arr, i) {
   return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest$1();
 }
@@ -1070,8 +1054,8 @@ ListCache.prototype.get = _listCacheGet;
 ListCache.prototype.has = _listCacheHas;
 ListCache.prototype.set = _listCacheSet;
 var _ListCache = ListCache;
-var Map = _getNative(_root, "Map");
-var _Map = Map;
+var Map$1 = _getNative(_root, "Map");
+var _Map = Map$1;
 function mapCacheClear() {
   this.size = 0;
   this.__data__ = {
@@ -1377,7 +1361,7 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   if (arrStacked && othStacked) {
     return arrStacked == other && othStacked == array;
   }
-  var index2 = -1, result = true, seen2 = bitmask & COMPARE_UNORDERED_FLAG$3 ? new _SetCache() : void 0;
+  var index2 = -1, result = true, seen = bitmask & COMPARE_UNORDERED_FLAG$3 ? new _SetCache() : void 0;
   stack.set(array, other);
   stack.set(other, array);
   while (++index2 < arrLength) {
@@ -1392,10 +1376,10 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
       result = false;
       break;
     }
-    if (seen2) {
+    if (seen) {
       if (!_arraySome(other, function(othValue2, othIndex) {
-        if (!_cacheHas(seen2, othIndex) && (arrValue === othValue2 || equalFunc(arrValue, othValue2, bitmask, customizer, stack))) {
-          return seen2.push(othIndex);
+        if (!_cacheHas(seen, othIndex) && (arrValue === othValue2 || equalFunc(arrValue, othValue2, bitmask, customizer, stack))) {
+          return seen.push(othIndex);
         }
       })) {
         result = false;
@@ -1529,8 +1513,8 @@ var isBuffer_1 = createCommonjsModule(function(module, exports) {
   var freeExports = exports && !exports.nodeType && exports;
   var freeModule = freeExports && true && module && !module.nodeType && module;
   var moduleExports = freeModule && freeModule.exports === freeExports;
-  var Buffer2 = moduleExports ? _root.Buffer : void 0;
-  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
+  var Buffer = moduleExports ? _root.Buffer : void 0;
+  var nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0;
   var isBuffer2 = nativeIsBuffer || stubFalse_1;
   module.exports = isBuffer2;
 });
@@ -2469,9 +2453,9 @@ var interopRequireWildcard = createCommonjsModule(function(module) {
   module.exports["default"] = module.exports, module.exports.__esModule = true;
 });
 var DoubleLeftOutlined$2 = {icon: {tag: "svg", attrs: {viewBox: "64 64 896 896", focusable: "false"}, children: [{tag: "path", attrs: {d: "M272.9 512l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L186.8 492.3a31.99 31.99 0 000 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H532c6.7 0 10.4-7.7 6.3-12.9L272.9 512zm304 0l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L490.8 492.3a31.99 31.99 0 000 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H836c6.7 0 10.4-7.7 6.3-12.9L576.9 512z"}}]}, name: "double-left", theme: "outlined"};
-var _default$1 = DoubleLeftOutlined$2;
+var _default$2 = DoubleLeftOutlined$2;
 var DoubleLeftOutlined_1$1 = /* @__PURE__ */ Object.defineProperty({
-  default: _default$1
+  default: _default$2
 }, "__esModule", {value: true});
 var arrayWithHoles = createCommonjsModule(function(module) {
   function _arrayWithHoles2(arr) {
@@ -3365,50 +3349,108 @@ var warning_1 = createCommonjsModule(function(module, exports) {
   var _default2 = warningOnce;
   exports.default = _default2;
 });
-var containers = [];
-var styleElements = [];
-var usage = "insert-css: You need to provide a CSS string. Usage: insertCss(cssString[, options]).";
-function insertCss(css, options) {
-  options = options || {};
-  if (css === void 0) {
-    throw new Error(usage);
+var arrayWithoutHoles = createCommonjsModule(function(module) {
+  function _arrayWithoutHoles2(arr) {
+    if (Array.isArray(arr))
+      return arrayLikeToArray(arr);
   }
-  var position2 = options.prepend === true ? "prepend" : "append";
-  var container = options.container !== void 0 ? options.container : document.querySelector("head");
-  var containerId = containers.indexOf(container);
-  if (containerId === -1) {
-    containerId = containers.push(container) - 1;
-    styleElements[containerId] = {};
+  module.exports = _arrayWithoutHoles2;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+});
+var iterableToArray = createCommonjsModule(function(module) {
+  function _iterableToArray2(iter) {
+    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter))
+      return Array.from(iter);
   }
-  var styleElement;
-  if (styleElements[containerId] !== void 0 && styleElements[containerId][position2] !== void 0) {
-    styleElement = styleElements[containerId][position2];
+  module.exports = _iterableToArray2;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+});
+var nonIterableSpread = createCommonjsModule(function(module) {
+  function _nonIterableSpread2() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  module.exports = _nonIterableSpread2;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+});
+var toConsumableArray = createCommonjsModule(function(module) {
+  function _toConsumableArray3(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+  }
+  module.exports = _toConsumableArray3;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+});
+var _default$1 = canUseDom;
+function canUseDom() {
+  return !!(typeof window !== "undefined" && window.document && window.document.createElement);
+}
+var canUseDom_1 = /* @__PURE__ */ Object.defineProperty({
+  default: _default$1
+}, "__esModule", {value: true});
+var injectCSS_1 = injectCSS;
+var updateCSS_1 = updateCSS;
+var _toConsumableArray2 = interopRequireDefault(toConsumableArray);
+var _canUseDom = interopRequireDefault(canUseDom_1);
+var MARK_KEY = "rc-util-key";
+function getContainer(option) {
+  if (option.attachTo) {
+    return option.attachTo;
+  }
+  var head = document.querySelector("head");
+  return head || document.body;
+}
+function injectCSS(css) {
+  var _option$csp;
+  var option = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  if (!(0, _canUseDom.default)()) {
+    return null;
+  }
+  var styleNode = document.createElement("style");
+  if ((_option$csp = option.csp) === null || _option$csp === void 0 ? void 0 : _option$csp.nonce) {
+    var _option$csp2;
+    styleNode.nonce = (_option$csp2 = option.csp) === null || _option$csp2 === void 0 ? void 0 : _option$csp2.nonce;
+  }
+  styleNode.innerHTML = css;
+  var container = getContainer(option);
+  var firstChild = container.firstChild;
+  if (option.prepend && firstChild) {
+    container.insertBefore(styleNode, firstChild);
   } else {
-    styleElement = styleElements[containerId][position2] = createStyleElement();
-    if (position2 === "prepend") {
-      container.insertBefore(styleElement, container.childNodes[0]);
-    } else {
-      container.appendChild(styleElement);
+    container.appendChild(styleNode);
+  }
+  return styleNode;
+}
+var containerCache = new Map();
+function updateCSS(css, key) {
+  var option = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+  var container = getContainer(option);
+  if (!containerCache.has(container)) {
+    var placeholderStyle = injectCSS("", option);
+    var parentElement = placeholderStyle.parentElement;
+    containerCache.set(container, parentElement);
+    parentElement.removeChild(placeholderStyle);
+  }
+  var existNode = (0, _toConsumableArray2.default)(containerCache.get(container).children).find(function(node) {
+    return node.tagName === "STYLE" && node[MARK_KEY] === key;
+  });
+  if (existNode) {
+    var _option$csp3, _option$csp4;
+    if (((_option$csp3 = option.csp) === null || _option$csp3 === void 0 ? void 0 : _option$csp3.nonce) && existNode.nonce !== ((_option$csp4 = option.csp) === null || _option$csp4 === void 0 ? void 0 : _option$csp4.nonce)) {
+      var _option$csp5;
+      existNode.nonce = (_option$csp5 = option.csp) === null || _option$csp5 === void 0 ? void 0 : _option$csp5.nonce;
     }
+    if (existNode.innerHTML !== css) {
+      existNode.innerHTML = css;
+    }
+    return existNode;
   }
-  if (css.charCodeAt(0) === 65279) {
-    css = css.substr(1, css.length);
-  }
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText += css;
-  } else {
-    styleElement.textContent += css;
-  }
-  return styleElement;
+  var newNode = injectCSS(css, option);
+  newNode[MARK_KEY] = key;
+  return newNode;
 }
-function createStyleElement() {
-  var styleElement = document.createElement("style");
-  styleElement.setAttribute("type", "text/css");
-  return styleElement;
-}
-var _insertCss_2_0_0_insertCss = insertCss;
-var insertCss_1 = insertCss;
-_insertCss_2_0_0_insertCss.insertCss = insertCss_1;
+var dynamicCSS = /* @__PURE__ */ Object.defineProperty({
+  injectCSS: injectCSS_1,
+  updateCSS: updateCSS_1
+}, "__esModule", {value: true});
 var _colors = /* @__PURE__ */ getAugmentedNamespace(index_esm);
 var utils = createCommonjsModule(function(module, exports) {
   Object.defineProperty(exports, "__esModule", {
@@ -3425,6 +3467,7 @@ var utils = createCommonjsModule(function(module, exports) {
   var _typeof2 = interopRequireDefault(_typeof_1);
   var _react2 = interopRequireWildcard(require$$0);
   var _warning = interopRequireDefault(warning_1);
+  var _Context = interopRequireDefault(Context);
   function warning(valid, message2) {
     (0, _warning.default)(valid, "[@ant-design/icons] ".concat(message2));
   }
@@ -3479,16 +3522,14 @@ var utils = createCommonjsModule(function(module, exports) {
   exports.svgBaseProps = svgBaseProps;
   var iconStyles = "\n.anticon {\n  display: inline-block;\n  color: inherit;\n  font-style: normal;\n  line-height: 0;\n  text-align: center;\n  text-transform: none;\n  vertical-align: -0.125em;\n  text-rendering: optimizeLegibility;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.anticon > * {\n  line-height: 1;\n}\n\n.anticon svg {\n  display: inline-block;\n}\n\n.anticon::before {\n  display: none;\n}\n\n.anticon .anticon-icon {\n  display: block;\n}\n\n.anticon[tabindex] {\n  cursor: pointer;\n}\n\n.anticon-spin::before,\n.anticon-spin {\n  display: inline-block;\n  -webkit-animation: loadingCircle 1s infinite linear;\n  animation: loadingCircle 1s infinite linear;\n}\n\n@-webkit-keyframes loadingCircle {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n\n@keyframes loadingCircle {\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n  }\n}\n";
   exports.iconStyles = iconStyles;
-  var cssInjectedFlag = false;
   var useInsertStyles = function useInsertStyles2() {
     var styleStr = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : iconStyles;
+    var _useContext = (0, _react2.useContext)(_Context.default), csp = _useContext.csp;
     (0, _react2.useEffect)(function() {
-      if (!cssInjectedFlag) {
-        (0, _insertCss_2_0_0_insertCss.insertCss)(styleStr, {
-          prepend: true
-        });
-        cssInjectedFlag = true;
-      }
+      (0, dynamicCSS.updateCSS)(styleStr, "@ant-design-icons", {
+        prepend: true,
+        csp
+      });
     }, []);
   };
   exports.useInsertStyles = useInsertStyles;
@@ -3775,51 +3816,9 @@ class VisionPane extends modules$1.PureComponent {
   }
 }
 var index$4 = "#public-component-show-container {\n  display: flex;\n  position: relative;\n  min-height: 100vh;\n  width: 100%;\n  background: #f2f3f7;\n  padding: 20px;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n#public-component-show-container .component-main {\n  position: relative;\n  display: flex;\n}\n#public-component-show-container .component-part {\n  flex: 1;\n  overflow: auto;\n}\n#public-component-show-container .component-name {\n  padding: 0;\n  border: 0;\n  margin: 0;\n  font-size: 3.5em;\n  font-weight: 800;\n  outline: 0;\n  vertical-align: baseline;\n  line-height: 1.2;\n}\n#public-component-show-container .component-sub-title {\n  font-size: 1em;\n  font-weight: 600;\n  vertical-align: baseline;\n  margin-bottom: 8px;\n  display: block;\n  color: #6f6f6f;\n}\n#public-component-show-container .component-sub-title > span {\n  margin-right: 1em;\n}\n#public-component-show-container .component-block {\n  background: #fff;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px #ccc solid;\n  border-bottom: unset;\n  border-top: unset;\n}\n#public-component-show-container .component-block:first-child {\n  border-radius: 7px 7px 0 0;\n  border-top: 1px #ccc solid;\n}\n#public-component-show-container .component-block:last-child {\n  border-radius: 0 0 7px 7px;\n  border-bottom: 1px #ccc solid;\n}\n#public-component-show-container .component-block:first-child:last-child {\n  border-radius: 7px;\n  border: 1px #ccc solid;\n}\n#public-component-show-container .component-container {\n  min-height: 300px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#public-component-show-container .component-description {\n  border-top: 1px solid #eee;\n  font-size: 14px;\n  padding: 20px;\n}\n#public-component-show-container .component-description > .block-title {\n  font-size: 1.3em;\n  display: block;\n  line-height: 2;\n}\n#public-component-show-container .component-description > code {\n  border: 1px solid #e7e9ed;\n  background-color: #f8fafc;\n  display: block;\n  padding: 5px 10px;\n  margin: 5px 0;\n  word-break: break-all;\n  word-wrap: break-word;\n  border-radius: 2px;\n  color: #5b6169;\n  font-size: 13px;\n  line-height: 1.6em;\n}\n#public-component-show-container .ant-tabs-bottom .ant-tabs-bottom-bar {\n  margin-top: 0;\n}\n#public-component-show-container .ant-tabs-nav .ant-tabs-tab {\n  margin: 0;\n}\n#public-component-show-container .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {\n  padding: 8px 16px;\n}\n@media screen and (max-width: 750px) {\n  #public-component-show-container {\n    padding: 20px 0;\n  }\n  #public-component-show-container .component-block {\n    border-radius: 0 !important;\n  }\n}";
-let scriptRel;
-const seen = {};
-const __vitePreload = function preload(baseModule, deps) {
-  if (!deps) {
-    return baseModule();
-  }
-  if (scriptRel === void 0) {
-    const relList = document.createElement("link").relList;
-    scriptRel = relList && relList.supports && relList.supports("modulepreload") ? "modulepreload" : "preload";
-  }
-  return Promise.all(deps.map((dep) => {
-    if (dep in seen)
-      return;
-    seen[dep] = true;
-    const isCss = dep.endsWith(".css");
-    const cssSelector = isCss ? '[rel="stylesheet"]' : "";
-    if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) {
-      return;
-    }
-    const link = document.createElement("link");
-    link.rel = isCss ? "stylesheet" : scriptRel;
-    if (!isCss) {
-      link.as = "script";
-      link.crossOrigin = "";
-    }
-    link.href = dep;
-    document.head.appendChild(link);
-    if (isCss) {
-      return new Promise((res, rej) => {
-        link.addEventListener("load", res);
-        link.addEventListener("error", rej);
-      });
-    }
-  })).then(() => baseModule());
-};
 const queryRE = /\?.*$/;
 const hashRE = /#.*$/;
 const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
-const addUrlParams = (url, params) => {
-  const paramsStr = Object.entries(params).reduce((previousValue, [key, val]) => previousValue + val ? `${key}=${val}` : "", "");
-  if (!paramsStr) {
-    return url;
-  }
-  return /[?|&]/.test(url) ? `${url}&${paramsStr}` : `${url}?${paramsStr}`;
-};
 const lscWindowConfig = {
   route: window["pageConfig"].route
 };
@@ -3903,25 +3902,10 @@ const runEsModuleCode = (code) => {
 const isJsx = (lang) => /^[j|t]sx$/.test(lang);
 const isCSSLang = (lang) => /^(css|less|sass|scss|styl|stylus|postcss)$/.test(lang);
 const {route} = lscWindowConfig;
-const registryMap = {};
-const registryHashMap = {};
 function addRegistry(p2, fn) {
-  if (!registryMap[p2]) {
-    registryMap[p2] = [];
+  if (!!window.RegistryMap$) {
+    window.RegistryMap$.push(fn);
   }
-  registryMap[p2].push(fn);
-}
-if (import_meta["hot"]) {
-  import_meta["hot"].on("packages-update", (payload) => {
-    const {url} = payload, restPayload = __rest(payload, ["url"]);
-    if (url in registryMap) {
-      console.log(`[vite] hot updated: ${url}`);
-      registryMap[url].forEach((fn) => {
-        registryHashMap[url] = restPayload;
-        fn(restPayload);
-      });
-    }
-  });
 }
 class ModuleLoadError extends Error {
 }
@@ -3932,12 +3916,12 @@ function useAsyncImport(path, cb = ({default: Comp}) => Comp) {
     const paths = Array.isArray(path) ? path : [path];
     try {
       const result = await Promise.all(paths.map((p2) => {
-        addRegistry(cleanUrl(p2), update);
-        const hashParams = registryHashMap[p2] || {};
-        return __vitePreload(() => import(
-          /* @vite-ignore */
-          addUrlParams(p2, hashParams)
-        ), true ? void 0 : void 0);
+        const cUrl = cleanUrl(p2);
+        addRegistry(cUrl, update);
+        if (!window.RuntimeLoadMap$[cUrl]) {
+          console.error(`Load Module '${p2}' not defined in window.RuntimeLoadMap$. `);
+        }
+        return window.RuntimeLoadMap$[cUrl];
       }));
       const Comp = cb(Array.isArray(path) ? result : result[0]);
       setModule(() => Comp);
@@ -3956,7 +3940,7 @@ function useRealComponent() {
   return useAsyncImport(`${route}/index.tsx`);
 }
 function useTypeFile() {
-  return useAsyncImport(`${route}/index.tsx.type.json`, ({default: properties}) => {
+  return useAsyncImport(`${route}/index.tsx.jsxType.json`, ({default: properties}) => {
     const {default: compProps} = keyBy_1(properties, "exportName");
     return compProps;
   });
@@ -6912,18 +6896,18 @@ function labelFactory(effects, ok2, nok, type2, markerType, stringType) {
 }
 var factoryLabel = labelFactory;
 function whitespaceFactory(effects, ok2) {
-  var seen2;
+  var seen;
   return start;
   function start(code) {
     if (markdownLineEnding_1(code)) {
       effects.enter("lineEnding");
       effects.consume(code);
       effects.exit("lineEnding");
-      seen2 = true;
+      seen = true;
       return start;
     }
     if (markdownSpace_1(code)) {
-      return factorySpace(effects, start, seen2 ? "linePrefix" : "lineSuffix")(code);
+      return factorySpace(effects, start, seen ? "linePrefix" : "lineSuffix")(code);
     }
     return ok2(code);
   }
@@ -10131,7 +10115,7 @@ var dist = createCommonjsModule(function(module, exports) {
         return t2.d(n3, "a", n3), n3;
       }, t2.o = function(e4, n3) {
         return Object.prototype.hasOwnProperty.call(e4, n3);
-      }, t2.p = "https://dev.g.alicdn.com/code/npm/@alife/intl-comp-highLighter/1.0.15/", t2(t2.s = 51);
+      }, t2.p = "https://g.alicdn.com/code/npm/@alife/intl-comp-highLighter/1.0.15/", t2(t2.s = 51);
     }([function(n2, t2) {
       n2.exports = e2;
     }, function(e3, n2, t2) {
@@ -11108,13 +11092,13 @@ var dist = createCommonjsModule(function(module, exports) {
       }
       O.registerLanguage("jsx", P), O.registerLanguage("tsx", P), O.registerLanguage("json", N);
       try {
-        E.__docsPath = "https://dev.g.alicdn.com/code/npm/@alife/intl-comp-highLighter/1.0.15/docs/index.js", E.displayName = "HighLighter", E.__displayName = "HighLighter";
+        E.__docsPath = "https://g.alicdn.com/code/npm/@alife/intl-comp-highLighter/1.0.15/docs/index.js", E.displayName = "HighLighter", E.__displayName = "HighLighter";
       } catch (e4) {
       }
       E.registerLanguage = O.registerLanguage;
       n2.default = E;
       try {
-        E.__docsPath = "https://dev.g.alicdn.com/code/npm/@alife/intl-comp-highLighter/1.0.15/docs/index.js", E.displayName = "HighLighter", E.__displayName = "HighLighter";
+        E.__docsPath = "https://g.alicdn.com/code/npm/@alife/intl-comp-highLighter/1.0.15/docs/index.js", E.displayName = "HighLighter", E.__displayName = "HighLighter";
       } catch (e4) {
       }
     }]).default;
@@ -11428,5 +11412,5 @@ function ReadmePane() {
     onPropsChange: setVisionProps
   })))));
 }
-_default$2();
+_default$3();
 render(/* @__PURE__ */ createElement$1(Fragment$1, null, /* @__PURE__ */ createElement$1(ReadmePane, null)), document.querySelector("#component-root"));

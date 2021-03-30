@@ -1,7 +1,8 @@
 import { createHash } from "crypto";
 import fs from "fs";
-import type { ModuleNode, ViteDevServer } from "vite";
+import type { ModuleNode } from "vite";
 import path from "path";
+import { PluginContainer } from "_vite@2.1.3@vite";
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -50,12 +51,12 @@ export const fsExist = (path: string) => {
 
 export const getImporter = (
   loadModule: ModuleNode,
-  condition: (mod: ModuleNode) => boolean = () => true
+  condition: (mod: ModuleNode) => boolean = () => false
 ) => {
   const { importers } = loadModule;
 
   const importerArr = Array.from(importers);
-  if (!importerArr.length && condition(loadModule)) {
+  if (!importerArr.length || condition(loadModule)) {
     return loadModule;
   }
 
@@ -65,7 +66,7 @@ export const getImporter = (
 };
 
 export const resolveMainComponent = async (
-  server: ViteDevServer,
+  server: { pluginContainer: PluginContainer },
   mdPath: string
 ) => {
   const mainPath = path.join(mdPath, "../index");
@@ -77,3 +78,41 @@ export const resolveMainComponent = async (
     return resolveMainComponent(server, path.join(mdPath, "../../R.md"));
   }
 };
+
+export const addUrlParams = (
+  url: string,
+  params: string | Record<string, any>
+) => {
+  const paramsStr =
+    typeof params === "string"
+      ? params
+      : Object.entries(params).reduce(
+          (previousValue, [key, val]) =>
+            previousValue + val ? `${key}=${val}` : "",
+          ""
+        );
+
+  if (!paramsStr) {
+    return url;
+  }
+
+  return /[?|&]/.test(url) ? `${url}&${paramsStr}` : `${url}?${paramsStr}`;
+};
+
+export function invalidate(
+  mod: ModuleNode,
+  timestamp: number,
+  seen: Set<ModuleNode>
+) {
+  if (seen.has(mod)) {
+    return;
+  }
+  seen.add(mod);
+  mod.lastHMRTimestamp = timestamp;
+  mod.transformResult = null;
+  mod.importers.forEach((importer) => {
+    if (!importer.acceptedHmrDeps.has(mod)) {
+      invalidate(importer, timestamp, seen);
+    }
+  });
+}

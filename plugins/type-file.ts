@@ -5,19 +5,15 @@ import {
   cleanUrl,
   getAssetHash,
   getQueryParams,
+  invalidate,
   isCSSRequest,
   isJsx,
 } from "./utils";
+import type { ModuleNode } from "vite";
 
-const alias = {
-  js: "application/javascript",
-  css: "text/css",
-  html: "text/html",
-  json: "application/json",
-};
-
-const TypeFile = ({ prefix = ".type.json" } = {}) => {
+const TypeFile = ({ prefix = ".jsxType.json" } = {}) => {
   let lastDoc: Record<string, any> = {};
+  const matchReg = new RegExp(`${prefix}$`);
   const requestedUrlMap = {};
   function getComponentDocs(fileName) {
     // console.time("get docs");
@@ -49,7 +45,7 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
 
   return {
     name: "vite:type-file",
-    handleHotUpdate({ file, modules, server }) {
+    handleHotUpdate({ file, timestamp, server }) {
       const url = "/" + cleanUrl(path.relative(process.cwd(), file));
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
@@ -62,52 +58,54 @@ const TypeFile = ({ prefix = ".type.json" } = {}) => {
         if (hash === beforeHash) {
           return;
         }
+        const mod = server.moduleGraph.getModuleById(`${url}${prefix}`);
+        invalidate(mod, new Date().valueOf(), new Set<ModuleNode>());
+
+        const updates = [mod].map((item) => ({
+          type: "js-update",
+          path: item.url,
+          acceptedPath: item.url,
+          timestamp: new Date().valueOf(),
+        }));
 
         server.ws.send({
-          type: "custom",
-          event: "packages-update",
-          data: { url: `${url}${prefix}`, hash },
+          type: "update",
+          updates,
         });
-      }, 50);
+      }, 500);
 
       return;
     },
-    configureServer({ middlewares }) {
-      middlewares.use(async (req, res, next) => {
-        if (
-          req.method !== "GET"
-          //  || req.headers.accept?.includes("text/html")
-        ) {
-          return next();
-        }
 
-        const url = cleanUrl(req.url);
-        if (!new RegExp(`${prefix}$`).test(url)) {
-          return next();
-        }
+    resolveId(id) {
+      if (matchReg.test(id)) {
+        return id;
+      }
+      return;
+    },
+    load(id) {
+      const file = cleanUrl(id);
 
-        requestedUrlMap[url.replace(new RegExp(`${prefix}$`), "")] = true;
+      if (matchReg.test(file)) {
+        requestedUrlMap[file.replace(new RegExp(`${prefix}$`), "")] = true;
 
-        const { hash } = getQueryParams(req.url);
+        const { hash } = getQueryParams(id);
 
         let componentDoc;
         if (lastDoc[hash]) {
           componentDoc = lastDoc[hash];
         } else {
-          const fileName = url
+          const fileName = file
             .replace(new RegExp(`${prefix}$`), "")
             .replace(/^\//, "");
 
           componentDoc = getComponentDocs(fileName).doc;
         }
 
-        res.setHeader("Content-Type", alias.js);
+        return JSON.stringify(componentDoc);
+      }
 
-        return res.end(`export default ${JSON.stringify(componentDoc)}`);
-      });
-    },
-    generateBundle(options, bundle) {
-      // console.log(bundle);
+      return;
     },
   };
 };

@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
-import lscWindowConfig, { addUrlParams, cleanUrl } from "./lscConfig";
+import lscWindowConfig, { cleanUrl } from "./lscConfig";
 import keyBy from "lodash/keyBy";
 import { getDocsSource } from "./strings";
 import { runEsModuleCode } from "./esmodule";
@@ -7,29 +7,17 @@ import { isCSSLang, isJsx } from "../../../utils/lang";
 
 const { route } = lscWindowConfig;
 
-const registryMap: Record<string, Array<(payload?: any) => void>> = {};
-const registryHashMap: Record<string, any> = {};
-function addRegistry(p, fn) {
-  if (!registryMap[p]) {
-    registryMap[p] = [];
+declare global {
+  interface Window {
+    RuntimeLoadMap$: Record<string, Promise<any>>;
+    RegistryMap$: (p: string, cb: () => void) => void;
   }
-  registryMap[p].push(fn);
 }
 
-// @ts-ignore
-if (import.meta['hot']) {
-  // @ts-ignore
-  import.meta['hot'].on("packages-update", (payload) => {
-    const { url, ...restPayload } = payload;
-
-    if (url in registryMap) {
-      console.log(`[vite] hot updated: ${url}`);
-      registryMap[url].forEach((fn) => {
-        registryHashMap[url] = restPayload;
-        fn(restPayload);
-      });
-    }
-  });
+function addRegistry(p, fn) {
+  if (!!window.RegistryMap$) {
+    window.RegistryMap$(p, fn);
+  }
 }
 
 export class ModuleLoadError extends Error {}
@@ -47,12 +35,15 @@ export function useAsyncImport(
     try {
       const result = await Promise.all(
         paths.map((p) => {
-          addRegistry(cleanUrl(p), update);
-          const hashParams = registryHashMap[p] || {};
-          return import(
-            /* @vite-ignore */
-            addUrlParams(p, hashParams)
-          );
+          const cUrl = cleanUrl(p);
+          addRegistry(cUrl, update);
+          if (!window.RuntimeLoadMap$[cUrl]) {
+            console.error(
+              `Load Module '${p}' not defined in window.RuntimeLoadMap$. `
+            );
+          }
+          // @ts-ignore
+          return window.RuntimeLoadMap$[cUrl];
         })
       );
 
@@ -105,7 +96,7 @@ export function useDocsComponent() {
 
 export function useTypeFile(): any {
   return useAsyncImport(
-    `${route}/index.tsx.type.json`,
+    `${route}/index.tsx.jsxType.json`,
     ({ default: properties }) => {
       const { default: compProps } = keyBy(properties, "exportName");
       return compProps;

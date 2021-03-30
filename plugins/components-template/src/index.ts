@@ -2,13 +2,13 @@
 import * as path from "path";
 import Swig from "swig";
 
-import { mergeConfig } from "vite";
+import { mergeConfig, ViteDevServer } from "vite";
 import { send } from "vite/dist/node";
-import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
+import { cleanUrl, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
 import { getComponentFiles } from "../../utils/rules";
 
-const isDebug = process.env.DEBUG;
+const isDebug = process.env.DEBUG || true;
 
 const pluginRoot = path.resolve(__dirname, "plugins/components-template");
 
@@ -24,11 +24,17 @@ export const createHtml = Swig.compileFile(
   }
 );
 
+const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
+const htmlCommentRE = /<!--[\s\S]*?-->/g;
+const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
+
+export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
+
 const componentsTemplate = () => {
-  let input;
+  let input = {};
+  let server: ViteDevServer;
   return {
     name: "vite:packages-template",
-    mode: "pre",
     config(resolvedConfig, { command }) {
       // store the resolved config
       const isBuild = command === "build";
@@ -55,34 +61,62 @@ const componentsTemplate = () => {
       });
     },
     resolveId(id) {
+      if (isCompHTMLProxy(id)) {
+        return id;
+      }
       if (Object.values(input).includes(id)) {
         return id;
       }
     },
-    load(id) {
-      if (Object.values(input).includes(id)) {
+    async load(id) {
+      const file = cleanUrl(id);
+      if (Object.values(input).includes(file)) {
         const { extendTemplate: externalHtml } = getConfig();
         const route = path.join("/", path.relative(process.cwd(), id), "..");
 
-        return createHtml({
+        let html = createHtml({
           externalHtml,
           __dirname: currentPath,
           route,
           isDebug,
         });
-      }
-    },
-    configureServer(server) {
-      const { middlewares, transformIndexHtml } = server;
 
-      const { extendTemplate: externalHtml } = getConfig();
+        if (isCompHTMLProxy(id)) {
+          const proxyMatch = id.match(compHtmlProxyRE);
+          if (proxyMatch) {
+            const index = Number(proxyMatch[1]);
+            html = html.replace(htmlCommentRE, "");
+            let match;
+            scriptModuleRE.lastIndex = 0;
+            for (let i = 0; i <= index; i++) {
+              match = scriptModuleRE.exec(html);
+            }
+            if (match) {
+              return match[2];
+            } else {
+              throw new Error(`No matching html proxy module found from ${id}`);
+            }
+          }
+        } else if (server) {
+          html = await server.transformIndexHtml(id, html);
+          html = html.replace(/\?html-proxy/g, "?component-html-proxy");
+        }
+
+        return html;
+      }
+      return;
+    },
+    configureServer(_server: ViteDevServer) {
+      server = _server;
+      const { middlewares } = server;
 
       middlewares.use(async (req, res, next) => {
         if (
           req.method !== "GET" ||
-          isHTMLProxy(req.url) ||
+          isCompHTMLProxy(<string>req.url) ||
           !(req.headers.accept || "").includes("text/html") ||
-          !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
+          !/(\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
+          // !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
         ) {
           return next();
         }
@@ -102,15 +136,9 @@ const componentsTemplate = () => {
           path.relative(process.cwd(), exist.id),
           ".."
         );
+        input[route] = url;
 
-        let html = createHtml({
-          externalHtml,
-          __dirname: currentPath,
-          route,
-          isDebug,
-        });
-
-        html = await transformIndexHtml(url, html);
+        const html = await this.load(url);
 
         return send(req, res, html, "html");
       });

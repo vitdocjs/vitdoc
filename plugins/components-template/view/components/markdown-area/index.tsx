@@ -18,10 +18,9 @@ const { Tag } = window.antd;
 import "./index.scss";
 
 export function MarkdownArea() {
-  const component = useRealComponent();
   const res = useMarkdown();
 
-  if (!res || !component) {
+  if (!res) {
     return null;
   }
 
