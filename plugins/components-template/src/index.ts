@@ -4,11 +4,11 @@ import Swig from "swig";
 
 import { mergeConfig, ViteDevServer } from "vite";
 import { send } from "vite/dist/node";
-import { cleanUrl, resolveMainComponent } from "../../utils";
+import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
 import { getComponentFiles } from "../../utils/rules";
 
-const isDebug = process.env.DEBUG ;
+const isDebug = process.env.DEBUG;
 
 const pluginRoot = path.resolve(__dirname, "plugins/components-template");
 
@@ -35,19 +35,20 @@ const componentsTemplate = () => {
   let server: ViteDevServer;
   return {
     name: "vite:packages-template",
+    enforce: "pre",
     config(resolvedConfig, { command }) {
       // store the resolved config
       const isBuild = command === "build";
       if (!isBuild) {
         return;
       }
-      const files = getComponentFiles();
+      const files = getComponentFiles("packages");
 
       input = files.reduce((previousValue, currentValue) => {
         return Object.assign(previousValue, {
-          [path.join(currentValue, "..")]: path.join(
-            currentValue,
-            "../index.html"
+          [path.join(currentValue, "..")]: currentValue.replace(
+            /\.md$/,
+            ".html"
           ),
         });
       }, {});
@@ -61,6 +62,9 @@ const componentsTemplate = () => {
       });
     },
     resolveId(id) {
+      if (isHTMLProxy(id)) {
+        return id.replace(/\?html-proxy/g, "?component-html-proxy");
+      }
       if (isCompHTMLProxy(id)) {
         return id;
       }
@@ -69,14 +73,27 @@ const componentsTemplate = () => {
       }
     },
     async load(id) {
-      const file = cleanUrl(id);
+      let file = cleanUrl(id);
       if (Object.values(input).includes(file)) {
+        if (!/^\//.test(file)) {
+          file = `/${file}`;
+        }
         const { extendTemplate: externalHtml } = getConfig();
-        const route = path.join("/", path.relative(process.cwd(), id), "..");
+        const mainModule = await resolveMainComponent(
+          // @ts-ignore
+          { pluginContainer: { resolveId: this.resolve } },
+          id
+        );
+
+        const mainModuleUrl =
+          "/" + path.relative(process.cwd(), mainModule?.id || id);
+        const route = path.join(mainModuleUrl, "..");
+        const readmePath = file.replace(/\.html$/, ".md");
 
         let html = createHtml({
           externalHtml,
           __dirname: currentPath,
+          readmePath,
           route,
           isDebug,
         });
@@ -99,7 +116,6 @@ const componentsTemplate = () => {
           }
         } else if (server) {
           html = await server.transformIndexHtml(id, html);
-          html = html.replace(/\?html-proxy/g, "?component-html-proxy");
         }
 
         return html;
@@ -115,30 +131,38 @@ const componentsTemplate = () => {
           req.method !== "GET" ||
           isCompHTMLProxy(<string>req.url) ||
           !(req.headers.accept || "").includes("text/html") ||
-          !/(\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
+          !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
           // !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
         ) {
           return next();
         }
 
         let url = cleanUrl(req.url);
+        if (/\.md$/.test(url)) {
+          res.writeHead(302, {
+            Location: url.replace(/.md$/, ".html"),
+          });
+          res.end();
+          return;
+        }
         if (/\/[\w|_|-]+$/.test(url)) {
-          url = path.join(url, "index.html");
+          const files = getComponentFiles(path.join(".", url));
+          const mdFile = files[0] || path.join(url, "README.html");
+
+          url = path.join("/", mdFile.replace(/\.md$/, ".html"));
+
+          res.writeHead(302, {
+            Location: url,
+          });
+          res.end();
+
+          return;
         }
 
-        const exist = await resolveMainComponent(server, path.join(url));
-
-        if (!exist) {
-          return next();
-        }
-        const route = path.join(
-          "/",
-          path.relative(process.cwd(), exist.id),
-          ".."
-        );
+        const route = path.join(url, "..");
         input[route] = url;
 
-        const html = await this.load(url);
+        const html = (await server.pluginContainer.load(url)) as string;
 
         return send(req, res, html, "html");
       });

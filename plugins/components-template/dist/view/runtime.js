@@ -3869,6 +3869,7 @@ function useAsyncImport(path, cb = ({default: Comp}) => Comp) {
       const Comp = cb(Array.isArray(path) ? result : result[0]);
       setModule(() => Comp);
     } catch (e2) {
+      console.error(`Load module ${paths.join(",")} error:`, e2);
       setModule({
         error: new ModuleLoadError([
           `Please make sure follow files exist in your project`,
@@ -3886,7 +3887,7 @@ function useTypeFile() {
   });
 }
 function useComponentInfo() {
-  return useAsyncImport(`/package.json?import`, ({default: packageInfo}) => {
+  return useAsyncImport(`/package.json`, ({default: packageInfo}) => {
     return {
       packageName: packageInfo.name,
       packageVersion: packageInfo.version
@@ -3899,9 +3900,9 @@ const RendererContext = createContext({
 });
 let moduleMaps = {};
 function useMarkdown() {
-  var _a, _b;
+  var _a, _b, _c;
   const {renderIndex, setRenderIndex} = useContext(RendererContext);
-  const results = useAsyncImport(/\.md$/.test(location.pathname) ? location.pathname : `${route}/README.md`, ({default: packageInfo}) => {
+  const results = useAsyncImport(((_a = window.pageConfig) == null ? void 0 : _a.readmePath) || location.pathname.replace(".html", ".md"), ({default: packageInfo}) => {
     return packageInfo;
   });
   if (results == null ? void 0 : results.error) {
@@ -3931,9 +3932,9 @@ function useMarkdown() {
   if (!results) {
     return null;
   }
-  const renderer = (_a = Object.values(moduleMap)) == null ? void 0 : _a[renderIndex || 0];
+  const renderer = (_b = Object.values(moduleMap)) == null ? void 0 : _b[renderIndex || 0];
   let error;
-  if (!((_b = results == null ? void 0 : results.modules) == null ? void 0 : _b.length)) {
+  if (!((_c = results == null ? void 0 : results.modules) == null ? void 0 : _c.length)) {
     error = new ModuleLoadError("You should add some code block in your .md file.\n Support `jsx` or `tsx` language for now.");
   }
   return {

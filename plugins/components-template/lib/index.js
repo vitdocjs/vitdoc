@@ -70,15 +70,16 @@ const componentsTemplate = () => {
   let server;
   return {
     name: "vite:packages-template",
+    enforce: "pre",
     config(resolvedConfig, {command}) {
       const isBuild = command === "build";
       if (!isBuild) {
         return;
       }
-      const files = (0, import_rules.getComponentFiles)();
+      const files = (0, import_rules.getComponentFiles)("packages");
       input = files.reduce((previousValue, currentValue) => {
         return Object.assign(previousValue, {
-          [path.join(currentValue, "..")]: path.join(currentValue, "../index.html")
+          [path.join(currentValue, "..")]: currentValue.replace(/\.md$/, ".html")
         });
       }, {});
       return (0, import_vite.mergeConfig)(resolvedConfig, {
@@ -90,6 +91,9 @@ const componentsTemplate = () => {
       });
     },
     resolveId(id) {
+      if ((0, import_utils.isHTMLProxy)(id)) {
+        return id.replace(/\?html-proxy/g, "?component-html-proxy");
+      }
       if (isCompHTMLProxy(id)) {
         return id;
       }
@@ -99,13 +103,20 @@ const componentsTemplate = () => {
     },
     load(id) {
       return __async(this, null, function* () {
-        const file = (0, import_utils.cleanUrl)(id);
+        let file = (0, import_utils.cleanUrl)(id);
         if (Object.values(input).includes(file)) {
+          if (!/^\//.test(file)) {
+            file = `/${file}`;
+          }
           const {extendTemplate: externalHtml} = (0, import_config.getConfig)();
-          const route = path.join("/", path.relative(process.cwd(), id), "..");
+          const mainModule = yield (0, import_utils.resolveMainComponent)({pluginContainer: {resolveId: this.resolve}}, id);
+          const mainModuleUrl = "/" + path.relative(process.cwd(), (mainModule == null ? void 0 : mainModule.id) || id);
+          const route = path.join(mainModuleUrl, "..");
+          const readmePath = file.replace(/\.html$/, ".md");
           let html = createHtml({
             externalHtml,
             __dirname: currentPath,
+            readmePath,
             route,
             isDebug
           });
@@ -127,7 +138,6 @@ const componentsTemplate = () => {
             }
           } else if (server) {
             html = yield server.transformIndexHtml(id, html);
-            html = html.replace(/\?html-proxy/g, "?component-html-proxy");
           }
           return html;
         }
@@ -138,20 +148,30 @@ const componentsTemplate = () => {
       server = _server;
       const {middlewares} = server;
       middlewares.use((req, res, next) => __async(this, null, function* () {
-        if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
+        if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
           return next();
         }
         let url = (0, import_utils.cleanUrl)(req.url);
+        if (/\.md$/.test(url)) {
+          res.writeHead(302, {
+            Location: url.replace(/.md$/, ".html")
+          });
+          res.end();
+          return;
+        }
         if (/\/[\w|_|-]+$/.test(url)) {
-          url = path.join(url, "index.html");
+          const files = (0, import_rules.getComponentFiles)(path.join(".", url));
+          const mdFile = files[0] || path.join(url, "README.html");
+          url = path.join("/", mdFile.replace(/\.md$/, ".html"));
+          res.writeHead(302, {
+            Location: url
+          });
+          res.end();
+          return;
         }
-        const exist = yield (0, import_utils.resolveMainComponent)(server, path.join(url));
-        if (!exist) {
-          return next();
-        }
-        const route = path.join("/", path.relative(process.cwd(), exist.id), "..");
+        const route = path.join(url, "..");
         input[route] = url;
-        const html = yield this.load(url);
+        const html = yield server.pluginContainer.load(url);
         return (0, import_node.send)(req, res, html, "html");
       }));
     },

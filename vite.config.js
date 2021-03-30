@@ -15,6 +15,9 @@ try {
 // https://vitejs.dev/config/
 export default mergeConfig(
   {
+    build: {
+      target: "esnext",
+    },
     server: {
       cors: true,
     },

@@ -51,22 +51,30 @@ const mdjsx = () => {
           return next();
         }
 
-        const result = await transformRequest(req.url);
-        const readmeMod = await moduleGraph.getModuleById(cleanUrl(req.url));
-        const mod = await moduleGraph.getModuleByUrl(req.url);
+        try {
+          const result = await transformRequest(req.url);
+          const readmeMod = await moduleGraph.getModuleById(cleanUrl(req.url));
+          const mod = await moduleGraph.getModuleByUrl(req.url);
 
-        readmeMod.importedModules.add(mod);
-        await moduleGraph.updateModuleInfo(
-          readmeMod,
-          readmeMod.importedModules,
-          new Set(),
-          false
-        );
-
-        return send(req, res, result.code, "js");
+          readmeMod.importedModules.add(mod);
+          await moduleGraph.updateModuleInfo(
+            readmeMod,
+            readmeMod.importedModules,
+            new Set(),
+            false
+          );
+          return send(req, res, result.code, "js");
+        } catch (e) {
+          res.end();
+        }
       });
     },
 
+    async resolveId(id) {
+      if (/\.md/.test(id)) {
+        return id;
+      }
+    },
     async load(id) {
       if (isMarkdownProxy(id)) {
         const [, , fileIndex, lang] = id.match(mdProxyRE) || [];

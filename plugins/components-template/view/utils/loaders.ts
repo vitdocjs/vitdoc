@@ -9,6 +9,7 @@ const { route } = lscWindowConfig;
 
 declare global {
   interface Window {
+    pageConfig?: { readmePath?: string };
     RuntimeLoadMap$: Record<string, Promise<any>>;
     RegistryMap$: (p: string, cb: () => void) => void;
   }
@@ -51,6 +52,7 @@ export function useAsyncImport(
 
       setModule(() => Comp);
     } catch (e) {
+      console.error(`Load module ${paths.join(',')} error:`, e)
       setModule({
         error: new ModuleLoadError(
           [
@@ -105,7 +107,7 @@ export function useTypeFile(): any {
 }
 
 export function useComponentInfo(): any {
-  return useAsyncImport(`/package.json?import`, ({ default: packageInfo }) => {
+  return useAsyncImport(`/package.json`, ({ default: packageInfo }) => {
     return {
       packageName: packageInfo.name,
       packageVersion: packageInfo.version,
@@ -125,7 +127,7 @@ export function useMarkdown() {
   const { renderIndex, setRenderIndex } = useContext(RendererContext);
 
   const results: any = useAsyncImport(
-    /\.md$/.test(location.pathname) ? location.pathname : `${route}/README.md`,
+    window.pageConfig?.readmePath || location.pathname.replace(".html", ".md"),
     ({ default: packageInfo }) => {
       return packageInfo;
     }

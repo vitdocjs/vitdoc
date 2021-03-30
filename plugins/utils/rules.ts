@@ -1,6 +1,6 @@
 import glob from "glob";
 
-export const getComponentFiles = () =>
-  glob.sync("packages/*/index.tsx", {
+export const getComponentFiles = (path: string = "src") =>
+  glob.sync(`${path ? `${path}/` : ""}**/*.md`, {
     cwd: process.cwd(),
   });

@@ -1,8 +1,7 @@
 import { createHash } from "crypto";
 import fs from "fs";
-import type { ModuleNode } from "vite";
 import path from "path";
-import { PluginContainer } from "_vite@2.1.3@vite";
+import type { ModuleNode, PluginContainer } from "vite";
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -71,7 +70,7 @@ export const resolveMainComponent = async (
 ) => {
   const mainPath = path.join(mdPath, "../index");
   const result = await server.pluginContainer.resolveId(mainPath);
-  if (result || path.dirname(mdPath) === "/") {
+  if (result || path.dirname(mdPath) === "." || path.dirname(mdPath) === "/") {
     return result;
   }
   if (!result) {
