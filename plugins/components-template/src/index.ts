@@ -8,7 +8,7 @@ import { cleanUrl, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
 import { getComponentFiles } from "../../utils/rules";
 
-const isDebug = process.env.DEBUG || true;
+const isDebug = process.env.DEBUG ;
 
 const pluginRoot = path.resolve(__dirname, "plugins/components-template");
 

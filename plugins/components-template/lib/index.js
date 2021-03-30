@@ -55,7 +55,7 @@ var import_node = __toModule(require("vite/dist/node"));
 var import_utils = __toModule(require("../../utils"));
 var import_config = __toModule(require("../../utils/config"));
 var import_rules = __toModule(require("../../utils/rules"));
-const isDebug = process.env.DEBUG || true;
+const isDebug = process.env.DEBUG;
 const pluginRoot = path.resolve(__dirname, "plugins/components-template");
 const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(pluginRoot, "./dist");
 const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./index.html"), {
@@ -138,7 +138,7 @@ const componentsTemplate = () => {
       server = _server;
       const {middlewares} = server;
       middlewares.use((req, res, next) => __async(this, null, function* () {
-        if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
+        if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
           return next();
         }
         let url = (0, import_utils.cleanUrl)(req.url);

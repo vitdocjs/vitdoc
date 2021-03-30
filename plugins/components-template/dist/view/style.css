@@ -175,7 +175,6 @@
 .markdown-area .selected-block > .code-pane {
   box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.4);
   border: 2px solid #6495f9;
-  margin-bottom: 1em;
 }
 .markdown-area .selected-block > .code-pane > pre.hljs {
   margin-bottom: 0;

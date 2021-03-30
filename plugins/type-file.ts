@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as path from "path";
 import * as parser from "@ali/react-docgen-typescript-loader-add-tag/dist/docgen-typescript";
 import {
@@ -9,6 +8,7 @@ import {
   isCSSRequest,
   isJsx,
 } from "./utils";
+import debounce from "lodash/debounce";
 import type { ModuleNode } from "vite";
 
 const TypeFile = ({ prefix = ".jsxType.json" } = {}) => {
@@ -42,6 +42,28 @@ const TypeFile = ({ prefix = ".jsxType.json" } = {}) => {
       hash,
     };
   }
+  const hotUpdateType = debounce((server, url, timestamp) => {
+    const beforeHash = Object.keys(lastDoc)[0];
+    const { hash } = getComponentDocs(url.replace(/^\//, ""));
+
+    if (hash === beforeHash) {
+      return;
+    }
+    const mod = server.moduleGraph.getModuleById(`${url}${prefix}`);
+    invalidate(mod, new Date().valueOf(), new Set<ModuleNode>());
+
+    const updates = [mod].map((item) => ({
+      type: "js-update",
+      path: item.url,
+      acceptedPath: item.url,
+      timestamp,
+    }));
+
+    server.ws.send({
+      type: "update",
+      updates,
+    });
+  }, 100);
 
   return {
     name: "vite:type-file",
@@ -51,28 +73,7 @@ const TypeFile = ({ prefix = ".jsxType.json" } = {}) => {
         return;
       }
 
-      setTimeout(() => {
-        const beforeHash = Object.keys(lastDoc)[0];
-        const { hash } = getComponentDocs(url.replace(/^\//, ""));
-
-        if (hash === beforeHash) {
-          return;
-        }
-        const mod = server.moduleGraph.getModuleById(`${url}${prefix}`);
-        invalidate(mod, new Date().valueOf(), new Set<ModuleNode>());
-
-        const updates = [mod].map((item) => ({
-          type: "js-update",
-          path: item.url,
-          acceptedPath: item.url,
-          timestamp: new Date().valueOf(),
-        }));
-
-        server.ws.send({
-          type: "update",
-          updates,
-        });
-      }, 500);
+      hotUpdateType(server, url, timestamp);
 
       return;
     },
