@@ -18,6 +18,8 @@ export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 const mdjsx = () => {
   let markdownMap = {};
   let server: ViteDevServer;
+  const cwd = process.cwd();
+  let resolver;
   return {
     name: "vite:markdown-jsx",
     handleHotUpdate(ctx) {
@@ -68,6 +70,10 @@ const mdjsx = () => {
           res.end();
         }
       });
+    },
+    configResolved(resolvedConfig) {
+      // store the resolved config
+      resolver = resolvedConfig.createResolver({ asSrc: false });
     },
 
     async resolveId(id) {
@@ -126,19 +132,22 @@ const mdjsx = () => {
 
       const content = fs.readFileSync(id, "utf-8");
 
-      const modules = fromMarkdown(content)
+      let moduleIds = {};
+      const promises = fromMarkdown(content)
         .children.filter(
           ({ type, lang = "" }) =>
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
         )
-        .map((item, index) => {
+        .map(async (item, index) => {
           const content = <string>item.value || "";
           const lang = item.lang;
           const fileName = `${index}.${lang}`;
 
           markdownMap[fileName] = content;
 
-          let moduleID = addUrlParams(id, `markdown-proxy&index=${fileName}`);
+          const params = `markdown-proxy&index=${fileName}`;
+          // id = id.replace(cwd + "/", "");
+          let moduleID = addUrlParams(id, params);
           if (server) {
             const { lastHMRTimestamp } =
               server.moduleGraph.getModuleById(id) || {};
@@ -149,25 +158,50 @@ const mdjsx = () => {
             );
           }
 
-          const code = `import renderDom from '${moduleID}'; (typeof renderDom === 'function') && renderDom();`;
+          this.emitFile({
+            type: "chunk",
+            id: moduleID,
+            importer: id,
+          });
+
+          moduleIds[index] = moduleID;
 
           return {
             lang,
-            code,
             sourcesContent: content,
           };
         });
 
-      const hash = getAssetHash(
-        modules.reduce(
-          (previousValue, currentValue) =>
-            previousValue.concat(currentValue.code),
-          ""
-        )
-      );
+      const modules = await Promise.all(promises);
+
+      const hash = getAssetHash(content);
 
       return {
-        code: `export default ${JSON.stringify({ hash, content, modules })}`,
+        code: `
+        const modules = {
+          ${Object.entries(moduleIds).reduce(
+            (prev, [k, v]) =>
+              prev.concat(`${k}: () => { 
+                import('${v}').then(res => { 
+                  const fn = res.default;
+                  typeof fn === 'function' && fn();
+                });
+              },`),
+            ""
+          )}
+        }
+
+        const exportModules = ${JSON.stringify({
+          hash,
+          content,
+          modules,
+        })}
+  
+        exportModules.modules.forEach((item,index)=>{
+          item.load = modules[index];
+        })
+        
+        export default exportModules; `,
       };
     },
   };

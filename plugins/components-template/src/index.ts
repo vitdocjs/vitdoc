@@ -79,14 +79,15 @@ const componentsTemplate = () => {
           file = `/${file}`;
         }
         const { extendTemplate: externalHtml } = getConfig();
-        const mainModule = await resolveMainComponent(
-          // @ts-ignore
-          { pluginContainer: { resolveId: this.resolve } },
-          id
-        );
+        const mainModule =
+          (await resolveMainComponent(
+            // @ts-ignore
+            { pluginContainer: { resolveId: this.resolve } },
+            id
+          )) || {};
 
         const mainModuleUrl =
-          "/" + path.relative(process.cwd(), mainModule?.id || id);
+          "/" + path.relative(process.cwd(), mainModule.id || id);
         const route = path.join(mainModuleUrl, "..");
         const readmePath = file.replace(/\.html$/, ".md");
 
@@ -132,7 +133,6 @@ const componentsTemplate = () => {
           isCompHTMLProxy(<string>req.url) ||
           !(req.headers.accept || "").includes("text/html") ||
           !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
-          // !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
         ) {
           return next();
         }

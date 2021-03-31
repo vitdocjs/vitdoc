@@ -55,7 +55,7 @@ var import_node = __toModule(require("vite/dist/node"));
 var import_utils = __toModule(require("../../utils"));
 var import_config = __toModule(require("../../utils/config"));
 var import_rules = __toModule(require("../../utils/rules"));
-const isDebug = process.env.DEBUG;
+const isDebug = process.env.DEBUG || true;
 const pluginRoot = path.resolve(__dirname, "plugins/components-template");
 const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(pluginRoot, "./dist");
 const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./index.html"), {
@@ -109,8 +109,8 @@ const componentsTemplate = () => {
             file = `/${file}`;
           }
           const {extendTemplate: externalHtml} = (0, import_config.getConfig)();
-          const mainModule = yield (0, import_utils.resolveMainComponent)({pluginContainer: {resolveId: this.resolve}}, id);
-          const mainModuleUrl = "/" + path.relative(process.cwd(), (mainModule == null ? void 0 : mainModule.id) || id);
+          const mainModule = (yield (0, import_utils.resolveMainComponent)({pluginContainer: {resolveId: this.resolve}}, id)) || {};
+          const mainModuleUrl = "/" + path.relative(process.cwd(), mainModule.id || id);
           const route = path.join(mainModuleUrl, "..");
           const readmePath = file.replace(/\.html$/, ".md");
           let html = createHtml({

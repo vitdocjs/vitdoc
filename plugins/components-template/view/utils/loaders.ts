@@ -52,7 +52,7 @@ export function useAsyncImport(
 
       setModule(() => Comp);
     } catch (e) {
-      console.error(`Load module ${paths.join(',')} error:`, e)
+      console.error(`Load module ${paths.join(",")} error:`, e);
       setModule({
         error: new ModuleLoadError(
           [
@@ -147,9 +147,9 @@ export function useMarkdown() {
       }
       return Object.assign(previousValue, {
         [currentValue.sourcesContent.trim()]: () => {
-          runEsModuleCode(currentValue.code);
+          currentValue.load();
           styleModules.forEach((mod) => {
-            runEsModuleCode(mod.code);
+            mod.load();
           });
         },
       });
