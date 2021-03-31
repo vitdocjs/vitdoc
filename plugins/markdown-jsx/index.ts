@@ -11,6 +11,7 @@ import {
 import type { ModuleNode } from "vite";
 import { isCSSLang, isJsx } from "../utils/lang";
 import { send } from "vite/dist/node";
+import { ViteDevServer } from "vite";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
@@ -19,6 +20,7 @@ export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 const mdjsx = () => {
   let markdownMap = {};
   let isBuild: boolean;
+  let server: ViteDevServer;
   return {
     name: "vite:markdown-jsx",
     config(resolvedConfig, { command }) {
@@ -27,20 +29,23 @@ const mdjsx = () => {
     },
 
     handleHotUpdate(ctx) {
-      const { file, timestamp } = ctx;
+      const { file, modules } = ctx;
 
       if (/\.md$/.test(file)) {
         markdownMap = {};
         const mod = ctx.server.moduleGraph.getModuleById(file);
 
         if (mod) {
-          console.log("####", mod);
           mod.isSelfAccepting = true;
+          return modules.filter(
+            (cmod) => mod.importedModules.has(cmod) || modules === cmod
+          );
         }
       }
     },
     configureServer(_server) {
       const { middlewares, moduleGraph, transformRequest } = _server;
+      server = _server;
 
       middlewares.use(async (req, res, next) => {
         if (
@@ -121,14 +126,7 @@ const mdjsx = () => {
 
         return beforeCreateElement(NextComp, ...rest);
       };
-      export default function (){;${after};}
-
-      if (import.meta.hot) {
-        import.meta.hot.accept();
-      }
-
-
-      `;
+      export default function (){;${after};}`;
 
         return nextCode;
       }
