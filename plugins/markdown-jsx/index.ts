@@ -5,23 +5,27 @@ import {
   cleanUrl,
   getAssetHash,
   invalidate,
+  removeImportQuery,
   resolveMainComponent,
 } from "../utils";
-import type { ModuleNode, ViteDevServer } from "vite";
+import type { ModuleNode } from "vite";
 import { isCSSLang, isJsx } from "../utils/lang";
 import { send } from "vite/dist/node";
 
-const mdProxyRE = /\?(t=\d+&)?markdown-proxy&index=(\d+)\.(\w+)$/;
+const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
 export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 
 const mdjsx = () => {
   let markdownMap = {};
-  let server: ViteDevServer;
-  const cwd = process.cwd();
-  let resolver;
+  let isBuild: boolean;
   return {
     name: "vite:markdown-jsx",
+    config(resolvedConfig, { command }) {
+      // store the resolved config
+      isBuild = command === "build";
+    },
+
     handleHotUpdate(ctx) {
       const { file, timestamp } = ctx;
 
@@ -29,17 +33,14 @@ const mdjsx = () => {
         markdownMap = {};
         const mod = ctx.server.moduleGraph.getModuleById(file);
 
-        mod &&
-          [mod].forEach((payload) => {
-            payload.importedModules.forEach((val) => {
-              invalidate(val, timestamp, new Set<ModuleNode>());
-            });
-          });
+        if (mod) {
+          console.log("####", mod);
+          mod.isSelfAccepting = true;
+        }
       }
     },
     configureServer(_server) {
       const { middlewares, moduleGraph, transformRequest } = _server;
-      server = _server;
 
       middlewares.use(async (req, res, next) => {
         if (
@@ -54,9 +55,10 @@ const mdjsx = () => {
         }
 
         try {
-          const result = await transformRequest(req.url);
-          const readmeMod = await moduleGraph.getModuleById(cleanUrl(req.url));
-          const mod = await moduleGraph.getModuleByUrl(req.url);
+          const url = removeImportQuery(req.url);
+          const result = await transformRequest(url);
+          const readmeMod = await moduleGraph.getModuleByUrl(cleanUrl(url));
+          const mod = await moduleGraph.getModuleByUrl(url);
 
           readmeMod.importedModules.add(mod);
           await moduleGraph.updateModuleInfo(
@@ -67,13 +69,10 @@ const mdjsx = () => {
           );
           return send(req, res, result.code, "js");
         } catch (e) {
+          console.error(e);
           res.end();
         }
       });
-    },
-    configResolved(resolvedConfig) {
-      // store the resolved config
-      resolver = resolvedConfig.createResolver({ asSrc: false });
     },
 
     async resolveId(id) {
@@ -83,7 +82,8 @@ const mdjsx = () => {
     },
     async load(id) {
       if (isMarkdownProxy(id)) {
-        const [, , fileIndex, lang] = id.match(mdProxyRE) || [];
+        const [, fileIndex, lang] = id.match(mdProxyRE) || [];
+
         const code = markdownMap[`${fileIndex}.${lang}`];
         if (!code) {
           return "";
@@ -121,7 +121,14 @@ const mdjsx = () => {
 
         return beforeCreateElement(NextComp, ...rest);
       };
-      export default function (){;${after};}`;
+      export default function (){;${after};}
+
+      if (import.meta.hot) {
+        import.meta.hot.accept();
+      }
+
+
+      `;
 
         return nextCode;
       }
@@ -148,21 +155,13 @@ const mdjsx = () => {
           const params = `markdown-proxy&index=${fileName}`;
           // id = id.replace(cwd + "/", "");
           let moduleID = addUrlParams(id, params);
-          if (server) {
-            const { lastHMRTimestamp } =
-              server.moduleGraph.getModuleById(id) || {};
 
-            moduleID = moduleID.replace(
-              "?markdown-proxy",
-              `?t=${lastHMRTimestamp}&markdown-proxy`
-            );
-          }
-
-          this.emitFile({
-            type: "chunk",
-            id: moduleID,
-            importer: id,
-          });
+          isBuild &&
+            this.emitFile({
+              type: "chunk",
+              id: moduleID,
+              importer: id,
+            });
 
           moduleIds[index] = moduleID;
 

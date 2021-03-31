@@ -2,7 +2,6 @@ import { createContext, useContext, useMemo, useState } from "react";
 import lscWindowConfig, { cleanUrl } from "./lscConfig";
 import keyBy from "lodash/keyBy";
 import { getDocsSource } from "./strings";
-import { runEsModuleCode } from "./esmodule";
 import { isCSSLang, isJsx } from "../../../utils/lang";
 
 const { route } = lscWindowConfig;
@@ -122,7 +121,8 @@ export const RendererContext = createContext<{
   setRenderIndex: () => {},
 });
 
-let moduleMaps = {};
+let moduleMap;
+let moduleCache;
 export function useMarkdown() {
   const { renderIndex, setRenderIndex } = useContext(RendererContext);
 
@@ -137,9 +137,10 @@ export function useMarkdown() {
     return results;
   }
 
-  let moduleMap = moduleMaps[results?.hash];
+  // let moduleMap = moduleMaps[results?.hash];
 
-  if (!moduleMap && results) {
+  if (results && results !== moduleCache) {
+    moduleCache = results;
     const styleModules = results.modules.filter(({ lang }) => isCSSLang(lang));
     moduleMap = results.modules.reduce((previousValue, currentValue) => {
       if (!isJsx(currentValue.lang)) {
@@ -154,7 +155,7 @@ export function useMarkdown() {
         },
       });
     }, {});
-    moduleMaps = { [results.hash]: moduleMap };
+
     if (renderIndex === undefined) {
       setRenderIndex(0);
     }

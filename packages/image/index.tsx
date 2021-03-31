@@ -127,6 +127,7 @@ class Image extends Component<IProps> {
       style
     );
 
+
     const imgStyle = imgSize.length
       ? { width: getNumberPx(imgSize[0]), height: getNumberPx(imgSize[1]) }
       : {};

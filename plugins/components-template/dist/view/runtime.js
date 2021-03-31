@@ -3944,7 +3944,8 @@ const RendererContext = createContext({
   setRenderIndex: () => {
   }
 });
-let moduleMaps = {};
+let moduleMap;
+let moduleCache;
 function useMarkdown() {
   var _a, _b, _c;
   const {renderIndex, setRenderIndex} = useContext(RendererContext);
@@ -3954,8 +3955,8 @@ function useMarkdown() {
   if (results == null ? void 0 : results.error) {
     return results;
   }
-  let moduleMap = moduleMaps[results == null ? void 0 : results.hash];
-  if (!moduleMap && results) {
+  if (results && results !== moduleCache) {
+    moduleCache = results;
     const styleModules = results.modules.filter(({lang}) => isCSSLang(lang));
     moduleMap = results.modules.reduce((previousValue, currentValue) => {
       if (!isJsx(currentValue.lang)) {
@@ -3970,7 +3971,6 @@ function useMarkdown() {
         }
       });
     }, {});
-    moduleMaps = {[results.hash]: moduleMap};
     if (renderIndex === void 0) {
       setRenderIndex(0);
     }
@@ -11335,10 +11335,10 @@ function MarkdownArea() {
   if (!res) {
     return null;
   }
-  const {moduleMap, content: content2, renderer, setRenderIndex} = res;
+  const {moduleMap: moduleMap2, content: content2, renderer, setRenderIndex} = res;
   let index2 = 0;
   const code = ({language, value = ""}) => {
-    const fn = moduleMap == null ? void 0 : moduleMap[value.trim()];
+    const fn = moduleMap2 == null ? void 0 : moduleMap2[value.trim()];
     const clickable = /^[j|t]sx$/.test(language);
     let onChange = () => {
     };
