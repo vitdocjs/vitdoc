@@ -11,7 +11,7 @@ import { getComponentFiles } from "../../utils/rules";
 const isDebug = process.env.DEBUG;
 
 const pluginRoot = __dirname.includes("plugins/components-template")
-  ? __dirname
+  ? path.resolve(__dirname, "..")
   : path.resolve(__dirname, "plugins/components-template");
 
 const currentPath = isDebug
