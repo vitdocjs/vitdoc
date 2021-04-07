@@ -1,6 +1,6 @@
 Some Image Component description
 
-```jsx
+```tsx
 import React from "react";
 import ReactDOM from "react-dom";
 import Component from "./index";
@@ -21,7 +21,7 @@ ReactDOM.render(
 
 ```scss
 .code-box-demo {
-  background: #000;
+  background: #eee;
 }
 ```
 
