@@ -95,7 +95,7 @@ const componentsTemplate = () => {
 
         let html = createHtml({
           externalHtml,
-          __dirname: currentPath,
+          dirname: currentPath,
           readmePath,
           route,
           isDebug,
