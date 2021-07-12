@@ -97,7 +97,7 @@ export function useDocsComponent() {
 
 export function useTypeFile(): any {
   return useAsyncImport(
-    `${route}/index.tsx.jsxType.json`,
+    `${route}/index.tsx.type$.json`,
     ({ default: properties }) => {
       const { default: compProps } = keyBy(properties, "exportName");
       return compProps || properties[0];
@@ -120,7 +120,7 @@ export function useComponentInfo(): any {
       packageName,
       packageVersion,
       registry,
-      npmLink: `${registry}/${packageName}@${packageVersion}`,
+      npmLink: `${registry}/package/${packageName}/v/${packageVersion}`,
       logo: packageInfo.componentConfig?.logo,
     };
   });

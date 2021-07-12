@@ -45,7 +45,7 @@ export const getRoutes = () => {
         });
       }
 
-      prev[prev.findIndex(({ name }) => name === groupName)]?.children.push({
+      prev[prev.findIndex(({ name }) => name === groupName)].children.push({
         name: rest,
         path,
       });
@@ -119,7 +119,7 @@ const componentsTemplate = () => {
       }
 
       if (/^\/?index\.html$/.test(file)) {
-        const href = (getComponentFiles()?.[0] || "").replace(/\.md$/, ".html");
+        const href = (getComponentFiles()[0] || "").replace(/\.md$/, ".html");
         return `<script>location.href='${href}';</script>`;
       }
 

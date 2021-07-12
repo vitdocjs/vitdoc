@@ -11,7 +11,7 @@ import {
 import debounce from "lodash/debounce";
 import type { ModuleNode } from "vite";
 
-const TypeFile = ({ prefix = ".jsxType.json" } = {}) => {
+const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
   let lastDoc: Record<string, any> = {};
   const matchReg = new RegExp(`${prefix}$`);
   const requestedUrlMap = {};

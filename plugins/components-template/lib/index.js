@@ -67,7 +67,6 @@ const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.
 const isRouteMap = (id) => /route-map\.json$/.test(id);
 const getRoutes = () => {
   return (0, import_rules.getComponentFiles)("src").reduce((prev, path2) => {
-    var _a;
     const name = path2.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
     path2 = `/${path2}`.replace(/\.md$/, ".html");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
@@ -78,7 +77,7 @@ const getRoutes = () => {
           children: []
         });
       }
-      (_a = prev[prev.findIndex(({ name: name2 }) => name2 === groupName)]) == null ? void 0 : _a.children.push({
+      prev[prev.findIndex(({ name: name2 }) => name2 === groupName)].children.push({
         name: rest,
         path: path2
       });
@@ -133,13 +132,12 @@ const componentsTemplate = () => {
     },
     load(id) {
       return __async(this, null, function* () {
-        var _a;
         let file = (0, import_utils.cleanUrl)(id);
         if (isRouteMap(file)) {
           return JSON.stringify(getRoutes());
         }
         if (/^\/?index\.html$/.test(file)) {
-          const href = (((_a = (0, import_rules.getComponentFiles)()) == null ? void 0 : _a[0]) || "").replace(/\.md$/, ".html");
+          const href = ((0, import_rules.getComponentFiles)()[0] || "").replace(/\.md$/, ".html");
           return `<script>location.href='${href}';<\/script>`;
         }
         if (Object.values(input).includes(file)) {

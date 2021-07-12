@@ -18,6 +18,8 @@ export default mergeConfig(
   {
     build: {
       target: "esnext",
+      outDir: "dist/stories",
+      manifest: true,
     },
     server: {
       cors: true,
@@ -42,7 +44,10 @@ export default mergeConfig(
           find: /^@alif[e|d]\/next$/,
         },
         react: "React",
-        "react-dom": "ReactDOM",
+        "react-dom": {
+          windowName: "ReactDOM",
+          find: /^react-dom$/,
+        },
         moment: "moment",
         "moment-timezone": "moment",
       }),

@@ -17,7 +17,7 @@ export default function RouterSwitch() {
   const menuData = useRouteMap();
   const { npmLink, logo } = useComponentInfo() || ({} as any);
 
-  if (!menuData) {
+  if (!menuData || menuData?.length <= 1) {
     return <></>;
   }
 
