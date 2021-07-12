@@ -11422,14 +11422,19 @@ function ReadmePane() {
 var index = ".ant-menu-root.router-switch {\n  width: 230px;\n  height: 100%;\n  z-index: 90;\n  left: 0;\n  top: 0;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column;\n}\n.ant-menu-root.router-switch > .logo {\n  margin: 16px auto;\n  display: flex;\n  align-items: center;\n}\n.ant-menu-root.router-switch .fold-btn {\n  color: rgba(0, 0, 0, 0.65);\n}\n.ant-menu-root.router-switch .capitalize {\n  text-transform: capitalize;\n}\n.ant-menu-root.router-switch a {\n  color: inherit;\n}\n.ant-menu-root.router-switch .menu-content {\n  width: 100%;\n  flex: 1;\n  padding: 16px;\n}";
 const {Menu} = window.antd;
 const {SubMenu} = Menu;
+function MenuLink(item) {
+  return /* @__PURE__ */ modules$1.createElement("a", {
+    href: item.path
+  }, item.name.replace(/-/g, " ").replace(/\//g, " - "));
+}
 function RouterSwitch() {
-  var _a;
+  var _a, _b;
   const menuData = useRouteMap();
   const {npmLink, logo} = useComponentInfo() || {};
   if (!menuData) {
     return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null);
   }
-  const route2 = (_a = window == null ? void 0 : window.pageConfig) == null ? void 0 : _a.route;
+  const route2 = (_b = (_a = window == null ? void 0 : window.pageConfig) == null ? void 0 : _a.readmePath) == null ? void 0 : _b.replace(/\.md$/, ".html");
   const openKeys = menuData == null ? void 0 : menuData.filter(({children}) => !!children).map(({name}) => name);
   return /* @__PURE__ */ modules$1.createElement(Menu, {
     mode: "inline",
@@ -11447,9 +11452,7 @@ function RouterSwitch() {
     if (item.path) {
       return /* @__PURE__ */ modules$1.createElement(Menu.Item, {
         key: item.path
-      }, /* @__PURE__ */ modules$1.createElement("a", {
-        href: item.path
-      }, item.name.replace(/-/g, " ")));
+      }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item)));
     }
     return /* @__PURE__ */ modules$1.createElement(SubMenu, {
       title: item.name,
@@ -11457,9 +11460,7 @@ function RouterSwitch() {
       key: item.name
     }, (_a2 = item.children) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ modules$1.createElement(Menu.Item, {
       key: item2.path
-    }, /* @__PURE__ */ modules$1.createElement("a", {
-      href: item2.path
-    }, item2.name.replace(/-/g, " ")))));
+    }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item2)))));
   }));
 }
 _default$6();

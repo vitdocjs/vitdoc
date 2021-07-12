@@ -64,7 +64,7 @@ const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./i
 const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
 const htmlCommentRE = /<!--[\s\S]*?-->/g;
 const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
-const isRouteMap = (id) => /route-map$/.test(id);
+const isRouteMap = (id) => /route-map\.json$/.test(id);
 const getRoutes = () => {
   return (0, import_rules.getComponentFiles)("src").reduce((prev, path2) => {
     var _a;
@@ -108,7 +108,7 @@ const componentsTemplate = () => {
         return Object.assign(previousValue, {
           [path.join(currentValue, "..")]: currentValue.replace(/\.md$/, ".html")
         });
-      }, {});
+      }, { homepage$: "index.html" });
       return (0, import_vite.mergeConfig)(resolvedConfig, {
         build: {
           rollupOptions: {
@@ -133,9 +133,14 @@ const componentsTemplate = () => {
     },
     load(id) {
       return __async(this, null, function* () {
+        var _a;
         let file = (0, import_utils.cleanUrl)(id);
         if (isRouteMap(file)) {
-          return `export default ${JSON.stringify(getRoutes())}`;
+          return JSON.stringify(getRoutes());
+        }
+        if (/^\/?index\.html$/.test(file)) {
+          const href = (((_a = (0, import_rules.getComponentFiles)()) == null ? void 0 : _a[0]) || "").replace(/\.md$/, ".html");
+          return `<script>location.href='${href}';<\/script>`;
         }
         if (Object.values(input).includes(file)) {
           if (!/^\//.test(file)) {
@@ -181,10 +186,20 @@ const componentsTemplate = () => {
       server = _server;
       const { middlewares } = server;
       middlewares.use((req, res, next) => __async(this, null, function* () {
+        let url = (0, import_utils.cleanUrl)(req.url);
         if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
+          if (isRouteMap(url)) {
+            return (0, import_node.send)(req, res, `export default ${yield this.load(url)}`, "js");
+          }
+          if (url === "/") {
+            res.writeHead(302, {
+              Location: "/index.html"
+            });
+            res.end();
+            return;
+          }
           return next();
         }
-        let url = (0, import_utils.cleanUrl)(req.url);
         if (/\.md$/.test(url)) {
           res.writeHead(302, {
             Location: url.replace(/.md$/, ".html")
