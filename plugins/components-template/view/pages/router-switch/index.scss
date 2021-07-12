@@ -1,0 +1,30 @@
+.ant-menu-root.router-switch {
+  width: 230px;
+  height: 100%;
+  z-index: 90;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  > .logo {
+    margin: 16px auto;
+    display: flex;
+    align-items: center;
+  }
+  .fold-btn {
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .capitalize {
+    text-transform: capitalize;
+  }
+  a {
+    color: inherit;
+  }
+  .menu-content {
+    width: 100%;
+    flex: 1;
+    padding: 16px;
+  }
+}

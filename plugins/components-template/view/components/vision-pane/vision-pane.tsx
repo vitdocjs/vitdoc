@@ -1,5 +1,5 @@
 import { getVisionConfig } from "./getVisionConfig";
-import { transform } from "@alife/json-2-vision";
+import { transform } from "./convert";
 
 import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
 import CloseOutlined from "@ant-design/icons/CloseOutlined";

@@ -44,7 +44,9 @@
   display: flex;
   position: relative;
   min-height: 100vh;
+  overflow: auto;
   width: 100%;
+  flex: 1;
   background: #f2f3f7;
   padding: 20px;
   flex-direction: column;
@@ -178,4 +180,32 @@
 }
 .markdown-area .selected-block > .code-pane > pre.hljs {
   margin-bottom: 0;
+}.ant-menu-root.router-switch {
+  width: 230px;
+  height: 100%;
+  z-index: 90;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.ant-menu-root.router-switch > .logo {
+  margin: 16px auto;
+  display: flex;
+  align-items: center;
+}
+.ant-menu-root.router-switch .fold-btn {
+  color: rgba(0, 0, 0, 0.65);
+}
+.ant-menu-root.router-switch .capitalize {
+  text-transform: capitalize;
+}
+.ant-menu-root.router-switch a {
+  color: inherit;
+}
+.ant-menu-root.router-switch .menu-content {
+  width: 100%;
+  flex: 1;
+  padding: 16px;
 }

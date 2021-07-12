@@ -24,24 +24,27 @@ export default function ReadmePane() {
     <div id="public-component-show-container">
       <RendererContext.Provider value={{ renderIndex, setRenderIndex }}>
         <div className="component-page">
-          <h1 className="component-name">{propertyTypes?.displayName}</h1>
-          <span className="component-sub-title">
-            <span>Package: {compInfo?.packageName}</span>
-            <span>Version: {compInfo?.packageVersion}</span>
-          </span>
+          <a href={compInfo?.npmLink}>
+            <h1 className="component-name">{propertyTypes?.displayName}</h1>
+            <span className="component-sub-title">
+              <span>Package: {compInfo?.packageName}</span>
+              <span>Version: {compInfo?.packageVersion}</span>
+            </span>
+          </a>
           <div className="component-main">
             <div className="component-part">
               <ComponentArea
                 componentProps={visionProps}
                 onSetDefaultProps={setVisionDefaultProps}
               />
-              <div className="component-description component-block ">
+              <div className="component-description component-block">
                 <MarkdownArea />
                 <Properties properties={propertyTypes} />
               </div>
             </div>
-            {propertyTypes && visionDefaultProps && (
+            {propertyTypes && (
               <VisionPane
+                key={`vision-default-props-${!!visionDefaultProps}`}
                 properties={propertyTypes}
                 defaultProps={visionDefaultProps}
                 onPropsChange={setVisionProps}

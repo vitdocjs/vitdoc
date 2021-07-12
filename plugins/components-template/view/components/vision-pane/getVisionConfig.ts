@@ -1,4 +1,4 @@
-import VisionTransfer from "@alife/json-2-vision";
+import VisionTransfer from "./convert";
 
 
 let promise;

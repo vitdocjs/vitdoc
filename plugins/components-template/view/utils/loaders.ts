@@ -8,7 +8,7 @@ const { route } = lscWindowConfig;
 
 declare global {
   interface Window {
-    pageConfig?: { readmePath?: string };
+    pageConfig?: { route?: string; readmePath?: string };
     RuntimeLoadMap$: Record<string, Promise<any>>;
     RegistryMap$: (p: string, cb: () => void) => void;
   }
@@ -100,16 +100,28 @@ export function useTypeFile(): any {
     `${route}/index.tsx.jsxType.json`,
     ({ default: properties }) => {
       const { default: compProps } = keyBy(properties, "exportName");
-      return compProps;
+      return compProps || properties[0];
     }
   );
 }
 
+export function useRouteMap(): any {
+  return useAsyncImport(`/route-map`);
+}
+
 export function useComponentInfo(): any {
   return useAsyncImport(`/package.json`, ({ default: packageInfo }) => {
+    const packageName = packageInfo.name;
+    const packageVersion = packageInfo.version;
+    const registry = (
+      packageInfo.publishConfig?.registry || "https://npmjs.com"
+    ).replace("registry.", "");
     return {
-      packageName: packageInfo.name,
-      packageVersion: packageInfo.version,
+      packageName,
+      packageVersion,
+      registry,
+      npmLink: `${registry}/${packageName}@${packageVersion}`,
+      logo: packageInfo.componentConfig?.logo,
     };
   });
 }

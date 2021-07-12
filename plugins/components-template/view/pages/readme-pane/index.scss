@@ -2,7 +2,9 @@
   display: flex;
   position: relative;
   min-height: 100vh;
+  overflow: auto;
   width: 100%;
+  flex: 1;
   background: #f2f3f7;
   padding: 20px;
   flex-direction: column;

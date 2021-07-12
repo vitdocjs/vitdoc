@@ -4,14 +4,12 @@ import {
   addUrlParams,
   cleanUrl,
   getAssetHash,
-  invalidate,
   removeImportQuery,
   resolveMainComponent,
 } from "../utils";
-import type { ModuleNode } from "vite";
+import { ViteDevServer } from "vite";
 import { isCSSLang, isJsx } from "../utils/lang";
 import { send } from "vite/dist/node";
-import { ViteDevServer } from "vite";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 

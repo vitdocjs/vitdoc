@@ -1,24 +1,25 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
+var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __export = (target, all) => {
+  __markAsModule(target);
   for (var name in all)
-    __defProp(target, name, {get: all[name], enumerable: true});
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __exportStar = (target, module2, desc) => {
+var __reExport = (target, module2, desc) => {
   if (module2 && typeof module2 === "object" || typeof module2 === "function") {
     for (let key of __getOwnPropNames(module2))
       if (!__hasOwnProp.call(target, key) && key !== "default")
-        __defProp(target, key, {get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable});
+        __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
   }
   return target;
 };
 var __toModule = (module2) => {
-  return __exportStar(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? {get: () => module2.default, enumerable: true} : {value: module2, enumerable: true})), module2);
+  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
 };
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
@@ -36,17 +37,16 @@ var __async = (__this, __arguments, generator) => {
         reject(e);
       }
     };
-    var step = (result) => {
-      return result.done ? resolve(result.value) : Promise.resolve(result.value).then(fulfilled, rejected);
-    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
     step((generator = generator.apply(__this, __arguments)).next());
   });
 };
-__markAsModule(exports);
 __export(exports, {
   createHtml: () => createHtml,
   default: () => src_default,
-  isCompHTMLProxy: () => isCompHTMLProxy
+  getRoutes: () => getRoutes,
+  isCompHTMLProxy: () => isCompHTMLProxy,
+  isRouteMap: () => isRouteMap
 });
 var path = __toModule(require("path"));
 var import_swig = __toModule(require("swig"));
@@ -56,7 +56,7 @@ var import_utils = __toModule(require("../../utils"));
 var import_config = __toModule(require("../../utils/config"));
 var import_rules = __toModule(require("../../utils/rules"));
 const isDebug = process.env.DEBUG;
-const pluginRoot = path.resolve(__dirname, "plugins/components-template");
+const pluginRoot = __dirname.includes("plugins/components-template") ? path.resolve(__dirname, "..") : path.resolve(__dirname, "plugins/components-template");
 const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(pluginRoot, "./dist");
 const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./index.html"), {
   autoescape: false
@@ -64,6 +64,33 @@ const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./i
 const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
 const htmlCommentRE = /<!--[\s\S]*?-->/g;
 const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
+const isRouteMap = (id) => /route-map$/.test(id);
+const getRoutes = () => {
+  return (0, import_rules.getComponentFiles)("src").reduce((prev, path2) => {
+    var _a;
+    const name = path2.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
+    path2 = `/${path2}`.replace(/\.md$/, ".html");
+    const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
+    if (groupName) {
+      if (!prev.some(({ name: name2 }) => name2 === groupName)) {
+        prev.push({
+          name: groupName,
+          children: []
+        });
+      }
+      (_a = prev[prev.findIndex(({ name: name2 }) => name2 === groupName)]) == null ? void 0 : _a.children.push({
+        name: rest,
+        path: path2
+      });
+    } else {
+      prev.push({
+        name,
+        path: path2
+      });
+    }
+    return prev;
+  }, []);
+};
 const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 const componentsTemplate = () => {
   let input = {};
@@ -71,12 +98,12 @@ const componentsTemplate = () => {
   return {
     name: "vite:packages-template",
     enforce: "pre",
-    config(resolvedConfig, {command}) {
+    config(resolvedConfig, { command }) {
       const isBuild = command === "build";
       if (!isBuild) {
         return;
       }
-      const files = (0, import_rules.getComponentFiles)("packages");
+      const files = (0, import_rules.getComponentFiles)("src");
       input = files.reduce((previousValue, currentValue) => {
         return Object.assign(previousValue, {
           [path.join(currentValue, "..")]: currentValue.replace(/\.md$/, ".html")
@@ -97,6 +124,9 @@ const componentsTemplate = () => {
       if (isCompHTMLProxy(id)) {
         return id;
       }
+      if (isRouteMap(id)) {
+        return id;
+      }
       if (Object.values(input).includes(id)) {
         return id;
       }
@@ -104,18 +134,21 @@ const componentsTemplate = () => {
     load(id) {
       return __async(this, null, function* () {
         let file = (0, import_utils.cleanUrl)(id);
+        if (isRouteMap(file)) {
+          return `export default ${JSON.stringify(getRoutes())}`;
+        }
         if (Object.values(input).includes(file)) {
           if (!/^\//.test(file)) {
             file = `/${file}`;
           }
-          const {extendTemplate: externalHtml} = (0, import_config.getConfig)();
-          const mainModule = (yield (0, import_utils.resolveMainComponent)({pluginContainer: {resolveId: this.resolve}}, id)) || {};
+          const { extendTemplate: externalHtml } = (0, import_config.getConfig)();
+          const mainModule = (yield (0, import_utils.resolveMainComponent)({ pluginContainer: { resolveId: this.resolve } }, id)) || {};
           const mainModuleUrl = "/" + path.relative(process.cwd(), mainModule.id || id);
           const route = path.join(mainModuleUrl, "..");
           const readmePath = file.replace(/\.html$/, ".md");
           let html = createHtml({
             externalHtml,
-            __dirname: currentPath,
+            dirname: currentPath,
             readmePath,
             route,
             isDebug
@@ -146,7 +179,7 @@ const componentsTemplate = () => {
     },
     configureServer(_server) {
       server = _server;
-      const {middlewares} = server;
+      const { middlewares } = server;
       middlewares.use((req, res, next) => __async(this, null, function* () {
         if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
           return next();
@@ -184,3 +217,10 @@ const componentsTemplate = () => {
   };
 };
 var src_default = componentsTemplate;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  createHtml,
+  getRoutes,
+  isCompHTMLProxy,
+  isRouteMap
+});

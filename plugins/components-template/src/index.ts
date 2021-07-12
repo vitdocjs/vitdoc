@@ -28,7 +28,38 @@ export const createHtml = Swig.compileFile(
 
 const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
 const htmlCommentRE = /<!--[\s\S]*?-->/g;
-const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
+const scriptModuleRE =
+  /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
+
+export const isRouteMap = (id) => /route-map\.json$/.test(id);
+export const getRoutes = () => {
+  return getComponentFiles("src").reduce((prev, path) => {
+    const name = path.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
+    path = `/${path}`.replace(/\.md$/, ".html");
+    const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
+    if (groupName) {
+      if (!prev.some(({ name }) => name === groupName)) {
+        prev.push({
+          name: groupName,
+          children: [],
+        });
+      }
+
+      prev[prev.findIndex(({ name }) => name === groupName)]?.children.push({
+        name: rest,
+        path,
+      });
+    } else {
+      // 没有子目录
+      prev.push({
+        name,
+        path,
+      });
+    }
+
+    return prev;
+  }, []);
+};
 
 export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 
@@ -44,16 +75,19 @@ const componentsTemplate = () => {
       if (!isBuild) {
         return;
       }
-      const files = getComponentFiles("packages");
+      const files = getComponentFiles("src");
 
-      input = files.reduce((previousValue, currentValue) => {
-        return Object.assign(previousValue, {
-          [path.join(currentValue, "..")]: currentValue.replace(
-            /\.md$/,
-            ".html"
-          ),
-        });
-      }, {});
+      input = files.reduce(
+        (previousValue, currentValue) => {
+          return Object.assign(previousValue, {
+            [path.join(currentValue, "..")]: currentValue.replace(
+              /\.md$/,
+              ".html"
+            ),
+          });
+        },
+        { homepage$: "index.html" }
+      );
 
       return mergeConfig(resolvedConfig, {
         build: {
@@ -70,12 +104,25 @@ const componentsTemplate = () => {
       if (isCompHTMLProxy(id)) {
         return id;
       }
+      if (isRouteMap(id)) {
+        return id;
+      }
       if (Object.values(input).includes(id)) {
         return id;
       }
     },
     async load(id) {
       let file = cleanUrl(id);
+
+      if (isRouteMap(file)) {
+        return JSON.stringify(getRoutes());
+      }
+
+      if (/^\/?index\.html$/.test(file)) {
+        const href = (getComponentFiles()?.[0] || "").replace(/\.md$/, ".html");
+        return `<script>location.href='${href}';</script>`;
+      }
+
       if (Object.values(input).includes(file)) {
         if (!/^\//.test(file)) {
           file = `/${file}`;
@@ -130,16 +177,32 @@ const componentsTemplate = () => {
       const { middlewares } = server;
 
       middlewares.use(async (req, res, next) => {
+        let url = cleanUrl(req.url);
+
         if (
           req.method !== "GET" ||
           isCompHTMLProxy(<string>req.url) ||
           !(req.headers.accept || "").includes("text/html") ||
           !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
         ) {
+          if (isRouteMap(url)) {
+            return send(
+              req,
+              res,
+              `export default ${await this.load(url)}`,
+              "js"
+            );
+          }
+          if (url === "/") {
+            res.writeHead(302, {
+              Location: "/index.html",
+            });
+            res.end();
+            return;
+          }
           return next();
         }
 
-        let url = cleanUrl(req.url);
         if (/\.md$/.test(url)) {
           res.writeHead(302, {
             Location: url.replace(/.md$/, ".html"),
