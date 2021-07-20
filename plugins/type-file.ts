@@ -50,6 +50,11 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
       return;
     }
     const mod = server.moduleGraph.getModuleById(`${url}${prefix}`);
+
+    if (!mod) {
+      return;
+    }
+
     invalidate(mod, new Date().valueOf(), new Set<ModuleNode>());
 
     const updates = [mod].map((item) => ({
