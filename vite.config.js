@@ -4,7 +4,6 @@ import TypeFile from "./plugins/type-file";
 import componentsTemplate from "./plugins/components-template/src";
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
-import * as path from "path";
 
 const cwd = process.cwd();
 
@@ -16,6 +15,7 @@ try {
 // https://vitejs.dev/config/
 export default mergeConfig(
   {
+    base: process.env.VITE_BASE_HOST || "/",
     build: {
       target: "esnext",
       outDir: "dist/stories",
