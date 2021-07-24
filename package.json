@@ -12,6 +12,9 @@
   "bin": {
     "vite-comp": "./bin/index.js"
   },
+  "engines": {
+    "node": ">=12"
+  },
   "dependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
     "@alifd/next": "^1.22.14",
