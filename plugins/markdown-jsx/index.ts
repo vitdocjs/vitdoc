@@ -94,7 +94,9 @@ const mdjsx = () => {
         if (!isJsx(lang)) {
           return code;
         }
-        const index = code.indexOf("ReactDOM.render");
+        const matchInfo = code.match(/import React([ ,])?.+?;/);
+        const { index: matchedIndex, "0": matchedContent } = matchInfo;
+        const index = matchedIndex + matchedContent.length;
         const before = code.slice(0, index);
         const after = code.slice(index);
 
@@ -104,7 +106,12 @@ const mdjsx = () => {
           id
         );
 
-        const nextCode = `${before.replace("import React ", "import React$ ")}
+        const nextCode = `${before.replace(
+          /import React([ ,])?/,
+          (d, matchInfo) => {
+            return `import React$${matchInfo}`;
+          }
+        )}
       
       ${
         mainModule
@@ -124,7 +131,8 @@ const mdjsx = () => {
 
         return beforeCreateElement(NextComp, ...rest);
       };
-      export default function (){;${after};}`;
+      ;${after};
+      `;
 
         return nextCode;
       }
