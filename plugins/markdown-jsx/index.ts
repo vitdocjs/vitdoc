@@ -7,7 +7,6 @@ import {
   removeImportQuery,
   resolveMainComponent,
 } from "../utils";
-import { ViteDevServer } from "vite";
 import { isCSSLang, isJsx } from "../utils/lang";
 import { send } from "vite/dist/node";
 
@@ -18,7 +17,6 @@ export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 const mdjsx = () => {
   let markdownMap = {};
   let isBuild: boolean;
-  let server: ViteDevServer;
   return {
     name: "vite:markdown-jsx",
     config(resolvedConfig, { command }) {
@@ -43,7 +41,6 @@ const mdjsx = () => {
     },
     configureServer(_server) {
       const { middlewares, moduleGraph, transformRequest } = _server;
-      server = _server;
 
       middlewares.use(async (req, res, next) => {
         if (
@@ -144,7 +141,7 @@ const mdjsx = () => {
       const content = fs.readFileSync(id, "utf-8");
 
       let moduleIds = {};
-      const promises = fromMarkdown(content)
+      const promises = (fromMarkdown(content) as any)
         .children.filter(
           ({ type, lang = "" }) =>
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
