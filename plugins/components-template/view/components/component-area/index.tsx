@@ -13,14 +13,15 @@ export function ComponentArea(props) {
   const invoked = useRef(false);
 
   const wrapProps = useCallback(
-    (Component, { React: OutReact }) => (props) => {
-      if (!invoked.current) {
-        onSetDefaultProps && onSetDefaultProps(props);
-        invoked.current = true;
-      }
-      const finalProps = Object.assign({}, props, componentProps);
-      return OutReact.createElement(Component, finalProps);
-    },
+    (Component, { React: OutReact }) =>
+      (props) => {
+        if (!invoked.current) {
+          onSetDefaultProps && onSetDefaultProps(props);
+          invoked.current = true;
+        }
+        const finalProps = Object.assign({}, props, componentProps);
+        return OutReact.createElement(Component, finalProps);
+      },
     [componentProps]
   );
 
@@ -49,7 +50,11 @@ export function ComponentArea(props) {
           }
         />
       ) : (
-        <div className="component-container code-box-demo" ref={componentRef} />
+        <div
+          className="component-container"
+          id="component-container"
+          ref={componentRef}
+        />
       )}
     </div>
   );

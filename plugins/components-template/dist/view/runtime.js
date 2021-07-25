@@ -3874,7 +3874,8 @@ function ComponentArea(props) {
       style: { whiteSpace: "pre-wrap", textAlign: "left" }
     }, Components == null ? void 0 : Components.error.message)
   }) : /* @__PURE__ */ modules$1.createElement("div", {
-    className: "component-container code-box-demo",
+    className: "component-container",
+    id: "component-container",
     ref: componentRef
   }));
 }
