@@ -3875,7 +3875,7 @@ function ComponentArea(props) {
     }, Components == null ? void 0 : Components.error.message)
   }) : /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-container",
-    id: "component-container",
+    id: "vite-component-container",
     ref: componentRef
   }));
 }

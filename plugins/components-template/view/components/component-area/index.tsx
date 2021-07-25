@@ -52,7 +52,7 @@ export function ComponentArea(props) {
       ) : (
         <div
           className="component-container"
-          id="component-container"
+          id="vite-component-container"
           ref={componentRef}
         />
       )}
