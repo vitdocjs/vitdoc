@@ -7,7 +7,7 @@ import RouterSwitch from "./pages/router-switch";
 mtopHook();
 
 ReactDOM.render(
-  <div style={{ display: "flex" }}>
+  <div style={{ display: "flex" }} className="code-box-demo">
     <RouterSwitch />
     <ReadmePane />
   </div>,

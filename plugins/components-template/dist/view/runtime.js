@@ -11471,5 +11471,6 @@ function RouterSwitch() {
 }
 _default$6();
 render(/* @__PURE__ */ createElement$1("div", {
-  style: { display: "flex" }
+  style: { display: "flex" },
+  className: "code-box-demo"
 }, /* @__PURE__ */ createElement$1(RouterSwitch, null), /* @__PURE__ */ createElement$1(ReadmePane, null)), document.querySelector("#component-root"));
