@@ -1,5 +1,4 @@
 import React from "react";
-import { useMarkdown, useRealComponent } from "../../utils/loaders";
 import ReactMarkdown from "react-markdown";
 import HighLight from "@alife/intl-comp-highLighter/dist/index";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
@@ -17,9 +16,7 @@ const { Tag } = window.antd;
 
 import "./index.scss";
 
-export function MarkdownArea() {
-  const res = useMarkdown();
-
+export function MarkdownArea({ data: res }) {
   if (!res) {
     return null;
   }

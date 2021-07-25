@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
-  "dependencies": {},
   "devDependencies": {
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
@@ -21,5 +20,8 @@
     "prepublishOnly": "npm run build"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-router-dom": "^5.2.0"
+  }
 }

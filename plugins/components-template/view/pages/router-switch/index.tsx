@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 import { useComponentInfo, useRouteMap } from "../../utils/loaders";
-import pageConfig from "../../utils/config";
+import { Link, useRouteMatch } from "react-router-dom";
 
 // @ts-ignore
 const { Menu } = window.antd;
@@ -10,7 +10,9 @@ const { SubMenu } = Menu;
 
 function MenuLink(item) {
   return (
-    <a href={item.path}>{item.name.replace(/-/g, " ").replace(/\//g, " - ")}</a>
+    <Link to={item.path}>
+      {item.name.replace(/-/g, " ").replace(/\//g, " - ")}
+    </Link>
   );
 }
 
@@ -22,9 +24,8 @@ export default function RouterSwitch() {
     return <></>;
   }
 
-  const route = pageConfig?.readmePath
-    ?.replace(/\.md$/, ".html")
-    .replace(/^\//, "");
+  const { url: route } = useRouteMatch();
+
   const openKeys = menuData
     ?.filter(({ children }) => !!children)
     .map(({ name }) => name);

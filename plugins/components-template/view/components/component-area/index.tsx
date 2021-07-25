@@ -1,14 +1,12 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { useMarkdown } from "../../utils/loaders";
 
 import "./index.scss";
+
 const { Result } = window["antd"];
 
 export function ComponentArea(props) {
-  const { componentProps, onSetDefaultProps } = props;
+  const { componentProps, onSetDefaultProps, data: Components } = props;
   const componentRef = useRef() as any;
-
-  const Components: any = useMarkdown();
 
   const invoked = useRef(false);
 
@@ -34,6 +32,7 @@ export function ComponentArea(props) {
     const renderer = Components?.renderer;
     // @ts-ignore
     window.mountNode = componentRef.current;
+    debugger;
     renderer && renderer();
   }, [Components?.renderer, componentProps]);
 

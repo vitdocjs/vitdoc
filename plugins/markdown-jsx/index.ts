@@ -91,28 +91,30 @@ const mdjsx = () => {
         if (!isJsx(lang)) {
           return code;
         }
-        const matchInfo = code.match(/import React([ ,])?.+?;/);
-        const { index: matchedIndex, "0": matchedContent } = matchInfo;
-        const index = matchedIndex + matchedContent.length;
-        const before = code.slice(0, index);
-        const after = code.slice(index);
-
-        const mainModule = await resolveMainComponent(
+        const mainModuleId = await resolveMainComponent(
           // @ts-ignore
           { pluginContainer: { resolveId: this.resolve } },
           id
-        );
+        ).then((res) => (res ? res.id : ""));
 
-        const nextCode = `${before.replace(
-          /import React([ ,])?/,
-          (d, matchInfo) => {
-            return `import React$${matchInfo}`;
-          }
-        )}
-      
+        const replaceReact = (code) => {
+          const matchInfo = code.match(/import React([ ,])?.+?;/);
+          const { index: matchedIndex, "0": matchedContent } = matchInfo;
+          const index = matchedIndex + matchedContent.length;
+          const before = code.slice(0, index);
+          const after = code.slice(index);
+
+          const reactCode = before.replace(
+            /import React([ ,])?/,
+            (d, matchInfo) => {
+              return `import React$${matchInfo}`;
+            }
+          );
+
+          return `${reactCode}
       ${
-        mainModule
-          ? `import $_Component from '${mainModule.id}';`
+        mainModuleId
+          ? `import $_Component from '${mainModuleId}';`
           : `const $_Component = {};`
       }
       const React = {...React$};
@@ -128,8 +130,33 @@ const mdjsx = () => {
 
         return beforeCreateElement(NextComp, ...rest);
       };
-      ;${after};
+      ${after}
       `;
+        };
+
+        const replaceExport = (code) => {
+          const reg = /import .+ from .+;/g;
+
+          let regRes: RegExpExecArray | null;
+          let lastReg: RegExpExecArray | null;
+          while ((regRes = reg.exec(code))) {
+            lastReg = regRes;
+          }
+
+          if (!lastReg!) {
+            return code;
+          }
+          const lastIndex: number = lastReg.index + lastReg[0].length;
+
+          return `${code.slice(
+            0,
+            lastIndex
+          )};export default function(){;${code.slice(lastIndex)};};`;
+        };
+
+        let nextCode: string = replaceReact(code);
+
+        nextCode = replaceExport(code);
 
         return nextCode;
       }
@@ -141,8 +168,8 @@ const mdjsx = () => {
       const content = fs.readFileSync(id, "utf-8");
 
       let moduleIds = {};
-      const promises = (fromMarkdown(content) as any)
-        .children.filter(
+      const promises = (fromMarkdown(content) as any).children
+        .filter(
           ({ type, lang = "" }) =>
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
         )

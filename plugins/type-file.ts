@@ -7,6 +7,7 @@ import {
   invalidate,
   isCSSRequest,
   isJsx,
+  resolveMainComponent,
 } from "./utils";
 import debounce from "lodash/debounce";
 import type { ModuleNode } from "vite";
@@ -83,9 +84,22 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
       return;
     },
 
-    resolveId(id) {
+    async resolveId(id) {
       if (matchReg.test(id)) {
-        return id;
+        const mainModule = await resolveMainComponent(
+          // @ts-ignore
+          { pluginContainer: { resolveId: this.resolve } },
+          id
+        );
+        if (!mainModule) {
+          return;
+        }
+
+        const mainTypeId = mainModule.id
+          .replace(/\.tsx$/, ".tsx.type$.json")
+          .replace(process.cwd(), "");
+
+        return mainTypeId;
       }
       return;
     },
@@ -104,6 +118,8 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
           const fileName = file
             .replace(new RegExp(`${prefix}$`), "")
             .replace(/^\//, "");
+
+          console.log("######", fileName);
 
           componentDoc = getComponentDocs(fileName).doc;
         }

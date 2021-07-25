@@ -1,9 +1,8 @@
-import { createContext, useContext, useMemo, useState } from "react";
-import pageConfig, { cleanUrl } from "./config";
+import { useMemo, useState } from "react";
+import { cleanUrl } from "./config";
 import keyBy from "lodash/keyBy";
 import { isCSSLang, isJsx } from "../../../utils/lang";
-
-const { route } = pageConfig;
+import { useRouteMatch } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -13,80 +12,73 @@ declare global {
   }
 }
 
-function addRegistry(p, fn) {
-  if (!!window.RegistryMap$) {
-    window.RegistryMap$(p, fn);
+function addRegistry(file, fn) {
+  // @ts-ignore
+  if (import.meta.hot) {
+    // TODO:: React文件热更新问题
+    // @ts-ignore
+    import("/@vite/client").then(({ createHotContext }) => {
+      createHotContext(file).accept((newModule) => {
+        fn(newModule);
+      });
+    });
   }
+  if (!!window.RegistryMap$) {
+    window.RegistryMap$(file, fn);
+  }
+}
+
+export function useRoute() {
+  const { url: route } = useRouteMatch();
+
+  return { route };
 }
 
 export class ModuleLoadError extends Error {}
 
 export function useAsyncImport(
-  path: string | string[],
+  path: string,
   cb = ({ default: Comp }: any) => Comp
 ) {
   const [Module, setModule] = useState<any>();
-  const [params, update] = useState({});
 
   useMemo(async () => {
-    const paths = Array.isArray(path) ? path : [path];
-
     try {
-      const result = await Promise.all(
-        paths.map((p) => {
-          const cUrl = cleanUrl(p);
-          addRegistry(cUrl, update);
-          if (!window.RuntimeLoadMap$[cUrl]) {
-            console.error(
-              `Load Module '${p}' not defined in window.RuntimeLoadMap$. `
-            );
-          }
-          // @ts-ignore
-          return window.RuntimeLoadMap$[cUrl];
-        })
-      );
+      const setNewModule = (newModule) => {
+        const Comp = cb(newModule);
+        setModule(() => Comp);
+      };
+      const cUrl = cleanUrl(path);
+      addRegistry(path, setNewModule);
 
-      const Comp = cb(Array.isArray(path) ? result : result[0]);
+      const result = await (window.RuntimeLoadMap$[cUrl] || import(path));
 
-      setModule(() => Comp);
+      setNewModule(result);
     } catch (e) {
-      console.error(`Load module ${paths.join(",")} error:`, e);
+      console.error(`Load module ${path} error:`, e);
       setModule({
         error: new ModuleLoadError(
           [
             `Please make sure follow files exist in your project`,
-            ...paths.map((path) => `   -  ${path}`),
+            `-  ${path}`,
           ].join("\n")
         ),
       });
     }
-  }, [params]);
+  }, [path]);
 
   return Module;
 }
 
-export function useComponents() {
-  return useAsyncImport(
-    [`${route}/index.tsx`, `${route}/docs.tsx`],
-    (results) => {
-      return results.map(({ default: C }) => C);
-    }
-  );
-}
-
-export function useRealComponent() {
-  return useAsyncImport(`${route}/index.tsx`);
-}
-
-
 export function useTypeFile(): any {
-  return useAsyncImport(
-    `${route}/index.tsx.type$.json`,
-    ({ default: properties }) => {
-      const { default: compProps } = keyBy(properties, "exportName");
-      return compProps || properties[0];
-    }
-  );
+  const { route } = useRoute();
+
+  const typeFile = route.replace(".html", ".tsx.type$.json");
+
+  return useAsyncImport(typeFile, ({ default: properties }) => {
+    const { default: compProps } = keyBy(properties, "exportName");
+    return compProps || properties[0];
+  });
 }
 
 export function useRouteMap(): any {
@@ -110,20 +102,15 @@ export function useComponentInfo(): any {
   });
 }
 
-export const RendererContext = createContext<{
-  renderIndex?: number;
-  setRenderIndex: (index: number) => void;
-}>({
-  setRenderIndex: () => {},
-});
-
-let moduleMap;
-let moduleCache;
 export function useMarkdown() {
-  const { renderIndex, setRenderIndex } = useContext(RendererContext);
+  const [renderIndex, setRenderIndex] = useState(0);
+
+  const { route } = useRoute();
+
+  const readmeFile = route.replace(".html", ".md");
 
   const results: any = useAsyncImport(
-    window.pageConfig?.readmePath || location.pathname.replace(".html", ".md"),
+    readmeFile,
     ({ default: packageInfo }) => {
       return packageInfo;
     }
@@ -133,10 +120,8 @@ export function useMarkdown() {
     return results;
   }
 
-  // let moduleMap = moduleMaps[results?.hash];
-
-  if (results && results !== moduleCache) {
-    moduleCache = results;
+  let moduleMap;
+  if (results) {
     const styleModules = results.modules.filter(({ lang }) => isCSSLang(lang));
     moduleMap = results.modules.reduce((previousValue, currentValue) => {
       if (!isJsx(currentValue.lang)) {
@@ -174,7 +159,7 @@ export function useMarkdown() {
     error,
     content: results.content,
     moduleMap,
-    renderer: renderer,
+    renderer,
     setRenderIndex: setRenderIndex,
   };
 }

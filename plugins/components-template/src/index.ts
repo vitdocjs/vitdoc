@@ -4,7 +4,7 @@ import Swig from "swig";
 
 import { mergeConfig, ViteDevServer } from "vite";
 import { send } from "vite/dist/node";
-import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
+import { cleanUrl, isHTMLProxy } from "../../utils";
 import { getConfig } from "../../utils/config";
 import { getComponentFiles } from "../../utils/rules";
 
@@ -35,7 +35,7 @@ export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = () => {
   return getComponentFiles("src").reduce((prev, path) => {
     const name = path.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
-    path = `${path}`.replace(/\.md$/, ".html");
+    path = `/${path}`.replace(/\.md$/, ".html");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
     if (groupName) {
       if (!prev.some(({ name }) => name === groupName)) {
@@ -67,12 +67,13 @@ const componentsTemplate = () => {
   let input = {};
   let server: ViteDevServer;
   let config;
+  let isBuild;
   return {
     name: "vite:packages-template",
     enforce: "pre",
     config(resolvedConfig, { command }) {
       // store the resolved config
-      const isBuild = command === "build";
+      isBuild = command === "build";
       config = resolvedConfig;
       if (!isBuild) {
         return;
@@ -130,24 +131,11 @@ const componentsTemplate = () => {
           file = `/${file}`;
         }
         const { extendTemplate: externalHtml } = getConfig();
-        const mainModule =
-          (await resolveMainComponent(
-            // @ts-ignore
-            { pluginContainer: { resolveId: this.resolve } },
-            id
-          )) || {};
-
-        const mainModuleUrl =
-          "/" + path.relative(process.cwd(), mainModule.id || id);
-        const route = path.join(mainModuleUrl, "..");
-        const readmePath = file.replace(/\.html$/, ".md");
 
         let html = createHtml({
           externalHtml,
           dirname: currentPath,
           base: config.base,
-          readmePath,
-          route,
           isDebug,
         });
 
