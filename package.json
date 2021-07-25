@@ -1,6 +1,6 @@
 {
   "name": "@ali/vite-comp",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "publishConfig": {
     "registry": "https://registry.npm.alibaba-inc.com"
   },
