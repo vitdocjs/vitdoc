@@ -3651,13 +3651,11 @@ class VisionPane extends modules$1.PureComponent {
     }, /* @__PURE__ */ modules$1.createElement(Button, null, /* @__PURE__ */ modules$1.createElement(DoubleLeftOutlined, null), "Vision \u9762\u677F"))) : null;
   }
 }
-var index$5 = "#public-component-show-container {\n  display: flex;\n  position: relative;\n  min-height: 100vh;\n  overflow: auto;\n  width: 100%;\n  flex: 1;\n  background: #f2f3f7;\n  padding: 20px;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n#public-component-show-container .component-main {\n  position: relative;\n  display: flex;\n}\n#public-component-show-container .component-part {\n  flex: 1;\n  overflow: auto;\n}\n#public-component-show-container .component-name {\n  padding: 0;\n  border: 0;\n  margin: 0;\n  font-size: 3.5em;\n  font-weight: 800;\n  outline: 0;\n  vertical-align: baseline;\n  line-height: 1.2;\n}\n#public-component-show-container .component-sub-title {\n  font-size: 1em;\n  font-weight: 600;\n  vertical-align: baseline;\n  margin-bottom: 8px;\n  display: block;\n  color: #6f6f6f;\n}\n#public-component-show-container .component-sub-title > span {\n  margin-right: 1em;\n}\n#public-component-show-container .component-block {\n  background: #fff;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px #ccc solid;\n  border-bottom: unset;\n  border-top: unset;\n}\n#public-component-show-container .component-block:first-child {\n  border-radius: 7px 7px 0 0;\n  border-top: 1px #ccc solid;\n}\n#public-component-show-container .component-block:last-child {\n  border-radius: 0 0 7px 7px;\n  border-bottom: 1px #ccc solid;\n}\n#public-component-show-container .component-block:first-child:last-child {\n  border-radius: 7px;\n  border: 1px #ccc solid;\n}\n#public-component-show-container .component-container {\n  min-height: 300px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#public-component-show-container .component-description {\n  border-top: 1px solid #eee;\n  font-size: 14px;\n  padding: 20px;\n}\n#public-component-show-container .component-description > .block-title {\n  font-size: 1.3em;\n  display: block;\n  line-height: 2;\n}\n#public-component-show-container .component-description > code {\n  border: 1px solid #e7e9ed;\n  background-color: #f8fafc;\n  display: block;\n  padding: 5px 10px;\n  margin: 5px 0;\n  word-break: break-all;\n  word-wrap: break-word;\n  border-radius: 2px;\n  color: #5b6169;\n  font-size: 13px;\n  line-height: 1.6em;\n}\n#public-component-show-container .ant-tabs-bottom .ant-tabs-bottom-bar {\n  margin-top: 0;\n}\n#public-component-show-container .ant-tabs-nav .ant-tabs-tab {\n  margin: 0;\n}\n#public-component-show-container .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {\n  padding: 8px 16px;\n}\n@media screen and (max-width: 750px) {\n  #public-component-show-container {\n    padding: 20px 0;\n  }\n  #public-component-show-container .component-block {\n    border-radius: 0 !important;\n  }\n}";
+var index$5 = "#public-component-show-container {\n  display: flex;\n  position: relative;\n  min-height: 100vh;\n  overflow: auto;\n  width: 100%;\n  flex: 1;\n  background: #f2f3f7;\n  padding: 20px;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n#public-component-show-container .link-title {\n  display: flex;\n  flex-direction: column;\n  width: fit-content;\n}\n#public-component-show-container .component-main {\n  position: relative;\n  display: flex;\n}\n#public-component-show-container .component-part {\n  flex: 1;\n  overflow: auto;\n}\n#public-component-show-container .component-name {\n  padding: 0;\n  border: 0;\n  margin: 0;\n  font-size: 3.5em;\n  font-weight: 800;\n  outline: 0;\n  vertical-align: baseline;\n  line-height: 1.2;\n}\n#public-component-show-container .component-sub-title {\n  font-size: 1em;\n  font-weight: 600;\n  vertical-align: baseline;\n  margin-bottom: 8px;\n  display: block;\n  color: #6f6f6f;\n}\n#public-component-show-container .component-sub-title > span {\n  margin-right: 1em;\n}\n#public-component-show-container .component-block {\n  background: #fff;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px #ccc solid;\n  border-bottom: unset;\n  border-top: unset;\n}\n#public-component-show-container .component-block:first-child {\n  border-radius: 7px 7px 0 0;\n  border-top: 1px #ccc solid;\n}\n#public-component-show-container .component-block:last-child {\n  border-radius: 0 0 7px 7px;\n  border-bottom: 1px #ccc solid;\n}\n#public-component-show-container .component-block:first-child:last-child {\n  border-radius: 7px;\n  border: 1px #ccc solid;\n}\n#public-component-show-container .component-container {\n  min-height: 300px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#public-component-show-container .component-description {\n  border-top: 1px solid #eee;\n  font-size: 14px;\n  padding: 20px;\n}\n#public-component-show-container .component-description > .block-title {\n  font-size: 1.3em;\n  display: block;\n  line-height: 2;\n}\n#public-component-show-container .component-description > code {\n  border: 1px solid #e7e9ed;\n  background-color: #f8fafc;\n  display: block;\n  padding: 5px 10px;\n  margin: 5px 0;\n  word-break: break-all;\n  word-wrap: break-word;\n  border-radius: 2px;\n  color: #5b6169;\n  font-size: 13px;\n  line-height: 1.6em;\n}\n#public-component-show-container .ant-tabs-bottom .ant-tabs-bottom-bar {\n  margin-top: 0;\n}\n#public-component-show-container .ant-tabs-nav .ant-tabs-tab {\n  margin: 0;\n}\n#public-component-show-container .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {\n  padding: 8px 16px;\n}\n@media screen and (max-width: 750px) {\n  #public-component-show-container {\n    padding: 20px 0;\n  }\n  #public-component-show-container .component-block {\n    border-radius: 0 !important;\n  }\n}";
 const queryRE = /\?.*$/;
 const hashRE = /#.*$/;
 const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
-const lscWindowConfig = {
-  route: window["pageConfig"].route
-};
+const pageConfig = window["pageConfig"];
 function arrayAggregator$1(array, setter, iteratee, accumulator) {
   var index2 = -1, length = array == null ? 0 : array.length;
   while (++index2 < length) {
@@ -3733,7 +3731,7 @@ var keyBy = createAggregator(function(result, value, key) {
 var keyBy_1 = keyBy;
 const isJsx = (lang) => /^[j|t]sx$/.test(lang);
 const isCSSLang = (lang) => /^(css|less|sass|scss|styl|stylus|postcss)$/.test(lang);
-const { route } = lscWindowConfig;
+const { route } = pageConfig;
 function addRegistry(p2, fn) {
   if (!!window.RegistryMap$) {
     window.RegistryMap$(p2, fn);
@@ -4565,7 +4563,7 @@ var extend = _extend_3_0_2_extend;
 var plain = _isPlainObj_2_1_0_isPlainObj;
 var trough = _trough_1_0_5_trough;
 var vfile = _vfile_4_2_1_vfile;
-var _unified_9_2_1_unified = unified$1().freeze();
+var _unified_9_2_2_unified = unified$1().freeze();
 var slice = [].slice;
 var own$2 = {}.hasOwnProperty;
 var pipeline = trough().use(pipelineParse).use(pipelineRun).use(pipelineStringify);
@@ -4589,6 +4587,9 @@ function pipelineStringify(p2, ctx) {
   if (result === void 0 || result === null)
     ;
   else if (typeof result === "string" || buffer(result)) {
+    if ("value" in ctx.file) {
+      ctx.file.value = result;
+    }
     ctx.file.contents = result;
   } else {
     ctx.file.result = result;
@@ -9998,7 +9999,7 @@ var symbols$1 = {};
 var HtmlParser = "__RMD_HTML_PARSER__";
 symbols$1.HtmlParser = typeof Symbol === "undefined" ? HtmlParser : Symbol(HtmlParser);
 var xtend = immutable;
-var unified = _unified_9_2_1_unified;
+var unified = _unified_9_2_2_unified;
 var parse = _remarkParse_9_0_0_remarkParse;
 var PropTypes = _propTypes_15_7_2_propTypes.exports;
 var addListMetadata = _mdastAddListMetadata_1_0_1_mdastAddListMetadata;
@@ -11399,7 +11400,8 @@ function ReadmePane() {
   }, /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-page"
   }, /* @__PURE__ */ modules$1.createElement("a", {
-    href: compInfo == null ? void 0 : compInfo.npmLink
+    href: compInfo == null ? void 0 : compInfo.npmLink,
+    className: "link-title"
   }, /* @__PURE__ */ modules$1.createElement("h1", {
     className: "component-name"
   }, propertyTypes == null ? void 0 : propertyTypes.displayName), /* @__PURE__ */ modules$1.createElement("span", {
@@ -11431,13 +11433,13 @@ function MenuLink(item) {
   }, item.name.replace(/-/g, " ").replace(/\//g, " - "));
 }
 function RouterSwitch() {
-  var _a, _b;
+  var _a;
   const menuData = useRouteMap();
   const { npmLink, logo } = useComponentInfo() || {};
   if (!menuData || (menuData == null ? void 0 : menuData.length) <= 1) {
     return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null);
   }
-  const route2 = (_b = (_a = window == null ? void 0 : window.pageConfig) == null ? void 0 : _a.readmePath) == null ? void 0 : _b.replace(/\.md$/, ".html");
+  const route2 = (_a = pageConfig == null ? void 0 : pageConfig.readmePath) == null ? void 0 : _a.replace(/\.md$/, ".html").replace(/^\//, "");
   const openKeys = menuData == null ? void 0 : menuData.filter(({ children }) => !!children).map(({ name }) => name);
   return /* @__PURE__ */ modules$1.createElement(Menu, {
     mode: "inline",

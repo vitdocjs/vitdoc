@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.scss";
 import { useComponentInfo, useRouteMap } from "../../utils/loaders";
+import pageConfig from "../../utils/config";
 
 // @ts-ignore
 const { Menu } = window.antd;
@@ -21,7 +22,9 @@ export default function RouterSwitch() {
     return <></>;
   }
 
-  const route = window?.pageConfig?.readmePath?.replace(/\.md$/, ".html");
+  const route = pageConfig?.readmePath
+    ?.replace(/\.md$/, ".html")
+    .replace(/^\//, "");
   const openKeys = menuData
     ?.filter(({ children }) => !!children)
     .map(({ name }) => name);

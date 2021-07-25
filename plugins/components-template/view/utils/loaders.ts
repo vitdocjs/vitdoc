@@ -1,10 +1,9 @@
 import { createContext, useContext, useMemo, useState } from "react";
-import lscWindowConfig, { cleanUrl } from "./lscConfig";
+import pageConfig, { cleanUrl } from "./config";
 import keyBy from "lodash/keyBy";
-import { getDocsSource } from "./strings";
 import { isCSSLang, isJsx } from "../../../utils/lang";
 
-const { route } = lscWindowConfig;
+const { route } = pageConfig;
 
 declare global {
   interface Window {
@@ -79,21 +78,6 @@ export function useRealComponent() {
   return useAsyncImport(`${route}/index.tsx`);
 }
 
-export function useDocsSourceCode(split: string = "") {
-  const raw: any = useAsyncImport(`${route}/docs.tsx?raw`);
-
-  if (!raw) {
-    return;
-  }
-
-  const content = split ? raw.split(split)[1] : raw;
-
-  return getDocsSource(content);
-}
-
-export function useDocsComponent() {
-  return useAsyncImport(`${route}/docs.tsx`);
-}
 
 export function useTypeFile(): any {
   return useAsyncImport(

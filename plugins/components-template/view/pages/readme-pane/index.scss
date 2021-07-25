@@ -9,6 +9,11 @@
   padding: 20px;
   flex-direction: column;
   box-sizing: border-box;
+  .link-title{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
 
   .component-main {
     position: relative;

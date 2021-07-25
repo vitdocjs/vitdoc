@@ -52,6 +52,11 @@
   flex-direction: column;
   box-sizing: border-box;
 }
+#public-component-show-container .link-title {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
 #public-component-show-container .component-main {
   position: relative;
   display: flex;

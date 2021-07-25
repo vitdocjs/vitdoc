@@ -24,7 +24,7 @@ export default function ReadmePane() {
     <div id="public-component-show-container">
       <RendererContext.Provider value={{ renderIndex, setRenderIndex }}>
         <div className="component-page">
-          <a href={compInfo?.npmLink}>
+          <a href={compInfo?.npmLink} className="link-title">
             <h1 className="component-name">{propertyTypes?.displayName}</h1>
             <span className="component-sub-title">
               <span>Package: {compInfo?.packageName}</span>

@@ -68,7 +68,7 @@ const isRouteMap = (id) => /route-map\.json$/.test(id);
 const getRoutes = () => {
   return (0, import_rules.getComponentFiles)("src").reduce((prev, path2) => {
     const name = path2.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
-    path2 = `/${path2}`.replace(/\.md$/, ".html");
+    path2 = `${path2}`.replace(/\.md$/, ".html");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
     if (groupName) {
       if (!prev.some(({ name: name2 }) => name2 === groupName)) {
@@ -94,11 +94,13 @@ const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 const componentsTemplate = () => {
   let input = {};
   let server;
+  let config;
   return {
     name: "vite:packages-template",
     enforce: "pre",
     config(resolvedConfig, { command }) {
       const isBuild = command === "build";
+      config = resolvedConfig;
       if (!isBuild) {
         return;
       }
@@ -152,6 +154,7 @@ const componentsTemplate = () => {
           let html = createHtml({
             externalHtml,
             dirname: currentPath,
+            base: config.base,
             readmePath,
             route,
             isDebug
