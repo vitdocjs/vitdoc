@@ -98,7 +98,7 @@ const componentsTemplate = () => {
         return id;
       }
       if (isRouteMap(id)) {
-        return id;
+        return "route-map.json";
       }
       if (id === "index.html") {
         return id;
