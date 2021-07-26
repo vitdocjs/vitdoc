@@ -420,11 +420,11 @@ function arrayPush$3(array, values) {
   return array;
 }
 var _arrayPush = arrayPush$3;
-var freeGlobal$3 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var _freeGlobal = freeGlobal$3;
-var freeGlobal$2 = _freeGlobal;
-var freeSelf$2 = typeof self == "object" && self && self.Object === Object && self;
-var root$8 = freeGlobal$2 || freeSelf$2 || Function("return this")();
+var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var _freeGlobal = freeGlobal$1;
+var freeGlobal = _freeGlobal;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+var root$8 = freeGlobal || freeSelf || Function("return this")();
 var _root = root$8;
 var root$7 = _root;
 var Symbol$6 = root$7.Symbol;
@@ -1689,14 +1689,14 @@ var getNative$1 = _getNative, root$1 = _root;
 var Promise$2 = getNative$1(root$1, "Promise");
 var _Promise = Promise$2;
 var getNative = _getNative, root = _root;
-var Set$2 = getNative(root, "Set");
-var _Set = Set$2;
-var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set$1 = _Set, WeakMap$1 = _WeakMap, baseGetTag = _baseGetTag, toSource = _toSource;
+var Set$1 = getNative(root, "Set");
+var _Set = Set$1;
+var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set = _Set, WeakMap$1 = _WeakMap, baseGetTag = _baseGetTag, toSource = _toSource;
 var mapTag = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag = "[object Set]", weakMapTag = "[object WeakMap]";
 var dataViewTag = "[object DataView]";
-var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set$1), weakMapCtorString = toSource(WeakMap$1);
+var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set), weakMapCtorString = toSource(WeakMap$1);
 var getTag$1 = baseGetTag;
-if (DataView && getTag$1(new DataView(new ArrayBuffer(1))) != dataViewTag || Map$1 && getTag$1(new Map$1()) != mapTag || Promise$1 && getTag$1(Promise$1.resolve()) != promiseTag || Set$1 && getTag$1(new Set$1()) != setTag || WeakMap$1 && getTag$1(new WeakMap$1()) != weakMapTag) {
+if (DataView && getTag$1(new DataView(new ArrayBuffer(1))) != dataViewTag || Map$1 && getTag$1(new Map$1()) != mapTag || Promise$1 && getTag$1(Promise$1.resolve()) != promiseTag || Set && getTag$1(new Set()) != setTag || WeakMap$1 && getTag$1(new WeakMap$1()) != weakMapTag) {
   getTag$1 = function(value) {
     var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
     if (ctorString) {
@@ -4050,17 +4050,17 @@ function createTransitionManager() {
       callback(true);
     }
   }
-  var listeners2 = [];
+  var listeners = [];
   function appendListener(fn) {
     var isActive = true;
     function listener() {
       if (isActive)
         fn.apply(void 0, arguments);
     }
-    listeners2.push(listener);
+    listeners.push(listener);
     return function() {
       isActive = false;
-      listeners2 = listeners2.filter(function(item) {
+      listeners = listeners.filter(function(item) {
         return item !== listener;
       });
     };
@@ -4069,7 +4069,7 @@ function createTransitionManager() {
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    listeners2.forEach(function(listener) {
+    listeners.forEach(function(listener) {
       return listener.apply(void 0, args);
     });
   }
@@ -5668,425 +5668,9 @@ forwardRef$1(function(_ref, forwardedRef) {
     return modules$1.createElement(Link, props);
   });
 });
-var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
-freeGlobal$1 || freeSelf$1 || Function("return this")();
-var freeGlobal = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-freeGlobal || freeSelf || Function("return this")();
-function isDocumentVisible() {
-  if (typeof document !== "undefined" && typeof document.visibilityState !== "undefined") {
-    return document.visibilityState !== "hidden";
-  }
-  return true;
-}
-function isOnline() {
-  if (typeof navigator.onLine !== "undefined") {
-    return navigator.onLine;
-  }
-  return true;
-}
-var __read$6 = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read$6(arguments[i]));
-  }
-  return ar;
-});
-var __read$5 = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read$5(arguments[i]));
-  }
-  return ar;
-});
-var listeners$1 = [];
-var eventsBinded$1 = false;
-if (typeof window !== "undefined" && window.addEventListener && !eventsBinded$1) {
-  var revalidate$1 = function revalidate() {
-    if (!isDocumentVisible() || !isOnline())
-      return;
-    for (var i = 0; i < listeners$1.length; i++) {
-      var listener = listeners$1[i];
-      listener();
-    }
-  };
-  window.addEventListener("visibilitychange", revalidate$1, false);
-  window.addEventListener("focus", revalidate$1, false);
-  eventsBinded$1 = true;
-}
-var listeners = [];
-var eventsBinded = false;
-if (typeof window !== "undefined" && window.addEventListener && !eventsBinded) {
-  var revalidate = function revalidate2() {
-    if (!isDocumentVisible())
-      return;
-    for (var i = 0; i < listeners.length; i++) {
-      var listener = listeners[i];
-      listener();
-    }
-  };
-  window.addEventListener("visibilitychange", revalidate, false);
-  eventsBinded = true;
-}
-var __assign$3 = function() {
-  __assign$3 = Object.assign || function(t2) {
-    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
-      s = arguments[i];
-      for (var p2 in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p2))
-          t2[p2] = s[p2];
-      }
-    }
-    return t2;
-  };
-  return __assign$3.apply(this, arguments);
-};
-var __read$4 = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read$4(arguments[i]));
-  }
-  return ar;
-});
-var __assign$2 = function() {
-  __assign$2 = Object.assign || function(t2) {
-    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
-      s = arguments[i];
-      for (var p2 in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p2))
-          t2[p2] = s[p2];
-      }
-    }
-    return t2;
-  };
-  return __assign$2.apply(this, arguments);
-};
-(function(s, e2) {
-  var t2 = {};
-  for (var p2 in s) {
-    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
-      t2[p2] = s[p2];
-  }
-  if (s != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
-      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
-        t2[p2[i]] = s[p2[i]];
-    }
-  return t2;
-});
-var __read$3 = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read$3(arguments[i]));
-  }
-  return ar;
-});
-var __assign$1 = function() {
-  __assign$1 = Object.assign || function(t2) {
-    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
-      s = arguments[i];
-      for (var p2 in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p2))
-          t2[p2] = s[p2];
-      }
-    }
-    return t2;
-  };
-  return __assign$1.apply(this, arguments);
-};
-(function(s, e2) {
-  var t2 = {};
-  for (var p2 in s) {
-    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
-      t2[p2] = s[p2];
-  }
-  if (s != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
-      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
-        t2[p2[i]] = s[p2[i]];
-    }
-  return t2;
-});
-var __read$2 = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read$2(arguments[i]));
-  }
-  return ar;
-});
-var ConfigContext = /* @__PURE__ */ modules$1.createContext({});
-ConfigContext.displayName = "UseRequestConfigContext";
-var __assign = function() {
-  __assign = Object.assign || function(t2) {
-    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
-      s = arguments[i];
-      for (var p2 in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p2))
-          t2[p2] = s[p2];
-      }
-    }
-    return t2;
-  };
-  return __assign.apply(this, arguments);
-};
-(function(s, e2) {
-  var t2 = {};
-  for (var p2 in s) {
-    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
-      t2[p2] = s[p2];
-  }
-  if (s != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
-      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
-        t2[p2[i]] = s[p2[i]];
-    }
-  return t2;
-});
-var __read$1 = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read$1(arguments[i]));
-  }
-  return ar;
-});
-ConfigContext.Provider;
-var __values = function(o) {
-  var s = typeof Symbol === "function" && Symbol.iterator, m2 = s && o[s], i = 0;
-  if (m2)
-    return m2.call(o);
-  if (o && typeof o.length === "number")
-    return {
-      next: function next() {
-        if (o && i >= o.length)
-          o = void 0;
-        return {
-          value: o && o[i++],
-          done: !o
-        };
-      }
-    };
-  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var EventEmitter = function() {
-  function EventEmitter2() {
-    var _this = this;
-    this.subscriptions = new Set();
-    this.emit = function(val) {
-      var e_1, _a;
-      try {
-        for (var _b = __values(_this.subscriptions), _c = _b.next(); !_c.done; _c = _b.next()) {
-          var subscription = _c.value;
-          subscription(val);
-        }
-      } catch (e_1_1) {
-        e_1 = {
-          error: e_1_1
-        };
-      } finally {
-        try {
-          if (_c && !_c.done && (_a = _b["return"]))
-            _a.call(_b);
-        } finally {
-          if (e_1)
-            throw e_1.error;
-        }
-      }
-    };
-    this.useSubscription = function(callback) {
-      var callbackRef = useRef();
-      callbackRef.current = callback;
-      useEffect(function() {
-        function subscription(val) {
-          if (callbackRef.current) {
-            callbackRef.current(val);
-          }
-        }
-        _this.subscriptions.add(subscription);
-        return function() {
-          _this.subscriptions["delete"](subscription);
-        };
-      }, []);
-    };
-  }
-  return EventEmitter2;
-}();
-function useEventEmitter() {
-  var ref = useRef();
-  if (!ref.current) {
-    ref.current = new EventEmitter();
-  }
-  return ref.current;
-}
-var __read = function(o, n2) {
-  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m2)
-    return o;
-  var i = m2.call(o), r2, ar = [], e2;
-  try {
-    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
-      ar.push(r2.value);
-    }
-  } catch (error) {
-    e2 = {
-      error
-    };
-  } finally {
-    try {
-      if (r2 && !r2.done && (m2 = i["return"]))
-        m2.call(i);
-    } finally {
-      if (e2)
-        throw e2.error;
-    }
-  }
-  return ar;
-};
-(function() {
-  for (var ar = [], i = 0; i < arguments.length; i++) {
-    ar = ar.concat(__read(arguments[i]));
-  }
-  return ar;
-});
 function addRegistry(file, fn) {
+  var _a;
+  (_a = window.HotReloadRegister$) == null ? void 0 : _a.call(window, file, fn);
 }
 function useRoute() {
   const { url: route } = useRouteMatch();
@@ -6096,12 +5680,6 @@ class ModuleLoadError extends Error {
 }
 function useAsyncImport(path, cb = ({ default: Comp }) => Comp) {
   const [Module, setModule] = useState();
-  const [d2, update] = useState({});
-  const emitter$ = useEventEmitter();
-  window.HotReloadEmitter$ = emitter$;
-  emitter$.useSubscription(() => {
-    update({});
-  });
   useMemo(async () => {
     var _a, _b;
     try {
@@ -6126,7 +5704,7 @@ function useAsyncImport(path, cb = ({ default: Comp }) => Comp) {
         ].join("\n"))
       });
     }
-  }, [d2, path]);
+  }, [path]);
   return Module;
 }
 function useTypeFile() {

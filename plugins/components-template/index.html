@@ -53,6 +53,16 @@
         {{moduleMaps}}
       };
 
+      window.HotReloadRegister$ = (file,fn)=>{
+        if (import.meta.hot) {
+          import("/@vite/client").then(({ createHotContext }) => {
+            createHotContext(file).accept((newModule) => {
+              fn(newModule);
+            });
+          });
+        }
+      }
+
       import("{{dirname}}/view/runtime");
     </script>
 

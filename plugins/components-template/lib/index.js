@@ -66,9 +66,9 @@ const htmlCommentRE = /<!--[\s\S]*?-->/g;
 const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
 const isRouteMap = (id) => /route-map\.json$/.test(id);
 const getRoutes = () => {
-  const routes = (0, import_rules.getComponentFiles)().map((path2) => `/${path2}`.replace(/\.md$/, ".html"));
+  const routes = (0, import_rules.getComponentFiles)().map((path2) => `/${path2}`);
   const tree = routes.reduce((prev, path2) => {
-    const name = path2.replace(/^\/src\//, "").replace(/(\/README)?\.html$/, "");
+    const name = path2.replace(/^\/src\//, "").replace(/(\/README)?\.md$/, "");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
     if (groupName) {
       if (!prev.some(({ name: name2 }) => name2 === groupName)) {

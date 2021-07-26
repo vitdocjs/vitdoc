@@ -3,28 +3,16 @@ import { cleanUrl } from "./config";
 import keyBy from "lodash/keyBy";
 import { isCSSLang, isJsx } from "../../../utils/lang";
 import { useRouteMatch } from "react-router-dom";
-import { useEventEmitter } from "ahooks";
 
 declare global {
   interface Window {
-    pageConfig?: { route?: string; readmePath?: string };
-    RuntimeLoadMap$: Record<string, Promise<any>>;
     RuntimeModuleMap$: Record<string, (cb: any) => Promise<any>>;
-    RegistryMap$: (p: string, cb: () => void) => void;
+    HotReloadRegister$: (p: string, cb: () => void) => void;
   }
 }
 
 function addRegistry(file, fn) {
-  // @ts-ignore
-  if (import.meta.hot) {
-    // TODO:: React文件热更新问题
-    // @ts-ignore
-    import("/@vite/client").then(({ createHotContext }) => {
-      createHotContext(file).accept((newModule) => {
-        fn(newModule);
-      });
-    });
-  }
+  window.HotReloadRegister$?.(file, fn);
 }
 
 export function useRoute() {
@@ -40,14 +28,6 @@ export function useAsyncImport(
   cb = ({ default: Comp }: any) => Comp
 ) {
   const [Module, setModule] = useState<any>();
-
-  const [d, update] = useState({});
-  const emitter$ = useEventEmitter();
-  // @ts-ignore
-  window.HotReloadEmitter$ = emitter$;
-  emitter$.useSubscription(() => {
-    update({});
-  });
 
   useMemo(async () => {
     try {
@@ -77,7 +57,7 @@ export function useAsyncImport(
         ),
       });
     }
-  }, [d, path]);
+  }, [path]);
 
   return Module;
 }
