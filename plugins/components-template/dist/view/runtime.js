@@ -5709,7 +5709,7 @@ function useAsyncImport(path, cb = ({ default: Comp }) => Comp) {
 }
 function useTypeFile() {
   const { route } = useRoute();
-  const typeFile = route.replace(".html", ".tsx.type$.json");
+  const typeFile = route.replace(".md", ".tsx.type$.json");
   return useAsyncImport(typeFile, ({ default: properties }) => {
     const { default: compProps } = keyBy_1(properties, "exportName");
     return compProps || properties[0];

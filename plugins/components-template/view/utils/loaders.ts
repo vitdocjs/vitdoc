@@ -65,7 +65,7 @@ export function useAsyncImport(
 export function useTypeFile(): any {
   const { route } = useRoute();
 
-  const typeFile = route.replace(".html", ".tsx.type$.json");
+  const typeFile = route.replace(".md", ".tsx.type$.json");
 
   return useAsyncImport(typeFile, ({ default: properties }) => {
     const { default: compProps } = keyBy(properties, "exportName");
