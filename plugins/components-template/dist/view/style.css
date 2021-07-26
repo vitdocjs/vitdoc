@@ -168,6 +168,7 @@
 }
 .markdown-area .selected-block {
   position: relative;
+  margin-bottom: 0.85rem;
 }
 .markdown-area .selected-block > .ant-tag {
   position: absolute;

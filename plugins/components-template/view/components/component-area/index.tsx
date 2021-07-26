@@ -32,7 +32,6 @@ export function ComponentArea(props) {
     const renderer = Components?.renderer;
     // @ts-ignore
     window.mountNode = componentRef.current;
-    debugger;
     renderer && renderer();
   }, [Components?.renderer, componentProps]);
 

@@ -38,8 +38,7 @@
     <script src="//g.alicdn.com/code/lib/antd/4.0.4/antd.min.js"></script>
 
     <script>
-      window.pageConfig = {
-      };
+      window.pageConfig = {};
     </script>
     <script src="https://g.alicdn.com/code/lib/lodash.js/4.17.15/lodash.min.js"></script>
     <script src="//g.alicdn.com/platform/c/??react15-polyfill/0.0.1/dist/index.js"></script>
@@ -49,42 +48,11 @@
     {{ externalHtml }}
 
     <script type="module">
-      window.RuntimeLoadMap$ = {
-        "/route-map": import("/route-map.json"),
-        "/package.json": import("/package.json"),
+      window.RuntimeModuleMap$ = {
+        "/route-map.json": (cb)=>{cb&&cb("/route-map.json");return import("/route-map.json")},
+        "/package.json": (cb)=>{cb&&cb("/package.json");return import("/package.json")},
+        {{moduleMaps}}
       };
-      if (!window.$RegistryFns) {
-        window.$RegistryFns = {};
-      }
-
-      const __updateFns = window.$RegistryFns;
-      window.RegistryMap$ = (p, cb) => {
-        if (!__updateFns[p]) {
-          __updateFns[p] = new Set();
-        }
-        const fn = (newModule) => {
-          cb(new Date().valueOf(), newModule);
-          __updateFns[p].delete(fn);
-        };
-        __updateFns[p].add(fn);
-      };
-      if (import.meta.hot) {
-        import("/@vite/client").then(({ createHotContext }) => {
-          Object.keys(window.RuntimeLoadMap$).forEach((file) => {
-            createHotContext(file).accept((newModule) => {
-              window.RuntimeLoadMap$[file] = newModule;
-              const tasks = __updateFns[file] || new Set();
-
-              [...tasks].forEach((fn) => fn(newModule));
-            });
-          });
-        });
-        import.meta.hot.accept(() => {
-          const tasks = __updateFns["{{readmePath}}"] || new Set();
-
-          [...tasks].forEach((fn) => fn());
-        });
-      }
 
       import("{{dirname}}/view/runtime");
     </script>

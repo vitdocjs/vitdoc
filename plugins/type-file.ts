@@ -7,14 +7,13 @@ import {
   invalidate,
   isCSSRequest,
   isJsx,
-  resolveMainComponent,
 } from "./utils";
 import debounce from "lodash/debounce";
 import type { ModuleNode } from "vite";
 
-const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
+const TypeFile = ({ prefix = ".type$.json" } = {}) => {
   let lastDoc: Record<string, any> = {};
-  const matchReg = new RegExp(`${prefix}$`);
+  const matchReg = new RegExp(`${prefix.replace("$", "\\$")}$`);
   const requestedUrlMap = {};
   function getComponentDocs(fileName) {
     // console.time("get docs");
@@ -50,6 +49,7 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
     if (hash === beforeHash) {
       return;
     }
+
     const mod = server.moduleGraph.getModuleById(`${url}${prefix}`);
 
     if (!mod) {
@@ -84,22 +84,9 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
       return;
     },
 
-    async resolveId(id) {
+    resolveId(id) {
       if (matchReg.test(id)) {
-        const mainModule = await resolveMainComponent(
-          // @ts-ignore
-          { pluginContainer: { resolveId: this.resolve } },
-          id
-        );
-        if (!mainModule) {
-          return;
-        }
-
-        const mainTypeId = mainModule.id
-          .replace(/\.tsx$/, ".tsx.type$.json")
-          .replace(process.cwd(), "");
-
-        return mainTypeId;
+        return id;
       }
       return;
     },
@@ -107,7 +94,7 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
       const file = cleanUrl(id);
 
       if (matchReg.test(file)) {
-        requestedUrlMap[file.replace(new RegExp(`${prefix}$`), "")] = true;
+        requestedUrlMap[file.replace(matchReg, "")] = true;
 
         const { hash } = getQueryParams(id);
 
@@ -115,11 +102,7 @@ const TypeFile = ({ prefix = ".type\\$.json" } = {}) => {
         if (lastDoc[hash]) {
           componentDoc = lastDoc[hash];
         } else {
-          const fileName = file
-            .replace(new RegExp(`${prefix}$`), "")
-            .replace(/^\//, "");
-
-          console.log("######", fileName);
+          const fileName = file.replace(matchReg, "").replace(/^\//, "");
 
           componentDoc = getComponentDocs(fileName).doc;
         }

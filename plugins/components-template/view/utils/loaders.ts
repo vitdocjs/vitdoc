@@ -3,11 +3,13 @@ import { cleanUrl } from "./config";
 import keyBy from "lodash/keyBy";
 import { isCSSLang, isJsx } from "../../../utils/lang";
 import { useRouteMatch } from "react-router-dom";
+import { useEventEmitter } from "ahooks";
 
 declare global {
   interface Window {
     pageConfig?: { route?: string; readmePath?: string };
     RuntimeLoadMap$: Record<string, Promise<any>>;
+    RuntimeModuleMap$: Record<string, (cb: any) => Promise<any>>;
     RegistryMap$: (p: string, cb: () => void) => void;
   }
 }
@@ -22,9 +24,6 @@ function addRegistry(file, fn) {
         fn(newModule);
       });
     });
-  }
-  if (!!window.RegistryMap$) {
-    window.RegistryMap$(file, fn);
   }
 }
 
@@ -42,6 +41,14 @@ export function useAsyncImport(
 ) {
   const [Module, setModule] = useState<any>();
 
+  const [d, update] = useState({});
+  const emitter$ = useEventEmitter();
+  // @ts-ignore
+  window.HotReloadEmitter$ = emitter$;
+  emitter$.useSubscription(() => {
+    update({});
+  });
+
   useMemo(async () => {
     try {
       const setNewModule = (newModule) => {
@@ -49,9 +56,14 @@ export function useAsyncImport(
         setModule(() => Comp);
       };
       const cUrl = cleanUrl(path);
-      addRegistry(path, setNewModule);
 
-      const result = await (window.RuntimeLoadMap$[cUrl] || import(path));
+      if (!window.RuntimeModuleMap$[cUrl]) {
+        throw `'${cUrl}' is not in runtime module map...`;
+      }
+
+      const result = await window.RuntimeModuleMap$[cUrl]?.((filePath) => {
+        addRegistry(filePath, setNewModule);
+      });
 
       setNewModule(result);
     } catch (e) {
@@ -65,7 +77,7 @@ export function useAsyncImport(
         ),
       });
     }
-  }, [path]);
+  }, [d, path]);
 
   return Module;
 }
@@ -82,7 +94,7 @@ export function useTypeFile(): any {
 }
 
 export function useRouteMap(): any {
-  return useAsyncImport(`/route-map`);
+  return useAsyncImport(`/route-map.json`);
 }
 
 export function useComponentInfo(): any {

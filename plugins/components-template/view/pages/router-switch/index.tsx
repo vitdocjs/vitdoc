@@ -17,7 +17,8 @@ function MenuLink(item) {
 }
 
 export default function RouterSwitch() {
-  const menuData = useRouteMap();
+  const { tree: menuData } = useRouteMap() || {};
+
   const { npmLink, logo } = useComponentInfo() || ({} as any);
 
   if (!menuData || menuData?.length <= 1) {

@@ -66,9 +66,9 @@ const htmlCommentRE = /<!--[\s\S]*?-->/g;
 const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
 const isRouteMap = (id) => /route-map\.json$/.test(id);
 const getRoutes = () => {
-  return (0, import_rules.getComponentFiles)("src").reduce((prev, path2) => {
-    const name = path2.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
-    path2 = `${path2}`.replace(/\.md$/, ".html");
+  const routes = (0, import_rules.getComponentFiles)().map((path2) => `/${path2}`.replace(/\.md$/, ".html"));
+  const tree = routes.reduce((prev, path2) => {
+    const name = path2.replace(/^\/src\//, "").replace(/(\/README)?\.html$/, "");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
     if (groupName) {
       if (!prev.some(({ name: name2 }) => name2 === groupName)) {
@@ -89,31 +89,27 @@ const getRoutes = () => {
     }
     return prev;
   }, []);
+  return { tree, routes };
 };
 const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 const componentsTemplate = () => {
   let input = {};
   let server;
   let config;
+  let isBuild;
   return {
     name: "vite:packages-template",
     enforce: "pre",
     config(resolvedConfig, { command }) {
-      const isBuild = command === "build";
+      isBuild = command === "build";
       config = resolvedConfig;
       if (!isBuild) {
         return;
       }
-      const files = (0, import_rules.getComponentFiles)("src");
-      input = files.reduce((previousValue, currentValue) => {
-        return Object.assign(previousValue, {
-          [path.join(currentValue, "..")]: currentValue.replace(/\.md$/, ".html")
-        });
-      }, { homepage$: "index.html" });
       return (0, import_vite.mergeConfig)(resolvedConfig, {
         build: {
           rollupOptions: {
-            input
+            input: { index: "index.html" }
           }
         }
       });
@@ -138,25 +134,22 @@ const componentsTemplate = () => {
         if (isRouteMap(file)) {
           return JSON.stringify(getRoutes());
         }
-        if (/^\/?index\.html$/.test(file)) {
-          const href = ((0, import_rules.getComponentFiles)()[0] || "").replace(/\.md$/, ".html");
-          return `<script>location.href='${href}';<\/script>`;
-        }
-        if (Object.values(input).includes(file)) {
+        if (/\.html$/.test(file)) {
           if (!/^\//.test(file)) {
             file = `/${file}`;
           }
           const { extendTemplate: externalHtml } = (0, import_config.getConfig)();
-          const mainModule = (yield (0, import_utils.resolveMainComponent)({ pluginContainer: { resolveId: this.resolve } }, id)) || {};
-          const mainModuleUrl = "/" + path.relative(process.cwd(), mainModule.id || id);
-          const route = path.join(mainModuleUrl, "..");
-          const readmePath = file.replace(/\.html$/, ".md");
+          const mdFiles = (0, import_rules.getComponentFiles)().map((file2) => `/${file2}`);
+          const mdFileMap = mdFiles.map((file2) => [file2, file2]);
+          const mainFiles = yield Promise.all(mdFiles.map((file2) => (0, import_utils.resolveMainComponent)({ pluginContainer: { resolveId: this.resolve } }, file2).then((res) => res ? res.id.replace(process.cwd(), "") : "").then((id2) => [
+            file2.replace(/\.md$/, ".tsx.type$.json"),
+            id2.replace(/\.tsx$/, ".tsx.type$.json")
+          ])));
           let html = createHtml({
+            moduleMaps: [...mdFileMap, ...mainFiles].filter(Boolean).map(([key, val]) => `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`),
             externalHtml,
             dirname: currentPath,
             base: config.base,
-            readmePath,
-            route,
             isDebug
           });
           if (isCompHTMLProxy(id)) {

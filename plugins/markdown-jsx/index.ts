@@ -17,6 +17,14 @@ export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 const mdjsx = () => {
   let markdownMap = {};
   let isBuild: boolean;
+  // const addHMR = (code) => {
+  //   return `${code}
+  //       if(import.meta.hot){
+  //      import.meta.hot.accept(() => {
+  //         window.HotReloadEmitter$ && window.HotReloadEmitter$.emit();
+  //       });
+  //     } `;
+  // };
   return {
     name: "vite:markdown-jsx",
     config(resolvedConfig, { command }) {
@@ -25,19 +33,22 @@ const mdjsx = () => {
     },
 
     handleHotUpdate(ctx) {
-      const { file, modules } = ctx;
-
-      if (/\.md$/.test(file)) {
-        markdownMap = {};
-        const mod = ctx.server.moduleGraph.getModuleById(file);
-
-        if (mod) {
-          mod.isSelfAccepting = true;
-          return modules.filter(
-            (cmod) => mod.importedModules.has(cmod) || modules === cmod
-          );
-        }
-      }
+      // const { file, modules } = ctx;
+      //
+      // const mod = ctx.server.moduleGraph.getModuleById(file);
+      //
+      // console.log("######", Array.from(mod?.importers)?.[0]?.importers);
+      // if (/\.md$/.test(file)) {
+      //   markdownMap = {};
+      //   const mod = ctx.server.moduleGraph.getModuleById(file);
+      //
+      //   if (mod) {
+      //     mod.isSelfAccepting = true;
+      //     return modules.filter(
+      //       (cmod) => mod.importedModules.has(cmod) || modules === cmod
+      //     );
+      //   }
+      // }
     },
     configureServer(_server) {
       const { middlewares, moduleGraph, transformRequest } = _server;
@@ -58,15 +69,15 @@ const mdjsx = () => {
           const url = removeImportQuery(req.url);
           const result = await transformRequest(url);
           const readmeMod = await moduleGraph.getModuleByUrl(cleanUrl(url));
-          const mod = await moduleGraph.getModuleByUrl(url);
+          // const mod = await moduleGraph.getModuleByUrl(url);
 
-          readmeMod.importedModules.add(mod);
           await moduleGraph.updateModuleInfo(
             readmeMod,
-            readmeMod.importedModules,
+            new Set([...Array.from(readmeMod.importedModules), url]),
             new Set(),
-            false
+            true
           );
+
           return send(req, res, result.code, "js");
         } catch (e) {
           console.error(e);
@@ -130,6 +141,7 @@ const mdjsx = () => {
 
         return beforeCreateElement(NextComp, ...rest);
       };
+      
       ${after}
       `;
         };
@@ -156,7 +168,8 @@ const mdjsx = () => {
 
         let nextCode: string = replaceReact(code);
 
-        nextCode = replaceExport(code);
+        nextCode = replaceExport(nextCode);
+        // nextCode = addHMR(nextCode);
 
         return nextCode;
       }
@@ -228,7 +241,8 @@ const mdjsx = () => {
           item.load = modules[index];
         })
         
-        export default exportModules; `,
+        export default exportModules;
+        `,
       };
     },
   };

@@ -4,7 +4,7 @@ import Swig from "swig";
 
 import { mergeConfig, ViteDevServer } from "vite";
 import { send } from "vite/dist/node";
-import { cleanUrl, isHTMLProxy } from "../../utils";
+import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
 import { getComponentFiles } from "../../utils/rules";
 
@@ -33,9 +33,11 @@ const scriptModuleRE =
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = () => {
-  return getComponentFiles("src").reduce((prev, path) => {
-    const name = path.replace(/^src\//, "").replace(/(\/README)?\.md$/, "");
-    path = `/${path}`.replace(/\.md$/, ".html");
+  const routes = getComponentFiles().map((path) =>
+    `/${path}`.replace(/\.md$/, ".html")
+  );
+  const tree = routes.reduce((prev, path) => {
+    const name = path.replace(/^\/src\//, "").replace(/(\/README)?\.html$/, "");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
     if (groupName) {
       if (!prev.some(({ name }) => name === groupName)) {
@@ -59,6 +61,7 @@ export const getRoutes = () => {
 
     return prev;
   }, []);
+  return { tree, routes };
 };
 
 export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
@@ -78,24 +81,11 @@ const componentsTemplate = () => {
       if (!isBuild) {
         return;
       }
-      const files = getComponentFiles("src");
-
-      input = files.reduce(
-        (previousValue, currentValue) => {
-          return Object.assign(previousValue, {
-            [path.join(currentValue, "..")]: currentValue.replace(
-              /\.md$/,
-              ".html"
-            ),
-          });
-        },
-        { homepage$: "index.html" }
-      );
 
       return mergeConfig(resolvedConfig, {
         build: {
           rollupOptions: {
-            input,
+            input: { index: "index.html" },
           },
         },
       });
@@ -110,7 +100,7 @@ const componentsTemplate = () => {
       if (isRouteMap(id)) {
         return id;
       }
-      if (Object.values(input).includes(id)) {
+      if (id === "index.html") {
         return id;
       }
     },
@@ -121,18 +111,37 @@ const componentsTemplate = () => {
         return JSON.stringify(getRoutes());
       }
 
-      if (/^\/?index\.html$/.test(file)) {
-        const href = (getComponentFiles()[0] || "").replace(/\.md$/, ".html");
-        return `<script>location.href='${href}';</script>`;
-      }
-
-      if (Object.values(input).includes(file)) {
+      if (/\.html$/.test(file)) {
         if (!/^\//.test(file)) {
           file = `/${file}`;
         }
         const { extendTemplate: externalHtml } = getConfig();
 
+        const mdFiles = getComponentFiles().map((file) => `/${file}`);
+
+        const mdFileMap = mdFiles.map((file) => [file, file]);
+        const mainFiles = await Promise.all(
+          mdFiles.map((file) =>
+            resolveMainComponent(
+              // @ts-ignore
+              { pluginContainer: { resolveId: this.resolve } },
+              file
+            )
+              .then((res) => (res ? res.id.replace(process.cwd(), "") : ""))
+              .then((id) => [
+                file.replace(/\.md$/, ".tsx.type$.json"),
+                id.replace(/\.tsx$/, ".tsx.type$.json"),
+              ])
+          )
+        );
+
         let html = createHtml({
+          moduleMaps: [...mdFileMap, ...mainFiles]
+            .filter(Boolean)
+            .map(
+              ([key, val]) =>
+                `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`
+            ),
           externalHtml,
           dirname: currentPath,
           base: config.base,
