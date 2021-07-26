@@ -29,35 +29,35 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-var modules = window["React"];
-const Fragment = modules["Fragment"];
-const StrictMode = modules["StrictMode"];
-const Profiler = modules["Profiler"];
-const Suspense = modules["Suspense"];
-const Children = modules["Children"];
-const Component = modules["Component"];
-const PureComponent = modules["PureComponent"];
-const __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = modules["__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED"];
-const cloneElement = modules["cloneElement"];
-const createContext = modules["createContext"];
-const createElement$1 = modules["createElement"];
-const createFactory = modules["createFactory"];
-const createRef = modules["createRef"];
-const forwardRef$2 = modules["forwardRef"];
-const isValidElement = modules["isValidElement"];
-const lazy = modules["lazy"];
-const memo = modules["memo"];
-const useCallback = modules["useCallback"];
-const useContext$1 = modules["useContext"];
-const useDebugValue = modules["useDebugValue"];
-const useEffect = modules["useEffect"];
-const useImperativeHandle = modules["useImperativeHandle"];
-const useLayoutEffect = modules["useLayoutEffect"];
-const useMemo = modules["useMemo"];
-const useReducer = modules["useReducer"];
-const useRef = modules["useRef"];
-const useState = modules["useState"];
-const version = modules["version"];
+var modules$1 = window["React"];
+const Fragment = modules$1["Fragment"];
+const StrictMode = modules$1["StrictMode"];
+const Profiler = modules$1["Profiler"];
+const Suspense = modules$1["Suspense"];
+const Children = modules$1["Children"];
+const Component = modules$1["Component"];
+const PureComponent = modules$1["PureComponent"];
+const __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = modules$1["__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED"];
+const cloneElement = modules$1["cloneElement"];
+const createContext = modules$1["createContext"];
+const createElement$1 = modules$1["createElement"];
+const createFactory = modules$1["createFactory"];
+const createRef = modules$1["createRef"];
+const forwardRef$2 = modules$1["forwardRef"];
+const isValidElement = modules$1["isValidElement"];
+const lazy = modules$1["lazy"];
+const memo = modules$1["memo"];
+const useCallback = modules$1["useCallback"];
+const useContext$1 = modules$1["useContext"];
+const useDebugValue = modules$1["useDebugValue"];
+const useEffect = modules$1["useEffect"];
+const useImperativeHandle = modules$1["useImperativeHandle"];
+const useLayoutEffect = modules$1["useLayoutEffect"];
+const useMemo = modules$1["useMemo"];
+const useReducer = modules$1["useReducer"];
+const useRef = modules$1["useRef"];
+const useState = modules$1["useState"];
+const version = modules$1["version"];
 var react_1a37f6a0 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
@@ -89,8 +89,20 @@ var react_1a37f6a0 = /* @__PURE__ */ Object.freeze({
   useRef,
   useState,
   version,
-  "default": modules
+  "default": modules$1
 });
+var modules = window["ReactDOM"];
+modules["__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED"];
+modules["createPortal"];
+modules["findDOMNode"];
+modules["flushSync"];
+modules["hydrate"];
+modules["render"];
+modules["unmountComponentAtNode"];
+modules["unstable_batchedUpdates"];
+modules["unstable_createPortal"];
+modules["unstable_renderSubtreeIntoContainer"];
+modules["version"];
 var commonjsGlobal$1 = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
@@ -344,20 +356,20 @@ function renderProperty({ properties }) {
     }
     return val;
   });
-  return /* @__PURE__ */ modules.createElement(modules.Fragment, null, /* @__PURE__ */ modules.createElement("b", {
+  return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null, /* @__PURE__ */ modules$1.createElement("b", {
     className: "block-title"
-  }, "Props"), /* @__PURE__ */ modules.createElement(Table, {
+  }, "Props"), /* @__PURE__ */ modules$1.createElement(Table, {
     dataSource: dateSource
-  }, /* @__PURE__ */ modules.createElement(Table.Column, {
+  }, /* @__PURE__ */ modules$1.createElement(Table.Column, {
     dataIndex: "name",
     title: "property"
-  }), /* @__PURE__ */ modules.createElement(Table.Column, {
+  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
     dataIndex: ["type", "name"],
     title: "propType"
-  }), /* @__PURE__ */ modules.createElement(Table.Column, {
+  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
     dataIndex: ["defaultValue", "value"],
     title: "default"
-  }), /* @__PURE__ */ modules.createElement(Table.Column, {
+  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
     dataIndex: "description",
     title: "description"
   })));
@@ -814,7 +826,7 @@ function translateByUIType(setter, floor) {
   if (floor === 1 && VisionUiHelper.DadaSetter && VisionUiHelper.DadaSetter[uiType]) {
     Setter = VisionUiHelper.DadaSetter[uiType];
   }
-  return Setter ? modules.createElement(Setter, __spreadValues({
+  return Setter ? modules$1.createElement(Setter, __spreadValues({
     configure: configure2.map(getSetter)
   }, restProps)) : null;
 }
@@ -824,7 +836,7 @@ function getComponent(setter, floor) {
     if (floor === 1 && VisionUiHelper.DadaSetter && VisionUiHelper.DadaSetter[setter]) {
       Setter = VisionUiHelper.DadaSetter[setter];
     }
-    return Setter ? modules.createElement(Setter) : null;
+    return Setter ? modules$1.createElement(Setter) : null;
   } else if (typeof setter === "object" && "uiType" in setter) {
     return translateByUIType(setter, floor);
   }
@@ -3556,7 +3568,7 @@ var index$7 = ".vision-property-container {\n  position: relative;\n  z-index: 9
 const PANE_VISIBLE = "pane_visible";
 const { Bundle, Node, ui } = window.VisualEngine;
 const { Button } = window.antd;
-class VisionPane extends modules.PureComponent {
+class VisionPane extends modules$1.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -3608,32 +3620,32 @@ class VisionPane extends modules.PureComponent {
     const icon = node.getIcon();
     const title = prototypeOptions.title;
     const { Stage } = ui.Field;
-    return stage ? /* @__PURE__ */ modules.createElement("div", {
+    return stage ? /* @__PURE__ */ modules$1.createElement("div", {
       className: "vision-property-container"
-    }, propertyDrawerShow && Object.keys(prototypeOptions) ? /* @__PURE__ */ modules.createElement("div", {
+    }, propertyDrawerShow && Object.keys(prototypeOptions) ? /* @__PURE__ */ modules$1.createElement("div", {
       className: "ant-drawer-wrapper-body "
-    }, /* @__PURE__ */ modules.createElement("div", {
+    }, /* @__PURE__ */ modules$1.createElement("div", {
       className: "component-block"
-    }, /* @__PURE__ */ modules.createElement("div", {
+    }, /* @__PURE__ */ modules$1.createElement("div", {
       className: "ant-drawer-header"
-    }, /* @__PURE__ */ modules.createElement("div", {
+    }, /* @__PURE__ */ modules$1.createElement("div", {
       className: "ant-drawer-title"
-    }, /* @__PURE__ */ modules.createElement("img", {
+    }, /* @__PURE__ */ modules$1.createElement("img", {
       className: "vision-title-icon",
       src: icon,
       alt: ""
-    }), title || "Vision \u5C5E\u6027\u9762\u677F"), /* @__PURE__ */ modules.createElement("button", {
+    }), title || "Vision \u5C5E\u6027\u9762\u677F"), /* @__PURE__ */ modules$1.createElement("button", {
       "aria-label": "Close",
       className: "ant-drawer-close",
       onClick: () => this.setPropertyDrawerShow(false)
-    }, /* @__PURE__ */ modules.createElement(CloseOutlined2, null))), /* @__PURE__ */ modules.createElement("div", {
+    }, /* @__PURE__ */ modules$1.createElement(CloseOutlined2, null))), /* @__PURE__ */ modules$1.createElement("div", {
       className: "ant-drawer-body"
-    }, /* @__PURE__ */ modules.createElement(Stage, {
+    }, /* @__PURE__ */ modules$1.createElement(Stage, {
       stage
-    })))) : /* @__PURE__ */ modules.createElement("div", {
+    })))) : /* @__PURE__ */ modules$1.createElement("div", {
       className: "icon-vision-property-show",
       onClick: () => this.setPropertyDrawerShow(true)
-    }, /* @__PURE__ */ modules.createElement(Button, null, /* @__PURE__ */ modules.createElement(DoubleLeftOutlined2, null), "Vision \u9762\u677F"))) : null;
+    }, /* @__PURE__ */ modules$1.createElement(Button, null, /* @__PURE__ */ modules$1.createElement(DoubleLeftOutlined2, null), "Vision \u9762\u677F"))) : null;
   }
 }
 var index$6 = "#public-component-show-container {\n  display: flex;\n  position: relative;\n  min-height: 100vh;\n  overflow: auto;\n  width: 100%;\n  flex: 1;\n  background: #f2f3f7;\n  padding: 20px;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n#public-component-show-container .link-title {\n  display: flex;\n  flex-direction: column;\n  width: fit-content;\n}\n#public-component-show-container .component-main {\n  position: relative;\n  display: flex;\n}\n#public-component-show-container .component-part {\n  flex: 1;\n  overflow: auto;\n}\n#public-component-show-container .component-name {\n  padding: 0;\n  border: 0;\n  margin: 0;\n  font-size: 3.5em;\n  font-weight: 800;\n  outline: 0;\n  vertical-align: baseline;\n  line-height: 1.2;\n}\n#public-component-show-container .component-sub-title {\n  font-size: 1em;\n  font-weight: 600;\n  vertical-align: baseline;\n  margin-bottom: 8px;\n  display: block;\n  color: #6f6f6f;\n}\n#public-component-show-container .component-sub-title > span {\n  margin-right: 1em;\n}\n#public-component-show-container .component-block {\n  background: #fff;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px #ccc solid;\n  border-bottom: unset;\n  border-top: unset;\n}\n#public-component-show-container .component-block:first-child {\n  border-radius: 7px 7px 0 0;\n  border-top: 1px #ccc solid;\n}\n#public-component-show-container .component-block:last-child {\n  border-radius: 0 0 7px 7px;\n  border-bottom: 1px #ccc solid;\n}\n#public-component-show-container .component-block:first-child:last-child {\n  border-radius: 7px;\n  border: 1px #ccc solid;\n}\n#public-component-show-container .component-container {\n  min-height: 300px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#public-component-show-container .component-description {\n  border-top: 1px solid #eee;\n  font-size: 14px;\n  padding: 20px;\n}\n#public-component-show-container .component-description > .block-title {\n  font-size: 1.3em;\n  display: block;\n  line-height: 2;\n}\n#public-component-show-container .component-description > code {\n  border: 1px solid #e7e9ed;\n  background-color: #f8fafc;\n  display: block;\n  padding: 5px 10px;\n  margin: 5px 0;\n  word-break: break-all;\n  word-wrap: break-word;\n  border-radius: 2px;\n  color: #5b6169;\n  font-size: 13px;\n  line-height: 1.6em;\n}\n#public-component-show-container .ant-tabs-bottom .ant-tabs-bottom-bar {\n  margin-top: 0;\n}\n#public-component-show-container .ant-tabs-nav .ant-tabs-tab {\n  margin: 0;\n}\n#public-component-show-container .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {\n  padding: 8px 16px;\n}\n@media screen and (max-width: 750px) {\n  #public-component-show-container {\n    padding: 20px 0;\n  }\n  #public-component-show-container .component-block {\n    border-radius: 0 !important;\n  }\n}";
@@ -3659,15 +3671,15 @@ function ComponentArea(props) {
     window.mountNode = componentRef.current;
     renderer && renderer();
   }, [Components == null ? void 0 : Components.renderer, componentProps]);
-  return /* @__PURE__ */ modules.createElement("div", {
+  return /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-block"
-  }, (Components == null ? void 0 : Components.error) ? /* @__PURE__ */ modules.createElement(Result, {
+  }, (Components == null ? void 0 : Components.error) ? /* @__PURE__ */ modules$1.createElement(Result, {
     status: "warning",
     title: "Resource load failed",
-    subTitle: /* @__PURE__ */ modules.createElement("span", {
+    subTitle: /* @__PURE__ */ modules$1.createElement("span", {
       style: { whiteSpace: "pre-wrap", textAlign: "left" }
     }, Components == null ? void 0 : Components.error.message)
-  }) : /* @__PURE__ */ modules.createElement("div", {
+  }) : /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-container",
     id: "vite-component-container",
     ref: componentRef
@@ -4759,7 +4771,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
     Consumer
   };
 }
-var index$4 = modules.createContext || createReactContext;
+var index$4 = modules$1.createContext || createReactContext;
 var _pathToRegexp_1_8_0_pathToRegexp = { exports: {} };
 var _isarray_0_0_1_isarray = Array.isArray || function(arr) {
   return Object.prototype.toString.call(arr) == "[object Array]";
@@ -5190,20 +5202,20 @@ var Router = /* @__PURE__ */ function(_React$Component) {
       this.unlisten();
   };
   _proto.render = function render() {
-    return modules.createElement(context.Provider, {
+    return modules$1.createElement(context.Provider, {
       value: {
         history: this.props.history,
         location: this.state.location,
         match: Router2.computeRootMatch(this.state.location.pathname),
         staticContext: this.props.staticContext
       }
-    }, modules.createElement(historyContext.Provider, {
+    }, modules$1.createElement(historyContext.Provider, {
       children: this.props.children || null,
       value: this.props.history
     }));
   };
   return Router2;
-}(modules.Component);
+}(modules$1.Component);
 /* @__PURE__ */ (function(_React$Component) {
   _inheritsLoose(MemoryRouter, _React$Component);
   function MemoryRouter() {
@@ -5217,13 +5229,13 @@ var Router = /* @__PURE__ */ function(_React$Component) {
   }
   var _proto = MemoryRouter.prototype;
   _proto.render = function render() {
-    return modules.createElement(Router, {
+    return modules$1.createElement(Router, {
       history: this.history,
       children: this.props.children
     });
   };
   return MemoryRouter;
-})(modules.Component);
+})(modules$1.Component);
 var Lifecycle = /* @__PURE__ */ function(_React$Component) {
   _inheritsLoose(Lifecycle2, _React$Component);
   function Lifecycle2() {
@@ -5246,7 +5258,7 @@ var Lifecycle = /* @__PURE__ */ function(_React$Component) {
     return null;
   };
   return Lifecycle2;
-}(modules.Component);
+}(modules$1.Component);
 var cache = {};
 var cacheLimit = 1e4;
 var cacheCount = 0;
@@ -5273,7 +5285,7 @@ function generatePath(path, params) {
 }
 function Redirect(_ref) {
   var computedMatch = _ref.computedMatch, to = _ref.to, _ref$push = _ref.push, push = _ref$push === void 0 ? false : _ref$push;
-  return modules.createElement(context.Consumer, null, function(context2) {
+  return modules$1.createElement(context.Consumer, null, function(context2) {
     !context2 ? invariant(false) : void 0;
     var history = context2.history, staticContext = context2.staticContext;
     var method = push ? history.push : history.replace;
@@ -5284,7 +5296,7 @@ function Redirect(_ref) {
       method(location2);
       return null;
     }
-    return modules.createElement(Lifecycle, {
+    return modules$1.createElement(Lifecycle, {
       onMount: function onMount() {
         method(location2);
       },
@@ -5367,7 +5379,7 @@ var Route = /* @__PURE__ */ function(_React$Component) {
   var _proto = Route2.prototype;
   _proto.render = function render() {
     var _this = this;
-    return modules.createElement(context.Consumer, null, function(context$1) {
+    return modules$1.createElement(context.Consumer, null, function(context$1) {
       !context$1 ? invariant(false) : void 0;
       var location2 = _this.props.location || context$1.location;
       var match = _this.props.computedMatch ? _this.props.computedMatch : _this.props.path ? matchPath(location2.pathname, _this.props) : context$1.match;
@@ -5379,13 +5391,13 @@ var Route = /* @__PURE__ */ function(_React$Component) {
       if (Array.isArray(children) && children.length === 0) {
         children = null;
       }
-      return modules.createElement(context.Provider, {
+      return modules$1.createElement(context.Provider, {
         value: props
-      }, props.match ? children ? typeof children === "function" ? children(props) : children : component ? modules.createElement(component, props) : render2 ? render2(props) : null : typeof children === "function" ? children(props) : null);
+      }, props.match ? children ? typeof children === "function" ? children(props) : children : component ? modules$1.createElement(component, props) : render2 ? render2(props) : null : typeof children === "function" ? children(props) : null);
     });
   };
   return Route2;
-}(modules.Component);
+}(modules$1.Component);
 function addLeadingSlash(path) {
   return path.charAt(0) === "/" ? path : "/" + path;
 }
@@ -5461,13 +5473,13 @@ function noop() {
       listen: this.handleListen,
       block: this.handleBlock
     };
-    return modules.createElement(Router, _extends({}, rest, {
+    return modules$1.createElement(Router, _extends({}, rest, {
       history,
       staticContext: context2
     }));
   };
   return StaticRouter;
-})(modules.Component);
+})(modules$1.Component);
 var Switch = /* @__PURE__ */ function(_React$Component) {
   _inheritsLoose(Switch2, _React$Component);
   function Switch2() {
@@ -5476,12 +5488,12 @@ var Switch = /* @__PURE__ */ function(_React$Component) {
   var _proto = Switch2.prototype;
   _proto.render = function render() {
     var _this = this;
-    return modules.createElement(context.Consumer, null, function(context2) {
+    return modules$1.createElement(context.Consumer, null, function(context2) {
       !context2 ? invariant(false) : void 0;
       var location2 = _this.props.location || context2.location;
       var element, match;
-      modules.Children.forEach(_this.props.children, function(child) {
-        if (match == null && modules.isValidElement(child)) {
+      modules$1.Children.forEach(_this.props.children, function(child) {
+        if (match == null && modules$1.isValidElement(child)) {
           element = child;
           var path = child.props.path || child.props.from;
           match = path ? matchPath(location2.pathname, _extends({}, child.props, {
@@ -5489,15 +5501,15 @@ var Switch = /* @__PURE__ */ function(_React$Component) {
           })) : context2.match;
         }
       });
-      return match ? modules.cloneElement(element, {
+      return match ? modules$1.cloneElement(element, {
         location: location2,
         computedMatch: match
       }) : null;
     });
   };
   return Switch2;
-}(modules.Component);
-var useContext = modules.useContext;
+}(modules$1.Component);
+var useContext = modules$1.useContext;
 function useLocation() {
   return useContext(context).location;
 }
@@ -5519,13 +5531,13 @@ function useRouteMatch(path) {
   }
   var _proto = BrowserRouter.prototype;
   _proto.render = function render() {
-    return modules.createElement(Router, {
+    return modules$1.createElement(Router, {
       history: this.history,
       children: this.props.children
     });
   };
   return BrowserRouter;
-})(modules.Component);
+})(modules$1.Component);
 var HashRouter = /* @__PURE__ */ function(_React$Component) {
   _inheritsLoose(HashRouter2, _React$Component);
   function HashRouter2() {
@@ -5539,13 +5551,13 @@ var HashRouter = /* @__PURE__ */ function(_React$Component) {
   }
   var _proto = HashRouter2.prototype;
   _proto.render = function render() {
-    return modules.createElement(Router, {
+    return modules$1.createElement(Router, {
       history: this.history,
       children: this.props.children
     });
   };
   return HashRouter2;
-}(modules.Component);
+}(modules$1.Component);
 var resolveToLocation = function resolveToLocation2(to, currentLocation) {
   return typeof to === "function" ? to(currentLocation) : to;
 };
@@ -5555,7 +5567,7 @@ var normalizeToLocation = function normalizeToLocation2(to, currentLocation) {
 var forwardRefShim = function forwardRefShim2(C) {
   return C;
 };
-var forwardRef = modules.forwardRef;
+var forwardRef = modules$1.forwardRef;
 if (typeof forwardRef === "undefined") {
   forwardRef = forwardRefShim;
 }
@@ -5585,11 +5597,11 @@ var LinkAnchor = forwardRef(function(_ref, forwardedRef) {
   } else {
     props.ref = innerRef;
   }
-  return modules.createElement("a", props);
+  return modules$1.createElement("a", props);
 });
 var Link = forwardRef(function(_ref2, forwardedRef) {
   var _ref2$component = _ref2.component, component = _ref2$component === void 0 ? LinkAnchor : _ref2$component, replace = _ref2.replace, to = _ref2.to, innerRef = _ref2.innerRef, rest = _objectWithoutPropertiesLoose(_ref2, ["component", "replace", "to", "innerRef"]);
-  return modules.createElement(context.Consumer, null, function(context2) {
+  return modules$1.createElement(context.Consumer, null, function(context2) {
     !context2 ? invariant(false) : void 0;
     var history = context2.history;
     var location2 = normalizeToLocation(resolveToLocation(to, context2.location), context2.location);
@@ -5607,13 +5619,13 @@ var Link = forwardRef(function(_ref2, forwardedRef) {
     } else {
       props.innerRef = innerRef;
     }
-    return modules.createElement(component, props);
+    return modules$1.createElement(component, props);
   });
 });
 var forwardRefShim$1 = function forwardRefShim3(C) {
   return C;
 };
-var forwardRef$1 = modules.forwardRef;
+var forwardRef$1 = modules$1.forwardRef;
 if (typeof forwardRef$1 === "undefined") {
   forwardRef$1 = forwardRefShim$1;
 }
@@ -5627,7 +5639,7 @@ function joinClassnames() {
 }
 forwardRef$1(function(_ref, forwardedRef) {
   var _ref$ariaCurrent = _ref["aria-current"], ariaCurrent = _ref$ariaCurrent === void 0 ? "page" : _ref$ariaCurrent, _ref$activeClassName = _ref.activeClassName, activeClassName = _ref$activeClassName === void 0 ? "active" : _ref$activeClassName, activeStyle = _ref.activeStyle, classNameProp = _ref.className, exact = _ref.exact, isActiveProp = _ref.isActive, locationProp = _ref.location, sensitive = _ref.sensitive, strict = _ref.strict, styleProp = _ref.style, to = _ref.to, innerRef = _ref.innerRef, rest = _objectWithoutPropertiesLoose(_ref, ["aria-current", "activeClassName", "activeStyle", "className", "exact", "isActive", "location", "sensitive", "strict", "style", "to", "innerRef"]);
-  return modules.createElement(context.Consumer, null, function(context2) {
+  return modules$1.createElement(context.Consumer, null, function(context2) {
     !context2 ? invariant(false) : void 0;
     var currentLocation = locationProp || context2.location;
     var toLocation = normalizeToLocation(resolveToLocation(to, currentLocation), currentLocation);
@@ -5653,7 +5665,7 @@ forwardRef$1(function(_ref, forwardedRef) {
     } else {
       props.innerRef = innerRef;
     }
-    return modules.createElement(Link, props);
+    return modules$1.createElement(Link, props);
   });
 });
 var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
@@ -5918,7 +5930,7 @@ var __read$2 = function(o, n2) {
   }
   return ar;
 });
-var ConfigContext = /* @__PURE__ */ modules.createContext({});
+var ConfigContext = /* @__PURE__ */ modules$1.createContext({});
 ConfigContext.displayName = "UseRequestConfigContext";
 var __assign = function() {
   __assign = Object.assign || function(t2) {
@@ -6499,12 +6511,12 @@ function parseOrigin(origin) {
   return result;
 }
 var minpath_browser = {};
-minpath_browser.basename = basename$1;
+minpath_browser.basename = basename;
 minpath_browser.dirname = dirname;
 minpath_browser.extname = extname;
 minpath_browser.join = join;
 minpath_browser.sep = "/";
-function basename$1(path, ext) {
+function basename(path, ext) {
   var start = 0;
   var end = -1;
   var index2;
@@ -13678,20 +13690,20 @@ function MarkdownArea({ data: res }) {
       }.bind(null, index2);
       index2++;
     }
-    return /* @__PURE__ */ modules.createElement("div", {
+    return /* @__PURE__ */ modules$1.createElement("div", {
       className: classNames({
         "clickable-block": clickable,
         "selected-block": renderer === fn
       }),
       onClick: onChange
-    }, renderer === fn && /* @__PURE__ */ modules.createElement(Tag, null, "Showing"), /* @__PURE__ */ modules.createElement(HighLight, {
+    }, renderer === fn && /* @__PURE__ */ modules$1.createElement(Tag, null, "Showing"), /* @__PURE__ */ modules$1.createElement(HighLight, {
       lang: language,
       children: value
     }));
   };
-  return /* @__PURE__ */ modules.createElement("div", {
+  return /* @__PURE__ */ modules$1.createElement("div", {
     className: "markdown-area"
-  }, /* @__PURE__ */ modules.createElement(reactMarkdown, {
+  }, /* @__PURE__ */ modules$1.createElement(reactMarkdown, {
     renderers: { code }
   }, content2));
 }
@@ -13701,32 +13713,32 @@ function ReadmePane() {
   const propertyTypes = useTypeFile();
   const compInfo = useComponentInfo();
   const Components = useMarkdown();
-  return /* @__PURE__ */ modules.createElement("div", {
+  return /* @__PURE__ */ modules$1.createElement("div", {
     id: "public-component-show-container"
-  }, Components ? /* @__PURE__ */ modules.createElement("div", {
+  }, Components ? /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-page"
-  }, /* @__PURE__ */ modules.createElement("a", {
+  }, /* @__PURE__ */ modules$1.createElement("a", {
     href: compInfo == null ? void 0 : compInfo.npmLink,
     className: "link-title"
-  }, /* @__PURE__ */ modules.createElement("h1", {
+  }, /* @__PURE__ */ modules$1.createElement("h1", {
     className: "component-name"
-  }, propertyTypes == null ? void 0 : propertyTypes.displayName), /* @__PURE__ */ modules.createElement("span", {
+  }, propertyTypes == null ? void 0 : propertyTypes.displayName), /* @__PURE__ */ modules$1.createElement("span", {
     className: "component-sub-title"
-  }, /* @__PURE__ */ modules.createElement("span", null, "Package: ", compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules.createElement("span", null, "Version: ", compInfo == null ? void 0 : compInfo.packageVersion))), /* @__PURE__ */ modules.createElement("div", {
+  }, /* @__PURE__ */ modules$1.createElement("span", null, "Package: ", compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement("span", null, "Version: ", compInfo == null ? void 0 : compInfo.packageVersion))), /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-main"
-  }, /* @__PURE__ */ modules.createElement("div", {
+  }, /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-part"
-  }, /* @__PURE__ */ modules.createElement(ComponentArea, {
+  }, /* @__PURE__ */ modules$1.createElement(ComponentArea, {
     data: Components,
     componentProps: visionProps,
     onSetDefaultProps: setVisionDefaultProps
-  }), /* @__PURE__ */ modules.createElement("div", {
+  }), /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-description component-block"
-  }, /* @__PURE__ */ modules.createElement(MarkdownArea, {
+  }, /* @__PURE__ */ modules$1.createElement(MarkdownArea, {
     data: Components
-  }), /* @__PURE__ */ modules.createElement(renderProperty, {
+  }), /* @__PURE__ */ modules$1.createElement(renderProperty, {
     properties: propertyTypes
-  }))), propertyTypes && /* @__PURE__ */ modules.createElement(VisionPane, {
+  }))), propertyTypes && /* @__PURE__ */ modules$1.createElement(VisionPane, {
     key: `vision-default-props-${!!visionDefaultProps}`,
     properties: propertyTypes,
     defaultProps: visionDefaultProps,
@@ -13737,7 +13749,7 @@ var index = ".ant-menu-root.router-switch {\n  width: 230px;\n  height: 100%;\n 
 const { Menu } = window.antd;
 const { SubMenu } = Menu;
 function MenuLink(item) {
-  return /* @__PURE__ */ modules.createElement(Link, {
+  return /* @__PURE__ */ modules$1.createElement(Link, {
     to: item.path
   }, item.name.replace(/-/g, " ").replace(/\//g, " - "));
 }
@@ -13745,42 +13757,42 @@ function RouterSwitch() {
   const { tree: menuData } = useRouteMap() || {};
   const { npmLink, logo } = useComponentInfo() || {};
   if (!menuData || (menuData == null ? void 0 : menuData.length) <= 1) {
-    return /* @__PURE__ */ modules.createElement(modules.Fragment, null);
+    return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null);
   }
   const { url: route } = useRouteMatch();
   const openKeys = menuData == null ? void 0 : menuData.filter(({ children }) => !!children).map(({ name }) => name);
-  return /* @__PURE__ */ modules.createElement(Menu, {
+  return /* @__PURE__ */ modules$1.createElement(Menu, {
     mode: "inline",
     className: "router-switch",
     defaultSelectedKeys: [route],
     defaultOpenKeys: openKeys
-  }, /* @__PURE__ */ modules.createElement("a", {
+  }, /* @__PURE__ */ modules$1.createElement("a", {
     className: "logo",
     href: npmLink
-  }, /* @__PURE__ */ modules.createElement("img", {
+  }, /* @__PURE__ */ modules$1.createElement("img", {
     src: logo || "https://img.alicdn.com/tfs/TB1Zs2ouQL0gK0jSZFAXXcA9pXa-1142-200.png",
     style: { width: 178, height: 31 }
   })), menuData && menuData.map((item) => {
     var _a;
     if (item.path) {
-      return /* @__PURE__ */ modules.createElement(Menu.Item, {
+      return /* @__PURE__ */ modules$1.createElement(Menu.Item, {
         key: item.path
-      }, /* @__PURE__ */ modules.createElement(MenuLink, __spreadValues({}, item)));
+      }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item)));
     }
-    return /* @__PURE__ */ modules.createElement(SubMenu, {
+    return /* @__PURE__ */ modules$1.createElement(SubMenu, {
       title: item.name,
       className: "capitalize",
       key: item.name
-    }, (_a = item.children) == null ? void 0 : _a.map((item2) => /* @__PURE__ */ modules.createElement(Menu.Item, {
+    }, (_a = item.children) == null ? void 0 : _a.map((item2) => /* @__PURE__ */ modules$1.createElement(Menu.Item, {
       key: item2.path
-    }, /* @__PURE__ */ modules.createElement(MenuLink, __spreadValues({}, item2)))));
+    }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item2)))));
   }));
 }
 _default$6();
 function App() {
   const { routes } = useRouteMap() || {};
   if (!routes) {
-    return "";
+    return null;
   }
   return /* @__PURE__ */ createElement$1(Switch, null, routes.map((route) => {
     return /* @__PURE__ */ createElement$1(Route, {
@@ -13795,8 +13807,5 @@ function App() {
     to: routes[0]
   }));
 }
-const basename = document.getElementsByTagName("base")[0].href.replace(location.origin, "");
-ReactDOM.render(/* @__PURE__ */ createElement$1(HashRouter, {
-  basename
-}, /* @__PURE__ */ createElement$1(App, null)), document.querySelector("#component-root"));
+modules.render(/* @__PURE__ */ createElement$1(HashRouter, null, /* @__PURE__ */ createElement$1(App, null)), document.querySelector("#component-root"));
 export { App };
