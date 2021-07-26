@@ -124,7 +124,7 @@ const componentsTemplate = () => {
       if (isRouteMap(id)) {
         return id;
       }
-      if (Object.values(input).includes(id)) {
+      if (id === "index.html") {
         return id;
       }
     },
