@@ -1,4 +1,5 @@
 import * as React from "react";
+import ReactDOM from "react-dom";
 import mtopHook from "@alife/mtop-mock-hook";
 import ReadmePane from "./pages/readme-pane";
 import RouterSwitch from "./pages/router-switch";
@@ -16,7 +17,7 @@ export function App() {
   const { routes } = useRouteMap() || {};
 
   if (!routes) {
-    return "";
+    return null;
   }
 
   return (
@@ -36,12 +37,8 @@ export function App() {
   );
 }
 
-const basename = document
-  .getElementsByTagName("base")[0]!
-  .href.replace(location.origin, "");
-
 ReactDOM.render(
-  <Router basename={basename}>
+  <Router>
     <App />
   </Router>,
   document.querySelector("#component-root")
