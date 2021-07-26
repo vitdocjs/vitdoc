@@ -71,13 +71,8 @@ const TypeFile = ({ prefix = ".type$.json" } = {}) => {
     });
   }, 100);
 
-  let isBuild;
   return {
     name: "vite:type-file",
-    config(resolvedConfig, { command }) {
-      // store the resolved config
-      isBuild = command === "build";
-    },
     handleHotUpdate({ file, timestamp, server }) {
       const url = cleanUrl(path.relative(process.cwd(), file));
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
