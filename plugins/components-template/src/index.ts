@@ -33,11 +33,10 @@ const scriptModuleRE =
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = () => {
-  const routes = getComponentFiles().map((path) =>
-    `/${path}`.replace(/\.md$/, ".html")
-  );
+  const routes = getComponentFiles().map((path) => `/${path}`);
+
   const tree = routes.reduce((prev, path) => {
-    const name = path.replace(/^\/src\//, "").replace(/(\/README)?\.html$/, "");
+    const name = path.replace(/^\/src\//, "").replace(/(\/README)?\.md$/, "");
     const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
     if (groupName) {
       if (!prev.some(({ name }) => name === groupName)) {
