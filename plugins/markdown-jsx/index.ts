@@ -17,14 +17,7 @@ export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 const mdjsx = () => {
   let markdownMap = {};
   let isBuild: boolean;
-  // const addHMR = (code) => {
-  //   return `${code}
-  //       if(import.meta.hot){
-  //      import.meta.hot.accept(() => {
-  //         window.HotReloadEmitter$ && window.HotReloadEmitter$.emit();
-  //       });
-  //     } `;
-  // };
+
   return {
     name: "vite:markdown-jsx",
     config(resolvedConfig, { command }) {
@@ -32,24 +25,6 @@ const mdjsx = () => {
       isBuild = command === "build";
     },
 
-    handleHotUpdate(ctx) {
-      // const { file, modules } = ctx;
-      //
-      // const mod = ctx.server.moduleGraph.getModuleById(file);
-      //
-      // console.log("######", Array.from(mod?.importers)?.[0]?.importers);
-      // if (/\.md$/.test(file)) {
-      //   markdownMap = {};
-      //   const mod = ctx.server.moduleGraph.getModuleById(file);
-      //
-      //   if (mod) {
-      //     mod.isSelfAccepting = true;
-      //     return modules.filter(
-      //       (cmod) => mod.importedModules.has(cmod) || modules === cmod
-      //     );
-      //   }
-      // }
-    },
     configureServer(_server) {
       const { middlewares, moduleGraph, transformRequest } = _server;
 
@@ -92,10 +67,11 @@ const mdjsx = () => {
       }
     },
     async load(id) {
+      const file = cleanUrl(id);
       if (isMarkdownProxy(id)) {
         const [, fileIndex, lang] = id.match(mdProxyRE) || [];
 
-        const code = markdownMap[`${fileIndex}.${lang}`];
+        const code = markdownMap[`${file}_${fileIndex}.${lang}`];
         if (!code) {
           return "";
         }
@@ -191,7 +167,7 @@ const mdjsx = () => {
           const lang = item.lang;
           const fileName = `${index}.${lang}`;
 
-          markdownMap[fileName] = content;
+          markdownMap[`${file}_${fileName}`] = content;
 
           const params = `markdown-proxy&index=${fileName}`;
           // id = id.replace(cwd + "/", "");
