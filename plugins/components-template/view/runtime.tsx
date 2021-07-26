@@ -1,10 +1,9 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import mtopHook from "@alife/mtop-mock-hook";
 import ReadmePane from "./pages/readme-pane";
 import RouterSwitch from "./pages/router-switch";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
   Redirect,
