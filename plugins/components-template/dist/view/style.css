@@ -186,6 +186,28 @@
 }
 .markdown-area .selected-block > .code-pane > pre.hljs {
   margin-bottom: 0;
+}
+.markdown-area p > img {
+  width: 100%;
+}
+.markdown-area ol {
+  list-style-type: decimal;
+}
+.markdown-area ul {
+  list-style-type: disc;
+}
+.markdown-area ul ul {
+  list-style-type: circle;
+}
+.markdown-area dl,
+.markdown-area ol,
+.markdown-area ul {
+  padding-left: 1em;
+}
+.markdown-area dl li,
+.markdown-area ol li,
+.markdown-area ul li {
+  list-style: inherit;
 }.ant-menu-root.router-switch {
   width: 230px;
   height: 100%;
