@@ -2236,17 +2236,17 @@ var _typeof = { exports: {} };
 })(_typeof);
 (function(module) {
   var _typeof$12 = _typeof.exports["default"];
-  function _getRequireWildcardCache() {
+  function _getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function")
       return null;
-    var cache2 = new WeakMap();
-    _getRequireWildcardCache = function _getRequireWildcardCache2() {
-      return cache2;
-    };
-    return cache2;
+    var cacheBabelInterop = new WeakMap();
+    var cacheNodeInterop = new WeakMap();
+    return (_getRequireWildcardCache = function _getRequireWildcardCache2(nodeInterop2) {
+      return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
+    })(nodeInterop);
   }
-  function _interopRequireWildcard2(obj) {
-    if (obj && obj.__esModule) {
+  function _interopRequireWildcard2(obj, nodeInterop) {
+    if (!nodeInterop && obj && obj.__esModule) {
       return obj;
     }
     if (obj === null || _typeof$12(obj) !== "object" && typeof obj !== "function") {
@@ -2254,14 +2254,14 @@ var _typeof = { exports: {} };
         "default": obj
       };
     }
-    var cache2 = _getRequireWildcardCache();
+    var cache2 = _getRequireWildcardCache(nodeInterop);
     if (cache2 && cache2.has(obj)) {
       return cache2.get(obj);
     }
     var newObj = {};
     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
     for (var key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
         if (desc && (desc.get || desc.set)) {
           Object.defineProperty(newObj, key, desc);
@@ -2298,7 +2298,7 @@ var arrayWithHoles = { exports: {} };
 var iterableToArrayLimit = { exports: {} };
 (function(module) {
   function _iterableToArrayLimit2(arr, i) {
-    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
     if (_i == null)
       return;
     var _arr = [];
@@ -2505,10 +2505,11 @@ var objectSpread2 = { exports: {} };
     var keys2 = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
       var symbols2 = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly)
+      if (enumerableOnly) {
         symbols2 = symbols2.filter(function(sym) {
           return Object.getOwnPropertyDescriptor(object, sym).enumerable;
         });
+      }
       keys2.push.apply(keys2, symbols2);
     }
     return keys2;
@@ -3243,7 +3244,9 @@ function injectCSS(css) {
   styleNode.innerHTML = css;
   var container = getContainer(option);
   var firstChild = container.firstChild;
-  if (option.prepend && firstChild) {
+  if (option.prepend && container.prepend) {
+    container.prepend(styleNode);
+  } else if (option.prepend && firstChild) {
     container.insertBefore(styleNode, firstChild);
   } else {
     container.appendChild(styleNode);
@@ -6465,7 +6468,7 @@ var extend2 = _extend_3_0_2_extend;
 var plain = _isPlainObj_2_1_0_isPlainObj;
 var trough = _trough_1_0_5_trough;
 var vfile = _vfile_4_2_1_vfile;
-var _unified_9_2_1_unified = unified$1().freeze();
+var _unified_9_2_2_unified = unified$1().freeze();
 var slice = [].slice;
 var own$2 = {}.hasOwnProperty;
 var pipeline = trough().use(pipelineParse).use(pipelineRun).use(pipelineStringify);
@@ -6489,6 +6492,9 @@ function pipelineStringify(p2, ctx) {
   if (result === void 0 || result === null)
     ;
   else if (typeof result === "string" || buffer(result)) {
+    if ("value" in ctx.file) {
+      ctx.file.value = result;
+    }
     ctx.file.contents = result;
   } else {
     ctx.file.result = result;
@@ -11898,7 +11904,7 @@ var symbols$1 = {};
 var HtmlParser = "__RMD_HTML_PARSER__";
 symbols$1.HtmlParser = typeof Symbol === "undefined" ? HtmlParser : Symbol(HtmlParser);
 var xtend = immutable;
-var unified = _unified_9_2_1_unified;
+var unified = _unified_9_2_2_unified;
 var parse = _remarkParse_9_0_0_remarkParse;
 var PropTypes = _propTypes_15_7_2_propTypes.exports;
 var addListMetadata = _mdastAddListMetadata_1_0_1_mdastAddListMetadata;
@@ -13246,7 +13252,7 @@ function less(Prism) {
   });
 }
 var index$2 = '.code-pane{position:relative;background-color:#282c34;border-radius:6px;font-size:15px}.code-pane:hover>.icon-copy{opacity:1}.code-pane>.icon-copy{opacity:0;transition:all .2s;position:absolute;z-index:3;top:.8em;right:1em;cursor:pointer;font-size:.75rem;color:hsla(0,0%,100%,.7);background:#282c34}.code-pane :not(pre)>code[class*=language-],.code-pane pre[class*=language-]{background:#2d2d2d}.code-pane :not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.code-pane .token.block-comment,.code-pane .token.cdata,.code-pane .token.comment,.code-pane .token.doctype,.code-pane .token.prolog{color:#999}.code-pane .language-css .token.string,.code-pane .style .token.string,.code-pane .token.entity,.code-pane .token.operator,.code-pane .token.url{background-color:transparent}.code-pane .token.punctuation{color:#ccc}.code-pane .token.attr-name,.code-pane .token.deleted,.code-pane .token.namespace,.code-pane .token.tag{color:#e2777a}.code-pane .token.function-name{color:#6196cc}.code-pane .token.boolean,.code-pane .token.function,.code-pane .token.number{color:#f08d49}.code-pane .token.class-name,.code-pane .token.constant,.code-pane .token.property,.code-pane .token.symbol{color:#f8c555}.code-pane .token.atrule,.code-pane .token.builtin,.code-pane .token.important,.code-pane .token.keyword,.code-pane .token.selector{color:#cc99cd}.code-pane .token.attr-value,.code-pane .token.char,.code-pane .token.regex,.code-pane .token.string,.code-pane .token.variable{color:#7ec699}.code-pane .token.entity,.code-pane .token.operator,.code-pane .token.url{color:#67cdcc}.code-pane .token.bold,.code-pane .token.important{font-weight:700}.code-pane .token.italic{font-style:italic}.code-pane .token.entity{cursor:help}.code-pane code .token.deleted{color:#ec5975}.code-pane code .token.inserted{color:#3eaf7c}.code-pane pre,.code-pane pre[class*=language-]{line-height:1.5;padding:1.25rem 1.5rem;margin:.85rem 0;background-color:#282c34;border-radius:6px}.code-pane pre[class*=language-] code,.code-pane pre code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;font-size:.9em;color:#fff;padding:0;background-color:transparent;border-radius:0}.code-pane[class*=language-] .highlight-lines{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;padding-top:1.3rem;position:absolute;top:0;left:0;width:100%;line-height:1.4}.code-pane[class*=language-] .highlight-lines .highlighted{background-color:rgba(0,0,0,.66)}.code-pane[class*=language-] pre,.code-pane[class*=language-] pre[class*=language-]{background:transparent;position:relative;z-index:1}.code-pane[class*=language-]:before{position:absolute;z-index:3;top:.8em;right:1em;font-size:.75rem;color:hsla(0,0%,100%,.4)}.code-pane[class*=language-]:not(.line-numbers-mode) .line-numbers-wrapper{display:none}.code-pane[class*=language-].line-numbers-mode .highlight-lines .highlighted{position:relative}.code-pane[class*=language-].line-numbers-mode .highlight-lines .highlighted:before{content:" ";position:absolute;z-index:3;left:0;top:0;display:block;width:3.5rem;height:100%;background-color:rgba(0,0,0,.66)}.code-pane[class*=language-].line-numbers-mode pre{padding-left:4.5rem;vertical-align:middle}.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper{position:absolute;top:0;width:3.5rem;text-align:center;color:hsla(0,0%,100%,.3);padding:1.25rem 0;line-height:1.4}.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper .line-number,.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper br{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper .line-number{position:relative;z-index:4;font-size:.85em}.code-pane[class*=language-].line-numbers-mode:after{content:"";position:absolute;z-index:2;top:0;left:0;width:3.5rem;height:100%;border-radius:6px 0 0 6px;border-right:1px solid rgba(0,0,0,.66);background-color:#282c34}.code-pane[class~=language-js]:before{content:"js"}.code-pane[class~=language-ts]:before{content:"ts"}.code-pane[class~=language-html]:before{content:"html"}.code-pane[class~=language-md]:before{content:"md"}.code-pane[class~=language-vue]:before{content:"vue"}.code-pane[class~=language-css]:before{content:"css"}.code-pane[class~=language-sass]:before{content:"sass"}.code-pane[class~=language-scss]:before{content:"scss"}.code-pane[class~=language-less]:before{content:"less"}.code-pane[class~=language-stylus]:before{content:"stylus"}.code-pane[class~=language-go]:before{content:"go"}.code-pane[class~=language-java]:before{content:"java"}.code-pane[class~=language-c]:before{content:"c"}.code-pane[class~=language-sh]:before{content:"sh"}.code-pane[class~=language-yaml]:before{content:"yaml"}.code-pane[class~=language-py]:before{content:"py"}.code-pane[class~=language-docker]:before{content:"docker"}.code-pane[class~=language-dockerfile]:before{content:"dockerfile"}.code-pane[class~=language-makefile]:before{content:"makefile"}.code-pane[class~=language-javascript]:before{content:"js"}.code-pane[class~=language-jsx]:before{content:"jsx"}.code-pane[class~=language-typescript]:before{content:"ts"}.code-pane[class~=language-tsx]:before{content:"tsx"}.code-pane[class~=language-markup]:before{content:"html"}.code-pane[class~=language-markdown]:before{content:"md"}.code-pane[class~=language-json]:before{content:"json"}.code-pane[class~=language-ruby]:before{content:"rb"}.code-pane[class~=language-python]:before{content:"py"}.code-pane[class~=language-bash]:before{content:"sh"}.code-pane[class~=language-php]:before{content:"php"}@media screen and (max-width:769px){.code-pane[class*=language-]{margin:.85rem -1.5rem;border-radius:0}}.code-pane .token.number{background-color:transparent;border-radius:0;font-size:inherit;height:inherit;margin-right:inherit;min-width:auto;padding:0;text-align:center}';
-var index$1 = ".markdown-area {\n  margin-bottom: 15px;\n}\n.markdown-area .clickable-block {\n  cursor: pointer;\n  border: 2px solid transparent;\n}\n.markdown-area .clickable-block:not(.selected-block):hover > .code-pane {\n  box-shadow: 0 2px 8px 0 #6495f9;\n}\n.markdown-area .selected-block {\n  position: relative;\n  margin-bottom: 0.85rem;\n}\n.markdown-area .selected-block > .ant-tag {\n  position: absolute;\n  z-index: 1;\n  border-radius: 6px 0 6px 0;\n  top: 0;\n  background: #6495f9;\n  border-color: #6495f9;\n  color: #fff;\n  font-weight: 500;\n}\n.markdown-area .selected-block > .code-pane {\n  box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.4);\n  border: 2px solid #6495f9;\n}\n.markdown-area .selected-block > .code-pane > pre.hljs {\n  margin-bottom: 0;\n}";
+var index$1 = ".markdown-area {\n  margin-bottom: 15px;\n}\n.markdown-area .clickable-block {\n  cursor: pointer;\n  border: 2px solid transparent;\n}\n.markdown-area .clickable-block:not(.selected-block):hover > .code-pane {\n  box-shadow: 0 2px 8px 0 #6495f9;\n}\n.markdown-area .selected-block {\n  position: relative;\n  margin-bottom: 0.85rem;\n}\n.markdown-area .selected-block > .ant-tag {\n  position: absolute;\n  z-index: 1;\n  border-radius: 6px 0 6px 0;\n  top: 0;\n  background: #6495f9;\n  border-color: #6495f9;\n  color: #fff;\n  font-weight: 500;\n}\n.markdown-area .selected-block > .code-pane {\n  box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.4);\n  border: 2px solid #6495f9;\n}\n.markdown-area .selected-block > .code-pane > pre.hljs {\n  margin-bottom: 0;\n}\n.markdown-area p > img {\n  width: 100%;\n}\n.markdown-area ol {\n  list-style-type: decimal;\n}\n.markdown-area ul {\n  list-style-type: disc;\n}\n.markdown-area ul ul {\n  list-style-type: circle;\n}\n.markdown-area dl,\n.markdown-area ol,\n.markdown-area ul {\n  padding-left: 1em;\n}\n.markdown-area dl li,\n.markdown-area ol li,\n.markdown-area ul li {\n  list-style: inherit;\n}";
 HighLight.registerLanguage("tsx", tsx_1);
 HighLight.registerLanguage("scss", scss_1);
 HighLight.registerLanguage("less", less_1);

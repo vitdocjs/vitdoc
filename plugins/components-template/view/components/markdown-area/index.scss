@@ -13,7 +13,7 @@ $color: #6495f9;
   }
   .selected-block {
     position: relative;
-    margin-bottom: .85rem;
+    margin-bottom: 0.85rem;
 
     > .ant-tag {
       position: absolute;
@@ -31,6 +31,27 @@ $color: #6495f9;
       > pre.hljs {
         margin-bottom: 0;
       }
+    }
+  }
+  p > img {
+    width: 100%;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+  ul {
+    list-style-type: disc;
+    ul {
+      list-style-type: circle;
+    }
+  }
+  dl,
+  ol,
+  ul {
+    padding-left: 1em;
+    li {
+      list-style: inherit;
     }
   }
 }
