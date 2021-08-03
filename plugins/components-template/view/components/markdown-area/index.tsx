@@ -52,7 +52,7 @@ export function MarkdownArea({ data: res }) {
   };
 
   return (
-    <div className="markdown-area">
+    <div className="markdown-area markdown-body">
       <ReactMarkdown renderers={{ code }}>{content}</ReactMarkdown>
     </div>
   );
