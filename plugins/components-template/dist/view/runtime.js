@@ -3658,13 +3658,21 @@ function ComponentArea(props) {
   const { componentProps, onSetDefaultProps, data: Components } = props;
   const componentRef = useRef();
   const invoked = useRef(false);
-  const wrapProps = useCallback((Component2, { React: OutReact }) => (props2) => {
-    if (!invoked.current) {
-      onSetDefaultProps && onSetDefaultProps(props2);
-      invoked.current = true;
+  const newComp = useRef();
+  const wrapProps = useCallback((Component2, { React: OutReact }) => {
+    if (newComp.current) {
+      return newComp.current;
     }
-    const finalProps = Object.assign({}, props2, componentProps);
-    return OutReact.createElement(Component2, finalProps);
+    const outputComp = (props2) => {
+      if (!invoked.current) {
+        onSetDefaultProps && onSetDefaultProps(props2);
+        invoked.current = true;
+      }
+      const finalProps = Object.assign({}, props2, componentProps);
+      return OutReact.createElement(Component2, finalProps);
+    };
+    newComp.current = outputComp;
+    return outputComp;
   }, [componentProps]);
   useEffect(() => {
     window.$_ComponentWrap = wrapProps;

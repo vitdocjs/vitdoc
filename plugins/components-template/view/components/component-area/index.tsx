@@ -9,17 +9,27 @@ export function ComponentArea(props) {
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
+  const newComp = useRef<any>();
 
   const wrapProps = useCallback(
-    (Component, { React: OutReact }) =>
-      (props) => {
+    (Component, { React: OutReact }) => {
+      if (newComp.current) {
+        return newComp.current;
+      }
+
+      const outputComp = (props) => {
         if (!invoked.current) {
           onSetDefaultProps && onSetDefaultProps(props);
           invoked.current = true;
         }
         const finalProps = Object.assign({}, props, componentProps);
         return OutReact.createElement(Component, finalProps);
-      },
+      };
+
+      newComp.current = outputComp;
+
+      return outputComp;
+    },
     [componentProps]
   );
 
