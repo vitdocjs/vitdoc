@@ -9,12 +9,12 @@ export function ComponentArea(props) {
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
-  const newComp = useRef<any>();
+  const newComp = useRef(new Map());
 
   const wrapProps = useCallback(
     (Component, { React: OutReact }) => {
-      if (newComp.current) {
-        return newComp.current;
+      if (newComp.current.get(Component)) {
+        return newComp.current.get(Component);
       }
 
       const outputComp = (props) => {
@@ -26,7 +26,7 @@ export function ComponentArea(props) {
         return OutReact.createElement(Component, finalProps);
       };
 
-      newComp.current = outputComp;
+      newComp.current.set(Component, outputComp);
 
       return outputComp;
     },
