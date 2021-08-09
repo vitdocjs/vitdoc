@@ -1,6 +1,6 @@
 {
   "name": "@ali/vite-comp",
-  "version": "1.1.14",
+  "version": "1.1.14-beta.1",
   "publishConfig": {
     "registry": "https://registry.npm.alibaba-inc.com"
   },
@@ -11,9 +11,6 @@
   },
   "bin": {
     "vite-comp": "./bin/index.js"
-  },
-  "engines": {
-    "node": ">=12"
   },
   "dependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
