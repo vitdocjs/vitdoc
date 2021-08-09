@@ -1,11 +1,12 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import HighLight from "@alife/intl-comp-highLighter/dist/index";
+// import ReactMarkdown from "react-markdown";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import scss from "react-syntax-highlighter/dist/esm/languages/prism/scss";
 import less from "react-syntax-highlighter/dist/esm/languages/prism/less";
-import "@alife/intl-comp-highLighter/dist/index.css";
 import classNames from "classnames";
+
+// @ts-ignore
+const { HighLighter: HighLight, ReactMarkdown } = window;
 
 HighLight.registerLanguage("tsx", tsx);
 HighLight.registerLanguage("scss", scss);
