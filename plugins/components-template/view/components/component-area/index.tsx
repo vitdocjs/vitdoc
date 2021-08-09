@@ -13,7 +13,7 @@ export function ComponentArea(props) {
 
   const wrapProps = useCallback(
     (Component, { React: OutReact }) => {
-      if (newComp.current.get(Component)) {
+      if (newComp.current.get(Component)?.visionProps === componentProps) {
         return newComp.current.get(Component);
       }
 
@@ -25,6 +25,8 @@ export function ComponentArea(props) {
         const finalProps = Object.assign({}, props, componentProps);
         return OutReact.createElement(Component, finalProps);
       };
+
+      outputComp.visionProps = componentProps;
 
       newComp.current.set(Component, outputComp);
 

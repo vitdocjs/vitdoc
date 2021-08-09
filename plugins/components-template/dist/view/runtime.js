@@ -2236,17 +2236,17 @@ var _typeof = { exports: {} };
 })(_typeof);
 (function(module) {
   var _typeof$12 = _typeof.exports["default"];
-  function _getRequireWildcardCache(nodeInterop) {
+  function _getRequireWildcardCache() {
     if (typeof WeakMap !== "function")
       return null;
-    var cacheBabelInterop = new WeakMap();
-    var cacheNodeInterop = new WeakMap();
-    return (_getRequireWildcardCache = function _getRequireWildcardCache2(nodeInterop2) {
-      return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop);
+    var cache2 = new WeakMap();
+    _getRequireWildcardCache = function _getRequireWildcardCache2() {
+      return cache2;
+    };
+    return cache2;
   }
-  function _interopRequireWildcard2(obj, nodeInterop) {
-    if (!nodeInterop && obj && obj.__esModule) {
+  function _interopRequireWildcard2(obj) {
+    if (obj && obj.__esModule) {
       return obj;
     }
     if (obj === null || _typeof$12(obj) !== "object" && typeof obj !== "function") {
@@ -2254,14 +2254,14 @@ var _typeof = { exports: {} };
         "default": obj
       };
     }
-    var cache2 = _getRequireWildcardCache(nodeInterop);
+    var cache2 = _getRequireWildcardCache();
     if (cache2 && cache2.has(obj)) {
       return cache2.get(obj);
     }
     var newObj = {};
     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
     for (var key in obj) {
-      if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
         if (desc && (desc.get || desc.set)) {
           Object.defineProperty(newObj, key, desc);
@@ -2298,7 +2298,7 @@ var arrayWithHoles = { exports: {} };
 var iterableToArrayLimit = { exports: {} };
 (function(module) {
   function _iterableToArrayLimit2(arr, i) {
-    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
     if (_i == null)
       return;
     var _arr = [];
@@ -2505,11 +2505,10 @@ var objectSpread2 = { exports: {} };
     var keys2 = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
       var symbols2 = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) {
+      if (enumerableOnly)
         symbols2 = symbols2.filter(function(sym) {
           return Object.getOwnPropertyDescriptor(object, sym).enumerable;
         });
-      }
       keys2.push.apply(keys2, symbols2);
     }
     return keys2;
@@ -3244,9 +3243,7 @@ function injectCSS(css) {
   styleNode.innerHTML = css;
   var container = getContainer(option);
   var firstChild = container.firstChild;
-  if (option.prepend && container.prepend) {
-    container.prepend(styleNode);
-  } else if (option.prepend && firstChild) {
+  if (option.prepend && firstChild) {
     container.insertBefore(styleNode, firstChild);
   } else {
     container.appendChild(styleNode);
@@ -3658,10 +3655,11 @@ function ComponentArea(props) {
   const { componentProps, onSetDefaultProps, data: Components } = props;
   const componentRef = useRef();
   const invoked = useRef(false);
-  const newComp = useRef();
+  const newComp = useRef(new Map());
   const wrapProps = useCallback((Component2, { React: OutReact }) => {
-    if (newComp.current) {
-      return newComp.current;
+    var _a;
+    if (((_a = newComp.current.get(Component2)) == null ? void 0 : _a.visionProps) === componentProps) {
+      return newComp.current.get(Component2);
     }
     const outputComp = (props2) => {
       if (!invoked.current) {
@@ -3671,7 +3669,8 @@ function ComponentArea(props) {
       const finalProps = Object.assign({}, props2, componentProps);
       return OutReact.createElement(Component2, finalProps);
     };
-    newComp.current = outputComp;
+    outputComp.visionProps = componentProps;
+    newComp.current.set(Component2, outputComp);
     return outputComp;
   }, [componentProps]);
   useEffect(() => {
@@ -6476,7 +6475,7 @@ var extend2 = _extend_3_0_2_extend;
 var plain = _isPlainObj_2_1_0_isPlainObj;
 var trough = _trough_1_0_5_trough;
 var vfile = _vfile_4_2_1_vfile;
-var _unified_9_2_2_unified = unified$1().freeze();
+var _unified_9_2_1_unified = unified$1().freeze();
 var slice = [].slice;
 var own$2 = {}.hasOwnProperty;
 var pipeline = trough().use(pipelineParse).use(pipelineRun).use(pipelineStringify);
@@ -6500,9 +6499,6 @@ function pipelineStringify(p2, ctx) {
   if (result === void 0 || result === null)
     ;
   else if (typeof result === "string" || buffer(result)) {
-    if ("value" in ctx.file) {
-      ctx.file.value = result;
-    }
     ctx.file.contents = result;
   } else {
     ctx.file.result = result;
@@ -11912,7 +11908,7 @@ var symbols$1 = {};
 var HtmlParser = "__RMD_HTML_PARSER__";
 symbols$1.HtmlParser = typeof Symbol === "undefined" ? HtmlParser : Symbol(HtmlParser);
 var xtend = immutable;
-var unified = _unified_9_2_2_unified;
+var unified = _unified_9_2_1_unified;
 var parse = _remarkParse_9_0_0_remarkParse;
 var PropTypes = _propTypes_15_7_2_propTypes.exports;
 var addListMetadata = _mdastAddListMetadata_1_0_1_mdastAddListMetadata;
