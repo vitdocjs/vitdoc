@@ -13348,9 +13348,9 @@ function MenuLink(item) {
   }, item.name.replace(/-/g, " ").replace(/\//g, " - "));
 }
 function RouterSwitch() {
-  const { tree: menuData } = useRouteMap() || {};
+  const { tree: menuData, routes } = useRouteMap() || {};
   const { npmLink, logo } = useComponentInfo() || {};
-  if (!menuData || (menuData == null ? void 0 : menuData.length) <= 1) {
+  if (!routes || (routes == null ? void 0 : routes.length) <= 1) {
     return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null);
   }
   const { url: route } = useRouteMatch();
