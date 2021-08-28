@@ -141,11 +141,6 @@ export function useMarkdown() {
   const renderer = Object.values(moduleMap)?.[renderIndex || 0];
 
   let error: ModuleLoadError | undefined;
-  if (!results?.modules?.length) {
-    error = new ModuleLoadError(
-      "You should add some code block in your .md file.\n Support `jsx` or `tsx` language for now."
-    );
-  }
 
   return {
     error,

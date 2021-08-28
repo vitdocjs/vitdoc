@@ -25,7 +25,9 @@ export default function ReadmePane() {
       {Components ? (
         <div className="component-page">
           <a href={compInfo?.npmLink} className="link-title">
-            <h1 className="component-name">{propertyTypes?.displayName}</h1>
+            <h1 className="component-name">
+              {propertyTypes?.displayName || compInfo?.packageName}
+            </h1>
             <span className="component-sub-title">
               <span>Package: {compInfo?.packageName}</span>
               <span>Version: {compInfo?.packageVersion}</span>
@@ -33,11 +35,13 @@ export default function ReadmePane() {
           </a>
           <div className="component-main">
             <div className="component-part">
-              <ComponentArea
-                data={Components}
-                componentProps={visionProps}
-                onSetDefaultProps={setVisionDefaultProps}
-              />
+              {Components.renderer && (
+                <ComponentArea
+                  data={Components}
+                  componentProps={visionProps}
+                  onSetDefaultProps={setVisionDefaultProps}
+                />
+              )}
               <div className="component-description component-block">
                 <MarkdownArea data={Components} />
                 <Properties properties={propertyTypes} />
