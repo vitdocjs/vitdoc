@@ -2203,16 +2203,6 @@ async function getVisionConfig(componentTypes) {
 }
 var DoubleLeftOutlined$5 = { exports: {} };
 var DoubleLeftOutlined$4 = {};
-var interopRequireDefault = { exports: {} };
-(function(module) {
-  function _interopRequireDefault2(obj) {
-    return obj && obj.__esModule ? obj : {
-      "default": obj
-    };
-  }
-  module.exports = _interopRequireDefault2;
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-})(interopRequireDefault);
 var interopRequireWildcard = { exports: {} };
 var _typeof = { exports: {} };
 (function(module) {
@@ -2279,6 +2269,70 @@ var _typeof = { exports: {} };
   module.exports = _interopRequireWildcard2;
   module.exports["default"] = module.exports, module.exports.__esModule = true;
 })(interopRequireWildcard);
+var interopRequireDefault = { exports: {} };
+(function(module) {
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : {
+      "default": obj
+    };
+  }
+  module.exports = _interopRequireDefault2;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+})(interopRequireDefault);
+var objectSpread2 = { exports: {} };
+var defineProperty$1 = { exports: {} };
+(function(module) {
+  function _defineProperty3(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  module.exports = _defineProperty3;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+})(defineProperty$1);
+(function(module) {
+  var defineProperty2 = defineProperty$1.exports;
+  function ownKeys(object, enumerableOnly) {
+    var keys2 = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols2 = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) {
+        symbols2 = symbols2.filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+      keys2.push.apply(keys2, symbols2);
+    }
+    return keys2;
+  }
+  function _objectSpread22(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function(key) {
+          defineProperty2(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function(key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+    return target;
+  }
+  module.exports = _objectSpread22;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+})(objectSpread2);
 var require$$0 = /* @__PURE__ */ getAugmentedNamespace(react_1a37f6a0);
 var DoubleLeftOutlined$3 = {};
 Object.defineProperty(DoubleLeftOutlined$3, "__esModule", { value: true });
@@ -2379,24 +2433,6 @@ var nonIterableRest = { exports: {} };
   module.exports = _slicedToArray3;
   module.exports["default"] = module.exports, module.exports.__esModule = true;
 })(slicedToArray);
-var defineProperty$1 = { exports: {} };
-(function(module) {
-  function _defineProperty3(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
-  module.exports = _defineProperty3;
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-})(defineProperty$1);
 var objectWithoutProperties = { exports: {} };
 var objectWithoutPropertiesLoose = { exports: {} };
 (function(module) {
@@ -2498,42 +2534,6 @@ var IconContext = /* @__PURE__ */ (0, _react$1.createContext)({});
 var _default$5 = IconContext;
 Context.default = _default$5;
 var IconBase$1 = {};
-var objectSpread2 = { exports: {} };
-(function(module) {
-  var defineProperty2 = defineProperty$1.exports;
-  function ownKeys(object, enumerableOnly) {
-    var keys2 = Object.keys(object);
-    if (Object.getOwnPropertySymbols) {
-      var symbols2 = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) {
-        symbols2 = symbols2.filter(function(sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-      }
-      keys2.push.apply(keys2, symbols2);
-    }
-    return keys2;
-  }
-  function _objectSpread22(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function(key) {
-          defineProperty2(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function(key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-    return target;
-  }
-  module.exports = _objectSpread22;
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-})(objectSpread2);
 var utils = {};
 function bound01(n2, max) {
   if (isOnePointZero(n2)) {
@@ -3293,7 +3293,7 @@ utils.generate = generate;
 utils.getSecondaryColor = getSecondaryColor;
 utils.normalizeTwoToneColors = normalizeTwoToneColors;
 utils.useInsertStyles = utils.iconStyles = utils.svgBaseProps = void 0;
-var _objectSpread2$1 = _interopRequireDefault$5(objectSpread2.exports);
+var _objectSpread2$4 = _interopRequireDefault$5(objectSpread2.exports);
 var _typeof2 = _interopRequireDefault$5(_typeof.exports);
 var _colors = require$$4;
 var _react = _interopRequireWildcard$3(require$$0);
@@ -3323,13 +3323,13 @@ function normalizeAttrs() {
 }
 function generate(node, key, rootProps) {
   if (!rootProps) {
-    return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$1.default)({
+    return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$4.default)({
       key
     }, normalizeAttrs(node.attrs)), (node.children || []).map(function(child, index2) {
       return generate(child, "".concat(key, "-").concat(node.tag, "-").concat(index2));
     }));
   }
-  return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$1.default)((0, _objectSpread2$1.default)({
+  return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$4.default)((0, _objectSpread2$4.default)({
     key
   }, normalizeAttrs(node.attrs)), rootProps), (node.children || []).map(function(child, index2) {
     return generate(child, "".concat(key, "-").concat(node.tag, "-").concat(index2));
@@ -3371,8 +3371,9 @@ Object.defineProperty(IconBase$1, "__esModule", {
 });
 IconBase$1.default = void 0;
 var _objectWithoutProperties2$1 = _interopRequireDefault$4(objectWithoutProperties.exports);
-var _objectSpread2 = _interopRequireDefault$4(objectSpread2.exports);
+var _objectSpread2$3 = _interopRequireDefault$4(objectSpread2.exports);
 var _utils$2 = utils;
+var _excluded$1 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
 var twoToneColorPalette = {
   primaryColor: "#333",
   secondaryColor: "#E6E6E6",
@@ -3385,10 +3386,10 @@ function setTwoToneColors(_ref) {
   twoToneColorPalette.calculated = !!secondaryColor;
 }
 function getTwoToneColors() {
-  return (0, _objectSpread2.default)({}, twoToneColorPalette);
+  return (0, _objectSpread2$3.default)({}, twoToneColorPalette);
 }
 var IconBase = function IconBase2(props) {
-  var icon = props.icon, className = props.className, onClick = props.onClick, style = props.style, primaryColor = props.primaryColor, secondaryColor = props.secondaryColor, restProps = (0, _objectWithoutProperties2$1.default)(props, ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"]);
+  var icon = props.icon, className = props.className, onClick = props.onClick, style = props.style, primaryColor = props.primaryColor, secondaryColor = props.secondaryColor, restProps = (0, _objectWithoutProperties2$1.default)(props, _excluded$1);
   var colors = twoToneColorPalette;
   if (primaryColor) {
     colors = {
@@ -3403,11 +3404,11 @@ var IconBase = function IconBase2(props) {
   }
   var target = icon;
   if (target && typeof target.icon === "function") {
-    target = (0, _objectSpread2.default)((0, _objectSpread2.default)({}, target), {}, {
+    target = (0, _objectSpread2$3.default)((0, _objectSpread2$3.default)({}, target), {}, {
       icon: target.icon(colors.primaryColor, colors.secondaryColor)
     });
   }
-  return (0, _utils$2.generate)(target.icon, "svg-".concat(target.name), (0, _objectSpread2.default)({
+  return (0, _utils$2.generate)(target.icon, "svg-".concat(target.name), (0, _objectSpread2$3.default)({
     className,
     onClick,
     style,
@@ -3447,12 +3448,13 @@ function getTwoToneColor() {
   }
   return [colors.primaryColor, colors.secondaryColor];
 }
-var _interopRequireWildcard$2 = interopRequireWildcard.exports;
 var _interopRequireDefault$2 = interopRequireDefault.exports;
+var _interopRequireWildcard$2 = interopRequireWildcard.exports;
 Object.defineProperty(AntdIcon, "__esModule", {
   value: true
 });
 AntdIcon.default = void 0;
+var _objectSpread2$2 = _interopRequireDefault$2(objectSpread2.exports);
 var _slicedToArray2 = _interopRequireDefault$2(slicedToArray.exports);
 var _defineProperty2 = _interopRequireDefault$2(defineProperty$1.exports);
 var _objectWithoutProperties2 = _interopRequireDefault$2(objectWithoutProperties.exports);
@@ -3462,10 +3464,11 @@ var _Context = _interopRequireDefault$2(Context);
 var _IconBase = _interopRequireDefault$2(IconBase$1);
 var _twoTonePrimaryColor = twoTonePrimaryColor;
 var _utils = utils;
+var _excluded = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
 (0, _twoTonePrimaryColor.setTwoToneColor)("#1890ff");
 var Icon = /* @__PURE__ */ React$4.forwardRef(function(props, ref) {
   var _classNames;
-  var className = props.className, icon = props.icon, spin = props.spin, rotate = props.rotate, tabIndex = props.tabIndex, onClick = props.onClick, twoToneColor = props.twoToneColor, restProps = (0, _objectWithoutProperties2.default)(props, ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"]);
+  var className = props.className, icon = props.icon, spin = props.spin, rotate = props.rotate, tabIndex = props.tabIndex, onClick = props.onClick, twoToneColor = props.twoToneColor, restProps = (0, _objectWithoutProperties2.default)(props, _excluded);
   var _React$useContext = React$4.useContext(_Context.default), _React$useContext$pre = _React$useContext.prefixCls, prefixCls = _React$useContext$pre === void 0 ? "anticon" : _React$useContext$pre;
   var classString = (0, _classnames.default)(prefixCls, (_classNames = {}, (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === "loading"), _classNames), className);
   var iconTabIndex = tabIndex;
@@ -3477,10 +3480,10 @@ var Icon = /* @__PURE__ */ React$4.forwardRef(function(props, ref) {
     transform: "rotate(".concat(rotate, "deg)")
   } : void 0;
   var _normalizeTwoToneColo = (0, _utils.normalizeTwoToneColors)(twoToneColor), _normalizeTwoToneColo2 = (0, _slicedToArray2.default)(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
-  return /* @__PURE__ */ React$4.createElement("span", Object.assign({
+  return /* @__PURE__ */ React$4.createElement("span", (0, _objectSpread2$2.default)((0, _objectSpread2$2.default)({
     role: "img",
     "aria-label": icon.name
-  }, restProps, {
+  }, restProps), {}, {
     ref,
     tabIndex: iconTabIndex,
     onClick,
@@ -3497,17 +3500,18 @@ Icon.getTwoToneColor = _twoTonePrimaryColor.getTwoToneColor;
 Icon.setTwoToneColor = _twoTonePrimaryColor.setTwoToneColor;
 var _default$2 = Icon;
 AntdIcon.default = _default$2;
-var _interopRequireDefault$1 = interopRequireDefault.exports;
 var _interopRequireWildcard$1 = interopRequireWildcard.exports;
+var _interopRequireDefault$1 = interopRequireDefault.exports;
 Object.defineProperty(DoubleLeftOutlined$4, "__esModule", {
   value: true
 });
 DoubleLeftOutlined$4.default = void 0;
+var _objectSpread2$1 = _interopRequireDefault$1(objectSpread2.exports);
 var React$3 = _interopRequireWildcard$1(require$$0);
 var _DoubleLeftOutlined = _interopRequireDefault$1(DoubleLeftOutlined$3);
 var _AntdIcon$1 = _interopRequireDefault$1(AntdIcon);
 var DoubleLeftOutlined$1 = function DoubleLeftOutlined(props, ref) {
-  return /* @__PURE__ */ React$3.createElement(_AntdIcon$1.default, Object.assign({}, props, {
+  return /* @__PURE__ */ React$3.createElement(_AntdIcon$1.default, (0, _objectSpread2$1.default)((0, _objectSpread2$1.default)({}, props), {}, {
     ref,
     icon: _DoubleLeftOutlined.default
   }));
@@ -3535,17 +3539,18 @@ var CloseOutlined$3 = {};
 Object.defineProperty(CloseOutlined$3, "__esModule", { value: true });
 var CloseOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z" } }] }, "name": "close", "theme": "outlined" };
 CloseOutlined$3.default = CloseOutlined$2;
-var _interopRequireDefault = interopRequireDefault.exports;
 var _interopRequireWildcard = interopRequireWildcard.exports;
+var _interopRequireDefault = interopRequireDefault.exports;
 Object.defineProperty(CloseOutlined$4, "__esModule", {
   value: true
 });
 CloseOutlined$4.default = void 0;
+var _objectSpread2 = _interopRequireDefault(objectSpread2.exports);
 var React$2 = _interopRequireWildcard(require$$0);
 var _CloseOutlined = _interopRequireDefault(CloseOutlined$3);
 var _AntdIcon = _interopRequireDefault(AntdIcon);
 var CloseOutlined$1 = function CloseOutlined(props, ref) {
-  return /* @__PURE__ */ React$2.createElement(_AntdIcon.default, Object.assign({}, props, {
+  return /* @__PURE__ */ React$2.createElement(_AntdIcon.default, (0, _objectSpread2.default)((0, _objectSpread2.default)({}, props), {}, {
     ref,
     icon: _CloseOutlined.default
   }));
@@ -5747,7 +5752,7 @@ function useComponentInfo() {
   });
 }
 function useMarkdown() {
-  var _a, _b;
+  var _a;
   const [renderIndex, setRenderIndex] = useState(0);
   const { route } = useRoute();
   const readmeFile = route.replace(".html", ".md");
@@ -5782,9 +5787,6 @@ function useMarkdown() {
   }
   const renderer = (_a = Object.values(moduleMap)) == null ? void 0 : _a[renderIndex || 0];
   let error;
-  if (!((_b = results == null ? void 0 : results.modules) == null ? void 0 : _b.length)) {
-    error = new ModuleLoadError("You should add some code block in your .md file.\n Support `jsx` or `tsx` language for now.");
-  }
   return {
     error,
     content: results.content,
@@ -13316,13 +13318,13 @@ function ReadmePane() {
     className: "link-title"
   }, /* @__PURE__ */ modules$1.createElement("h1", {
     className: "component-name"
-  }, propertyTypes == null ? void 0 : propertyTypes.displayName), /* @__PURE__ */ modules$1.createElement("span", {
+  }, (propertyTypes == null ? void 0 : propertyTypes.displayName) || (compInfo == null ? void 0 : compInfo.packageName)), /* @__PURE__ */ modules$1.createElement("span", {
     className: "component-sub-title"
   }, /* @__PURE__ */ modules$1.createElement("span", null, "Package: ", compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement("span", null, "Version: ", compInfo == null ? void 0 : compInfo.packageVersion))), /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-main"
   }, /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-part"
-  }, /* @__PURE__ */ modules$1.createElement(ComponentArea, {
+  }, Components.renderer && /* @__PURE__ */ modules$1.createElement(ComponentArea, {
     data: Components,
     componentProps: visionProps,
     onSetDefaultProps: setVisionDefaultProps
