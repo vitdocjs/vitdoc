@@ -4,6 +4,7 @@ import TypeFile from "./plugins/type-file";
 import componentsTemplate from "./plugins/components-template/src";
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
+import path from "path";
 
 const cwd = process.cwd();
 
@@ -23,6 +24,9 @@ export default mergeConfig(
     },
     server: {
       cors: true,
+      fs: {
+        allow: [path.resolve(__dirname), cwd],
+      },
     },
     resolve: {
       alias: [
