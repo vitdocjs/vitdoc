@@ -16,6 +16,7 @@ export default function ReadmePane() {
   const [visionDefaultProps, setVisionDefaultProps] = useState();
 
   const propertyTypes = useTypeFile();
+
   const compInfo = useComponentInfo();
 
   const Components = useMarkdown();

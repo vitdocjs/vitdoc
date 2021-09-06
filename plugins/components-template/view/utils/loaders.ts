@@ -69,7 +69,7 @@ export function useTypeFile(): any {
 
   return useAsyncImport(typeFile, ({ default: properties }) => {
     const { default: compProps } = keyBy(properties, "exportName");
-    return compProps || properties[0];
+    return compProps || properties?.[0];
   });
 }
 

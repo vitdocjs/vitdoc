@@ -11,7 +11,10 @@ const { SubMenu } = Menu;
 function MenuLink(item) {
   return (
     <Link to={item.path}>
-      {item.name.replace(/-/g, " ").replace(/\//g, " - ")}
+      {item.name
+        .replace(/-/g, " ")
+        .replace(/\//g, " - ")
+        .replace(/^[a-z] /, "")}
     </Link>
   );
 }
@@ -52,7 +55,7 @@ export default function RouterSwitch() {
         menuData.map((item) => {
           if (item.path) {
             return (
-              <Menu.Item key={item.path}>
+              <Menu.Item className="capitalize" key={item.path}>
                 <MenuLink {...item} />
               </Menu.Item>
             );
