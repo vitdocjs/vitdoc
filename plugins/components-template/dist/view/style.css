@@ -74,6 +74,18 @@
   outline: 0;
   vertical-align: baseline;
   line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+#public-component-show-container .component-name:not(:hover) .copy-link-icon {
+  display: none;
+}
+#public-component-show-container .component-name .copy-link-icon {
+  font-size: 0.6em;
+  margin-left: 0.3em;
+}
+#public-component-show-container .component-name .copy-link-icon:hover {
+  color: #1971ff;
 }
 #public-component-show-container .component-sub-title {
   font-size: 1em;
@@ -929,6 +941,20 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
+}
+.ant-menu-root.router-switch .nav-item-link .nav-menu-link-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ant-menu-root.router-switch .nav-item-link .nav-menu-link-item > a:first-child {
+  flex: 1;
+}
+.ant-menu-root.router-switch .nav-item-link .nav-menu-link-item > .copy-link-icon {
+  margin-right: 0;
+}
+.ant-menu-root.router-switch .nav-item-link:not(:hover) .copy-link-icon {
+  display: none;
 }
 .ant-menu-root.router-switch > .logo {
   margin: 16px auto;

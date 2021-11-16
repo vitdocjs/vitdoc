@@ -128,7 +128,7 @@ Object.defineProperty(lib$1, "__esModule", {
 });
 lib$1.makeXMLhttp = makeXMLhttp;
 lib$1.getMockPath = getMockPath;
-var _default$6 = lib$1.default = mtopHook;
+var _default$7 = lib$1.default = mtopHook;
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
@@ -1516,7 +1516,7 @@ function baseTimes$1(n2, iteratee) {
   return result;
 }
 var _baseTimes = baseTimes$1;
-var isBuffer$2 = { exports: {} };
+var isBuffer$3 = { exports: {} };
 function stubFalse() {
   return false;
 }
@@ -1530,7 +1530,7 @@ var stubFalse_1 = stubFalse;
   var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
   var isBuffer3 = nativeIsBuffer || stubFalse2;
   module.exports = isBuffer3;
-})(isBuffer$2, isBuffer$2.exports);
+})(isBuffer$3, isBuffer$3.exports);
 var MAX_SAFE_INTEGER = 9007199254740991;
 function isLength$3(value) {
   return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
@@ -1575,11 +1575,11 @@ var baseIsTypedArray = _baseIsTypedArray, baseUnary = _baseUnary, nodeUtil = _no
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 var isTypedArray$2 = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 var isTypedArray_1 = isTypedArray$2;
-var baseTimes = _baseTimes, isArguments$1 = isArguments_1, isArray$5 = isArray_1, isBuffer$1 = isBuffer$2.exports, isIndex$1 = _isIndex, isTypedArray$1 = isTypedArray_1;
+var baseTimes = _baseTimes, isArguments$1 = isArguments_1, isArray$5 = isArray_1, isBuffer$2 = isBuffer$3.exports, isIndex$1 = _isIndex, isTypedArray$1 = isTypedArray_1;
 var objectProto$5 = Object.prototype;
 var hasOwnProperty$7 = objectProto$5.hasOwnProperty;
 function arrayLikeKeys$2(value, inherited) {
-  var isArr = isArray$5(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$1(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
+  var isArr = isArray$5(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$2(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
   for (var key in value) {
     if ((inherited || hasOwnProperty$7.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex$1(key, length)))) {
       result.push(key);
@@ -1717,7 +1717,7 @@ if (DataView && getTag$1(new DataView(new ArrayBuffer(1))) != dataViewTag || Map
   };
 }
 var _getTag = getTag$1;
-var Stack$1 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag = _getTag, isArray$4 = isArray_1, isBuffer = isBuffer$2.exports, isTypedArray = isTypedArray_1;
+var Stack$1 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag = _getTag, isArray$4 = isArray_1, isBuffer$1 = isBuffer$3.exports, isTypedArray = isTypedArray_1;
 var COMPARE_PARTIAL_FLAG$2 = 1;
 var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
 var objectProto$1 = Object.prototype;
@@ -1727,8 +1727,8 @@ function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack)
   objTag = objTag == argsTag ? objectTag : objTag;
   othTag = othTag == argsTag ? objectTag : othTag;
   var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
+  if (isSameTag && isBuffer$1(object)) {
+    if (!isBuffer$1(other)) {
       return false;
     }
     objIsArr = true;
@@ -2203,16 +2203,6 @@ async function getVisionConfig(componentTypes) {
 }
 var DoubleLeftOutlined$5 = { exports: {} };
 var DoubleLeftOutlined$4 = {};
-var interopRequireDefault = { exports: {} };
-(function(module) {
-  function _interopRequireDefault2(obj) {
-    return obj && obj.__esModule ? obj : {
-      "default": obj
-    };
-  }
-  module.exports = _interopRequireDefault2;
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-})(interopRequireDefault);
 var interopRequireWildcard = { exports: {} };
 var _typeof = { exports: {} };
 (function(module) {
@@ -2279,7 +2269,71 @@ var _typeof = { exports: {} };
   module.exports = _interopRequireWildcard2;
   module.exports["default"] = module.exports, module.exports.__esModule = true;
 })(interopRequireWildcard);
-var require$$0 = /* @__PURE__ */ getAugmentedNamespace(react_1a37f6a0);
+var interopRequireDefault = { exports: {} };
+(function(module) {
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : {
+      "default": obj
+    };
+  }
+  module.exports = _interopRequireDefault2;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+})(interopRequireDefault);
+var objectSpread2 = { exports: {} };
+var defineProperty$1 = { exports: {} };
+(function(module) {
+  function _defineProperty3(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  module.exports = _defineProperty3;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+})(defineProperty$1);
+(function(module) {
+  var defineProperty2 = defineProperty$1.exports;
+  function ownKeys(object, enumerableOnly) {
+    var keys2 = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols2 = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) {
+        symbols2 = symbols2.filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+      keys2.push.apply(keys2, symbols2);
+    }
+    return keys2;
+  }
+  function _objectSpread22(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function(key) {
+          defineProperty2(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function(key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+    return target;
+  }
+  module.exports = _objectSpread22;
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+})(objectSpread2);
+var require$$3 = /* @__PURE__ */ getAugmentedNamespace(react_1a37f6a0);
 var DoubleLeftOutlined$3 = {};
 Object.defineProperty(DoubleLeftOutlined$3, "__esModule", { value: true });
 var DoubleLeftOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M272.9 512l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L186.8 492.3a31.99 31.99 0 000 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H532c6.7 0 10.4-7.7 6.3-12.9L272.9 512zm304 0l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L490.8 492.3a31.99 31.99 0 000 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H836c6.7 0 10.4-7.7 6.3-12.9L576.9 512z" } }] }, "name": "double-left", "theme": "outlined" };
@@ -2379,24 +2433,6 @@ var nonIterableRest = { exports: {} };
   module.exports = _slicedToArray3;
   module.exports["default"] = module.exports, module.exports.__esModule = true;
 })(slicedToArray);
-var defineProperty$1 = { exports: {} };
-(function(module) {
-  function _defineProperty3(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
-  module.exports = _defineProperty3;
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-})(defineProperty$1);
 var objectWithoutProperties = { exports: {} };
 var objectWithoutPropertiesLoose = { exports: {} };
 (function(module) {
@@ -2440,7 +2476,7 @@ var objectWithoutPropertiesLoose = { exports: {} };
   module.exports = _objectWithoutProperties;
   module.exports["default"] = module.exports, module.exports.__esModule = true;
 })(objectWithoutProperties);
-var _classnames_2_3_1_classnames = { exports: {} };
+var classnames = { exports: {} };
 /*!
   Copyright (c) 2018 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -2486,54 +2522,18 @@ var _classnames_2_3_1_classnames = { exports: {} };
       window.classNames = classNames2;
     }
   })();
-})(_classnames_2_3_1_classnames);
-var classNames = _classnames_2_3_1_classnames.exports;
+})(classnames);
+var classNames = classnames.exports;
 var Context = {};
 Object.defineProperty(Context, "__esModule", {
   value: true
 });
 Context.default = void 0;
-var _react$1 = require$$0;
+var _react$1 = require$$3;
 var IconContext = /* @__PURE__ */ (0, _react$1.createContext)({});
-var _default$5 = IconContext;
-Context.default = _default$5;
+var _default$6 = IconContext;
+Context.default = _default$6;
 var IconBase$1 = {};
-var objectSpread2 = { exports: {} };
-(function(module) {
-  var defineProperty2 = defineProperty$1.exports;
-  function ownKeys(object, enumerableOnly) {
-    var keys2 = Object.keys(object);
-    if (Object.getOwnPropertySymbols) {
-      var symbols2 = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) {
-        symbols2 = symbols2.filter(function(sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-      }
-      keys2.push.apply(keys2, symbols2);
-    }
-    return keys2;
-  }
-  function _objectSpread22(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function(key) {
-          defineProperty2(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function(key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-    return target;
-  }
-  module.exports = _objectSpread22;
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
-})(objectSpread2);
 var utils = {};
 function bound01(n2, max) {
   if (isOnePointZero(n2)) {
@@ -3204,8 +3204,8 @@ function warningOnce(valid, message2) {
 function noteOnce(valid, message2) {
   call(note, valid, message2);
 }
-var _default$4 = warningOnce;
-warning$2.default = _default$4;
+var _default$5 = warningOnce;
+warning$2.default = _default$5;
 var dynamicCSS = {};
 var canUseDom$1 = {};
 Object.defineProperty(canUseDom$1, "__esModule", {
@@ -3215,13 +3215,13 @@ canUseDom$1.default = canUseDom;
 function canUseDom() {
   return !!(typeof window !== "undefined" && window.document && window.document.createElement);
 }
-var _interopRequireDefault$6 = interopRequireDefault.exports;
+var _interopRequireDefault$7 = interopRequireDefault.exports;
 Object.defineProperty(dynamicCSS, "__esModule", {
   value: true
 });
 dynamicCSS.injectCSS = injectCSS;
 dynamicCSS.updateCSS = updateCSS;
-var _canUseDom = _interopRequireDefault$6(canUseDom$1);
+var _canUseDom = _interopRequireDefault$7(canUseDom$1);
 var MARK_KEY = "rc-util-key";
 function getContainer(option) {
   if (option.attachTo) {
@@ -3281,8 +3281,8 @@ function updateCSS(css, key) {
   newNode[MARK_KEY] = key;
   return newNode;
 }
-var _interopRequireWildcard$3 = interopRequireWildcard.exports;
-var _interopRequireDefault$5 = interopRequireDefault.exports;
+var _interopRequireWildcard$4 = interopRequireWildcard.exports;
+var _interopRequireDefault$6 = interopRequireDefault.exports;
 Object.defineProperty(utils, "__esModule", {
   value: true
 });
@@ -3293,13 +3293,13 @@ utils.generate = generate;
 utils.getSecondaryColor = getSecondaryColor;
 utils.normalizeTwoToneColors = normalizeTwoToneColors;
 utils.useInsertStyles = utils.iconStyles = utils.svgBaseProps = void 0;
-var _objectSpread2$1 = _interopRequireDefault$5(objectSpread2.exports);
-var _typeof2 = _interopRequireDefault$5(_typeof.exports);
+var _objectSpread2$5 = _interopRequireDefault$6(objectSpread2.exports);
+var _typeof2 = _interopRequireDefault$6(_typeof.exports);
 var _colors = require$$4;
-var _react = _interopRequireWildcard$3(require$$0);
-var _warning = _interopRequireDefault$5(warning$2);
+var _react = _interopRequireWildcard$4(require$$3);
+var _warning = _interopRequireDefault$6(warning$2);
 var _dynamicCSS = dynamicCSS;
-var _Context$1 = _interopRequireDefault$5(Context);
+var _Context$1 = _interopRequireDefault$6(Context);
 function warning(valid, message2) {
   (0, _warning.default)(valid, "[@ant-design/icons] ".concat(message2));
 }
@@ -3323,13 +3323,13 @@ function normalizeAttrs() {
 }
 function generate(node, key, rootProps) {
   if (!rootProps) {
-    return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$1.default)({
+    return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$5.default)({
       key
     }, normalizeAttrs(node.attrs)), (node.children || []).map(function(child, index2) {
       return generate(child, "".concat(key, "-").concat(node.tag, "-").concat(index2));
     }));
   }
-  return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$1.default)((0, _objectSpread2$1.default)({
+  return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$5.default)((0, _objectSpread2$5.default)({
     key
   }, normalizeAttrs(node.attrs)), rootProps), (node.children || []).map(function(child, index2) {
     return generate(child, "".concat(key, "-").concat(node.tag, "-").concat(index2));
@@ -3365,14 +3365,15 @@ var useInsertStyles = function useInsertStyles2() {
   }, []);
 };
 utils.useInsertStyles = useInsertStyles;
-var _interopRequireDefault$4 = interopRequireDefault.exports;
+var _interopRequireDefault$5 = interopRequireDefault.exports;
 Object.defineProperty(IconBase$1, "__esModule", {
   value: true
 });
 IconBase$1.default = void 0;
-var _objectWithoutProperties2$1 = _interopRequireDefault$4(objectWithoutProperties.exports);
-var _objectSpread2 = _interopRequireDefault$4(objectSpread2.exports);
+var _objectWithoutProperties2$1 = _interopRequireDefault$5(objectWithoutProperties.exports);
+var _objectSpread2$4 = _interopRequireDefault$5(objectSpread2.exports);
 var _utils$2 = utils;
+var _excluded$1 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
 var twoToneColorPalette = {
   primaryColor: "#333",
   secondaryColor: "#E6E6E6",
@@ -3385,10 +3386,10 @@ function setTwoToneColors(_ref) {
   twoToneColorPalette.calculated = !!secondaryColor;
 }
 function getTwoToneColors() {
-  return (0, _objectSpread2.default)({}, twoToneColorPalette);
+  return (0, _objectSpread2$4.default)({}, twoToneColorPalette);
 }
 var IconBase = function IconBase2(props) {
-  var icon = props.icon, className = props.className, onClick = props.onClick, style = props.style, primaryColor = props.primaryColor, secondaryColor = props.secondaryColor, restProps = (0, _objectWithoutProperties2$1.default)(props, ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"]);
+  var icon = props.icon, className = props.className, onClick = props.onClick, style = props.style, primaryColor = props.primaryColor, secondaryColor = props.secondaryColor, restProps = (0, _objectWithoutProperties2$1.default)(props, _excluded$1);
   var colors = twoToneColorPalette;
   if (primaryColor) {
     colors = {
@@ -3403,11 +3404,11 @@ var IconBase = function IconBase2(props) {
   }
   var target = icon;
   if (target && typeof target.icon === "function") {
-    target = (0, _objectSpread2.default)((0, _objectSpread2.default)({}, target), {}, {
+    target = (0, _objectSpread2$4.default)((0, _objectSpread2$4.default)({}, target), {}, {
       icon: target.icon(colors.primaryColor, colors.secondaryColor)
     });
   }
-  return (0, _utils$2.generate)(target.icon, "svg-".concat(target.name), (0, _objectSpread2.default)({
+  return (0, _utils$2.generate)(target.icon, "svg-".concat(target.name), (0, _objectSpread2$4.default)({
     className,
     onClick,
     style,
@@ -3421,17 +3422,17 @@ var IconBase = function IconBase2(props) {
 IconBase.displayName = "IconReact";
 IconBase.getTwoToneColors = getTwoToneColors;
 IconBase.setTwoToneColors = setTwoToneColors;
-var _default$3 = IconBase;
-IconBase$1.default = _default$3;
+var _default$4 = IconBase;
+IconBase$1.default = _default$4;
 var twoTonePrimaryColor = {};
-var _interopRequireDefault$3 = interopRequireDefault.exports;
+var _interopRequireDefault$4 = interopRequireDefault.exports;
 Object.defineProperty(twoTonePrimaryColor, "__esModule", {
   value: true
 });
 twoTonePrimaryColor.setTwoToneColor = setTwoToneColor;
 twoTonePrimaryColor.getTwoToneColor = getTwoToneColor;
-var _slicedToArray2$1 = _interopRequireDefault$3(slicedToArray.exports);
-var _IconBase$1 = _interopRequireDefault$3(IconBase$1);
+var _slicedToArray2$1 = _interopRequireDefault$4(slicedToArray.exports);
+var _IconBase$1 = _interopRequireDefault$4(IconBase$1);
 var _utils$1 = utils;
 function setTwoToneColor(twoToneColor) {
   var _normalizeTwoToneColo = (0, _utils$1.normalizeTwoToneColors)(twoToneColor), _normalizeTwoToneColo2 = (0, _slicedToArray2$1.default)(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
@@ -3447,26 +3448,28 @@ function getTwoToneColor() {
   }
   return [colors.primaryColor, colors.secondaryColor];
 }
-var _interopRequireWildcard$2 = interopRequireWildcard.exports;
-var _interopRequireDefault$2 = interopRequireDefault.exports;
+var _interopRequireDefault$3 = interopRequireDefault.exports;
+var _interopRequireWildcard$3 = interopRequireWildcard.exports;
 Object.defineProperty(AntdIcon, "__esModule", {
   value: true
 });
 AntdIcon.default = void 0;
-var _slicedToArray2 = _interopRequireDefault$2(slicedToArray.exports);
-var _defineProperty2 = _interopRequireDefault$2(defineProperty$1.exports);
-var _objectWithoutProperties2 = _interopRequireDefault$2(objectWithoutProperties.exports);
-var React$4 = _interopRequireWildcard$2(require$$0);
-var _classnames = _interopRequireDefault$2(_classnames_2_3_1_classnames.exports);
-var _Context = _interopRequireDefault$2(Context);
-var _IconBase = _interopRequireDefault$2(IconBase$1);
+var _objectSpread2$3 = _interopRequireDefault$3(objectSpread2.exports);
+var _slicedToArray2 = _interopRequireDefault$3(slicedToArray.exports);
+var _defineProperty2 = _interopRequireDefault$3(defineProperty$1.exports);
+var _objectWithoutProperties2 = _interopRequireDefault$3(objectWithoutProperties.exports);
+var React$5 = _interopRequireWildcard$3(require$$3);
+var _classnames = _interopRequireDefault$3(classnames.exports);
+var _Context = _interopRequireDefault$3(Context);
+var _IconBase = _interopRequireDefault$3(IconBase$1);
 var _twoTonePrimaryColor = twoTonePrimaryColor;
 var _utils = utils;
+var _excluded = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
 (0, _twoTonePrimaryColor.setTwoToneColor)("#1890ff");
-var Icon = /* @__PURE__ */ React$4.forwardRef(function(props, ref) {
+var Icon = /* @__PURE__ */ React$5.forwardRef(function(props, ref) {
   var _classNames;
-  var className = props.className, icon = props.icon, spin = props.spin, rotate = props.rotate, tabIndex = props.tabIndex, onClick = props.onClick, twoToneColor = props.twoToneColor, restProps = (0, _objectWithoutProperties2.default)(props, ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"]);
-  var _React$useContext = React$4.useContext(_Context.default), _React$useContext$pre = _React$useContext.prefixCls, prefixCls = _React$useContext$pre === void 0 ? "anticon" : _React$useContext$pre;
+  var className = props.className, icon = props.icon, spin = props.spin, rotate = props.rotate, tabIndex = props.tabIndex, onClick = props.onClick, twoToneColor = props.twoToneColor, restProps = (0, _objectWithoutProperties2.default)(props, _excluded);
+  var _React$useContext = React$5.useContext(_Context.default), _React$useContext$pre = _React$useContext.prefixCls, prefixCls = _React$useContext$pre === void 0 ? "anticon" : _React$useContext$pre;
   var classString = (0, _classnames.default)(prefixCls, (_classNames = {}, (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === "loading"), _classNames), className);
   var iconTabIndex = tabIndex;
   if (iconTabIndex === void 0 && onClick) {
@@ -3477,15 +3480,15 @@ var Icon = /* @__PURE__ */ React$4.forwardRef(function(props, ref) {
     transform: "rotate(".concat(rotate, "deg)")
   } : void 0;
   var _normalizeTwoToneColo = (0, _utils.normalizeTwoToneColors)(twoToneColor), _normalizeTwoToneColo2 = (0, _slicedToArray2.default)(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
-  return /* @__PURE__ */ React$4.createElement("span", Object.assign({
+  return /* @__PURE__ */ React$5.createElement("span", (0, _objectSpread2$3.default)((0, _objectSpread2$3.default)({
     role: "img",
     "aria-label": icon.name
-  }, restProps, {
+  }, restProps), {}, {
     ref,
     tabIndex: iconTabIndex,
     onClick,
     className: classString
-  }), /* @__PURE__ */ React$4.createElement(_IconBase.default, {
+  }), /* @__PURE__ */ React$5.createElement(_IconBase.default, {
     icon,
     primaryColor,
     secondaryColor,
@@ -3495,26 +3498,27 @@ var Icon = /* @__PURE__ */ React$4.forwardRef(function(props, ref) {
 Icon.displayName = "AntdIcon";
 Icon.getTwoToneColor = _twoTonePrimaryColor.getTwoToneColor;
 Icon.setTwoToneColor = _twoTonePrimaryColor.setTwoToneColor;
-var _default$2 = Icon;
-AntdIcon.default = _default$2;
-var _interopRequireDefault$1 = interopRequireDefault.exports;
-var _interopRequireWildcard$1 = interopRequireWildcard.exports;
+var _default$3 = Icon;
+AntdIcon.default = _default$3;
+var _interopRequireWildcard$2 = interopRequireWildcard.exports;
+var _interopRequireDefault$2 = interopRequireDefault.exports;
 Object.defineProperty(DoubleLeftOutlined$4, "__esModule", {
   value: true
 });
 DoubleLeftOutlined$4.default = void 0;
-var React$3 = _interopRequireWildcard$1(require$$0);
-var _DoubleLeftOutlined = _interopRequireDefault$1(DoubleLeftOutlined$3);
-var _AntdIcon$1 = _interopRequireDefault$1(AntdIcon);
+var _objectSpread2$2 = _interopRequireDefault$2(objectSpread2.exports);
+var React$4 = _interopRequireWildcard$2(require$$3);
+var _DoubleLeftOutlined = _interopRequireDefault$2(DoubleLeftOutlined$3);
+var _AntdIcon$2 = _interopRequireDefault$2(AntdIcon);
 var DoubleLeftOutlined$1 = function DoubleLeftOutlined(props, ref) {
-  return /* @__PURE__ */ React$3.createElement(_AntdIcon$1.default, Object.assign({}, props, {
+  return /* @__PURE__ */ React$4.createElement(_AntdIcon$2.default, (0, _objectSpread2$2.default)((0, _objectSpread2$2.default)({}, props), {}, {
     ref,
     icon: _DoubleLeftOutlined.default
   }));
 };
 DoubleLeftOutlined$1.displayName = "DoubleLeftOutlined";
-var _default$1 = /* @__PURE__ */ React$3.forwardRef(DoubleLeftOutlined$1);
-DoubleLeftOutlined$4.default = _default$1;
+var _default$2 = /* @__PURE__ */ React$4.forwardRef(DoubleLeftOutlined$1);
+DoubleLeftOutlined$4.default = _default$2;
 (function(module, exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3535,24 +3539,25 @@ var CloseOutlined$3 = {};
 Object.defineProperty(CloseOutlined$3, "__esModule", { value: true });
 var CloseOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z" } }] }, "name": "close", "theme": "outlined" };
 CloseOutlined$3.default = CloseOutlined$2;
-var _interopRequireDefault = interopRequireDefault.exports;
-var _interopRequireWildcard = interopRequireWildcard.exports;
+var _interopRequireWildcard$1 = interopRequireWildcard.exports;
+var _interopRequireDefault$1 = interopRequireDefault.exports;
 Object.defineProperty(CloseOutlined$4, "__esModule", {
   value: true
 });
 CloseOutlined$4.default = void 0;
-var React$2 = _interopRequireWildcard(require$$0);
-var _CloseOutlined = _interopRequireDefault(CloseOutlined$3);
-var _AntdIcon = _interopRequireDefault(AntdIcon);
+var _objectSpread2$1 = _interopRequireDefault$1(objectSpread2.exports);
+var React$3 = _interopRequireWildcard$1(require$$3);
+var _CloseOutlined = _interopRequireDefault$1(CloseOutlined$3);
+var _AntdIcon$1 = _interopRequireDefault$1(AntdIcon);
 var CloseOutlined$1 = function CloseOutlined(props, ref) {
-  return /* @__PURE__ */ React$2.createElement(_AntdIcon.default, Object.assign({}, props, {
+  return /* @__PURE__ */ React$3.createElement(_AntdIcon$1.default, (0, _objectSpread2$1.default)((0, _objectSpread2$1.default)({}, props), {}, {
     ref,
     icon: _CloseOutlined.default
   }));
 };
 CloseOutlined$1.displayName = "CloseOutlined";
-var _default = /* @__PURE__ */ React$2.forwardRef(CloseOutlined$1);
-CloseOutlined$4.default = _default;
+var _default$1 = /* @__PURE__ */ React$3.forwardRef(CloseOutlined$1);
+CloseOutlined$4.default = _default$1;
 (function(module, exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3567,7 +3572,7 @@ CloseOutlined$4.default = _default;
   module.exports = _default2;
 })(CloseOutlined$5, CloseOutlined$5.exports);
 var CloseOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(CloseOutlined$5.exports);
-var index$7 = ".vision-property-container {\n  position: relative;\n  z-index: 999;\n}\n@media screen and (max-width: 750px) {\n  .vision-property-container {\n    position: fixed;\n    z-index: 3;\n    height: 100vh;\n    right: 0;\n    top: 0;\n  }\n}\n.vision-property-container .ant-drawer-header {\n  border-bottom: 0;\n}\n.vision-property-container .ant-drawer-title {\n  display: flex;\n  align-items: center;\n}\n.vision-property-container .ant-drawer-wrapper-body {\n  margin-left: 15px;\n  height: 100%;\n  width: 300px;\n}\n.vision-property-container .ant-drawer-wrapper-body > div {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n}\n.vision-property-container .ant-drawer-wrapper-body .ant-drawer-body {\n  position: relative;\n  flex: 1;\n}\n.vision-property-container .vision-title-icon {\n  width: 1.2em;\n  margin-right: 0.3em;\n}\n.vision-property-container .icon-vision-property-show {\n  position: fixed;\n  top: 20px;\n  right: 30px;\n}";
+var index$7 = "";
 const PANE_VISIBLE = "pane_visible";
 const { Bundle, Node, ui } = window.VisualEngine;
 const { Button } = window.antd;
@@ -3651,8 +3656,8 @@ class VisionPane extends modules$1.PureComponent {
     }, /* @__PURE__ */ modules$1.createElement(Button, null, /* @__PURE__ */ modules$1.createElement(DoubleLeftOutlined2, null), "Vision \u9762\u677F"))) : null;
   }
 }
-var index$6 = "#public-component-show-container {\n  display: flex;\n  position: relative;\n  min-height: 100vh;\n  overflow: auto;\n  width: 100%;\n  flex: 1;\n  background: #f2f3f7;\n  padding: 20px;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n#public-component-show-container .link-title {\n  display: flex;\n  flex-direction: column;\n  width: fit-content;\n}\n#public-component-show-container .component-main {\n  position: relative;\n  display: flex;\n}\n#public-component-show-container .component-part {\n  flex: 1;\n  overflow: auto;\n}\n#public-component-show-container .component-name {\n  padding: 0;\n  border: 0;\n  margin: 0;\n  font-size: 3.5em;\n  font-weight: 800;\n  outline: 0;\n  vertical-align: baseline;\n  line-height: 1.2;\n}\n#public-component-show-container .component-sub-title {\n  font-size: 1em;\n  font-weight: 600;\n  vertical-align: baseline;\n  margin-bottom: 8px;\n  display: block;\n  color: #6f6f6f;\n}\n#public-component-show-container .component-sub-title > span {\n  margin-right: 1em;\n}\n#public-component-show-container .component-block {\n  background: #fff;\n  box-sizing: border-box;\n  overflow: hidden;\n  border: 1px #ccc solid;\n  border-bottom: unset;\n  border-top: unset;\n}\n#public-component-show-container .component-block:first-child {\n  border-radius: 7px 7px 0 0;\n  border-top: 1px #ccc solid;\n}\n#public-component-show-container .component-block:last-child {\n  border-radius: 0 0 7px 7px;\n  border-bottom: 1px #ccc solid;\n}\n#public-component-show-container .component-block:first-child:last-child {\n  border-radius: 7px;\n  border: 1px #ccc solid;\n}\n#public-component-show-container .component-container {\n  min-height: 300px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#public-component-show-container .component-description {\n  border-top: 1px solid #eee;\n  font-size: 14px;\n  padding: 20px;\n}\n#public-component-show-container .component-description > .block-title {\n  font-size: 1.3em;\n  display: block;\n  line-height: 2;\n}\n#public-component-show-container .component-description > code {\n  border: 1px solid #e7e9ed;\n  background-color: #f8fafc;\n  display: block;\n  padding: 5px 10px;\n  margin: 5px 0;\n  word-break: break-all;\n  word-wrap: break-word;\n  border-radius: 2px;\n  color: #5b6169;\n  font-size: 13px;\n  line-height: 1.6em;\n}\n#public-component-show-container .ant-tabs-bottom .ant-tabs-bottom-bar {\n  margin-top: 0;\n}\n#public-component-show-container .ant-tabs-nav .ant-tabs-tab {\n  margin: 0;\n}\n#public-component-show-container .ant-tabs .ant-tabs-small-bar .ant-tabs-tab {\n  padding: 8px 16px;\n}\n@media screen and (max-width: 750px) {\n  #public-component-show-container {\n    padding: 20px 0;\n  }\n  #public-component-show-container .component-block {\n    border-radius: 0 !important;\n  }\n}";
-var index$5 = ".component-block > .ant-affix {\n  background: #fff;\n  border-radius: 0 0 6px 6px;\n  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);\n  border: 1px solid #eee;\n}";
+var index$6 = "";
+var index$5 = "";
 const { Result } = window["antd"];
 function ComponentArea(props) {
   const { componentProps, onSetDefaultProps, data: Components } = props;
@@ -3788,7 +3793,7 @@ function _inheritsLoose(subClass, superClass) {
   subClass.prototype.constructor = subClass;
   _setPrototypeOf(subClass, superClass);
 }
-var _propTypes_15_7_2_propTypes$1 = { exports: {} };
+var _propTypes_15_7_2_propTypes = { exports: {} };
 var ReactPropTypesSecret$3 = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
 var ReactPropTypesSecret_1$1 = ReactPropTypesSecret$3;
 var ReactPropTypesSecret$2 = ReactPropTypesSecret_1$1;
@@ -3836,9 +3841,9 @@ var factoryWithThrowingShims$1 = function() {
   return ReactPropTypes;
 };
 {
-  _propTypes_15_7_2_propTypes$1.exports = factoryWithThrowingShims$1();
+  _propTypes_15_7_2_propTypes.exports = factoryWithThrowingShims$1();
 }
-var PropTypes$1 = _propTypes_15_7_2_propTypes$1.exports;
+var PropTypes$1 = _propTypes_15_7_2_propTypes.exports;
 function _extends() {
   _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -5024,7 +5029,7 @@ function pathToRegexp(path, keys2, options) {
   return stringToRegexp(path, keys2, options);
 }
 var pathToRegexp$1 = _pathToRegexp_1_8_0_pathToRegexp.exports;
-var _reactIs_16_13_1_reactIs$1 = { exports: {} };
+var _reactIs_16_13_1_reactIs = { exports: {} };
 var reactIs_production_min$1 = {};
 /** @license React v16.13.1
  * react-is.production.min.js
@@ -5123,7 +5128,7 @@ reactIs_production_min$1.isValidElementType = function(a) {
 };
 reactIs_production_min$1.typeOf = z$1;
 {
-  _reactIs_16_13_1_reactIs$1.exports = reactIs_production_min$1;
+  _reactIs_16_13_1_reactIs.exports = reactIs_production_min$1;
 }
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null)
@@ -5139,7 +5144,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   }
   return target;
 }
-var reactIs = _reactIs_16_13_1_reactIs$1.exports;
+var reactIs$1 = _reactIs_16_13_1_reactIs.exports;
 var FORWARD_REF_STATICS = {
   "$$typeof": true,
   render: true,
@@ -5156,8 +5161,8 @@ var MEMO_STATICS = {
   type: true
 };
 var TYPE_STATICS = {};
-TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+TYPE_STATICS[reactIs$1.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[reactIs$1.Memo] = MEMO_STATICS;
 var createNamedContext = function createNamedContext2(name) {
   var context2 = index$4();
   context2.displayName = name;
@@ -5643,10 +5648,10 @@ if (typeof forwardRef$1 === "undefined") {
   forwardRef$1 = forwardRefShim$1;
 }
 function joinClassnames() {
-  for (var _len = arguments.length, classnames = new Array(_len), _key = 0; _key < _len; _key++) {
-    classnames[_key] = arguments[_key];
+  for (var _len = arguments.length, classnames2 = new Array(_len), _key = 0; _key < _len; _key++) {
+    classnames2[_key] = arguments[_key];
   }
-  return classnames.filter(function(i) {
+  return classnames2.filter(function(i) {
     return i;
   }).join(" ");
 }
@@ -5790,9 +5795,9 @@ function useMarkdown() {
     setRenderIndex
   };
 }
-var immutable = extend$1;
+var immutable = extend$2;
 var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
-function extend$1() {
+function extend$2() {
   var target = {};
   for (var i = 0; i < arguments.length; i++) {
     var source = arguments[i];
@@ -5804,7 +5809,7 @@ function extend$1() {
   }
   return target;
 }
-var _bail_1_0_5_bail = bail$1;
+var bail_1 = bail$1;
 function bail$1(err) {
   if (err) {
     throw err;
@@ -5816,7 +5821,7 @@ function bail$1(err) {
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
-var _isBuffer_2_0_5_isBuffer = function isBuffer2(obj) {
+var isBuffer = function isBuffer2(obj) {
   return obj != null && obj.constructor != null && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj);
 };
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -5865,7 +5870,7 @@ var getProperty = function getProperty2(obj, name) {
   }
   return obj[name];
 };
-var _extend_3_0_2_extend = function extend() {
+var extend$1 = function extend() {
   var options, name, src, copy, copyIsArray, clone;
   var target = arguments[0];
   var i = 1;
@@ -5903,7 +5908,7 @@ var _extend_3_0_2_extend = function extend() {
   }
   return target;
 };
-var _isPlainObj_2_1_0_isPlainObj = (value) => {
+var isPlainObj = (value) => {
   if (Object.prototype.toString.call(value) !== "[object Object]") {
     return false;
   }
@@ -5951,7 +5956,7 @@ function wrap$2(fn, callback) {
   }
 }
 var wrap$1 = wrap_1;
-var _trough_1_0_5_trough = trough$1;
+var trough_1 = trough$1;
 trough$1.wrap = wrap$1;
 var slice$1 = [].slice;
 function trough$1() {
@@ -6000,7 +6005,7 @@ function trough$1() {
   }
 }
 var own$4 = {}.hasOwnProperty;
-var _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition = stringify$1;
+var unistUtilStringifyPosition = stringify$1;
 function stringify$1(value) {
   if (!value || typeof value !== "object") {
     return "";
@@ -6031,8 +6036,8 @@ function position(pos) {
 function index$3(value) {
   return value && typeof value === "number" ? value : 1;
 }
-var stringify = _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition;
-var _vfileMessage_2_0_4_vfileMessage = VMessage$1;
+var stringify = unistUtilStringifyPosition;
+var vfileMessage = VMessage$1;
 function VMessagePrototype() {
 }
 VMessagePrototype.prototype = Error.prototype;
@@ -6327,7 +6332,7 @@ function cwd() {
 }
 var p$1 = minpath_browser;
 var proc = minproc_browser;
-var buffer$1 = _isBuffer_2_0_5_isBuffer;
+var buffer$1 = isBuffer;
 var core = VFile$1;
 var own$3 = {}.hasOwnProperty;
 var order = ["history", "path", "basename", "stem", "extname", "dirname"];
@@ -6442,13 +6447,13 @@ function assertPath(path, name) {
     throw new Error("Setting `" + name + "` requires `path` to be set too");
   }
 }
-var VMessage = _vfileMessage_2_0_4_vfileMessage;
+var VMessage = vfileMessage;
 var VFile = core;
 var lib = VFile;
-VFile.prototype.message = message;
+VFile.prototype.message = message$1;
 VFile.prototype.info = info;
 VFile.prototype.fail = fail;
-function message(reason, position2, origin) {
+function message$1(reason, position2, origin) {
   var message2 = new VMessage(reason, position2, origin);
   if (this.path) {
     message2.name = this.path + ":" + message2.name;
@@ -6468,14 +6473,14 @@ function info() {
   message2.fatal = null;
   return message2;
 }
-var _vfile_4_2_1_vfile = lib;
-var bail = _bail_1_0_5_bail;
-var buffer = _isBuffer_2_0_5_isBuffer;
-var extend2 = _extend_3_0_2_extend;
-var plain = _isPlainObj_2_1_0_isPlainObj;
-var trough = _trough_1_0_5_trough;
-var vfile = _vfile_4_2_1_vfile;
-var _unified_9_2_2_unified = unified$1().freeze();
+var vfile$1 = lib;
+var bail = bail_1;
+var buffer = isBuffer;
+var extend2 = extend$1;
+var plain = isPlainObj;
+var trough = trough_1;
+var vfile = vfile$1;
+var unified_1 = unified$1().freeze();
 var slice = [].slice;
 var own$2 = {}.hasOwnProperty;
 var pipeline = trough().use(pipelineParse).use(pipelineRun).use(pipelineStringify);
@@ -6776,7 +6781,7 @@ function assertDone(name, asyncName, complete) {
     throw new Error("`" + name + "` finished async. Use `" + asyncName + "` instead");
   }
 }
-var _mdastUtilToString_2_0_0_mdastUtilToString = toString$1;
+var mdastUtilToString = toString$1;
 function toString$1(node) {
   return node && (node.value || node.alt || node.title || "children" in node && all(node.children) || "length" in node && all(node)) || "";
 }
@@ -10459,7 +10464,7 @@ function postprocess$1(events) {
 }
 var postprocess_1 = postprocess$1;
 var dist$1 = fromMarkdown$1;
-var toString = _mdastUtilToString_2_0_0_mdastUtilToString;
+var toString = mdastUtilToString;
 var assign = assign_1;
 var own = hasOwnProperty$1;
 var normalizeIdentifier = normalizeIdentifier_1;
@@ -10468,7 +10473,7 @@ var parser = parse_1;
 var preprocessor = preprocess_1;
 var postprocess = postprocess_1;
 var decode = decodeEntity_browser;
-var stringifyPosition = _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition;
+var stringifyPosition = unistUtilStringifyPosition;
 function fromMarkdown$1(value, encoding, options) {
   if (typeof encoding !== "string") {
     options = encoding;
@@ -11036,9 +11041,9 @@ function extension(config, extension2) {
     }
   }
 }
-var _mdastUtilFromMarkdown_0_8_5_mdastUtilFromMarkdown = dist$1;
-var _remarkParse_9_0_0_remarkParse = parse$1;
-var fromMarkdown = _mdastUtilFromMarkdown_0_8_5_mdastUtilFromMarkdown;
+var mdastUtilFromMarkdown = dist$1;
+var remarkParse = parse$1;
+var fromMarkdown = mdastUtilFromMarkdown;
 function parse$1(options) {
   var self2 = this;
   this.Parser = parse2;
@@ -11049,7 +11054,7 @@ function parse$1(options) {
     }));
   }
 }
-var _propTypes_15_7_2_propTypes = { exports: {} };
+var propTypes = { exports: {} };
 var ReactPropTypesSecret$1 = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
 var ReactPropTypesSecret_1 = ReactPropTypesSecret$1;
 var ReactPropTypesSecret = ReactPropTypesSecret_1;
@@ -11097,9 +11102,9 @@ var factoryWithThrowingShims = function() {
   return ReactPropTypes;
 };
 {
-  _propTypes_15_7_2_propTypes.exports = factoryWithThrowingShims();
+  propTypes.exports = factoryWithThrowingShims();
 }
-var _unistUtilVisitParents_1_1_2_unistUtilVisitParents = visitParents$2;
+var unistUtilVisitParents$1 = visitParents$2;
 function visitParents$2(tree, type2, visitor) {
   var stack = [];
   if (typeof type2 === "function") {
@@ -11132,7 +11137,7 @@ function visitParents$2(tree, type2, visitor) {
     return true;
   }
 }
-var visitWithParents = _unistUtilVisitParents_1_1_2_unistUtilVisitParents;
+var visitWithParents = unistUtilVisitParents$1;
 function addListMetadata$1() {
   return function(ast) {
     visitWithParents(ast, "list", function(listNode, parents) {
@@ -11151,7 +11156,7 @@ function addListMetadata$1() {
     return ast;
   };
 }
-var _mdastAddListMetadata_1_0_1_mdastAddListMetadata = addListMetadata$1;
+var mdastAddListMetadata = addListMetadata$1;
 var convert_1 = convert$1;
 function convert$1(test) {
   if (test == null) {
@@ -11209,7 +11214,7 @@ var color_browser = identity;
 function identity(d2) {
   return d2;
 }
-var _unistUtilVisitParents_3_1_1_unistUtilVisitParents = visitParents$1;
+var unistUtilVisitParents = visitParents$1;
 var convert = convert_1;
 var color = color_browser;
 var CONTINUE$1 = true;
@@ -11271,8 +11276,8 @@ function toResult(value) {
   }
   return [value];
 }
-var _unistUtilVisit_2_0_3_unistUtilVisit = visit$4;
-var visitParents = _unistUtilVisitParents_3_1_1_unistUtilVisitParents;
+var unistUtilVisit = visit$4;
+var visitParents = unistUtilVisitParents;
 var CONTINUE = visitParents.CONTINUE;
 var SKIP = visitParents.SKIP;
 var EXIT = visitParents.EXIT;
@@ -11292,7 +11297,7 @@ function visit$4(tree, test, visitor, reverse) {
     return visitor(node, index2, parent);
   }
 }
-var visit$3 = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit$3 = unistUtilVisit;
 var type = "virtualHtml";
 var selfClosingRe = /^<(area|base|br|col|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)\s*\/?>$/i;
 var simpleTagRe = /^<(\/?)([a-z]+)\s*>$/;
@@ -11365,7 +11370,7 @@ function virtual(fromNode, toNode, parent) {
   };
 }
 var disallowNode$1 = {};
-var visit$2 = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit$2 = unistUtilVisit;
 var splice = [].splice;
 disallowNode$1.ofType = function(types, mode) {
   return ifNotMatch(allow, mode);
@@ -11391,7 +11396,7 @@ function ifNotMatch(allow, mode) {
     }
   }
 }
-var _reactIs_16_13_1_reactIs = { exports: {} };
+var reactIs = { exports: {} };
 var reactIs_production_min = {};
 /** @license React v16.13.1
  * react-is.production.min.js
@@ -11490,11 +11495,11 @@ reactIs_production_min.isValidElementType = function(a) {
 };
 reactIs_production_min.typeOf = z;
 {
-  _reactIs_16_13_1_reactIs.exports = reactIs_production_min;
+  reactIs.exports = reactIs_production_min;
 }
-var React$1 = require$$0;
+var React$2 = require$$3;
 var xtend$2 = immutable;
-var ReactIs = _reactIs_16_13_1_reactIs.exports;
+var ReactIs = reactIs.exports;
 function astToReact$1(node, options) {
   var parent = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
   var index2 = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : 0;
@@ -11519,7 +11524,7 @@ function astToReact$1(node, options) {
     throw new Error("Renderer for type `".concat(node.type, "` not defined or is not renderable"));
   }
   var nodeProps = getNodeProps(node, key, options, renderer, parent, index2);
-  return React$1.createElement(renderer, nodeProps, nodeProps.children || resolveChildren() || void 0);
+  return React$2.createElement(renderer, nodeProps, nodeProps.children || resolveChildren() || void 0);
   function resolveChildren() {
     return node.children && node.children.map(function(childNode, i) {
       return astToReact$1(childNode, options, {
@@ -11533,7 +11538,7 @@ function getNodeProps(node, key, opts, renderer, parent, index2) {
   var props = {
     key
   };
-  var isSimpleRenderer = typeof renderer === "string" || renderer === React$1.Fragment;
+  var isSimpleRenderer = typeof renderer === "string" || renderer === React$2.Fragment;
   if (opts.sourcePos && node.position) {
     props["data-sourcepos"] = flattenPosition(node.position);
   }
@@ -11683,14 +11688,14 @@ function assignDefined(target, attrs) {
 function mergeNodeChildren(node, parsedChildren) {
   var el2 = node.element;
   if (Array.isArray(el2)) {
-    var Fragment2 = React$1.Fragment || "div";
-    return React$1.createElement(Fragment2, null, el2);
+    var Fragment2 = React$2.Fragment || "div";
+    return React$2.createElement(Fragment2, null, el2);
   }
   if (el2.props.children || parsedChildren) {
-    var children = React$1.Children.toArray(el2.props.children).concat(parsedChildren);
-    return React$1.cloneElement(el2, null, children);
+    var children = React$2.Children.toArray(el2.props.children).concat(parsedChildren);
+    return React$2.cloneElement(el2, null, children);
   }
-  return React$1.cloneElement(el2, null);
+  return React$2.cloneElement(el2, null);
 }
 function flattenPosition(pos) {
   return [pos.start.line, ":", pos.start.column, "-", pos.end.line, ":", pos.end.column].map(String).join("");
@@ -11718,7 +11723,7 @@ function listItemLoose(node) {
   return spread === void 0 || spread === null ? node.children.length > 1 : spread;
 }
 var astToReact_1 = astToReact$1;
-var visit$1 = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit$1 = unistUtilVisit;
 var wrapTableRows$1 = function(node) {
   visit$1(node, "table", wrap);
   return node;
@@ -11743,7 +11748,7 @@ function wrap(table) {
     });
   }
 }
-var visit = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit = unistUtilVisit;
 var getDefinitions$1 = function getDefinitions(tree) {
   var definitions = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
   visit(tree, "definition", function(node) {
@@ -11787,9 +11792,9 @@ var uriTransformer$1 = function uriTransformer(uri) {
   return "javascript:void(0)";
 };
 var xtend$1 = immutable;
-var React = require$$0;
-var supportsStringRender = parseInt((React.version || "16").slice(0, 2), 10) >= 16;
-var createElement = React.createElement;
+var React$1 = require$$3;
+var supportsStringRender = parseInt((React$1.version || "16").slice(0, 2), 10) >= 16;
+var createElement = React$1.createElement;
 var renderers = {
   break: "br",
   paragraph: "p",
@@ -11825,7 +11830,7 @@ function TextRenderer(props) {
 }
 function Root(props) {
   var className = props.className;
-  var root2 = !className && React.Fragment || "div";
+  var root2 = !className && React$1.Fragment || "div";
   return createElement(root2, className ? {
     className
   } : null, props.children);
@@ -11881,7 +11886,7 @@ function Html(props) {
   var dangerous = props.allowDangerousHtml || props.escapeHtml === false;
   var tag = props.isBlock ? "div" : "span";
   if (!dangerous) {
-    return createElement(React.Fragment || tag, null, props.value);
+    return createElement(React$1.Fragment || tag, null, props.value);
   }
   var nodeProps = {
     dangerouslySetInnerHTML: {
@@ -11891,7 +11896,7 @@ function Html(props) {
   return createElement(tag, nodeProps);
 }
 function ParsedHtml(props) {
-  return props["data-sourcepos"] ? React.cloneElement(props.element, {
+  return props["data-sourcepos"] ? React$1.cloneElement(props.element, {
     "data-sourcepos": props["data-sourcepos"]
   }) : props.element;
 }
@@ -11911,10 +11916,10 @@ var symbols$1 = {};
 var HtmlParser = "__RMD_HTML_PARSER__";
 symbols$1.HtmlParser = typeof Symbol === "undefined" ? HtmlParser : Symbol(HtmlParser);
 var xtend = immutable;
-var unified = _unified_9_2_2_unified;
-var parse = _remarkParse_9_0_0_remarkParse;
-var PropTypes = _propTypes_15_7_2_propTypes.exports;
-var addListMetadata = _mdastAddListMetadata_1_0_1_mdastAddListMetadata;
+var unified = unified_1;
+var parse = remarkParse;
+var PropTypes = propTypes.exports;
+var addListMetadata = mdastAddListMetadata;
 var naiveHtml = naiveHtml$1;
 var disallowNode = disallowNode$1;
 var astToReact = astToReact_1;
@@ -11999,7 +12004,7 @@ var reactMarkdown = ReactMarkdown;
 var dist = { exports: {} };
 (function(module, exports) {
   !function(e2, n2) {
-    module.exports = n2(require$$0);
+    module.exports = n2(require$$3);
   }(window, function(e2) {
     return function(e3) {
       var n2 = {};
@@ -13030,26 +13035,38 @@ jsx.aliases = [];
 function jsx(Prism) {
   (function(Prism2) {
     var javascript = Prism2.util.clone(Prism2.languages.javascript);
+    var space = /(?:\s|\/\/.*(?!.)|\/\*(?:[^*]|\*(?!\/))\*\/)/.source;
+    var braces = /(?:\{(?:\{(?:\{[^{}]*\}|[^{}])*\}|[^{}])*\})/.source;
+    var spread = /(?:\{<S>*\.{3}(?:[^{}]|<BRACES>)*\})/.source;
+    function re(source, flags2) {
+      source = source.replace(/<S>/g, function() {
+        return space;
+      }).replace(/<BRACES>/g, function() {
+        return braces;
+      }).replace(/<SPREAD>/g, function() {
+        return spread;
+      });
+      return RegExp(source, flags2);
+    }
+    spread = re(spread).source;
     Prism2.languages.jsx = Prism2.languages.extend("markup", javascript);
-    Prism2.languages.jsx.tag.pattern = /<\/?(?:[\w.:-]+\s*(?:\s+(?:[\w.:-]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s{'">=]+|\{(?:\{(?:\{[^}]*\}|[^{}])*\}|[^{}])+\}))?|\{\.{3}[a-z_$][\w$]*(?:\.[a-z_$][\w$]*)*\}))*\s*\/?)?>/i;
+    Prism2.languages.jsx.tag.pattern = re(/<\/?(?:[\w.:-]+(?:<S>+(?:[\w.:$-]+(?:=(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s{'"/>=]+|<BRACES>))?|<SPREAD>))*<S>*\/?)?>/.source);
     Prism2.languages.jsx.tag.inside["tag"].pattern = /^<\/?[^\s>\/]*/i;
-    Prism2.languages.jsx.tag.inside["attr-value"].pattern = /=(?!\{)(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">]+)/i;
+    Prism2.languages.jsx.tag.inside["attr-value"].pattern = /=(?!\{)(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s'">]+)/i;
     Prism2.languages.jsx.tag.inside["tag"].inside["class-name"] = /^[A-Z]\w*(?:\.[A-Z]\w*)*$/;
+    Prism2.languages.jsx.tag.inside["comment"] = javascript["comment"];
     Prism2.languages.insertBefore("inside", "attr-name", {
       spread: {
-        pattern: /\{\.{3}[a-z_$][\w$]*(?:\.[a-z_$][\w$]*)*\}/,
-        inside: {
-          punctuation: /\.{3}|[{}.]/,
-          "attr-value": /\w+/
-        }
+        pattern: re(/<SPREAD>/.source),
+        inside: Prism2.languages.jsx
       }
     }, Prism2.languages.jsx.tag);
-    Prism2.languages.insertBefore("inside", "attr-value", {
+    Prism2.languages.insertBefore("inside", "special-attr", {
       script: {
-        pattern: /=(\{(?:\{(?:\{[^}]*\}|[^}])*\}|[^}])+\})/i,
+        pattern: re(/=<BRACES>/.source),
         inside: {
           "script-punctuation": {
-            pattern: /^=(?={)/,
+            pattern: /^=(?=\{)/,
             alias: "punctuation"
           },
           rest: Prism2.languages.jsx
@@ -13130,11 +13147,47 @@ var typescript_1 = typescript;
 typescript.displayName = "typescript";
 typescript.aliases = ["ts"];
 function typescript(Prism) {
-  Prism.languages.typescript = Prism.languages.extend("javascript", {
-    keyword: /\b(?:abstract|as|async|await|break|case|catch|class|const|constructor|continue|debugger|declare|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|is|keyof|let|module|namespace|new|null|of|package|private|protected|public|readonly|return|require|set|static|super|switch|this|throw|try|type|typeof|var|void|while|with|yield)\b/,
-    builtin: /\b(?:string|Function|any|number|boolean|Array|symbol|console|Promise|unknown|never)\b/
-  });
-  Prism.languages.ts = Prism.languages.typescript;
+  (function(Prism2) {
+    Prism2.languages.typescript = Prism2.languages.extend("javascript", {
+      "class-name": {
+        pattern: /(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
+        lookbehind: true,
+        greedy: true,
+        inside: null
+      },
+      builtin: /\b(?:string|Function|any|number|boolean|Array|symbol|console|Promise|unknown|never)\b/
+    });
+    Prism2.languages.typescript.keyword.push(/\b(?:abstract|as|declare|implements|is|keyof|readonly|require)\b/, /\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/, /\btype\b(?=\s*(?:[\{*]|$))/);
+    delete Prism2.languages.typescript["parameter"];
+    var typeInside = Prism2.languages.extend("typescript", {});
+    delete typeInside["class-name"];
+    Prism2.languages.typescript["class-name"].inside = typeInside;
+    Prism2.languages.insertBefore("typescript", "function", {
+      decorator: {
+        pattern: /@[$\w\xA0-\uFFFF]+/,
+        inside: {
+          at: {
+            pattern: /^@/,
+            alias: "operator"
+          },
+          function: /^[\s\S]+/
+        }
+      },
+      "generic-function": {
+        pattern: /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>(?=\s*\()/,
+        greedy: true,
+        inside: {
+          function: /^#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*/,
+          generic: {
+            pattern: /<[\s\S]+/,
+            alias: "class-name",
+            inside: typeInside
+          }
+        }
+      }
+    });
+    Prism2.languages.ts = Prism2.languages.typescript;
+  })(Prism);
 }
 var refractorJsx = jsx_1;
 var refractorTypescript = typescript_1;
@@ -13144,9 +13197,15 @@ tsx.aliases = [];
 function tsx(Prism) {
   Prism.register(refractorJsx);
   Prism.register(refractorTypescript);
-  var typescript2 = Prism.util.clone(Prism.languages.typescript);
-  Prism.languages.tsx = Prism.languages.extend("jsx", typescript2);
+  (function(Prism2) {
+    var typescript2 = Prism2.util.clone(Prism2.languages.typescript);
+    Prism2.languages.tsx = Prism2.languages.extend("jsx", typescript2);
+    var tag = Prism2.languages.tsx.tag;
+    tag.pattern = RegExp(/(^|[^\w$]|(?=<\/))/.source + "(?:" + tag.pattern.source + ")", tag.pattern.flags);
+    tag.lookbehind = true;
+  })(Prism);
 }
+var tsx$1 = tsx_1;
 var scss_1 = scss;
 scss.displayName = "scss";
 scss.aliases = [];
@@ -13157,14 +13216,14 @@ function scss(Prism) {
       lookbehind: true
     },
     atrule: {
-      pattern: /@[\w-]+(?:\([^()]+\)|[^(])*?(?=\s+[{;])/,
+      pattern: /@[\w-](?:\([^()]+\)|[^()\s]|\s+(?!\s))*?(?=\s+[{;])/,
       inside: {
         rule: /@[\w-]+/
       }
     },
     url: /(?:[-a-z]+-)?url(?=\()/i,
     selector: {
-      pattern: /(?=\S)[^@;{}()]?(?:[^@;{}()]|#\{\$[-\w]+\})+(?=\s*\{(?:\}|\s|[^}]+[:{][^}]+))/m,
+      pattern: /(?=\S)[^@;{}()]?(?:[^@;{}()\s]|\s+(?!\s)|#\{\$[-\w]+\})+(?=\s*\{(?:\}|\s|[^}][^:{}]*[:{][^}]))/m,
       inside: {
         parent: {
           pattern: /&/,
@@ -13175,7 +13234,7 @@ function scss(Prism) {
       }
     },
     property: {
-      pattern: /(?:[\w-]|\$[-\w]+|#\{\$[-\w]+\})+(?=\s*:)/,
+      pattern: /(?:[-\w]|\$[-\w]|#\{\$[-\w]+\})+(?=\s*:)/,
       inside: {
         variable: /\$[-\w]+|#\{\$[-\w]+\}/
       }
@@ -13183,9 +13242,9 @@ function scss(Prism) {
   });
   Prism.languages.insertBefore("scss", "atrule", {
     keyword: [
-      /@(?:if|else(?: if)?|for|each|while|import|extend|debug|warn|mixin|include|function|return|content)/i,
+      /@(?:if|else(?: if)?|forward|for|each|while|import|use|extend|debug|warn|mixin|include|function|return|content)\b/i,
       {
-        pattern: /( +)(?:from|through)(?= )/,
+        pattern: /( )(?:from|through)(?= )/,
         lookbehind: true
       }
     ]
@@ -13194,6 +13253,10 @@ function scss(Prism) {
     variable: /\$[-\w]+|#\{\$[-\w]+\}/
   });
   Prism.languages.insertBefore("scss", "function", {
+    "module-modifier": {
+      pattern: /\b(?:as|with|show|hide)\b/i,
+      alias: "keyword"
+    },
     placeholder: {
       pattern: /%[-\w]+/,
       alias: "selector"
@@ -13214,6 +13277,7 @@ function scss(Prism) {
   });
   Prism.languages.scss["atrule"].inside.rest = Prism.languages.scss;
 }
+var scss$1 = scss_1;
 var less_1 = less;
 less.displayName = "less";
 less.aliases = [];
@@ -13227,13 +13291,13 @@ function less(Prism) {
       }
     ],
     atrule: {
-      pattern: /@[\w-]+?(?:\([^{}]+\)|[^(){};])*?(?=\s*\{)/i,
+      pattern: /@[\w-](?:\((?:[^(){}]|\([^(){}]*\))*\)|[^(){};\s]|\s+(?!\s))*?(?=\s*\{)/,
       inside: {
         punctuation: /[:()]/
       }
     },
     selector: {
-      pattern: /(?:@\{[\w-]+\}|[^{};\s@])(?:@\{[\w-]+\}|\([^{}]*\)|[^{};@])*?(?=\s*\{)/,
+      pattern: /(?:@\{[\w-]+\}|[^{};\s@])(?:@\{[\w-]+\}|\((?:[^(){}]|\([^(){}]*\))*\)|[^(){};@\s]|\s+(?!\s))*?(?=\s*\{)/,
       inside: {
         variable: /@+[\w-]+/
       }
@@ -13252,17 +13316,18 @@ function less(Prism) {
       /@@?[\w-]+/
     ],
     "mixin-usage": {
-      pattern: /([{;]\s*)[.#](?!\d)[\w-]+.*?(?=[(;])/,
+      pattern: /([{;]\s*)[.#](?!\d)[\w-].*?(?=[(;])/,
       lookbehind: true,
       alias: "function"
     }
   });
 }
-var index$2 = '.code-pane{position:relative;background-color:#282c34;border-radius:6px;font-size:15px}.code-pane:hover>.icon-copy{opacity:1}.code-pane>.icon-copy{opacity:0;transition:all .2s;position:absolute;z-index:3;top:.8em;right:1em;cursor:pointer;font-size:.75rem;color:hsla(0,0%,100%,.7);background:#282c34}.code-pane :not(pre)>code[class*=language-],.code-pane pre[class*=language-]{background:#2d2d2d}.code-pane :not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.code-pane .token.block-comment,.code-pane .token.cdata,.code-pane .token.comment,.code-pane .token.doctype,.code-pane .token.prolog{color:#999}.code-pane .language-css .token.string,.code-pane .style .token.string,.code-pane .token.entity,.code-pane .token.operator,.code-pane .token.url{background-color:transparent}.code-pane .token.punctuation{color:#ccc}.code-pane .token.attr-name,.code-pane .token.deleted,.code-pane .token.namespace,.code-pane .token.tag{color:#e2777a}.code-pane .token.function-name{color:#6196cc}.code-pane .token.boolean,.code-pane .token.function,.code-pane .token.number{color:#f08d49}.code-pane .token.class-name,.code-pane .token.constant,.code-pane .token.property,.code-pane .token.symbol{color:#f8c555}.code-pane .token.atrule,.code-pane .token.builtin,.code-pane .token.important,.code-pane .token.keyword,.code-pane .token.selector{color:#cc99cd}.code-pane .token.attr-value,.code-pane .token.char,.code-pane .token.regex,.code-pane .token.string,.code-pane .token.variable{color:#7ec699}.code-pane .token.entity,.code-pane .token.operator,.code-pane .token.url{color:#67cdcc}.code-pane .token.bold,.code-pane .token.important{font-weight:700}.code-pane .token.italic{font-style:italic}.code-pane .token.entity{cursor:help}.code-pane code .token.deleted{color:#ec5975}.code-pane code .token.inserted{color:#3eaf7c}.code-pane pre,.code-pane pre[class*=language-]{line-height:1.5;padding:1.25rem 1.5rem;margin:.85rem 0;background-color:#282c34;border-radius:6px}.code-pane pre[class*=language-] code,.code-pane pre code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;font-size:.9em;color:#fff;padding:0;background-color:transparent;border-radius:0}.code-pane[class*=language-] .highlight-lines{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;padding-top:1.3rem;position:absolute;top:0;left:0;width:100%;line-height:1.4}.code-pane[class*=language-] .highlight-lines .highlighted{background-color:rgba(0,0,0,.66)}.code-pane[class*=language-] pre,.code-pane[class*=language-] pre[class*=language-]{background:transparent;position:relative;z-index:1}.code-pane[class*=language-]:before{position:absolute;z-index:3;top:.8em;right:1em;font-size:.75rem;color:hsla(0,0%,100%,.4)}.code-pane[class*=language-]:not(.line-numbers-mode) .line-numbers-wrapper{display:none}.code-pane[class*=language-].line-numbers-mode .highlight-lines .highlighted{position:relative}.code-pane[class*=language-].line-numbers-mode .highlight-lines .highlighted:before{content:" ";position:absolute;z-index:3;left:0;top:0;display:block;width:3.5rem;height:100%;background-color:rgba(0,0,0,.66)}.code-pane[class*=language-].line-numbers-mode pre{padding-left:4.5rem;vertical-align:middle}.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper{position:absolute;top:0;width:3.5rem;text-align:center;color:hsla(0,0%,100%,.3);padding:1.25rem 0;line-height:1.4}.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper .line-number,.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper br{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.code-pane[class*=language-].line-numbers-mode .line-numbers-wrapper .line-number{position:relative;z-index:4;font-size:.85em}.code-pane[class*=language-].line-numbers-mode:after{content:"";position:absolute;z-index:2;top:0;left:0;width:3.5rem;height:100%;border-radius:6px 0 0 6px;border-right:1px solid rgba(0,0,0,.66);background-color:#282c34}.code-pane[class~=language-js]:before{content:"js"}.code-pane[class~=language-ts]:before{content:"ts"}.code-pane[class~=language-html]:before{content:"html"}.code-pane[class~=language-md]:before{content:"md"}.code-pane[class~=language-vue]:before{content:"vue"}.code-pane[class~=language-css]:before{content:"css"}.code-pane[class~=language-sass]:before{content:"sass"}.code-pane[class~=language-scss]:before{content:"scss"}.code-pane[class~=language-less]:before{content:"less"}.code-pane[class~=language-stylus]:before{content:"stylus"}.code-pane[class~=language-go]:before{content:"go"}.code-pane[class~=language-java]:before{content:"java"}.code-pane[class~=language-c]:before{content:"c"}.code-pane[class~=language-sh]:before{content:"sh"}.code-pane[class~=language-yaml]:before{content:"yaml"}.code-pane[class~=language-py]:before{content:"py"}.code-pane[class~=language-docker]:before{content:"docker"}.code-pane[class~=language-dockerfile]:before{content:"dockerfile"}.code-pane[class~=language-makefile]:before{content:"makefile"}.code-pane[class~=language-javascript]:before{content:"js"}.code-pane[class~=language-jsx]:before{content:"jsx"}.code-pane[class~=language-typescript]:before{content:"ts"}.code-pane[class~=language-tsx]:before{content:"tsx"}.code-pane[class~=language-markup]:before{content:"html"}.code-pane[class~=language-markdown]:before{content:"md"}.code-pane[class~=language-json]:before{content:"json"}.code-pane[class~=language-ruby]:before{content:"rb"}.code-pane[class~=language-python]:before{content:"py"}.code-pane[class~=language-bash]:before{content:"sh"}.code-pane[class~=language-php]:before{content:"php"}@media screen and (max-width:769px){.code-pane[class*=language-]{margin:.85rem -1.5rem;border-radius:0}}.code-pane .token.number{background-color:transparent;border-radius:0;font-size:inherit;height:inherit;margin-right:inherit;min-width:auto;padding:0;text-align:center}';
-var index$1 = '@font-face {\n  font-family: octicons-anchor;\n  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAYcAA0AAAAACjQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABMAAAABwAAAAca8vGTk9TLzIAAAFMAAAARAAAAFZG1VHVY21hcAAAAZAAAAA+AAABQgAP9AdjdnQgAAAB0AAAAAQAAAAEACICiGdhc3AAAAHUAAAACAAAAAj//wADZ2x5ZgAAAdwAAADRAAABEKyikaNoZWFkAAACsAAAAC0AAAA2AtXoA2hoZWEAAALgAAAAHAAAACQHngNFaG10eAAAAvwAAAAQAAAAEAwAACJsb2NhAAADDAAAAAoAAAAKALIAVG1heHAAAAMYAAAAHwAAACABEAB2bmFtZQAAAzgAAALBAAAFu3I9x/Nwb3N0AAAF/AAAAB0AAAAvaoFvbwAAAAEAAAAAzBdyYwAAAADP2IQvAAAAAM/bz7t4nGNgZGFgnMDAysDB1Ml0hoGBoR9CM75mMGLkYGBgYmBlZsAKAtJcUxgcPsR8iGF2+O/AEMPsznAYKMwIkgMA5REMOXicY2BgYGaAYBkGRgYQsAHyGMF8FgYFIM0ChED+h5j//yEk/3KoSgZGNgYYk4GRCUgwMaACRoZhDwCs7QgGAAAAIgKIAAAAAf//AAJ4nHWMMQrCQBBF/0zWrCCIKUQsTDCL2EXMohYGSSmorScInsRGL2DOYJe0Ntp7BK+gJ1BxF1stZvjz/v8DRghQzEc4kIgKwiAppcA9LtzKLSkdNhKFY3HF4lK69ExKslx7Xa+vPRVS43G98vG1DnkDMIBUgFN0MDXflU8tbaZOUkXUH0+U27RoRpOIyCKjbMCVejwypzJJG4jIwb43rfl6wbwanocrJm9XFYfskuVC5K/TPyczNU7b84CXcbxks1Un6H6tLH9vf2LRnn8Ax7A5WQAAAHicY2BkYGAA4teL1+yI57f5ysDNwgAC529f0kOmWRiYVgEpDgYmEA8AUzEKsQAAAHicY2BkYGB2+O/AEMPCAAJAkpEBFbAAADgKAe0EAAAiAAAAAAQAAAAEAAAAAAAAKgAqACoAiAAAeJxjYGRgYGBhsGFgYgABEMkFhAwM/xn0QAIAD6YBhwB4nI1Ty07cMBS9QwKlQapQW3VXySvEqDCZGbGaHULiIQ1FKgjWMxknMfLEke2A+IJu+wntrt/QbVf9gG75jK577Lg8K1qQPCfnnnt8fX1NRC/pmjrk/zprC+8D7tBy9DHgBXoWfQ44Av8t4Bj4Z8CLtBL9CniJluPXASf0Lm4CXqFX8Q84dOLnMB17N4c7tBo1AS/Qi+hTwBH4rwHHwN8DXqQ30XXAS7QaLwSc0Gn8NuAVWou/gFmnjLrEaEh9GmDdDGgL3B4JsrRPDU2hTOiMSuJUIdKQQayiAth69r6akSSFqIJuA19TrzCIaY8sIoxyrNIrL//pw7A2iMygkX5vDj+G+kuoLdX4GlGK/8Lnlz6/h9MpmoO9rafrz7ILXEHHaAx95s9lsI7AHNMBWEZHULnfAXwG9/ZqdzLI08iuwRloXE8kfhXYAvE23+23DU3t626rbs8/8adv+9DWknsHp3E17oCf+Z48rvEQNZ78paYM38qfk3v/u3l3u3GXN2Dmvmvpf1Srwk3pB/VSsp512bA/GG5i2WJ7wu430yQ5K3nFGiOqgtmSB5pJVSizwaacmUZzZhXLlZTq8qGGFY2YcSkqbth6aW1tRmlaCFs2016m5qn36SbJrqosG4uMV4aP2PHBmB3tjtmgN2izkGQyLWprekbIntJFing32a5rKWCN/SdSoga45EJykyQ7asZvHQ8PTm6cslIpwyeyjbVltNikc2HTR7YKh9LBl9DADC0U/jLcBZDKrMhUBfQBvXRzLtFtjU9eNHKin0x5InTqb8lNpfKv1s1xHzTXRqgKzek/mb7nB8RZTCDhGEX3kK/8Q75AmUM/eLkfA+0Hi908Kx4eNsMgudg5GLdRD7a84npi+YxNr5i5KIbW5izXas7cHXIMAau1OueZhfj+cOcP3P8MNIWLyYOBuxL6DRylJ4cAAAB4nGNgYoAALjDJyIAOWMCiTIxMLDmZedkABtIBygAAAA==)\n    format("woff");\n}\n\n.markdown-body {\n  -ms-text-size-adjust: 100%;\n  -webkit-text-size-adjust: 100%;\n  color: #333;\n  overflow: hidden;\n  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,\n    sans-serif;\n  font-size: 16px;\n  line-height: 1.6;\n  word-wrap: break-word;\n}\n\n.markdown-body a {\n  background: transparent;\n}\n\n.markdown-body a:active,\n.markdown-body a:hover {\n  outline: 0;\n}\n\n.markdown-body strong {\n  font-weight: bold;\n}\n\n.markdown-body h1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n.markdown-body img {\n  border: 0;\n}\n\n.markdown-body hr {\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n  height: 0;\n}\n\n.markdown-body pre {\n  overflow: auto;\n}\n\n.markdown-body code,\n.markdown-body kbd,\n.markdown-body pre {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\n.markdown-body input {\n  color: inherit;\n  font: inherit;\n  margin: 0;\n}\n\n.markdown-body html input[disabled] {\n  cursor: default;\n}\n\n.markdown-body input {\n  line-height: normal;\n}\n\n.markdown-body input[type="checkbox"] {\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  padding: 0;\n}\n\n.markdown-body table {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n.markdown-body td,\n.markdown-body th {\n  padding: 0;\n}\n\n.markdown-body * {\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n.markdown-body input {\n  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji",\n    "Segoe UI Symbol";\n}\n\n.markdown-body a {\n  color: #4183c4;\n  text-decoration: none;\n}\n\n.markdown-body a:hover,\n.markdown-body a:focus,\n.markdown-body a:active {\n  text-decoration: underline;\n}\n\n.markdown-body hr {\n  height: 0;\n  margin: 15px 0;\n  overflow: hidden;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid #ddd;\n}\n\n.markdown-body hr:before {\n  display: table;\n  content: "";\n}\n\n.markdown-body hr:after {\n  display: table;\n  clear: both;\n  content: "";\n}\n\n.markdown-body h1,\n.markdown-body h2,\n.markdown-body h3,\n.markdown-body h4,\n.markdown-body h5,\n.markdown-body h6 {\n  margin-top: 15px;\n  margin-bottom: 15px;\n  line-height: 1.1;\n}\n\n.markdown-body h1 {\n  font-size: 30px;\n}\n\n.markdown-body h2 {\n  font-size: 21px;\n}\n\n.markdown-body h3 {\n  font-size: 16px;\n}\n\n.markdown-body h4 {\n  font-size: 14px;\n}\n\n.markdown-body h5 {\n  font-size: 12px;\n}\n\n.markdown-body h6 {\n  font-size: 11px;\n}\n\n.markdown-body blockquote {\n  margin: 0;\n}\n\n.markdown-body ul,\n.markdown-body ol {\n  padding: 0;\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n.markdown-body ol ol,\n.markdown-body ul ol {\n  list-style-type: lower-roman;\n}\n\n.markdown-body ul ul ol,\n.markdown-body ul ol ol,\n.markdown-body ol ul ol,\n.markdown-body ol ol ol {\n  list-style-type: lower-alpha;\n}\n\n.markdown-body dd {\n  margin-left: 0;\n}\n\n.markdown-body code {\n  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;\n}\n\n.markdown-body pre {\n  margin-top: 0;\n  margin-bottom: 0;\n  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;\n}\n\n.markdown-body kbd {\n  background-color: #e7e7e7;\n  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);\n  background-image: linear-gradient(#fefefe, #e7e7e7);\n  background-repeat: repeat-x;\n  border-radius: 2px;\n  border: 1px solid #cfcfcf;\n  color: #000;\n  padding: 3px 5px;\n  line-height: 10px;\n  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;\n  display: inline-block;\n}\n\n.markdown-body > *:first-child {\n  margin-top: 0 !important;\n}\n\n.markdown-body > *:last-child {\n  margin-bottom: 0 !important;\n}\n\n.markdown-body .anchor {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  display: block;\n  padding-right: 6px;\n  padding-left: 30px;\n  margin-left: -30px;\n}\n\n.markdown-body .anchor:focus {\n  outline: none;\n}\n\n.markdown-body h1,\n.markdown-body h2,\n.markdown-body h3,\n.markdown-body h4,\n.markdown-body h5,\n.markdown-body h6 {\n  position: relative;\n  margin-top: 1em;\n  margin-bottom: 16px;\n  font-weight: bold;\n  line-height: 1.4;\n}\n\n.markdown-body h1 .octicon-link,\n.markdown-body h2 .octicon-link,\n.markdown-body h3 .octicon-link,\n.markdown-body h4 .octicon-link,\n.markdown-body h5 .octicon-link,\n.markdown-body h6 .octicon-link {\n  display: none;\n  color: #000;\n  vertical-align: middle;\n}\n\n.markdown-body h1:hover .anchor,\n.markdown-body h2:hover .anchor,\n.markdown-body h3:hover .anchor,\n.markdown-body h4:hover .anchor,\n.markdown-body h5:hover .anchor,\n.markdown-body h6:hover .anchor {\n  height: 1em;\n  padding-left: 8px;\n  margin-left: -30px;\n  line-height: 1;\n  text-decoration: none;\n}\n\n.markdown-body h1:hover .anchor .octicon-link,\n.markdown-body h2:hover .anchor .octicon-link,\n.markdown-body h3:hover .anchor .octicon-link,\n.markdown-body h4:hover .anchor .octicon-link,\n.markdown-body h5:hover .anchor .octicon-link,\n.markdown-body h6:hover .anchor .octicon-link {\n  display: inline-block;\n}\n\n.markdown-body h1 {\n  padding-bottom: 0.3em;\n  font-size: 2.25em;\n  line-height: 1.2;\n  border-bottom: 1px solid #eee;\n}\n\n.markdown-body h2 {\n  padding-bottom: 0.3em;\n  font-size: 1.75em;\n  line-height: 1.225;\n  border-bottom: 1px solid #eee;\n}\n\n.markdown-body h3 {\n  font-size: 1.5em;\n  line-height: 1.43;\n}\n\n.markdown-body h4 {\n  font-size: 1.25em;\n}\n\n.markdown-body h5 {\n  font-size: 1em;\n}\n\n.markdown-body h6 {\n  font-size: 1em;\n  color: #777;\n}\n\n.markdown-body p,\n.markdown-body blockquote,\n.markdown-body ul,\n.markdown-body ol,\n.markdown-body dl,\n.markdown-body table,\n.markdown-body pre {\n  margin-top: 0;\n  margin-bottom: 16px;\n}\n\n.markdown-body hr {\n  height: 4px;\n  padding: 0;\n  margin: 16px 0;\n  background-color: #e7e7e7;\n  border: 0 none;\n}\n\n.markdown-body ul,\n.markdown-body ol {\n  padding-left: 2em;\n}\n\n.markdown-body ul ul,\n.markdown-body ul ol,\n.markdown-body ol ol,\n.markdown-body ol ul {\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n.markdown-body li > p {\n  margin-top: 16px;\n}\n\n.markdown-body dl {\n  padding: 0;\n}\n\n.markdown-body dl dt {\n  padding: 0;\n  margin-top: 16px;\n  font-size: 1em;\n  font-style: italic;\n  font-weight: bold;\n}\n\n.markdown-body dl dd {\n  padding: 0 16px;\n  margin-bottom: 16px;\n}\n\n.markdown-body blockquote {\n  padding: 0 15px;\n  color: #777;\n  border-left: 4px solid #ddd;\n}\n\n.markdown-body blockquote > :first-child {\n  margin-top: 0;\n}\n\n.markdown-body blockquote > :last-child {\n  margin-bottom: 0;\n}\n\n.markdown-body table {\n  display: block;\n  width: 100%;\n  overflow: auto;\n  word-break: normal;\n  word-break: keep-all;\n}\n\n.markdown-body table th {\n  font-weight: bold;\n}\n\n.markdown-body table th,\n.markdown-body table td {\n  padding: 6px 13px;\n  border: 1px solid #ddd;\n}\n\n.markdown-body table tr {\n  background-color: #fff;\n  border-top: 1px solid #ccc;\n}\n\n.markdown-body table tr:nth-child(2n) {\n  background-color: #f8f8f8;\n}\n\n.markdown-body img {\n  max-width: 100%;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n.markdown-body code {\n  padding: 0;\n  padding-top: 0.2em;\n  padding-bottom: 0.2em;\n  margin: 0;\n  font-size: 85%;\n  background-color: rgba(0, 0, 0, 0.04);\n  border-radius: 3px;\n}\n\n.markdown-body code:before,\n.markdown-body code:after {\n  letter-spacing: -0.2em;\n  content: "\\00a0";\n}\n\n.markdown-body pre > code {\n  padding: 0;\n  margin: 0;\n  font-size: 100%;\n  word-break: normal;\n  white-space: pre;\n  background: transparent;\n  border: 0;\n}\n\n.markdown-body .highlight {\n  margin-bottom: 16px;\n}\n\n.markdown-body .highlight pre,\n.markdown-body pre {\n  padding: 16px;\n  overflow: auto;\n  font-size: 85%;\n  line-height: 1.45;\n  background-color: #f7f7f7;\n  border-radius: 3px;\n}\n\n.markdown-body .highlight pre {\n  margin-bottom: 0;\n  word-break: normal;\n}\n\n.markdown-body pre {\n  word-wrap: normal;\n}\n\n.markdown-body pre code {\n  display: inline;\n  max-width: initial;\n  padding: 0;\n  margin: 0;\n  overflow: initial;\n  line-height: inherit;\n  word-wrap: normal;\n  background-color: transparent;\n  border: 0;\n}\n\n.markdown-body pre code:before,\n.markdown-body pre code:after {\n  content: normal;\n}\n\n.markdown-body .highlight {\n  background: #fff;\n}\n\n.markdown-body .highlight .mf,\n.markdown-body .highlight .mh,\n.markdown-body .highlight .mi,\n.markdown-body .highlight .mo,\n.markdown-body .highlight .il,\n.markdown-body .highlight .m {\n  color: #945277;\n}\n\n.markdown-body .highlight .s,\n.markdown-body .highlight .sb,\n.markdown-body .highlight .sc,\n.markdown-body .highlight .sd,\n.markdown-body .highlight .s2,\n.markdown-body .highlight .se,\n.markdown-body .highlight .sh,\n.markdown-body .highlight .si,\n.markdown-body .highlight .sx,\n.markdown-body .highlight .s1 {\n  color: #df5000;\n}\n\n.markdown-body .highlight .kc,\n.markdown-body .highlight .kd,\n.markdown-body .highlight .kn,\n.markdown-body .highlight .kp,\n.markdown-body .highlight .kr,\n.markdown-body .highlight .kt,\n.markdown-body .highlight .k,\n.markdown-body .highlight .o {\n  font-weight: bold;\n}\n\n.markdown-body .highlight .kt {\n  color: #458;\n}\n\n.markdown-body .highlight .c,\n.markdown-body .highlight .cm,\n.markdown-body .highlight .c1 {\n  color: #998;\n  font-style: italic;\n}\n\n.markdown-body .highlight .cp,\n.markdown-body .highlight .cs {\n  color: #999;\n  font-weight: bold;\n}\n\n.markdown-body .highlight .cs {\n  font-style: italic;\n}\n\n.markdown-body .highlight .n {\n  color: #333;\n}\n\n.markdown-body .highlight .na,\n.markdown-body .highlight .nv,\n.markdown-body .highlight .vc,\n.markdown-body .highlight .vg,\n.markdown-body .highlight .vi {\n  color: #008080;\n}\n\n.markdown-body .highlight .nb {\n  color: #0086b3;\n}\n\n.markdown-body .highlight .nc {\n  color: #458;\n  font-weight: bold;\n}\n\n.markdown-body .highlight .no {\n  color: #094e99;\n}\n\n.markdown-body .highlight .ni {\n  color: #800080;\n}\n\n.markdown-body .highlight .ne {\n  color: #990000;\n  font-weight: bold;\n}\n\n.markdown-body .highlight .nf {\n  color: #945277;\n  font-weight: bold;\n}\n\n.markdown-body .highlight .nn {\n  color: #555;\n}\n\n.markdown-body .highlight .nt {\n  color: #000080;\n}\n\n.markdown-body .highlight .err {\n  color: #a61717;\n  background-color: #e3d2d2;\n}\n\n.markdown-body .highlight .gd {\n  color: #000;\n  background-color: #fdd;\n}\n\n.markdown-body .highlight .gd .x {\n  color: #000;\n  background-color: #faa;\n}\n\n.markdown-body .highlight .ge {\n  font-style: italic;\n}\n\n.markdown-body .highlight .gr {\n  color: #aa0000;\n}\n\n.markdown-body .highlight .gh {\n  color: #999;\n}\n\n.markdown-body .highlight .gi {\n  color: #000;\n  background-color: #dfd;\n}\n\n.markdown-body .highlight .gi .x {\n  color: #000;\n  background-color: #afa;\n}\n\n.markdown-body .highlight .go {\n  color: #888;\n}\n\n.markdown-body .highlight .gp {\n  color: #555;\n}\n\n.markdown-body .highlight .gs {\n  font-weight: bold;\n}\n\n.markdown-body .highlight .gu {\n  color: #800080;\n  font-weight: bold;\n}\n\n.markdown-body .highlight .gt {\n  color: #aa0000;\n}\n\n.markdown-body .highlight .ow {\n  font-weight: bold;\n}\n\n.markdown-body .highlight .w {\n  color: #bbb;\n}\n\n.markdown-body .highlight .sr {\n  color: #017936;\n}\n\n.markdown-body .highlight .ss {\n  color: #8b467f;\n}\n\n.markdown-body .highlight .bp {\n  color: #999;\n}\n\n.markdown-body .highlight .gc {\n  color: #999;\n  background-color: #eaf2f5;\n}\n\n.markdown-body .octicon {\n  font: normal normal 16px octicons-anchor;\n  line-height: 1;\n  display: inline-block;\n  text-decoration: none;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n.markdown-body .octicon-link:before {\n  content: "\\f05c";\n}\n\n.markdown-body .task-list-item {\n  list-style-type: none;\n}\n\n.markdown-body .task-list-item + .task-list-item {\n  margin-top: 3px;\n}\n\n.markdown-body .task-list-item input {\n  float: left;\n  margin: 0.3em 0 0.25em -1.6em;\n  vertical-align: middle;\n}\n\n.markdown-area {\n  margin-bottom: 15px;\n}\n\n.markdown-area .clickable-block {\n  cursor: pointer;\n  border: 2px solid transparent;\n}\n\n.markdown-area .clickable-block:not(.selected-block):hover > .code-pane {\n  box-shadow: 0 2px 8px 0 #6495f9;\n}\n\n.markdown-area .selected-block {\n  position: relative;\n  margin-bottom: 0.85rem;\n}\n\n.markdown-area .selected-block > .ant-tag {\n  position: absolute;\n  z-index: 1;\n  border-radius: 6px 0 6px 0;\n  top: 0;\n  background: #6495f9;\n  border-color: #6495f9;\n  color: #fff;\n  font-weight: 500;\n}\n\n.markdown-area .selected-block > .code-pane {\n  box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.4);\n  border: 2px solid #6495f9;\n}\n\n.markdown-area .selected-block > .code-pane > pre.hljs {\n  margin-bottom: 0;\n}\n\n.markdown-area ul > li,\n.markdown-area dl > li,\n.markdown-area ol > li {\n  list-style-type: inherit;\n}\n\n.markdown-area ul {\n  list-style-type: disc;\n  list-style-position: inside;\n}\n\n.markdown-area ol {\n  list-style-type: decimal;\n  list-style-position: inside;\n}\n\n.markdown-area ul ul,\n.markdown-area ol ul {\n  list-style-type: circle;\n  list-style-position: inside;\n}\n\n.markdown-area ol ol,\n.markdown-area ul ol {\n  list-style-type: lower-latin;\n  list-style-position: inside;\n}';
-HighLight.registerLanguage("tsx", tsx_1);
-HighLight.registerLanguage("scss", scss_1);
-HighLight.registerLanguage("less", less_1);
+var less$1 = less_1;
+var index$2 = "";
+var index$1 = "";
+HighLight.registerLanguage("tsx", tsx$1);
+HighLight.registerLanguage("scss", scss$1);
+HighLight.registerLanguage("less", less$1);
 const { Tag } = window.antd;
 function MarkdownArea({ data: res }) {
   if (!res) {
@@ -13298,9 +13363,70 @@ function MarkdownArea({ data: res }) {
     renderers: { code }
   }, content2));
 }
+var LinkOutlined$5 = { exports: {} };
+var LinkOutlined$4 = {};
+var LinkOutlined$3 = {};
+Object.defineProperty(LinkOutlined$3, "__esModule", { value: true });
+var LinkOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M574 665.4a8.03 8.03 0 00-11.3 0L446.5 781.6c-53.8 53.8-144.6 59.5-204 0-59.5-59.5-53.8-150.2 0-204l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3l-39.8-39.8a8.03 8.03 0 00-11.3 0L191.4 526.5c-84.6 84.6-84.6 221.5 0 306s221.5 84.6 306 0l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3L574 665.4zm258.6-474c-84.6-84.6-221.5-84.6-306 0L410.3 307.6a8.03 8.03 0 000 11.3l39.7 39.7c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c53.8-53.8 144.6-59.5 204 0 59.5 59.5 53.8 150.2 0 204L665.3 562.6a8.03 8.03 0 000 11.3l39.8 39.8c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c84.5-84.6 84.5-221.5 0-306.1zM610.1 372.3a8.03 8.03 0 00-11.3 0L372.3 598.7a8.03 8.03 0 000 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0l226.4-226.4c3.1-3.1 3.1-8.2 0-11.3l-39.5-39.6z" } }] }, "name": "link", "theme": "outlined" };
+LinkOutlined$3.default = LinkOutlined$2;
+var _interopRequireWildcard = interopRequireWildcard.exports;
+var _interopRequireDefault = interopRequireDefault.exports;
+Object.defineProperty(LinkOutlined$4, "__esModule", {
+  value: true
+});
+LinkOutlined$4.default = void 0;
+var _objectSpread2 = _interopRequireDefault(objectSpread2.exports);
+var React = _interopRequireWildcard(require$$3);
+var _LinkOutlined = _interopRequireDefault(LinkOutlined$3);
+var _AntdIcon = _interopRequireDefault(AntdIcon);
+var LinkOutlined$1 = function LinkOutlined(props, ref) {
+  return /* @__PURE__ */ React.createElement(_AntdIcon.default, (0, _objectSpread2.default)((0, _objectSpread2.default)({}, props), {}, {
+    ref,
+    icon: _LinkOutlined.default
+  }));
+};
+LinkOutlined$1.displayName = "LinkOutlined";
+var _default = /* @__PURE__ */ React.forwardRef(LinkOutlined$1);
+LinkOutlined$4.default = _default;
+(function(module, exports) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _LinkOutlined2 = _interopRequireDefault2(LinkOutlined$4);
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : { "default": obj };
+  }
+  var _default2 = _LinkOutlined2;
+  exports.default = _default2;
+  module.exports = _default2;
+})(LinkOutlined$5, LinkOutlined$5.exports);
+var LinkOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(LinkOutlined$5.exports);
+const { message } = window.antd;
+function copyToClipboard(str) {
+  const el2 = document.createElement("textarea");
+  el2.innerText = str;
+  document.body.appendChild(el2);
+  el2.select();
+  document.execCommand("copy");
+  el2.remove();
+  message.success("Copy successfully !");
+}
+function LinkCopy({ route }) {
+  return /* @__PURE__ */ modules$1.createElement(LinkOutlined2, {
+    className: "copy-link-icon",
+    onClick: (e2) => {
+      e2.stopPropagation();
+      e2.preventDefault();
+      const { origin, pathname } = location;
+      copyToClipboard(`${origin}${pathname}#${route}`);
+    }
+  });
+}
 function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
+  const { route } = useRoute();
   const propertyTypes = useTypeFile();
   const compInfo = useComponentInfo();
   const Components = useMarkdown();
@@ -13313,7 +13439,9 @@ function ReadmePane() {
     className: "link-title"
   }, /* @__PURE__ */ modules$1.createElement("h1", {
     className: "component-name"
-  }, (propertyTypes == null ? void 0 : propertyTypes.displayName) || (compInfo == null ? void 0 : compInfo.packageName)), /* @__PURE__ */ modules$1.createElement("span", {
+  }, (propertyTypes == null ? void 0 : propertyTypes.displayName) || (compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement(LinkCopy, {
+    route
+  })), /* @__PURE__ */ modules$1.createElement("span", {
     className: "component-sub-title"
   }, /* @__PURE__ */ modules$1.createElement("span", null, "Package: ", compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement("span", null, "Version: ", compInfo == null ? void 0 : compInfo.packageVersion))), /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-main"
@@ -13336,13 +13464,19 @@ function ReadmePane() {
     onPropsChange: setVisionProps
   }))) : "Loading...");
 }
-var index = ".ant-menu-root.router-switch {\n  width: 230px;\n  height: 100%;\n  z-index: 90;\n  left: 0;\n  top: 0;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column;\n}\n.ant-menu-root.router-switch > .logo {\n  margin: 16px auto;\n  display: flex;\n  align-items: center;\n}\n.ant-menu-root.router-switch .fold-btn {\n  color: rgba(0, 0, 0, 0.65);\n}\n.ant-menu-root.router-switch .capitalize {\n  text-transform: capitalize;\n}\n.ant-menu-root.router-switch a {\n  color: inherit;\n}\n.ant-menu-root.router-switch .menu-content {\n  width: 100%;\n  flex: 1;\n  padding: 16px;\n}";
+var index = "";
 const { Menu } = window.antd;
 const { SubMenu } = Menu;
 function MenuLink(item) {
-  return /* @__PURE__ */ modules$1.createElement(Link, {
+  return /* @__PURE__ */ modules$1.createElement("div", {
+    className: "nav-menu-link-item"
+  }, /* @__PURE__ */ modules$1.createElement(Link, {
     to: item.path
-  }, item.name.replace(/-/g, " ").replace(/\//g, " - ").replace(/^[a-z] /, ""));
+  }, /* @__PURE__ */ modules$1.createElement("span", {
+    style: { flex: 1 }
+  }, item.name.replace(/-/g, " ").replace(/\//g, " - ").replace(/^[a-z] /, ""))), /* @__PURE__ */ modules$1.createElement(LinkCopy, {
+    route: item.path
+  }));
 }
 function RouterSwitch() {
   const { tree: menuData, routes } = useRouteMap() || {};
@@ -13367,7 +13501,7 @@ function RouterSwitch() {
     var _a;
     if (item.path) {
       return /* @__PURE__ */ modules$1.createElement(Menu.Item, {
-        className: "capitalize",
+        className: "capitalize nav-item-link",
         key: item.path
       }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item)));
     }
@@ -13376,11 +13510,12 @@ function RouterSwitch() {
       className: "capitalize",
       key: item.name
     }, (_a = item.children) == null ? void 0 : _a.map((item2) => /* @__PURE__ */ modules$1.createElement(Menu.Item, {
+      className: "nav-item-link",
       key: item2.path
     }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item2)))));
   }));
 }
-_default$6();
+_default$7();
 function App() {
   const { routes } = useRouteMap() || {};
   if (!routes) {
