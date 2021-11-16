@@ -15,7 +15,7 @@
   "dependencies": {
     "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
     "@alifd/next": "^1.22.14",
-    "@alife/intl-comp-highLighter": "^1.0.14",
+    "@alife/intl-comp-highLighter": "^1.0.15",
     "@alife/json-2-vision": "^1.0.29",
     "@alife/mtop-mock-hook": "^1.0.6",
     "@ant-design/icons": "^4.5.0",
@@ -32,6 +32,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-markdown": "^5.0.3",
+    "react-syntax-highlighter": "^15.4.5",
     "sass": "^1.32.8",
     "shelljs.exec": "^1.1.8",
     "styled-components": "^5.2.1",

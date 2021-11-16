@@ -7,6 +7,23 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  .nav-item-link {
+    .nav-menu-link-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > a:first-child {
+        flex: 1;
+      }
+      > .copy-link-icon {
+        margin-right: 0;
+      }
+    }
+    &:not(:hover) .copy-link-icon {
+      display: none;
+    }
+  }
   > .logo {
     margin: 16px auto;
     display: flex;

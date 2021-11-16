@@ -9,7 +9,7 @@
   padding: 20px;
   flex-direction: column;
   box-sizing: border-box;
-  .link-title{
+  .link-title {
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -33,6 +33,20 @@
     outline: 0;
     vertical-align: baseline;
     line-height: 1.2;
+    display: flex;
+    align-items: center;
+
+    &:not(:hover) .copy-link-icon {
+      display: none;
+    }
+
+    .copy-link-icon {
+      font-size: 0.6em;
+      margin-left: 0.3em;
+      &:hover {
+        color: #1971ff;
+      }
+    }
   }
   .component-sub-title {
     font-size: 1em;

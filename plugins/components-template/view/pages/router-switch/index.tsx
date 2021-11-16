@@ -2,6 +2,7 @@ import React from "react";
 import "./index.scss";
 import { useComponentInfo, useRouteMap } from "../../utils/loaders";
 import { Link, useRouteMatch } from "react-router-dom";
+import { LinkCopy } from "../../components/link-copy";
 
 // @ts-ignore
 const { Menu } = window.antd;
@@ -10,12 +11,17 @@ const { SubMenu } = Menu;
 
 function MenuLink(item) {
   return (
-    <Link to={item.path}>
-      {item.name
-        .replace(/-/g, " ")
-        .replace(/\//g, " - ")
-        .replace(/^[a-z] /, "")}
-    </Link>
+    <div className="nav-menu-link-item">
+      <Link to={item.path}>
+        <span style={{ flex: 1 }}>
+          {item.name
+            .replace(/-/g, " ")
+            .replace(/\//g, " - ")
+            .replace(/^[a-z] /, "")}
+        </span>
+      </Link>
+      <LinkCopy route={item.path} />
+    </div>
   );
 }
 
@@ -55,7 +61,7 @@ export default function RouterSwitch() {
         menuData.map((item) => {
           if (item.path) {
             return (
-              <Menu.Item className="capitalize" key={item.path}>
+              <Menu.Item className="capitalize nav-item-link" key={item.path}>
                 <MenuLink {...item} />
               </Menu.Item>
             );
@@ -63,7 +69,7 @@ export default function RouterSwitch() {
           return (
             <SubMenu title={item.name} className="capitalize" key={item.name}>
               {item.children?.map((item) => (
-                <Menu.Item key={item.path}>
+                <Menu.Item className="nav-item-link" key={item.path}>
                   <MenuLink {...item} />
                 </Menu.Item>
               ))}

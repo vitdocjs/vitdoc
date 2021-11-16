@@ -7,13 +7,17 @@ import { ComponentArea } from "../../components/component-area";
 import {
   useComponentInfo,
   useMarkdown,
+  useRoute,
   useTypeFile,
 } from "../../utils/loaders";
 import { MarkdownArea } from "../../components/markdown-area";
+import { LinkCopy } from "../../components/link-copy";
 
 export default function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
+
+  const { route } = useRoute();
 
   const propertyTypes = useTypeFile();
 
@@ -28,6 +32,7 @@ export default function ReadmePane() {
           <a href={compInfo?.npmLink} className="link-title">
             <h1 className="component-name">
               {propertyTypes?.displayName || compInfo?.packageName}
+              <LinkCopy route={route} />
             </h1>
             <span className="component-sub-title">
               <span>Package: {compInfo?.packageName}</span>
