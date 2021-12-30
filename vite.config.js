@@ -11,7 +11,7 @@ const cwd = process.cwd();
 let config = {};
 let deps = {};
 try {
-  const { dependencies } = require(path.resolve(process.cwd(), 'package.json'));
+  const { dependencies } = require(path.resolve(process.cwd(), "package.json"));
   deps = dependencies;
 } catch (e) {}
 

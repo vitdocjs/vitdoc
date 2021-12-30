@@ -92,6 +92,7 @@ const getRoutes = () => {
   return { tree, routes };
 };
 const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
+const entry = path.resolve(__dirname, "../index.html");
 const componentsTemplate = () => {
   let input = {};
   let server;
@@ -109,7 +110,7 @@ const componentsTemplate = () => {
       return (0, import_vite.mergeConfig)(resolvedConfig, {
         build: {
           rollupOptions: {
-            input: { index: "index.html" }
+            input: { index: entry }
           }
         }
       });
@@ -124,8 +125,8 @@ const componentsTemplate = () => {
       if (isRouteMap(id)) {
         return "route-map.json";
       }
-      if (id === "index.html") {
-        return id;
+      if (id === entry) {
+        return "index.html";
       }
     },
     load(id) {

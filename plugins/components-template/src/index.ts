@@ -65,6 +65,8 @@ export const getRoutes = () => {
 
 export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 
+const entry = path.resolve(__dirname, "../index.html");
+
 const componentsTemplate = () => {
   let input = {};
   let server: ViteDevServer;
@@ -84,7 +86,7 @@ const componentsTemplate = () => {
       return mergeConfig(resolvedConfig, {
         build: {
           rollupOptions: {
-            input: { index: "index.html" },
+            input: { index: entry },
           },
         },
       });
@@ -99,8 +101,8 @@ const componentsTemplate = () => {
       if (isRouteMap(id)) {
         return "route-map.json";
       }
-      if (id === "index.html") {
-        return id;
+      if (id === entry) {
+        return 'index.html';
       }
     },
     async load(id) {
