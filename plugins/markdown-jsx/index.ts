@@ -208,7 +208,8 @@ const mdjsx = () => {
               prev.concat(`${k}: function () { 
                 import('${v}').then(res => { 
                   const fn = res.default;
-                  typeof fn === 'function' && fn.apply(null, arguments);
+                  typeof fn === 'function' ? fn.apply(null, arguments):
+                   (arguments[arguments.length-1] && arguments[arguments.length-1](fn));
                 });
               },`),
             ""

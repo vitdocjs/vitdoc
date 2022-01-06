@@ -205,12 +205,8 @@
   display: inline-block;
 }
 
-.markdown-body>>*:first-child {
-  margin-top: 0 !important;
-}
-
-.markdown-body>>*:last-child {
-  margin-bottom: 0 !important;
+.markdown-body > *:first-child {
+  margin-top: 0;
 }
 
 .markdown-body > .anchor {
@@ -235,8 +231,8 @@
 .markdown-body > h5,
 .markdown-body > h6 {
   position: relative;
-  margin-top: 1em;
-  margin-bottom: 16px;
+  margin-top: 0.2em;
+  margin-bottom: 0.6em;
   font-weight: bold;
   line-height: 1.4;
 }
@@ -314,7 +310,7 @@
 .markdown-body > table,
 .markdown-body > pre {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 0.8em;
 }
 
 .markdown-body > hr {
@@ -335,7 +331,6 @@
 .markdown-body > ol ol,
 .markdown-body > ol ul {
   margin-top: 0;
-  margin-bottom: 0;
 }
 
 .markdown-body > li > p {
@@ -406,20 +401,14 @@
   box-sizing: border-box;
 }
 
-.markdown-body > code {
-  padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+.markdown-body > p > code {
   margin: 0;
-  font-size: 85%;
-  background-color: rgba(0, 0, 0, 0.04);
+  margin: 0 1px;
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  background: #f2f4f5;
+  border: 1px solid #f0f0f0;
   border-radius: 3px;
-}
-
-.markdown-body > code:before,
-.markdown-body > code:after {
-  letter-spacing: -0.2em;
-  content: "\00a0";
 }
 
 .markdown-body > pre > code {

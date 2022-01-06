@@ -7,10 +7,15 @@
   transition: all 0.2s;
   margin-bottom: 20px;
 
-  .code-box-demo {
-    color: #000000d9;
+  .component-container {
+    padding: 16px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .code-box-demo-description {
+
+  .code-box-demo-description:not(:empty) {
     padding: 12px 16px;
     padding-bottom: 0;
     border-bottom: 1px dashed #f0f0f0;
@@ -42,9 +47,10 @@
       transition: all 0.24s;
     }
   }
-  .code-pane {
+  .code-box-actions + .code-pane {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
+
     pre.hljs {
       margin-bottom: 0 !important;
       margin-top: 0 !important;

@@ -2,7 +2,6 @@
 
 .markdown-area {
   width: 100%;
-  overflow: auto;
   margin-bottom: 15px;
 
   ul,
@@ -10,6 +9,7 @@
   ol {
     > li {
       list-style-type: inherit;
+      line-height: 1.5;
     }
   }
 

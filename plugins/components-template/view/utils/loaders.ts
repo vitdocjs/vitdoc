@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cleanUrl } from "./config";
 import keyBy from "lodash/keyBy";
 import { isCSSLang, isJsx } from "../../../utils/lang";
@@ -98,6 +98,17 @@ export function useMarkdown() {
   const { route } = useRoute();
 
   const readmeFile = route.replace(".html", ".md");
+  const disposeArr = useRef<Array<() => void>>([]);
+
+  useEffect(
+    () => () => {
+      let fn;
+      while ((fn = disposeArr.current.pop())) {
+        fn();
+      }
+    },
+    []
+  );
 
   const results: any = useAsyncImport(
     readmeFile,
@@ -121,7 +132,21 @@ export function useMarkdown() {
         [currentValue.sourcesContent.trim()]: (...args) => {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
-            mod.load();
+            mod.load((content) => {
+              const style = document.createElement("style");
+              style.setAttribute("type", "text/css");
+              style.innerHTML = content;
+              document.head.appendChild(style);
+              disposeArr.current.push(() => {
+                Array.from(document.getElementsByTagName("style"))
+                  .filter((item) => {
+                    return item.innerText === content;
+                  })
+                  .forEach((ele) => {
+                    ele.remove();
+                  });
+              });
+            });
           });
         },
       });

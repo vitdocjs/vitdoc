@@ -6,10 +6,10 @@ import scss from "react-syntax-highlighter/dist/esm/languages/prism/scss";
 import less from "react-syntax-highlighter/dist/esm/languages/prism/less";
 import "@alife/intl-comp-highLighter/dist/index.css";
 import "./index.scss";
-import { ComponentArea } from "../component-area";
-import { useCreation } from "ahooks";
+import { ComponentArea, componentBlockRender } from "../component-area";
+import { useCreation, usePersistFn } from "ahooks";
 
-import remarkCodeFrontMatter from "remark-code-frontmatter";
+import { remarkFrontMatter } from "./plugins";
 
 HighLight.registerLanguage("tsx", tsx);
 HighLight.registerLanguage("scss", scss);
@@ -22,32 +22,24 @@ export function MarkdownArea({ data: res }) {
 
   const { moduleMap, content } = res;
 
-  const code = ({ language, value = "", node }) => {
+  const code = usePersistFn(({ language, value = "", node }) => {
     const jsx = /^[j|t]sx$/.test(language);
     if (!jsx) {
       return <HighLight lang={language} children={value} />;
     }
 
-    const frontMatter: Record<string, any> = node?.frontmatter || {};
-
     const fn = moduleMap?.[value.trim()];
-    return (
-      <ComponentArea
-        renderer={fn}
-        lang={language}
-        content={value}
-        meta={frontMatter}
-      />
-    );
-  };
+    return <ComponentArea renderer={fn} lang={language} content={value} />;
+  });
 
   const markdownComponent = useCreation(
     () => (
       <ReactMarkdown
         className="markdown-body"
-        plugins={[remarkCodeFrontMatter]}
+        plugins={[remarkFrontMatter]}
         renderers={{
           code,
+          "component-block": componentBlockRender,
         }}
       >
         {content}

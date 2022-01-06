@@ -29,6 +29,7 @@
     "mdast": "^3.0.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
+    "prettier": "^2.5.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-markdown": "^5.0.3",

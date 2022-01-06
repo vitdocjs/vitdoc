@@ -12,12 +12,29 @@ import BugOutlined from "@ant-design/icons/BugOutlined";
 import classNames from "classnames";
 import { copyToClipboard } from "../link-copy";
 
-const { Result, Tooltip, Typography } = window["antd"];
+import dropRight from "lodash/dropRight";
+import takeRight from "lodash/takeRight";
 
-const { Title, Paragraph } = Typography;
+const { Result, Tooltip } = window["antd"];
+
+export const componentBlockRender = (props) => {
+  const { children } = props;
+  const beforeChildren = dropRight(children, 1);
+  const lastChild = takeRight(children, 1);
+  return (
+    <div className="component-area">
+      {!!beforeChildren.length && (
+        <div className="code-box-demo-description markdown-body">
+          {beforeChildren}
+        </div>
+      )}
+      {lastChild}
+    </div>
+  );
+};
 
 export function ComponentArea(props) {
-  const { renderer, lang, content, meta } = props;
+  const { renderer, lang, content } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
@@ -60,32 +77,24 @@ export function ComponentArea(props) {
   });
 
   return (
-    <div className="component-area">
-      {!!Object.values(meta).length && (
-        <div className="code-box-demo-description">
-          {meta.title && <Title level={4}>{meta.title}</Title>}
-          {meta.desc && <Paragraph>{meta.desc}</Paragraph>}
-        </div>
+    <>
+      {error ? (
+        <Result
+          status="warning"
+          title="Resource load failed"
+          subTitle={
+            <span style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
+              {error.message}
+            </span>
+          }
+        />
+      ) : (
+        <div
+          className="component-container"
+          id="vite-component-container"
+          ref={componentRef}
+        />
       )}
-      <div className="code-box-demo">
-        {error ? (
-          <Result
-            status="warning"
-            title="Resource load failed"
-            subTitle={
-              <span style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-                {error.message}
-              </span>
-            }
-          />
-        ) : (
-          <div
-            className="component-container"
-            id="vite-component-container"
-            ref={componentRef}
-          />
-        )}
-      </div>
       <div className="code-box-actions">
         <Tooltip title="Debug" onClick={handlerDebugComponent}>
           <BugOutlined className="code-box-code-action" />
@@ -104,7 +113,7 @@ export function ComponentArea(props) {
         </Tooltip>
       </div>
       {checkCode && <HighLight lang={lang} children={content} />}
-    </div>
+    </>
   );
 }
 
