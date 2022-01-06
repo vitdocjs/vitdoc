@@ -1,71 +1,128 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+
+import HighLight from "@alife/intl-comp-highLighter/dist/index";
 
 import "./index.scss";
+import { ComponentPropsContext } from "../../context";
+import { useBoolean, usePersistFn } from "ahooks";
+import CopyOutlined from "@ant-design/icons/CopyOutlined";
+import CodeOutlined from "@ant-design/icons/CodeOutlined";
+import CheckOutlined from "@ant-design/icons/CheckOutlined";
+import BugOutlined from "@ant-design/icons/BugOutlined";
+import classNames from "classnames";
+import { copyToClipboard } from "../link-copy";
 
-const { Result } = window["antd"];
+const { Result, Tooltip } = window["antd"];
 
 export function ComponentArea(props) {
-  const { componentProps, onSetDefaultProps, data: Components } = props;
+  const { renderer, lang, content } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
   const newComp = useRef(new Map());
 
-  const wrapProps = useCallback(
-    (Component, { React: OutReact }) => {
-      if (newComp.current.get(Component)?.visionProps === componentProps) {
-        return newComp.current.get(Component);
-      }
-
-      const outputComp = (props) => {
-        if (!invoked.current) {
-          onSetDefaultProps && onSetDefaultProps(props);
-          invoked.current = true;
-        }
-        const finalProps = Object.assign({}, props, componentProps);
-        return OutReact.createElement(Component, finalProps);
-      };
-
-      outputComp.visionProps = componentProps;
-
-      newComp.current.set(Component, outputComp);
-
-      return outputComp;
-    },
-    [componentProps]
+  const { componentProps, onSetDefaultProps, error } = useContext(
+    ComponentPropsContext
   );
+  const defaultPropsRef = useRef();
+
+  const wrapProps = usePersistFn((Component, { React: OutReact }) => {
+    if (newComp.current.get(Component)?.visionProps === componentProps) {
+      return newComp.current.get(Component);
+    }
+
+    const outputComp = (props) => {
+      if (!invoked.current) {
+        defaultPropsRef.current = props;
+        invoked.current = true;
+      }
+      const finalProps = Object.assign({}, props, componentProps);
+      return OutReact.createElement(Component, finalProps);
+    };
+
+    outputComp.visionProps = componentProps;
+
+    newComp.current.set(Component, outputComp);
+
+    return outputComp;
+  });
 
   useEffect(() => {
-    // @ts-ignore
-    window.$_ComponentWrap = wrapProps;
-  }, [componentProps]);
+    renderer && renderer(componentRef.current, wrapProps);
+  }, [renderer, componentProps]);
 
-  useEffect(() => {
-    const renderer = Components?.renderer;
-    // @ts-ignore
-    window.mountNode = componentRef.current;
-    renderer && renderer();
-  }, [Components?.renderer, componentProps]);
+  const [checkCode, { toggle }] = useBoolean();
+
+  const handlerDebugComponent = usePersistFn(() => {
+    onSetDefaultProps?.({ ...(defaultPropsRef.current || {}) });
+  });
 
   return (
-    <div className="component-block">
-      {Components?.error ? (
-        <Result
-          status="warning"
-          title="Resource load failed"
-          subTitle={
-            <span style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-              {Components?.error.message}
-            </span>
-          }
+    <div className="component-area">
+      <div className="code-box-demo">
+        {error ? (
+          <Result
+            status="warning"
+            title="Resource load failed"
+            subTitle={
+              <span style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
+                {error.message}
+              </span>
+            }
+          />
+        ) : (
+          <div className="component-container" ref={componentRef} />
+        )}
+      </div>
+      <div className="code-box-actions">
+        <Tooltip title="Debug" onClick={handlerDebugComponent}>
+          <BugOutlined className="code-box-code-action" />
+        </Tooltip>
+        <CopyIcon content={content} />
+        <Tooltip
+          title={checkCode ? "Hide Code" : "View Code"}
+          onClick={() => toggle()}
+        >
+          <CodeOutlined
+            className={classNames(
+              "code-box-code-action",
+              checkCode && "active"
+            )}
+          />
+        </Tooltip>
+      </div>
+      {checkCode && <HighLight lang={lang} children={content} />}
+    </div>
+  );
+}
+
+export function CopyIcon({ content }) {
+  const [copied, { setTrue, setFalse }] = useBoolean();
+
+  const copy = usePersistFn(() => {
+    copyToClipboard(content);
+    setTrue();
+  });
+
+  return (
+    <Tooltip
+      title={copied ? "Copied!" : "Copy Code"}
+      onClick={copy}
+      onVisibleChange={(v) => {
+        !v &&
+          setTimeout(() => {
+            setFalse();
+          }, 500);
+      }}
+    >
+      {copied ? (
+        <CheckOutlined
+          className="code-box-code-action"
+          style={{ color: "#52c41a" }}
         />
       ) : (
-        <div
-          className="component-container"
-          id="vite-component-container"
-          ref={componentRef}
-        />
+        <CopyOutlined className="code-box-code-action" />
       )}
-    </div>
+    </Tooltip>
   );
 }

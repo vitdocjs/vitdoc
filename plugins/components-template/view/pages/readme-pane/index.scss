@@ -5,8 +5,7 @@
   overflow: auto;
   width: 100%;
   flex: 1;
-  background: #f2f3f7;
-  padding: 20px;
+  padding: 8px 24px;
   flex-direction: column;
   box-sizing: border-box;
   .link-title {
@@ -93,6 +92,8 @@
   .component-description {
     border-top: 1px solid #eee;
     font-size: 14px;
+    padding: 20px 0;
+
     > .block-title {
       font-size: 1.3em;
       display: block;
@@ -111,7 +112,6 @@
       font-size: 13px;
       line-height: 1.6em;
     }
-    padding: 20px;
   }
 
   .ant-tabs-bottom .ant-tabs-bottom-bar {

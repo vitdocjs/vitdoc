@@ -95,8 +95,6 @@ export function useComponentInfo(): any {
 }
 
 export function useMarkdown() {
-  const [renderIndex, setRenderIndex] = useState(0);
-
   const { route } = useRoute();
 
   const readmeFile = route.replace(".html", ".md");
@@ -120,25 +118,19 @@ export function useMarkdown() {
         return previousValue;
       }
       return Object.assign(previousValue, {
-        [currentValue.sourcesContent.trim()]: () => {
-          currentValue.load();
+        [currentValue.sourcesContent.trim()]: (...args) => {
+          currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load();
           });
         },
       });
     }, {});
-
-    if (renderIndex === undefined) {
-      setRenderIndex(0);
-    }
   }
 
   if (!results) {
     return null;
   }
-
-  const renderer = Object.values(moduleMap)?.[renderIndex || 0];
 
   let error: ModuleLoadError | undefined;
 
@@ -146,7 +138,5 @@ export function useMarkdown() {
     error,
     content: results.content,
     moduleMap,
-    renderer,
-    setRenderIndex: setRenderIndex,
   };
 }

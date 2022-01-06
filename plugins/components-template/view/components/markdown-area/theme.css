@@ -5,108 +5,101 @@
 }
 
 .markdown-body {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
   color: #333;
-  overflow: hidden;
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,
-    sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
   word-wrap: break-word;
 }
 
-.markdown-body a {
+.markdown-body > a {
   background: transparent;
 }
 
-.markdown-body a:active,
-.markdown-body a:hover {
+.markdown-body > a:active,
+.markdown-body > a:hover {
   outline: 0;
 }
 
-.markdown-body strong {
+.markdown-body > strong {
   font-weight: bold;
 }
 
-.markdown-body h1 {
+.markdown-body > h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
 
-.markdown-body img {
+.markdown-body > img {
   border: 0;
 }
 
-.markdown-body hr {
+.markdown-body > hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
 
-.markdown-body pre {
+.markdown-body > pre {
   overflow: auto;
 }
 
-.markdown-body code,
-.markdown-body kbd,
-.markdown-body pre {
+.markdown-body > code,
+.markdown-body > kbd,
+.markdown-body > pre {
   font-family: monospace, monospace;
   font-size: 1em;
 }
 
-.markdown-body input {
+.markdown-body > input {
   color: inherit;
   font: inherit;
   margin: 0;
 }
 
-.markdown-body html input[disabled] {
+.markdown-body > html input[disabled] {
   cursor: default;
 }
 
-.markdown-body input {
+.markdown-body > input {
   line-height: normal;
 }
 
-.markdown-body input[type="checkbox"] {
+.markdown-body > input[type="checkbox"] {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
 }
 
-.markdown-body table {
+.markdown-body > table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-.markdown-body td,
-.markdown-body th {
+.markdown-body > td,
+.markdown-body > th {
   padding: 0;
 }
 
-.markdown-body * {
+.markdown-body > * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.markdown-body input {
+.markdown-body > input {
   font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji",
     "Segoe UI Symbol";
 }
 
-.markdown-body a {
+.markdown-body > a {
   color: #4183c4;
   text-decoration: none;
 }
 
-.markdown-body a:hover,
-.markdown-body a:focus,
-.markdown-body a:active {
+.markdown-body > a:hover,
+.markdown-body > a:focus,
+.markdown-body > a:active {
   text-decoration: underline;
 }
 
-.markdown-body hr {
+.markdown-body > hr {
   height: 0;
   margin: 15px 0;
   overflow: hidden;
@@ -115,90 +108,90 @@
   border-bottom: 1px solid #ddd;
 }
 
-.markdown-body hr:before {
+.markdown-body > hr:before {
   display: table;
   content: "";
 }
 
-.markdown-body hr:after {
+.markdown-body > hr:after {
   display: table;
   clear: both;
   content: "";
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
+.markdown-body > h1,
+.markdown-body > h2,
+.markdown-body > h3,
+.markdown-body > h4,
+.markdown-body > h5,
+.markdown-body > h6 {
   margin-top: 15px;
   margin-bottom: 15px;
   line-height: 1.1;
 }
 
-.markdown-body h1 {
+.markdown-body > h1 {
   font-size: 30px;
 }
 
-.markdown-body h2 {
+.markdown-body > h2 {
   font-size: 21px;
 }
 
-.markdown-body h3 {
+.markdown-body > h3 {
   font-size: 16px;
 }
 
-.markdown-body h4 {
+.markdown-body > h4 {
   font-size: 14px;
 }
 
-.markdown-body h5 {
+.markdown-body > h5 {
   font-size: 12px;
 }
 
-.markdown-body h6 {
+.markdown-body > h6 {
   font-size: 11px;
 }
 
-.markdown-body blockquote {
+.markdown-body > blockquote {
   margin: 0;
 }
 
-.markdown-body ul,
-.markdown-body ol {
+.markdown-body > ul,
+.markdown-body > ol {
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.markdown-body ol ol,
-.markdown-body ul ol {
+.markdown-body > ol ol,
+.markdown-body > ul ol {
   list-style-type: lower-roman;
 }
 
-.markdown-body ul ul ol,
-.markdown-body ul ol ol,
-.markdown-body ol ul ol,
-.markdown-body ol ol ol {
+.markdown-body > ul ul ol,
+.markdown-body > ul ol ol,
+.markdown-body > ol ul ol,
+.markdown-body > ol ol ol {
   list-style-type: lower-alpha;
 }
 
-.markdown-body dd {
+.markdown-body > dd {
   margin-left: 0;
 }
 
-.markdown-body code {
+.markdown-body > code {
   font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
-.markdown-body pre {
+.markdown-body > pre {
   margin-top: 0;
   margin-bottom: 0;
   font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
-.markdown-body kbd {
+.markdown-body > kbd {
   background-color: #e7e7e7;
   background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
   background-image: linear-gradient(#fefefe, #e7e7e7);
@@ -212,15 +205,15 @@
   display: inline-block;
 }
 
-.markdown-body > *:first-child {
+.markdown-body>>*:first-child {
   margin-top: 0 !important;
 }
 
-.markdown-body > *:last-child {
+.markdown-body>>*:last-child {
   margin-bottom: 0 !important;
 }
 
-.markdown-body .anchor {
+.markdown-body > .anchor {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -231,16 +224,16 @@
   margin-left: -30px;
 }
 
-.markdown-body .anchor:focus {
+.markdown-body > .anchor:focus {
   outline: none;
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
+.markdown-body > h1,
+.markdown-body > h2,
+.markdown-body > h3,
+.markdown-body > h4,
+.markdown-body > h5,
+.markdown-body > h6 {
   position: relative;
   margin-top: 1em;
   margin-bottom: 16px;
@@ -248,23 +241,23 @@
   line-height: 1.4;
 }
 
-.markdown-body h1 .octicon-link,
-.markdown-body h2 .octicon-link,
-.markdown-body h3 .octicon-link,
-.markdown-body h4 .octicon-link,
-.markdown-body h5 .octicon-link,
-.markdown-body h6 .octicon-link {
+.markdown-body > h1 .octicon-link,
+.markdown-body > h2 .octicon-link,
+.markdown-body > h3 .octicon-link,
+.markdown-body > h4 .octicon-link,
+.markdown-body > h5 .octicon-link,
+.markdown-body > h6 .octicon-link {
   display: none;
   color: #000;
   vertical-align: middle;
 }
 
-.markdown-body h1:hover .anchor,
-.markdown-body h2:hover .anchor,
-.markdown-body h3:hover .anchor,
-.markdown-body h4:hover .anchor,
-.markdown-body h5:hover .anchor,
-.markdown-body h6:hover .anchor {
+.markdown-body > h1:hover .anchor,
+.markdown-body > h2:hover .anchor,
+.markdown-body > h3:hover .anchor,
+.markdown-body > h4:hover .anchor,
+.markdown-body > h5:hover .anchor,
+.markdown-body > h6:hover .anchor {
   height: 1em;
   padding-left: 8px;
   margin-left: -30px;
@@ -272,59 +265,59 @@
   text-decoration: none;
 }
 
-.markdown-body h1:hover .anchor .octicon-link,
-.markdown-body h2:hover .anchor .octicon-link,
-.markdown-body h3:hover .anchor .octicon-link,
-.markdown-body h4:hover .anchor .octicon-link,
-.markdown-body h5:hover .anchor .octicon-link,
-.markdown-body h6:hover .anchor .octicon-link {
+.markdown-body > h1:hover .anchor .octicon-link,
+.markdown-body > h2:hover .anchor .octicon-link,
+.markdown-body > h3:hover .anchor .octicon-link,
+.markdown-body > h4:hover .anchor .octicon-link,
+.markdown-body > h5:hover .anchor .octicon-link,
+.markdown-body > h6:hover .anchor .octicon-link {
   display: inline-block;
 }
 
-.markdown-body h1 {
+.markdown-body > h1 {
   padding-bottom: 0.3em;
   font-size: 2.25em;
   line-height: 1.2;
   border-bottom: 1px solid #eee;
 }
 
-.markdown-body h2 {
+.markdown-body > h2 {
   padding-bottom: 0.3em;
   font-size: 1.75em;
   line-height: 1.225;
   border-bottom: 1px solid #eee;
 }
 
-.markdown-body h3 {
+.markdown-body > h3 {
   font-size: 1.5em;
   line-height: 1.43;
 }
 
-.markdown-body h4 {
+.markdown-body > h4 {
   font-size: 1.25em;
 }
 
-.markdown-body h5 {
+.markdown-body > h5 {
   font-size: 1em;
 }
 
-.markdown-body h6 {
+.markdown-body > h6 {
   font-size: 1em;
   color: #777;
 }
 
-.markdown-body p,
-.markdown-body blockquote,
-.markdown-body ul,
-.markdown-body ol,
-.markdown-body dl,
-.markdown-body table,
-.markdown-body pre {
+.markdown-body > p,
+.markdown-body > blockquote,
+.markdown-body > ul,
+.markdown-body > ol,
+.markdown-body > dl,
+.markdown-body > table,
+.markdown-body > pre {
   margin-top: 0;
   margin-bottom: 16px;
 }
 
-.markdown-body hr {
+.markdown-body > hr {
   height: 4px;
   padding: 0;
   margin: 16px 0;
@@ -332,28 +325,28 @@
   border: 0 none;
 }
 
-.markdown-body ul,
-.markdown-body ol {
+.markdown-body > ul,
+.markdown-body > ol {
   padding-left: 2em;
 }
 
-.markdown-body ul ul,
-.markdown-body ul ol,
-.markdown-body ol ol,
-.markdown-body ol ul {
+.markdown-body > ul ul,
+.markdown-body > ul ol,
+.markdown-body > ol ol,
+.markdown-body > ol ul {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.markdown-body li > p {
+.markdown-body > li > p {
   margin-top: 16px;
 }
 
-.markdown-body dl {
+.markdown-body > dl {
   padding: 0;
 }
 
-.markdown-body dl dt {
+.markdown-body > dl dt {
   padding: 0;
   margin-top: 16px;
   font-size: 1em;
@@ -361,26 +354,26 @@
   font-weight: bold;
 }
 
-.markdown-body dl dd {
+.markdown-body > dl dd {
   padding: 0 16px;
   margin-bottom: 16px;
 }
 
-.markdown-body blockquote {
+.markdown-body > blockquote {
   padding: 0 15px;
   color: #777;
   border-left: 4px solid #ddd;
 }
 
-.markdown-body blockquote > :first-child {
+.markdown-body > blockquote > :first-child {
   margin-top: 0;
 }
 
-.markdown-body blockquote > :last-child {
+.markdown-body > blockquote > :last-child {
   margin-bottom: 0;
 }
 
-.markdown-body table {
+.markdown-body > table {
   display: block;
   width: 100%;
   overflow: auto;
@@ -388,32 +381,32 @@
   word-break: keep-all;
 }
 
-.markdown-body table th {
+.markdown-body > table th {
   font-weight: bold;
 }
 
-.markdown-body table th,
-.markdown-body table td {
+.markdown-body > table th,
+.markdown-body > table td {
   padding: 6px 13px;
   border: 1px solid #ddd;
 }
 
-.markdown-body table tr {
+.markdown-body > table tr {
   background-color: #fff;
   border-top: 1px solid #ccc;
 }
 
-.markdown-body table tr:nth-child(2n) {
+.markdown-body > table tr:nth-child(2n) {
   background-color: #f8f8f8;
 }
 
-.markdown-body img {
+.markdown-body > img {
   max-width: 100%;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.markdown-body code {
+.markdown-body > code {
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
@@ -423,13 +416,13 @@
   border-radius: 3px;
 }
 
-.markdown-body code:before,
-.markdown-body code:after {
+.markdown-body > code:before,
+.markdown-body > code:after {
   letter-spacing: -0.2em;
   content: "\00a0";
 }
 
-.markdown-body pre > code {
+.markdown-body > pre > code {
   padding: 0;
   margin: 0;
   font-size: 100%;
@@ -439,12 +432,12 @@
   border: 0;
 }
 
-.markdown-body .highlight {
+.markdown-body > .highlight {
   margin-bottom: 16px;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
+.markdown-body > .highlight pre,
+.markdown-body > pre {
   padding: 16px;
   overflow: auto;
   font-size: 85%;
@@ -453,16 +446,16 @@
   border-radius: 3px;
 }
 
-.markdown-body .highlight pre {
+.markdown-body > .highlight pre {
   margin-bottom: 0;
   word-break: normal;
 }
 
-.markdown-body pre {
+.markdown-body > pre {
   word-wrap: normal;
 }
 
-.markdown-body pre code {
+.markdown-body > pre code {
   display: inline;
   max-width: initial;
   padding: 0;
@@ -474,200 +467,200 @@
   border: 0;
 }
 
-.markdown-body pre code:before,
-.markdown-body pre code:after {
+.markdown-body > pre code:before,
+.markdown-body > pre code:after {
   content: normal;
 }
 
-.markdown-body .highlight {
+.markdown-body > .highlight {
   background: #fff;
 }
 
-.markdown-body .highlight .mf,
-.markdown-body .highlight .mh,
-.markdown-body .highlight .mi,
-.markdown-body .highlight .mo,
-.markdown-body .highlight .il,
-.markdown-body .highlight .m {
+.markdown-body > .highlight .mf,
+.markdown-body > .highlight .mh,
+.markdown-body > .highlight .mi,
+.markdown-body > .highlight .mo,
+.markdown-body > .highlight .il,
+.markdown-body > .highlight .m {
   color: #945277;
 }
 
-.markdown-body .highlight .s,
-.markdown-body .highlight .sb,
-.markdown-body .highlight .sc,
-.markdown-body .highlight .sd,
-.markdown-body .highlight .s2,
-.markdown-body .highlight .se,
-.markdown-body .highlight .sh,
-.markdown-body .highlight .si,
-.markdown-body .highlight .sx,
-.markdown-body .highlight .s1 {
+.markdown-body > .highlight .s,
+.markdown-body > .highlight .sb,
+.markdown-body > .highlight .sc,
+.markdown-body > .highlight .sd,
+.markdown-body > .highlight .s2,
+.markdown-body > .highlight .se,
+.markdown-body > .highlight .sh,
+.markdown-body > .highlight .si,
+.markdown-body > .highlight .sx,
+.markdown-body > .highlight .s1 {
   color: #df5000;
 }
 
-.markdown-body .highlight .kc,
-.markdown-body .highlight .kd,
-.markdown-body .highlight .kn,
-.markdown-body .highlight .kp,
-.markdown-body .highlight .kr,
-.markdown-body .highlight .kt,
-.markdown-body .highlight .k,
-.markdown-body .highlight .o {
+.markdown-body > .highlight .kc,
+.markdown-body > .highlight .kd,
+.markdown-body > .highlight .kn,
+.markdown-body > .highlight .kp,
+.markdown-body > .highlight .kr,
+.markdown-body > .highlight .kt,
+.markdown-body > .highlight .k,
+.markdown-body > .highlight .o {
   font-weight: bold;
 }
 
-.markdown-body .highlight .kt {
+.markdown-body > .highlight .kt {
   color: #458;
 }
 
-.markdown-body .highlight .c,
-.markdown-body .highlight .cm,
-.markdown-body .highlight .c1 {
+.markdown-body > .highlight .c,
+.markdown-body > .highlight .cm,
+.markdown-body > .highlight .c1 {
   color: #998;
   font-style: italic;
 }
 
-.markdown-body .highlight .cp,
-.markdown-body .highlight .cs {
+.markdown-body > .highlight .cp,
+.markdown-body > .highlight .cs {
   color: #999;
   font-weight: bold;
 }
 
-.markdown-body .highlight .cs {
+.markdown-body > .highlight .cs {
   font-style: italic;
 }
 
-.markdown-body .highlight .n {
+.markdown-body > .highlight .n {
   color: #333;
 }
 
-.markdown-body .highlight .na,
-.markdown-body .highlight .nv,
-.markdown-body .highlight .vc,
-.markdown-body .highlight .vg,
-.markdown-body .highlight .vi {
+.markdown-body > .highlight .na,
+.markdown-body > .highlight .nv,
+.markdown-body > .highlight .vc,
+.markdown-body > .highlight .vg,
+.markdown-body > .highlight .vi {
   color: #008080;
 }
 
-.markdown-body .highlight .nb {
+.markdown-body > .highlight .nb {
   color: #0086b3;
 }
 
-.markdown-body .highlight .nc {
+.markdown-body > .highlight .nc {
   color: #458;
   font-weight: bold;
 }
 
-.markdown-body .highlight .no {
+.markdown-body > .highlight .no {
   color: #094e99;
 }
 
-.markdown-body .highlight .ni {
+.markdown-body > .highlight .ni {
   color: #800080;
 }
 
-.markdown-body .highlight .ne {
+.markdown-body > .highlight .ne {
   color: #990000;
   font-weight: bold;
 }
 
-.markdown-body .highlight .nf {
+.markdown-body > .highlight .nf {
   color: #945277;
   font-weight: bold;
 }
 
-.markdown-body .highlight .nn {
+.markdown-body > .highlight .nn {
   color: #555;
 }
 
-.markdown-body .highlight .nt {
+.markdown-body > .highlight .nt {
   color: #000080;
 }
 
-.markdown-body .highlight .err {
+.markdown-body > .highlight .err {
   color: #a61717;
   background-color: #e3d2d2;
 }
 
-.markdown-body .highlight .gd {
+.markdown-body > .highlight .gd {
   color: #000;
   background-color: #fdd;
 }
 
-.markdown-body .highlight .gd .x {
+.markdown-body > .highlight .gd .x {
   color: #000;
   background-color: #faa;
 }
 
-.markdown-body .highlight .ge {
+.markdown-body > .highlight .ge {
   font-style: italic;
 }
 
-.markdown-body .highlight .gr {
+.markdown-body > .highlight .gr {
   color: #aa0000;
 }
 
-.markdown-body .highlight .gh {
+.markdown-body > .highlight .gh {
   color: #999;
 }
 
-.markdown-body .highlight .gi {
+.markdown-body > .highlight .gi {
   color: #000;
   background-color: #dfd;
 }
 
-.markdown-body .highlight .gi .x {
+.markdown-body > .highlight .gi .x {
   color: #000;
   background-color: #afa;
 }
 
-.markdown-body .highlight .go {
+.markdown-body > .highlight .go {
   color: #888;
 }
 
-.markdown-body .highlight .gp {
+.markdown-body > .highlight .gp {
   color: #555;
 }
 
-.markdown-body .highlight .gs {
+.markdown-body > .highlight .gs {
   font-weight: bold;
 }
 
-.markdown-body .highlight .gu {
+.markdown-body > .highlight .gu {
   color: #800080;
   font-weight: bold;
 }
 
-.markdown-body .highlight .gt {
+.markdown-body > .highlight .gt {
   color: #aa0000;
 }
 
-.markdown-body .highlight .ow {
+.markdown-body > .highlight .ow {
   font-weight: bold;
 }
 
-.markdown-body .highlight .w {
+.markdown-body > .highlight .w {
   color: #bbb;
 }
 
-.markdown-body .highlight .sr {
+.markdown-body > .highlight .sr {
   color: #017936;
 }
 
-.markdown-body .highlight .ss {
+.markdown-body > .highlight .ss {
   color: #8b467f;
 }
 
-.markdown-body .highlight .bp {
+.markdown-body > .highlight .bp {
   color: #999;
 }
 
-.markdown-body .highlight .gc {
+.markdown-body > .highlight .gc {
   color: #999;
   background-color: #eaf2f5;
 }
 
-.markdown-body .octicon {
+.markdown-body > .octicon {
   font: normal normal 16px octicons-anchor;
   line-height: 1;
   display: inline-block;
@@ -680,19 +673,19 @@
   user-select: none;
 }
 
-.markdown-body .octicon-link:before {
+.markdown-body > .octicon-link:before {
   content: "\f05c";
 }
 
-.markdown-body .task-list-item {
+.markdown-body > .task-list-item {
   list-style-type: none;
 }
 
-.markdown-body .task-list-item + .task-list-item {
+.markdown-body > .task-list-item + .task-list-item {
   margin-top: 3px;
 }
 
-.markdown-body .task-list-item input {
+.markdown-body > .task-list-item input {
   float: left;
   margin: 0.3em 0 0.25em -1.6em;
   vertical-align: middle;

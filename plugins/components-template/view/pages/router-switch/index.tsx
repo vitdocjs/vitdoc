@@ -3,9 +3,14 @@ import "./index.scss";
 import { useComponentInfo, useRouteMap } from "../../utils/loaders";
 import { Link, useRouteMatch } from "react-router-dom";
 import { LinkCopy } from "../../components/link-copy";
+import { useBoolean, useUpdateEffect } from "ahooks";
+
+import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
+import DoubleRightOutlined from "@ant-design/icons/DoubleRightOutlined";
+import classNames from "classnames";
 
 // @ts-ignore
-const { Menu } = window.antd;
+const { Menu, Button } = window.antd;
 
 const { SubMenu } = Menu;
 
@@ -30,52 +35,78 @@ export default function RouterSwitch() {
 
   const { npmLink, logo } = useComponentInfo() || ({} as any);
 
+  const [showMenu, { toggle, setFalse }] = useBoolean(false);
+
+  const { url: route } = useRouteMatch();
+
+  useUpdateEffect(() => {
+    setFalse();
+  }, [route]);
+
   if (!routes || routes?.length <= 1) {
     return <></>;
   }
-
-  const { url: route } = useRouteMatch();
 
   const openKeys = menuData
     ?.filter(({ children }) => !!children)
     .map(({ name }) => name);
 
   return (
-    <Menu
-      mode="inline"
-      className="router-switch"
-      defaultSelectedKeys={[route]}
-      defaultOpenKeys={openKeys}
-    >
-      <a className="logo" href={npmLink}>
-        <img
-          src={
-            logo ||
-            "https://img.alicdn.com/tfs/TB1Zs2ouQL0gK0jSZFAXXcA9pXa-1142-200.png"
-          }
-          style={{ width: 178, height: 31 }}
-        />
-      </a>
+    <>
+      <div className="route-switch-placeholder" />
+      <div
+        className={classNames(
+          "route-switch-scope",
+          showMenu && "router-switch-open"
+        )}
+      >
+        <a className="logo" href={npmLink}>
+          <img
+            src={
+              logo ||
+              "https://img.alicdn.com/tfs/TB1Zs2ouQL0gK0jSZFAXXcA9pXa-1142-200.png"
+            }
+            style={{ width: 178, height: 31 }}
+          />
+        </a>
 
-      {menuData &&
-        menuData.map((item) => {
-          if (item.path) {
-            return (
-              <Menu.Item className="capitalize nav-item-link" key={item.path}>
-                <MenuLink {...item} />
-              </Menu.Item>
-            );
-          }
-          return (
-            <SubMenu title={item.name} className="capitalize" key={item.name}>
-              {item.children?.map((item) => (
-                <Menu.Item className="nav-item-link" key={item.path}>
-                  <MenuLink {...item} />
-                </Menu.Item>
-              ))}
-            </SubMenu>
-          );
-        })}
-    </Menu>
+        <Button className="responsive-btn" onClick={() => toggle()}>
+          {showMenu ? <DoubleLeftOutlined /> : <DoubleRightOutlined />}
+        </Button>
+        <Menu
+          mode="inline"
+          className="router-switch"
+          defaultSelectedKeys={[route]}
+          defaultOpenKeys={openKeys}
+        >
+          {menuData &&
+            menuData.map((item) => {
+              if (item.path) {
+                return (
+                  <Menu.Item
+                    className="capitalize nav-item-link"
+                    key={item.path}
+                  >
+                    <MenuLink {...item} />
+                  </Menu.Item>
+                );
+              }
+              return (
+                <SubMenu
+                  title={item.name}
+                  className="capitalize"
+                  key={item.name}
+                >
+                  {item.children?.map((item) => (
+                    <Menu.Item className="nav-item-link" key={item.path}>
+                      <MenuLink {...item} />
+                    </Menu.Item>
+                  ))}
+                </SubMenu>
+              );
+            })}
+        </Menu>
+      </div>
+    </>
   );
 }

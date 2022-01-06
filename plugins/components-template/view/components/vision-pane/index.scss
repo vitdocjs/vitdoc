@@ -17,9 +17,14 @@
     display: flex;
     align-items: center;
   }
+  .ant-affix {
+    .ant-drawer-wrapper-body {
+      height: calc(100vh - 40px);
+    }
+  }
   .ant-drawer-wrapper-body {
+    height: calc(100vh - 120px);
     margin-left: 15px;
-    height: 100%;
     width: 300px;
     > div {
       display: flex;

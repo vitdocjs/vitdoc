@@ -1,12 +1,64 @@
-.ant-menu-root.router-switch {
+.route-switch-placeholder {
   width: 230px;
-  height: 100%;
+  @media screen and (max-width: 1100px) {
+    width: 0;
+  }
+}
+
+.route-switch-scope {
+  position: fixed;
+  height: 100vh;
+  border-right: 1px solid #f0f0f0;
   z-index: 90;
-  left: 0;
-  top: 0;
   background-color: #fff;
+  width: 230px;
   display: flex;
   flex-direction: column;
+
+  > .logo {
+    margin: 16px auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .responsive-btn {
+    padding: 0 2px;
+    position: absolute;
+    left: 100%;
+    top: 180px;
+    border-left-width: 0;
+    display: none;
+  }
+
+  transition: transform 0.3s;
+
+  @media screen and (max-width: 1100px) {
+    position: absolute;
+    transform: translateX(-100%);
+    .responsive-btn {
+      display: block;
+    }
+    &.router-switch-open {
+      transform: translateX(0);
+    }
+  }
+}
+.ant-menu-root.router-switch {
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border-width: 0;
+
+  //position: fixed;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
   .nav-item-link {
     .nav-menu-link-item {
       display: flex;
@@ -23,11 +75,6 @@
     &:not(:hover) .copy-link-icon {
       display: none;
     }
-  }
-  > .logo {
-    margin: 16px auto;
-    display: flex;
-    align-items: center;
   }
   .fold-btn {
     color: rgba(0, 0, 0, 0.65);

@@ -3,7 +3,6 @@ import VisionPane from "../../components/vision-pane/vision-pane";
 import React, { useState } from "react";
 
 import "./index.scss";
-import { ComponentArea } from "../../components/component-area";
 import {
   useComponentInfo,
   useMarkdown,
@@ -12,6 +11,7 @@ import {
 } from "../../utils/loaders";
 import { MarkdownArea } from "../../components/markdown-area";
 import { LinkCopy } from "../../components/link-copy";
+import { ComponentPropsContext } from "../../context";
 
 export default function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
@@ -41,21 +41,22 @@ export default function ReadmePane() {
           </a>
           <div className="component-main">
             <div className="component-part">
-              {Components.renderer && (
-                <ComponentArea
-                  data={Components}
-                  componentProps={visionProps}
-                  onSetDefaultProps={setVisionDefaultProps}
-                />
-              )}
-              <div className="component-description component-block">
-                <MarkdownArea data={Components} />
+              <div className="component-description">
+                <ComponentPropsContext.Provider
+                  value={{
+                    error: Components?.error,
+                    componentProps: visionProps,
+                    onSetDefaultProps: setVisionDefaultProps,
+                  }}
+                >
+                  <MarkdownArea data={Components} />
+                </ComponentPropsContext.Provider>
                 <Properties properties={propertyTypes} />
               </div>
             </div>
             {propertyTypes && (
               <VisionPane
-                key={`vision-default-props-${!!visionDefaultProps}`}
+                key={`vision-default-props`}
                 properties={propertyTypes}
                 defaultProps={visionDefaultProps}
                 onPropsChange={setVisionProps}

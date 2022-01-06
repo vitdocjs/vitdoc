@@ -5,55 +5,39 @@ import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import scss from "react-syntax-highlighter/dist/esm/languages/prism/scss";
 import less from "react-syntax-highlighter/dist/esm/languages/prism/less";
 import "@alife/intl-comp-highLighter/dist/index.css";
-import classNames from "classnames";
+import "./index.scss";
+import { ComponentArea } from "../component-area";
+import { useCreation } from "ahooks";
 
 HighLight.registerLanguage("tsx", tsx);
 HighLight.registerLanguage("scss", scss);
 HighLight.registerLanguage("less", less);
-
-// @ts-ignore
-const { Tag } = window.antd;
-
-import "./index.scss";
 
 export function MarkdownArea({ data: res }) {
   if (!res) {
     return null;
   }
 
-  const { moduleMap, content, renderer, setRenderIndex } = res;
+  const { moduleMap, content } = res;
 
-  let index = 0;
   const code = ({ language, value = "" }) => {
-    const fn = moduleMap?.[value.trim()];
-
-    const clickable = /^[j|t]sx$/.test(language);
-    let onChange = () => {};
-    if (clickable) {
-      onChange = function (tabIndex) {
-        setRenderIndex(tabIndex);
-      }.bind(null, index);
-
-      index++;
+    const jsx = /^[j|t]sx$/.test(language);
+    if (!jsx) {
+      return <HighLight lang={language} children={value} />;
     }
 
-    return (
-      <div
-        className={classNames({
-          "clickable-block": clickable,
-          "selected-block": renderer === fn,
-        })}
-        onClick={onChange}
-      >
-        {renderer === fn && <Tag>Showing</Tag>}
-        <HighLight lang={language} children={value} />
-      </div>
-    );
+    const fn = moduleMap?.[value.trim()];
+    return <ComponentArea renderer={fn} lang={language} content={value} />;
   };
 
-  return (
-    <div className="markdown-area markdown-body">
-      <ReactMarkdown renderers={{ code }}>{content}</ReactMarkdown>
-    </div>
+  const markdownComponent = useCreation(
+    () => (
+      <ReactMarkdown className="markdown-body" renderers={{ code }}>
+        {content}
+      </ReactMarkdown>
+    ),
+    [content]
   );
+
+  return <div className="markdown-area">{markdownComponent}</div>;
 }

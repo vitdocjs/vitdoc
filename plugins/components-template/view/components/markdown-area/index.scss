@@ -1,40 +1,7 @@
-$color: #6495f9;
-
 @import "./theme.css";
 
 .markdown-area {
   margin-bottom: 15px;
-  .clickable-block {
-    cursor: pointer;
-    border: 2px solid transparent;
-    &:not(.selected-block):hover {
-      > .code-pane {
-        box-shadow: 0 2px 8px 0 rgb(100 149 249);
-      }
-    }
-  }
-  .selected-block {
-    position: relative;
-    margin-bottom: 0.85rem;
-
-    > .ant-tag {
-      position: absolute;
-      z-index: 1;
-      border-radius: 6px 0 6px 0;
-      top: 0;
-      background: $color;
-      border-color: $color;
-      color: #fff;
-      font-weight: 500;
-    }
-    > .code-pane {
-      box-shadow: 0 2px 18px 0 rgb(0 0 0 / 40%);
-      border: 2px solid $color;
-      > pre.hljs {
-        margin-bottom: 0;
-      }
-    }
-  }
 
   ul,
   dl,

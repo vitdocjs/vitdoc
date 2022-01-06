@@ -107,8 +107,9 @@ const mdjsx = () => {
       const React = {...React$};
 
       const beforeCreateElement = React.createElement;
+      var $_ComponentWrap;
       React.createElement = (Comp,...rest) => {
-        const wrap = window.$_ComponentWrap;
+        const wrap = $_ComponentWrap;
         let NextComp = Comp;
 
         if(NextComp === $_Component && wrap) {
@@ -139,7 +140,7 @@ const mdjsx = () => {
           return `${code.slice(
             0,
             lastIndex
-          )};export default function(){;${code.slice(lastIndex)};};`;
+          )};export default function(mountNode, ComponentWrap){$_ComponentWrap = ComponentWrap;${code.slice(lastIndex)};};`;
         };
 
         let nextCode: string = replaceReact(code);
@@ -197,10 +198,10 @@ const mdjsx = () => {
         const modules = {
           ${Object.entries(moduleIds).reduce(
             (prev, [k, v]) =>
-              prev.concat(`${k}: () => { 
+              prev.concat(`${k}: function () { 
                 import('${v}').then(res => { 
                   const fn = res.default;
-                  typeof fn === 'function' && fn();
+                  typeof fn === 'function' && fn.apply(null, arguments);
                 });
               },`),
             ""

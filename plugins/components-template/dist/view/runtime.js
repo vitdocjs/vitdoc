@@ -128,7 +128,7 @@ Object.defineProperty(lib$1, "__esModule", {
 });
 lib$1.makeXMLhttp = makeXMLhttp;
 lib$1.getMockPath = getMockPath;
-var _default$7 = lib$1.default = mtopHook;
+var _default$c = lib$1.default = mtopHook;
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
@@ -358,20 +358,22 @@ function renderProperty({ properties }) {
   });
   return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null, /* @__PURE__ */ modules$1.createElement("b", {
     className: "block-title"
-  }, "Props"), /* @__PURE__ */ modules$1.createElement(Table, {
-    dataSource: dateSource
+  }, "API"), /* @__PURE__ */ modules$1.createElement(Table, {
+    dataSource: dateSource,
+    pagination: false,
+    bordered: true
   }, /* @__PURE__ */ modules$1.createElement(Table.Column, {
     dataIndex: "name",
-    title: "property"
-  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
-    dataIndex: ["type", "name"],
-    title: "propType"
-  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
-    dataIndex: ["defaultValue", "value"],
-    title: "default"
+    title: "Property"
   }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
     dataIndex: "description",
-    title: "description"
+    title: "Description"
+  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
+    dataIndex: ["type", "name"],
+    title: "Type"
+  }), /* @__PURE__ */ modules$1.createElement(Table.Column, {
+    dataIndex: ["defaultValue", "value"],
+    title: "Default"
   })));
 }
 function isObject$6(value) {
@@ -420,11 +422,11 @@ function arrayPush$3(array, values) {
   return array;
 }
 var _arrayPush = arrayPush$3;
-var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var _freeGlobal = freeGlobal$1;
-var freeGlobal = _freeGlobal;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$8 = freeGlobal || freeSelf || Function("return this")();
+var freeGlobal$3 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var _freeGlobal = freeGlobal$3;
+var freeGlobal$2 = _freeGlobal;
+var freeSelf$2 = typeof self == "object" && self && self.Object === Object && self;
+var root$8 = freeGlobal$2 || freeSelf$2 || Function("return this")();
 var _root = root$8;
 var root$7 = _root;
 var Symbol$6 = root$7.Symbol;
@@ -2502,8 +2504,8 @@ Object.defineProperty(Context, "__esModule", {
 Context.default = void 0;
 var _react$1 = require$$3;
 var IconContext = /* @__PURE__ */ (0, _react$1.createContext)({});
-var _default$6 = IconContext;
-Context.default = _default$6;
+var _default$b = IconContext;
+Context.default = _default$b;
 var IconBase$1 = {};
 var utils = {};
 function bound01(n2, max) {
@@ -3175,8 +3177,8 @@ function warningOnce(valid, message2) {
 function noteOnce(valid, message2) {
   call(note, valid, message2);
 }
-var _default$5 = warningOnce;
-warning$2.default = _default$5;
+var _default$a = warningOnce;
+warning$2.default = _default$a;
 var dynamicCSS = {};
 var canUseDom$1 = {};
 Object.defineProperty(canUseDom$1, "__esModule", {
@@ -3186,13 +3188,13 @@ canUseDom$1.default = canUseDom;
 function canUseDom() {
   return !!(typeof window !== "undefined" && window.document && window.document.createElement);
 }
-var _interopRequireDefault$7 = interopRequireDefault.exports;
+var _interopRequireDefault$c = interopRequireDefault.exports;
 Object.defineProperty(dynamicCSS, "__esModule", {
   value: true
 });
 dynamicCSS.injectCSS = injectCSS;
 dynamicCSS.updateCSS = updateCSS;
-var _canUseDom = _interopRequireDefault$7(canUseDom$1);
+var _canUseDom = _interopRequireDefault$c(canUseDom$1);
 var MARK_KEY = "rc-util-key";
 function getContainer(option) {
   if (option.attachTo) {
@@ -3252,8 +3254,8 @@ function updateCSS(css, key) {
   newNode[MARK_KEY] = key;
   return newNode;
 }
-var _interopRequireWildcard$4 = interopRequireWildcard.exports;
-var _interopRequireDefault$6 = interopRequireDefault.exports;
+var _interopRequireWildcard$9 = interopRequireWildcard.exports;
+var _interopRequireDefault$b = interopRequireDefault.exports;
 Object.defineProperty(utils, "__esModule", {
   value: true
 });
@@ -3264,13 +3266,13 @@ utils.generate = generate;
 utils.getSecondaryColor = getSecondaryColor;
 utils.normalizeTwoToneColors = normalizeTwoToneColors;
 utils.useInsertStyles = utils.iconStyles = utils.svgBaseProps = void 0;
-var _objectSpread2$5 = _interopRequireDefault$6(objectSpread2.exports);
-var _typeof2 = _interopRequireDefault$6(_typeof.exports);
+var _objectSpread2$a = _interopRequireDefault$b(objectSpread2.exports);
+var _typeof2 = _interopRequireDefault$b(_typeof.exports);
 var _colors = require$$4;
-var _react = _interopRequireWildcard$4(require$$3);
-var _warning = _interopRequireDefault$6(warning$2);
+var _react = _interopRequireWildcard$9(require$$3);
+var _warning = _interopRequireDefault$b(warning$2);
 var _dynamicCSS = dynamicCSS;
-var _Context$1 = _interopRequireDefault$6(Context);
+var _Context$1 = _interopRequireDefault$b(Context);
 function warning(valid, message2) {
   (0, _warning.default)(valid, "[@ant-design/icons] ".concat(message2));
 }
@@ -3294,13 +3296,13 @@ function normalizeAttrs() {
 }
 function generate(node, key, rootProps) {
   if (!rootProps) {
-    return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$5.default)({
+    return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$a.default)({
       key
     }, normalizeAttrs(node.attrs)), (node.children || []).map(function(child, index2) {
       return generate(child, "".concat(key, "-").concat(node.tag, "-").concat(index2));
     }));
   }
-  return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$5.default)((0, _objectSpread2$5.default)({
+  return /* @__PURE__ */ _react.default.createElement(node.tag, (0, _objectSpread2$a.default)((0, _objectSpread2$a.default)({
     key
   }, normalizeAttrs(node.attrs)), rootProps), (node.children || []).map(function(child, index2) {
     return generate(child, "".concat(key, "-").concat(node.tag, "-").concat(index2));
@@ -3336,13 +3338,13 @@ var useInsertStyles = function useInsertStyles2() {
   }, []);
 };
 utils.useInsertStyles = useInsertStyles;
-var _interopRequireDefault$5 = interopRequireDefault.exports;
+var _interopRequireDefault$a = interopRequireDefault.exports;
 Object.defineProperty(IconBase$1, "__esModule", {
   value: true
 });
 IconBase$1.default = void 0;
-var _objectWithoutProperties2$1 = _interopRequireDefault$5(objectWithoutProperties.exports);
-var _objectSpread2$4 = _interopRequireDefault$5(objectSpread2.exports);
+var _objectWithoutProperties2$1 = _interopRequireDefault$a(objectWithoutProperties.exports);
+var _objectSpread2$9 = _interopRequireDefault$a(objectSpread2.exports);
 var _utils$2 = utils;
 var _excluded$1 = ["icon", "className", "onClick", "style", "primaryColor", "secondaryColor"];
 var twoToneColorPalette = {
@@ -3357,7 +3359,7 @@ function setTwoToneColors(_ref) {
   twoToneColorPalette.calculated = !!secondaryColor;
 }
 function getTwoToneColors() {
-  return (0, _objectSpread2$4.default)({}, twoToneColorPalette);
+  return (0, _objectSpread2$9.default)({}, twoToneColorPalette);
 }
 var IconBase = function IconBase2(props) {
   var icon = props.icon, className = props.className, onClick = props.onClick, style = props.style, primaryColor = props.primaryColor, secondaryColor = props.secondaryColor, restProps = (0, _objectWithoutProperties2$1.default)(props, _excluded$1);
@@ -3375,11 +3377,11 @@ var IconBase = function IconBase2(props) {
   }
   var target = icon;
   if (target && typeof target.icon === "function") {
-    target = (0, _objectSpread2$4.default)((0, _objectSpread2$4.default)({}, target), {}, {
+    target = (0, _objectSpread2$9.default)((0, _objectSpread2$9.default)({}, target), {}, {
       icon: target.icon(colors.primaryColor, colors.secondaryColor)
     });
   }
-  return (0, _utils$2.generate)(target.icon, "svg-".concat(target.name), (0, _objectSpread2$4.default)({
+  return (0, _utils$2.generate)(target.icon, "svg-".concat(target.name), (0, _objectSpread2$9.default)({
     className,
     onClick,
     style,
@@ -3393,17 +3395,17 @@ var IconBase = function IconBase2(props) {
 IconBase.displayName = "IconReact";
 IconBase.getTwoToneColors = getTwoToneColors;
 IconBase.setTwoToneColors = setTwoToneColors;
-var _default$4 = IconBase;
-IconBase$1.default = _default$4;
+var _default$9 = IconBase;
+IconBase$1.default = _default$9;
 var twoTonePrimaryColor = {};
-var _interopRequireDefault$4 = interopRequireDefault.exports;
+var _interopRequireDefault$9 = interopRequireDefault.exports;
 Object.defineProperty(twoTonePrimaryColor, "__esModule", {
   value: true
 });
 twoTonePrimaryColor.setTwoToneColor = setTwoToneColor;
 twoTonePrimaryColor.getTwoToneColor = getTwoToneColor;
-var _slicedToArray2$1 = _interopRequireDefault$4(slicedToArray.exports);
-var _IconBase$1 = _interopRequireDefault$4(IconBase$1);
+var _slicedToArray2$1 = _interopRequireDefault$9(slicedToArray.exports);
+var _IconBase$1 = _interopRequireDefault$9(IconBase$1);
 var _utils$1 = utils;
 function setTwoToneColor(twoToneColor) {
   var _normalizeTwoToneColo = (0, _utils$1.normalizeTwoToneColors)(twoToneColor), _normalizeTwoToneColo2 = (0, _slicedToArray2$1.default)(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
@@ -3419,28 +3421,28 @@ function getTwoToneColor() {
   }
   return [colors.primaryColor, colors.secondaryColor];
 }
-var _interopRequireDefault$3 = interopRequireDefault.exports;
-var _interopRequireWildcard$3 = interopRequireWildcard.exports;
+var _interopRequireDefault$8 = interopRequireDefault.exports;
+var _interopRequireWildcard$8 = interopRequireWildcard.exports;
 Object.defineProperty(AntdIcon, "__esModule", {
   value: true
 });
 AntdIcon.default = void 0;
-var _objectSpread2$3 = _interopRequireDefault$3(objectSpread2.exports);
-var _slicedToArray2 = _interopRequireDefault$3(slicedToArray.exports);
-var _defineProperty2 = _interopRequireDefault$3(defineProperty$1.exports);
-var _objectWithoutProperties2 = _interopRequireDefault$3(objectWithoutProperties.exports);
-var React$5 = _interopRequireWildcard$3(require$$3);
-var _classnames = _interopRequireDefault$3(_classnames_2_3_1_classnames.exports);
-var _Context = _interopRequireDefault$3(Context);
-var _IconBase = _interopRequireDefault$3(IconBase$1);
+var _objectSpread2$8 = _interopRequireDefault$8(objectSpread2.exports);
+var _slicedToArray2 = _interopRequireDefault$8(slicedToArray.exports);
+var _defineProperty2 = _interopRequireDefault$8(defineProperty$1.exports);
+var _objectWithoutProperties2 = _interopRequireDefault$8(objectWithoutProperties.exports);
+var React$a = _interopRequireWildcard$8(require$$3);
+var _classnames = _interopRequireDefault$8(_classnames_2_3_1_classnames.exports);
+var _Context = _interopRequireDefault$8(Context);
+var _IconBase = _interopRequireDefault$8(IconBase$1);
 var _twoTonePrimaryColor = twoTonePrimaryColor;
 var _utils = utils;
 var _excluded = ["className", "icon", "spin", "rotate", "tabIndex", "onClick", "twoToneColor"];
 (0, _twoTonePrimaryColor.setTwoToneColor)("#1890ff");
-var Icon = /* @__PURE__ */ React$5.forwardRef(function(props, ref) {
+var Icon = /* @__PURE__ */ React$a.forwardRef(function(props, ref) {
   var _classNames;
   var className = props.className, icon = props.icon, spin = props.spin, rotate = props.rotate, tabIndex = props.tabIndex, onClick = props.onClick, twoToneColor = props.twoToneColor, restProps = (0, _objectWithoutProperties2.default)(props, _excluded);
-  var _React$useContext = React$5.useContext(_Context.default), _React$useContext$pre = _React$useContext.prefixCls, prefixCls = _React$useContext$pre === void 0 ? "anticon" : _React$useContext$pre;
+  var _React$useContext = React$a.useContext(_Context.default), _React$useContext$pre = _React$useContext.prefixCls, prefixCls = _React$useContext$pre === void 0 ? "anticon" : _React$useContext$pre;
   var classString = (0, _classnames.default)(prefixCls, (_classNames = {}, (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-").concat(icon.name), !!icon.name), (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-spin"), !!spin || icon.name === "loading"), _classNames), className);
   var iconTabIndex = tabIndex;
   if (iconTabIndex === void 0 && onClick) {
@@ -3451,7 +3453,7 @@ var Icon = /* @__PURE__ */ React$5.forwardRef(function(props, ref) {
     transform: "rotate(".concat(rotate, "deg)")
   } : void 0;
   var _normalizeTwoToneColo = (0, _utils.normalizeTwoToneColors)(twoToneColor), _normalizeTwoToneColo2 = (0, _slicedToArray2.default)(_normalizeTwoToneColo, 2), primaryColor = _normalizeTwoToneColo2[0], secondaryColor = _normalizeTwoToneColo2[1];
-  return /* @__PURE__ */ React$5.createElement("span", (0, _objectSpread2$3.default)((0, _objectSpread2$3.default)({
+  return /* @__PURE__ */ React$a.createElement("span", (0, _objectSpread2$8.default)((0, _objectSpread2$8.default)({
     role: "img",
     "aria-label": icon.name
   }, restProps), {}, {
@@ -3459,7 +3461,7 @@ var Icon = /* @__PURE__ */ React$5.forwardRef(function(props, ref) {
     tabIndex: iconTabIndex,
     onClick,
     className: classString
-  }), /* @__PURE__ */ React$5.createElement(_IconBase.default, {
+  }), /* @__PURE__ */ React$a.createElement(_IconBase.default, {
     icon,
     primaryColor,
     secondaryColor,
@@ -3469,27 +3471,27 @@ var Icon = /* @__PURE__ */ React$5.forwardRef(function(props, ref) {
 Icon.displayName = "AntdIcon";
 Icon.getTwoToneColor = _twoTonePrimaryColor.getTwoToneColor;
 Icon.setTwoToneColor = _twoTonePrimaryColor.setTwoToneColor;
-var _default$3 = Icon;
-AntdIcon.default = _default$3;
-var _interopRequireWildcard$2 = interopRequireWildcard.exports;
-var _interopRequireDefault$2 = interopRequireDefault.exports;
+var _default$8 = Icon;
+AntdIcon.default = _default$8;
+var _interopRequireWildcard$7 = interopRequireWildcard.exports;
+var _interopRequireDefault$7 = interopRequireDefault.exports;
 Object.defineProperty(DoubleLeftOutlined$4, "__esModule", {
   value: true
 });
 DoubleLeftOutlined$4.default = void 0;
-var _objectSpread2$2 = _interopRequireDefault$2(objectSpread2.exports);
-var React$4 = _interopRequireWildcard$2(require$$3);
-var _DoubleLeftOutlined = _interopRequireDefault$2(DoubleLeftOutlined$3);
-var _AntdIcon$2 = _interopRequireDefault$2(AntdIcon);
+var _objectSpread2$7 = _interopRequireDefault$7(objectSpread2.exports);
+var React$9 = _interopRequireWildcard$7(require$$3);
+var _DoubleLeftOutlined = _interopRequireDefault$7(DoubleLeftOutlined$3);
+var _AntdIcon$7 = _interopRequireDefault$7(AntdIcon);
 var DoubleLeftOutlined$1 = function DoubleLeftOutlined(props, ref) {
-  return /* @__PURE__ */ React$4.createElement(_AntdIcon$2.default, (0, _objectSpread2$2.default)((0, _objectSpread2$2.default)({}, props), {}, {
+  return /* @__PURE__ */ React$9.createElement(_AntdIcon$7.default, (0, _objectSpread2$7.default)((0, _objectSpread2$7.default)({}, props), {}, {
     ref,
     icon: _DoubleLeftOutlined.default
   }));
 };
 DoubleLeftOutlined$1.displayName = "DoubleLeftOutlined";
-var _default$2 = /* @__PURE__ */ React$4.forwardRef(DoubleLeftOutlined$1);
-DoubleLeftOutlined$4.default = _default$2;
+var _default$7 = /* @__PURE__ */ React$9.forwardRef(DoubleLeftOutlined$1);
+DoubleLeftOutlined$4.default = _default$7;
 (function(module, exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3510,25 +3512,25 @@ var CloseOutlined$3 = {};
 Object.defineProperty(CloseOutlined$3, "__esModule", { value: true });
 var CloseOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z" } }] }, "name": "close", "theme": "outlined" };
 CloseOutlined$3.default = CloseOutlined$2;
-var _interopRequireWildcard$1 = interopRequireWildcard.exports;
-var _interopRequireDefault$1 = interopRequireDefault.exports;
+var _interopRequireWildcard$6 = interopRequireWildcard.exports;
+var _interopRequireDefault$6 = interopRequireDefault.exports;
 Object.defineProperty(CloseOutlined$4, "__esModule", {
   value: true
 });
 CloseOutlined$4.default = void 0;
-var _objectSpread2$1 = _interopRequireDefault$1(objectSpread2.exports);
-var React$3 = _interopRequireWildcard$1(require$$3);
-var _CloseOutlined = _interopRequireDefault$1(CloseOutlined$3);
-var _AntdIcon$1 = _interopRequireDefault$1(AntdIcon);
+var _objectSpread2$6 = _interopRequireDefault$6(objectSpread2.exports);
+var React$8 = _interopRequireWildcard$6(require$$3);
+var _CloseOutlined = _interopRequireDefault$6(CloseOutlined$3);
+var _AntdIcon$6 = _interopRequireDefault$6(AntdIcon);
 var CloseOutlined$1 = function CloseOutlined(props, ref) {
-  return /* @__PURE__ */ React$3.createElement(_AntdIcon$1.default, (0, _objectSpread2$1.default)((0, _objectSpread2$1.default)({}, props), {}, {
+  return /* @__PURE__ */ React$8.createElement(_AntdIcon$6.default, (0, _objectSpread2$6.default)((0, _objectSpread2$6.default)({}, props), {}, {
     ref,
     icon: _CloseOutlined.default
   }));
 };
 CloseOutlined$1.displayName = "CloseOutlined";
-var _default$1 = /* @__PURE__ */ React$3.forwardRef(CloseOutlined$1);
-CloseOutlined$4.default = _default$1;
+var _default$6 = /* @__PURE__ */ React$8.forwardRef(CloseOutlined$1);
+CloseOutlined$4.default = _default$6;
 (function(module, exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -3546,7 +3548,7 @@ var CloseOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(CloseOutlined$5.exp
 var index$7 = "";
 const PANE_VISIBLE = "pane_visible";
 const { Bundle, Node, ui } = window.VisualEngine;
-const { Button } = window.antd;
+const { Button: Button$1, Anchor } = window.antd;
 class VisionPane extends modules$1.PureComponent {
   constructor(props) {
     super(props);
@@ -3583,6 +3585,10 @@ class VisionPane extends modules$1.PureComponent {
       this.disposeArr && this.disposeArr.forEach((dispose) => dispose());
       this.init();
     }
+    if (prevProps.defaultProps !== this.props.defaultProps) {
+      this.setPropertyDrawerShow(true);
+      this.init();
+    }
   }
   componentWillUnmount() {
     this.disposeArr && this.disposeArr.forEach((dispose) => dispose());
@@ -3601,7 +3607,10 @@ class VisionPane extends modules$1.PureComponent {
     const { Stage } = ui.Field;
     return stage ? /* @__PURE__ */ modules$1.createElement("div", {
       className: "vision-property-container"
-    }, propertyDrawerShow && Object.keys(prototypeOptions) ? /* @__PURE__ */ modules$1.createElement("div", {
+    }, propertyDrawerShow && Object.keys(prototypeOptions) ? /* @__PURE__ */ modules$1.createElement(Anchor, {
+      offsetTop: 20,
+      style: { backgroundColor: "unset" }
+    }, /* @__PURE__ */ modules$1.createElement("div", {
       className: "ant-drawer-wrapper-body "
     }, /* @__PURE__ */ modules$1.createElement("div", {
       className: "component-block"
@@ -3613,7 +3622,7 @@ class VisionPane extends modules$1.PureComponent {
       className: "vision-title-icon",
       src: icon,
       alt: ""
-    }), title || "Vision \u5C5E\u6027\u9762\u677F"), /* @__PURE__ */ modules$1.createElement("button", {
+    }), title || "Prop Debug Panel"), /* @__PURE__ */ modules$1.createElement("button", {
       "aria-label": "Close",
       className: "ant-drawer-close",
       onClick: () => this.setPropertyDrawerShow(false)
@@ -3621,59 +3630,13 @@ class VisionPane extends modules$1.PureComponent {
       className: "ant-drawer-body"
     }, /* @__PURE__ */ modules$1.createElement(Stage, {
       stage
-    })))) : /* @__PURE__ */ modules$1.createElement("div", {
+    }))))) : /* @__PURE__ */ modules$1.createElement("div", {
       className: "icon-vision-property-show",
       onClick: () => this.setPropertyDrawerShow(true)
-    }, /* @__PURE__ */ modules$1.createElement(Button, null, /* @__PURE__ */ modules$1.createElement(DoubleLeftOutlined2, null), "Vision \u9762\u677F"))) : null;
+    }, /* @__PURE__ */ modules$1.createElement(Button$1, null, /* @__PURE__ */ modules$1.createElement(DoubleLeftOutlined2, null), "Debug Panel"))) : null;
   }
 }
 var index$6 = "";
-var index$5 = "";
-const { Result } = window["antd"];
-function ComponentArea(props) {
-  const { componentProps, onSetDefaultProps, data: Components } = props;
-  const componentRef = useRef();
-  const invoked = useRef(false);
-  const newComp = useRef(new Map());
-  const wrapProps = useCallback((Component2, { React: OutReact }) => {
-    var _a;
-    if (((_a = newComp.current.get(Component2)) == null ? void 0 : _a.visionProps) === componentProps) {
-      return newComp.current.get(Component2);
-    }
-    const outputComp = (props2) => {
-      if (!invoked.current) {
-        onSetDefaultProps && onSetDefaultProps(props2);
-        invoked.current = true;
-      }
-      const finalProps = Object.assign({}, props2, componentProps);
-      return OutReact.createElement(Component2, finalProps);
-    };
-    outputComp.visionProps = componentProps;
-    newComp.current.set(Component2, outputComp);
-    return outputComp;
-  }, [componentProps]);
-  useEffect(() => {
-    window.$_ComponentWrap = wrapProps;
-  }, [componentProps]);
-  useEffect(() => {
-    const renderer = Components == null ? void 0 : Components.renderer;
-    window.mountNode = componentRef.current;
-    renderer && renderer();
-  }, [Components == null ? void 0 : Components.renderer, componentProps]);
-  return /* @__PURE__ */ modules$1.createElement("div", {
-    className: "component-block"
-  }, (Components == null ? void 0 : Components.error) ? /* @__PURE__ */ modules$1.createElement(Result, {
-    status: "warning",
-    title: "Resource load failed",
-    subTitle: /* @__PURE__ */ modules$1.createElement("span", {
-      style: { whiteSpace: "pre-wrap", textAlign: "left" }
-    }, Components == null ? void 0 : Components.error.message)
-  }) : /* @__PURE__ */ modules$1.createElement("div", {
-    className: "component-container",
-    id: "vite-component-container",
-    ref: componentRef
-  }));
-}
 const queryRE = /\?.*$/;
 const hashRE = /#.*$/;
 const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
@@ -4039,17 +4002,17 @@ function createTransitionManager() {
       callback(true);
     }
   }
-  var listeners = [];
+  var listeners2 = [];
   function appendListener(fn) {
     var isActive = true;
     function listener() {
       if (isActive)
         fn.apply(void 0, arguments);
     }
-    listeners.push(listener);
+    listeners2.push(listener);
     return function() {
       isActive = false;
-      listeners = listeners.filter(function(item) {
+      listeners2 = listeners2.filter(function(item) {
         return item !== listener;
       });
     };
@@ -4058,7 +4021,7 @@ function createTransitionManager() {
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    listeners.forEach(function(listener) {
+    listeners2.forEach(function(listener) {
       return listener.apply(void 0, args);
     });
   }
@@ -4760,7 +4723,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
     Consumer
   };
 }
-var index$4 = modules$1.createContext || createReactContext;
+var index$5 = modules$1.createContext || createReactContext;
 var _pathToRegexp_1_8_0_pathToRegexp = { exports: {} };
 var _isarray_0_0_1_isarray = Array.isArray || function(arr) {
   return Object.prototype.toString.call(arr) == "[object Array]";
@@ -5135,13 +5098,13 @@ var TYPE_STATICS = {};
 TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
 TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
 var createNamedContext = function createNamedContext2(name) {
-  var context2 = index$4();
+  var context2 = index$5();
   context2.displayName = name;
   return context2;
 };
 var historyContext = /* @__PURE__ */ createNamedContext("Router-History");
 var createNamedContext$1 = function createNamedContext3(name) {
-  var context2 = index$4();
+  var context2 = index$5();
   context2.displayName = name;
   return context2;
 };
@@ -5723,8 +5686,6 @@ function useComponentInfo() {
   });
 }
 function useMarkdown() {
-  var _a;
-  const [renderIndex, setRenderIndex] = useState(0);
   const { route } = useRoute();
   const readmeFile = route.replace(".html", ".md");
   const results = useAsyncImport(readmeFile, ({ default: packageInfo }) => {
@@ -5741,29 +5702,23 @@ function useMarkdown() {
         return previousValue;
       }
       return Object.assign(previousValue, {
-        [currentValue.sourcesContent.trim()]: () => {
-          currentValue.load();
+        [currentValue.sourcesContent.trim()]: (...args) => {
+          currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load();
           });
         }
       });
     }, {});
-    if (renderIndex === void 0) {
-      setRenderIndex(0);
-    }
   }
   if (!results) {
     return null;
   }
-  const renderer = (_a = Object.values(moduleMap)) == null ? void 0 : _a[renderIndex || 0];
   let error;
   return {
     error,
     content: results.content,
-    moduleMap,
-    renderer,
-    setRenderIndex
+    moduleMap
   };
 }
 var immutable = extend$1;
@@ -5996,7 +5951,7 @@ function point(point2) {
   if (!point2 || typeof point2 !== "object") {
     point2 = {};
   }
-  return index$3(point2.line) + ":" + index$3(point2.column);
+  return index$4(point2.line) + ":" + index$4(point2.column);
 }
 function position(pos) {
   if (!pos || typeof pos !== "object") {
@@ -6004,7 +5959,7 @@ function position(pos) {
   }
   return point(pos.start) + "-" + point(pos.end);
 }
-function index$3(value) {
+function index$4(value) {
   return value && typeof value === "number" ? value : 1;
 }
 var stringify = _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition;
@@ -11469,7 +11424,7 @@ reactIs_production_min.typeOf = z;
 {
   _reactIs_16_13_1_reactIs.exports = reactIs_production_min;
 }
-var React$2 = require$$3;
+var React$7 = require$$3;
 var xtend$2 = immutable;
 var ReactIs = _reactIs_16_13_1_reactIs.exports;
 function astToReact$1(node, options) {
@@ -11496,7 +11451,7 @@ function astToReact$1(node, options) {
     throw new Error("Renderer for type `".concat(node.type, "` not defined or is not renderable"));
   }
   var nodeProps = getNodeProps(node, key, options, renderer, parent, index2);
-  return React$2.createElement(renderer, nodeProps, nodeProps.children || resolveChildren() || void 0);
+  return React$7.createElement(renderer, nodeProps, nodeProps.children || resolveChildren() || void 0);
   function resolveChildren() {
     return node.children && node.children.map(function(childNode, i) {
       return astToReact$1(childNode, options, {
@@ -11510,7 +11465,7 @@ function getNodeProps(node, key, opts, renderer, parent, index2) {
   var props = {
     key
   };
-  var isSimpleRenderer = typeof renderer === "string" || renderer === React$2.Fragment;
+  var isSimpleRenderer = typeof renderer === "string" || renderer === React$7.Fragment;
   if (opts.sourcePos && node.position) {
     props["data-sourcepos"] = flattenPosition(node.position);
   }
@@ -11660,14 +11615,14 @@ function assignDefined(target, attrs) {
 function mergeNodeChildren(node, parsedChildren) {
   var el2 = node.element;
   if (Array.isArray(el2)) {
-    var Fragment2 = React$2.Fragment || "div";
-    return React$2.createElement(Fragment2, null, el2);
+    var Fragment2 = React$7.Fragment || "div";
+    return React$7.createElement(Fragment2, null, el2);
   }
   if (el2.props.children || parsedChildren) {
-    var children = React$2.Children.toArray(el2.props.children).concat(parsedChildren);
-    return React$2.cloneElement(el2, null, children);
+    var children = React$7.Children.toArray(el2.props.children).concat(parsedChildren);
+    return React$7.cloneElement(el2, null, children);
   }
-  return React$2.cloneElement(el2, null);
+  return React$7.cloneElement(el2, null);
 }
 function flattenPosition(pos) {
   return [pos.start.line, ":", pos.start.column, "-", pos.end.line, ":", pos.end.column].map(String).join("");
@@ -11764,9 +11719,9 @@ var uriTransformer$1 = function uriTransformer(uri) {
   return "javascript:void(0)";
 };
 var xtend$1 = immutable;
-var React$1 = require$$3;
-var supportsStringRender = parseInt((React$1.version || "16").slice(0, 2), 10) >= 16;
-var createElement = React$1.createElement;
+var React$6 = require$$3;
+var supportsStringRender = parseInt((React$6.version || "16").slice(0, 2), 10) >= 16;
+var createElement = React$6.createElement;
 var renderers = {
   break: "br",
   paragraph: "p",
@@ -11802,7 +11757,7 @@ function TextRenderer(props) {
 }
 function Root(props) {
   var className = props.className;
-  var root2 = !className && React$1.Fragment || "div";
+  var root2 = !className && React$6.Fragment || "div";
   return createElement(root2, className ? {
     className
   } : null, props.children);
@@ -11858,7 +11813,7 @@ function Html(props) {
   var dangerous = props.allowDangerousHtml || props.escapeHtml === false;
   var tag = props.isBlock ? "div" : "span";
   if (!dangerous) {
-    return createElement(React$1.Fragment || tag, null, props.value);
+    return createElement(React$6.Fragment || tag, null, props.value);
   }
   var nodeProps = {
     dangerouslySetInnerHTML: {
@@ -11868,7 +11823,7 @@ function Html(props) {
   return createElement(tag, nodeProps);
 }
 function ParsedHtml(props) {
-  return props["data-sourcepos"] ? React$1.cloneElement(props.element, {
+  return props["data-sourcepos"] ? React$6.cloneElement(props.element, {
     "data-sourcepos": props["data-sourcepos"]
   }) : props.element;
 }
@@ -13295,71 +13250,688 @@ function less(Prism) {
   });
 }
 var less$1 = less_1;
+var index$3 = "";
 var index$2 = "";
 var index$1 = "";
-HighLight.registerLanguage("tsx", tsx$1);
-HighLight.registerLanguage("scss", scss$1);
-HighLight.registerLanguage("less", less$1);
-const { Tag } = window.antd;
-function MarkdownArea({ data: res }) {
-  if (!res) {
-    return null;
+const ComponentPropsContext = createContext({});
+var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
+freeGlobal$1 || freeSelf$1 || Function("return this")();
+var freeGlobal = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+freeGlobal || freeSelf || Function("return this")();
+function isDocumentVisible() {
+  if (typeof document !== "undefined" && typeof document.visibilityState !== "undefined") {
+    return document.visibilityState !== "hidden";
   }
-  const { moduleMap, content: content2, renderer, setRenderIndex } = res;
-  let index2 = 0;
-  const code = ({ language, value = "" }) => {
-    const fn = moduleMap == null ? void 0 : moduleMap[value.trim()];
-    const clickable = /^[j|t]sx$/.test(language);
-    let onChange = () => {
-    };
-    if (clickable) {
-      onChange = function(tabIndex) {
-        setRenderIndex(tabIndex);
-      }.bind(null, index2);
-      index2++;
-    }
-    return /* @__PURE__ */ modules$1.createElement("div", {
-      className: classNames({
-        "clickable-block": clickable,
-        "selected-block": renderer === fn
-      }),
-      onClick: onChange
-    }, renderer === fn && /* @__PURE__ */ modules$1.createElement(Tag, null, "Showing"), /* @__PURE__ */ modules$1.createElement(HighLight, {
-      lang: language,
-      children: value
-    }));
-  };
-  return /* @__PURE__ */ modules$1.createElement("div", {
-    className: "markdown-area markdown-body"
-  }, /* @__PURE__ */ modules$1.createElement(reactMarkdown, {
-    renderers: { code }
-  }, content2));
+  return true;
 }
+function isOnline() {
+  if (typeof navigator.onLine !== "undefined") {
+    return navigator.onLine;
+  }
+  return true;
+}
+var __read$8 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read$8(arguments[i]));
+  }
+  return ar;
+};
+var __read$7 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read$7(arguments[i]));
+  }
+  return ar;
+};
+var listeners$1 = [];
+var eventsBinded$1 = false;
+if (typeof window !== "undefined" && window.addEventListener && !eventsBinded$1) {
+  var revalidate$1 = function revalidate() {
+    if (!isDocumentVisible() || !isOnline())
+      return;
+    for (var i = 0; i < listeners$1.length; i++) {
+      var listener = listeners$1[i];
+      listener();
+    }
+  };
+  window.addEventListener("visibilitychange", revalidate$1, false);
+  window.addEventListener("focus", revalidate$1, false);
+  eventsBinded$1 = true;
+}
+var listeners = [];
+var eventsBinded = false;
+if (typeof window !== "undefined" && window.addEventListener && !eventsBinded) {
+  var revalidate = function revalidate2() {
+    if (!isDocumentVisible())
+      return;
+    for (var i = 0; i < listeners.length; i++) {
+      var listener = listeners[i];
+      listener();
+    }
+  };
+  window.addEventListener("visibilitychange", revalidate, false);
+  eventsBinded = true;
+}
+var __assign$3 = globalThis && globalThis.__assign || function() {
+  __assign$3 = Object.assign || function(t2) {
+    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
+      s = arguments[i];
+      for (var p2 in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+      }
+    }
+    return t2;
+  };
+  return __assign$3.apply(this, arguments);
+};
+var __read$6 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read$6(arguments[i]));
+  }
+  return ar;
+};
+var __assign$2 = globalThis && globalThis.__assign || function() {
+  __assign$2 = Object.assign || function(t2) {
+    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
+      s = arguments[i];
+      for (var p2 in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+      }
+    }
+    return t2;
+  };
+  return __assign$2.apply(this, arguments);
+};
+globalThis && globalThis.__rest || function(s, e2) {
+  var t2 = {};
+  for (var p2 in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  }
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+var __read$5 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read$5(arguments[i]));
+  }
+  return ar;
+};
+var __assign$1 = globalThis && globalThis.__assign || function() {
+  __assign$1 = Object.assign || function(t2) {
+    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
+      s = arguments[i];
+      for (var p2 in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+      }
+    }
+    return t2;
+  };
+  return __assign$1.apply(this, arguments);
+};
+globalThis && globalThis.__rest || function(s, e2) {
+  var t2 = {};
+  for (var p2 in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  }
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+var __read$4 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read$4(arguments[i]));
+  }
+  return ar;
+};
+var ConfigContext = /* @__PURE__ */ modules$1.createContext({});
+ConfigContext.displayName = "UseRequestConfigContext";
+var __assign = globalThis && globalThis.__assign || function() {
+  __assign = Object.assign || function(t2) {
+    for (var s, i = 1, n2 = arguments.length; i < n2; i++) {
+      s = arguments[i];
+      for (var p2 in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p2))
+          t2[p2] = s[p2];
+      }
+    }
+    return t2;
+  };
+  return __assign.apply(this, arguments);
+};
+globalThis && globalThis.__rest || function(s, e2) {
+  var t2 = {};
+  for (var p2 in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s[p2];
+  }
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
+      if (e2.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
+        t2[p2[i]] = s[p2[i]];
+    }
+  return t2;
+};
+var __read$3 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read$3(arguments[i]));
+  }
+  return ar;
+};
+ConfigContext.Provider;
+var useUpdateEffect = function useUpdateEffect2(effect, deps) {
+  var isMounted = useRef(false);
+  useEffect(function() {
+    if (!isMounted.current) {
+      isMounted.current = true;
+    } else {
+      return effect();
+    }
+  }, deps);
+};
+var useUpdateEffect$1 = useUpdateEffect;
+function usePersistFn(fn) {
+  var fnRef = useRef(fn);
+  fnRef.current = fn;
+  var persistFn = useRef();
+  if (!persistFn.current) {
+    persistFn.current = function() {
+      var args = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+      }
+      return fnRef.current.apply(this, args);
+    };
+  }
+  return persistFn.current;
+}
+var __read$2 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+function useToggle(defaultValue, reverseValue) {
+  if (defaultValue === void 0) {
+    defaultValue = false;
+  }
+  var _a = __read$2(useState(defaultValue), 2), state = _a[0], setState = _a[1];
+  var actions = useMemo(function() {
+    var reverseValueOrigin = reverseValue === void 0 ? !defaultValue : reverseValue;
+    var toggle = function toggle2(value) {
+      if (value !== void 0) {
+        setState(value);
+        return;
+      }
+      setState(function(s) {
+        return s === defaultValue ? reverseValueOrigin : defaultValue;
+      });
+    };
+    var setLeft = function setLeft2() {
+      return setState(defaultValue);
+    };
+    var setRight = function setRight2() {
+      return setState(reverseValueOrigin);
+    };
+    return {
+      toggle,
+      setLeft,
+      setRight
+    };
+  }, [defaultValue, reverseValue]);
+  return [state, actions];
+}
+var __read$1 = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+function useBoolean(defaultValue) {
+  if (defaultValue === void 0) {
+    defaultValue = false;
+  }
+  var _a = __read$1(useToggle(defaultValue), 2), state = _a[0], toggle = _a[1].toggle;
+  var actions = useMemo(function() {
+    var setTrue = function setTrue2() {
+      return toggle(true);
+    };
+    var setFalse = function setFalse2() {
+      return toggle(false);
+    };
+    return {
+      toggle,
+      setTrue,
+      setFalse
+    };
+  }, [toggle]);
+  return [state, actions];
+}
+function useCreation(factory, deps) {
+  var current = useRef({
+    deps,
+    obj: void 0,
+    initialized: false
+  }).current;
+  if (current.initialized === false || !depsAreSame(current.deps, deps)) {
+    current.deps = deps;
+    current.obj = factory();
+    current.initialized = true;
+  }
+  return current.obj;
+}
+function depsAreSame(oldDeps, deps) {
+  if (oldDeps === deps)
+    return true;
+  for (var i = 0; i < oldDeps.length; i++) {
+    if (oldDeps[i] !== deps[i])
+      return false;
+  }
+  return true;
+}
+var __read = globalThis && globalThis.__read || function(o, n2) {
+  var m2 = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m2)
+    return o;
+  var i = m2.call(o), r2, ar = [], e2;
+  try {
+    while ((n2 === void 0 || n2-- > 0) && !(r2 = i.next()).done) {
+      ar.push(r2.value);
+    }
+  } catch (error) {
+    e2 = {
+      error
+    };
+  } finally {
+    try {
+      if (r2 && !r2.done && (m2 = i["return"]))
+        m2.call(i);
+    } finally {
+      if (e2)
+        throw e2.error;
+    }
+  }
+  return ar;
+};
+globalThis && globalThis.__spread || function() {
+  for (var ar = [], i = 0; i < arguments.length; i++) {
+    ar = ar.concat(__read(arguments[i]));
+  }
+  return ar;
+};
+var CopyOutlined$5 = { exports: {} };
+var CopyOutlined$4 = {};
+var CopyOutlined$3 = {};
+Object.defineProperty(CopyOutlined$3, "__esModule", { value: true });
+var CopyOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z" } }] }, "name": "copy", "theme": "outlined" };
+CopyOutlined$3.default = CopyOutlined$2;
+var _interopRequireWildcard$5 = interopRequireWildcard.exports;
+var _interopRequireDefault$5 = interopRequireDefault.exports;
+Object.defineProperty(CopyOutlined$4, "__esModule", {
+  value: true
+});
+CopyOutlined$4.default = void 0;
+var _objectSpread2$5 = _interopRequireDefault$5(objectSpread2.exports);
+var React$5 = _interopRequireWildcard$5(require$$3);
+var _CopyOutlined = _interopRequireDefault$5(CopyOutlined$3);
+var _AntdIcon$5 = _interopRequireDefault$5(AntdIcon);
+var CopyOutlined$1 = function CopyOutlined(props, ref) {
+  return /* @__PURE__ */ React$5.createElement(_AntdIcon$5.default, (0, _objectSpread2$5.default)((0, _objectSpread2$5.default)({}, props), {}, {
+    ref,
+    icon: _CopyOutlined.default
+  }));
+};
+CopyOutlined$1.displayName = "CopyOutlined";
+var _default$5 = /* @__PURE__ */ React$5.forwardRef(CopyOutlined$1);
+CopyOutlined$4.default = _default$5;
+(function(module, exports) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _CopyOutlined2 = _interopRequireDefault2(CopyOutlined$4);
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : { "default": obj };
+  }
+  var _default2 = _CopyOutlined2;
+  exports.default = _default2;
+  module.exports = _default2;
+})(CopyOutlined$5, CopyOutlined$5.exports);
+var CopyOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(CopyOutlined$5.exports);
+var CodeOutlined$5 = { exports: {} };
+var CodeOutlined$4 = {};
+var CodeOutlined$3 = {};
+Object.defineProperty(CodeOutlined$3, "__esModule", { value: true });
+var CodeOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M516 673c0 4.4 3.4 8 7.5 8h185c4.1 0 7.5-3.6 7.5-8v-48c0-4.4-3.4-8-7.5-8h-185c-4.1 0-7.5 3.6-7.5 8v48zm-194.9 6.1l192-161c3.8-3.2 3.8-9.1 0-12.3l-192-160.9A7.95 7.95 0 00308 351v62.7c0 2.4 1 4.6 2.9 6.1L420.7 512l-109.8 92.2a8.1 8.1 0 00-2.9 6.1V673c0 6.8 7.9 10.5 13.1 6.1zM880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656z" } }] }, "name": "code", "theme": "outlined" };
+CodeOutlined$3.default = CodeOutlined$2;
+var _interopRequireWildcard$4 = interopRequireWildcard.exports;
+var _interopRequireDefault$4 = interopRequireDefault.exports;
+Object.defineProperty(CodeOutlined$4, "__esModule", {
+  value: true
+});
+CodeOutlined$4.default = void 0;
+var _objectSpread2$4 = _interopRequireDefault$4(objectSpread2.exports);
+var React$4 = _interopRequireWildcard$4(require$$3);
+var _CodeOutlined = _interopRequireDefault$4(CodeOutlined$3);
+var _AntdIcon$4 = _interopRequireDefault$4(AntdIcon);
+var CodeOutlined$1 = function CodeOutlined(props, ref) {
+  return /* @__PURE__ */ React$4.createElement(_AntdIcon$4.default, (0, _objectSpread2$4.default)((0, _objectSpread2$4.default)({}, props), {}, {
+    ref,
+    icon: _CodeOutlined.default
+  }));
+};
+CodeOutlined$1.displayName = "CodeOutlined";
+var _default$4 = /* @__PURE__ */ React$4.forwardRef(CodeOutlined$1);
+CodeOutlined$4.default = _default$4;
+(function(module, exports) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _CodeOutlined2 = _interopRequireDefault2(CodeOutlined$4);
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : { "default": obj };
+  }
+  var _default2 = _CodeOutlined2;
+  exports.default = _default2;
+  module.exports = _default2;
+})(CodeOutlined$5, CodeOutlined$5.exports);
+var CodeOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(CodeOutlined$5.exports);
+var CheckOutlined$5 = { exports: {} };
+var CheckOutlined$4 = {};
+var CheckOutlined$3 = {};
+Object.defineProperty(CheckOutlined$3, "__esModule", { value: true });
+var CheckOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z" } }] }, "name": "check", "theme": "outlined" };
+CheckOutlined$3.default = CheckOutlined$2;
+var _interopRequireWildcard$3 = interopRequireWildcard.exports;
+var _interopRequireDefault$3 = interopRequireDefault.exports;
+Object.defineProperty(CheckOutlined$4, "__esModule", {
+  value: true
+});
+CheckOutlined$4.default = void 0;
+var _objectSpread2$3 = _interopRequireDefault$3(objectSpread2.exports);
+var React$3 = _interopRequireWildcard$3(require$$3);
+var _CheckOutlined = _interopRequireDefault$3(CheckOutlined$3);
+var _AntdIcon$3 = _interopRequireDefault$3(AntdIcon);
+var CheckOutlined$1 = function CheckOutlined(props, ref) {
+  return /* @__PURE__ */ React$3.createElement(_AntdIcon$3.default, (0, _objectSpread2$3.default)((0, _objectSpread2$3.default)({}, props), {}, {
+    ref,
+    icon: _CheckOutlined.default
+  }));
+};
+CheckOutlined$1.displayName = "CheckOutlined";
+var _default$3 = /* @__PURE__ */ React$3.forwardRef(CheckOutlined$1);
+CheckOutlined$4.default = _default$3;
+(function(module, exports) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _CheckOutlined2 = _interopRequireDefault2(CheckOutlined$4);
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : { "default": obj };
+  }
+  var _default2 = _CheckOutlined2;
+  exports.default = _default2;
+  module.exports = _default2;
+})(CheckOutlined$5, CheckOutlined$5.exports);
+var CheckOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(CheckOutlined$5.exports);
+var BugOutlined$5 = { exports: {} };
+var BugOutlined$4 = {};
+var BugOutlined$3 = {};
+Object.defineProperty(BugOutlined$3, "__esModule", { value: true });
+var BugOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M304 280h56c4.4 0 8-3.6 8-8 0-28.3 5.9-53.2 17.1-73.5 10.6-19.4 26-34.8 45.4-45.4C450.9 142 475.7 136 504 136h16c28.3 0 53.2 5.9 73.5 17.1 19.4 10.6 34.8 26 45.4 45.4C650 218.9 656 243.7 656 272c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8 0-40-8.8-76.7-25.9-108.1a184.31 184.31 0 00-74-74C596.7 72.8 560 64 520 64h-16c-40 0-76.7 8.8-108.1 25.9a184.31 184.31 0 00-74 74C304.8 195.3 296 232 296 272c0 4.4 3.6 8 8 8z" } }, { "tag": "path", "attrs": { "d": "M940 512H792V412c76.8 0 139-62.2 139-139 0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8a63 63 0 01-63 63H232a63 63 0 01-63-63c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 76.8 62.2 139 139 139v100H84c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h148v96c0 6.5.2 13 .7 19.3C164.1 728.6 116 796.7 116 876c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8 0-44.2 23.9-82.9 59.6-103.7a273 273 0 0022.7 49c24.3 41.5 59 76.2 100.5 100.5S460.5 960 512 960s99.8-13.9 141.3-38.2a281.38 281.38 0 00123.2-149.5A120 120 0 01836 876c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8 0-79.3-48.1-147.4-116.7-176.7.4-6.4.7-12.8.7-19.3v-96h148c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM716 680c0 36.8-9.7 72-27.8 102.9-17.7 30.3-43 55.6-73.3 73.3C584 874.3 548.8 884 512 884s-72-9.7-102.9-27.8c-30.3-17.7-55.6-43-73.3-73.3A202.75 202.75 0 01308 680V412h408v268z" } }] }, "name": "bug", "theme": "outlined" };
+BugOutlined$3.default = BugOutlined$2;
+var _interopRequireWildcard$2 = interopRequireWildcard.exports;
+var _interopRequireDefault$2 = interopRequireDefault.exports;
+Object.defineProperty(BugOutlined$4, "__esModule", {
+  value: true
+});
+BugOutlined$4.default = void 0;
+var _objectSpread2$2 = _interopRequireDefault$2(objectSpread2.exports);
+var React$2 = _interopRequireWildcard$2(require$$3);
+var _BugOutlined = _interopRequireDefault$2(BugOutlined$3);
+var _AntdIcon$2 = _interopRequireDefault$2(AntdIcon);
+var BugOutlined$1 = function BugOutlined(props, ref) {
+  return /* @__PURE__ */ React$2.createElement(_AntdIcon$2.default, (0, _objectSpread2$2.default)((0, _objectSpread2$2.default)({}, props), {}, {
+    ref,
+    icon: _BugOutlined.default
+  }));
+};
+BugOutlined$1.displayName = "BugOutlined";
+var _default$2 = /* @__PURE__ */ React$2.forwardRef(BugOutlined$1);
+BugOutlined$4.default = _default$2;
+(function(module, exports) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _BugOutlined2 = _interopRequireDefault2(BugOutlined$4);
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : { "default": obj };
+  }
+  var _default2 = _BugOutlined2;
+  exports.default = _default2;
+  module.exports = _default2;
+})(BugOutlined$5, BugOutlined$5.exports);
+var BugOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(BugOutlined$5.exports);
 var LinkOutlined$5 = { exports: {} };
 var LinkOutlined$4 = {};
 var LinkOutlined$3 = {};
 Object.defineProperty(LinkOutlined$3, "__esModule", { value: true });
 var LinkOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M574 665.4a8.03 8.03 0 00-11.3 0L446.5 781.6c-53.8 53.8-144.6 59.5-204 0-59.5-59.5-53.8-150.2 0-204l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3l-39.8-39.8a8.03 8.03 0 00-11.3 0L191.4 526.5c-84.6 84.6-84.6 221.5 0 306s221.5 84.6 306 0l116.2-116.2c3.1-3.1 3.1-8.2 0-11.3L574 665.4zm258.6-474c-84.6-84.6-221.5-84.6-306 0L410.3 307.6a8.03 8.03 0 000 11.3l39.7 39.7c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c53.8-53.8 144.6-59.5 204 0 59.5 59.5 53.8 150.2 0 204L665.3 562.6a8.03 8.03 0 000 11.3l39.8 39.8c3.1 3.1 8.2 3.1 11.3 0l116.2-116.2c84.5-84.6 84.5-221.5 0-306.1zM610.1 372.3a8.03 8.03 0 00-11.3 0L372.3 598.7a8.03 8.03 0 000 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3 0l226.4-226.4c3.1-3.1 3.1-8.2 0-11.3l-39.5-39.6z" } }] }, "name": "link", "theme": "outlined" };
 LinkOutlined$3.default = LinkOutlined$2;
-var _interopRequireWildcard = interopRequireWildcard.exports;
-var _interopRequireDefault = interopRequireDefault.exports;
+var _interopRequireWildcard$1 = interopRequireWildcard.exports;
+var _interopRequireDefault$1 = interopRequireDefault.exports;
 Object.defineProperty(LinkOutlined$4, "__esModule", {
   value: true
 });
 LinkOutlined$4.default = void 0;
-var _objectSpread2 = _interopRequireDefault(objectSpread2.exports);
-var React = _interopRequireWildcard(require$$3);
-var _LinkOutlined = _interopRequireDefault(LinkOutlined$3);
-var _AntdIcon = _interopRequireDefault(AntdIcon);
+var _objectSpread2$1 = _interopRequireDefault$1(objectSpread2.exports);
+var React$1 = _interopRequireWildcard$1(require$$3);
+var _LinkOutlined = _interopRequireDefault$1(LinkOutlined$3);
+var _AntdIcon$1 = _interopRequireDefault$1(AntdIcon);
 var LinkOutlined$1 = function LinkOutlined(props, ref) {
-  return /* @__PURE__ */ React.createElement(_AntdIcon.default, (0, _objectSpread2.default)((0, _objectSpread2.default)({}, props), {}, {
+  return /* @__PURE__ */ React$1.createElement(_AntdIcon$1.default, (0, _objectSpread2$1.default)((0, _objectSpread2$1.default)({}, props), {}, {
     ref,
     icon: _LinkOutlined.default
   }));
 };
 LinkOutlined$1.displayName = "LinkOutlined";
-var _default = /* @__PURE__ */ React.forwardRef(LinkOutlined$1);
-LinkOutlined$4.default = _default;
+var _default$1 = /* @__PURE__ */ React$1.forwardRef(LinkOutlined$1);
+LinkOutlined$4.default = _default$1;
 (function(module, exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -13395,6 +13967,122 @@ function LinkCopy({ route }) {
     }
   });
 }
+const { Result, Tooltip } = window["antd"];
+function ComponentArea(props) {
+  const { renderer, lang, content: content2 } = props;
+  const componentRef = useRef();
+  const invoked = useRef(false);
+  const newComp = useRef(new Map());
+  const { componentProps, onSetDefaultProps, error } = useContext$1(ComponentPropsContext);
+  const defaultPropsRef = useRef();
+  const wrapProps = usePersistFn((Component2, { React: OutReact }) => {
+    var _a;
+    if (((_a = newComp.current.get(Component2)) == null ? void 0 : _a.visionProps) === componentProps) {
+      return newComp.current.get(Component2);
+    }
+    const outputComp = (props2) => {
+      if (!invoked.current) {
+        defaultPropsRef.current = props2;
+        invoked.current = true;
+      }
+      const finalProps = Object.assign({}, props2, componentProps);
+      return OutReact.createElement(Component2, finalProps);
+    };
+    outputComp.visionProps = componentProps;
+    newComp.current.set(Component2, outputComp);
+    return outputComp;
+  });
+  useEffect(() => {
+    renderer && renderer(componentRef.current, wrapProps);
+  }, [renderer, componentProps]);
+  const [checkCode, { toggle }] = useBoolean();
+  const handlerDebugComponent = usePersistFn(() => {
+    onSetDefaultProps == null ? void 0 : onSetDefaultProps(__spreadValues({}, defaultPropsRef.current || {}));
+  });
+  return /* @__PURE__ */ modules$1.createElement("div", {
+    className: "component-area"
+  }, /* @__PURE__ */ modules$1.createElement("div", {
+    className: "code-box-demo"
+  }, error ? /* @__PURE__ */ modules$1.createElement(Result, {
+    status: "warning",
+    title: "Resource load failed",
+    subTitle: /* @__PURE__ */ modules$1.createElement("span", {
+      style: { whiteSpace: "pre-wrap", textAlign: "left" }
+    }, error.message)
+  }) : /* @__PURE__ */ modules$1.createElement("div", {
+    className: "component-container",
+    ref: componentRef
+  })), /* @__PURE__ */ modules$1.createElement("div", {
+    className: "code-box-actions"
+  }, /* @__PURE__ */ modules$1.createElement(Tooltip, {
+    title: "Debug",
+    onClick: handlerDebugComponent
+  }, /* @__PURE__ */ modules$1.createElement(BugOutlined2, {
+    className: "code-box-code-action"
+  })), /* @__PURE__ */ modules$1.createElement(CopyIcon, {
+    content: content2
+  }), /* @__PURE__ */ modules$1.createElement(Tooltip, {
+    title: checkCode ? "Hide Code" : "View Code",
+    onClick: () => toggle()
+  }, /* @__PURE__ */ modules$1.createElement(CodeOutlined2, {
+    className: classNames("code-box-code-action", checkCode && "active")
+  }))), checkCode && /* @__PURE__ */ modules$1.createElement(HighLight, {
+    lang,
+    children: content2
+  }));
+}
+function CopyIcon({ content: content2 }) {
+  const [copied, { setTrue, setFalse }] = useBoolean();
+  const copy = usePersistFn(() => {
+    copyToClipboard(content2);
+    setTrue();
+  });
+  return /* @__PURE__ */ modules$1.createElement(Tooltip, {
+    title: copied ? "Copied!" : "Copy Code",
+    onClick: copy,
+    onVisibleChange: (v2) => {
+      !v2 && setTimeout(() => {
+        setFalse();
+      }, 500);
+    }
+  }, copied ? /* @__PURE__ */ modules$1.createElement(CheckOutlined2, {
+    className: "code-box-code-action",
+    style: { color: "#52c41a" }
+  }) : /* @__PURE__ */ modules$1.createElement(CopyOutlined2, {
+    className: "code-box-code-action"
+  }));
+}
+HighLight.registerLanguage("tsx", tsx$1);
+HighLight.registerLanguage("scss", scss$1);
+HighLight.registerLanguage("less", less$1);
+function MarkdownArea({ data: res }) {
+  if (!res) {
+    return null;
+  }
+  const { moduleMap, content: content2 } = res;
+  const code = ({ language, value = "" }) => {
+    const jsx2 = /^[j|t]sx$/.test(language);
+    if (!jsx2) {
+      return /* @__PURE__ */ modules$1.createElement(HighLight, {
+        lang: language,
+        children: value
+      });
+    }
+    const fn = moduleMap == null ? void 0 : moduleMap[value.trim()];
+    return /* @__PURE__ */ modules$1.createElement(ComponentArea, {
+      renderer: fn,
+      lang: language,
+      content: value
+    });
+  };
+  const markdownComponent = useCreation(() => /* @__PURE__ */ modules$1.createElement(reactMarkdown, {
+    className: "markdown-body",
+    renderers: { code }
+  }, content2), [content2]);
+  return /* @__PURE__ */ modules$1.createElement("div", {
+    className: "markdown-area"
+  }, markdownComponent);
+}
 function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
@@ -13419,25 +14107,66 @@ function ReadmePane() {
     className: "component-main"
   }, /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-part"
-  }, Components.renderer && /* @__PURE__ */ modules$1.createElement(ComponentArea, {
-    data: Components,
-    componentProps: visionProps,
-    onSetDefaultProps: setVisionDefaultProps
-  }), /* @__PURE__ */ modules$1.createElement("div", {
-    className: "component-description component-block"
+  }, /* @__PURE__ */ modules$1.createElement("div", {
+    className: "component-description"
+  }, /* @__PURE__ */ modules$1.createElement(ComponentPropsContext.Provider, {
+    value: {
+      error: Components == null ? void 0 : Components.error,
+      componentProps: visionProps,
+      onSetDefaultProps: setVisionDefaultProps
+    }
   }, /* @__PURE__ */ modules$1.createElement(MarkdownArea, {
     data: Components
-  }), /* @__PURE__ */ modules$1.createElement(renderProperty, {
+  })), /* @__PURE__ */ modules$1.createElement(renderProperty, {
     properties: propertyTypes
   }))), propertyTypes && /* @__PURE__ */ modules$1.createElement(VisionPane, {
-    key: `vision-default-props-${!!visionDefaultProps}`,
+    key: `vision-default-props`,
     properties: propertyTypes,
     defaultProps: visionDefaultProps,
     onPropsChange: setVisionProps
   }))) : "Loading...");
 }
 var index = "";
-const { Menu } = window.antd;
+var DoubleRightOutlined$5 = { exports: {} };
+var DoubleRightOutlined$4 = {};
+var DoubleRightOutlined$3 = {};
+Object.defineProperty(DoubleRightOutlined$3, "__esModule", { value: true });
+var DoubleRightOutlined$2 = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z" } }] }, "name": "double-right", "theme": "outlined" };
+DoubleRightOutlined$3.default = DoubleRightOutlined$2;
+var _interopRequireWildcard = interopRequireWildcard.exports;
+var _interopRequireDefault = interopRequireDefault.exports;
+Object.defineProperty(DoubleRightOutlined$4, "__esModule", {
+  value: true
+});
+DoubleRightOutlined$4.default = void 0;
+var _objectSpread2 = _interopRequireDefault(objectSpread2.exports);
+var React = _interopRequireWildcard(require$$3);
+var _DoubleRightOutlined = _interopRequireDefault(DoubleRightOutlined$3);
+var _AntdIcon = _interopRequireDefault(AntdIcon);
+var DoubleRightOutlined$1 = function DoubleRightOutlined(props, ref) {
+  return /* @__PURE__ */ React.createElement(_AntdIcon.default, (0, _objectSpread2.default)((0, _objectSpread2.default)({}, props), {}, {
+    ref,
+    icon: _DoubleRightOutlined.default
+  }));
+};
+DoubleRightOutlined$1.displayName = "DoubleRightOutlined";
+var _default = /* @__PURE__ */ React.forwardRef(DoubleRightOutlined$1);
+DoubleRightOutlined$4.default = _default;
+(function(module, exports) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _DoubleRightOutlined2 = _interopRequireDefault2(DoubleRightOutlined$4);
+  function _interopRequireDefault2(obj) {
+    return obj && obj.__esModule ? obj : { "default": obj };
+  }
+  var _default2 = _DoubleRightOutlined2;
+  exports.default = _default2;
+  module.exports = _default2;
+})(DoubleRightOutlined$5, DoubleRightOutlined$5.exports);
+var DoubleRightOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(DoubleRightOutlined$5.exports);
+const { Menu, Button } = window.antd;
 const { SubMenu } = Menu;
 function MenuLink(item) {
   return /* @__PURE__ */ modules$1.createElement("div", {
@@ -13453,23 +14182,34 @@ function MenuLink(item) {
 function RouterSwitch() {
   const { tree: menuData, routes } = useRouteMap() || {};
   const { npmLink, logo } = useComponentInfo() || {};
+  const [showMenu, { toggle, setFalse }] = useBoolean(false);
+  const { url: route } = useRouteMatch();
+  useUpdateEffect$1(() => {
+    setFalse();
+  }, [route]);
   if (!routes || (routes == null ? void 0 : routes.length) <= 1) {
     return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null);
   }
-  const { url: route } = useRouteMatch();
   const openKeys = menuData == null ? void 0 : menuData.filter(({ children }) => !!children).map(({ name }) => name);
-  return /* @__PURE__ */ modules$1.createElement(Menu, {
-    mode: "inline",
-    className: "router-switch",
-    defaultSelectedKeys: [route],
-    defaultOpenKeys: openKeys
+  return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null, /* @__PURE__ */ modules$1.createElement("div", {
+    className: "route-switch-placeholder"
+  }), /* @__PURE__ */ modules$1.createElement("div", {
+    className: classNames("route-switch-scope", showMenu && "router-switch-open")
   }, /* @__PURE__ */ modules$1.createElement("a", {
     className: "logo",
     href: npmLink
   }, /* @__PURE__ */ modules$1.createElement("img", {
     src: logo || "https://img.alicdn.com/tfs/TB1Zs2ouQL0gK0jSZFAXXcA9pXa-1142-200.png",
     style: { width: 178, height: 31 }
-  })), menuData && menuData.map((item) => {
+  })), /* @__PURE__ */ modules$1.createElement(Button, {
+    className: "responsive-btn",
+    onClick: () => toggle()
+  }, showMenu ? /* @__PURE__ */ modules$1.createElement(DoubleLeftOutlined2, null) : /* @__PURE__ */ modules$1.createElement(DoubleRightOutlined2, null)), /* @__PURE__ */ modules$1.createElement(Menu, {
+    mode: "inline",
+    className: "router-switch",
+    defaultSelectedKeys: [route],
+    defaultOpenKeys: openKeys
+  }, menuData && menuData.map((item) => {
     var _a;
     if (item.path) {
       return /* @__PURE__ */ modules$1.createElement(Menu.Item, {
@@ -13485,9 +14225,9 @@ function RouterSwitch() {
       className: "nav-item-link",
       key: item2.path
     }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item2)))));
-  }));
+  }))));
 }
-_default$7();
+_default$c();
 function App() {
   const { routes } = useRouteMap() || {};
   if (!routes) {

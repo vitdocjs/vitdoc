@@ -13,7 +13,7 @@ import React from "react";
 const { Bundle, Node, ui } = window.VisualEngine;
 
 // @ts-ignore
-const { Button } = window.antd;
+const { Button, Anchor } = window.antd;
 
 export default class VisionPane extends React.PureComponent<{
   componentName?: string;
@@ -83,6 +83,10 @@ export default class VisionPane extends React.PureComponent<{
       this.disposeArr && this.disposeArr.forEach((dispose) => dispose());
       this.init();
     }
+    if (prevProps.defaultProps !== this.props.defaultProps) {
+      this.setPropertyDrawerShow(true);
+      this.init();
+    }
   }
 
   setPropertyDrawerShow = (visible) => {
@@ -114,26 +118,28 @@ export default class VisionPane extends React.PureComponent<{
     return stage ? (
       <div className="vision-property-container">
         {propertyDrawerShow && Object.keys(prototypeOptions) ? (
-          <div className="ant-drawer-wrapper-body ">
-            <div className="component-block">
-              <div className="ant-drawer-header">
-                <div className="ant-drawer-title">
-                  <img className="vision-title-icon" src={icon} alt="" />
-                  {title || "Vision 属性面板"}
+          <Anchor offsetTop={20} style={{ backgroundColor: "unset" }}>
+            <div className="ant-drawer-wrapper-body ">
+              <div className="component-block">
+                <div className="ant-drawer-header">
+                  <div className="ant-drawer-title">
+                    <img className="vision-title-icon" src={icon} alt="" />
+                    {title || "Prop Debug Panel"}
+                  </div>
+                  <button
+                    aria-label="Close"
+                    className="ant-drawer-close"
+                    onClick={() => this.setPropertyDrawerShow(false)}
+                  >
+                    <CloseOutlined />
+                  </button>
                 </div>
-                <button
-                  aria-label="Close"
-                  className="ant-drawer-close"
-                  onClick={() => this.setPropertyDrawerShow(false)}
-                >
-                  <CloseOutlined />
-                </button>
-              </div>
-              <div className="ant-drawer-body">
-                <Stage stage={stage} />
+                <div className="ant-drawer-body">
+                  <Stage stage={stage} />
+                </div>
               </div>
             </div>
-          </div>
+          </Anchor>
         ) : (
           <div
             className="icon-vision-property-show"
@@ -141,7 +147,7 @@ export default class VisionPane extends React.PureComponent<{
           >
             <Button>
               <DoubleLeftOutlined />
-              Vision 面板
+              Debug Panel
             </Button>
           </div>
         )}
