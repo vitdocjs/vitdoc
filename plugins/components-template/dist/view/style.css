@@ -131,7 +131,7 @@
 #public-component-show-container .component-description > .block-title {
   font-size: 1.3em;
   display: block;
-  line-height: 2;
+  margin-bottom: 0.2em;
 }
 #public-component-show-container .component-description > code {
   border: 1px solid #e7e9ed;
