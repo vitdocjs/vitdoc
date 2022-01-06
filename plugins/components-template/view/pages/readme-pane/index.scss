@@ -63,22 +63,22 @@
     background: #fff;
     box-sizing: border-box;
     overflow: hidden;
-    border: 1px #ccc solid;
+    border: 1px #f0f0f0 solid;
     border-bottom: unset;
     border-top: unset;
 
     $borderRadius: 7px;
     &:first-child {
       border-radius: $borderRadius $borderRadius 0 0;
-      border-top: 1px #ccc solid;
+      border-top: 1px #f0f0f0 solid;
     }
     &:last-child {
       border-radius: 0 0 $borderRadius $borderRadius;
-      border-bottom: 1px #ccc solid;
+      border-bottom: 1px #f0f0f0 solid;
     }
     &:first-child:last-child {
       border-radius: $borderRadius;
-      border: 1px #ccc solid;
+      border: 1px #f0f0f0 solid;
     }
   }
 

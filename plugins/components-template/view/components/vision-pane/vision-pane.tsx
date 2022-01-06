@@ -124,7 +124,7 @@ export default class VisionPane extends React.PureComponent<{
                 <div className="ant-drawer-header">
                   <div className="ant-drawer-title">
                     <img className="vision-title-icon" src={icon} alt="" />
-                    {title || "Prop Debug Panel"}
+                    {title || "Debug Panel"}
                   </div>
                   <button
                     aria-label="Close"

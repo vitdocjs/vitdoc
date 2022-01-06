@@ -19,7 +19,12 @@ export default function renderProperty({ properties }) {
   return (
     <React.Fragment>
       <b className="block-title">API</b>
-      <Table dataSource={dateSource} pagination={false} bordered>
+      <Table
+        scroll={{ x: "100%" }}
+        dataSource={dateSource}
+        pagination={false}
+        bordered
+      >
         <Table.Column dataIndex="name" title="Property" />
         <Table.Column dataIndex="description" title="Description" />
         <Table.Column dataIndex={["type", "name"]} title="Type" />

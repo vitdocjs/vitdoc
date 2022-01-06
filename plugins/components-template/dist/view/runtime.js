@@ -359,6 +359,7 @@ function renderProperty({ properties }) {
   return /* @__PURE__ */ modules$1.createElement(modules$1.Fragment, null, /* @__PURE__ */ modules$1.createElement("b", {
     className: "block-title"
   }, "API"), /* @__PURE__ */ modules$1.createElement(Table, {
+    scroll: { x: "100%" },
     dataSource: dateSource,
     pagination: false,
     bordered: true
@@ -3622,7 +3623,7 @@ class VisionPane extends modules$1.PureComponent {
       className: "vision-title-icon",
       src: icon,
       alt: ""
-    }), title || "Prop Debug Panel"), /* @__PURE__ */ modules$1.createElement("button", {
+    }), title || "Debug Panel"), /* @__PURE__ */ modules$1.createElement("button", {
       "aria-label": "Close",
       className: "ant-drawer-close",
       onClick: () => this.setPropertyDrawerShow(false)
@@ -14011,6 +14012,7 @@ function ComponentArea(props) {
     }, error.message)
   }) : /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-container",
+    id: "vite-component-container",
     ref: componentRef
   })), /* @__PURE__ */ modules$1.createElement("div", {
     className: "code-box-actions"

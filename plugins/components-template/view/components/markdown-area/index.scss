@@ -1,6 +1,8 @@
 @import "./theme.css";
 
 .markdown-area {
+  width: 100%;
+  overflow: auto;
   margin-bottom: 15px;
 
   ul,

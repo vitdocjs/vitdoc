@@ -71,7 +71,11 @@ export function ComponentArea(props) {
             }
           />
         ) : (
-          <div className="component-container" ref={componentRef} />
+          <div
+            className="component-container"
+            id="vite-component-container"
+            ref={componentRef}
+          />
         )}
       </div>
       <div className="code-box-actions">

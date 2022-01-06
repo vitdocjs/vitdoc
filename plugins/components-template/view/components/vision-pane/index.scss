@@ -1,6 +1,9 @@
 .vision-property-container {
   position: relative;
   z-index: 999;
+  .ant-anchor-ink {
+    display: none;
+  }
 
   @media screen and (max-width: 750px) {
     position: fixed;
