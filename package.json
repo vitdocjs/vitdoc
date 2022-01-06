@@ -34,7 +34,6 @@
     "react-dom": "^17.0.0",
     "react-markdown": "^5.0.3",
     "react-syntax-highlighter": "^15.4.5",
-    "remark-code-frontmatter": "^1.0.0",
     "sass": "^1.32.8",
     "shelljs.exec": "^1.1.8",
     "styled-components": "^5.2.1",

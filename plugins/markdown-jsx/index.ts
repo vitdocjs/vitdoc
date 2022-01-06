@@ -1,6 +1,5 @@
 import fs from "fs";
 import fromMarkdown from "mdast-util-from-markdown";
-import remarkCodeFrontMatter from "remark-code-frontmatter";
 
 import {
   addUrlParams,
@@ -162,10 +161,7 @@ const mdjsx = () => {
       const content = fs.readFileSync(id, "utf-8");
 
       let moduleIds = {};
-      // @ts-ignore
-      const mdnode = remarkCodeFrontMatter()(fromMarkdown(content)) as any;
-
-      const promises = mdnode.children
+      const promises = (fromMarkdown(content) as any).children
         .filter(
           ({ type, lang = "" }) =>
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
