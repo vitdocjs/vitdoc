@@ -12,10 +12,12 @@ import BugOutlined from "@ant-design/icons/BugOutlined";
 import classNames from "classnames";
 import { copyToClipboard } from "../link-copy";
 
-const { Result, Tooltip } = window["antd"];
+const { Result, Tooltip, Typography } = window["antd"];
+
+const { Title, Paragraph } = Typography;
 
 export function ComponentArea(props) {
-  const { renderer, lang, content } = props;
+  const { renderer, lang, content, meta } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
@@ -59,6 +61,12 @@ export function ComponentArea(props) {
 
   return (
     <div className="component-area">
+      {!!Object.values(meta).length && (
+        <div className="code-box-demo-description">
+          {meta.title && <Title level={4}>{meta.title}</Title>}
+          {meta.desc && <Paragraph>{meta.desc}</Paragraph>}
+        </div>
+      )}
       <div className="code-box-demo">
         {error ? (
           <Result

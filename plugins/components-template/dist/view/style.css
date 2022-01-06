@@ -124,7 +124,7 @@
   border: 1px #f0f0f0 solid;
 }
 #public-component-show-container .component-container {
-  min-height: 300px;
+  min-height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -900,15 +900,21 @@
   display: inline-block;
   width: 100%;
   transition: all 0.2s;
+  margin-bottom: 12px;
 }
 .component-area .code-box-demo {
   color: #000000d9;
 }
+.component-area .code-box-demo-description {
+  padding: 12px 16px;
+  padding-bottom: 0;
+  border-bottom: 1px dashed #f0f0f0;
+}
 .component-area .code-box-actions {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   padding: 12px 0;
-  margin-top: 8px;
+  padding-right: 16px;
   border-top: 1px dashed #f0f0f0;
   opacity: 0.7;
   transition: opacity 0.3s;

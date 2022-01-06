@@ -23,7 +23,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ahooks": "^2.10.9",
     "react-router-dom": "^5.2.0",
-    "ahooks": "^2.10.9"
+    "remark-code-frontmatter": "^1.0.0"
   }
 }

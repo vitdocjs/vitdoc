@@ -5,15 +5,22 @@
   display: inline-block;
   width: 100%;
   transition: all 0.2s;
+  margin-bottom: 12px;
+
   .code-box-demo {
     color: #000000d9;
+  }
+  .code-box-demo-description {
+    padding: 12px 16px;
+    padding-bottom: 0;
+    border-bottom: 1px dashed #f0f0f0;
   }
 
   .code-box-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     padding: 12px 0;
-    margin-top: 8px;
+    padding-right: 16px;
     border-top: 1px dashed #f0f0f0;
     opacity: 0.7;
     transition: opacity 0.3s;

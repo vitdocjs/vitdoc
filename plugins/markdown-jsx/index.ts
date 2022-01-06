@@ -1,5 +1,7 @@
 import fs from "fs";
 import fromMarkdown from "mdast-util-from-markdown";
+import remarkCodeFrontMatter from "remark-code-frontmatter";
+
 import {
   addUrlParams,
   cleanUrl,
@@ -140,7 +142,9 @@ const mdjsx = () => {
           return `${code.slice(
             0,
             lastIndex
-          )};export default function(mountNode, ComponentWrap){$_ComponentWrap = ComponentWrap;${code.slice(lastIndex)};};`;
+          )};export default function(mountNode, ComponentWrap){$_ComponentWrap = ComponentWrap;${code.slice(
+            lastIndex
+          )};};`;
         };
 
         let nextCode: string = replaceReact(code);
@@ -158,7 +162,10 @@ const mdjsx = () => {
       const content = fs.readFileSync(id, "utf-8");
 
       let moduleIds = {};
-      const promises = (fromMarkdown(content) as any).children
+      // @ts-ignore
+      const mdnode = remarkCodeFrontMatter()(fromMarkdown(content)) as any;
+
+      const promises = mdnode.children
         .filter(
           ({ type, lang = "" }) =>
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
