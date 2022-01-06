@@ -846,7 +846,6 @@
 
 .markdown-area {
   width: 100%;
-  margin-bottom: 15px;
 }
 
 .markdown-area ul > li,
@@ -950,7 +949,7 @@
   position: fixed;
   height: 100vh;
   border-right: 1px solid #f0f0f0;
-  z-index: 90;
+  z-index: 2000;
   background-color: #fff;
   width: 230px;
   display: flex;

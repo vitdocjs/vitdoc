@@ -5714,10 +5714,15 @@ function useMarkdown() {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load((content2) => {
-              const style = document.createElement("style");
-              style.setAttribute("type", "text/css");
-              style.innerHTML = content2;
-              document.head.appendChild(style);
+              const has = Array.from(document.getElementsByTagName("style")).find((item) => {
+                return item.innerText === content2;
+              });
+              !has && (() => {
+                const style = document.createElement("style");
+                style.setAttribute("type", "text/css");
+                style.innerHTML = content2;
+                document.head.appendChild(style);
+              })();
               disposeArr.current.push(() => {
                 Array.from(document.getElementsByTagName("style")).filter((item) => {
                   return item.innerText === content2;

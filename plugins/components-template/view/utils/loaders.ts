@@ -133,10 +133,19 @@ export function useMarkdown() {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load((content) => {
-              const style = document.createElement("style");
-              style.setAttribute("type", "text/css");
-              style.innerHTML = content;
-              document.head.appendChild(style);
+              const has = Array.from(
+                document.getElementsByTagName("style")
+              ).find((item) => {
+                return item.innerText === content;
+              });
+
+              !has &&
+                (() => {
+                  const style = document.createElement("style");
+                  style.setAttribute("type", "text/css");
+                  style.innerHTML = content;
+                  document.head.appendChild(style);
+                })();
               disposeArr.current.push(() => {
                 Array.from(document.getElementsByTagName("style"))
                   .filter((item) => {
