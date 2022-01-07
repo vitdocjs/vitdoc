@@ -14869,6 +14869,8 @@ function MarkdownArea({ data: res }) {
     className: "markdown-area"
   }, markdownComponent);
 }
+const { Typography } = window["antd"];
+const { Title, Text } = Typography;
 function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
@@ -14883,13 +14885,18 @@ function ReadmePane() {
   }, /* @__PURE__ */ modules$1.createElement("a", {
     href: compInfo == null ? void 0 : compInfo.npmLink,
     className: "link-title"
-  }, /* @__PURE__ */ modules$1.createElement("h1", {
+  }, /* @__PURE__ */ modules$1.createElement(Title, {
+    level: 1,
     className: "component-name"
   }, (propertyTypes == null ? void 0 : propertyTypes.displayName) || (compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement(LinkCopy, {
     route
   })), /* @__PURE__ */ modules$1.createElement("span", {
     className: "component-sub-title"
-  }, /* @__PURE__ */ modules$1.createElement("span", null, "Package: ", compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement("span", null, "Version: ", compInfo == null ? void 0 : compInfo.packageVersion))), /* @__PURE__ */ modules$1.createElement("div", {
+  }, /* @__PURE__ */ modules$1.createElement(Text, {
+    type: "secondary"
+  }, "Package: ", compInfo == null ? void 0 : compInfo.packageName), /* @__PURE__ */ modules$1.createElement(Text, {
+    type: "secondary"
+  }, "Version: ", compInfo == null ? void 0 : compInfo.packageVersion))), /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-main"
   }, /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-part"

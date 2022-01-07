@@ -85,14 +85,9 @@
   overflow: auto;
 }
 #public-component-show-container .component-name {
-  padding: 0;
-  border: 0;
-  margin: 0;
-  font-size: 3.5em;
-  font-weight: 800;
+  margin-bottom: 0;
   outline: 0;
   vertical-align: baseline;
-  line-height: 1.2;
   display: flex;
   align-items: center;
 }
@@ -107,12 +102,9 @@
   color: #1971ff;
 }
 #public-component-show-container .component-sub-title {
-  font-size: 1em;
-  font-weight: 600;
   vertical-align: baseline;
   margin-bottom: 8px;
   display: block;
-  color: #6f6f6f;
 }
 #public-component-show-container .component-sub-title > span {
   margin-right: 1em;

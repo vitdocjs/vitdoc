@@ -13,6 +13,10 @@ import { MarkdownArea } from "../../components/markdown-area";
 import { LinkCopy } from "../../components/link-copy";
 import { ComponentPropsContext } from "../../context";
 
+const { Typography } = window["antd"];
+
+const { Title, Text } = Typography;
+
 export default function ReadmePane() {
   const [visionProps, setVisionProps] = useState({});
   const [visionDefaultProps, setVisionDefaultProps] = useState();
@@ -30,13 +34,13 @@ export default function ReadmePane() {
       {Components ? (
         <div className="component-page">
           <a href={compInfo?.npmLink} className="link-title">
-            <h1 className="component-name">
+            <Title level={1} className="component-name">
               {propertyTypes?.displayName || compInfo?.packageName}
               <LinkCopy route={route} />
-            </h1>
+            </Title>
             <span className="component-sub-title">
-              <span>Package: {compInfo?.packageName}</span>
-              <span>Version: {compInfo?.packageVersion}</span>
+              <Text type="secondary">Package: {compInfo?.packageName}</Text>
+              <Text type="secondary">Version: {compInfo?.packageVersion}</Text>
             </span>
           </a>
           <div className="component-main">
