@@ -6868,8 +6868,7 @@ function useMarkdown() {
         [currentValue.sourcesContent.trim()]: (...args) => {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
-            mod.load((pathId, content2) => {
-            });
+            mod.load();
           });
         }
       });
