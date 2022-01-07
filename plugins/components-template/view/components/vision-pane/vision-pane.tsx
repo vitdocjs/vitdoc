@@ -28,8 +28,6 @@ export default function VisionPane({
     return VisionTransfer.buildVisionFromTypes(properties);
   }, {});
 
-  console.log(prototypeOptions);
-
   return (
     <div className="vision-property-container">
       {propertyDrawerShow && prototypeOptions ? (
