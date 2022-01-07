@@ -1,4 +1,14 @@
-.vision-property-container {
+.setter-form-item {
+  flex-wrap: wrap;
+}
+.setter-form-item-label {
+  text-transform: capitalize;
+  line-height: 32px;
+}
+.setter-form-item .has-tip {
+  border-bottom: 1px dashed currentColor;
+  cursor: help;
+}.vision-property-container {
   position: relative;
   z-index: 999;
 }
@@ -50,16 +60,6 @@
   position: fixed;
   top: 20px;
   right: 30px;
-}.setter-form-item {
-  flex-wrap: wrap;
-}
-.setter-form-item-label {
-  text-transform: capitalize;
-  line-height: 32px;
-}
-.setter-form-item .has-tip {
-  border-bottom: 1px dashed currentColor;
-  cursor: help;
 }#public-component-show-container {
   display: flex;
   position: relative;

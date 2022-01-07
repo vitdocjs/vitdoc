@@ -1,8 +1,23 @@
-import { ITypeDesc } from "./@types/index";
 import get from "lodash/get";
 import set from "lodash/set";
-import pickBy from "lodash/pickBy";
 import { BLOCK_PROPS } from "./const";
+
+export interface ITypeDesc {
+  displayName: string;
+  props: Record<
+    string,
+    {
+      defaultValue: null | string;
+      description: string;
+      name: string;
+      parent: Record<string, any>;
+      type: {
+        name: string;
+      };
+    }
+  >;
+  tags: Record<string, string>;
+}
 
 const DEFAULT_VISION_CONFIG = {
   category: "*",
@@ -27,25 +42,11 @@ const Composite_Types = [
   "object[]",
 ];
 
-// const ALL_TYES = Normal_Types.concat(Composite_Types, Null_TYPES);
-
-// const isAllNormalType = (types: string = '') => {
-//   return types.split('|').every(str => Normal_Types.concat(Null_TYPES).includes(str.trim()));
-// };
-
-// const isSomeNormalType = (types: string = '') => {
-//   return types.split('|').some(str => Normal_Types.includes(str.trim()));
-// };
-
 const isNotEnumTypes = (types: string = "") => {
   return types
     .split("|")
     .some((str) => Normal_Types.concat(Composite_Types).includes(str.trim()));
 };
-
-// const isCompositeTypes = (types: string = '') => {
-//   REGEXP_ISArray.test(types) && isSomeNormalType;
-// };
 
 const isNumberTypes = (types: string = "") => {
   return types
@@ -283,41 +284,6 @@ class VisionSchemaTransfer {
     );
   }
 
-  getDefaultProps() {
-    const { props } = this.types;
-
-    return pickBy(
-      Object.values(props).reduce((prev, propType) => {
-        return Object.assign(prev, {
-          [propType.name]: VisionSchemaTransfer.getDefaultPropByTypes(propType),
-        });
-      }, {}),
-      (val) => val !== undefined
-    );
-  }
-
-  mergeActionSetter(actionConfigs: any[]) {
-    const events: any[] = [];
-    actionConfigs.forEach((config) => {
-      const { name, tip } = config;
-      name.indexOf("on") === 0 &&
-        events.push({
-          name,
-          title: tip || name,
-        });
-    });
-    if (events.length > 0) {
-      return {
-        name: "actions",
-        setter: {
-          setter: "ActionSetter",
-          events,
-        },
-      };
-    }
-    return undefined;
-  }
-
   transformTypeSchema(): any {
     const defaultVisionConfig = this.defaultVisionConfig;
 
@@ -329,15 +295,9 @@ class VisionSchemaTransfer {
       .map(this.transformProps.bind(this))
       .filter(Boolean) as any[];
 
-    const actionConfig = this.mergeActionSetter(
-      configure.filter((conf: any) => conf.setter === "ActionSetter")
-    );
-
     const restConfigs: any[] = configure.filter(
       (config: any) => config.setter !== "ActionSetter" && config
     ) as any[];
-
-    // const defaultProps = this.getDefaultProps();
 
     let isContainer;
     if (isVisionContainer !== undefined) {
@@ -351,7 +311,7 @@ class VisionSchemaTransfer {
       componentName: displayName,
       // defaultProps,
       isContainer,
-      configure: actionConfig ? [...restConfigs, actionConfig] : restConfigs,
+      configure: restConfigs,
     });
   }
 }

@@ -1,15 +1,13 @@
-import VisionTransfer from "./convert";
-
+import React from "react";
 import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
 import CloseOutlined from "@ant-design/icons/CloseOutlined";
-
-import "./index.scss";
 import { PANE_VISIBLE } from "../../constants";
-
-import React from "react";
 import { Stage } from "./stage";
 import { useLocalStorageState, useRequest } from "ahooks";
 import BugOutlined from "@ant-design/icons/BugOutlined";
+import { buildVisionFromTypes } from "./convert/typefile";
+
+import "./index.scss";
 
 // @ts-ignore
 const { Button, Anchor } = window.antd;
@@ -25,7 +23,7 @@ export default function VisionPane({
   );
 
   const { data: prototypeOptions } = useRequest(async () => {
-    return VisionTransfer.buildVisionFromTypes(properties);
+    return buildVisionFromTypes(properties);
   }, {});
 
   return (

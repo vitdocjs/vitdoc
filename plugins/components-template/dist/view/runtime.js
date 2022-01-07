@@ -377,1849 +377,6 @@ function renderProperty({ properties }) {
     title: "Default"
   })));
 }
-function isObject$9(value) {
-  var type2 = typeof value;
-  return value != null && (type2 == "object" || type2 == "function");
-}
-var isObject_1 = isObject$9;
-var isObject$8 = isObject_1;
-var objectCreate = Object.create;
-var baseCreate$2 = function() {
-  function object() {
-  }
-  return function(proto2) {
-    if (!isObject$8(proto2)) {
-      return {};
-    }
-    if (objectCreate) {
-      return objectCreate(proto2);
-    }
-    object.prototype = proto2;
-    var result = new object();
-    object.prototype = void 0;
-    return result;
-  };
-}();
-var _baseCreate = baseCreate$2;
-function baseLodash$3() {
-}
-var _baseLodash = baseLodash$3;
-var baseCreate$1 = _baseCreate, baseLodash$2 = _baseLodash;
-function LodashWrapper$3(value, chainAll) {
-  this.__wrapped__ = value;
-  this.__actions__ = [];
-  this.__chain__ = !!chainAll;
-  this.__index__ = 0;
-  this.__values__ = void 0;
-}
-LodashWrapper$3.prototype = baseCreate$1(baseLodash$2.prototype);
-LodashWrapper$3.prototype.constructor = LodashWrapper$3;
-var _LodashWrapper = LodashWrapper$3;
-function arrayPush$3(array, values) {
-  var index2 = -1, length = values.length, offset = array.length;
-  while (++index2 < length) {
-    array[offset + index2] = values[index2];
-  }
-  return array;
-}
-var _arrayPush = arrayPush$3;
-var freeGlobal$3 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var _freeGlobal = freeGlobal$3;
-var freeGlobal$2 = _freeGlobal;
-var freeSelf$2 = typeof self == "object" && self && self.Object === Object && self;
-var root$a = freeGlobal$2 || freeSelf$2 || Function("return this")();
-var _root = root$a;
-var root$9 = _root;
-var Symbol$6 = root$9.Symbol;
-var _Symbol = Symbol$6;
-var Symbol$5 = _Symbol;
-var objectProto$h = Object.prototype;
-var hasOwnProperty$f = objectProto$h.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$h.toString;
-var symToStringTag$1 = Symbol$5 ? Symbol$5.toStringTag : void 0;
-function getRawTag$1(value) {
-  var isOwn = hasOwnProperty$f.call(value, symToStringTag$1), tag = value[symToStringTag$1];
-  try {
-    value[symToStringTag$1] = void 0;
-    var unmasked = true;
-  } catch (e2) {
-  }
-  var result = nativeObjectToString$1.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$1] = tag;
-    } else {
-      delete value[symToStringTag$1];
-    }
-  }
-  return result;
-}
-var _getRawTag = getRawTag$1;
-var objectProto$g = Object.prototype;
-var nativeObjectToString = objectProto$g.toString;
-function objectToString$3(value) {
-  return nativeObjectToString.call(value);
-}
-var _objectToString = objectToString$3;
-var Symbol$4 = _Symbol, getRawTag = _getRawTag, objectToString$2 = _objectToString;
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$4 ? Symbol$4.toStringTag : void 0;
-function baseGetTag$5(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
-  }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString$2(value);
-}
-var _baseGetTag = baseGetTag$5;
-function isObjectLike$8(value) {
-  return value != null && typeof value == "object";
-}
-var isObjectLike_1 = isObjectLike$8;
-var baseGetTag$4 = _baseGetTag, isObjectLike$7 = isObjectLike_1;
-var argsTag$2 = "[object Arguments]";
-function baseIsArguments$1(value) {
-  return isObjectLike$7(value) && baseGetTag$4(value) == argsTag$2;
-}
-var _baseIsArguments = baseIsArguments$1;
-var baseIsArguments = _baseIsArguments, isObjectLike$6 = isObjectLike_1;
-var objectProto$f = Object.prototype;
-var hasOwnProperty$e = objectProto$f.hasOwnProperty;
-var propertyIsEnumerable$1 = objectProto$f.propertyIsEnumerable;
-var isArguments$3 = baseIsArguments(function() {
-  return arguments;
-}()) ? baseIsArguments : function(value) {
-  return isObjectLike$6(value) && hasOwnProperty$e.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
-};
-var isArguments_1 = isArguments$3;
-var isArray$d = Array.isArray;
-var isArray_1 = isArray$d;
-var Symbol$3 = _Symbol, isArguments$2 = isArguments_1, isArray$c = isArray_1;
-var spreadableSymbol = Symbol$3 ? Symbol$3.isConcatSpreadable : void 0;
-function isFlattenable$1(value) {
-  return isArray$c(value) || isArguments$2(value) || !!(spreadableSymbol && value && value[spreadableSymbol]);
-}
-var _isFlattenable = isFlattenable$1;
-var arrayPush$2 = _arrayPush, isFlattenable = _isFlattenable;
-function baseFlatten$1(array, depth, predicate, isStrict, result) {
-  var index2 = -1, length = array.length;
-  predicate || (predicate = isFlattenable);
-  result || (result = []);
-  while (++index2 < length) {
-    var value = array[index2];
-    if (depth > 0 && predicate(value)) {
-      if (depth > 1) {
-        baseFlatten$1(value, depth - 1, predicate, isStrict, result);
-      } else {
-        arrayPush$2(result, value);
-      }
-    } else if (!isStrict) {
-      result[result.length] = value;
-    }
-  }
-  return result;
-}
-var _baseFlatten = baseFlatten$1;
-var baseFlatten = _baseFlatten;
-function flatten$1(array) {
-  var length = array == null ? 0 : array.length;
-  return length ? baseFlatten(array, 1) : [];
-}
-var flatten_1 = flatten$1;
-function apply$1(func, thisArg, args) {
-  switch (args.length) {
-    case 0:
-      return func.call(thisArg);
-    case 1:
-      return func.call(thisArg, args[0]);
-    case 2:
-      return func.call(thisArg, args[0], args[1]);
-    case 3:
-      return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
-}
-var _apply = apply$1;
-var apply = _apply;
-var nativeMax$2 = Math.max;
-function overRest$1(func, start, transform2) {
-  start = nativeMax$2(start === void 0 ? func.length - 1 : start, 0);
-  return function() {
-    var args = arguments, index2 = -1, length = nativeMax$2(args.length - start, 0), array = Array(length);
-    while (++index2 < length) {
-      array[index2] = args[start + index2];
-    }
-    index2 = -1;
-    var otherArgs = Array(start + 1);
-    while (++index2 < start) {
-      otherArgs[index2] = args[index2];
-    }
-    otherArgs[start] = transform2(array);
-    return apply(func, this, otherArgs);
-  };
-}
-var _overRest = overRest$1;
-function constant$1(value) {
-  return function() {
-    return value;
-  };
-}
-var constant_1 = constant$1;
-var baseGetTag$3 = _baseGetTag, isObject$7 = isObject_1;
-var asyncTag = "[object AsyncFunction]", funcTag$1 = "[object Function]", genTag = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
-function isFunction$3(value) {
-  if (!isObject$7(value)) {
-    return false;
-  }
-  var tag = baseGetTag$3(value);
-  return tag == funcTag$1 || tag == genTag || tag == asyncTag || tag == proxyTag;
-}
-var isFunction_1 = isFunction$3;
-var root$8 = _root;
-var coreJsData$1 = root$8["__core-js_shared__"];
-var _coreJsData = coreJsData$1;
-var coreJsData = _coreJsData;
-var maskSrcKey = function() {
-  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-  return uid ? "Symbol(src)_1." + uid : "";
-}();
-function isMasked$1(func) {
-  return !!maskSrcKey && maskSrcKey in func;
-}
-var _isMasked = isMasked$1;
-var funcProto$1 = Function.prototype;
-var funcToString$1 = funcProto$1.toString;
-function toSource$2(func) {
-  if (func != null) {
-    try {
-      return funcToString$1.call(func);
-    } catch (e2) {
-    }
-    try {
-      return func + "";
-    } catch (e2) {
-    }
-  }
-  return "";
-}
-var _toSource = toSource$2;
-var isFunction$2 = isFunction_1, isMasked = _isMasked, isObject$6 = isObject_1, toSource$1 = _toSource;
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-var funcProto = Function.prototype, objectProto$e = Object.prototype;
-var funcToString = funcProto.toString;
-var hasOwnProperty$d = objectProto$e.hasOwnProperty;
-var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$d).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
-function baseIsNative$1(value) {
-  if (!isObject$6(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction$2(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource$1(value));
-}
-var _baseIsNative = baseIsNative$1;
-function getValue$2(object, key) {
-  return object == null ? void 0 : object[key];
-}
-var _getValue = getValue$2;
-var baseIsNative = _baseIsNative, getValue$1 = _getValue;
-function getNative$7(object, key) {
-  var value = getValue$1(object, key);
-  return baseIsNative(value) ? value : void 0;
-}
-var _getNative = getNative$7;
-var getNative$6 = _getNative;
-var defineProperty$4 = function() {
-  try {
-    var func = getNative$6(Object, "defineProperty");
-    func({}, "", {});
-    return func;
-  } catch (e2) {
-  }
-}();
-var _defineProperty = defineProperty$4;
-function identity$3(value) {
-  return value;
-}
-var identity_1 = identity$3;
-var constant = constant_1, defineProperty$3 = _defineProperty, identity$2 = identity_1;
-var baseSetToString$1 = !defineProperty$3 ? identity$2 : function(func, string2) {
-  return defineProperty$3(func, "toString", {
-    "configurable": true,
-    "enumerable": false,
-    "value": constant(string2),
-    "writable": true
-  });
-};
-var _baseSetToString = baseSetToString$1;
-var HOT_COUNT = 800, HOT_SPAN = 16;
-var nativeNow = Date.now;
-function shortOut$1(func) {
-  var count = 0, lastCalled = 0;
-  return function() {
-    var stamp = nativeNow(), remaining = HOT_SPAN - (stamp - lastCalled);
-    lastCalled = stamp;
-    if (remaining > 0) {
-      if (++count >= HOT_COUNT) {
-        return arguments[0];
-      }
-    } else {
-      count = 0;
-    }
-    return func.apply(void 0, arguments);
-  };
-}
-var _shortOut = shortOut$1;
-var baseSetToString = _baseSetToString, shortOut = _shortOut;
-var setToString$1 = shortOut(baseSetToString);
-var _setToString = setToString$1;
-var flatten = flatten_1, overRest = _overRest, setToString = _setToString;
-function flatRest$1(func) {
-  return setToString(overRest(func, void 0, flatten), func + "");
-}
-var _flatRest = flatRest$1;
-var getNative$5 = _getNative, root$7 = _root;
-var WeakMap$3 = getNative$5(root$7, "WeakMap");
-var _WeakMap = WeakMap$3;
-var WeakMap$2 = _WeakMap;
-var metaMap$1 = WeakMap$2 && new WeakMap$2();
-var _metaMap = metaMap$1;
-function noop$2() {
-}
-var noop_1 = noop$2;
-var metaMap = _metaMap, noop$1 = noop_1;
-var getData$2 = !metaMap ? noop$1 : function(func) {
-  return metaMap.get(func);
-};
-var _getData = getData$2;
-var realNames$1 = {};
-var _realNames = realNames$1;
-var realNames = _realNames;
-var objectProto$d = Object.prototype;
-var hasOwnProperty$c = objectProto$d.hasOwnProperty;
-function getFuncName$2(func) {
-  var result = func.name + "", array = realNames[result], length = hasOwnProperty$c.call(realNames, result) ? array.length : 0;
-  while (length--) {
-    var data = array[length], otherFunc = data.func;
-    if (otherFunc == null || otherFunc == func) {
-      return data.name;
-    }
-  }
-  return result;
-}
-var _getFuncName = getFuncName$2;
-var baseCreate = _baseCreate, baseLodash$1 = _baseLodash;
-var MAX_ARRAY_LENGTH = 4294967295;
-function LazyWrapper$3(value) {
-  this.__wrapped__ = value;
-  this.__actions__ = [];
-  this.__dir__ = 1;
-  this.__filtered__ = false;
-  this.__iteratees__ = [];
-  this.__takeCount__ = MAX_ARRAY_LENGTH;
-  this.__views__ = [];
-}
-LazyWrapper$3.prototype = baseCreate(baseLodash$1.prototype);
-LazyWrapper$3.prototype.constructor = LazyWrapper$3;
-var _LazyWrapper = LazyWrapper$3;
-function copyArray$1(source, array) {
-  var index2 = -1, length = source.length;
-  array || (array = Array(length));
-  while (++index2 < length) {
-    array[index2] = source[index2];
-  }
-  return array;
-}
-var _copyArray = copyArray$1;
-var LazyWrapper$2 = _LazyWrapper, LodashWrapper$2 = _LodashWrapper, copyArray = _copyArray;
-function wrapperClone$1(wrapper) {
-  if (wrapper instanceof LazyWrapper$2) {
-    return wrapper.clone();
-  }
-  var result = new LodashWrapper$2(wrapper.__wrapped__, wrapper.__chain__);
-  result.__actions__ = copyArray(wrapper.__actions__);
-  result.__index__ = wrapper.__index__;
-  result.__values__ = wrapper.__values__;
-  return result;
-}
-var _wrapperClone = wrapperClone$1;
-var LazyWrapper$1 = _LazyWrapper, LodashWrapper$1 = _LodashWrapper, baseLodash = _baseLodash, isArray$b = isArray_1, isObjectLike$5 = isObjectLike_1, wrapperClone = _wrapperClone;
-var objectProto$c = Object.prototype;
-var hasOwnProperty$b = objectProto$c.hasOwnProperty;
-function lodash$1(value) {
-  if (isObjectLike$5(value) && !isArray$b(value) && !(value instanceof LazyWrapper$1)) {
-    if (value instanceof LodashWrapper$1) {
-      return value;
-    }
-    if (hasOwnProperty$b.call(value, "__wrapped__")) {
-      return wrapperClone(value);
-    }
-  }
-  return new LodashWrapper$1(value);
-}
-lodash$1.prototype = baseLodash.prototype;
-lodash$1.prototype.constructor = lodash$1;
-var wrapperLodash = lodash$1;
-var LazyWrapper = _LazyWrapper, getData$1 = _getData, getFuncName$1 = _getFuncName, lodash = wrapperLodash;
-function isLaziable$1(func) {
-  var funcName = getFuncName$1(func), other = lodash[funcName];
-  if (typeof other != "function" || !(funcName in LazyWrapper.prototype)) {
-    return false;
-  }
-  if (func === other) {
-    return true;
-  }
-  var data = getData$1(other);
-  return !!data && func === data[0];
-}
-var _isLaziable = isLaziable$1;
-var LodashWrapper = _LodashWrapper, flatRest = _flatRest, getData = _getData, getFuncName = _getFuncName, isArray$a = isArray_1, isLaziable = _isLaziable;
-var FUNC_ERROR_TEXT$3 = "Expected a function";
-var WRAP_CURRY_FLAG = 8, WRAP_PARTIAL_FLAG = 32, WRAP_ARY_FLAG = 128, WRAP_REARG_FLAG = 256;
-function createFlow$1(fromRight) {
-  return flatRest(function(funcs) {
-    var length = funcs.length, index2 = length, prereq = LodashWrapper.prototype.thru;
-    if (fromRight) {
-      funcs.reverse();
-    }
-    while (index2--) {
-      var func = funcs[index2];
-      if (typeof func != "function") {
-        throw new TypeError(FUNC_ERROR_TEXT$3);
-      }
-      if (prereq && !wrapper && getFuncName(func) == "wrapper") {
-        var wrapper = new LodashWrapper([], true);
-      }
-    }
-    index2 = wrapper ? index2 : length;
-    while (++index2 < length) {
-      func = funcs[index2];
-      var funcName = getFuncName(func), data = funcName == "wrapper" ? getData(func) : void 0;
-      if (data && isLaziable(data[0]) && data[1] == (WRAP_ARY_FLAG | WRAP_CURRY_FLAG | WRAP_PARTIAL_FLAG | WRAP_REARG_FLAG) && !data[4].length && data[9] == 1) {
-        wrapper = wrapper[getFuncName(data[0])].apply(wrapper, data[3]);
-      } else {
-        wrapper = func.length == 1 && isLaziable(func) ? wrapper[funcName]() : wrapper.thru(func);
-      }
-    }
-    return function() {
-      var args = arguments, value = args[0];
-      if (wrapper && args.length == 1 && isArray$a(value)) {
-        return wrapper.plant(value).value();
-      }
-      var index3 = 0, result = length ? funcs[index3].apply(this, args) : value;
-      while (++index3 < length) {
-        result = funcs[index3].call(this, result);
-      }
-      return result;
-    };
-  });
-}
-var _createFlow = createFlow$1;
-var createFlow = _createFlow;
-var flow$3 = createFlow();
-var flow_1 = flow$3;
-const GROUP_COMPOSITE = ["composite", "group"];
-let VisionUiHelper = {};
-try {
-  VisionUiHelper = window.VisualEngineUtils;
-} catch (e2) {
-}
-function translateByUIType(setter, floor) {
-  const _a = setter, { uiType, configure: configure2 = [] } = _a, restProps = __objRest(_a, ["uiType", "configure"]);
-  let Setter = VisionUiHelper[uiType];
-  if (floor === 1 && VisionUiHelper.DadaSetter && VisionUiHelper.DadaSetter[uiType]) {
-    Setter = VisionUiHelper.DadaSetter[uiType];
-  }
-  return Setter ? modules$1.createElement(Setter, __spreadValues({
-    configure: configure2.map(getSetter)
-  }, restProps)) : null;
-}
-function getComponent(setter, floor) {
-  if (typeof setter === "string") {
-    let Setter = VisionUiHelper[setter];
-    if (floor === 1 && VisionUiHelper.DadaSetter && VisionUiHelper.DadaSetter[setter]) {
-      Setter = VisionUiHelper.DadaSetter[setter];
-    }
-    return Setter ? modules$1.createElement(Setter) : null;
-  } else if (typeof setter === "object" && "uiType" in setter) {
-    return translateByUIType(setter, floor);
-  }
-  return setter;
-}
-function getDefaultEvents(configure2) {
-  const { name } = configure2;
-  if (name === "events") {
-    return Object.assign({
-      name: "events",
-      title: "Action Set",
-      tip: {
-        url: "https://yuque.antfin-inc.com/globalfe/intl-dada/actions",
-        content: "Click ? view how to set actions for component"
-      },
-      display: "accordion",
-      initialValue: []
-    }, configure2);
-  }
-  return configure2;
-}
-function getSetter(configure2) {
-  const { setter, items, type: type2, floor } = configure2;
-  if (setter) {
-    configure2.setter = getComponent(configure2.setter, floor);
-  }
-  if (GROUP_COMPOSITE.indexOf(type2) > 0 && Array.isArray(items)) {
-    configure2.items = items.map(flow_1(getDefaultEvents, getSetter));
-  }
-  return configure2;
-}
-function transform(prototypeSchema) {
-  let _a = prototypeSchema, { configure: configure2 = [] } = _a, restProps = __objRest(_a, ["configure"]);
-  const setFloor = (configure22) => {
-    return __spreadValues({
-      floor: 1
-    }, configure22);
-  };
-  configure2 = configure2.map(flow_1(setFloor, getDefaultEvents, getSetter));
-  return __spreadProps(__spreadValues({}, restProps), {
-    configure: configure2
-  });
-}
-var baseGetTag$2 = _baseGetTag, isObjectLike$4 = isObjectLike_1;
-var symbolTag$3 = "[object Symbol]";
-function isSymbol$6(value) {
-  return typeof value == "symbol" || isObjectLike$4(value) && baseGetTag$2(value) == symbolTag$3;
-}
-var isSymbol_1 = isSymbol$6;
-var isArray$9 = isArray_1, isSymbol$5 = isSymbol_1;
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
-function isKey$3(value, object) {
-  if (isArray$9(value)) {
-    return false;
-  }
-  var type2 = typeof value;
-  if (type2 == "number" || type2 == "symbol" || type2 == "boolean" || value == null || isSymbol$5(value)) {
-    return true;
-  }
-  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
-}
-var _isKey = isKey$3;
-var getNative$4 = _getNative;
-var nativeCreate$4 = getNative$4(Object, "create");
-var _nativeCreate = nativeCreate$4;
-var nativeCreate$3 = _nativeCreate;
-function hashClear$1() {
-  this.__data__ = nativeCreate$3 ? nativeCreate$3(null) : {};
-  this.size = 0;
-}
-var _hashClear = hashClear$1;
-function hashDelete$1(key) {
-  var result = this.has(key) && delete this.__data__[key];
-  this.size -= result ? 1 : 0;
-  return result;
-}
-var _hashDelete = hashDelete$1;
-var nativeCreate$2 = _nativeCreate;
-var HASH_UNDEFINED$2 = "__lodash_hash_undefined__";
-var objectProto$b = Object.prototype;
-var hasOwnProperty$a = objectProto$b.hasOwnProperty;
-function hashGet$1(key) {
-  var data = this.__data__;
-  if (nativeCreate$2) {
-    var result = data[key];
-    return result === HASH_UNDEFINED$2 ? void 0 : result;
-  }
-  return hasOwnProperty$a.call(data, key) ? data[key] : void 0;
-}
-var _hashGet = hashGet$1;
-var nativeCreate$1 = _nativeCreate;
-var objectProto$a = Object.prototype;
-var hasOwnProperty$9 = objectProto$a.hasOwnProperty;
-function hashHas$1(key) {
-  var data = this.__data__;
-  return nativeCreate$1 ? data[key] !== void 0 : hasOwnProperty$9.call(data, key);
-}
-var _hashHas = hashHas$1;
-var nativeCreate = _nativeCreate;
-var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
-function hashSet$1(key, value) {
-  var data = this.__data__;
-  this.size += this.has(key) ? 0 : 1;
-  data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED$1 : value;
-  return this;
-}
-var _hashSet = hashSet$1;
-var hashClear = _hashClear, hashDelete = _hashDelete, hashGet = _hashGet, hashHas = _hashHas, hashSet = _hashSet;
-function Hash$1(entries) {
-  var index2 = -1, length = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-Hash$1.prototype.clear = hashClear;
-Hash$1.prototype["delete"] = hashDelete;
-Hash$1.prototype.get = hashGet;
-Hash$1.prototype.has = hashHas;
-Hash$1.prototype.set = hashSet;
-var _Hash = Hash$1;
-function listCacheClear$1() {
-  this.__data__ = [];
-  this.size = 0;
-}
-var _listCacheClear = listCacheClear$1;
-function eq$3(value, other) {
-  return value === other || value !== value && other !== other;
-}
-var eq_1 = eq$3;
-var eq$2 = eq_1;
-function assocIndexOf$4(array, key) {
-  var length = array.length;
-  while (length--) {
-    if (eq$2(array[length][0], key)) {
-      return length;
-    }
-  }
-  return -1;
-}
-var _assocIndexOf = assocIndexOf$4;
-var assocIndexOf$3 = _assocIndexOf;
-var arrayProto = Array.prototype;
-var splice$3 = arrayProto.splice;
-function listCacheDelete$1(key) {
-  var data = this.__data__, index2 = assocIndexOf$3(data, key);
-  if (index2 < 0) {
-    return false;
-  }
-  var lastIndex = data.length - 1;
-  if (index2 == lastIndex) {
-    data.pop();
-  } else {
-    splice$3.call(data, index2, 1);
-  }
-  --this.size;
-  return true;
-}
-var _listCacheDelete = listCacheDelete$1;
-var assocIndexOf$2 = _assocIndexOf;
-function listCacheGet$1(key) {
-  var data = this.__data__, index2 = assocIndexOf$2(data, key);
-  return index2 < 0 ? void 0 : data[index2][1];
-}
-var _listCacheGet = listCacheGet$1;
-var assocIndexOf$1 = _assocIndexOf;
-function listCacheHas$1(key) {
-  return assocIndexOf$1(this.__data__, key) > -1;
-}
-var _listCacheHas = listCacheHas$1;
-var assocIndexOf = _assocIndexOf;
-function listCacheSet$1(key, value) {
-  var data = this.__data__, index2 = assocIndexOf(data, key);
-  if (index2 < 0) {
-    ++this.size;
-    data.push([key, value]);
-  } else {
-    data[index2][1] = value;
-  }
-  return this;
-}
-var _listCacheSet = listCacheSet$1;
-var listCacheClear = _listCacheClear, listCacheDelete = _listCacheDelete, listCacheGet = _listCacheGet, listCacheHas = _listCacheHas, listCacheSet = _listCacheSet;
-function ListCache$4(entries) {
-  var index2 = -1, length = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-ListCache$4.prototype.clear = listCacheClear;
-ListCache$4.prototype["delete"] = listCacheDelete;
-ListCache$4.prototype.get = listCacheGet;
-ListCache$4.prototype.has = listCacheHas;
-ListCache$4.prototype.set = listCacheSet;
-var _ListCache = ListCache$4;
-var getNative$3 = _getNative, root$6 = _root;
-var Map$4 = getNative$3(root$6, "Map");
-var _Map = Map$4;
-var Hash = _Hash, ListCache$3 = _ListCache, Map$3 = _Map;
-function mapCacheClear$1() {
-  this.size = 0;
-  this.__data__ = {
-    "hash": new Hash(),
-    "map": new (Map$3 || ListCache$3)(),
-    "string": new Hash()
-  };
-}
-var _mapCacheClear = mapCacheClear$1;
-function isKeyable$1(value) {
-  var type2 = typeof value;
-  return type2 == "string" || type2 == "number" || type2 == "symbol" || type2 == "boolean" ? value !== "__proto__" : value === null;
-}
-var _isKeyable = isKeyable$1;
-var isKeyable = _isKeyable;
-function getMapData$4(map, key) {
-  var data = map.__data__;
-  return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
-}
-var _getMapData = getMapData$4;
-var getMapData$3 = _getMapData;
-function mapCacheDelete$1(key) {
-  var result = getMapData$3(this, key)["delete"](key);
-  this.size -= result ? 1 : 0;
-  return result;
-}
-var _mapCacheDelete = mapCacheDelete$1;
-var getMapData$2 = _getMapData;
-function mapCacheGet$1(key) {
-  return getMapData$2(this, key).get(key);
-}
-var _mapCacheGet = mapCacheGet$1;
-var getMapData$1 = _getMapData;
-function mapCacheHas$1(key) {
-  return getMapData$1(this, key).has(key);
-}
-var _mapCacheHas = mapCacheHas$1;
-var getMapData = _getMapData;
-function mapCacheSet$1(key, value) {
-  var data = getMapData(this, key), size = data.size;
-  data.set(key, value);
-  this.size += data.size == size ? 0 : 1;
-  return this;
-}
-var _mapCacheSet = mapCacheSet$1;
-var mapCacheClear = _mapCacheClear, mapCacheDelete = _mapCacheDelete, mapCacheGet = _mapCacheGet, mapCacheHas = _mapCacheHas, mapCacheSet = _mapCacheSet;
-function MapCache$3(entries) {
-  var index2 = -1, length = entries == null ? 0 : entries.length;
-  this.clear();
-  while (++index2 < length) {
-    var entry = entries[index2];
-    this.set(entry[0], entry[1]);
-  }
-}
-MapCache$3.prototype.clear = mapCacheClear;
-MapCache$3.prototype["delete"] = mapCacheDelete;
-MapCache$3.prototype.get = mapCacheGet;
-MapCache$3.prototype.has = mapCacheHas;
-MapCache$3.prototype.set = mapCacheSet;
-var _MapCache = MapCache$3;
-var MapCache$2 = _MapCache;
-var FUNC_ERROR_TEXT$2 = "Expected a function";
-function memoize$1(func, resolver2) {
-  if (typeof func != "function" || resolver2 != null && typeof resolver2 != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$2);
-  }
-  var memoized = function() {
-    var args = arguments, key = resolver2 ? resolver2.apply(this, args) : args[0], cache2 = memoized.cache;
-    if (cache2.has(key)) {
-      return cache2.get(key);
-    }
-    var result = func.apply(this, args);
-    memoized.cache = cache2.set(key, result) || cache2;
-    return result;
-  };
-  memoized.cache = new (memoize$1.Cache || MapCache$2)();
-  return memoized;
-}
-memoize$1.Cache = MapCache$2;
-var memoize_1 = memoize$1;
-var memoize = memoize_1;
-var MAX_MEMOIZE_SIZE = 500;
-function memoizeCapped$1(func) {
-  var result = memoize(func, function(key) {
-    if (cache2.size === MAX_MEMOIZE_SIZE) {
-      cache2.clear();
-    }
-    return key;
-  });
-  var cache2 = result.cache;
-  return result;
-}
-var _memoizeCapped = memoizeCapped$1;
-var memoizeCapped = _memoizeCapped;
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-var reEscapeChar = /\\(\\)?/g;
-var stringToPath$1 = memoizeCapped(function(string2) {
-  var result = [];
-  if (string2.charCodeAt(0) === 46) {
-    result.push("");
-  }
-  string2.replace(rePropName, function(match, number, quote, subString) {
-    result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
-  });
-  return result;
-});
-var _stringToPath = stringToPath$1;
-function arrayMap$2(array, iteratee) {
-  var index2 = -1, length = array == null ? 0 : array.length, result = Array(length);
-  while (++index2 < length) {
-    result[index2] = iteratee(array[index2], index2, array);
-  }
-  return result;
-}
-var _arrayMap = arrayMap$2;
-var Symbol$2 = _Symbol, arrayMap$1 = _arrayMap, isArray$8 = isArray_1, isSymbol$4 = isSymbol_1;
-var INFINITY$2 = 1 / 0;
-var symbolProto$1 = Symbol$2 ? Symbol$2.prototype : void 0, symbolToString = symbolProto$1 ? symbolProto$1.toString : void 0;
-function baseToString$1(value) {
-  if (typeof value == "string") {
-    return value;
-  }
-  if (isArray$8(value)) {
-    return arrayMap$1(value, baseToString$1) + "";
-  }
-  if (isSymbol$4(value)) {
-    return symbolToString ? symbolToString.call(value) : "";
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -INFINITY$2 ? "-0" : result;
-}
-var _baseToString = baseToString$1;
-var baseToString = _baseToString;
-function toString$4(value) {
-  return value == null ? "" : baseToString(value);
-}
-var toString_1 = toString$4;
-var isArray$7 = isArray_1, isKey$2 = _isKey, stringToPath = _stringToPath, toString$3 = toString_1;
-function castPath$4(value, object) {
-  if (isArray$7(value)) {
-    return value;
-  }
-  return isKey$2(value, object) ? [value] : stringToPath(toString$3(value));
-}
-var _castPath = castPath$4;
-var isSymbol$3 = isSymbol_1;
-var INFINITY$1 = 1 / 0;
-function toKey$5(value) {
-  if (typeof value == "string" || isSymbol$3(value)) {
-    return value;
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -INFINITY$1 ? "-0" : result;
-}
-var _toKey = toKey$5;
-var castPath$3 = _castPath, toKey$4 = _toKey;
-function baseGet$3(object, path) {
-  path = castPath$3(path, object);
-  var index2 = 0, length = path.length;
-  while (object != null && index2 < length) {
-    object = object[toKey$4(path[index2++])];
-  }
-  return index2 && index2 == length ? object : void 0;
-}
-var _baseGet = baseGet$3;
-var baseGet$2 = _baseGet;
-function get$1(object, path, defaultValue) {
-  var result = object == null ? void 0 : baseGet$2(object, path);
-  return result === void 0 ? defaultValue : result;
-}
-var get_1 = get$1;
-var defineProperty$2 = _defineProperty;
-function baseAssignValue$2(object, key, value) {
-  if (key == "__proto__" && defineProperty$2) {
-    defineProperty$2(object, key, {
-      "configurable": true,
-      "enumerable": true,
-      "value": value,
-      "writable": true
-    });
-  } else {
-    object[key] = value;
-  }
-}
-var _baseAssignValue = baseAssignValue$2;
-var baseAssignValue$1 = _baseAssignValue, eq$1 = eq_1;
-var objectProto$9 = Object.prototype;
-var hasOwnProperty$8 = objectProto$9.hasOwnProperty;
-function assignValue$1(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty$8.call(object, key) && eq$1(objValue, value)) || value === void 0 && !(key in object)) {
-    baseAssignValue$1(object, key, value);
-  }
-}
-var _assignValue = assignValue$1;
-var MAX_SAFE_INTEGER$1 = 9007199254740991;
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-function isIndex$3(value, length) {
-  var type2 = typeof value;
-  length = length == null ? MAX_SAFE_INTEGER$1 : length;
-  return !!length && (type2 == "number" || type2 != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
-}
-var _isIndex = isIndex$3;
-var assignValue = _assignValue, castPath$2 = _castPath, isIndex$2 = _isIndex, isObject$5 = isObject_1, toKey$3 = _toKey;
-function baseSet$2(object, path, value, customizer) {
-  if (!isObject$5(object)) {
-    return object;
-  }
-  path = castPath$2(path, object);
-  var index2 = -1, length = path.length, lastIndex = length - 1, nested = object;
-  while (nested != null && ++index2 < length) {
-    var key = toKey$3(path[index2]), newValue = value;
-    if (key === "__proto__" || key === "constructor" || key === "prototype") {
-      return object;
-    }
-    if (index2 != lastIndex) {
-      var objValue = nested[key];
-      newValue = customizer ? customizer(objValue, key, nested) : void 0;
-      if (newValue === void 0) {
-        newValue = isObject$5(objValue) ? objValue : isIndex$2(path[index2 + 1]) ? [] : {};
-      }
-    }
-    assignValue(nested, key, newValue);
-    nested = nested[key];
-  }
-  return object;
-}
-var _baseSet = baseSet$2;
-var baseSet$1 = _baseSet;
-function set(object, path, value) {
-  return object == null ? object : baseSet$1(object, path, value);
-}
-var set_1 = set;
-var ListCache$2 = _ListCache;
-function stackClear$1() {
-  this.__data__ = new ListCache$2();
-  this.size = 0;
-}
-var _stackClear = stackClear$1;
-function stackDelete$1(key) {
-  var data = this.__data__, result = data["delete"](key);
-  this.size = data.size;
-  return result;
-}
-var _stackDelete = stackDelete$1;
-function stackGet$1(key) {
-  return this.__data__.get(key);
-}
-var _stackGet = stackGet$1;
-function stackHas$1(key) {
-  return this.__data__.has(key);
-}
-var _stackHas = stackHas$1;
-var ListCache$1 = _ListCache, Map$2 = _Map, MapCache$1 = _MapCache;
-var LARGE_ARRAY_SIZE = 200;
-function stackSet$1(key, value) {
-  var data = this.__data__;
-  if (data instanceof ListCache$1) {
-    var pairs = data.__data__;
-    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-      pairs.push([key, value]);
-      this.size = ++data.size;
-      return this;
-    }
-    data = this.__data__ = new MapCache$1(pairs);
-  }
-  data.set(key, value);
-  this.size = data.size;
-  return this;
-}
-var _stackSet = stackSet$1;
-var ListCache = _ListCache, stackClear = _stackClear, stackDelete = _stackDelete, stackGet = _stackGet, stackHas = _stackHas, stackSet = _stackSet;
-function Stack$2(entries) {
-  var data = this.__data__ = new ListCache(entries);
-  this.size = data.size;
-}
-Stack$2.prototype.clear = stackClear;
-Stack$2.prototype["delete"] = stackDelete;
-Stack$2.prototype.get = stackGet;
-Stack$2.prototype.has = stackHas;
-Stack$2.prototype.set = stackSet;
-var _Stack = Stack$2;
-var HASH_UNDEFINED = "__lodash_hash_undefined__";
-function setCacheAdd$1(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-var _setCacheAdd = setCacheAdd$1;
-function setCacheHas$1(value) {
-  return this.__data__.has(value);
-}
-var _setCacheHas = setCacheHas$1;
-var MapCache = _MapCache, setCacheAdd = _setCacheAdd, setCacheHas = _setCacheHas;
-function SetCache$1(values) {
-  var index2 = -1, length = values == null ? 0 : values.length;
-  this.__data__ = new MapCache();
-  while (++index2 < length) {
-    this.add(values[index2]);
-  }
-}
-SetCache$1.prototype.add = SetCache$1.prototype.push = setCacheAdd;
-SetCache$1.prototype.has = setCacheHas;
-var _SetCache = SetCache$1;
-function arraySome$1(array, predicate) {
-  var index2 = -1, length = array == null ? 0 : array.length;
-  while (++index2 < length) {
-    if (predicate(array[index2], index2, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-var _arraySome = arraySome$1;
-function cacheHas$1(cache2, key) {
-  return cache2.has(key);
-}
-var _cacheHas = cacheHas$1;
-var SetCache = _SetCache, arraySome = _arraySome, cacheHas = _cacheHas;
-var COMPARE_PARTIAL_FLAG$5 = 1, COMPARE_UNORDERED_FLAG$3 = 2;
-function equalArrays$2(array, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$5, arrLength = array.length, othLength = other.length;
-  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
-    return false;
-  }
-  var arrStacked = stack.get(array);
-  var othStacked = stack.get(other);
-  if (arrStacked && othStacked) {
-    return arrStacked == other && othStacked == array;
-  }
-  var index2 = -1, result = true, seen = bitmask & COMPARE_UNORDERED_FLAG$3 ? new SetCache() : void 0;
-  stack.set(array, other);
-  stack.set(other, array);
-  while (++index2 < arrLength) {
-    var arrValue = array[index2], othValue = other[index2];
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, arrValue, index2, other, array, stack) : customizer(arrValue, othValue, index2, array, other, stack);
-    }
-    if (compared !== void 0) {
-      if (compared) {
-        continue;
-      }
-      result = false;
-      break;
-    }
-    if (seen) {
-      if (!arraySome(other, function(othValue2, othIndex) {
-        if (!cacheHas(seen, othIndex) && (arrValue === othValue2 || equalFunc(arrValue, othValue2, bitmask, customizer, stack))) {
-          return seen.push(othIndex);
-        }
-      })) {
-        result = false;
-        break;
-      }
-    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
-      result = false;
-      break;
-    }
-  }
-  stack["delete"](array);
-  stack["delete"](other);
-  return result;
-}
-var _equalArrays = equalArrays$2;
-var root$5 = _root;
-var Uint8Array$1 = root$5.Uint8Array;
-var _Uint8Array = Uint8Array$1;
-function mapToArray$1(map) {
-  var index2 = -1, result = Array(map.size);
-  map.forEach(function(value, key) {
-    result[++index2] = [key, value];
-  });
-  return result;
-}
-var _mapToArray = mapToArray$1;
-function setToArray$1(set2) {
-  var index2 = -1, result = Array(set2.size);
-  set2.forEach(function(value) {
-    result[++index2] = value;
-  });
-  return result;
-}
-var _setToArray = setToArray$1;
-var Symbol$1 = _Symbol, Uint8Array2 = _Uint8Array, eq = eq_1, equalArrays$1 = _equalArrays, mapToArray = _mapToArray, setToArray = _setToArray;
-var COMPARE_PARTIAL_FLAG$4 = 1, COMPARE_UNORDERED_FLAG$2 = 2;
-var boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", errorTag$1 = "[object Error]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", symbolTag$2 = "[object Symbol]";
-var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]";
-var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-function equalByTag$1(object, other, tag, bitmask, customizer, equalFunc, stack) {
-  switch (tag) {
-    case dataViewTag$2:
-      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
-        return false;
-      }
-      object = object.buffer;
-      other = other.buffer;
-    case arrayBufferTag$1:
-      if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array2(object), new Uint8Array2(other))) {
-        return false;
-      }
-      return true;
-    case boolTag$1:
-    case dateTag$1:
-    case numberTag$1:
-      return eq(+object, +other);
-    case errorTag$1:
-      return object.name == other.name && object.message == other.message;
-    case regexpTag$1:
-    case stringTag$1:
-      return object == other + "";
-    case mapTag$2:
-      var convert2 = mapToArray;
-    case setTag$2:
-      var isPartial = bitmask & COMPARE_PARTIAL_FLAG$4;
-      convert2 || (convert2 = setToArray);
-      if (object.size != other.size && !isPartial) {
-        return false;
-      }
-      var stacked = stack.get(object);
-      if (stacked) {
-        return stacked == other;
-      }
-      bitmask |= COMPARE_UNORDERED_FLAG$2;
-      stack.set(object, other);
-      var result = equalArrays$1(convert2(object), convert2(other), bitmask, customizer, equalFunc, stack);
-      stack["delete"](object);
-      return result;
-    case symbolTag$2:
-      if (symbolValueOf) {
-        return symbolValueOf.call(object) == symbolValueOf.call(other);
-      }
-  }
-  return false;
-}
-var _equalByTag = equalByTag$1;
-var arrayPush$1 = _arrayPush, isArray$6 = isArray_1;
-function baseGetAllKeys$2(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray$6(object) ? result : arrayPush$1(result, symbolsFunc(object));
-}
-var _baseGetAllKeys = baseGetAllKeys$2;
-function arrayFilter$1(array, predicate) {
-  var index2 = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
-  while (++index2 < length) {
-    var value = array[index2];
-    if (predicate(value, index2, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-var _arrayFilter = arrayFilter$1;
-function stubArray$2() {
-  return [];
-}
-var stubArray_1 = stubArray$2;
-var arrayFilter = _arrayFilter, stubArray$1 = stubArray_1;
-var objectProto$8 = Object.prototype;
-var propertyIsEnumerable = objectProto$8.propertyIsEnumerable;
-var nativeGetSymbols$1 = Object.getOwnPropertySymbols;
-var getSymbols$2 = !nativeGetSymbols$1 ? stubArray$1 : function(object) {
-  if (object == null) {
-    return [];
-  }
-  object = Object(object);
-  return arrayFilter(nativeGetSymbols$1(object), function(symbol) {
-    return propertyIsEnumerable.call(object, symbol);
-  });
-};
-var _getSymbols = getSymbols$2;
-function baseTimes$1(n2, iteratee) {
-  var index2 = -1, result = Array(n2);
-  while (++index2 < n2) {
-    result[index2] = iteratee(index2);
-  }
-  return result;
-}
-var _baseTimes = baseTimes$1;
-var isBuffer$2 = { exports: {} };
-function stubFalse() {
-  return false;
-}
-var stubFalse_1 = stubFalse;
-(function(module, exports) {
-  var root2 = _root, stubFalse2 = stubFalse_1;
-  var freeExports = exports && !exports.nodeType && exports;
-  var freeModule = freeExports && true && module && !module.nodeType && module;
-  var moduleExports = freeModule && freeModule.exports === freeExports;
-  var Buffer2 = moduleExports ? root2.Buffer : void 0;
-  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
-  var isBuffer3 = nativeIsBuffer || stubFalse2;
-  module.exports = isBuffer3;
-})(isBuffer$2, isBuffer$2.exports);
-var MAX_SAFE_INTEGER = 9007199254740991;
-function isLength$3(value) {
-  return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-var isLength_1 = isLength$3;
-var baseGetTag$1 = _baseGetTag, isLength$2 = isLength_1, isObjectLike$3 = isObjectLike_1;
-var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", mapTag$1 = "[object Map]", numberTag = "[object Number]", objectTag$2 = "[object Object]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag = "[object String]", weakMapTag$1 = "[object WeakMap]";
-var arrayBufferTag = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
-var typedArrayTags = {};
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] = typedArrayTags[dataViewTag$1] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[funcTag] = typedArrayTags[mapTag$1] = typedArrayTags[numberTag] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag] = typedArrayTags[setTag$1] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag$1] = false;
-function baseIsTypedArray$1(value) {
-  return isObjectLike$3(value) && isLength$2(value.length) && !!typedArrayTags[baseGetTag$1(value)];
-}
-var _baseIsTypedArray = baseIsTypedArray$1;
-function baseUnary$1(func) {
-  return function(value) {
-    return func(value);
-  };
-}
-var _baseUnary = baseUnary$1;
-var _nodeUtil = { exports: {} };
-(function(module, exports) {
-  var freeGlobal2 = _freeGlobal;
-  var freeExports = exports && !exports.nodeType && exports;
-  var freeModule = freeExports && true && module && !module.nodeType && module;
-  var moduleExports = freeModule && freeModule.exports === freeExports;
-  var freeProcess = moduleExports && freeGlobal2.process;
-  var nodeUtil2 = function() {
-    try {
-      var types = freeModule && freeModule.require && freeModule.require("util").types;
-      if (types) {
-        return types;
-      }
-      return freeProcess && freeProcess.binding && freeProcess.binding("util");
-    } catch (e2) {
-    }
-  }();
-  module.exports = nodeUtil2;
-})(_nodeUtil, _nodeUtil.exports);
-var baseIsTypedArray = _baseIsTypedArray, baseUnary = _baseUnary, nodeUtil = _nodeUtil.exports;
-var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
-var isTypedArray$2 = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-var isTypedArray_1 = isTypedArray$2;
-var baseTimes = _baseTimes, isArguments$1 = isArguments_1, isArray$5 = isArray_1, isBuffer$1 = isBuffer$2.exports, isIndex$1 = _isIndex, isTypedArray$1 = isTypedArray_1;
-var objectProto$7 = Object.prototype;
-var hasOwnProperty$7 = objectProto$7.hasOwnProperty;
-function arrayLikeKeys$2(value, inherited) {
-  var isArr = isArray$5(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$1(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
-  for (var key in value) {
-    if ((inherited || hasOwnProperty$7.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex$1(key, length)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _arrayLikeKeys = arrayLikeKeys$2;
-var objectProto$6 = Object.prototype;
-function isPrototype$2(value) {
-  var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto$6;
-  return value === proto2;
-}
-var _isPrototype = isPrototype$2;
-function overArg$2(func, transform2) {
-  return function(arg) {
-    return func(transform2(arg));
-  };
-}
-var _overArg = overArg$2;
-var overArg$1 = _overArg;
-var nativeKeys$1 = overArg$1(Object.keys, Object);
-var _nativeKeys = nativeKeys$1;
-var isPrototype$1 = _isPrototype, nativeKeys = _nativeKeys;
-var objectProto$5 = Object.prototype;
-var hasOwnProperty$6 = objectProto$5.hasOwnProperty;
-function baseKeys$1(object) {
-  if (!isPrototype$1(object)) {
-    return nativeKeys(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty$6.call(object, key) && key != "constructor") {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _baseKeys = baseKeys$1;
-var isFunction$1 = isFunction_1, isLength$1 = isLength_1;
-function isArrayLike$3(value) {
-  return value != null && isLength$1(value.length) && !isFunction$1(value);
-}
-var isArrayLike_1 = isArrayLike$3;
-var arrayLikeKeys$1 = _arrayLikeKeys, baseKeys = _baseKeys, isArrayLike$2 = isArrayLike_1;
-function keys$4(object) {
-  return isArrayLike$2(object) ? arrayLikeKeys$1(object) : baseKeys(object);
-}
-var keys_1 = keys$4;
-var baseGetAllKeys$1 = _baseGetAllKeys, getSymbols$1 = _getSymbols, keys$3 = keys_1;
-function getAllKeys$1(object) {
-  return baseGetAllKeys$1(object, keys$3, getSymbols$1);
-}
-var _getAllKeys = getAllKeys$1;
-var getAllKeys = _getAllKeys;
-var COMPARE_PARTIAL_FLAG$3 = 1;
-var objectProto$4 = Object.prototype;
-var hasOwnProperty$5 = objectProto$4.hasOwnProperty;
-function equalObjects$1(object, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$3, objProps = getAllKeys(object), objLength = objProps.length, othProps = getAllKeys(other), othLength = othProps.length;
-  if (objLength != othLength && !isPartial) {
-    return false;
-  }
-  var index2 = objLength;
-  while (index2--) {
-    var key = objProps[index2];
-    if (!(isPartial ? key in other : hasOwnProperty$5.call(other, key))) {
-      return false;
-    }
-  }
-  var objStacked = stack.get(object);
-  var othStacked = stack.get(other);
-  if (objStacked && othStacked) {
-    return objStacked == other && othStacked == object;
-  }
-  var result = true;
-  stack.set(object, other);
-  stack.set(other, object);
-  var skipCtor = isPartial;
-  while (++index2 < objLength) {
-    key = objProps[index2];
-    var objValue = object[key], othValue = other[key];
-    if (customizer) {
-      var compared = isPartial ? customizer(othValue, objValue, key, other, object, stack) : customizer(objValue, othValue, key, object, other, stack);
-    }
-    if (!(compared === void 0 ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack) : compared)) {
-      result = false;
-      break;
-    }
-    skipCtor || (skipCtor = key == "constructor");
-  }
-  if (result && !skipCtor) {
-    var objCtor = object.constructor, othCtor = other.constructor;
-    if (objCtor != othCtor && ("constructor" in object && "constructor" in other) && !(typeof objCtor == "function" && objCtor instanceof objCtor && typeof othCtor == "function" && othCtor instanceof othCtor)) {
-      result = false;
-    }
-  }
-  stack["delete"](object);
-  stack["delete"](other);
-  return result;
-}
-var _equalObjects = equalObjects$1;
-var getNative$2 = _getNative, root$4 = _root;
-var DataView$1 = getNative$2(root$4, "DataView");
-var _DataView = DataView$1;
-var getNative$1 = _getNative, root$3 = _root;
-var Promise$2 = getNative$1(root$3, "Promise");
-var _Promise = Promise$2;
-var getNative = _getNative, root$2 = _root;
-var Set$1 = getNative(root$2, "Set");
-var _Set = Set$1;
-var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set = _Set, WeakMap$1 = _WeakMap, baseGetTag = _baseGetTag, toSource = _toSource;
-var mapTag = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag = "[object Set]", weakMapTag = "[object WeakMap]";
-var dataViewTag = "[object DataView]";
-var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set), weakMapCtorString = toSource(WeakMap$1);
-var getTag$1 = baseGetTag;
-if (DataView && getTag$1(new DataView(new ArrayBuffer(1))) != dataViewTag || Map$1 && getTag$1(new Map$1()) != mapTag || Promise$1 && getTag$1(Promise$1.resolve()) != promiseTag || Set && getTag$1(new Set()) != setTag || WeakMap$1 && getTag$1(new WeakMap$1()) != weakMapTag) {
-  getTag$1 = function(value) {
-    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString:
-          return dataViewTag;
-        case mapCtorString:
-          return mapTag;
-        case promiseCtorString:
-          return promiseTag;
-        case setCtorString:
-          return setTag;
-        case weakMapCtorString:
-          return weakMapTag;
-      }
-    }
-    return result;
-  };
-}
-var _getTag = getTag$1;
-var Stack$1 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag = _getTag, isArray$4 = isArray_1, isBuffer = isBuffer$2.exports, isTypedArray = isTypedArray_1;
-var COMPARE_PARTIAL_FLAG$2 = 1;
-var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
-var objectProto$3 = Object.prototype;
-var hasOwnProperty$4 = objectProto$3.hasOwnProperty;
-function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray$4(object), othIsArr = isArray$4(other), objTag = objIsArr ? arrayTag : getTag(object), othTag = othIsArr ? arrayTag : getTag(other);
-  objTag = objTag == argsTag ? objectTag : objTag;
-  othTag = othTag == argsTag ? objectTag : othTag;
-  var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
-      return false;
-    }
-    objIsArr = true;
-    objIsObj = false;
-  }
-  if (isSameTag && !objIsObj) {
-    stack || (stack = new Stack$1());
-    return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
-  }
-  if (!(bitmask & COMPARE_PARTIAL_FLAG$2)) {
-    var objIsWrapped = objIsObj && hasOwnProperty$4.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty$4.call(other, "__wrapped__");
-    if (objIsWrapped || othIsWrapped) {
-      var objUnwrapped = objIsWrapped ? object.value() : object, othUnwrapped = othIsWrapped ? other.value() : other;
-      stack || (stack = new Stack$1());
-      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stack || (stack = new Stack$1());
-  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
-}
-var _baseIsEqualDeep = baseIsEqualDeep$1;
-var baseIsEqualDeep = _baseIsEqualDeep, isObjectLike$2 = isObjectLike_1;
-function baseIsEqual$2(value, other, bitmask, customizer, stack) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || !isObjectLike$2(value) && !isObjectLike$2(other)) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual$2, stack);
-}
-var _baseIsEqual = baseIsEqual$2;
-var Stack = _Stack, baseIsEqual$1 = _baseIsEqual;
-var COMPARE_PARTIAL_FLAG$1 = 1, COMPARE_UNORDERED_FLAG$1 = 2;
-function baseIsMatch$1(object, source, matchData, customizer) {
-  var index2 = matchData.length, length = index2, noCustomizer = !customizer;
-  if (object == null) {
-    return !length;
-  }
-  object = Object(object);
-  while (index2--) {
-    var data = matchData[index2];
-    if (noCustomizer && data[2] ? data[1] !== object[data[0]] : !(data[0] in object)) {
-      return false;
-    }
-  }
-  while (++index2 < length) {
-    data = matchData[index2];
-    var key = data[0], objValue = object[key], srcValue = data[1];
-    if (noCustomizer && data[2]) {
-      if (objValue === void 0 && !(key in object)) {
-        return false;
-      }
-    } else {
-      var stack = new Stack();
-      if (customizer) {
-        var result = customizer(objValue, srcValue, key, object, source, stack);
-      }
-      if (!(result === void 0 ? baseIsEqual$1(srcValue, objValue, COMPARE_PARTIAL_FLAG$1 | COMPARE_UNORDERED_FLAG$1, customizer, stack) : result)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-var _baseIsMatch = baseIsMatch$1;
-var isObject$4 = isObject_1;
-function isStrictComparable$2(value) {
-  return value === value && !isObject$4(value);
-}
-var _isStrictComparable = isStrictComparable$2;
-var isStrictComparable$1 = _isStrictComparable, keys$2 = keys_1;
-function getMatchData$1(object) {
-  var result = keys$2(object), length = result.length;
-  while (length--) {
-    var key = result[length], value = object[key];
-    result[length] = [key, value, isStrictComparable$1(value)];
-  }
-  return result;
-}
-var _getMatchData = getMatchData$1;
-function matchesStrictComparable$2(key, srcValue) {
-  return function(object) {
-    if (object == null) {
-      return false;
-    }
-    return object[key] === srcValue && (srcValue !== void 0 || key in Object(object));
-  };
-}
-var _matchesStrictComparable = matchesStrictComparable$2;
-var baseIsMatch = _baseIsMatch, getMatchData = _getMatchData, matchesStrictComparable$1 = _matchesStrictComparable;
-function baseMatches$1(source) {
-  var matchData = getMatchData(source);
-  if (matchData.length == 1 && matchData[0][2]) {
-    return matchesStrictComparable$1(matchData[0][0], matchData[0][1]);
-  }
-  return function(object) {
-    return object === source || baseIsMatch(object, source, matchData);
-  };
-}
-var _baseMatches = baseMatches$1;
-function baseHasIn$1(object, key) {
-  return object != null && key in Object(object);
-}
-var _baseHasIn = baseHasIn$1;
-var castPath$1 = _castPath, isArguments = isArguments_1, isArray$3 = isArray_1, isIndex = _isIndex, isLength = isLength_1, toKey$2 = _toKey;
-function hasPath$1(object, path, hasFunc) {
-  path = castPath$1(path, object);
-  var index2 = -1, length = path.length, result = false;
-  while (++index2 < length) {
-    var key = toKey$2(path[index2]);
-    if (!(result = object != null && hasFunc(object, key))) {
-      break;
-    }
-    object = object[key];
-  }
-  if (result || ++index2 != length) {
-    return result;
-  }
-  length = object == null ? 0 : object.length;
-  return !!length && isLength(length) && isIndex(key, length) && (isArray$3(object) || isArguments(object));
-}
-var _hasPath = hasPath$1;
-var baseHasIn = _baseHasIn, hasPath = _hasPath;
-function hasIn$1(object, path) {
-  return object != null && hasPath(object, path, baseHasIn);
-}
-var hasIn_1 = hasIn$1;
-var baseIsEqual = _baseIsEqual, get = get_1, hasIn = hasIn_1, isKey$1 = _isKey, isStrictComparable = _isStrictComparable, matchesStrictComparable = _matchesStrictComparable, toKey$1 = _toKey;
-var COMPARE_PARTIAL_FLAG = 1, COMPARE_UNORDERED_FLAG = 2;
-function baseMatchesProperty$1(path, srcValue) {
-  if (isKey$1(path) && isStrictComparable(srcValue)) {
-    return matchesStrictComparable(toKey$1(path), srcValue);
-  }
-  return function(object) {
-    var objValue = get(object, path);
-    return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
-  };
-}
-var _baseMatchesProperty = baseMatchesProperty$1;
-function baseProperty$1(key) {
-  return function(object) {
-    return object == null ? void 0 : object[key];
-  };
-}
-var _baseProperty = baseProperty$1;
-var baseGet$1 = _baseGet;
-function basePropertyDeep$1(path) {
-  return function(object) {
-    return baseGet$1(object, path);
-  };
-}
-var _basePropertyDeep = basePropertyDeep$1;
-var baseProperty = _baseProperty, basePropertyDeep = _basePropertyDeep, isKey = _isKey, toKey = _toKey;
-function property$1(path) {
-  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
-}
-var property_1 = property$1;
-var baseMatches = _baseMatches, baseMatchesProperty = _baseMatchesProperty, identity$1 = identity_1, isArray$2 = isArray_1, property = property_1;
-function baseIteratee$2(value) {
-  if (typeof value == "function") {
-    return value;
-  }
-  if (value == null) {
-    return identity$1;
-  }
-  if (typeof value == "object") {
-    return isArray$2(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
-  }
-  return property(value);
-}
-var _baseIteratee = baseIteratee$2;
-var baseGet = _baseGet, baseSet = _baseSet, castPath = _castPath;
-function basePickBy$1(object, paths, predicate) {
-  var index2 = -1, length = paths.length, result = {};
-  while (++index2 < length) {
-    var path = paths[index2], value = baseGet(object, path);
-    if (predicate(value, path)) {
-      baseSet(result, castPath(path, object), value);
-    }
-  }
-  return result;
-}
-var _basePickBy = basePickBy$1;
-var overArg = _overArg;
-var getPrototype$1 = overArg(Object.getPrototypeOf, Object);
-var _getPrototype = getPrototype$1;
-var arrayPush = _arrayPush, getPrototype = _getPrototype, getSymbols = _getSymbols, stubArray = stubArray_1;
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-var getSymbolsIn$1 = !nativeGetSymbols ? stubArray : function(object) {
-  var result = [];
-  while (object) {
-    arrayPush(result, getSymbols(object));
-    object = getPrototype(object);
-  }
-  return result;
-};
-var _getSymbolsIn = getSymbolsIn$1;
-function nativeKeysIn$1(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _nativeKeysIn = nativeKeysIn$1;
-var isObject$3 = isObject_1, isPrototype = _isPrototype, nativeKeysIn = _nativeKeysIn;
-var objectProto$2 = Object.prototype;
-var hasOwnProperty$3 = objectProto$2.hasOwnProperty;
-function baseKeysIn$1(object) {
-  if (!isObject$3(object)) {
-    return nativeKeysIn(object);
-  }
-  var isProto = isPrototype(object), result = [];
-  for (var key in object) {
-    if (!(key == "constructor" && (isProto || !hasOwnProperty$3.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-var _baseKeysIn = baseKeysIn$1;
-var arrayLikeKeys = _arrayLikeKeys, baseKeysIn = _baseKeysIn, isArrayLike$1 = isArrayLike_1;
-function keysIn$1(object) {
-  return isArrayLike$1(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-var keysIn_1 = keysIn$1;
-var baseGetAllKeys = _baseGetAllKeys, getSymbolsIn = _getSymbolsIn, keysIn = keysIn_1;
-function getAllKeysIn$1(object) {
-  return baseGetAllKeys(object, keysIn, getSymbolsIn);
-}
-var _getAllKeysIn = getAllKeysIn$1;
-var arrayMap = _arrayMap, baseIteratee$1 = _baseIteratee, basePickBy = _basePickBy, getAllKeysIn = _getAllKeysIn;
-function pickBy(object, predicate) {
-  if (object == null) {
-    return {};
-  }
-  var props = arrayMap(getAllKeysIn(object), function(prop) {
-    return [prop];
-  });
-  predicate = baseIteratee$1(predicate);
-  return basePickBy(object, props, function(value, path) {
-    return predicate(value, path[0]);
-  });
-}
-var pickBy_1 = pickBy;
-const HOC_PROPS = [
-  "request",
-  "label",
-  "visible",
-  "hotload",
-  "tips",
-  "labelPosition",
-  "subLabel",
-  "required"
-];
-const BLOCK_PROPS = [
-  "name",
-  "renderComponent",
-  "elements",
-  "runAction",
-  "actions",
-  "itemData",
-  "uiType",
-  "componentKey",
-  "itemData",
-  "App",
-  ...HOC_PROPS
-];
-const DEFAULT_VISION_CONFIG = {
-  category: "*",
-  icon: "https://img.alicdn.com/tfs/TB1whTmvAL0gK0jSZFxXXXWHVXa-200-200.svg",
-  isContainer: false
-};
-const STRING = "string";
-const NUMBER = "number";
-const BOOL = "boolean";
-const Normal_Types = [STRING, NUMBER, BOOL];
-const Null_TYPES = ["undefined", "null"];
-const Composite_Types = [
-  "any",
-  "any[]",
-  "string[]",
-  "number[]",
-  "object",
-  "object[]"
-];
-const isNotEnumTypes = (types = "") => {
-  return types.split("|").some((str) => Normal_Types.concat(Composite_Types).includes(str.trim()));
-};
-const isNumberTypes = (types = "") => {
-  return types.split("|").every((str) => [NUMBER].concat(Null_TYPES).includes(str.trim()));
-};
-const isTextTypes = (types = "") => {
-  return types.split("|").every((str) => [STRING, NUMBER].concat(Null_TYPES).includes(str.trim()));
-};
-const isBoolTypes = (types = "") => {
-  return types.split("|").every((str) => [BOOL].concat(Null_TYPES).includes(str.trim()));
-};
-const strToObj = (str) => {
-  try {
-    return JSON.parse(str);
-  } catch (error) {
-    return str;
-  }
-};
-const filterQuotaMarkAndUndefined = (typeStr) => typeStr.split("|").map((val) => val.replace(/"/g, "").trim()).filter((val) => val !== "undefined");
-const REGEXP_ISMultipleTypes = /\S+(\[\])?\s*\|/g;
-const REGEXP_ISFunction = /\(.*\)\s*=>\s*.+/;
-const REGEXP_ISArray = /{.+}\[]$/;
-class VisionSchemaTransfer {
-  transformProps(propType) {
-    const defaultConfig = this.defaultVisionConfig;
-    const { configure: defaultConfigure = [] } = defaultConfig;
-    const { name, description } = propType;
-    const defaultValue = VisionSchemaTransfer.getDefaultPropByTypes(propType);
-    const type2 = get_1(propType, "type.name");
-    const tags = Object.entries(propType.tags || {}).reduce((previousValue, [key, value]) => set_1(previousValue, key, strToObj(value)), {});
-    if (tags.vision === false) {
-      return null;
-    }
-    const visionJsonConfig = defaultConfigure.find((configure2) => configure2.name === name);
-    const setterInfo = VisionSchemaTransfer.getSetterByTSType(type2);
-    if (!setterInfo) {
-      return false;
-    }
-    const visionDocsConfig = get_1(tags, "vision");
-    return __spreadValues(__spreadValues(__spreadValues({
-      name,
-      tip: description,
-      defaultValue
-    }, setterInfo), visionJsonConfig), visionDocsConfig);
-  }
-  static getObjectTypes(typeStr) {
-    if (!/^{.+}$/.test(typeStr.trim())) {
-      return typeStr;
-    }
-    const reg = /(\w+)\??: ([\w\[\]]+|{.+});/g;
-    let regResult, result = {};
-    while (regResult = reg.exec(typeStr)) {
-      const [, key, value] = regResult;
-      result[key] = value;
-    }
-    return result;
-  }
-  static getSetterByTSType(tsType) {
-    const typeStr = `${tsType}`.trim();
-    let result;
-    [
-      this.getNumberSetterByTypes.bind(this),
-      this.getBoolSetterByTypes.bind(this),
-      this.getTextSetterByTypes.bind(this),
-      this.getChoiceSetterByTypes.bind(this),
-      this.getSelectSetterByTypes.bind(this)
-    ].some((fn) => {
-      const item = fn(typeStr);
-      if (item) {
-        result = item;
-      }
-      return item;
-    });
-    return result;
-  }
-  static getBoolSetterByTypes(types) {
-    return isBoolTypes(types) && { setter: "BoolSetter" };
-  }
-  static getNumberSetterByTypes(types) {
-    return isNumberTypes(types) && { setter: "NumberSetter" };
-  }
-  static getTextSetterByTypes(types) {
-    return isTextTypes(types) && { setter: "TextSetter" };
-  }
-  static getListSetterByTypes(typeStr) {
-    if (REGEXP_ISArray.test(typeStr)) {
-      const typeItemStr = typeStr.replace(/\[]$/, "").trim();
-      const resultType = this.getObjectTypes(typeItemStr);
-      const configure2 = resultType instanceof Object ? Object.entries(resultType).map(([key, item]) => ({
-        name: key,
-        setter: this.getSetterByTSType(item)
-      })) : void 0;
-      return {
-        setter: "ListSetter",
-        checkField: null,
-        configure: configure2
-      };
-    }
-    return typeStr;
-  }
-  static getChoiceSetterByTypes(typeStr) {
-    if (!REGEXP_ISFunction.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr) && filterQuotaMarkAndUndefined(typeStr).length <= 3) {
-      return {
-        setter: "ChoiceSetter",
-        options: filterQuotaMarkAndUndefined(typeStr)
-      };
-    }
-    return false;
-  }
-  static getSelectSetterByTypes(typeStr) {
-    if (!REGEXP_ISFunction.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr)) {
-      return {
-        setter: "SelectSetter",
-        options: typeStr.split("|").map((val) => val.replace(/"/g, "").trim()).filter((val) => val !== "undefined").map((val) => {
-          return {
-            text: val,
-            value: val
-          };
-        })
-      };
-    }
-    return false;
-  }
-  static getDefaultPropByTypes(propType) {
-    let defaultValue = get_1(propType, "defaultValue.value");
-    try {
-      if (!defaultValue) {
-        return defaultValue;
-      }
-      defaultValue = new Function("global", `return ("" + ${defaultValue}) in global ? (""+${defaultValue}) : ${defaultValue}`)(global);
-    } catch (e2) {
-    }
-    return defaultValue;
-  }
-  constructor(types, options) {
-    this.types = types;
-    const { defaultConfig = {}, blockProps = BLOCK_PROPS } = options || {};
-    this.blockProps = blockProps;
-    this.defaultVisionConfig = Object.assign({}, DEFAULT_VISION_CONFIG, defaultConfig);
-  }
-  getDefaultProps() {
-    const { props } = this.types;
-    return pickBy_1(Object.values(props).reduce((prev, propType) => {
-      return Object.assign(prev, {
-        [propType.name]: VisionSchemaTransfer.getDefaultPropByTypes(propType)
-      });
-    }, {}), (val) => val !== void 0);
-  }
-  mergeActionSetter(actionConfigs) {
-    const events = [];
-    actionConfigs.forEach((config) => {
-      const { name, tip } = config;
-      name.indexOf("on") === 0 && events.push({
-        name,
-        title: tip || name
-      });
-    });
-    if (events.length > 0) {
-      return {
-        name: "actions",
-        setter: {
-          setter: "ActionSetter",
-          events
-        }
-      };
-    }
-    return void 0;
-  }
-  transformTypeSchema() {
-    const defaultVisionConfig = this.defaultVisionConfig;
-    const { displayName, props = {}, tags = {} } = this.types;
-    const isVisionContainer = tags["vision.isContainer"];
-    const configure2 = Object.values(props).filter((prop) => !this.blockProps.includes(get_1(prop, "name", ""))).map(this.transformProps.bind(this)).filter(Boolean);
-    const actionConfig = this.mergeActionSetter(configure2.filter((conf) => conf.setter === "ActionSetter"));
-    const restConfigs = configure2.filter((config) => config.setter !== "ActionSetter" && config);
-    let isContainer;
-    if (isVisionContainer !== void 0) {
-      isContainer = JSON.parse(isVisionContainer);
-    } else {
-      isContainer = Object.keys(props).includes("elements") || false;
-    }
-    return Object.assign({}, defaultVisionConfig, {
-      componentName: displayName,
-      isContainer,
-      configure: actionConfig ? [...restConfigs, actionConfig] : restConfigs
-    });
-  }
-}
-function buildVisionFromTypes(typeDesc, options) {
-  return new VisionSchemaTransfer(typeDesc, options).transformTypeSchema();
-}
-var VisionTransfer = {
-  transform,
-  buildVisionFromTypes
-};
 var DoubleLeftOutlined$5 = { exports: {} };
 var DoubleLeftOutlined$4 = {};
 var interopRequireWildcard = { exports: {} };
@@ -2289,7 +446,7 @@ var interopRequireDefault = { exports: {} };
   module.exports = _interopRequireDefault2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 })(interopRequireDefault);
 var objectSpread2 = { exports: {} };
-var defineProperty$1 = { exports: {} };
+var defineProperty$3 = { exports: {} };
 (function(module) {
   function _defineProperty3(obj, key, value) {
     if (key in obj) {
@@ -2305,9 +462,9 @@ var defineProperty$1 = { exports: {} };
     return obj;
   }
   module.exports = _defineProperty3, module.exports.__esModule = true, module.exports["default"] = module.exports;
-})(defineProperty$1);
+})(defineProperty$3);
 (function(module) {
-  var defineProperty2 = defineProperty$1.exports;
+  var defineProperty2 = defineProperty$3.exports;
   function ownKeys(object, enumerableOnly) {
     var keys2 = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
@@ -3058,7 +1215,7 @@ function getSaturation(hsv, i, light) {
   }
   return Number(saturation.toFixed(2));
 }
-function getValue(hsv, i, light) {
+function getValue$2(hsv, i, light) {
   var value;
   if (light) {
     value = hsv.v + brightnessStep1 * i;
@@ -3079,7 +1236,7 @@ function generate$1(color2) {
     var colorString = toHex(inputToRGB({
       h: getHue(hsv, i, true),
       s: getSaturation(hsv, i, true),
-      v: getValue(hsv, i, true)
+      v: getValue$2(hsv, i, true)
     }));
     patterns.push(colorString);
   }
@@ -3089,7 +1246,7 @@ function generate$1(color2) {
     var _colorString = toHex(inputToRGB({
       h: getHue(_hsv, _i),
       s: getSaturation(_hsv, _i),
-      v: getValue(_hsv, _i)
+      v: getValue$2(_hsv, _i)
     }));
     patterns.push(_colorString);
   }
@@ -3446,7 +1603,7 @@ Object.defineProperty(AntdIcon, "__esModule", {
 AntdIcon.default = void 0;
 var _objectSpread2$8 = _interopRequireDefault$8(objectSpread2.exports);
 var _slicedToArray2 = _interopRequireDefault$8(slicedToArray.exports);
-var _defineProperty2 = _interopRequireDefault$8(defineProperty$1.exports);
+var _defineProperty2 = _interopRequireDefault$8(defineProperty$3.exports);
 var _objectWithoutProperties2 = _interopRequireDefault$8(objectWithoutProperties.exports);
 var React$a = _interopRequireWildcard$8(require$$3);
 var _classnames = _interopRequireDefault$8(_classnames_2_3_1_classnames.exports);
@@ -3562,7 +1719,6 @@ CloseOutlined$4.default = _default$6;
   module.exports = _default2;
 })(CloseOutlined$5, CloseOutlined$5.exports);
 var CloseOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(CloseOutlined$5.exports);
-var index$7 = "";
 const PANE_VISIBLE = "pane_visible";
 var form = "";
 const { Input, Radio, InputNumber, Select, Switch: Switch$1 } = window.antd;
@@ -3623,30 +1779,30 @@ function Stage({
     }
   }));
 }
-var FUNC_ERROR_TEXT$1 = "Expected a function";
+var FUNC_ERROR_TEXT$2 = "Expected a function";
 var NAN$2 = 0 / 0;
-var symbolTag$1 = "[object Symbol]";
+var symbolTag$3 = "[object Symbol]";
 var reTrim$1 = /^\s+|\s+$/g;
 var reIsBadHex$2 = /^[-+]0x[0-9a-f]+$/i;
 var reIsBinary$2 = /^0b[01]+$/i;
 var reIsOctal$2 = /^0o[0-7]+$/i;
 var freeParseInt$2 = parseInt;
-var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
-var root$1 = freeGlobal$1 || freeSelf$1 || Function("return this")();
-var objectProto$1 = Object.prototype;
-var objectToString$1 = objectProto$1.toString;
+var freeGlobal$3 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var freeSelf$2 = typeof self == "object" && self && self.Object === Object && self;
+var root$a = freeGlobal$3 || freeSelf$2 || Function("return this")();
+var objectProto$e = Object.prototype;
+var objectToString$3 = objectProto$e.toString;
 var nativeMax$1 = Math.max, nativeMin$1 = Math.min;
 var now$1 = function() {
-  return root$1.Date.now();
+  return root$a.Date.now();
 };
 function debounce$1(func, wait, options) {
   var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
   if (typeof func != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT$1);
+    throw new TypeError(FUNC_ERROR_TEXT$2);
   }
   wait = toNumber$3(wait) || 0;
-  if (isObject$2(options)) {
+  if (isObject$7(options)) {
     leading = !!options.leading;
     maxing = "maxWait" in options;
     maxWait = maxing ? nativeMax$1(toNumber$3(options.maxWait) || 0, wait) : maxWait;
@@ -3720,26 +1876,26 @@ function debounce$1(func, wait, options) {
   debounced.flush = flush;
   return debounced;
 }
-function isObject$2(value) {
+function isObject$7(value) {
   var type2 = typeof value;
   return !!value && (type2 == "object" || type2 == "function");
 }
-function isObjectLike$1(value) {
+function isObjectLike$7(value) {
   return !!value && typeof value == "object";
 }
-function isSymbol$2(value) {
-  return typeof value == "symbol" || isObjectLike$1(value) && objectToString$1.call(value) == symbolTag$1;
+function isSymbol$6(value) {
+  return typeof value == "symbol" || isObjectLike$7(value) && objectToString$3.call(value) == symbolTag$3;
 }
 function toNumber$3(value) {
   if (typeof value == "number") {
     return value;
   }
-  if (isSymbol$2(value)) {
+  if (isSymbol$6(value)) {
     return NAN$2;
   }
-  if (isObject$2(value)) {
+  if (isObject$7(value)) {
     var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-    value = isObject$2(other) ? other + "" : other;
+    value = isObject$7(other) ? other + "" : other;
   }
   if (typeof value != "string") {
     return value === 0 ? value : +value;
@@ -3749,30 +1905,30 @@ function toNumber$3(value) {
   return isBinary || reIsOctal$2.test(value) ? freeParseInt$2(value.slice(2), isBinary ? 2 : 8) : reIsBadHex$2.test(value) ? NAN$2 : +value;
 }
 var _lodash_debounce_4_0_8_lodash_debounce = debounce$1;
-var FUNC_ERROR_TEXT = "Expected a function";
+var FUNC_ERROR_TEXT$1 = "Expected a function";
 var NAN$1 = 0 / 0;
-var symbolTag = "[object Symbol]";
+var symbolTag$2 = "[object Symbol]";
 var reTrim = /^\s+|\s+$/g;
 var reIsBadHex$1 = /^[-+]0x[0-9a-f]+$/i;
 var reIsBinary$1 = /^0b[01]+$/i;
 var reIsOctal$1 = /^0o[0-7]+$/i;
 var freeParseInt$1 = parseInt;
-var freeGlobal = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root = freeGlobal || freeSelf || Function("return this")();
-var objectProto = Object.prototype;
-var objectToString = objectProto.toString;
+var freeGlobal$2 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var freeSelf$1 = typeof self == "object" && self && self.Object === Object && self;
+var root$9 = freeGlobal$2 || freeSelf$1 || Function("return this")();
+var objectProto$d = Object.prototype;
+var objectToString$2 = objectProto$d.toString;
 var nativeMax = Math.max, nativeMin = Math.min;
 var now = function() {
-  return root.Date.now();
+  return root$9.Date.now();
 };
 function debounce(func, wait, options) {
   var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
   if (typeof func != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT);
+    throw new TypeError(FUNC_ERROR_TEXT$1);
   }
   wait = toNumber$2(wait) || 0;
-  if (isObject$1(options)) {
+  if (isObject$6(options)) {
     leading = !!options.leading;
     maxing = "maxWait" in options;
     maxWait = maxing ? nativeMax(toNumber$2(options.maxWait) || 0, wait) : maxWait;
@@ -3849,9 +2005,9 @@ function debounce(func, wait, options) {
 function throttle(func, wait, options) {
   var leading = true, trailing = true;
   if (typeof func != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT);
+    throw new TypeError(FUNC_ERROR_TEXT$1);
   }
-  if (isObject$1(options)) {
+  if (isObject$6(options)) {
     leading = "leading" in options ? !!options.leading : leading;
     trailing = "trailing" in options ? !!options.trailing : trailing;
   }
@@ -3861,26 +2017,26 @@ function throttle(func, wait, options) {
     "trailing": trailing
   });
 }
-function isObject$1(value) {
+function isObject$6(value) {
   var type2 = typeof value;
   return !!value && (type2 == "object" || type2 == "function");
 }
-function isObjectLike(value) {
+function isObjectLike$6(value) {
   return !!value && typeof value == "object";
 }
-function isSymbol$1(value) {
-  return typeof value == "symbol" || isObjectLike(value) && objectToString.call(value) == symbolTag;
+function isSymbol$5(value) {
+  return typeof value == "symbol" || isObjectLike$6(value) && objectToString$2.call(value) == symbolTag$2;
 }
 function toNumber$2(value) {
   if (typeof value == "number") {
     return value;
   }
-  if (isSymbol$1(value)) {
+  if (isSymbol$5(value)) {
     return NAN$1;
   }
-  if (isObject$1(value)) {
+  if (isObject$6(value)) {
     var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-    value = isObject$1(other) ? other + "" : other;
+    value = isObject$6(other) ? other + "" : other;
   }
   if (typeof value != "string") {
     return value === 0 ? value : +value;
@@ -4946,7 +3102,7 @@ var __read$3 = globalThis && globalThis.__read || function(o, n2) {
   }
   return ar;
 };
-function isFunction(obj) {
+function isFunction$3(obj) {
   return typeof obj === "function";
 }
 function createUseStorageState(nullishStorage) {
@@ -4967,7 +3123,7 @@ function createUseStorageState(nullishStorage) {
       } catch (e2) {
         console.error(e2);
       }
-      if (isFunction(defaultValue)) {
+      if (isFunction$3(defaultValue)) {
         return defaultValue();
       }
       return defaultValue;
@@ -4976,7 +3132,7 @@ function createUseStorageState(nullishStorage) {
       if (typeof value === "undefined") {
         storage.removeItem(key);
         setState(void 0);
-      } else if (isFunction(value)) {
+      } else if (isFunction$3(value)) {
         var previousState = getStoredValue();
         var currentState = value(previousState);
         try {
@@ -4998,7 +3154,7 @@ function createUseStorageState(nullishStorage) {
   }
   if (!nullishStorage) {
     return function(_, defaultValue) {
-      return [isFunction(defaultValue) ? defaultValue() : defaultValue, function() {
+      return [isFunction$3(defaultValue) ? defaultValue() : defaultValue, function() {
       }];
     };
   }
@@ -5195,6 +3351,735 @@ BugOutlined$4.default = _default$5;
   module.exports = _default2;
 })(BugOutlined$5, BugOutlined$5.exports);
 var BugOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(BugOutlined$5.exports);
+var isArray$a = Array.isArray;
+var isArray_1 = isArray$a;
+var freeGlobal$1 = typeof commonjsGlobal$1 == "object" && commonjsGlobal$1 && commonjsGlobal$1.Object === Object && commonjsGlobal$1;
+var _freeGlobal = freeGlobal$1;
+var freeGlobal = _freeGlobal;
+var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+var root$8 = freeGlobal || freeSelf || Function("return this")();
+var _root = root$8;
+var root$7 = _root;
+var Symbol$5 = root$7.Symbol;
+var _Symbol = Symbol$5;
+var Symbol$4 = _Symbol;
+var objectProto$c = Object.prototype;
+var hasOwnProperty$c = objectProto$c.hasOwnProperty;
+var nativeObjectToString$1 = objectProto$c.toString;
+var symToStringTag$1 = Symbol$4 ? Symbol$4.toStringTag : void 0;
+function getRawTag$1(value) {
+  var isOwn = hasOwnProperty$c.call(value, symToStringTag$1), tag = value[symToStringTag$1];
+  try {
+    value[symToStringTag$1] = void 0;
+    var unmasked = true;
+  } catch (e2) {
+  }
+  var result = nativeObjectToString$1.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+  return result;
+}
+var _getRawTag = getRawTag$1;
+var objectProto$b = Object.prototype;
+var nativeObjectToString = objectProto$b.toString;
+function objectToString$1(value) {
+  return nativeObjectToString.call(value);
+}
+var _objectToString = objectToString$1;
+var Symbol$3 = _Symbol, getRawTag = _getRawTag, objectToString = _objectToString;
+var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
+var symToStringTag = Symbol$3 ? Symbol$3.toStringTag : void 0;
+function baseGetTag$5(value) {
+  if (value == null) {
+    return value === void 0 ? undefinedTag : nullTag;
+  }
+  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+}
+var _baseGetTag = baseGetTag$5;
+function isObjectLike$5(value) {
+  return value != null && typeof value == "object";
+}
+var isObjectLike_1 = isObjectLike$5;
+var baseGetTag$4 = _baseGetTag, isObjectLike$4 = isObjectLike_1;
+var symbolTag$1 = "[object Symbol]";
+function isSymbol$4(value) {
+  return typeof value == "symbol" || isObjectLike$4(value) && baseGetTag$4(value) == symbolTag$1;
+}
+var isSymbol_1 = isSymbol$4;
+var isArray$9 = isArray_1, isSymbol$3 = isSymbol_1;
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, reIsPlainProp = /^\w*$/;
+function isKey$3(value, object) {
+  if (isArray$9(value)) {
+    return false;
+  }
+  var type2 = typeof value;
+  if (type2 == "number" || type2 == "symbol" || type2 == "boolean" || value == null || isSymbol$3(value)) {
+    return true;
+  }
+  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
+}
+var _isKey = isKey$3;
+function isObject$5(value) {
+  var type2 = typeof value;
+  return value != null && (type2 == "object" || type2 == "function");
+}
+var isObject_1 = isObject$5;
+var baseGetTag$3 = _baseGetTag, isObject$4 = isObject_1;
+var asyncTag = "[object AsyncFunction]", funcTag$1 = "[object Function]", genTag = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
+function isFunction$2(value) {
+  if (!isObject$4(value)) {
+    return false;
+  }
+  var tag = baseGetTag$3(value);
+  return tag == funcTag$1 || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+var isFunction_1 = isFunction$2;
+var root$6 = _root;
+var coreJsData$1 = root$6["__core-js_shared__"];
+var _coreJsData = coreJsData$1;
+var coreJsData = _coreJsData;
+var maskSrcKey = function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+  return uid ? "Symbol(src)_1." + uid : "";
+}();
+function isMasked$1(func) {
+  return !!maskSrcKey && maskSrcKey in func;
+}
+var _isMasked = isMasked$1;
+var funcProto$1 = Function.prototype;
+var funcToString$1 = funcProto$1.toString;
+function toSource$2(func) {
+  if (func != null) {
+    try {
+      return funcToString$1.call(func);
+    } catch (e2) {
+    }
+    try {
+      return func + "";
+    } catch (e2) {
+    }
+  }
+  return "";
+}
+var _toSource = toSource$2;
+var isFunction$1 = isFunction_1, isMasked = _isMasked, isObject$3 = isObject_1, toSource$1 = _toSource;
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+var funcProto = Function.prototype, objectProto$a = Object.prototype;
+var funcToString = funcProto.toString;
+var hasOwnProperty$b = objectProto$a.hasOwnProperty;
+var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$b).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+function baseIsNative$1(value) {
+  if (!isObject$3(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction$1(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource$1(value));
+}
+var _baseIsNative = baseIsNative$1;
+function getValue$1(object, key) {
+  return object == null ? void 0 : object[key];
+}
+var _getValue = getValue$1;
+var baseIsNative = _baseIsNative, getValue = _getValue;
+function getNative$7(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : void 0;
+}
+var _getNative = getNative$7;
+var getNative$6 = _getNative;
+var nativeCreate$4 = getNative$6(Object, "create");
+var _nativeCreate = nativeCreate$4;
+var nativeCreate$3 = _nativeCreate;
+function hashClear$1() {
+  this.__data__ = nativeCreate$3 ? nativeCreate$3(null) : {};
+  this.size = 0;
+}
+var _hashClear = hashClear$1;
+function hashDelete$1(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+var _hashDelete = hashDelete$1;
+var nativeCreate$2 = _nativeCreate;
+var HASH_UNDEFINED$2 = "__lodash_hash_undefined__";
+var objectProto$9 = Object.prototype;
+var hasOwnProperty$a = objectProto$9.hasOwnProperty;
+function hashGet$1(key) {
+  var data = this.__data__;
+  if (nativeCreate$2) {
+    var result = data[key];
+    return result === HASH_UNDEFINED$2 ? void 0 : result;
+  }
+  return hasOwnProperty$a.call(data, key) ? data[key] : void 0;
+}
+var _hashGet = hashGet$1;
+var nativeCreate$1 = _nativeCreate;
+var objectProto$8 = Object.prototype;
+var hasOwnProperty$9 = objectProto$8.hasOwnProperty;
+function hashHas$1(key) {
+  var data = this.__data__;
+  return nativeCreate$1 ? data[key] !== void 0 : hasOwnProperty$9.call(data, key);
+}
+var _hashHas = hashHas$1;
+var nativeCreate = _nativeCreate;
+var HASH_UNDEFINED$1 = "__lodash_hash_undefined__";
+function hashSet$1(key, value) {
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED$1 : value;
+  return this;
+}
+var _hashSet = hashSet$1;
+var hashClear = _hashClear, hashDelete = _hashDelete, hashGet = _hashGet, hashHas = _hashHas, hashSet = _hashSet;
+function Hash$1(entries) {
+  var index2 = -1, length = entries == null ? 0 : entries.length;
+  this.clear();
+  while (++index2 < length) {
+    var entry = entries[index2];
+    this.set(entry[0], entry[1]);
+  }
+}
+Hash$1.prototype.clear = hashClear;
+Hash$1.prototype["delete"] = hashDelete;
+Hash$1.prototype.get = hashGet;
+Hash$1.prototype.has = hashHas;
+Hash$1.prototype.set = hashSet;
+var _Hash = Hash$1;
+function listCacheClear$1() {
+  this.__data__ = [];
+  this.size = 0;
+}
+var _listCacheClear = listCacheClear$1;
+function eq$3(value, other) {
+  return value === other || value !== value && other !== other;
+}
+var eq_1 = eq$3;
+var eq$2 = eq_1;
+function assocIndexOf$4(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq$2(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+var _assocIndexOf = assocIndexOf$4;
+var assocIndexOf$3 = _assocIndexOf;
+var arrayProto = Array.prototype;
+var splice$3 = arrayProto.splice;
+function listCacheDelete$1(key) {
+  var data = this.__data__, index2 = assocIndexOf$3(data, key);
+  if (index2 < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index2 == lastIndex) {
+    data.pop();
+  } else {
+    splice$3.call(data, index2, 1);
+  }
+  --this.size;
+  return true;
+}
+var _listCacheDelete = listCacheDelete$1;
+var assocIndexOf$2 = _assocIndexOf;
+function listCacheGet$1(key) {
+  var data = this.__data__, index2 = assocIndexOf$2(data, key);
+  return index2 < 0 ? void 0 : data[index2][1];
+}
+var _listCacheGet = listCacheGet$1;
+var assocIndexOf$1 = _assocIndexOf;
+function listCacheHas$1(key) {
+  return assocIndexOf$1(this.__data__, key) > -1;
+}
+var _listCacheHas = listCacheHas$1;
+var assocIndexOf = _assocIndexOf;
+function listCacheSet$1(key, value) {
+  var data = this.__data__, index2 = assocIndexOf(data, key);
+  if (index2 < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index2][1] = value;
+  }
+  return this;
+}
+var _listCacheSet = listCacheSet$1;
+var listCacheClear = _listCacheClear, listCacheDelete = _listCacheDelete, listCacheGet = _listCacheGet, listCacheHas = _listCacheHas, listCacheSet = _listCacheSet;
+function ListCache$4(entries) {
+  var index2 = -1, length = entries == null ? 0 : entries.length;
+  this.clear();
+  while (++index2 < length) {
+    var entry = entries[index2];
+    this.set(entry[0], entry[1]);
+  }
+}
+ListCache$4.prototype.clear = listCacheClear;
+ListCache$4.prototype["delete"] = listCacheDelete;
+ListCache$4.prototype.get = listCacheGet;
+ListCache$4.prototype.has = listCacheHas;
+ListCache$4.prototype.set = listCacheSet;
+var _ListCache = ListCache$4;
+var getNative$5 = _getNative, root$5 = _root;
+var Map$4 = getNative$5(root$5, "Map");
+var _Map = Map$4;
+var Hash = _Hash, ListCache$3 = _ListCache, Map$3 = _Map;
+function mapCacheClear$1() {
+  this.size = 0;
+  this.__data__ = {
+    "hash": new Hash(),
+    "map": new (Map$3 || ListCache$3)(),
+    "string": new Hash()
+  };
+}
+var _mapCacheClear = mapCacheClear$1;
+function isKeyable$1(value) {
+  var type2 = typeof value;
+  return type2 == "string" || type2 == "number" || type2 == "symbol" || type2 == "boolean" ? value !== "__proto__" : value === null;
+}
+var _isKeyable = isKeyable$1;
+var isKeyable = _isKeyable;
+function getMapData$4(map, key) {
+  var data = map.__data__;
+  return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+}
+var _getMapData = getMapData$4;
+var getMapData$3 = _getMapData;
+function mapCacheDelete$1(key) {
+  var result = getMapData$3(this, key)["delete"](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+var _mapCacheDelete = mapCacheDelete$1;
+var getMapData$2 = _getMapData;
+function mapCacheGet$1(key) {
+  return getMapData$2(this, key).get(key);
+}
+var _mapCacheGet = mapCacheGet$1;
+var getMapData$1 = _getMapData;
+function mapCacheHas$1(key) {
+  return getMapData$1(this, key).has(key);
+}
+var _mapCacheHas = mapCacheHas$1;
+var getMapData = _getMapData;
+function mapCacheSet$1(key, value) {
+  var data = getMapData(this, key), size = data.size;
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
+}
+var _mapCacheSet = mapCacheSet$1;
+var mapCacheClear = _mapCacheClear, mapCacheDelete = _mapCacheDelete, mapCacheGet = _mapCacheGet, mapCacheHas = _mapCacheHas, mapCacheSet = _mapCacheSet;
+function MapCache$3(entries) {
+  var index2 = -1, length = entries == null ? 0 : entries.length;
+  this.clear();
+  while (++index2 < length) {
+    var entry = entries[index2];
+    this.set(entry[0], entry[1]);
+  }
+}
+MapCache$3.prototype.clear = mapCacheClear;
+MapCache$3.prototype["delete"] = mapCacheDelete;
+MapCache$3.prototype.get = mapCacheGet;
+MapCache$3.prototype.has = mapCacheHas;
+MapCache$3.prototype.set = mapCacheSet;
+var _MapCache = MapCache$3;
+var MapCache$2 = _MapCache;
+var FUNC_ERROR_TEXT = "Expected a function";
+function memoize$1(func, resolver2) {
+  if (typeof func != "function" || resolver2 != null && typeof resolver2 != "function") {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments, key = resolver2 ? resolver2.apply(this, args) : args[0], cache2 = memoized.cache;
+    if (cache2.has(key)) {
+      return cache2.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache2.set(key, result) || cache2;
+    return result;
+  };
+  memoized.cache = new (memoize$1.Cache || MapCache$2)();
+  return memoized;
+}
+memoize$1.Cache = MapCache$2;
+var memoize_1 = memoize$1;
+var memoize = memoize_1;
+var MAX_MEMOIZE_SIZE = 500;
+function memoizeCapped$1(func) {
+  var result = memoize(func, function(key) {
+    if (cache2.size === MAX_MEMOIZE_SIZE) {
+      cache2.clear();
+    }
+    return key;
+  });
+  var cache2 = result.cache;
+  return result;
+}
+var _memoizeCapped = memoizeCapped$1;
+var memoizeCapped = _memoizeCapped;
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+var reEscapeChar = /\\(\\)?/g;
+var stringToPath$1 = memoizeCapped(function(string2) {
+  var result = [];
+  if (string2.charCodeAt(0) === 46) {
+    result.push("");
+  }
+  string2.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
+  });
+  return result;
+});
+var _stringToPath = stringToPath$1;
+function arrayMap$1(array, iteratee) {
+  var index2 = -1, length = array == null ? 0 : array.length, result = Array(length);
+  while (++index2 < length) {
+    result[index2] = iteratee(array[index2], index2, array);
+  }
+  return result;
+}
+var _arrayMap = arrayMap$1;
+var Symbol$2 = _Symbol, arrayMap = _arrayMap, isArray$8 = isArray_1, isSymbol$2 = isSymbol_1;
+var INFINITY$2 = 1 / 0;
+var symbolProto$1 = Symbol$2 ? Symbol$2.prototype : void 0, symbolToString = symbolProto$1 ? symbolProto$1.toString : void 0;
+function baseToString$1(value) {
+  if (typeof value == "string") {
+    return value;
+  }
+  if (isArray$8(value)) {
+    return arrayMap(value, baseToString$1) + "";
+  }
+  if (isSymbol$2(value)) {
+    return symbolToString ? symbolToString.call(value) : "";
+  }
+  var result = value + "";
+  return result == "0" && 1 / value == -INFINITY$2 ? "-0" : result;
+}
+var _baseToString = baseToString$1;
+var baseToString = _baseToString;
+function toString$4(value) {
+  return value == null ? "" : baseToString(value);
+}
+var toString_1 = toString$4;
+var isArray$7 = isArray_1, isKey$2 = _isKey, stringToPath = _stringToPath, toString$3 = toString_1;
+function castPath$3(value, object) {
+  if (isArray$7(value)) {
+    return value;
+  }
+  return isKey$2(value, object) ? [value] : stringToPath(toString$3(value));
+}
+var _castPath = castPath$3;
+var isSymbol$1 = isSymbol_1;
+var INFINITY$1 = 1 / 0;
+function toKey$5(value) {
+  if (typeof value == "string" || isSymbol$1(value)) {
+    return value;
+  }
+  var result = value + "";
+  return result == "0" && 1 / value == -INFINITY$1 ? "-0" : result;
+}
+var _toKey = toKey$5;
+var castPath$2 = _castPath, toKey$4 = _toKey;
+function baseGet$2(object, path) {
+  path = castPath$2(path, object);
+  var index2 = 0, length = path.length;
+  while (object != null && index2 < length) {
+    object = object[toKey$4(path[index2++])];
+  }
+  return index2 && index2 == length ? object : void 0;
+}
+var _baseGet = baseGet$2;
+var baseGet$1 = _baseGet;
+function get$1(object, path, defaultValue) {
+  var result = object == null ? void 0 : baseGet$1(object, path);
+  return result === void 0 ? defaultValue : result;
+}
+var get_1 = get$1;
+var getNative$4 = _getNative;
+var defineProperty$2 = function() {
+  try {
+    var func = getNative$4(Object, "defineProperty");
+    func({}, "", {});
+    return func;
+  } catch (e2) {
+  }
+}();
+var _defineProperty = defineProperty$2;
+var defineProperty$1 = _defineProperty;
+function baseAssignValue$2(object, key, value) {
+  if (key == "__proto__" && defineProperty$1) {
+    defineProperty$1(object, key, {
+      "configurable": true,
+      "enumerable": true,
+      "value": value,
+      "writable": true
+    });
+  } else {
+    object[key] = value;
+  }
+}
+var _baseAssignValue = baseAssignValue$2;
+var baseAssignValue$1 = _baseAssignValue, eq$1 = eq_1;
+var objectProto$7 = Object.prototype;
+var hasOwnProperty$8 = objectProto$7.hasOwnProperty;
+function assignValue$1(object, key, value) {
+  var objValue = object[key];
+  if (!(hasOwnProperty$8.call(object, key) && eq$1(objValue, value)) || value === void 0 && !(key in object)) {
+    baseAssignValue$1(object, key, value);
+  }
+}
+var _assignValue = assignValue$1;
+var MAX_SAFE_INTEGER$1 = 9007199254740991;
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+function isIndex$3(value, length) {
+  var type2 = typeof value;
+  length = length == null ? MAX_SAFE_INTEGER$1 : length;
+  return !!length && (type2 == "number" || type2 != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+}
+var _isIndex = isIndex$3;
+var assignValue = _assignValue, castPath$1 = _castPath, isIndex$2 = _isIndex, isObject$2 = isObject_1, toKey$3 = _toKey;
+function baseSet$1(object, path, value, customizer) {
+  if (!isObject$2(object)) {
+    return object;
+  }
+  path = castPath$1(path, object);
+  var index2 = -1, length = path.length, lastIndex = length - 1, nested = object;
+  while (nested != null && ++index2 < length) {
+    var key = toKey$3(path[index2]), newValue = value;
+    if (key === "__proto__" || key === "constructor" || key === "prototype") {
+      return object;
+    }
+    if (index2 != lastIndex) {
+      var objValue = nested[key];
+      newValue = customizer ? customizer(objValue, key, nested) : void 0;
+      if (newValue === void 0) {
+        newValue = isObject$2(objValue) ? objValue : isIndex$2(path[index2 + 1]) ? [] : {};
+      }
+    }
+    assignValue(nested, key, newValue);
+    nested = nested[key];
+  }
+  return object;
+}
+var _baseSet = baseSet$1;
+var baseSet = _baseSet;
+function set(object, path, value) {
+  return object == null ? object : baseSet(object, path, value);
+}
+var set_1 = set;
+const HOC_PROPS = [
+  "request",
+  "label",
+  "visible",
+  "hotload",
+  "tips",
+  "labelPosition",
+  "subLabel",
+  "required"
+];
+const BLOCK_PROPS = [
+  "name",
+  "renderComponent",
+  "elements",
+  "runAction",
+  "actions",
+  "itemData",
+  "uiType",
+  "componentKey",
+  "itemData",
+  "App",
+  ...HOC_PROPS
+];
+const DEFAULT_VISION_CONFIG = {
+  category: "*",
+  icon: "https://img.alicdn.com/tfs/TB1whTmvAL0gK0jSZFxXXXWHVXa-200-200.svg",
+  isContainer: false
+};
+const STRING = "string";
+const NUMBER = "number";
+const BOOL = "boolean";
+const Normal_Types = [STRING, NUMBER, BOOL];
+const Null_TYPES = ["undefined", "null"];
+const Composite_Types = [
+  "any",
+  "any[]",
+  "string[]",
+  "number[]",
+  "object",
+  "object[]"
+];
+const isNotEnumTypes = (types = "") => {
+  return types.split("|").some((str) => Normal_Types.concat(Composite_Types).includes(str.trim()));
+};
+const isNumberTypes = (types = "") => {
+  return types.split("|").every((str) => [NUMBER].concat(Null_TYPES).includes(str.trim()));
+};
+const isTextTypes = (types = "") => {
+  return types.split("|").every((str) => [STRING, NUMBER].concat(Null_TYPES).includes(str.trim()));
+};
+const isBoolTypes = (types = "") => {
+  return types.split("|").every((str) => [BOOL].concat(Null_TYPES).includes(str.trim()));
+};
+const strToObj = (str) => {
+  try {
+    return JSON.parse(str);
+  } catch (error) {
+    return str;
+  }
+};
+const filterQuotaMarkAndUndefined = (typeStr) => typeStr.split("|").map((val) => val.replace(/"/g, "").trim()).filter((val) => val !== "undefined");
+const REGEXP_ISMultipleTypes = /\S+(\[\])?\s*\|/g;
+const REGEXP_ISFunction = /\(.*\)\s*=>\s*.+/;
+const REGEXP_ISArray = /{.+}\[]$/;
+class VisionSchemaTransfer {
+  transformProps(propType) {
+    const defaultConfig = this.defaultVisionConfig;
+    const { configure: defaultConfigure = [] } = defaultConfig;
+    const { name, description } = propType;
+    const defaultValue = VisionSchemaTransfer.getDefaultPropByTypes(propType);
+    const type2 = get_1(propType, "type.name");
+    const tags = Object.entries(propType.tags || {}).reduce((previousValue, [key, value]) => set_1(previousValue, key, strToObj(value)), {});
+    if (tags.vision === false) {
+      return null;
+    }
+    const visionJsonConfig = defaultConfigure.find((configure2) => configure2.name === name);
+    const setterInfo = VisionSchemaTransfer.getSetterByTSType(type2);
+    if (!setterInfo) {
+      return false;
+    }
+    const visionDocsConfig = get_1(tags, "vision");
+    return __spreadValues(__spreadValues(__spreadValues({
+      name,
+      tip: description,
+      defaultValue
+    }, setterInfo), visionJsonConfig), visionDocsConfig);
+  }
+  static getObjectTypes(typeStr) {
+    if (!/^{.+}$/.test(typeStr.trim())) {
+      return typeStr;
+    }
+    const reg = /(\w+)\??: ([\w\[\]]+|{.+});/g;
+    let regResult, result = {};
+    while (regResult = reg.exec(typeStr)) {
+      const [, key, value] = regResult;
+      result[key] = value;
+    }
+    return result;
+  }
+  static getSetterByTSType(tsType) {
+    const typeStr = `${tsType}`.trim();
+    let result;
+    [
+      this.getNumberSetterByTypes.bind(this),
+      this.getBoolSetterByTypes.bind(this),
+      this.getTextSetterByTypes.bind(this),
+      this.getChoiceSetterByTypes.bind(this),
+      this.getSelectSetterByTypes.bind(this)
+    ].some((fn) => {
+      const item = fn(typeStr);
+      if (item) {
+        result = item;
+      }
+      return item;
+    });
+    return result;
+  }
+  static getBoolSetterByTypes(types) {
+    return isBoolTypes(types) && { setter: "BoolSetter" };
+  }
+  static getNumberSetterByTypes(types) {
+    return isNumberTypes(types) && { setter: "NumberSetter" };
+  }
+  static getTextSetterByTypes(types) {
+    return isTextTypes(types) && { setter: "TextSetter" };
+  }
+  static getListSetterByTypes(typeStr) {
+    if (REGEXP_ISArray.test(typeStr)) {
+      const typeItemStr = typeStr.replace(/\[]$/, "").trim();
+      const resultType = this.getObjectTypes(typeItemStr);
+      const configure2 = resultType instanceof Object ? Object.entries(resultType).map(([key, item]) => ({
+        name: key,
+        setter: this.getSetterByTSType(item)
+      })) : void 0;
+      return {
+        setter: "ListSetter",
+        checkField: null,
+        configure: configure2
+      };
+    }
+    return typeStr;
+  }
+  static getChoiceSetterByTypes(typeStr) {
+    if (!REGEXP_ISFunction.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr) && filterQuotaMarkAndUndefined(typeStr).length <= 3) {
+      return {
+        setter: "ChoiceSetter",
+        options: filterQuotaMarkAndUndefined(typeStr)
+      };
+    }
+    return false;
+  }
+  static getSelectSetterByTypes(typeStr) {
+    if (!REGEXP_ISFunction.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr)) {
+      return {
+        setter: "SelectSetter",
+        options: typeStr.split("|").map((val) => val.replace(/"/g, "").trim()).filter((val) => val !== "undefined").map((val) => {
+          return {
+            text: val,
+            value: val
+          };
+        })
+      };
+    }
+    return false;
+  }
+  static getDefaultPropByTypes(propType) {
+    let defaultValue = get_1(propType, "defaultValue.value");
+    try {
+      if (!defaultValue) {
+        return defaultValue;
+      }
+      defaultValue = new Function("global", `return ("" + ${defaultValue}) in global ? (""+${defaultValue}) : ${defaultValue}`)(global);
+    } catch (e2) {
+    }
+    return defaultValue;
+  }
+  constructor(types, options) {
+    this.types = types;
+    const { defaultConfig = {}, blockProps = BLOCK_PROPS } = options || {};
+    this.blockProps = blockProps;
+    this.defaultVisionConfig = Object.assign({}, DEFAULT_VISION_CONFIG, defaultConfig);
+  }
+  transformTypeSchema() {
+    const defaultVisionConfig = this.defaultVisionConfig;
+    const { displayName, props = {}, tags = {} } = this.types;
+    const isVisionContainer = tags["vision.isContainer"];
+    const configure2 = Object.values(props).filter((prop) => !this.blockProps.includes(get_1(prop, "name", ""))).map(this.transformProps.bind(this)).filter(Boolean);
+    const restConfigs = configure2.filter((config) => config.setter !== "ActionSetter" && config);
+    let isContainer;
+    if (isVisionContainer !== void 0) {
+      isContainer = JSON.parse(isVisionContainer);
+    } else {
+      isContainer = Object.keys(props).includes("elements") || false;
+    }
+    return Object.assign({}, defaultVisionConfig, {
+      componentName: displayName,
+      isContainer,
+      configure: restConfigs
+    });
+  }
+}
+function buildVisionFromTypes(typeDesc, options) {
+  return new VisionSchemaTransfer(typeDesc, options).transformTypeSchema();
+}
+var index$7 = "";
 const { Button: Button$1, Anchor } = window.antd;
 function VisionPane({
   properties,
@@ -5203,7 +4088,7 @@ function VisionPane({
 }) {
   const [propertyDrawerShow, setPropertyDrawerShow] = useLocalStorageState$1(PANE_VISIBLE, "");
   const { data: prototypeOptions } = useRequest(async () => {
-    return VisionTransfer.buildVisionFromTypes(properties);
+    return buildVisionFromTypes(properties);
   }, {});
   return /* @__PURE__ */ modules$1.createElement("div", {
     className: "vision-property-container"
@@ -5264,9 +4149,146 @@ var _createBaseFor = createBaseFor$1;
 var createBaseFor = _createBaseFor;
 var baseFor$1 = createBaseFor();
 var _baseFor = baseFor$1;
-var baseFor = _baseFor, keys$1 = keys_1;
+function baseTimes$1(n2, iteratee) {
+  var index2 = -1, result = Array(n2);
+  while (++index2 < n2) {
+    result[index2] = iteratee(index2);
+  }
+  return result;
+}
+var _baseTimes = baseTimes$1;
+var baseGetTag$2 = _baseGetTag, isObjectLike$3 = isObjectLike_1;
+var argsTag$2 = "[object Arguments]";
+function baseIsArguments$1(value) {
+  return isObjectLike$3(value) && baseGetTag$2(value) == argsTag$2;
+}
+var _baseIsArguments = baseIsArguments$1;
+var baseIsArguments = _baseIsArguments, isObjectLike$2 = isObjectLike_1;
+var objectProto$6 = Object.prototype;
+var hasOwnProperty$7 = objectProto$6.hasOwnProperty;
+var propertyIsEnumerable$1 = objectProto$6.propertyIsEnumerable;
+var isArguments$2 = baseIsArguments(function() {
+  return arguments;
+}()) ? baseIsArguments : function(value) {
+  return isObjectLike$2(value) && hasOwnProperty$7.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
+};
+var isArguments_1 = isArguments$2;
+var isBuffer$2 = { exports: {} };
+function stubFalse() {
+  return false;
+}
+var stubFalse_1 = stubFalse;
+(function(module, exports) {
+  var root2 = _root, stubFalse2 = stubFalse_1;
+  var freeExports = exports && !exports.nodeType && exports;
+  var freeModule = freeExports && true && module && !module.nodeType && module;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
+  var Buffer2 = moduleExports ? root2.Buffer : void 0;
+  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
+  var isBuffer3 = nativeIsBuffer || stubFalse2;
+  module.exports = isBuffer3;
+})(isBuffer$2, isBuffer$2.exports);
+var MAX_SAFE_INTEGER = 9007199254740991;
+function isLength$3(value) {
+  return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+var isLength_1 = isLength$3;
+var baseGetTag$1 = _baseGetTag, isLength$2 = isLength_1, isObjectLike$1 = isObjectLike_1;
+var argsTag$1 = "[object Arguments]", arrayTag$1 = "[object Array]", boolTag$1 = "[object Boolean]", dateTag$1 = "[object Date]", errorTag$1 = "[object Error]", funcTag = "[object Function]", mapTag$2 = "[object Map]", numberTag$1 = "[object Number]", objectTag$2 = "[object Object]", regexpTag$1 = "[object RegExp]", setTag$2 = "[object Set]", stringTag$1 = "[object String]", weakMapTag$1 = "[object WeakMap]";
+var arrayBufferTag$1 = "[object ArrayBuffer]", dataViewTag$2 = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag$1] = typedArrayTags[arrayTag$1] = typedArrayTags[arrayBufferTag$1] = typedArrayTags[boolTag$1] = typedArrayTags[dataViewTag$2] = typedArrayTags[dateTag$1] = typedArrayTags[errorTag$1] = typedArrayTags[funcTag] = typedArrayTags[mapTag$2] = typedArrayTags[numberTag$1] = typedArrayTags[objectTag$2] = typedArrayTags[regexpTag$1] = typedArrayTags[setTag$2] = typedArrayTags[stringTag$1] = typedArrayTags[weakMapTag$1] = false;
+function baseIsTypedArray$1(value) {
+  return isObjectLike$1(value) && isLength$2(value.length) && !!typedArrayTags[baseGetTag$1(value)];
+}
+var _baseIsTypedArray = baseIsTypedArray$1;
+function baseUnary$1(func) {
+  return function(value) {
+    return func(value);
+  };
+}
+var _baseUnary = baseUnary$1;
+var _nodeUtil = { exports: {} };
+(function(module, exports) {
+  var freeGlobal2 = _freeGlobal;
+  var freeExports = exports && !exports.nodeType && exports;
+  var freeModule = freeExports && true && module && !module.nodeType && module;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
+  var freeProcess = moduleExports && freeGlobal2.process;
+  var nodeUtil2 = function() {
+    try {
+      var types = freeModule && freeModule.require && freeModule.require("util").types;
+      if (types) {
+        return types;
+      }
+      return freeProcess && freeProcess.binding && freeProcess.binding("util");
+    } catch (e2) {
+    }
+  }();
+  module.exports = nodeUtil2;
+})(_nodeUtil, _nodeUtil.exports);
+var baseIsTypedArray = _baseIsTypedArray, baseUnary = _baseUnary, nodeUtil = _nodeUtil.exports;
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+var isTypedArray$2 = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+var isTypedArray_1 = isTypedArray$2;
+var baseTimes = _baseTimes, isArguments$1 = isArguments_1, isArray$6 = isArray_1, isBuffer$1 = isBuffer$2.exports, isIndex$1 = _isIndex, isTypedArray$1 = isTypedArray_1;
+var objectProto$5 = Object.prototype;
+var hasOwnProperty$6 = objectProto$5.hasOwnProperty;
+function arrayLikeKeys$1(value, inherited) {
+  var isArr = isArray$6(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$1(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
+  for (var key in value) {
+    if ((inherited || hasOwnProperty$6.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex$1(key, length)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+var _arrayLikeKeys = arrayLikeKeys$1;
+var objectProto$4 = Object.prototype;
+function isPrototype$1(value) {
+  var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto$4;
+  return value === proto2;
+}
+var _isPrototype = isPrototype$1;
+function overArg$1(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+var _overArg = overArg$1;
+var overArg = _overArg;
+var nativeKeys$1 = overArg(Object.keys, Object);
+var _nativeKeys = nativeKeys$1;
+var isPrototype = _isPrototype, nativeKeys = _nativeKeys;
+var objectProto$3 = Object.prototype;
+var hasOwnProperty$5 = objectProto$3.hasOwnProperty;
+function baseKeys$1(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty$5.call(object, key) && key != "constructor") {
+      result.push(key);
+    }
+  }
+  return result;
+}
+var _baseKeys = baseKeys$1;
+var isFunction = isFunction_1, isLength$1 = isLength_1;
+function isArrayLike$2(value) {
+  return value != null && isLength$1(value.length) && !isFunction(value);
+}
+var isArrayLike_1 = isArrayLike$2;
+var arrayLikeKeys = _arrayLikeKeys, baseKeys = _baseKeys, isArrayLike$1 = isArrayLike_1;
+function keys$4(object) {
+  return isArrayLike$1(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+var keys_1 = keys$4;
+var baseFor = _baseFor, keys$3 = keys_1;
 function baseForOwn$1(object, iteratee) {
-  return object && baseFor(object, iteratee, keys$1);
+  return object && baseFor(object, iteratee, keys$3);
 }
 var _baseForOwn = baseForOwn$1;
 var isArrayLike = isArrayLike_1;
@@ -5299,6 +4321,532 @@ function baseAggregator$1(collection, setter, iteratee, accumulator) {
   return accumulator;
 }
 var _baseAggregator = baseAggregator$1;
+var ListCache$2 = _ListCache;
+function stackClear$1() {
+  this.__data__ = new ListCache$2();
+  this.size = 0;
+}
+var _stackClear = stackClear$1;
+function stackDelete$1(key) {
+  var data = this.__data__, result = data["delete"](key);
+  this.size = data.size;
+  return result;
+}
+var _stackDelete = stackDelete$1;
+function stackGet$1(key) {
+  return this.__data__.get(key);
+}
+var _stackGet = stackGet$1;
+function stackHas$1(key) {
+  return this.__data__.has(key);
+}
+var _stackHas = stackHas$1;
+var ListCache$1 = _ListCache, Map$2 = _Map, MapCache$1 = _MapCache;
+var LARGE_ARRAY_SIZE = 200;
+function stackSet$1(key, value) {
+  var data = this.__data__;
+  if (data instanceof ListCache$1) {
+    var pairs = data.__data__;
+    if (!Map$2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+      pairs.push([key, value]);
+      this.size = ++data.size;
+      return this;
+    }
+    data = this.__data__ = new MapCache$1(pairs);
+  }
+  data.set(key, value);
+  this.size = data.size;
+  return this;
+}
+var _stackSet = stackSet$1;
+var ListCache = _ListCache, stackClear = _stackClear, stackDelete = _stackDelete, stackGet = _stackGet, stackHas = _stackHas, stackSet = _stackSet;
+function Stack$2(entries) {
+  var data = this.__data__ = new ListCache(entries);
+  this.size = data.size;
+}
+Stack$2.prototype.clear = stackClear;
+Stack$2.prototype["delete"] = stackDelete;
+Stack$2.prototype.get = stackGet;
+Stack$2.prototype.has = stackHas;
+Stack$2.prototype.set = stackSet;
+var _Stack = Stack$2;
+var HASH_UNDEFINED = "__lodash_hash_undefined__";
+function setCacheAdd$1(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+  return this;
+}
+var _setCacheAdd = setCacheAdd$1;
+function setCacheHas$1(value) {
+  return this.__data__.has(value);
+}
+var _setCacheHas = setCacheHas$1;
+var MapCache = _MapCache, setCacheAdd = _setCacheAdd, setCacheHas = _setCacheHas;
+function SetCache$1(values) {
+  var index2 = -1, length = values == null ? 0 : values.length;
+  this.__data__ = new MapCache();
+  while (++index2 < length) {
+    this.add(values[index2]);
+  }
+}
+SetCache$1.prototype.add = SetCache$1.prototype.push = setCacheAdd;
+SetCache$1.prototype.has = setCacheHas;
+var _SetCache = SetCache$1;
+function arraySome$1(array, predicate) {
+  var index2 = -1, length = array == null ? 0 : array.length;
+  while (++index2 < length) {
+    if (predicate(array[index2], index2, array)) {
+      return true;
+    }
+  }
+  return false;
+}
+var _arraySome = arraySome$1;
+function cacheHas$1(cache2, key) {
+  return cache2.has(key);
+}
+var _cacheHas = cacheHas$1;
+var SetCache = _SetCache, arraySome = _arraySome, cacheHas = _cacheHas;
+var COMPARE_PARTIAL_FLAG$5 = 1, COMPARE_UNORDERED_FLAG$3 = 2;
+function equalArrays$2(array, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$5, arrLength = array.length, othLength = other.length;
+  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
+    return false;
+  }
+  var arrStacked = stack.get(array);
+  var othStacked = stack.get(other);
+  if (arrStacked && othStacked) {
+    return arrStacked == other && othStacked == array;
+  }
+  var index2 = -1, result = true, seen = bitmask & COMPARE_UNORDERED_FLAG$3 ? new SetCache() : void 0;
+  stack.set(array, other);
+  stack.set(other, array);
+  while (++index2 < arrLength) {
+    var arrValue = array[index2], othValue = other[index2];
+    if (customizer) {
+      var compared = isPartial ? customizer(othValue, arrValue, index2, other, array, stack) : customizer(arrValue, othValue, index2, array, other, stack);
+    }
+    if (compared !== void 0) {
+      if (compared) {
+        continue;
+      }
+      result = false;
+      break;
+    }
+    if (seen) {
+      if (!arraySome(other, function(othValue2, othIndex) {
+        if (!cacheHas(seen, othIndex) && (arrValue === othValue2 || equalFunc(arrValue, othValue2, bitmask, customizer, stack))) {
+          return seen.push(othIndex);
+        }
+      })) {
+        result = false;
+        break;
+      }
+    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+      result = false;
+      break;
+    }
+  }
+  stack["delete"](array);
+  stack["delete"](other);
+  return result;
+}
+var _equalArrays = equalArrays$2;
+var root$4 = _root;
+var Uint8Array$1 = root$4.Uint8Array;
+var _Uint8Array = Uint8Array$1;
+function mapToArray$1(map) {
+  var index2 = -1, result = Array(map.size);
+  map.forEach(function(value, key) {
+    result[++index2] = [key, value];
+  });
+  return result;
+}
+var _mapToArray = mapToArray$1;
+function setToArray$1(set2) {
+  var index2 = -1, result = Array(set2.size);
+  set2.forEach(function(value) {
+    result[++index2] = value;
+  });
+  return result;
+}
+var _setToArray = setToArray$1;
+var Symbol$1 = _Symbol, Uint8Array2 = _Uint8Array, eq = eq_1, equalArrays$1 = _equalArrays, mapToArray = _mapToArray, setToArray = _setToArray;
+var COMPARE_PARTIAL_FLAG$4 = 1, COMPARE_UNORDERED_FLAG$2 = 2;
+var boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", mapTag$1 = "[object Map]", numberTag = "[object Number]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]";
+var arrayBufferTag = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]";
+var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+function equalByTag$1(object, other, tag, bitmask, customizer, equalFunc, stack) {
+  switch (tag) {
+    case dataViewTag$1:
+      if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
+        return false;
+      }
+      object = object.buffer;
+      other = other.buffer;
+    case arrayBufferTag:
+      if (object.byteLength != other.byteLength || !equalFunc(new Uint8Array2(object), new Uint8Array2(other))) {
+        return false;
+      }
+      return true;
+    case boolTag:
+    case dateTag:
+    case numberTag:
+      return eq(+object, +other);
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+    case regexpTag:
+    case stringTag:
+      return object == other + "";
+    case mapTag$1:
+      var convert2 = mapToArray;
+    case setTag$1:
+      var isPartial = bitmask & COMPARE_PARTIAL_FLAG$4;
+      convert2 || (convert2 = setToArray);
+      if (object.size != other.size && !isPartial) {
+        return false;
+      }
+      var stacked = stack.get(object);
+      if (stacked) {
+        return stacked == other;
+      }
+      bitmask |= COMPARE_UNORDERED_FLAG$2;
+      stack.set(object, other);
+      var result = equalArrays$1(convert2(object), convert2(other), bitmask, customizer, equalFunc, stack);
+      stack["delete"](object);
+      return result;
+    case symbolTag:
+      if (symbolValueOf) {
+        return symbolValueOf.call(object) == symbolValueOf.call(other);
+      }
+  }
+  return false;
+}
+var _equalByTag = equalByTag$1;
+function arrayPush$1(array, values) {
+  var index2 = -1, length = values.length, offset = array.length;
+  while (++index2 < length) {
+    array[offset + index2] = values[index2];
+  }
+  return array;
+}
+var _arrayPush = arrayPush$1;
+var arrayPush = _arrayPush, isArray$5 = isArray_1;
+function baseGetAllKeys$1(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray$5(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+var _baseGetAllKeys = baseGetAllKeys$1;
+function arrayFilter$1(array, predicate) {
+  var index2 = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
+  while (++index2 < length) {
+    var value = array[index2];
+    if (predicate(value, index2, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+var _arrayFilter = arrayFilter$1;
+function stubArray$1() {
+  return [];
+}
+var stubArray_1 = stubArray$1;
+var arrayFilter = _arrayFilter, stubArray = stubArray_1;
+var objectProto$2 = Object.prototype;
+var propertyIsEnumerable = objectProto$2.propertyIsEnumerable;
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+var getSymbols$1 = !nativeGetSymbols ? stubArray : function(object) {
+  if (object == null) {
+    return [];
+  }
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols(object), function(symbol) {
+    return propertyIsEnumerable.call(object, symbol);
+  });
+};
+var _getSymbols = getSymbols$1;
+var baseGetAllKeys = _baseGetAllKeys, getSymbols = _getSymbols, keys$2 = keys_1;
+function getAllKeys$1(object) {
+  return baseGetAllKeys(object, keys$2, getSymbols);
+}
+var _getAllKeys = getAllKeys$1;
+var getAllKeys = _getAllKeys;
+var COMPARE_PARTIAL_FLAG$3 = 1;
+var objectProto$1 = Object.prototype;
+var hasOwnProperty$4 = objectProto$1.hasOwnProperty;
+function equalObjects$1(object, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG$3, objProps = getAllKeys(object), objLength = objProps.length, othProps = getAllKeys(other), othLength = othProps.length;
+  if (objLength != othLength && !isPartial) {
+    return false;
+  }
+  var index2 = objLength;
+  while (index2--) {
+    var key = objProps[index2];
+    if (!(isPartial ? key in other : hasOwnProperty$4.call(other, key))) {
+      return false;
+    }
+  }
+  var objStacked = stack.get(object);
+  var othStacked = stack.get(other);
+  if (objStacked && othStacked) {
+    return objStacked == other && othStacked == object;
+  }
+  var result = true;
+  stack.set(object, other);
+  stack.set(other, object);
+  var skipCtor = isPartial;
+  while (++index2 < objLength) {
+    key = objProps[index2];
+    var objValue = object[key], othValue = other[key];
+    if (customizer) {
+      var compared = isPartial ? customizer(othValue, objValue, key, other, object, stack) : customizer(objValue, othValue, key, object, other, stack);
+    }
+    if (!(compared === void 0 ? objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack) : compared)) {
+      result = false;
+      break;
+    }
+    skipCtor || (skipCtor = key == "constructor");
+  }
+  if (result && !skipCtor) {
+    var objCtor = object.constructor, othCtor = other.constructor;
+    if (objCtor != othCtor && ("constructor" in object && "constructor" in other) && !(typeof objCtor == "function" && objCtor instanceof objCtor && typeof othCtor == "function" && othCtor instanceof othCtor)) {
+      result = false;
+    }
+  }
+  stack["delete"](object);
+  stack["delete"](other);
+  return result;
+}
+var _equalObjects = equalObjects$1;
+var getNative$3 = _getNative, root$3 = _root;
+var DataView$1 = getNative$3(root$3, "DataView");
+var _DataView = DataView$1;
+var getNative$2 = _getNative, root$2 = _root;
+var Promise$2 = getNative$2(root$2, "Promise");
+var _Promise = Promise$2;
+var getNative$1 = _getNative, root$1 = _root;
+var Set$1 = getNative$1(root$1, "Set");
+var _Set = Set$1;
+var getNative = _getNative, root = _root;
+var WeakMap$2 = getNative(root, "WeakMap");
+var _WeakMap = WeakMap$2;
+var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set = _Set, WeakMap$1 = _WeakMap, baseGetTag = _baseGetTag, toSource = _toSource;
+var mapTag = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag = "[object Set]", weakMapTag = "[object WeakMap]";
+var dataViewTag = "[object DataView]";
+var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map$1), promiseCtorString = toSource(Promise$1), setCtorString = toSource(Set), weakMapCtorString = toSource(WeakMap$1);
+var getTag$1 = baseGetTag;
+if (DataView && getTag$1(new DataView(new ArrayBuffer(1))) != dataViewTag || Map$1 && getTag$1(new Map$1()) != mapTag || Promise$1 && getTag$1(Promise$1.resolve()) != promiseTag || Set && getTag$1(new Set()) != setTag || WeakMap$1 && getTag$1(new WeakMap$1()) != weakMapTag) {
+  getTag$1 = function(value) {
+    var result = baseGetTag(value), Ctor = result == objectTag$1 ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : "";
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString:
+          return dataViewTag;
+        case mapCtorString:
+          return mapTag;
+        case promiseCtorString:
+          return promiseTag;
+        case setCtorString:
+          return setTag;
+        case weakMapCtorString:
+          return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+var _getTag = getTag$1;
+var Stack$1 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag = _getTag, isArray$4 = isArray_1, isBuffer = isBuffer$2.exports, isTypedArray = isTypedArray_1;
+var COMPARE_PARTIAL_FLAG$2 = 1;
+var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
+var objectProto = Object.prototype;
+var hasOwnProperty$3 = objectProto.hasOwnProperty;
+function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack) {
+  var objIsArr = isArray$4(object), othIsArr = isArray$4(other), objTag = objIsArr ? arrayTag : getTag(object), othTag = othIsArr ? arrayTag : getTag(other);
+  objTag = objTag == argsTag ? objectTag : objTag;
+  othTag = othTag == argsTag ? objectTag : othTag;
+  var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false;
+    }
+    objIsArr = true;
+    objIsObj = false;
+  }
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack$1());
+    return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+  }
+  if (!(bitmask & COMPARE_PARTIAL_FLAG$2)) {
+    var objIsWrapped = objIsObj && hasOwnProperty$3.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty$3.call(other, "__wrapped__");
+    if (objIsWrapped || othIsWrapped) {
+      var objUnwrapped = objIsWrapped ? object.value() : object, othUnwrapped = othIsWrapped ? other.value() : other;
+      stack || (stack = new Stack$1());
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+    }
+  }
+  if (!isSameTag) {
+    return false;
+  }
+  stack || (stack = new Stack$1());
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+}
+var _baseIsEqualDeep = baseIsEqualDeep$1;
+var baseIsEqualDeep = _baseIsEqualDeep, isObjectLike = isObjectLike_1;
+function baseIsEqual$2(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+  if (value == null || other == null || !isObjectLike(value) && !isObjectLike(other)) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual$2, stack);
+}
+var _baseIsEqual = baseIsEqual$2;
+var Stack = _Stack, baseIsEqual$1 = _baseIsEqual;
+var COMPARE_PARTIAL_FLAG$1 = 1, COMPARE_UNORDERED_FLAG$1 = 2;
+function baseIsMatch$1(object, source, matchData, customizer) {
+  var index2 = matchData.length, length = index2, noCustomizer = !customizer;
+  if (object == null) {
+    return !length;
+  }
+  object = Object(object);
+  while (index2--) {
+    var data = matchData[index2];
+    if (noCustomizer && data[2] ? data[1] !== object[data[0]] : !(data[0] in object)) {
+      return false;
+    }
+  }
+  while (++index2 < length) {
+    data = matchData[index2];
+    var key = data[0], objValue = object[key], srcValue = data[1];
+    if (noCustomizer && data[2]) {
+      if (objValue === void 0 && !(key in object)) {
+        return false;
+      }
+    } else {
+      var stack = new Stack();
+      if (customizer) {
+        var result = customizer(objValue, srcValue, key, object, source, stack);
+      }
+      if (!(result === void 0 ? baseIsEqual$1(srcValue, objValue, COMPARE_PARTIAL_FLAG$1 | COMPARE_UNORDERED_FLAG$1, customizer, stack) : result)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+var _baseIsMatch = baseIsMatch$1;
+var isObject$1 = isObject_1;
+function isStrictComparable$2(value) {
+  return value === value && !isObject$1(value);
+}
+var _isStrictComparable = isStrictComparable$2;
+var isStrictComparable$1 = _isStrictComparable, keys$1 = keys_1;
+function getMatchData$1(object) {
+  var result = keys$1(object), length = result.length;
+  while (length--) {
+    var key = result[length], value = object[key];
+    result[length] = [key, value, isStrictComparable$1(value)];
+  }
+  return result;
+}
+var _getMatchData = getMatchData$1;
+function matchesStrictComparable$2(key, srcValue) {
+  return function(object) {
+    if (object == null) {
+      return false;
+    }
+    return object[key] === srcValue && (srcValue !== void 0 || key in Object(object));
+  };
+}
+var _matchesStrictComparable = matchesStrictComparable$2;
+var baseIsMatch = _baseIsMatch, getMatchData = _getMatchData, matchesStrictComparable$1 = _matchesStrictComparable;
+function baseMatches$1(source) {
+  var matchData = getMatchData(source);
+  if (matchData.length == 1 && matchData[0][2]) {
+    return matchesStrictComparable$1(matchData[0][0], matchData[0][1]);
+  }
+  return function(object) {
+    return object === source || baseIsMatch(object, source, matchData);
+  };
+}
+var _baseMatches = baseMatches$1;
+function baseHasIn$1(object, key) {
+  return object != null && key in Object(object);
+}
+var _baseHasIn = baseHasIn$1;
+var castPath = _castPath, isArguments = isArguments_1, isArray$3 = isArray_1, isIndex = _isIndex, isLength = isLength_1, toKey$2 = _toKey;
+function hasPath$1(object, path, hasFunc) {
+  path = castPath(path, object);
+  var index2 = -1, length = path.length, result = false;
+  while (++index2 < length) {
+    var key = toKey$2(path[index2]);
+    if (!(result = object != null && hasFunc(object, key))) {
+      break;
+    }
+    object = object[key];
+  }
+  if (result || ++index2 != length) {
+    return result;
+  }
+  length = object == null ? 0 : object.length;
+  return !!length && isLength(length) && isIndex(key, length) && (isArray$3(object) || isArguments(object));
+}
+var _hasPath = hasPath$1;
+var baseHasIn = _baseHasIn, hasPath = _hasPath;
+function hasIn$1(object, path) {
+  return object != null && hasPath(object, path, baseHasIn);
+}
+var hasIn_1 = hasIn$1;
+var baseIsEqual = _baseIsEqual, get = get_1, hasIn = hasIn_1, isKey$1 = _isKey, isStrictComparable = _isStrictComparable, matchesStrictComparable = _matchesStrictComparable, toKey$1 = _toKey;
+var COMPARE_PARTIAL_FLAG = 1, COMPARE_UNORDERED_FLAG = 2;
+function baseMatchesProperty$1(path, srcValue) {
+  if (isKey$1(path) && isStrictComparable(srcValue)) {
+    return matchesStrictComparable(toKey$1(path), srcValue);
+  }
+  return function(object) {
+    var objValue = get(object, path);
+    return objValue === void 0 && objValue === srcValue ? hasIn(object, path) : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
+  };
+}
+var _baseMatchesProperty = baseMatchesProperty$1;
+function identity$2(value) {
+  return value;
+}
+var identity_1 = identity$2;
+function baseProperty$1(key) {
+  return function(object) {
+    return object == null ? void 0 : object[key];
+  };
+}
+var _baseProperty = baseProperty$1;
+var baseGet = _baseGet;
+function basePropertyDeep$1(path) {
+  return function(object) {
+    return baseGet(object, path);
+  };
+}
+var _basePropertyDeep = basePropertyDeep$1;
+var baseProperty = _baseProperty, basePropertyDeep = _basePropertyDeep, isKey = _isKey, toKey = _toKey;
+function property$1(path) {
+  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+}
+var property_1 = property$1;
+var baseMatches = _baseMatches, baseMatchesProperty = _baseMatchesProperty, identity$1 = identity_1, isArray$2 = isArray_1, property = property_1;
+function baseIteratee$1(value) {
+  if (typeof value == "function") {
+    return value;
+  }
+  if (value == null) {
+    return identity$1;
+  }
+  if (typeof value == "object") {
+    return isArray$2(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
+  }
+  return property(value);
+}
+var _baseIteratee = baseIteratee$1;
 var arrayAggregator = _arrayAggregator, baseAggregator = _baseAggregator, baseIteratee = _baseIteratee, isArray$1 = isArray_1;
 function createAggregator$1(setter, initializer) {
   return function(collection, iteratee) {
@@ -12163,7 +11711,7 @@ function compiler(options) {
       buffer: buffer2,
       resume,
       setData,
-      getData: getData2
+      getData
     };
     while (++index2 < events.length) {
       if (events[index2][1].type === "listOrdered" || events[index2][1].type === "listUnordered") {
@@ -12279,7 +11827,7 @@ function compiler(options) {
   function setData(key, value) {
     data[key] = value;
   }
-  function getData2(key) {
+  function getData(key) {
     return data[key];
   }
   function point2(d2) {
@@ -12329,7 +11877,7 @@ function compiler(options) {
     setData("expectingFirstListItemValue", true);
   }
   function onenterlistitemvalue(token) {
-    if (getData2("expectingFirstListItemValue")) {
+    if (getData("expectingFirstListItemValue")) {
       this.stack[this.stack.length - 2].start = parseInt(this.sliceSerialize(token), 10);
       setData("expectingFirstListItemValue");
     }
@@ -12343,7 +11891,7 @@ function compiler(options) {
     this.stack[this.stack.length - 1].meta = data2;
   }
   function onexitcodefencedfence() {
-    if (getData2("flowCodeInside"))
+    if (getData("flowCodeInside"))
       return;
     this.buffer();
     setData("flowCodeInside", true);
@@ -12401,12 +11949,12 @@ function compiler(options) {
   }
   function onexitlineending(token) {
     var context2 = this.stack[this.stack.length - 1];
-    if (getData2("atHardBreak")) {
+    if (getData("atHardBreak")) {
       context2.children[context2.children.length - 1].position.end = point2(token.end);
       setData("atHardBreak");
       return;
     }
-    if (!getData2("setextHeadingSlurpLineEnding") && config.canContainEols.indexOf(context2.type) > -1) {
+    if (!getData("setextHeadingSlurpLineEnding") && config.canContainEols.indexOf(context2.type) > -1) {
       onenterdata.call(this, token);
       onexitdata.call(this, token);
     }
@@ -12428,9 +11976,9 @@ function compiler(options) {
   }
   function onexitlink() {
     var context2 = this.stack[this.stack.length - 1];
-    if (getData2("inReference")) {
+    if (getData("inReference")) {
       context2.type += "Reference";
-      context2.referenceType = getData2("referenceType") || "shortcut";
+      context2.referenceType = getData("referenceType") || "shortcut";
       delete context2.url;
       delete context2.title;
     } else {
@@ -12442,9 +11990,9 @@ function compiler(options) {
   }
   function onexitimage() {
     var context2 = this.stack[this.stack.length - 1];
-    if (getData2("inReference")) {
+    if (getData("inReference")) {
       context2.type += "Reference";
-      context2.referenceType = getData2("referenceType") || "shortcut";
+      context2.referenceType = getData("referenceType") || "shortcut";
       delete context2.url;
       delete context2.title;
     } else {
@@ -12493,7 +12041,7 @@ function compiler(options) {
   }
   function onexitcharacterreferencevalue(token) {
     var data2 = this.sliceSerialize(token);
-    var type2 = getData2("characterReferenceType");
+    var type2 = getData("characterReferenceType");
     var value;
     var tail;
     if (type2) {
@@ -12939,8 +12487,8 @@ disallowNode$1.ofType = function(types, mode) {
 };
 disallowNode$1.ifNotMatch = ifNotMatch;
 function ifNotMatch(allow, mode) {
-  return transform2;
-  function transform2(tree) {
+  return transform;
+  function transform(tree) {
     visit$2(tree, filter);
     return tree;
   }
@@ -13500,8 +13048,8 @@ var ReactMarkdown = function ReactMarkdown2(props) {
     renderers: renderers2,
     definitions: getDefinitions2(tree)
   });
-  determineAstToReactTransforms(props).forEach(function(transform2) {
-    tree = transform2(tree, renderProps);
+  determineAstToReactTransforms(props).forEach(function(transform) {
+    tree = transform(tree, renderProps);
   });
   return tree;
 };
@@ -13521,8 +13069,8 @@ function determineAstToReactTransforms(props) {
     transforms.push(disallowNode.ifNotMatch(props.allowNode, removalMethod));
   }
   var renderHtml = (props.allowDangerousHtml || props.escapeHtml === false) && !props.skipHtml;
-  var hasHtmlParser = (props.astPlugins || []).some(function(transform2) {
-    return transform2.identity === symbols.HtmlParser;
+  var hasHtmlParser = (props.astPlugins || []).some(function(transform) {
+    return transform.identity === symbols.HtmlParser;
   });
   if (renderHtml && !hasHtmlParser) {
     transforms.push(naiveHtml);
