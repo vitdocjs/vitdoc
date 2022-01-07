@@ -69,6 +69,7 @@
       }
       > .copy-link-icon {
         margin-right: 0;
+        z-index: 1;
       }
     }
     &:not(:hover) .copy-link-icon {
