@@ -17,6 +17,9 @@
 .vision-property-container .ant-drawer-header {
   border-bottom: 0;
 }
+.vision-property-container .ant-drawer-header .ant-drawer-close {
+  margin-right: 0;
+}
 .vision-property-container .ant-drawer-title {
   display: flex;
   align-items: center;
@@ -35,6 +38,7 @@
   height: 100%;
 }
 .vision-property-container .ant-drawer-wrapper-body .ant-drawer-body {
+  padding: 4px 16px;
   position: relative;
   flex: 1;
 }
@@ -46,6 +50,16 @@
   position: fixed;
   top: 20px;
   right: 30px;
+}.setter-form-item {
+  flex-wrap: wrap;
+}
+.setter-form-item-label {
+  text-transform: capitalize;
+  line-height: 32px;
+}
+.setter-form-item .has-tip {
+  border-bottom: 1px dashed currentColor;
+  cursor: help;
 }#public-component-show-container {
   display: flex;
   position: relative;
