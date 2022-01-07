@@ -34,7 +34,7 @@ export const componentBlockRender = (props) => {
 };
 
 export function ComponentArea(props) {
-  const { renderer, lang, content, defaultOpenCodePanel } = props;
+  const { renderer, lang, content, defaultCodePanel } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
@@ -47,7 +47,7 @@ export function ComponentArea(props) {
 
   const setDefaultProps = usePersistFn((props) => {
     defaultPropsRef.current = props;
-    defaultOpenCodePanel && onSetDefaultProps?.({ ...(props || {}) });
+    defaultCodePanel && onSetDefaultProps?.({ ...(props || {}) });
   });
 
   const wrapProps = usePersistFn((Component, { React: OutReact }) => {
@@ -75,7 +75,7 @@ export function ComponentArea(props) {
     renderer && renderer(componentRef.current, wrapProps);
   }, [renderer, componentProps]);
 
-  const [checkCode, { toggle }] = useBoolean(defaultOpenCodePanel);
+  const [checkCode, { toggle }] = useBoolean();
 
   const handlerDebugComponent = usePersistFn(() => {
     onSetDefaultProps?.({ ...(defaultPropsRef.current || {}) });

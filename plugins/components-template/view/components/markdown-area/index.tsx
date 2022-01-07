@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import HighLight from "@alife/intl-comp-highLighter/dist/index";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
@@ -22,14 +22,25 @@ export function MarkdownArea({ data: res }) {
 
   const { moduleMap, content } = res;
 
-  const code = usePersistFn(({ language, value = "" }) => {
+  const isCodeRenderIndexRef = useRef(0);
+  const code = usePersistFn(({ language, value = "", node }) => {
     const jsx = /^[j|t]sx$/.test(language);
     if (!jsx) {
       return <HighLight lang={language} children={value} />;
     }
 
+    const index = isCodeRenderIndexRef.current;
+    isCodeRenderIndexRef.current++;
+
     const fn = moduleMap?.[value.trim()];
-    return <ComponentArea renderer={fn} lang={language} content={value} />;
+    return (
+      <ComponentArea
+        renderer={fn}
+        lang={language}
+        content={value}
+        defaultCodePanel={index === 0}
+      />
+    );
   });
 
   const markdownComponent = useCreation(

@@ -4090,6 +4090,13 @@ function VisionPane({
   const { data: prototypeOptions } = useRequest(async () => {
     return buildVisionFromTypes(properties);
   }, {});
+  const renderIndex = useRef(0);
+  useUpdateEffect$1(() => {
+    renderIndex.current++;
+    if (renderIndex.current > 1) {
+      setPropertyDrawerShow("1");
+    }
+  }, [defaultProps]);
   return /* @__PURE__ */ modules$1.createElement("div", {
     className: "vision-property-container"
   }, propertyDrawerShow && prototypeOptions ? /* @__PURE__ */ modules$1.createElement(Anchor, {
@@ -14705,7 +14712,7 @@ const componentBlockRender = (props) => {
   }, beforeChildren), lastChild);
 };
 function ComponentArea(props) {
-  const { renderer, lang, content: content2, defaultOpenCodePanel } = props;
+  const { renderer, lang, content: content2, defaultCodePanel } = props;
   const componentRef = useRef();
   const invoked = useRef(false);
   const newComp = useRef(new Map());
@@ -14713,7 +14720,7 @@ function ComponentArea(props) {
   const defaultPropsRef = useRef();
   const setDefaultProps = usePersistFn((props2) => {
     defaultPropsRef.current = props2;
-    defaultOpenCodePanel && (onSetDefaultProps == null ? void 0 : onSetDefaultProps(__spreadValues({}, props2 || {})));
+    defaultCodePanel && (onSetDefaultProps == null ? void 0 : onSetDefaultProps(__spreadValues({}, props2 || {})));
   });
   const wrapProps = usePersistFn((Component2, { React: OutReact }) => {
     var _a;
@@ -14735,7 +14742,7 @@ function ComponentArea(props) {
   useEffect(() => {
     renderer && renderer(componentRef.current, wrapProps);
   }, [renderer, componentProps]);
-  const [checkCode, { toggle }] = useBoolean(defaultOpenCodePanel);
+  const [checkCode, { toggle }] = useBoolean();
   const handlerDebugComponent = usePersistFn(() => {
     onSetDefaultProps == null ? void 0 : onSetDefaultProps(__spreadValues({}, defaultPropsRef.current || {}));
   });
@@ -14823,7 +14830,8 @@ function MarkdownArea({ data: res }) {
     return null;
   }
   const { moduleMap, content: content2 } = res;
-  const code = usePersistFn(({ language, value = "" }) => {
+  const isCodeRenderIndexRef = useRef(0);
+  const code = usePersistFn(({ language, value = "", node }) => {
     const jsx2 = /^[j|t]sx$/.test(language);
     if (!jsx2) {
       return /* @__PURE__ */ modules$1.createElement(HighLight, {
@@ -14831,11 +14839,14 @@ function MarkdownArea({ data: res }) {
         children: value
       });
     }
+    const index2 = isCodeRenderIndexRef.current;
+    isCodeRenderIndexRef.current++;
     const fn = moduleMap == null ? void 0 : moduleMap[value.trim()];
     return /* @__PURE__ */ modules$1.createElement(ComponentArea, {
       renderer: fn,
       lang: language,
-      content: value
+      content: value,
+      defaultCodePanel: index2 === 0
     });
   });
   const markdownComponent = useCreation(() => /* @__PURE__ */ modules$1.createElement(reactMarkdown, {

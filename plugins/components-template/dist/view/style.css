@@ -4,6 +4,7 @@
 .setter-form-item-label {
   text-transform: capitalize;
   line-height: 32px;
+  margin-right: 10px;
 }
 .setter-form-item .has-tip {
   border-bottom: 1px dashed currentColor;

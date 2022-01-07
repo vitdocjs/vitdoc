@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
 import CloseOutlined from "@ant-design/icons/CloseOutlined";
 import { PANE_VISIBLE } from "../../constants";
 import { Stage } from "./stage";
-import { useLocalStorageState, useRequest } from "ahooks";
+import { useLocalStorageState, useRequest, useUpdateEffect } from "ahooks";
 import BugOutlined from "@ant-design/icons/BugOutlined";
 import { buildVisionFromTypes } from "./convert/typefile";
 
@@ -25,6 +25,14 @@ export default function VisionPane({
   const { data: prototypeOptions } = useRequest(async () => {
     return buildVisionFromTypes(properties);
   }, {});
+
+  const renderIndex = useRef(0);
+  useUpdateEffect(() => {
+    renderIndex.current++;
+    if (renderIndex.current > 1) {
+      setPropertyDrawerShow("1");
+    }
+  }, [defaultProps]);
 
   return (
     <div className="vision-property-container">
