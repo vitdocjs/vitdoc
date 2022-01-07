@@ -6,6 +6,7 @@ import {
   cleanUrl,
   getAssetHash,
   removeImportQuery,
+  removeProcessCwd,
   resolveMainComponent,
 } from "../utils";
 import { isCSSLang, isJsx } from "../utils/lang";
@@ -47,6 +48,7 @@ const mdjsx = () => {
           const readmeMod = await moduleGraph.getModuleByUrl(cleanUrl(url));
           // const mod = await moduleGraph.getModuleByUrl(url);
 
+          // readmeMod &&
           await moduleGraph.updateModuleInfo(
             readmeMod,
             new Set([...Array.from(readmeMod.importedModules), url]),
@@ -70,15 +72,19 @@ const mdjsx = () => {
     async load(id) {
       const file = cleanUrl(id);
       if (isMarkdownProxy(id)) {
+        id = removeProcessCwd(id);
+
         const [, fileIndex, lang] = id.match(mdProxyRE) || [];
 
         const code = markdownMap[`${file}_${fileIndex}.${lang}`];
         if (!code) {
           return "";
         }
+
         if (!isJsx(lang)) {
           return code;
         }
+
         const mainModuleId = await resolveMainComponent(
           // @ts-ignore
           { pluginContainer: { resolveId: this.resolve } },
@@ -184,7 +190,7 @@ const mdjsx = () => {
               importer: id,
             });
 
-          moduleIds[index] = moduleID;
+          moduleIds[index] = removeProcessCwd(moduleID);
 
           return {
             lang,
@@ -202,10 +208,13 @@ const mdjsx = () => {
           ${Object.entries(moduleIds).reduce(
             (prev, [k, v]) =>
               prev.concat(`${k}: function () { 
+                let pathId = '${v}';
+                const isCss = ${/\.(css|less|sass|scss|styl|stylus|postcss)$/.test(`${v}`)};
+                
                 import('${v}').then(res => { 
                   const fn = res.default;
-                  typeof fn === 'function' ? fn.apply(null, arguments):
-                   (arguments[arguments.length-1] && arguments[arguments.length-1](fn));
+                  typeof fn === 'function' && fn.apply(null, arguments); 
+                  isCss && arguments[0] && arguments[0](pathId, fn);
                 });
               },`),
             ""

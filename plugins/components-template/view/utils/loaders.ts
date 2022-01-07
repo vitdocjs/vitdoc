@@ -132,28 +132,20 @@ export function useMarkdown() {
         [currentValue.sourcesContent.trim()]: (...args) => {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
-            mod.load((content) => {
-              const has = Array.from(
-                document.getElementsByTagName("style")
-              ).find((item) => {
-                return item.innerText === content;
-              });
+            mod.load((pathId, content) => {
+              const style = document.createElement("style");
+              style.setAttribute("type", "text/css");
+              style.innerHTML = content;
+              document.head.appendChild(style);
 
-              !has &&
-                (() => {
-                  const style = document.createElement("style");
-                  style.setAttribute("type", "text/css");
-                  style.innerHTML = content;
-                  document.head.appendChild(style);
-                })();
               disposeArr.current.push(() => {
-                Array.from(document.getElementsByTagName("style"))
-                  .filter((item) => {
-                    return item.innerText === content;
-                  })
-                  .forEach((ele) => {
-                    ele.remove();
-                  });
+                Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+                  .filter((dom) => dom.getAttribute("href")?.includes(pathId))
+                  .forEach((dom) => dom.remove());
+
+                Array.from(document.querySelectorAll("style"))
+                  .filter((dom) => dom.innerHTML === content)
+                  .forEach((dom) => dom.remove());
               });
             });
           });

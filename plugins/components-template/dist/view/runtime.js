@@ -6868,21 +6868,10 @@ function useMarkdown() {
         [currentValue.sourcesContent.trim()]: (...args) => {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
-            mod.load((content2) => {
-              const has = Array.from(document.getElementsByTagName("style")).find((item) => {
-                return item.innerText === content2;
-              });
-              !has && (() => {
-                const style = document.createElement("style");
-                style.setAttribute("type", "text/css");
-                style.innerHTML = content2;
-                document.head.appendChild(style);
-              })();
+            mod.load((pathId) => {
               disposeArr.current.push(() => {
-                Array.from(document.getElementsByTagName("style")).filter((item) => {
-                  return item.innerText === content2;
-                }).forEach((ele) => {
-                  ele.remove();
+                import("./client.js").then((client) => {
+                  client.removeStyle(pathId);
                 });
               });
             });

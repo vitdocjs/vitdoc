@@ -65,6 +65,10 @@ export const getImporter = (
   }
 };
 
+export function removeProcessCwd(path: string) {
+  return path.replace(process.cwd(), "");
+}
+
 export const resolveMainComponent = async (
   server: { pluginContainer: PluginContainer },
   mdPath: string
