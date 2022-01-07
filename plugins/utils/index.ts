@@ -9,6 +9,8 @@ export const hashRE = /#.*$/;
 export const cleanUrl = (url) => url.replace(hashRE, "").replace(queryRE, "");
 export const removeImportQuery = (url) => url.replace(/([?&])import&/, "$1");
 
+export const removeAllQuery = (url) => url.replace(/[?&].+/, "");
+
 const htmlProxyRE = /\?html-proxy&index=(\d+)\.js$/;
 export const isHTMLProxy = (id: string) => htmlProxyRE.test(id);
 
@@ -119,4 +121,10 @@ export function invalidate(
       invalidate(importer, timestamp, seen);
     }
   });
+}
+
+export function getMD5(str: string) {
+  const hash = createHash("md5");
+  hash.update(str);
+  return hash.digest("hex");
 }

@@ -5,6 +5,7 @@ import {
   addUrlParams,
   cleanUrl,
   getAssetHash,
+  getMD5,
   removeImportQuery,
   removeProcessCwd,
   resolveMainComponent,
@@ -165,6 +166,7 @@ const mdjsx = () => {
       }
 
       const content = fs.readFileSync(id, "utf-8");
+      const pathHash = `_${getMD5(removeProcessCwd(id))}`;
 
       let moduleIds = {};
       const promises = (fromMarkdown(content) as any).children
@@ -173,8 +175,16 @@ const mdjsx = () => {
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
         )
         .map(async (item, index) => {
-          const content = <string>item.value || "";
-          const lang = item.lang;
+          let content = <string>item.value || "";
+          let lang = item.lang;
+
+          if (isCSSLang(lang)) {
+            content = `.${pathHash}{ ${content} }`;
+            if (lang === "css") {
+              lang = "scss";
+            }
+          }
+
           const fileName = `${index}.${lang}`;
 
           markdownMap[`${file}_${fileName}`] = content;
@@ -190,7 +200,7 @@ const mdjsx = () => {
               importer: id,
             });
 
-          moduleIds[index] = removeProcessCwd(moduleID);
+          moduleIds[index] = moduleID;
 
           return {
             lang,
@@ -208,13 +218,9 @@ const mdjsx = () => {
           ${Object.entries(moduleIds).reduce(
             (prev, [k, v]) =>
               prev.concat(`${k}: function () { 
-                let pathId = '${v}';
-                const isCss = ${/\.(css|less|sass|scss|styl|stylus|postcss)$/.test(`${v}`)};
-                
                 import('${v}').then(res => { 
                   const fn = res.default;
                   typeof fn === 'function' && fn.apply(null, arguments); 
-                  isCss && arguments[0] && arguments[0](pathId, fn);
                 });
               },`),
             ""
@@ -222,6 +228,7 @@ const mdjsx = () => {
         }
 
         const exportModules = ${JSON.stringify({
+          pathHash,
           hash,
           content,
           modules,

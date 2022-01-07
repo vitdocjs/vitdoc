@@ -623,7 +623,7 @@ var objectWithoutPropertiesLoose = { exports: {} };
   }
   module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
 })(objectWithoutProperties);
-var _classnames_2_3_1_classnames = { exports: {} };
+var classnames = { exports: {} };
 /*!
   Copyright (c) 2018 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -669,8 +669,8 @@ var _classnames_2_3_1_classnames = { exports: {} };
       window.classNames = classNames2;
     }
   })();
-})(_classnames_2_3_1_classnames);
-var classNames = _classnames_2_3_1_classnames.exports;
+})(classnames);
+var classNames = classnames.exports;
 var Context = {};
 Object.defineProperty(Context, "__esModule", {
   value: true
@@ -1606,7 +1606,7 @@ var _slicedToArray2 = _interopRequireDefault$8(slicedToArray.exports);
 var _defineProperty2 = _interopRequireDefault$8(defineProperty$3.exports);
 var _objectWithoutProperties2 = _interopRequireDefault$8(objectWithoutProperties.exports);
 var React$a = _interopRequireWildcard$8(require$$3);
-var _classnames = _interopRequireDefault$8(_classnames_2_3_1_classnames.exports);
+var _classnames = _interopRequireDefault$8(classnames.exports);
 var _Context = _interopRequireDefault$8(Context);
 var _IconBase = _interopRequireDefault$8(IconBase$1);
 var _twoTonePrimaryColor = twoTonePrimaryColor;
@@ -1904,7 +1904,7 @@ function toNumber$3(value) {
   var isBinary = reIsBinary$2.test(value);
   return isBinary || reIsOctal$2.test(value) ? freeParseInt$2(value.slice(2), isBinary ? 2 : 8) : reIsBadHex$2.test(value) ? NAN$2 : +value;
 }
-var _lodash_debounce_4_0_8_lodash_debounce = debounce$1;
+var lodash_debounce = debounce$1;
 var FUNC_ERROR_TEXT$1 = "Expected a function";
 var NAN$1 = 0 / 0;
 var symbolTag$2 = "[object Symbol]";
@@ -2045,7 +2045,7 @@ function toNumber$2(value) {
   var isBinary = reIsBinary$1.test(value);
   return isBinary || reIsOctal$1.test(value) ? freeParseInt$1(value.slice(2), isBinary ? 2 : 8) : reIsBadHex$1.test(value) ? NAN$1 : +value;
 }
-var _lodash_throttle_4_1_1_lodash_throttle = throttle;
+var lodash_throttle = throttle;
 function isDocumentVisible() {
   if (typeof document !== "undefined" && typeof document.visibilityState !== "undefined") {
     return document.visibilityState !== "hidden";
@@ -2306,8 +2306,8 @@ var Fetch = function() {
     if (initState) {
       this.state = __assign$3(__assign$3({}, this.state), initState);
     }
-    this.debounceRun = this.config.debounceInterval ? _lodash_debounce_4_0_8_lodash_debounce(this._run, this.config.debounceInterval) : void 0;
-    this.throttleRun = this.config.throttleInterval ? _lodash_throttle_4_1_1_lodash_throttle(this._run, this.config.throttleInterval) : void 0;
+    this.debounceRun = this.config.debounceInterval ? lodash_debounce(this._run, this.config.debounceInterval) : void 0;
+    this.throttleRun = this.config.throttleInterval ? lodash_throttle(this._run, this.config.throttleInterval) : void 0;
     this.limitRefresh = limit(this.refresh.bind(this), this.config.focusTimespan);
     if (this.config.pollingInterval) {
       this.unsubscribe.push(subscribe(this.rePolling.bind(this)));
@@ -4173,7 +4173,7 @@ var isArguments$2 = baseIsArguments(function() {
   return isObjectLike$2(value) && hasOwnProperty$7.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
 };
 var isArguments_1 = isArguments$2;
-var isBuffer$2 = { exports: {} };
+var isBuffer$3 = { exports: {} };
 function stubFalse() {
   return false;
 }
@@ -4187,7 +4187,7 @@ var stubFalse_1 = stubFalse;
   var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
   var isBuffer3 = nativeIsBuffer || stubFalse2;
   module.exports = isBuffer3;
-})(isBuffer$2, isBuffer$2.exports);
+})(isBuffer$3, isBuffer$3.exports);
 var MAX_SAFE_INTEGER = 9007199254740991;
 function isLength$3(value) {
   return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
@@ -4232,11 +4232,11 @@ var baseIsTypedArray = _baseIsTypedArray, baseUnary = _baseUnary, nodeUtil = _no
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 var isTypedArray$2 = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 var isTypedArray_1 = isTypedArray$2;
-var baseTimes = _baseTimes, isArguments$1 = isArguments_1, isArray$6 = isArray_1, isBuffer$1 = isBuffer$2.exports, isIndex$1 = _isIndex, isTypedArray$1 = isTypedArray_1;
+var baseTimes = _baseTimes, isArguments$1 = isArguments_1, isArray$6 = isArray_1, isBuffer$2 = isBuffer$3.exports, isIndex$1 = _isIndex, isTypedArray$1 = isTypedArray_1;
 var objectProto$5 = Object.prototype;
 var hasOwnProperty$6 = objectProto$5.hasOwnProperty;
 function arrayLikeKeys$1(value, inherited) {
-  var isArr = isArray$6(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$1(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
+  var isArr = isArray$6(value), isArg = !isArr && isArguments$1(value), isBuff = !isArr && !isArg && isBuffer$2(value), isType = !isArr && !isArg && !isBuff && isTypedArray$1(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
   for (var key in value) {
     if ((inherited || hasOwnProperty$6.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex$1(key, length)))) {
       result.push(key);
@@ -4656,7 +4656,7 @@ if (DataView && getTag$1(new DataView(new ArrayBuffer(1))) != dataViewTag || Map
   };
 }
 var _getTag = getTag$1;
-var Stack$1 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag = _getTag, isArray$4 = isArray_1, isBuffer = isBuffer$2.exports, isTypedArray = isTypedArray_1;
+var Stack$1 = _Stack, equalArrays = _equalArrays, equalByTag = _equalByTag, equalObjects = _equalObjects, getTag = _getTag, isArray$4 = isArray_1, isBuffer$1 = isBuffer$3.exports, isTypedArray = isTypedArray_1;
 var COMPARE_PARTIAL_FLAG$2 = 1;
 var argsTag = "[object Arguments]", arrayTag = "[object Array]", objectTag = "[object Object]";
 var objectProto = Object.prototype;
@@ -4666,8 +4666,8 @@ function baseIsEqualDeep$1(object, other, bitmask, customizer, equalFunc, stack)
   objTag = objTag == argsTag ? objectTag : objTag;
   othTag = othTag == argsTag ? objectTag : othTag;
   var objIsObj = objTag == objectTag, othIsObj = othTag == objectTag, isSameTag = objTag == othTag;
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
+  if (isSameTag && isBuffer$1(object)) {
+    if (!isBuffer$1(other)) {
       return false;
     }
     objIsArr = true;
@@ -4874,7 +4874,7 @@ function _inheritsLoose(subClass, superClass) {
   subClass.prototype.constructor = subClass;
   _setPrototypeOf(subClass, superClass);
 }
-var _propTypes_15_8_1_propTypes$1 = { exports: {} };
+var propTypes$1 = { exports: {} };
 var ReactPropTypesSecret$3 = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
 var ReactPropTypesSecret_1$1 = ReactPropTypesSecret$3;
 var ReactPropTypesSecret$2 = ReactPropTypesSecret_1$1;
@@ -4923,9 +4923,9 @@ var factoryWithThrowingShims$1 = function() {
   return ReactPropTypes;
 };
 {
-  _propTypes_15_8_1_propTypes$1.exports = factoryWithThrowingShims$1();
+  propTypes$1.exports = factoryWithThrowingShims$1();
 }
-var PropTypes$1 = _propTypes_15_8_1_propTypes$1.exports;
+var PropTypes$1 = propTypes$1.exports;
 function _extends() {
   _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -5874,16 +5874,16 @@ function createReactContext(defaultValue, calculateChangedBits) {
   };
 }
 var index$5 = modules$1.createContext || createReactContext;
-var _pathToRegexp_1_8_0_pathToRegexp = { exports: {} };
-var _isarray_0_0_1_isarray = Array.isArray || function(arr) {
+var pathToRegexp$2 = { exports: {} };
+var isarray$1 = Array.isArray || function(arr) {
   return Object.prototype.toString.call(arr) == "[object Array]";
 };
-var isarray = _isarray_0_0_1_isarray;
-_pathToRegexp_1_8_0_pathToRegexp.exports = pathToRegexp;
-_pathToRegexp_1_8_0_pathToRegexp.exports.parse = parse$3;
-_pathToRegexp_1_8_0_pathToRegexp.exports.compile = compile;
-_pathToRegexp_1_8_0_pathToRegexp.exports.tokensToFunction = tokensToFunction;
-_pathToRegexp_1_8_0_pathToRegexp.exports.tokensToRegExp = tokensToRegExp;
+var isarray = isarray$1;
+pathToRegexp$2.exports = pathToRegexp;
+pathToRegexp$2.exports.parse = parse$3;
+pathToRegexp$2.exports.compile = compile;
+pathToRegexp$2.exports.tokensToFunction = tokensToFunction;
+pathToRegexp$2.exports.tokensToRegExp = tokensToRegExp;
 var PATH_REGEXP = new RegExp([
   "(\\\\.)",
   "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))"
@@ -6112,8 +6112,8 @@ function pathToRegexp(path, keys2, options) {
   }
   return stringToRegexp(path, keys2, options);
 }
-var pathToRegexp$1 = _pathToRegexp_1_8_0_pathToRegexp.exports;
-var _reactIs_16_13_1_reactIs$1 = { exports: {} };
+var pathToRegexp$1 = pathToRegexp$2.exports;
+var reactIs$2 = { exports: {} };
 var reactIs_production_min$1 = {};
 /** @license React v16.13.1
  * react-is.production.min.js
@@ -6212,7 +6212,7 @@ reactIs_production_min$1.isValidElementType = function(a) {
 };
 reactIs_production_min$1.typeOf = z$1;
 {
-  _reactIs_16_13_1_reactIs$1.exports = reactIs_production_min$1;
+  reactIs$2.exports = reactIs_production_min$1;
 }
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null)
@@ -6228,7 +6228,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   }
   return target;
 }
-var reactIs = _reactIs_16_13_1_reactIs$1.exports;
+var reactIs$1 = reactIs$2.exports;
 var FORWARD_REF_STATICS = {
   "$$typeof": true,
   render: true,
@@ -6245,8 +6245,8 @@ var MEMO_STATICS = {
   type: true
 };
 var TYPE_STATICS = {};
-TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+TYPE_STATICS[reactIs$1.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[reactIs$1.Memo] = MEMO_STATICS;
 var createNamedContext = function createNamedContext2(name) {
   var context2 = index$5();
   context2.displayName = name;
@@ -6734,10 +6734,10 @@ if (typeof forwardRef$1 === "undefined") {
   forwardRef$1 = forwardRefShim$1;
 }
 function joinClassnames() {
-  for (var _len = arguments.length, classnames = new Array(_len), _key = 0; _key < _len; _key++) {
-    classnames[_key] = arguments[_key];
+  for (var _len = arguments.length, classnames2 = new Array(_len), _key = 0; _key < _len; _key++) {
+    classnames2[_key] = arguments[_key];
   }
-  return classnames.filter(function(i) {
+  return classnames2.filter(function(i) {
     return i;
   }).join(" ");
 }
@@ -6868,12 +6868,7 @@ function useMarkdown() {
         [currentValue.sourcesContent.trim()]: (...args) => {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
-            mod.load((pathId) => {
-              disposeArr.current.push(() => {
-                import("./client.js").then((client) => {
-                  client.removeStyle(pathId);
-                });
-              });
+            mod.load((pathId, content2) => {
             });
           });
         }
@@ -6887,12 +6882,13 @@ function useMarkdown() {
   return {
     error,
     content: results.content,
+    pathHash: results.pathHash,
     moduleMap
   };
 }
-var immutable = extend$1;
+var immutable = extend$2;
 var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
-function extend$1() {
+function extend$2() {
   var target = {};
   for (var i = 0; i < arguments.length; i++) {
     var source = arguments[i];
@@ -6904,7 +6900,7 @@ function extend$1() {
   }
   return target;
 }
-var _bail_1_0_5_bail = bail$1;
+var bail_1 = bail$1;
 function bail$1(err) {
   if (err) {
     throw err;
@@ -6916,7 +6912,7 @@ function bail$1(err) {
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
-var _isBuffer_2_0_5_isBuffer = function isBuffer2(obj) {
+var isBuffer = function isBuffer2(obj) {
   return obj != null && obj.constructor != null && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj);
 };
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -6965,7 +6961,7 @@ var getProperty = function getProperty2(obj, name) {
   }
   return obj[name];
 };
-var _extend_3_0_2_extend = function extend() {
+var extend$1 = function extend() {
   var options, name, src, copy, copyIsArray, clone;
   var target = arguments[0];
   var i = 1;
@@ -7003,7 +6999,7 @@ var _extend_3_0_2_extend = function extend() {
   }
   return target;
 };
-var _isPlainObj_2_1_0_isPlainObj = (value) => {
+var isPlainObj = (value) => {
   if (Object.prototype.toString.call(value) !== "[object Object]") {
     return false;
   }
@@ -7051,7 +7047,7 @@ function wrap$2(fn, callback) {
   }
 }
 var wrap$1 = wrap_1;
-var _trough_1_0_5_trough = trough$1;
+var trough_1 = trough$1;
 trough$1.wrap = wrap$1;
 var slice$1 = [].slice;
 function trough$1() {
@@ -7100,7 +7096,7 @@ function trough$1() {
   }
 }
 var own$4 = {}.hasOwnProperty;
-var _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition = stringify$1;
+var unistUtilStringifyPosition = stringify$1;
 function stringify$1(value) {
   if (!value || typeof value !== "object") {
     return "";
@@ -7131,8 +7127,8 @@ function position(pos) {
 function index$4(value) {
   return value && typeof value === "number" ? value : 1;
 }
-var stringify = _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition;
-var _vfileMessage_2_0_4_vfileMessage = VMessage$1;
+var stringify = unistUtilStringifyPosition;
+var vfileMessage = VMessage$1;
 function VMessagePrototype() {
 }
 VMessagePrototype.prototype = Error.prototype;
@@ -7427,7 +7423,7 @@ function cwd() {
 }
 var p$1 = minpath_browser;
 var proc = minproc_browser;
-var buffer$1 = _isBuffer_2_0_5_isBuffer;
+var buffer$1 = isBuffer;
 var core = VFile$1;
 var own$3 = {}.hasOwnProperty;
 var order = ["history", "path", "basename", "stem", "extname", "dirname"];
@@ -7542,7 +7538,7 @@ function assertPath(path, name) {
     throw new Error("Setting `" + name + "` requires `path` to be set too");
   }
 }
-var VMessage = _vfileMessage_2_0_4_vfileMessage;
+var VMessage = vfileMessage;
 var VFile = core;
 var lib = VFile;
 VFile.prototype.message = message$1;
@@ -7568,14 +7564,14 @@ function info() {
   message2.fatal = null;
   return message2;
 }
-var _vfile_4_2_1_vfile = lib;
-var bail = _bail_1_0_5_bail;
-var buffer = _isBuffer_2_0_5_isBuffer;
-var extend2 = _extend_3_0_2_extend;
-var plain = _isPlainObj_2_1_0_isPlainObj;
-var trough = _trough_1_0_5_trough;
-var vfile = _vfile_4_2_1_vfile;
-var _unified_9_2_2_unified = unified$1().freeze();
+var vfile$1 = lib;
+var bail = bail_1;
+var buffer = isBuffer;
+var extend2 = extend$1;
+var plain = isPlainObj;
+var trough = trough_1;
+var vfile = vfile$1;
+var unified_1 = unified$1().freeze();
 var slice = [].slice;
 var own$2 = {}.hasOwnProperty;
 var pipeline = trough().use(pipelineParse).use(pipelineRun).use(pipelineStringify);
@@ -7876,7 +7872,7 @@ function assertDone(name, asyncName, complete) {
     throw new Error("`" + name + "` finished async. Use `" + asyncName + "` instead");
   }
 }
-var _mdastUtilToString_2_0_0_mdastUtilToString = toString$1;
+var mdastUtilToString = toString$1;
 function toString$1(node) {
   return node && (node.value || node.alt || node.title || "children" in node && all(node.children) || "length" in node && all(node)) || "";
 }
@@ -11559,7 +11555,7 @@ function postprocess$1(events) {
 }
 var postprocess_1 = postprocess$1;
 var dist$1 = fromMarkdown$1;
-var toString = _mdastUtilToString_2_0_0_mdastUtilToString;
+var toString = mdastUtilToString;
 var assign = assign_1;
 var own = hasOwnProperty$1;
 var normalizeIdentifier = normalizeIdentifier_1;
@@ -11568,7 +11564,7 @@ var parser = parse_1;
 var preprocessor = preprocess_1;
 var postprocess = postprocess_1;
 var decode = decodeEntity_browser;
-var stringifyPosition = _unistUtilStringifyPosition_2_0_3_unistUtilStringifyPosition;
+var stringifyPosition = unistUtilStringifyPosition;
 function fromMarkdown$1(value, encoding, options) {
   if (typeof encoding !== "string") {
     options = encoding;
@@ -12136,9 +12132,9 @@ function extension(config, extension2) {
     }
   }
 }
-var _mdastUtilFromMarkdown_0_8_5_mdastUtilFromMarkdown = dist$1;
-var _remarkParse_9_0_0_remarkParse = parse$1;
-var fromMarkdown = _mdastUtilFromMarkdown_0_8_5_mdastUtilFromMarkdown;
+var mdastUtilFromMarkdown = dist$1;
+var remarkParse = parse$1;
+var fromMarkdown = mdastUtilFromMarkdown;
 function parse$1(options) {
   var self2 = this;
   this.Parser = parse2;
@@ -12149,7 +12145,7 @@ function parse$1(options) {
     }));
   }
 }
-var _propTypes_15_8_1_propTypes = { exports: {} };
+var propTypes = { exports: {} };
 var ReactPropTypesSecret$1 = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
 var ReactPropTypesSecret_1 = ReactPropTypesSecret$1;
 var ReactPropTypesSecret = ReactPropTypesSecret_1;
@@ -12173,7 +12169,6 @@ var factoryWithThrowingShims = function() {
   }
   var ReactPropTypes = {
     array: shim,
-    bigint: shim,
     bool: shim,
     func: shim,
     number: shim,
@@ -12198,9 +12193,9 @@ var factoryWithThrowingShims = function() {
   return ReactPropTypes;
 };
 {
-  _propTypes_15_8_1_propTypes.exports = factoryWithThrowingShims();
+  propTypes.exports = factoryWithThrowingShims();
 }
-var _unistUtilVisitParents_1_1_2_unistUtilVisitParents = visitParents$2;
+var unistUtilVisitParents$1 = visitParents$2;
 function visitParents$2(tree, type2, visitor) {
   var stack = [];
   if (typeof type2 === "function") {
@@ -12233,7 +12228,7 @@ function visitParents$2(tree, type2, visitor) {
     return true;
   }
 }
-var visitWithParents = _unistUtilVisitParents_1_1_2_unistUtilVisitParents;
+var visitWithParents = unistUtilVisitParents$1;
 function addListMetadata$1() {
   return function(ast) {
     visitWithParents(ast, "list", function(listNode, parents) {
@@ -12252,7 +12247,7 @@ function addListMetadata$1() {
     return ast;
   };
 }
-var _mdastAddListMetadata_1_0_1_mdastAddListMetadata = addListMetadata$1;
+var mdastAddListMetadata = addListMetadata$1;
 var convert_1 = convert$1;
 function convert$1(test) {
   if (test == null) {
@@ -12310,7 +12305,7 @@ var color_browser = identity;
 function identity(d2) {
   return d2;
 }
-var _unistUtilVisitParents_3_1_1_unistUtilVisitParents = visitParents$1;
+var unistUtilVisitParents = visitParents$1;
 var convert = convert_1;
 var color = color_browser;
 var CONTINUE$1 = true;
@@ -12372,8 +12367,8 @@ function toResult(value) {
   }
   return [value];
 }
-var _unistUtilVisit_2_0_3_unistUtilVisit = visit$4;
-var visitParents = _unistUtilVisitParents_3_1_1_unistUtilVisitParents;
+var unistUtilVisit = visit$4;
+var visitParents = unistUtilVisitParents;
 var CONTINUE = visitParents.CONTINUE;
 var SKIP = visitParents.SKIP;
 var EXIT = visitParents.EXIT;
@@ -12393,7 +12388,7 @@ function visit$4(tree, test, visitor, reverse) {
     return visitor(node, index2, parent);
   }
 }
-var visit$3 = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit$3 = unistUtilVisit;
 var type = "virtualHtml";
 var selfClosingRe = /^<(area|base|br|col|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)\s*\/?>$/i;
 var simpleTagRe = /^<(\/?)([a-z]+)\s*>$/;
@@ -12466,7 +12461,7 @@ function virtual(fromNode, toNode, parent) {
   };
 }
 var disallowNode$1 = {};
-var visit$2 = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit$2 = unistUtilVisit;
 var splice = [].splice;
 disallowNode$1.ofType = function(types, mode) {
   return ifNotMatch(allow, mode);
@@ -12492,7 +12487,7 @@ function ifNotMatch(allow, mode) {
     }
   }
 }
-var _reactIs_16_13_1_reactIs = { exports: {} };
+var reactIs = { exports: {} };
 var reactIs_production_min = {};
 /** @license React v16.13.1
  * react-is.production.min.js
@@ -12591,11 +12586,11 @@ reactIs_production_min.isValidElementType = function(a) {
 };
 reactIs_production_min.typeOf = z;
 {
-  _reactIs_16_13_1_reactIs.exports = reactIs_production_min;
+  reactIs.exports = reactIs_production_min;
 }
 var React$6 = require$$3;
 var xtend$2 = immutable;
-var ReactIs = _reactIs_16_13_1_reactIs.exports;
+var ReactIs = reactIs.exports;
 function astToReact$1(node, options) {
   var parent = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
   var index2 = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : 0;
@@ -12819,7 +12814,7 @@ function listItemLoose(node) {
   return spread === void 0 || spread === null ? node.children.length > 1 : spread;
 }
 var astToReact_1 = astToReact$1;
-var visit$1 = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit$1 = unistUtilVisit;
 var wrapTableRows$1 = function(node) {
   visit$1(node, "table", wrap);
   return node;
@@ -12844,7 +12839,7 @@ function wrap(table) {
     });
   }
 }
-var visit = _unistUtilVisit_2_0_3_unistUtilVisit;
+var visit = unistUtilVisit;
 var getDefinitions$1 = function getDefinitions(tree) {
   var definitions = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
   visit(tree, "definition", function(node) {
@@ -13012,10 +13007,10 @@ var symbols$1 = {};
 var HtmlParser = "__RMD_HTML_PARSER__";
 symbols$1.HtmlParser = typeof Symbol === "undefined" ? HtmlParser : Symbol(HtmlParser);
 var xtend = immutable;
-var unified = _unified_9_2_2_unified;
-var parse = _remarkParse_9_0_0_remarkParse;
-var PropTypes = _propTypes_15_8_1_propTypes.exports;
-var addListMetadata = _mdastAddListMetadata_1_0_1_mdastAddListMetadata;
+var unified = unified_1;
+var parse = remarkParse;
+var PropTypes = propTypes.exports;
+var addListMetadata = mdastAddListMetadata;
 var naiveHtml = naiveHtml$1;
 var disallowNode = disallowNode$1;
 var astToReact = astToReact_1;
@@ -14715,7 +14710,7 @@ function ComponentArea(props) {
   const componentRef = useRef();
   const invoked = useRef(false);
   const newComp = useRef(new Map());
-  const { componentProps, onSetDefaultProps, error } = useContext$1(ComponentPropsContext);
+  const { componentProps, onSetDefaultProps, error, pathHash } = useContext$1(ComponentPropsContext);
   const defaultPropsRef = useRef();
   const setDefaultProps = usePersistFn((props2) => {
     defaultPropsRef.current = props2;
@@ -14752,10 +14747,12 @@ function ComponentArea(props) {
       style: { whiteSpace: "pre-wrap", textAlign: "left" }
     }, error.message)
   }) : /* @__PURE__ */ modules$1.createElement("div", {
+    className: pathHash
+  }, /* @__PURE__ */ modules$1.createElement("div", {
     className: "component-container",
     id: "vite-component-container",
     ref: componentRef
-  }), /* @__PURE__ */ modules$1.createElement("div", {
+  })), /* @__PURE__ */ modules$1.createElement("div", {
     className: "code-box-actions"
   }, /* @__PURE__ */ modules$1.createElement(Tooltip, {
     title: "Debug",
@@ -14827,8 +14824,7 @@ function MarkdownArea({ data: res }) {
     return null;
   }
   const { moduleMap, content: content2 } = res;
-  const isFirstRef = useRef(true);
-  const code = usePersistFn(({ language, value = "", node }) => {
+  const code = usePersistFn(({ language, value = "" }) => {
     const jsx2 = /^[j|t]sx$/.test(language);
     if (!jsx2) {
       return /* @__PURE__ */ modules$1.createElement(HighLight, {
@@ -14836,14 +14832,11 @@ function MarkdownArea({ data: res }) {
         children: value
       });
     }
-    const isFirst = isFirstRef.current;
-    isFirstRef.current = false;
     const fn = moduleMap == null ? void 0 : moduleMap[value.trim()];
     return /* @__PURE__ */ modules$1.createElement(ComponentArea, {
       renderer: fn,
       lang: language,
-      content: value,
-      defaultOpenCodePanel: isFirst
+      content: value
     });
   });
   const markdownComponent = useCreation(() => /* @__PURE__ */ modules$1.createElement(reactMarkdown, {
@@ -14893,6 +14886,7 @@ function ReadmePane() {
     className: "component-description"
   }, /* @__PURE__ */ modules$1.createElement(ComponentPropsContext.Provider, {
     value: {
+      pathHash: Components == null ? void 0 : Components.pathHash,
       error: Components == null ? void 0 : Components.error,
       componentProps: visionProps,
       onSetDefaultProps: setVisionDefaultProps

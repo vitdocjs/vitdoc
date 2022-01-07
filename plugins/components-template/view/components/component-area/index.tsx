@@ -40,7 +40,7 @@ export function ComponentArea(props) {
   const invoked = useRef(false);
   const newComp = useRef(new Map());
 
-  const { componentProps, onSetDefaultProps, error } = useContext(
+  const { componentProps, onSetDefaultProps, error, pathHash } = useContext(
     ComponentPropsContext
   );
   const defaultPropsRef = useRef();
@@ -94,11 +94,13 @@ export function ComponentArea(props) {
           }
         />
       ) : (
-        <div
-          className="component-container"
-          id="vite-component-container"
-          ref={componentRef}
-        />
+        <div className={pathHash}>
+          <div
+            className="component-container"
+            id="vite-component-container"
+            ref={componentRef}
+          />
+        </div>
       )}
       <div className="code-box-actions">
         <Tooltip title="Debug" onClick={handlerDebugComponent}>

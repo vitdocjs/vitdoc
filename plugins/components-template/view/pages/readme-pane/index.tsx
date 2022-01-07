@@ -48,6 +48,7 @@ export default function ReadmePane() {
               <div className="component-description">
                 <ComponentPropsContext.Provider
                   value={{
+                    pathHash: Components?.pathHash,
                     error: Components?.error,
                     componentProps: visionProps,
                     onSetDefaultProps: setVisionDefaultProps,

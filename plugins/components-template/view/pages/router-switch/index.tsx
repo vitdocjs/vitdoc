@@ -4,10 +4,10 @@ import { useComponentInfo, useRouteMap } from "../../utils/loaders";
 import { Link, useRouteMatch } from "react-router-dom";
 import { LinkCopy } from "../../components/link-copy";
 import { useBoolean, useUpdateEffect } from "ahooks";
+import classNames from "classnames";
 
 import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
 import DoubleRightOutlined from "@ant-design/icons/DoubleRightOutlined";
-import classNames from "classnames";
 
 // @ts-ignore
 const { Menu, Button } = window.antd;
