@@ -15,6 +15,9 @@
 
   .ant-drawer-header {
     border-bottom: 0;
+    .ant-drawer-close {
+      margin-right: 0;
+    }
   }
   .ant-drawer-title {
     display: flex;
@@ -35,6 +38,7 @@
       height: 100%;
     }
     .ant-drawer-body {
+      padding: 4px 16px;
       position: relative;
       flex: 1;
     }
