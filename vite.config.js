@@ -9,24 +9,14 @@ import path from "path";
 const cwd = process.cwd();
 
 let config = {};
-let deps = {};
-try {
-  const { dependencies } = require(path.resolve(process.cwd(), "package.json"));
-  deps = dependencies;
-} catch (e) {}
 
 try {
   config = require(`${cwd}/vite.config.js`).default;
 } catch (e) {}
 
-defineConfig({});
-
 // https://vitejs.dev/config/
 export default mergeConfig(
   {
-    optimizeDeps: {
-      include: Object.keys(deps),
-    },
     base: process.env.VITE_BASE_HOST || "/",
     build: {
       target: "esnext",

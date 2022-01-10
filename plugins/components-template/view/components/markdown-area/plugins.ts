@@ -1,4 +1,5 @@
-import {isJsx} from "../../../../utils/lang"
+import isEmpty from "lodash/isEmpty";
+import { isJsx } from "../../../../utils/lang";
 
 export function remarkFrontMatter() {
   return (tree, _file) => {
@@ -20,7 +21,9 @@ export function remarkFrontMatter() {
         return;
       }
     });
-    tree.children = modules;
+    if (!isEmpty(modules)) {
+      tree.children = modules;
+    }
     return tree;
   };
 }

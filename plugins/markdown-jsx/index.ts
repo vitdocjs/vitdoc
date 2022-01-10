@@ -73,8 +73,6 @@ const mdjsx = () => {
     async load(id) {
       const file = cleanUrl(id);
       if (isMarkdownProxy(id)) {
-        id = removeProcessCwd(id);
-
         const [, fileIndex, lang] = id.match(mdProxyRE) || [];
 
         const code = markdownMap[`${file}_${fileIndex}.${lang}`];

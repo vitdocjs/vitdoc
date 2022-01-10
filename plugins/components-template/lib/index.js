@@ -103,11 +103,15 @@ const componentsTemplate = () => {
     enforce: "pre",
     config(resolvedConfig, { command }) {
       isBuild = command === "build";
-      config = resolvedConfig;
+      config = (0, import_vite.mergeConfig)(resolvedConfig, {
+        optimizeDeps: {
+          entries: (0, import_rules.getMainFiles)()
+        }
+      });
       if (!isBuild) {
-        return;
+        return config;
       }
-      return (0, import_vite.mergeConfig)(resolvedConfig, {
+      return (0, import_vite.mergeConfig)(config, {
         build: {
           rollupOptions: {
             input: { index: entry }

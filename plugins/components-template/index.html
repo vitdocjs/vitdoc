@@ -51,7 +51,7 @@
         {{moduleMaps}}
       };
 
-      globalThis.HotReloadRegister$ = (file,fn)=>{
+      globalThis.HotReloadRegister$ = (file, fn)=>{
         if (import.meta.hot) {
           import("/@vite/client").then(({ createHotContext }) => {
             createHotContext(file).accept((newModule) => {

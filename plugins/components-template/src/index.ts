@@ -6,7 +6,7 @@ import { mergeConfig, ViteDevServer } from "vite";
 import { send } from "vite/dist/node";
 import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
-import { getComponentFiles } from "../../utils/rules";
+import { getComponentFiles, getMainFiles } from "../../utils/rules";
 
 const isDebug = process.env.DEBUG;
 
@@ -78,12 +78,17 @@ const componentsTemplate = () => {
     config(resolvedConfig, { command }) {
       // store the resolved config
       isBuild = command === "build";
-      config = resolvedConfig;
+      config = mergeConfig(resolvedConfig, {
+        optimizeDeps: {
+          entries: getMainFiles(),
+        },
+      });
+
       if (!isBuild) {
-        return;
+        return config;
       }
 
-      return mergeConfig(resolvedConfig, {
+      return mergeConfig(config, {
         build: {
           rollupOptions: {
             input: { index: entry },
@@ -102,7 +107,7 @@ const componentsTemplate = () => {
         return "route-map.json";
       }
       if (id === entry) {
-        return 'index.html';
+        return "index.html";
       }
     },
     async load(id) {
