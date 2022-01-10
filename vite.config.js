@@ -34,9 +34,9 @@ export default mergeConfig(
       manifest: true,
     },
     server: {
-      strict: false,
       cors: true,
       fs: {
+        strict: false,
         allow: [path.resolve(__dirname), cwd],
       },
     },

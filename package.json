@@ -1,6 +1,6 @@
 {
   "name": "@ali/vite-comp",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "publishConfig": {
     "registry": "https://registry.antfin-inc.com"
   },
