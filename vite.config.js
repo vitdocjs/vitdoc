@@ -1,4 +1,4 @@
-import { mergeConfig } from "vite";
+import { mergeConfig, defineConfig } from "vite";
 import TypeFile from "./plugins/type-file";
 // import reactRefresh from "@vitejs/plugin-react-refresh";
 import componentsTemplate from "./plugins/components-template/src";
@@ -19,6 +19,8 @@ try {
   config = require(`${cwd}/vite.config.js`).default;
 } catch (e) {}
 
+defineConfig({});
+
 // https://vitejs.dev/config/
 export default mergeConfig(
   {
@@ -32,6 +34,7 @@ export default mergeConfig(
       manifest: true,
     },
     server: {
+      strict: false,
       cors: true,
       fs: {
         allow: [path.resolve(__dirname), cwd],
