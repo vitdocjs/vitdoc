@@ -74,7 +74,7 @@ const TypeFile = ({ prefix = ".type$.json" } = {}) => {
   return {
     name: "vite:type-file",
     handleHotUpdate({ file, timestamp, server }) {
-      const url = cleanUrl(path.relative(process.cwd(), file));
+      const url = path.join("/", cleanUrl(path.relative(process.cwd(), file)));
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
       }
@@ -86,7 +86,7 @@ const TypeFile = ({ prefix = ".type$.json" } = {}) => {
 
     resolveId(id) {
       if (matchReg.test(id)) {
-        return id.replace(/^\//, "");
+        return id;
       }
       return;
     },

@@ -56,7 +56,7 @@ export function MarkdownArea({ data: res }) {
         {content}
       </ReactMarkdown>
     ),
-    [content]
+    [content, moduleMap]
   );
 
   return <div className="markdown-area">{markdownComponent}</div>;

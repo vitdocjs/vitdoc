@@ -1734,9 +1734,12 @@ const Setters = {
     size: "small"
   })),
   SelectSetter: (props) => /* @__PURE__ */ modules$1.createElement(Select, __spreadProps(__spreadValues({}, props), {
-    style: { width: 120 }
+    style: { width: 120 },
+    allowClear: true
   })),
-  BoolSetter: Switch$1
+  BoolSetter: (props) => /* @__PURE__ */ modules$1.createElement(Switch$1, __spreadProps(__spreadValues({}, props), {
+    checked: props.value
+  }))
 };
 const { List: List$2, Tooltip: Tooltip$1, Form: Form$1 } = window.antd;
 function SetterFormItem(_a) {
@@ -1756,28 +1759,6 @@ function SetterFormItem(_a) {
     initialValue: defaultValue,
     style: { marginBottom: 0 }
   }, /* @__PURE__ */ modules$1.createElement(Setter, __spreadValues({}, rest)))));
-}
-const { List: List$1, Form } = window.antd;
-function Stage({
-  componentName,
-  configure: configure2,
-  initialValues,
-  onValuesChange
-}) {
-  const [form2] = Form.useForm();
-  useEffect(() => {
-    initialValues && form2.setFieldsValue(initialValues);
-  }, [initialValues]);
-  return /* @__PURE__ */ modules$1.createElement(Form, {
-    form: form2,
-    onValuesChange
-  }, /* @__PURE__ */ modules$1.createElement(List$1, {
-    className: "pane-stage",
-    dataSource: configure2,
-    renderItem: (item) => {
-      return /* @__PURE__ */ modules$1.createElement(SetterFormItem, __spreadValues({}, item));
-    }
-  }));
 }
 var FUNC_ERROR_TEXT$2 = "Expected a function";
 var NAN$2 = 0 / 0;
@@ -3312,6 +3293,32 @@ globalThis && globalThis.__spread || function() {
   }
   return ar;
 };
+const { List: List$1, Form } = window.antd;
+function Stage({
+  componentName,
+  configure: configure2,
+  initialValues,
+  onValuesChange
+}) {
+  const [form2] = Form.useForm();
+  const propertyDefaultValues = useCreation(() => configure2.reduce((prev, { name, defaultValue }) => {
+    defaultValue !== void 0 && Object.assign(prev, { [name]: defaultValue });
+    return prev;
+  }, {}), [configure2]);
+  useEffect(() => {
+    form2.setFieldsValue(__spreadValues(__spreadValues({}, propertyDefaultValues), initialValues));
+  }, [initialValues, propertyDefaultValues]);
+  return /* @__PURE__ */ modules$1.createElement(Form, {
+    form: form2,
+    onValuesChange
+  }, /* @__PURE__ */ modules$1.createElement(List$1, {
+    className: "pane-stage",
+    dataSource: configure2,
+    renderItem: (item) => {
+      return /* @__PURE__ */ modules$1.createElement(SetterFormItem, __spreadValues({}, item));
+    }
+  }));
+}
 var BugOutlined$5 = { exports: {} };
 var BugOutlined$4 = {};
 var BugOutlined$3 = {};
@@ -4046,7 +4053,7 @@ class VisionSchemaTransfer {
       if (!defaultValue) {
         return defaultValue;
       }
-      defaultValue = new Function("global", `return ("" + ${defaultValue}) in global ? (""+${defaultValue}) : ${defaultValue}`)(global);
+      defaultValue = new Function("global", `return ("" + ${defaultValue}) in global ? (""+${defaultValue}) : ${defaultValue}`)(globalThis);
     } catch (e2) {
     }
     return defaultValue;
@@ -4089,7 +4096,9 @@ function VisionPane({
   const [propertyDrawerShow, setPropertyDrawerShow] = useLocalStorageState$1(PANE_VISIBLE, "");
   const { data: prototypeOptions } = useRequest(async () => {
     return buildVisionFromTypes(properties);
-  }, {});
+  }, {
+    refreshDeps: [properties]
+  });
   const renderIndex = useRef(0);
   useUpdateEffect$1(() => {
     renderIndex.current++;
@@ -14857,7 +14866,7 @@ function MarkdownArea({ data: res }) {
       code,
       "component-block": componentBlockRender
     }
-  }, content2), [content2]);
+  }, content2), [content2, moduleMap]);
   return /* @__PURE__ */ modules$1.createElement("div", {
     className: "markdown-area"
   }, markdownComponent);

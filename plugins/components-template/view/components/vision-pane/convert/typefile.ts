@@ -258,7 +258,7 @@ class VisionSchemaTransfer {
       defaultValue = new Function(
         "global",
         `return ("" + ${defaultValue}) in global ? (""+${defaultValue}) : ${defaultValue}`
-      )(global);
+      )(globalThis);
     } catch (e) {}
 
     return defaultValue;

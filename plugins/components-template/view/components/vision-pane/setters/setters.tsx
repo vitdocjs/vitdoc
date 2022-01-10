@@ -9,6 +9,8 @@ export const Setters = {
   ChoiceSetter: (props) => (
     <Radio.Group {...props} optionType="button" size="small" />
   ),
-  SelectSetter: (props) => <Select {...props} style={{ width: 120 }} />,
-  BoolSetter: Switch,
+  SelectSetter: (props) => (
+    <Select {...props} style={{ width: 120 }} allowClear />
+  ),
+  BoolSetter: (props) => <Switch {...props} checked={props.value} />,
 };

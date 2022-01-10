@@ -22,9 +22,14 @@ export default function VisionPane({
     ""
   );
 
-  const { data: prototypeOptions } = useRequest(async () => {
-    return buildVisionFromTypes(properties);
-  }, {});
+  const { data: prototypeOptions } = useRequest(
+    async () => {
+      return buildVisionFromTypes(properties);
+    },
+    {
+      refreshDeps: [properties],
+    }
+  );
 
   const renderIndex = useRef(0);
   useUpdateEffect(() => {
