@@ -125,6 +125,8 @@ const mdjsx = () => {
               /React\.createElement/g,
               "viteCompJsxCreateElement"
             );
+
+            wrappedReact = `${wrappedReact} \n $RefreshReg$();`
           }
 
           return `${reactCode}
