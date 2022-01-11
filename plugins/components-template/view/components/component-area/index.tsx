@@ -65,6 +65,8 @@ export function ComponentArea(props) {
     };
 
     outputComp.visionProps = componentProps;
+    outputComp.origin$ = Component;
+    outputComp.wrap$ = (Component) => wrapProps(Component, { React: OutReact });
 
     newComp.current.set(Component, outputComp);
 

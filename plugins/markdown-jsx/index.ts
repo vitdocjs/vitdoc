@@ -104,7 +104,7 @@ const mdjsx = () => {
             }
           );
 
-          const wrapedReact = `
+          let wrappedReact = `
       const React = {...React$};
 
       const beforeCreateElement = React.createElement;
@@ -120,13 +120,20 @@ const mdjsx = () => {
         return beforeCreateElement(NextComp, ...rest);
       }; `;
 
+          if (!isBuild) {
+            wrappedReact = wrappedReact.replace(
+              /React\.createElement/g,
+              "viteCompJsxCreateElement"
+            );
+          }
+
           return `${reactCode}
       ${
         mainModuleId
           ? `import $_Component from '${mainModuleId}';`
           : `const $_Component = {};`
       }
-      ${wrapedReact}
+      ${wrappedReact}
       ${after}
       `;
         };

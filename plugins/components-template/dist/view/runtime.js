@@ -14746,6 +14746,8 @@ function ComponentArea(props) {
       return OutReact.createElement(Component2, finalProps);
     };
     outputComp.visionProps = componentProps;
+    outputComp.origin$ = Component2;
+    outputComp.wrap$ = (Component22) => wrapProps(Component22, { React: OutReact });
     newComp.current.set(Component2, outputComp);
     return outputComp;
   });

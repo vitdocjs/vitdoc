@@ -520,8 +520,9 @@ function debounce(fn, delay) {
   exports.createElement = function () {
     const Component = arguments[0];
 
-    if (exports.getFamilyByType(Component)) {
-      const gotComponent = allComponentsMap.get(Component);
+    const OriginComponent = Component.origin$ || Component;
+    if (exports.getFamilyByType(OriginComponent)) {
+      const gotComponent = allComponentsMap.get(OriginComponent);
 
       arguments[0] =
         gotComponent ??
@@ -531,11 +532,13 @@ function debounce(fn, delay) {
           );
 
           const setNextComponent = (nextComponent) => {
-            _setNextComponent(() => nextComponent);
+            _setNextComponent(() =>
+              Component.wrap$ ? Component.wrap$(nextComponent) : nextComponent
+            );
           };
 
           React.useEffect(() => {
-            subscribe(NextComponent, setNextComponent);
+            subscribe(NextComponent.origin$ || NextComponent, setNextComponent);
           }, [NextComponent]);
 
           return React.createElement(NextComponent, props);
