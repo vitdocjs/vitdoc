@@ -69,7 +69,7 @@ const TypeFile = ({ prefix = ".type$.json" } = {}) => {
       type: "update",
       updates,
     });
-  }, 100);
+  }, 300);
 
   return {
     name: "vite:type-file",

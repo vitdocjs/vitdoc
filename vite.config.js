@@ -1,6 +1,6 @@
-import { mergeConfig, defineConfig } from "vite";
+import { mergeConfig } from "vite";
 import TypeFile from "./plugins/type-file";
-// import reactRefresh from "@vitejs/plugin-react-refresh";
+import reactRefresh from "./plugins/react-refresh";
 import componentsTemplate from "./plugins/components-template/src";
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
@@ -44,6 +44,7 @@ export default mergeConfig(
       componentsTemplate(),
       TypeFile(),
       mdjsx(),
+      reactRefresh(),
       cdnExternals({
         "@alifd/next": {
           windowName: "Next",

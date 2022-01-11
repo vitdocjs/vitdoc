@@ -104,12 +104,7 @@ const mdjsx = () => {
             }
           );
 
-          return `${reactCode}
-      ${
-        mainModuleId
-          ? `import $_Component from '${mainModuleId}';`
-          : `const $_Component = {};`
-      }
+          const wrapedReact = `
       const React = {...React$};
 
       const beforeCreateElement = React.createElement;
@@ -123,8 +118,15 @@ const mdjsx = () => {
         }
 
         return beforeCreateElement(NextComp, ...rest);
-      };
-      
+      }; `;
+
+          return `${reactCode}
+      ${
+        mainModuleId
+          ? `import $_Component from '${mainModuleId}';`
+          : `const $_Component = {};`
+      }
+      ${wrapedReact}
       ${after}
       `;
         };
