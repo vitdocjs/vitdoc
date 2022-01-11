@@ -1,6 +1,6 @@
 {
   "name": "@ali/vite-comp",
-  "version": "1.2.7-beta.0",
+  "version": "1.2.7",
   "publishConfig": {
     "registry": "https://registry.antfin-inc.com"
   },
@@ -19,11 +19,6 @@
     "@alife/json-2-vision": "^1.0.29",
     "@alife/mtop-mock-hook": "^1.0.6",
     "@ant-design/icons": "^4.5.0",
-    "@babel/core": "^7.14.8",
-    "@babel/plugin-transform-react-jsx": "^7.16.7",
-    "@babel/plugin-transform-react-jsx-self": "^7.14.5",
-    "@babel/plugin-transform-react-jsx-source": "^7.14.5",
-    "@rollup/pluginutils": "^4.1.1",
     "@types/node": "^14.14.35",
     "classnames": "^2.2.6",
     "glob": "^7.1.6",
@@ -43,6 +38,7 @@
     "swig": "^1.4.2",
     "typescript": "^4.2.3",
     "vite": "^2.7.10",
-    "vite-plugin-cdn-externals": "^1.0.3"
+    "vite-plugin-cdn-externals": "^1.0.5",
+    "vite-plugin-react-prod-refresh": "^1.0.3"
   }
 }
