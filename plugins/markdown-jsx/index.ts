@@ -1,5 +1,6 @@
 import fs from "fs";
 import fromMarkdown from "mdast-util-from-markdown";
+import reactRefresh from "vite-plugin-react-prod-refresh";
 
 import {
   addUrlParams,
@@ -123,10 +124,10 @@ const mdjsx = () => {
           if (!isBuild) {
             wrappedReact = wrappedReact.replace(
               /React\.createElement/g,
-              "viteCompJsxCreateElement"
+              reactRefresh.runtimePragma
             );
 
-            wrappedReact = `${wrappedReact} \n $RefreshReg$();`
+            wrappedReact = `${wrappedReact} \n $RefreshReg$();`;
           }
 
           return `${reactCode}

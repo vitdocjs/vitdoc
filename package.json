@@ -1,6 +1,6 @@
 {
   "name": "@ali/vite-comp",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "publishConfig": {
     "registry": "https://registry.antfin-inc.com"
   },
@@ -39,6 +39,6 @@
     "typescript": "^4.2.3",
     "vite": "^2.7.10",
     "vite-plugin-cdn-externals": "^1.0.5",
-    "vite-plugin-react-prod-refresh": "^1.0.3"
+    "vite-plugin-react-prod-refresh": "^1.0.6"
   }
 }
