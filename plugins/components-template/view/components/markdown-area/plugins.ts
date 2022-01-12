@@ -1,4 +1,3 @@
-import isEmpty from "lodash/isEmpty";
 import { isJsx } from "../../../../utils/lang";
 
 export function remarkFrontMatter() {
@@ -21,9 +20,13 @@ export function remarkFrontMatter() {
         return;
       }
     });
-    if (!isEmpty(modules)) {
-      tree.children = modules;
+
+    if (!!prevModules.length) {
+      modules.push(...prevModules);
     }
+
+    tree.children = modules;
+
     return tree;
   };
 }

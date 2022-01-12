@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "ahooks": "^2.10.9",
+    "copy-to-clipboard": "^3.3.1",
     "lodash": "^4.17.21",
     "react-router-dom": "^5.2.0"
   }

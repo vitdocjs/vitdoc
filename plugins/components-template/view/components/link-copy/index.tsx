@@ -1,16 +1,12 @@
 import LinkOutlined from "@ant-design/icons/LinkOutlined";
 import React from "react";
+import copy from "copy-to-clipboard";
 
 // @ts-ignore
 const { message } = window.antd;
 
 export function copyToClipboard(str: string) {
-  const el = document.createElement("textarea");
-  el.innerText = str;
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand("copy");
-  el.remove();
+  copy(str);
 
   message.success("Copy successfully !");
 }
