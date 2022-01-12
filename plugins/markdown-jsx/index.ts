@@ -1,6 +1,5 @@
 import fs from "fs";
 import fromMarkdown from "mdast-util-from-markdown";
-import reactRefresh from "vite-plugin-react-prod-refresh";
 
 import {
   addUrlParams,
@@ -121,14 +120,14 @@ const mdjsx = () => {
         return beforeCreateElement(NextComp, ...rest);
       }; `;
 
-          if (!isBuild) {
-            wrappedReact = wrappedReact.replace(
-              /React\.createElement/g,
-              reactRefresh.runtimePragma
-            );
-
-            wrappedReact = `${wrappedReact} \n $RefreshReg$();`;
-          }
+          // if (!isBuild) {
+          //   wrappedReact = wrappedReact.replace(
+          //     /React\.createElement/g,
+          //     reactRefresh.runtimePragma
+          //   );
+          //
+          //   wrappedReact = `${wrappedReact} \n $RefreshReg$?.();`;
+          // }
 
           return `${reactCode}
       ${
