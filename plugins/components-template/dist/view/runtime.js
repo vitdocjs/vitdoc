@@ -3945,6 +3945,7 @@ const strToObj = (str) => {
 const filterQuotaMarkAndUndefined = (typeStr) => typeStr.split("|").map((val) => val.replace(/"/g, "").trim()).filter((val) => val !== "undefined");
 const REGEXP_ISMultipleTypes = /\S+(\[\])?\s*\|/g;
 const REGEXP_ISFunction = /\(.*\)\s*=>\s*.+/;
+const REGEXP_ISObject = /^\{.+}$/;
 const REGEXP_ISArray = /{.+}\[]$/;
 class VisionSchemaTransfer {
   transformProps(propType) {
@@ -4025,7 +4026,7 @@ class VisionSchemaTransfer {
     return typeStr;
   }
   static getChoiceSetterByTypes(typeStr) {
-    if (!REGEXP_ISFunction.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr) && filterQuotaMarkAndUndefined(typeStr).length <= 3) {
+    if (!REGEXP_ISFunction.test(typeStr) && !REGEXP_ISObject.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr) && filterQuotaMarkAndUndefined(typeStr).length <= 3) {
       return {
         setter: "ChoiceSetter",
         options: filterQuotaMarkAndUndefined(typeStr)
@@ -4034,7 +4035,7 @@ class VisionSchemaTransfer {
     return false;
   }
   static getSelectSetterByTypes(typeStr) {
-    if (!REGEXP_ISFunction.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr)) {
+    if (!REGEXP_ISFunction.test(typeStr) && !REGEXP_ISObject.test(typeStr) && REGEXP_ISMultipleTypes.test(typeStr) && !isNotEnumTypes(typeStr)) {
       return {
         setter: "SelectSetter",
         options: typeStr.split("|").map((val) => val.replace(/"/g, "").trim()).filter((val) => val !== "undefined").map((val) => {
