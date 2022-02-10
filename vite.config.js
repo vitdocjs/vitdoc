@@ -1,6 +1,6 @@
 import { mergeConfig } from "vite";
 import TypeFile from "./plugins/type-file";
-import componentsTemplate from "./plugins/components-template/src";
+import componentsTemplate from "./plugins/components-template/lib";
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
 import path from "path";

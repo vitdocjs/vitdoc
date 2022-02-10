@@ -6,21 +6,25 @@ var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __export = (target, all) => {
-  __markAsModule(target);
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __reExport = (target, module2, desc) => {
+var __reExport = (target, module2, copyDefault, desc) => {
   if (module2 && typeof module2 === "object" || typeof module2 === "function") {
     for (let key of __getOwnPropNames(module2))
-      if (!__hasOwnProp.call(target, key) && key !== "default")
+      if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
         __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
   }
   return target;
 };
-var __toModule = (module2) => {
-  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", module2 && module2.__esModule && "default" in module2 ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
+var __toESM = (module2, isNodeMode) => {
+  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", !isNodeMode && module2 && module2.__esModule ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
 };
+var __toCommonJS = /* @__PURE__ */ ((cache) => {
+  return (module2, temp) => {
+    return cache && cache.get(module2) || (temp = __reExport(__markAsModule({}), module2, 1), cache && cache.set(module2, temp), temp);
+  };
+})(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
     var fulfilled = (value) => {
@@ -41,20 +45,21 @@ var __async = (__this, __arguments, generator) => {
     step((generator = generator.apply(__this, __arguments)).next());
   });
 };
-__export(exports, {
+var src_exports = {};
+__export(src_exports, {
   createHtml: () => createHtml,
   default: () => src_default,
   getRoutes: () => getRoutes,
   isCompHTMLProxy: () => isCompHTMLProxy,
   isRouteMap: () => isRouteMap
 });
-var path = __toModule(require("path"));
-var import_swig = __toModule(require("swig"));
-var import_vite = __toModule(require("vite"));
-var import_node = __toModule(require("vite/dist/node"));
-var import_utils = __toModule(require("../../utils"));
-var import_config = __toModule(require("../../utils/config"));
-var import_rules = __toModule(require("../../utils/rules"));
+var path = __toESM(require("path"));
+var import_swig = __toESM(require("swig"));
+var import_vite = require("vite");
+var import_node = require("vite/dist/node");
+var import_utils = require("../../utils");
+var import_config = require("../../utils/config");
+var import_rules = require("../../utils/rules");
 const isDebug = process.env.DEBUG;
 const pluginRoot = __dirname.includes("plugins/components-template") ? path.resolve(__dirname, "..") : path.resolve(__dirname, "plugins/components-template");
 const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(pluginRoot, "./dist");
@@ -188,7 +193,7 @@ const componentsTemplate = () => {
         let url = (0, import_utils.cleanUrl)(req.url);
         if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
           if (isRouteMap(url)) {
-            return (0, import_node.send)(req, res, `export default ${yield this.load(url)}`, "js");
+            return (0, import_node.send)(req, res, `export default ${yield this.load(url)}`, "js", {});
           }
           if (url === "/") {
             res.writeHead(302, {
@@ -219,7 +224,7 @@ const componentsTemplate = () => {
         const route = path.join(url, "..");
         input[route] = url;
         const html = yield server.pluginContainer.load(url);
-        return (0, import_node.send)(req, res, html, "html");
+        return (0, import_node.send)(req, res, html, "html", {});
       }));
     },
     transform(code, id) {
@@ -231,6 +236,7 @@ const componentsTemplate = () => {
   };
 };
 var src_default = componentsTemplate;
+module.exports = __toCommonJS(src_exports);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   createHtml,

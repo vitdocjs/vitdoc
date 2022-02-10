@@ -57,7 +57,7 @@ const mdjsx = () => {
             true
           );
 
-          return send(req, res, result.code, "js");
+          return send(req, res, result.code, "js", {});
         } catch (e) {
           console.error(e);
           res.end();

@@ -196,7 +196,8 @@ const componentsTemplate = () => {
               req,
               res,
               `export default ${await this.load(url)}`,
-              "js"
+              "js",
+              {}
             );
           }
           if (url === "/") {
@@ -235,7 +236,7 @@ const componentsTemplate = () => {
 
         const html = (await server.pluginContainer.load(url)) as string;
 
-        return send(req, res, html, "html");
+        return send(req, res, html, "html", {});
       });
     },
     transform(code, id) {
