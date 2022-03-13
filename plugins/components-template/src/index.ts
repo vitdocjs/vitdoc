@@ -163,6 +163,9 @@ const componentsTemplate = () => {
             scriptModuleRE.lastIndex = 0;
             for (let i = 0; i <= index; i++) {
               match = scriptModuleRE.exec(html);
+              if (match[2]?.includes("globalThis.RuntimeModuleM")) {
+                break;
+              }
             }
             if (match) {
               return match[2];
