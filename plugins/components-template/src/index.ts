@@ -106,6 +106,7 @@ const componentsTemplate = () => {
       if (isRouteMap(id)) {
         return "route-map.json";
       }
+
       if (id === entry) {
         return "index.html";
       }
@@ -117,7 +118,7 @@ const componentsTemplate = () => {
         return JSON.stringify(getRoutes());
       }
 
-      if (/\.html$/.test(file)) {
+      if (/\.html$/.test(file) && !/\.css$/.test(id)) {
         if (!/^\//.test(file)) {
           file = `/${file}`;
         }
@@ -176,6 +177,7 @@ const componentsTemplate = () => {
         } else if (server) {
           html = await server.transformIndexHtml(id, html);
         }
+
 
         return html;
       }

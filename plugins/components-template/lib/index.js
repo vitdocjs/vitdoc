@@ -145,7 +145,7 @@ const componentsTemplate = () => {
         if (isRouteMap(file)) {
           return JSON.stringify(getRoutes());
         }
-        if (/\.html$/.test(file)) {
+        if (/\.html$/.test(file) && !/\.css$/.test(id)) {
           if (!/^\//.test(file)) {
             file = `/${file}`;
           }
