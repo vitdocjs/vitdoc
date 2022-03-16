@@ -140,7 +140,6 @@ const componentsTemplate = () => {
     },
     load(id) {
       return __async(this, null, function* () {
-        var _a;
         let file = (0, import_utils.cleanUrl)(id);
         if (isRouteMap(file)) {
           return JSON.stringify(getRoutes());
@@ -172,7 +171,7 @@ const componentsTemplate = () => {
               scriptModuleRE.lastIndex = 0;
               for (let i = 0; i <= index; i++) {
                 match = scriptModuleRE.exec(html);
-                if ((_a = match[2]) == null ? void 0 : _a.includes("globalThis.RuntimeModuleM")) {
+                if (match[2] && match[2].includes("globalThis.RuntimeModuleM")) {
                   break;
                 }
               }

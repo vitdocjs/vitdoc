@@ -164,7 +164,7 @@ const componentsTemplate = () => {
             scriptModuleRE.lastIndex = 0;
             for (let i = 0; i <= index; i++) {
               match = scriptModuleRE.exec(html);
-              if (match[2]?.includes("globalThis.RuntimeModuleM")) {
+              if (match[2] && match[2].includes("globalThis.RuntimeModuleM")) {
                 break;
               }
             }
