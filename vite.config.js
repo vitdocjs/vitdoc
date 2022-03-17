@@ -10,8 +10,11 @@ const cwd = process.cwd();
 let config = {};
 
 try {
+  require("esbuild-register");
   config = require(`${cwd}/vite.config.js`).default;
-} catch (e) {}
+} catch (e) {
+  console.log(e);
+}
 
 // https://vitejs.dev/config/
 export default mergeConfig(
