@@ -13,7 +13,7 @@ try {
   require("esbuild-register");
   config = require(`${cwd}/vite.config.js`).default;
 } catch (e) {
-  console.log(e);
+  // console.log(e);
 }
 
 // https://vitejs.dev/config/
