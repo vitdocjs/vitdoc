@@ -4,6 +4,7 @@ import componentsTemplate from "./plugins/components-template/lib";
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
 import path from "path";
+import fs from "fs";
 
 const cwd = process.cwd();
 
@@ -11,9 +12,11 @@ let config = {};
 
 try {
   require("esbuild-register");
-  config = require(`${cwd}/vite.config.js`).default;
+  if (fs.existsSync(`${cwd}/vite.config.js`)) {
+    config = require(`${cwd}/vite.config.js`).default;
+  }
 } catch (e) {
-  // console.log(e);
+  console.log(e);
 }
 
 // https://vitejs.dev/config/
