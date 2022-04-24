@@ -11,7 +11,10 @@ import {
 } from "react-router-dom";
 import { useRouteMap } from "./utils/loaders";
 
-mtopHook();
+// @ts-ignore
+if (window.__mtopHook !== false) {
+  mtopHook();
+}
 
 export function App() {
   const { routes } = useRouteMap() || {};

@@ -1324,13 +1324,13 @@ var warning$2 = {};
 Object.defineProperty(warning$2, "__esModule", {
   value: true
 });
-warning$2.warning = warning$1;
-warning$2.note = note;
-warning$2.resetWarned = resetWarned;
 warning$2.call = call;
-warning$2.warningOnce = warningOnce;
-warning$2.noteOnce = noteOnce;
 warning$2.default = void 0;
+warning$2.note = note;
+warning$2.noteOnce = noteOnce;
+warning$2.resetWarned = resetWarned;
+warning$2.warning = warning$1;
+warning$2.warningOnce = warningOnce;
 var warned = {};
 function warning$1(valid, message2) {
 }
@@ -1367,9 +1367,17 @@ Object.defineProperty(dynamicCSS, "__esModule", {
   value: true
 });
 dynamicCSS.injectCSS = injectCSS;
+dynamicCSS.removeCSS = removeCSS;
 dynamicCSS.updateCSS = updateCSS;
 var _canUseDom = _interopRequireDefault$c(canUseDom$1);
 var MARK_KEY = "rc-util-key";
+function getMark() {
+  var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, mark = _ref.mark;
+  if (mark) {
+    return mark.startsWith("data-") ? mark : "data-".concat(mark);
+  }
+  return MARK_KEY;
+}
 function getContainer(option) {
   if (option.attachTo) {
     return option.attachTo;
@@ -1401,6 +1409,19 @@ function injectCSS(css) {
   return styleNode;
 }
 var containerCache = /* @__PURE__ */ new Map();
+function findExistNode(key) {
+  var option = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  var container = getContainer(option);
+  return Array.from(containerCache.get(container).children).find(function(node) {
+    return node.tagName === "STYLE" && node.getAttribute(getMark(option)) === key;
+  });
+}
+function removeCSS(key) {
+  var _existNode$parentNode;
+  var option = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  var existNode = findExistNode(key, option);
+  existNode === null || existNode === void 0 ? void 0 : (_existNode$parentNode = existNode.parentNode) === null || _existNode$parentNode === void 0 ? void 0 : _existNode$parentNode.removeChild(existNode);
+}
 function updateCSS(css, key) {
   var option = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
   var container = getContainer(option);
@@ -1410,9 +1431,7 @@ function updateCSS(css, key) {
     containerCache.set(container, parentNode);
     parentNode.removeChild(placeholderStyle);
   }
-  var existNode = Array.from(containerCache.get(container).children).find(function(node) {
-    return node.tagName === "STYLE" && node[MARK_KEY] === key;
-  });
+  var existNode = findExistNode(key, option);
   if (existNode) {
     var _option$csp3, _option$csp4;
     if (((_option$csp3 = option.csp) === null || _option$csp3 === void 0 ? void 0 : _option$csp3.nonce) && existNode.nonce !== ((_option$csp4 = option.csp) === null || _option$csp4 === void 0 ? void 0 : _option$csp4.nonce)) {
@@ -1425,7 +1444,7 @@ function updateCSS(css, key) {
     return existNode;
   }
   var newNode = injectCSS(css, option);
-  newNode[MARK_KEY] = key;
+  newNode.setAttribute(getMark(option), key);
   return newNode;
 }
 var _interopRequireWildcard$9 = interopRequireWildcard.exports;
@@ -1885,7 +1904,7 @@ function toNumber$3(value) {
   var isBinary = reIsBinary$2.test(value);
   return isBinary || reIsOctal$2.test(value) ? freeParseInt$2(value.slice(2), isBinary ? 2 : 8) : reIsBadHex$2.test(value) ? NAN$2 : +value;
 }
-var _lodash_debounce_4_0_8_lodash_debounce = debounce$1;
+var lodash_debounce = debounce$1;
 var FUNC_ERROR_TEXT$1 = "Expected a function";
 var NAN$1 = 0 / 0;
 var symbolTag$2 = "[object Symbol]";
@@ -2026,7 +2045,7 @@ function toNumber$2(value) {
   var isBinary = reIsBinary$1.test(value);
   return isBinary || reIsOctal$1.test(value) ? freeParseInt$1(value.slice(2), isBinary ? 2 : 8) : reIsBadHex$1.test(value) ? NAN$1 : +value;
 }
-var _lodash_throttle_4_1_1_lodash_throttle = throttle;
+var lodash_throttle = throttle;
 function isDocumentVisible() {
   if (typeof document !== "undefined" && typeof document.visibilityState !== "undefined") {
     return document.visibilityState !== "hidden";
@@ -2287,8 +2306,8 @@ var Fetch = function() {
     if (initState) {
       this.state = __assign$3(__assign$3({}, this.state), initState);
     }
-    this.debounceRun = this.config.debounceInterval ? _lodash_debounce_4_0_8_lodash_debounce(this._run, this.config.debounceInterval) : void 0;
-    this.throttleRun = this.config.throttleInterval ? _lodash_throttle_4_1_1_lodash_throttle(this._run, this.config.throttleInterval) : void 0;
+    this.debounceRun = this.config.debounceInterval ? lodash_debounce(this._run, this.config.debounceInterval) : void 0;
+    this.throttleRun = this.config.throttleInterval ? lodash_throttle(this._run, this.config.throttleInterval) : void 0;
     this.limitRefresh = limit(this.refresh.bind(this), this.config.focusTimespan);
     if (this.config.pollingInterval) {
       this.unsubscribe.push(subscribe(this.rePolling.bind(this)));
@@ -4891,7 +4910,7 @@ function _inheritsLoose(subClass, superClass) {
   subClass.prototype.constructor = subClass;
   _setPrototypeOf(subClass, superClass);
 }
-var _propTypes_15_8_1_propTypes = { exports: {} };
+var propTypes$1 = { exports: {} };
 var ReactPropTypesSecret$3 = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
 var ReactPropTypesSecret_1$1 = ReactPropTypesSecret$3;
 var ReactPropTypesSecret$2 = ReactPropTypesSecret_1$1;
@@ -4940,9 +4959,9 @@ var factoryWithThrowingShims$1 = function() {
   return ReactPropTypes;
 };
 {
-  _propTypes_15_8_1_propTypes.exports = factoryWithThrowingShims$1();
+  propTypes$1.exports = factoryWithThrowingShims$1();
 }
-var PropTypes$1 = _propTypes_15_8_1_propTypes.exports;
+var PropTypes$1 = propTypes$1.exports;
 function _extends() {
   _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -5891,16 +5910,16 @@ function createReactContext(defaultValue, calculateChangedBits) {
   };
 }
 var index$5 = modules$1.createContext || createReactContext;
-var _pathToRegexp_1_8_0_pathToRegexp = { exports: {} };
-var _isarray_0_0_1_isarray = Array.isArray || function(arr) {
+var pathToRegexp$2 = { exports: {} };
+var isarray$1 = Array.isArray || function(arr) {
   return Object.prototype.toString.call(arr) == "[object Array]";
 };
-var isarray = _isarray_0_0_1_isarray;
-_pathToRegexp_1_8_0_pathToRegexp.exports = pathToRegexp;
-_pathToRegexp_1_8_0_pathToRegexp.exports.parse = parse$3;
-_pathToRegexp_1_8_0_pathToRegexp.exports.compile = compile;
-_pathToRegexp_1_8_0_pathToRegexp.exports.tokensToFunction = tokensToFunction;
-_pathToRegexp_1_8_0_pathToRegexp.exports.tokensToRegExp = tokensToRegExp;
+var isarray = isarray$1;
+pathToRegexp$2.exports = pathToRegexp;
+pathToRegexp$2.exports.parse = parse$3;
+pathToRegexp$2.exports.compile = compile;
+pathToRegexp$2.exports.tokensToFunction = tokensToFunction;
+pathToRegexp$2.exports.tokensToRegExp = tokensToRegExp;
 var PATH_REGEXP = new RegExp([
   "(\\\\.)",
   "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))"
@@ -6129,8 +6148,8 @@ function pathToRegexp(path, keys2, options) {
   }
   return stringToRegexp(path, keys2, options);
 }
-var pathToRegexp$1 = _pathToRegexp_1_8_0_pathToRegexp.exports;
-var _reactIs_16_13_1_reactIs = { exports: {} };
+var pathToRegexp$1 = pathToRegexp$2.exports;
+var reactIs$2 = { exports: {} };
 var reactIs_production_min$1 = {};
 /** @license React v16.13.1
  * react-is.production.min.js
@@ -6229,7 +6248,7 @@ reactIs_production_min$1.isValidElementType = function(a) {
 };
 reactIs_production_min$1.typeOf = z$1;
 {
-  _reactIs_16_13_1_reactIs.exports = reactIs_production_min$1;
+  reactIs$2.exports = reactIs_production_min$1;
 }
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null)
@@ -6245,7 +6264,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   }
   return target;
 }
-var reactIs$1 = _reactIs_16_13_1_reactIs.exports;
+var reactIs$1 = reactIs$2.exports;
 var FORWARD_REF_STATICS = {
   "$$typeof": true,
   render: true,
@@ -12185,6 +12204,7 @@ var factoryWithThrowingShims = function() {
   }
   var ReactPropTypes = {
     array: shim,
+    bigint: shim,
     bool: shim,
     func: shim,
     number: shim,
@@ -14590,7 +14610,7 @@ LinkOutlined$4.default = _default$1;
   module.exports = _default2;
 })(LinkOutlined$5, LinkOutlined$5.exports);
 var LinkOutlined2 = /* @__PURE__ */ getDefaultExportFromCjs(LinkOutlined$5.exports);
-var _toggleSelection_1_0_6_toggleSelection = function() {
+var toggleSelection = function() {
   var selection = document.getSelection();
   if (!selection.rangeCount) {
     return function() {
@@ -14621,7 +14641,7 @@ var _toggleSelection_1_0_6_toggleSelection = function() {
     active && active.focus();
   };
 };
-var deselectCurrent = _toggleSelection_1_0_6_toggleSelection;
+var deselectCurrent = toggleSelection;
 var clipboardToIE11Formatting = {
   "text/plain": "Text",
   "text/html": "Url",
@@ -14709,10 +14729,10 @@ function copy(text2, options) {
   }
   return success;
 }
-var _copyToClipboard_3_3_1_copyToClipboard = copy;
+var copyToClipboard$1 = copy;
 const { message } = window.antd;
 function copyToClipboard(str) {
-  _copyToClipboard_3_3_1_copyToClipboard(str);
+  copyToClipboard$1(str);
   message.success("Copy successfully !");
 }
 function LinkCopy({ route }) {
@@ -15143,7 +15163,9 @@ function RouterSwitch() {
     }, /* @__PURE__ */ modules$1.createElement(MenuLink, __spreadValues({}, item2)))));
   }))));
 }
-_default$c();
+if (window.__mtopHook !== false) {
+  _default$c();
+}
 function App() {
   const { routes } = useRouteMap() || {};
   if (!routes) {

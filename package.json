@@ -1,8 +1,8 @@
 {
   "name": "@ali/vite-comp",
-  "version": "1.3.7",
+  "version": "1.3.9",
   "publishConfig": {
-    "registry": "https://registry.npm.alibaba-inc.com"
+    "registry": "https://registry.antfin-inc.com"
   },
   "scripts": {
     "dev": "vite",
