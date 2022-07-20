@@ -7,7 +7,7 @@ import less from "react-syntax-highlighter/dist/esm/languages/prism/less";
 import "@alife/intl-comp-highLighter/dist/index.css";
 import "./index.scss";
 import { ComponentArea, componentBlockRender } from "../component-area";
-import { useCreation, usePersistFn } from "ahooks";
+import { useCreation, useMemoizedFn } from "ahooks";
 
 import { remarkFrontMatter } from "./plugins";
 
@@ -23,7 +23,7 @@ export function MarkdownArea({ data: res }) {
   const { moduleMap, content } = res;
 
   const isCodeRenderIndexRef = useRef(0);
-  const code = usePersistFn(({ language, value = "", node }) => {
+  const code = useMemoizedFn(({ language, value = "", node }) => {
     const jsx = /^[j|t]sx$/.test(language);
     if (!jsx) {
       return <HighLight lang={language} children={value} />;

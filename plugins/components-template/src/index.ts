@@ -3,7 +3,7 @@ import * as path from "path";
 import Swig from "swig";
 
 import { mergeConfig, ViteDevServer } from "vite";
-import { send } from "vite/dist/node";
+import { send } from "vite";
 import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
 import { getConfig } from "../../utils/config";
 import { getComponentFiles, getMainFiles } from "../../utils/rules";

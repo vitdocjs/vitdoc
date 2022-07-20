@@ -4,7 +4,7 @@ import HighLight from "@alife/intl-comp-highLighter/dist/index";
 
 import "./index.scss";
 import { ComponentPropsContext } from "../../context";
-import { useBoolean, usePersistFn } from "ahooks";
+import { useBoolean, useMemoizedFn } from "ahooks";
 import CopyOutlined from "@ant-design/icons/CopyOutlined";
 import CodeOutlined from "@ant-design/icons/CodeOutlined";
 import CheckOutlined from "@ant-design/icons/CheckOutlined";
@@ -45,12 +45,12 @@ export function ComponentArea(props) {
   );
   const defaultPropsRef = useRef();
 
-  const setDefaultProps = usePersistFn((props) => {
+  const setDefaultProps = useMemoizedFn((props) => {
     defaultPropsRef.current = props;
     defaultCodePanel && onSetDefaultProps?.({ ...(props || {}) });
   });
 
-  const wrapProps = usePersistFn((Component, { React: OutReact }) => {
+  const wrapProps = useMemoizedFn((Component, { React: OutReact }) => {
     if (newComp.current.get(Component)?.visionProps === componentProps) {
       return newComp.current.get(Component);
     }
@@ -79,7 +79,7 @@ export function ComponentArea(props) {
 
   const [checkCode, { toggle }] = useBoolean();
 
-  const handlerDebugComponent = usePersistFn(() => {
+  const handlerDebugComponent = useMemoizedFn(() => {
     onSetDefaultProps?.({ ...(defaultPropsRef.current || {}) });
   });
 
@@ -129,7 +129,7 @@ export function ComponentArea(props) {
 export function CopyIcon({ content }) {
   const [copied, { setTrue, setFalse }] = useBoolean();
 
-  const copy = usePersistFn(() => {
+  const copy = useMemoizedFn(() => {
     copyToClipboard(content);
     setTrue();
   });

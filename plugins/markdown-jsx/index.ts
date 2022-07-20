@@ -11,7 +11,7 @@ import {
   resolveMainComponent,
 } from "../utils";
 import { isCSSLang, isJsx } from "../utils/lang";
-import { send } from "vite/dist/node";
+import { send } from "vite";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
@@ -53,6 +53,7 @@ const mdjsx = () => {
           await moduleGraph.updateModuleInfo(
             readmeMod,
             new Set([...Array.from(readmeMod.importedModules), url]),
+            null,
             new Set(),
             true
           );

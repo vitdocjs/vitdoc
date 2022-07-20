@@ -4,27 +4,20 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __reExport = (target, module2, copyDefault, desc) => {
-  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
-    for (let key of __getOwnPropNames(module2))
-      if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
-        __defProp(target, key, { get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable });
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
   }
-  return target;
+  return to;
 };
-var __toESM = (module2, isNodeMode) => {
-  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", !isNodeMode && module2 && module2.__esModule ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
-};
-var __toCommonJS = /* @__PURE__ */ ((cache) => {
-  return (module2, temp) => {
-    return cache && cache.get(module2) || (temp = __reExport(__markAsModule({}), module2, 1), cache && cache.set(module2, temp), temp);
-  };
-})(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
     var fulfilled = (value) => {
@@ -53,10 +46,11 @@ __export(src_exports, {
   isCompHTMLProxy: () => isCompHTMLProxy,
   isRouteMap: () => isRouteMap
 });
+module.exports = __toCommonJS(src_exports);
 var path = __toESM(require("path"));
 var import_swig = __toESM(require("swig"));
 var import_vite = require("vite");
-var import_node = require("vite/dist/node");
+var import_vite2 = require("vite");
 var import_utils = require("../../utils");
 var import_config = require("../../utils/config");
 var import_rules = require("../../utils/rules");
@@ -68,7 +62,7 @@ const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./i
 });
 const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
 const htmlCommentRE = /<!--[\s\S]*?-->/g;
-const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
+const scriptModuleRE = new RegExp(`(<script\\b[^>]*type\\s*=\\s*(?:"module"|'module')[^>]*>)(.*?)<\\/script>`, "gims");
 const isRouteMap = (id) => /route-map\.json$/.test(id);
 const getRoutes = () => {
   const routes = (0, import_rules.getComponentFiles)().map((path2) => `/${path2}`);
@@ -196,7 +190,7 @@ const componentsTemplate = () => {
         let url = (0, import_utils.cleanUrl)(req.url);
         if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
           if (isRouteMap(url)) {
-            return (0, import_node.send)(req, res, `export default ${yield this.load(url)}`, "js", {});
+            return (0, import_vite2.send)(req, res, `export default ${yield this.load(url)}`, "js", {});
           }
           if (url === "/") {
             res.writeHead(302, {
@@ -227,7 +221,7 @@ const componentsTemplate = () => {
         const route = path.join(url, "..");
         input[route] = url;
         const html = yield server.pluginContainer.load(url);
-        return (0, import_node.send)(req, res, html, "html", {});
+        return (0, import_vite2.send)(req, res, html, "html", {});
       }));
     },
     transform(code, id) {
@@ -239,7 +233,6 @@ const componentsTemplate = () => {
   };
 };
 var src_default = componentsTemplate;
-module.exports = __toCommonJS(src_exports);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   createHtml,

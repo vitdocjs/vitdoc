@@ -1,6 +1,10 @@
+require("esbuild-register");
+
 import { mergeConfig } from "vite";
 import TypeFile from "./plugins/type-file";
-import componentsTemplate from "./plugins/components-template/lib";
+const {
+  default: componentsTemplate,
+} = require("./plugins/components-template/lib");
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
 import path from "path";
@@ -11,7 +15,6 @@ const cwd = process.cwd();
 let config = {};
 
 try {
-  require("esbuild-register");
   if (fs.existsSync(`${cwd}/vite.config.js`)) {
     config = require(`${cwd}/vite.config.js`).default;
   }
