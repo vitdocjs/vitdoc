@@ -1,5 +1,5 @@
 import * as path from "path";
-import * as parser from "@ali/react-docgen-typescript-loader-add-tag/dist/docgen-typescript";
+import * as parser from "react-docgen-typescript-loader-add-tag/dist/docgen-typescript";
 import {
   cleanUrl,
   getAssetHash,

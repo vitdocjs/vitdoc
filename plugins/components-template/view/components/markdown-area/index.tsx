@@ -1,19 +1,12 @@
 import React, { useRef } from "react";
 import ReactMarkdown from "react-markdown";
-import HighLight from "@alife/intl-comp-highLighter/dist/index";
-import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
-import scss from "react-syntax-highlighter/dist/esm/languages/prism/scss";
-import less from "react-syntax-highlighter/dist/esm/languages/prism/less";
-import "@alife/intl-comp-highLighter/dist/index.css";
 import "./index.scss";
 import { ComponentArea, componentBlockRender } from "../component-area";
 import { useCreation, useMemoizedFn } from "ahooks";
 
-import { remarkFrontMatter } from "./plugins";
+import HighLight from "../highlight";
 
-HighLight.registerLanguage("tsx", tsx);
-HighLight.registerLanguage("scss", scss);
-HighLight.registerLanguage("less", less);
+import { remarkFrontMatter } from "./plugins";
 
 export function MarkdownArea({ data: res }) {
   if (!res) {
@@ -45,6 +38,7 @@ export function MarkdownArea({ data: res }) {
 
   const markdownComponent = useCreation(
     () => (
+      // @ts-ignore
       <ReactMarkdown
         className="markdown-body"
         plugins={[remarkFrontMatter]}

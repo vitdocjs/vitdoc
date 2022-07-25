@@ -13,11 +13,6 @@
     "vite-comp": "./bin/index.js"
   },
   "dependencies": {
-    "@ali/react-docgen-typescript-loader-add-tag": "^3.6.16",
-    "@alifd/next": "^1.22.14",
-    "@alife/intl-comp-highLighter": "^1.0.15",
-    "@alife/json-2-vision": "^1.0.29",
-    "@alife/mtop-mock-hook": "^1.0.6",
     "@ant-design/icons": "^4.5.0",
     "@types/node": "^14.14.35",
     "classnames": "^2.2.6",
@@ -30,6 +25,8 @@
     "moment-timezone": "^0.5.33",
     "prettier": "^2.5.1",
     "react": "^17.0.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-docgen-typescript-loader-add-tag": "^3.6.16",
     "react-dom": "^17.0.0",
     "react-markdown": "^5.0.3",
     "react-refresh": "^0.11.0",

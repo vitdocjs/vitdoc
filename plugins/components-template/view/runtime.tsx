@@ -1,6 +1,5 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import mtopHook from "@alife/mtop-mock-hook";
 import ReadmePane from "./pages/readme-pane";
 import RouterSwitch from "./pages/router-switch";
 import {
@@ -10,11 +9,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useRouteMap } from "./utils/loaders";
-
-// @ts-ignore
-if (window.__mtopHook !== false) {
-  mtopHook();
-}
 
 export function App() {
   const { routes } = useRouteMap() || {};

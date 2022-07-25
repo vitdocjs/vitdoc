@@ -61,7 +61,6 @@ export default function ReadmePane() {
             </div>
             {propertyTypes && (
               <VisionPane
-                key={`vision-default-props`}
                 properties={propertyTypes}
                 defaultProps={visionDefaultProps}
                 onPropsChange={setVisionProps}

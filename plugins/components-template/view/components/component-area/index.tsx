@@ -1,8 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-
-import HighLight from "@alife/intl-comp-highLighter/dist/index";
-
-import "./index.scss";
+import HighLight from "../highlight";
 import { ComponentPropsContext } from "../../context";
 import { useBoolean, useMemoizedFn } from "ahooks";
 import CopyOutlined from "@ant-design/icons/CopyOutlined";
@@ -11,6 +8,8 @@ import CheckOutlined from "@ant-design/icons/CheckOutlined";
 import BugOutlined from "@ant-design/icons/BugOutlined";
 import classNames from "classnames";
 import { copyToClipboard } from "../link-copy";
+
+import "./index.scss";
 
 import dropRight from "lodash/dropRight";
 import takeRight from "lodash/takeRight";
