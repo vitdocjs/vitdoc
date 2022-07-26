@@ -21,7 +21,7 @@ export interface ITypeDesc {
 
 const DEFAULT_VISION_CONFIG = {
   category: "*",
-  icon: "https://img.alicdn.com/tfs/TB1whTmvAL0gK0jSZFxXXXWHVXa-200-200.svg",
+  icon: "//img.alicdn.com/tfs/TB1whTmvAL0gK0jSZFxXXXWHVXa-200-200.svg",
   isContainer: false,
 };
 

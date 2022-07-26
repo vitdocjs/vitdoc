@@ -388,20 +388,13 @@ function requireReactIs_development$1() {
   }
   return reactIs_development$1;
 }
-var hasRequiredReactIs;
-function requireReactIs() {
-  if (hasRequiredReactIs)
-    return reactIs$2.exports;
-  hasRequiredReactIs = 1;
-  (function(module) {
-    if (process.env.NODE_ENV === "production") {
-      module.exports = requireReactIs_production_min$1();
-    } else {
-      module.exports = requireReactIs_development$1();
-    }
-  })(reactIs$2);
-  return reactIs$2.exports;
-}
+(function(module) {
+  if (process.env.NODE_ENV === "production") {
+    module.exports = requireReactIs_production_min$1();
+  } else {
+    module.exports = requireReactIs_development$1();
+  }
+})(reactIs$2);
 /*
 object-assign
 (c) Sindre Sorhus
@@ -561,7 +554,7 @@ function requireFactoryWithTypeCheckers$1() {
   if (hasRequiredFactoryWithTypeCheckers$1)
     return factoryWithTypeCheckers$1;
   hasRequiredFactoryWithTypeCheckers$1 = 1;
-  var ReactIs2 = requireReactIs();
+  var ReactIs2 = reactIs$2.exports;
   var assign2 = requireObjectAssign$1();
   var ReactPropTypesSecret = requireReactPropTypesSecret$1();
   var has2 = requireHas$1();
@@ -1037,7 +1030,7 @@ function requireFactoryWithThrowingShims$1() {
   return factoryWithThrowingShims$1;
 }
 if (process.env.NODE_ENV !== "production") {
-  var ReactIs$2 = requireReactIs();
+  var ReactIs$2 = reactIs$2.exports;
   var throwOnDirectAccess$1 = true;
   propTypes$1.exports = requireFactoryWithTypeCheckers$1()(ReactIs$2.isElement, throwOnDirectAccess$1);
 } else {
@@ -2262,7 +2255,6 @@ function pathToRegexp(path, keys2, options) {
   }
   return stringToRegexp(path, keys2, options);
 }
-var reactIsExports = requireReactIs();
 function _objectWithoutPropertiesLoose$1(source, excluded) {
   if (source == null)
     return {};
@@ -2277,7 +2269,7 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   }
   return target;
 }
-var reactIs$1 = requireReactIs();
+var reactIs$1 = reactIs$2.exports;
 var FORWARD_REF_STATICS = {
   "$$typeof": true,
   render: true,
@@ -2602,7 +2594,7 @@ if (process.env.NODE_ENV !== "production") {
   Route.propTypes = {
     children: propTypes$1.exports.oneOfType([propTypes$1.exports.func, propTypes$1.exports.node]),
     component: function component(props, propName) {
-      if (props[propName] && !reactIsExports.isValidElementType(props[propName])) {
+      if (props[propName] && !reactIs$2.exports.isValidElementType(props[propName])) {
         return new Error("Invalid prop 'component' supplied to 'Route': the prop is not a valid React component");
       }
     },
@@ -10212,11 +10204,11 @@ Object.defineProperty(Component, "__esModule", {
 Component.CopyToClipboard = void 0;
 var _react = _interopRequireDefault$8(require$$3);
 var _copyToClipboard = _interopRequireDefault$8(copyToClipboard$2);
-var _excluded$1 = ["text", "onCopy", "options", "children"];
+var _excluded = ["text", "onCopy", "options", "children"];
 function _interopRequireDefault$8(obj) {
   return obj && obj.__esModule ? obj : { "default": obj };
 }
-function ownKeys$2(object, enumerableOnly) {
+function ownKeys(object, enumerableOnly) {
   var keys2 = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols2 = Object.getOwnPropertySymbols(object);
@@ -10226,12 +10218,12 @@ function ownKeys$2(object, enumerableOnly) {
   }
   return keys2;
 }
-function _objectSpread$2(target) {
+function _objectSpread$1(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys$2(Object(source), true).forEach(function(key) {
-      _defineProperty$1(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function(key) {
+    i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+      _defineProperty$2(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
@@ -10356,7 +10348,7 @@ function _getPrototypeOf(o) {
   };
   return _getPrototypeOf(o);
 }
-function _defineProperty$1(obj, key, value) {
+function _defineProperty$2(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -10374,7 +10366,7 @@ var CopyToClipboard$1 = /* @__PURE__ */ function(_React$PureComponent) {
       args[_key] = arguments[_key];
     }
     _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty$1(_assertThisInitialized(_this), "onClick", function(event) {
+    _defineProperty$2(_assertThisInitialized(_this), "onClick", function(event) {
       var _this$props = _this.props, text2 = _this$props.text, onCopy = _this$props.onCopy, children = _this$props.children, options = _this$props.options;
       var elem = _react["default"].Children.only(children);
       var result = (0, _copyToClipboard["default"])(text2, options);
@@ -10394,9 +10386,9 @@ var CopyToClipboard$1 = /* @__PURE__ */ function(_React$PureComponent) {
       _this$props2.text;
       _this$props2.onCopy;
       _this$props2.options;
-      var children = _this$props2.children, props = _objectWithoutProperties(_this$props2, _excluded$1);
+      var children = _this$props2.children, props = _objectWithoutProperties(_this$props2, _excluded);
       var elem = _react["default"].Children.only(children);
-      return /* @__PURE__ */ _react["default"].cloneElement(elem, _objectSpread$2(_objectSpread$2({}, props), {}, {
+      return /* @__PURE__ */ _react["default"].cloneElement(elem, _objectSpread$1(_objectSpread$1({}, props), {}, {
         onClick: this.onClick
       }));
     }
@@ -10404,7 +10396,7 @@ var CopyToClipboard$1 = /* @__PURE__ */ function(_React$PureComponent) {
   return CopyToClipboard2;
 }(_react["default"].PureComponent);
 Component.CopyToClipboard = CopyToClipboard$1;
-_defineProperty$1(CopyToClipboard$1, "defaultProps", {
+_defineProperty$2(CopyToClipboard$1, "defaultProps", {
   onCopy: void 0,
   options: void 0
 });
@@ -10502,33 +10494,36 @@ function _nonIterableSpread() {
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
-var defineProperty$2 = { exports: {} };
-var hasRequiredDefineProperty;
-function requireDefineProperty() {
-  if (hasRequiredDefineProperty)
-    return defineProperty$2.exports;
-  hasRequiredDefineProperty = 1;
-  (function(module) {
-    function _defineProperty2(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-      return obj;
-    }
-    module.exports = _defineProperty2, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  })(defineProperty$2);
-  return defineProperty$2.exports;
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
 }
-var definePropertyExports = requireDefineProperty();
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? Object(arguments[i]) : {};
+    var ownKeys2 = Object.keys(source);
+    if (typeof Object.getOwnPropertySymbols === "function") {
+      ownKeys2.push.apply(ownKeys2, Object.getOwnPropertySymbols(source).filter(function(sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+    ownKeys2.forEach(function(key) {
+      _defineProperty$1(target, key, source[key]);
+    });
+  }
+  return target;
+}
 function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function(target) {
+  _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -10540,27 +10535,6 @@ function _extends() {
     return target;
   };
   return _extends.apply(this, arguments);
-}
-function ownKeys$1(object, enumerableOnly) {
-  var keys2 = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols2 = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols2 = symbols2.filter(function(sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys2.push.apply(keys2, symbols2);
-  }
-  return keys2;
-}
-function _objectSpread$1(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys$1(Object(source), true).forEach(function(key) {
-      definePropertyExports(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function(key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-  return target;
 }
 function powerSetPermutations(arr) {
   var arrLength = arr.length;
@@ -10594,7 +10568,7 @@ function createStyleObject(classNames2) {
   });
   var classNamesCombinations = getClassNameCombinations(nonTokenClassNames);
   return classNamesCombinations.reduce(function(styleObject, className) {
-    return _objectSpread$1(_objectSpread$1({}, styleObject), stylesheet[className]);
+    return _objectSpread({}, styleObject, stylesheet[className]);
   }, elementStyle);
 }
 function createClassNameString(classNames2) {
@@ -10623,7 +10597,7 @@ function createElement(_ref) {
     var childrenCreator = createChildren(stylesheet, useInlineStyles);
     var props;
     if (!useInlineStyles) {
-      props = _objectSpread$1(_objectSpread$1({}, properties), {}, {
+      props = _objectSpread({}, properties, {
         className: createClassNameString(properties.className)
       });
     } else {
@@ -10638,13 +10612,13 @@ function createElement(_ref) {
       var className = properties.className && startingClassName.concat(properties.className.filter(function(className2) {
         return !allStylesheetSelectors.includes(className2);
       }));
-      props = _objectSpread$1(_objectSpread$1({}, properties), {}, {
+      props = _objectSpread({}, properties, {
         className: createClassNameString(className) || void 0,
         style: createStyleObject(properties.className, Object.assign({}, properties.style, style2), stylesheet)
       });
     }
     var children = childrenCreator(node.children);
-    return /* @__PURE__ */ modules$1.createElement(TagName, _extends({
+    return modules$1.createElement(TagName, _extends({
       key
     }, props), children);
   }
@@ -10653,28 +10627,6 @@ const checkForListedLanguage = function(astGenerator, language) {
   var langs = astGenerator.listLanguages();
   return langs.indexOf(language) !== -1;
 };
-var _excluded = ["language", "children", "style", "customStyle", "codeTagProps", "useInlineStyles", "showLineNumbers", "showInlineLineNumbers", "startingLineNumber", "lineNumberContainerStyle", "lineNumberStyle", "wrapLines", "wrapLongLines", "lineProps", "renderer", "PreTag", "CodeTag", "code", "astGenerator"];
-function ownKeys(object, enumerableOnly) {
-  var keys2 = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols2 = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols2 = symbols2.filter(function(sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys2.push.apply(keys2, symbols2);
-  }
-  return keys2;
-}
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
-      definePropertyExports(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-  return target;
-}
 var newLineRegex = /\n/g;
 function getNewLines(str) {
   return str.match(newLineRegex);
@@ -10683,7 +10635,7 @@ function getAllLineNumbers(_ref) {
   var lines = _ref.lines, startingLineNumber = _ref.startingLineNumber, style2 = _ref.style;
   return lines.map(function(_, i) {
     var number2 = i + startingLineNumber;
-    return /* @__PURE__ */ modules$1.createElement("span", {
+    return modules$1.createElement("span", {
       key: "line-".concat(i),
       className: "react-syntax-highlighter-line-number",
       style: typeof style2 === "function" ? style2(number2) : style2
@@ -10692,10 +10644,10 @@ function getAllLineNumbers(_ref) {
 }
 function AllLineNumbers(_ref2) {
   var codeString = _ref2.codeString, codeStyle = _ref2.codeStyle, _ref2$containerStyle = _ref2.containerStyle, containerStyle = _ref2$containerStyle === void 0 ? {
-    "float": "left",
+    float: "left",
     paddingRight: "10px"
   } : _ref2$containerStyle, _ref2$numberStyle = _ref2.numberStyle, numberStyle = _ref2$numberStyle === void 0 ? {} : _ref2$numberStyle, startingLineNumber = _ref2.startingLineNumber;
-  return /* @__PURE__ */ modules$1.createElement("code", {
+  return modules$1.createElement("code", {
     style: Object.assign({}, codeStyle, containerStyle)
   }, getAllLineNumbers({
     lines: codeString.replace(/\n$/, "").split("\n"),
@@ -10730,7 +10682,7 @@ function assembleLineNumberStyles(lineNumberStyle, lineNumber, largestLineNumber
     userSelect: "none"
   };
   var customLineNumberStyle = typeof lineNumberStyle === "function" ? lineNumberStyle(lineNumber) : lineNumberStyle;
-  var assembledStyle = _objectSpread(_objectSpread({}, defaultLineNumberStyle), customLineNumberStyle);
+  var assembledStyle = _objectSpread({}, defaultLineNumberStyle, customLineNumberStyle);
   return assembledStyle;
 }
 function createLineElement(_ref3) {
@@ -10742,7 +10694,7 @@ function createLineElement(_ref3) {
     children.unshift(getInlineLineNumber(lineNumber, inlineLineNumberStyle));
   }
   if (wrapLongLines & showLineNumbers) {
-    properties.style = _objectSpread(_objectSpread({}, properties.style), {}, {
+    properties.style = _objectSpread({}, properties.style, {
       display: "flex"
     });
   }
@@ -10765,9 +10717,7 @@ function flattenCodeTree(tree) {
       }));
     } else if (node.children) {
       var classNames2 = className.concat(node.properties.className);
-      flattenCodeTree(node.children, classNames2).forEach(function(i2) {
-        return newTree.push(i2);
-      });
+      newTree = newTree.concat(flattenCodeTree(node.children, classNames2));
     }
   }
   return newTree;
@@ -10824,18 +10774,18 @@ function processLines(codeTree, wrapLines, lineProps, showLineNumbers, showInlin
           newTree.push(_line);
         } else if (i === splitValue.length - 1) {
           var stringChild = tree[index2 + 1] && tree[index2 + 1].children && tree[index2 + 1].children[0];
-          var lastLineInPreviousSpan = {
-            type: "text",
-            value: "".concat(text2)
-          };
           if (stringChild) {
+            var lastLineInPreviousSpan = {
+              type: "text",
+              value: "".concat(text2)
+            };
             var newElem = createLineElement({
               children: [lastLineInPreviousSpan],
               className: node.properties.className
             });
             tree.splice(index2 + 1, 0, newElem);
           } else {
-            var _children2 = [lastLineInPreviousSpan];
+            var _children2 = [newChild];
             var _line2 = createLine(_children2, lineNumber2, node.properties.className);
             newTree.push(_line2);
           }
@@ -10907,10 +10857,10 @@ function highlight$1(defaultAstGenerator, defaultStyle) {
   return function SyntaxHighlighter2(_ref7) {
     var language = _ref7.language, children = _ref7.children, _ref7$style = _ref7.style, style2 = _ref7$style === void 0 ? defaultStyle : _ref7$style, _ref7$customStyle = _ref7.customStyle, customStyle = _ref7$customStyle === void 0 ? {} : _ref7$customStyle, _ref7$codeTagProps = _ref7.codeTagProps, codeTagProps = _ref7$codeTagProps === void 0 ? {
       className: language ? "language-".concat(language) : void 0,
-      style: _objectSpread(_objectSpread({}, style2['code[class*="language-"]']), style2['code[class*="language-'.concat(language, '"]')])
-    } : _ref7$codeTagProps, _ref7$useInlineStyles = _ref7.useInlineStyles, useInlineStyles = _ref7$useInlineStyles === void 0 ? true : _ref7$useInlineStyles, _ref7$showLineNumbers = _ref7.showLineNumbers, showLineNumbers = _ref7$showLineNumbers === void 0 ? false : _ref7$showLineNumbers, _ref7$showInlineLineN = _ref7.showInlineLineNumbers, showInlineLineNumbers = _ref7$showInlineLineN === void 0 ? true : _ref7$showInlineLineN, _ref7$startingLineNum = _ref7.startingLineNumber, startingLineNumber = _ref7$startingLineNum === void 0 ? 1 : _ref7$startingLineNum, lineNumberContainerStyle = _ref7.lineNumberContainerStyle, _ref7$lineNumberStyle = _ref7.lineNumberStyle, lineNumberStyle = _ref7$lineNumberStyle === void 0 ? {} : _ref7$lineNumberStyle, wrapLines = _ref7.wrapLines, _ref7$wrapLongLines = _ref7.wrapLongLines, wrapLongLines = _ref7$wrapLongLines === void 0 ? false : _ref7$wrapLongLines, _ref7$lineProps = _ref7.lineProps, lineProps = _ref7$lineProps === void 0 ? {} : _ref7$lineProps, renderer = _ref7.renderer, _ref7$PreTag = _ref7.PreTag, PreTag = _ref7$PreTag === void 0 ? "pre" : _ref7$PreTag, _ref7$CodeTag = _ref7.CodeTag, CodeTag = _ref7$CodeTag === void 0 ? "code" : _ref7$CodeTag, _ref7$code = _ref7.code, code = _ref7$code === void 0 ? (Array.isArray(children) ? children[0] : children) || "" : _ref7$code, astGenerator = _ref7.astGenerator, rest = objectWithoutPropertiesExports(_ref7, _excluded);
+      style: _objectSpread({}, style2['code[class*="language-"]'], style2['code[class*="language-'.concat(language, '"]')])
+    } : _ref7$codeTagProps, _ref7$useInlineStyles = _ref7.useInlineStyles, useInlineStyles = _ref7$useInlineStyles === void 0 ? true : _ref7$useInlineStyles, _ref7$showLineNumbers = _ref7.showLineNumbers, showLineNumbers = _ref7$showLineNumbers === void 0 ? false : _ref7$showLineNumbers, _ref7$showInlineLineN = _ref7.showInlineLineNumbers, showInlineLineNumbers = _ref7$showInlineLineN === void 0 ? true : _ref7$showInlineLineN, _ref7$startingLineNum = _ref7.startingLineNumber, startingLineNumber = _ref7$startingLineNum === void 0 ? 1 : _ref7$startingLineNum, lineNumberContainerStyle = _ref7.lineNumberContainerStyle, _ref7$lineNumberStyle = _ref7.lineNumberStyle, lineNumberStyle = _ref7$lineNumberStyle === void 0 ? {} : _ref7$lineNumberStyle, wrapLines = _ref7.wrapLines, _ref7$wrapLongLines = _ref7.wrapLongLines, wrapLongLines = _ref7$wrapLongLines === void 0 ? false : _ref7$wrapLongLines, _ref7$lineProps = _ref7.lineProps, lineProps = _ref7$lineProps === void 0 ? {} : _ref7$lineProps, renderer = _ref7.renderer, _ref7$PreTag = _ref7.PreTag, PreTag = _ref7$PreTag === void 0 ? "pre" : _ref7$PreTag, _ref7$CodeTag = _ref7.CodeTag, CodeTag = _ref7$CodeTag === void 0 ? "code" : _ref7$CodeTag, _ref7$code = _ref7.code, code = _ref7$code === void 0 ? Array.isArray(children) ? children[0] : children : _ref7$code, astGenerator = _ref7.astGenerator, rest = objectWithoutPropertiesExports(_ref7, ["language", "children", "style", "customStyle", "codeTagProps", "useInlineStyles", "showLineNumbers", "showInlineLineNumbers", "startingLineNumber", "lineNumberContainerStyle", "lineNumberStyle", "wrapLines", "wrapLongLines", "lineProps", "renderer", "PreTag", "CodeTag", "code", "astGenerator"]);
     astGenerator = astGenerator || defaultAstGenerator;
-    var allLineNumbers = showLineNumbers ? /* @__PURE__ */ modules$1.createElement(AllLineNumbers, {
+    var allLineNumbers = showLineNumbers ? modules$1.createElement(AllLineNumbers, {
       containerStyle: lineNumberContainerStyle,
       codeStyle: codeTagProps.style || {},
       numberStyle: lineNumberStyle,
@@ -10927,17 +10877,8 @@ function highlight$1(defaultAstGenerator, defaultStyle) {
       className: rest.className ? "".concat(generatorClassName, " ").concat(rest.className) : generatorClassName,
       style: Object.assign({}, customStyle)
     });
-    if (wrapLongLines) {
-      codeTagProps.style = _objectSpread(_objectSpread({}, codeTagProps.style), {}, {
-        whiteSpace: "pre-wrap"
-      });
-    } else {
-      codeTagProps.style = _objectSpread(_objectSpread({}, codeTagProps.style), {}, {
-        whiteSpace: "pre"
-      });
-    }
     if (!astGenerator) {
-      return /* @__PURE__ */ modules$1.createElement(PreTag, preProps, allLineNumbers, /* @__PURE__ */ modules$1.createElement(CodeTag, codeTagProps, code));
+      return modules$1.createElement(PreTag, preProps, allLineNumbers, modules$1.createElement(CodeTag, codeTagProps, code));
     }
     if (wrapLines === void 0 && renderer || wrapLongLines)
       wrapLines = true;
@@ -10957,7 +10898,16 @@ function highlight$1(defaultAstGenerator, defaultStyle) {
     }
     var largestLineNumber = codeTree.value.length + startingLineNumber;
     var rows = processLines(codeTree, wrapLines, lineProps, showLineNumbers, showInlineLineNumbers, startingLineNumber, largestLineNumber, lineNumberStyle, wrapLongLines);
-    return /* @__PURE__ */ modules$1.createElement(PreTag, preProps, /* @__PURE__ */ modules$1.createElement(CodeTag, codeTagProps, !showInlineLineNumbers && allLineNumbers, renderer({
+    if (wrapLongLines) {
+      codeTagProps.style = _objectSpread({}, codeTagProps.style, {
+        whiteSpace: "pre-wrap"
+      });
+    } else {
+      codeTagProps.style = _objectSpread({}, codeTagProps.style, {
+        whiteSpace: "pre"
+      });
+    }
+    return modules$1.createElement(PreTag, preProps, modules$1.createElement(CodeTag, codeTagProps, !showInlineLineNumbers && allLineNumbers, renderer({
       rows,
       stylesheet: style2,
       useInlineStyles
@@ -12353,7 +12303,7 @@ var prismCore = { exports: {} };
    * @public
    */
   var Prism2 = function(_self2) {
-    var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i;
+    var lang = /\blang(?:uage)?-([\w-]+)\b/i;
     var uniqueId = 0;
     var plainTextGrammar = {};
     var _ = {
@@ -12412,18 +12362,13 @@ var prismCore = { exports: {} };
           }
         },
         getLanguage: function(element) {
-          while (element) {
-            var m = lang.exec(element.className);
-            if (m) {
-              return m[1].toLowerCase();
-            }
+          while (element && !lang.test(element.className)) {
             element = element.parentElement;
           }
+          if (element) {
+            return (element.className.match(lang) || [, "none"])[1].toLowerCase();
+          }
           return "none";
-        },
-        setLanguage: function(element, language) {
-          element.className = element.className.replace(RegExp(lang, "gi"), "");
-          element.classList.add("language-" + language);
         },
         currentScript: function() {
           if (typeof document === "undefined") {
@@ -12540,10 +12485,10 @@ var prismCore = { exports: {} };
       highlightElement: function(element, async, callback) {
         var language = _.util.getLanguage(element);
         var grammar = _.languages[language];
-        _.util.setLanguage(element, language);
+        element.className = element.className.replace(lang, "").replace(/\s+/g, " ") + " language-" + language;
         var parent = element.parentElement;
         if (parent && parent.nodeName.toLowerCase() === "pre") {
-          _.util.setLanguage(parent, language);
+          parent.className = parent.className.replace(lang, "").replace(/\s+/g, " ") + " language-" + language;
         }
         var code = element.textContent;
         var env = {
@@ -12596,9 +12541,6 @@ var prismCore = { exports: {} };
           language
         };
         _.hooks.run("before-tokenize", env);
-        if (!env.grammar) {
-          throw new Error('The language "' + env.language + '" has no grammar.');
-        }
         env.tokens = _.tokenize(env.code, env.grammar);
         _.hooks.run("after-tokenize", env);
         return Token.stringify(_.util.encode(env.tokens), env.language);
@@ -12722,7 +12664,7 @@ var prismCore = { exports: {} };
             var match;
             if (greedy) {
               match = matchPattern(pattern, pos, text2, lookbehind);
-              if (!match || match.index >= text2.length) {
+              if (!match) {
                 break;
               }
               var from = match.index;
@@ -13105,14 +13047,14 @@ function clike$1(Prism2) {
       greedy: true
     },
     "class-name": {
-      pattern: /(\b(?:class|extends|implements|instanceof|interface|new|trait)\s+|\bcatch\s+\()[\w.\\]+/i,
+      pattern: /(\b(?:class|interface|extends|implements|trait|instanceof|new)\s+|\bcatch\s+\()[\w.\\]+/i,
       lookbehind: true,
       inside: {
         punctuation: /[.\\]/
       }
     },
-    keyword: /\b(?:break|catch|continue|do|else|finally|for|function|if|in|instanceof|new|null|return|throw|try|while)\b/,
-    boolean: /\b(?:false|true)\b/,
+    keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+    boolean: /\b(?:true|false)\b/,
     function: /\b\w+(?=\()/,
     number: /\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,
     operator: /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
@@ -13127,7 +13069,7 @@ function javascript(Prism2) {
     "class-name": [
       Prism2.languages.clike["class-name"],
       {
-        pattern: /(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,
+        pattern: /(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:prototype|constructor))/,
         lookbehind: true
       }
     ],
@@ -13142,13 +13084,10 @@ function javascript(Prism2) {
       }
     ],
     function: /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
-    number: {
-      pattern: RegExp(/(^|[^\w$])/.source + "(?:" + (/NaN|Infinity/.source + "|" + /0[bB][01]+(?:_[01]+)*n?/.source + "|" + /0[oO][0-7]+(?:_[0-7]+)*n?/.source + "|" + /0[xX][\dA-Fa-f]+(?:_[\dA-Fa-f]+)*n?/.source + "|" + /\d+(?:_\d+)*n/.source + "|" + /(?:\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\.\d+(?:_\d+)*)(?:[Ee][+-]?\d+(?:_\d+)*)?/.source) + ")" + /(?![\w$])/.source),
-      lookbehind: true
-    },
+    number: /\b(?:(?:0[xX](?:[\dA-Fa-f](?:_[\dA-Fa-f])?)+|0[bB](?:[01](?:_[01])?)+|0[oO](?:[0-7](?:_[0-7])?)+)n?|(?:\d(?:_\d)?)+n|NaN|Infinity)\b|(?:\b(?:\d(?:_\d)?)+\.?(?:\d(?:_\d)?)*|\B\.(?:\d(?:_\d)?)+)(?:[Ee][+-]?(?:\d(?:_\d)?)+)?/,
     operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/
   });
-  Prism2.languages.javascript["class-name"][0].pattern = /(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
+  Prism2.languages.javascript["class-name"][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/;
   Prism2.languages.insertBefore("javascript", "keyword", {
     regex: {
       pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,
@@ -13220,19 +13159,6 @@ function javascript(Prism2) {
         },
         string: /[\s\S]+/
       }
-    },
-    "string-property": {
-      pattern: /((?:^|[,{])[ \t]*)(["'])(?:\\(?:\r\n|[\s\S])|(?!\2)[^\\\r\n])*\2(?=\s*:)/m,
-      lookbehind: true,
-      greedy: true,
-      alias: "property"
-    }
-  });
-  Prism2.languages.insertBefore("javascript", "operator", {
-    "literal-property": {
-      pattern: /((?:^|[,{])[ \t]*)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*:)/m,
-      lookbehind: true,
-      alias: "property"
     }
   });
   if (Prism2.languages.markup) {
@@ -13406,9 +13332,6 @@ var SyntaxHighlighter = highlight$1(core, {});
 SyntaxHighlighter.registerLanguage = function(_, language) {
   return core.register(language);
 };
-SyntaxHighlighter.alias = function(name2, aliases) {
-  return core.alias(name2, aliases);
-};
 const SyntaxHighlighter$1 = SyntaxHighlighter;
 var jsx_1 = jsx;
 jsx.displayName = "jsx";
@@ -13432,8 +13355,8 @@ function jsx(Prism2) {
     spread = re(spread).source;
     Prism3.languages.jsx = Prism3.languages.extend("markup", javascript2);
     Prism3.languages.jsx.tag.pattern = re(/<\/?(?:[\w.:-]+(?:<S>+(?:[\w.:$-]+(?:=(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s{'"/>=]+|<BRACES>))?|<SPREAD>))*<S>*\/?)?>/.source);
-    Prism3.languages.jsx.tag.inside["tag"].pattern = /^<\/?[^\s>\/]*/;
-    Prism3.languages.jsx.tag.inside["attr-value"].pattern = /=(?!\{)(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s'">]+)/;
+    Prism3.languages.jsx.tag.inside["tag"].pattern = /^<\/?[^\s>\/]*/i;
+    Prism3.languages.jsx.tag.inside["attr-value"].pattern = /=(?!\{)(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s'">]+)/i;
     Prism3.languages.jsx.tag.inside["tag"].inside["class-name"] = /^[A-Z]\w*(?:\.[A-Z]\w*)*$/;
     Prism3.languages.jsx.tag.inside["comment"] = javascript2["comment"];
     Prism3.languages.insertBefore("inside", "attr-name", {
@@ -13445,14 +13368,14 @@ function jsx(Prism2) {
     Prism3.languages.insertBefore("inside", "special-attr", {
       script: {
         pattern: re(/=<BRACES>/.source),
-        alias: "language-javascript",
         inside: {
           "script-punctuation": {
             pattern: /^=(?=\{)/,
             alias: "punctuation"
           },
           rest: Prism3.languages.jsx
-        }
+        },
+        alias: "language-javascript"
       }
     }, Prism3.languages.jsx.tag);
     var stringifyToken = function(token) {
@@ -13536,11 +13459,10 @@ function typescript(Prism2) {
         greedy: true,
         inside: null
       },
-      builtin: /\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/
+      builtin: /\b(?:string|Function|any|number|boolean|Array|symbol|console|Promise|unknown|never)\b/
     });
-    Prism3.languages.typescript.keyword.push(/\b(?:abstract|declare|is|keyof|readonly|require)\b/, /\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/, /\btype\b(?=\s*(?:[\{*]|$))/);
+    Prism3.languages.typescript.keyword.push(/\b(?:abstract|as|declare|implements|is|keyof|readonly|require)\b/, /\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/, /\btype\b(?=\s*(?:[\{*]|$))/);
     delete Prism3.languages.typescript["parameter"];
-    delete Prism3.languages.typescript["literal-property"];
     var typeInside = Prism3.languages.extend("typescript", {});
     delete typeInside["class-name"];
     Prism3.languages.typescript["class-name"].inside = typeInside;
@@ -13582,8 +13504,6 @@ function tsx(Prism2) {
   (function(Prism3) {
     var typescript2 = Prism3.util.clone(Prism3.languages.typescript);
     Prism3.languages.tsx = Prism3.languages.extend("jsx", typescript2);
-    delete Prism3.languages.tsx["parameter"];
-    delete Prism3.languages.tsx["literal-property"];
     var tag = Prism3.languages.tsx.tag;
     tag.pattern = RegExp(/(^|[^\w$]|(?=<\/))/.source + "(?:" + tag.pattern.source + ")", tag.pattern.flags);
     tag.lookbehind = true;
@@ -13607,7 +13527,7 @@ function scss(Prism2) {
     },
     url: /(?:[-a-z]+-)?url(?=\()/i,
     selector: {
-      pattern: /(?=\S)[^@;{}()]?(?:[^@;{}()\s]|\s+(?!\s)|#\{\$[-\w]+\})+(?=\s*\{(?:\}|\s|[^}][^:{}]*[:{][^}]))/,
+      pattern: /(?=\S)[^@;{}()]?(?:[^@;{}()\s]|\s+(?!\s)|#\{\$[-\w]+\})+(?=\s*\{(?:\}|\s|[^}][^:{}]*[:{][^}]))/m,
       inside: {
         parent: {
           pattern: /&/,
@@ -13626,7 +13546,7 @@ function scss(Prism2) {
   });
   Prism2.languages.insertBefore("scss", "atrule", {
     keyword: [
-      /@(?:content|debug|each|else(?: if)?|extend|for|forward|function|if|import|include|mixin|return|use|warn|while)\b/i,
+      /@(?:if|else(?: if)?|forward|for|each|while|import|use|extend|debug|warn|mixin|include|function|return|content)\b/i,
       {
         pattern: /( )(?:from|through)(?= )/,
         lookbehind: true
@@ -13638,7 +13558,7 @@ function scss(Prism2) {
   });
   Prism2.languages.insertBefore("scss", "function", {
     "module-modifier": {
-      pattern: /\b(?:as|hide|show|with)\b/i,
+      pattern: /\b(?:as|with|show|hide)\b/i,
       alias: "keyword"
     },
     placeholder: {
@@ -13649,13 +13569,13 @@ function scss(Prism2) {
       pattern: /\B!(?:default|optional)\b/i,
       alias: "keyword"
     },
-    boolean: /\b(?:false|true)\b/,
+    boolean: /\b(?:true|false)\b/,
     null: {
       pattern: /\bnull\b/,
       alias: "keyword"
     },
     operator: {
-      pattern: /(\s)(?:[-+*\/%]|[=!]=|<=?|>=?|and|not|or)(?=\s)/,
+      pattern: /(\s)(?:[-+*\/%]|[=!]=|<=?|>=?|and|or|not)(?=\s)/,
       lookbehind: true
     }
   });
@@ -13686,7 +13606,7 @@ function less(Prism2) {
         variable: /@+[\w-]+/
       }
     },
-    property: /(?:@\{[\w-]+\}|[\w-])+(?:\+_?)?(?=\s*:)/,
+    property: /(?:@\{[\w-]+\}|[\w-])+(?:\+_?)?(?=\s*:)/i,
     operator: /[+\-*\/]/
   });
   Prism2.languages.insertBefore("less", "property", {
@@ -13729,7 +13649,7 @@ function json(Prism2) {
     number: /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/i,
     punctuation: /[{}[\],]/,
     operator: /:/,
-    boolean: /\b(?:false|true)\b/,
+    boolean: /\b(?:true|false)\b/,
     null: {
       pattern: /\bnull\b/,
       alias: "keyword"
@@ -15862,6 +15782,30 @@ var interopRequireDefault = { exports: {} };
   module.exports = _interopRequireDefault2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 })(interopRequireDefault);
 var objectSpread2 = { exports: {} };
+var defineProperty$2 = { exports: {} };
+var hasRequiredDefineProperty;
+function requireDefineProperty() {
+  if (hasRequiredDefineProperty)
+    return defineProperty$2.exports;
+  hasRequiredDefineProperty = 1;
+  (function(module) {
+    function _defineProperty2(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+    module.exports = _defineProperty2, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  })(defineProperty$2);
+  return defineProperty$2.exports;
+}
 var hasRequiredObjectSpread2;
 function requireObjectSpread2() {
   if (hasRequiredObjectSpread2)
@@ -16136,7 +16080,7 @@ function boundAlpha(a) {
 }
 function convertToPercentage(n) {
   if (n <= 1) {
-    return "".concat(Number(n) * 100, "%");
+    return Number(n) * 100 + "%";
   }
   return n;
 }
@@ -16443,9 +16387,9 @@ function inputToRGB(color2) {
 }
 var CSS_INTEGER = "[-\\+]?\\d+%?";
 var CSS_NUMBER = "[-\\+]?\\d*\\.\\d+%?";
-var CSS_UNIT = "(?:".concat(CSS_NUMBER, ")|(?:").concat(CSS_INTEGER, ")");
-var PERMISSIVE_MATCH3 = "[\\s|\\(]+(".concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")\\s*\\)?");
-var PERMISSIVE_MATCH4 = "[\\s|\\(]+(".concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")[,|\\s]+(").concat(CSS_UNIT, ")\\s*\\)?");
+var CSS_UNIT = "(?:" + CSS_NUMBER + ")|(?:" + CSS_INTEGER + ")";
+var PERMISSIVE_MATCH3 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
+var PERMISSIVE_MATCH4 = "[\\s|\\(]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")[,|\\s]+(" + CSS_UNIT + ")\\s*\\)?";
 var matchers = {
   CSS_UNIT: new RegExp(CSS_UNIT),
   rgb: new RegExp("rgb" + PERMISSIVE_MATCH3),
@@ -18874,7 +18818,7 @@ const BLOCK_PROPS = [
 ];
 const DEFAULT_VISION_CONFIG = {
   category: "*",
-  icon: "https://img.alicdn.com/tfs/TB1whTmvAL0gK0jSZFxXXXWHVXa-200-200.svg",
+  icon: "//img.alicdn.com/tfs/TB1whTmvAL0gK0jSZFxXXXWHVXa-200-200.svg",
   isContainer: false
 };
 const STRING = "string";
@@ -19225,8 +19169,9 @@ function RouterSwitch() {
     className: "logo",
     href: npmLink
   }, /* @__PURE__ */ modules$1.createElement("img", {
-    src: logo || "https://img.alicdn.com/tfs/TB1Zs2ouQL0gK0jSZFAXXcA9pXa-1142-200.png",
-    style: { width: 178, height: 31 }
+    alt: "Vite Docs",
+    src: logo || "//img.alicdn.com/imgextra/i1/O1CN01yPg2Vc1gAJ2EFm5iG_!!6000000004101-55-tps-1058-237.svg",
+    style: { width: 178 }
   })), /* @__PURE__ */ modules$1.createElement(Button, {
     className: "responsive-btn",
     onClick: () => toggle()

@@ -1157,7 +1157,7 @@
   align-items: center;
   width: 16px;
   height: 16px;
-  color: rgba(0, 0, 0, 0.4509803922);
+  color: #00000073;
   cursor: pointer;
   transition: all 0.24s;
 }
