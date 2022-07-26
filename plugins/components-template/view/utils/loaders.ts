@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cleanUrl } from "./config";
-import keyBy from "lodash/keyBy";
 import { isCSSLang, isJsx } from "../../../utils/lang";
 import { useRouteMatch } from "react-router-dom";
 
@@ -65,11 +64,10 @@ export function useAsyncImport(
 export function useTypeFile(): any {
   const { route } = useRoute();
 
-  const typeFile = route.replace(".md", ".tsx.type$.json");
+  const typeFile = route.replace(".md", ".tsx.type");
 
-  return useAsyncImport(typeFile, ({ default: properties }) => {
-    const { default: compProps } = keyBy(properties, "exportName");
-    return compProps || properties?.[0];
+  return useAsyncImport(typeFile, ({ default: property }) => {
+    return property;
   });
 }
 

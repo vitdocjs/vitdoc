@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import HighLight from "../highlight";
-import { ComponentPropsContext } from "../../context";
 import { useBoolean, useMemoizedFn } from "ahooks";
 import CopyOutlined from "@ant-design/icons/CopyOutlined";
 import CodeOutlined from "@ant-design/icons/CodeOutlined";
@@ -13,13 +12,23 @@ import "./index.scss";
 
 import dropRight from "lodash/dropRight";
 import takeRight from "lodash/takeRight";
+import { useAtom } from "jotai";
+import { propertiesPropsStore, useSetPartialProperties } from "../../store";
 
 const { Result, Tooltip } = window["antd"];
 
-export const componentBlockRender = (props) => {
-  const { children } = props;
+export const ComponentBlock = (props) => {
+  const { children, lang, eventBus, content } = props;
+
   const beforeChildren = dropRight(children, 1);
   const lastChild = takeRight(children, 1);
+
+  const [checkCode, { toggle }] = useBoolean();
+
+  const handlerDebugComponent = useMemoizedFn(() => {
+    eventBus.emit("debug");
+  });
+
   return (
     <div className="component-area">
       {!!beforeChildren.length && (
@@ -28,25 +37,52 @@ export const componentBlockRender = (props) => {
         </div>
       )}
       {lastChild}
+      <div className="code-box-actions">
+        <Tooltip title="Debug" onClick={handlerDebugComponent}>
+          <BugOutlined className="code-box-code-action" />
+        </Tooltip>
+        <CopyIcon content={content} />
+        <Tooltip
+          title={checkCode ? "Hide Code" : "View Code"}
+          onClick={() => toggle()}
+        >
+          <CodeOutlined
+            className={classNames(
+              "code-box-code-action",
+              checkCode && "active"
+            )}
+          />
+        </Tooltip>
+      </div>
+      {checkCode && <HighLight lang={lang} children={content} />}
     </div>
   );
 };
 
 export function ComponentArea(props) {
-  const { renderer, lang, content, defaultCodePanel } = props;
+  const { renderer, defaultCodePanel, eventBus, pathHash, error } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
   const newComp = useRef(new Map());
 
-  const { componentProps, onSetDefaultProps, error, pathHash } = useContext(
-    ComponentPropsContext
-  );
+  const [{ props: componentProps }] = useAtom(propertiesPropsStore);
+  const setPartialProps = useSetPartialProperties();
   const defaultPropsRef = useRef();
+
+  eventBus.useSubscription((s) => {
+    if (s === "debug") {
+      setPartialProps({ defaultProps: defaultPropsRef.current || {} });
+    }
+  });
 
   const setDefaultProps = useMemoizedFn((props) => {
     defaultPropsRef.current = props;
-    defaultCodePanel && onSetDefaultProps?.({ ...(props || {}) });
+
+    defaultCodePanel &&
+      setPartialProps({
+        defaultProps: props,
+      });
   });
 
   const wrapProps = useMemoizedFn((Component, { React: OutReact }) => {
@@ -73,14 +109,10 @@ export function ComponentArea(props) {
   });
 
   useEffect(() => {
-    renderer && renderer(componentRef.current, wrapProps);
+    renderer(componentRef.current, {
+      wrap: wrapProps,
+    });
   }, [renderer, componentProps]);
-
-  const [checkCode, { toggle }] = useBoolean();
-
-  const handlerDebugComponent = useMemoizedFn(() => {
-    onSetDefaultProps?.({ ...(defaultPropsRef.current || {}) });
-  });
 
   return (
     <>
@@ -103,24 +135,6 @@ export function ComponentArea(props) {
           />
         </div>
       )}
-      <div className="code-box-actions">
-        <Tooltip title="Debug" onClick={handlerDebugComponent}>
-          <BugOutlined className="code-box-code-action" />
-        </Tooltip>
-        <CopyIcon content={content} />
-        <Tooltip
-          title={checkCode ? "Hide Code" : "View Code"}
-          onClick={() => toggle()}
-        >
-          <CodeOutlined
-            className={classNames(
-              "code-box-code-action",
-              checkCode && "active"
-            )}
-          />
-        </Tooltip>
-      </div>
-      {checkCode && <HighLight lang={lang} children={content} />}
     </>
   );
 }

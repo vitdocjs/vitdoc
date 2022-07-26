@@ -1,4 +1,4 @@
-import { isJsx } from "../../../../utils/lang";
+import { hasReact, isJsx, isTypes } from "../../../../utils/lang";
 
 export function remarkFrontMatter() {
   return (tree, _file) => {
@@ -10,8 +10,16 @@ export function remarkFrontMatter() {
         prevModules = [];
         return;
       }
+      if (node.type === "code" && isJsx(node.lang) && isTypes(node.value)) {
+        modules.push(...prevModules, {
+          ...node,
+          type: "property-code",
+        });
+        prevModules = [];
+        return;
+      }
       prevModules.push(node);
-      if (node.type === "code" && isJsx(node.lang)) {
+      if (node.type === "code" && hasReact(node.value) && isJsx(node.lang)) {
         modules.push({
           type: "component-block",
           children: prevModules,

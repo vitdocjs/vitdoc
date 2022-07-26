@@ -39,7 +39,6 @@ export function getConfig() {
       libraryName:
         configRc.libraryName || targetPackageJson.name || "Component",
       extendTemplate,
-      storiesWebpackMerge: configRc.storiesWebpackMerge,
       webpackMerge: configRc.webpackMerge,
       viteConfig: configRc.viteConfig,
       devPort: configRc.port,

@@ -11,9 +11,9 @@ import {
 import debounce from "lodash/debounce";
 import type { ModuleNode } from "vite";
 
-const TypeFile = ({ prefix = ".type$.json" } = {}) => {
+const TypeFile = ({ prefix = ".type" } = {}) => {
   let lastDoc: Record<string, any> = {};
-  const matchReg = new RegExp(`${prefix.replace("$", "\\$")}$`);
+  const matchReg = new RegExp(`${prefix}$`);
   const requestedUrlMap = {};
   function getComponentDocs(fileName) {
     // console.time("get docs");
@@ -84,13 +84,17 @@ const TypeFile = ({ prefix = ".type$.json" } = {}) => {
       return;
     },
 
-    resolveId(id) {
+    resolveId(id, importer) {
       if (matchReg.test(id)) {
-        return id;
+        if (/^\/src/.test(id)) {
+          // REMOVE
+          return id;
+        }
+        return path.join(path.relative(process.cwd(), importer), "..", id);
       }
       return;
     },
-    load(id) {
+    load(id, ...args) {
       const file = cleanUrl(id);
 
       if (matchReg.test(file)) {
@@ -107,7 +111,15 @@ const TypeFile = ({ prefix = ".type$.json" } = {}) => {
           componentDoc = getComponentDocs(fileName).doc;
         }
 
-        return JSON.stringify(componentDoc);
+        return componentDoc
+          .map((s) => {
+            const { exportName } = s;
+            if (exportName === "default") {
+              return `export default ${JSON.stringify(s)}`;
+            }
+            return `export const ${exportName} = ${JSON.stringify(s)}`;
+          })
+          .join("\n");
       }
 
       return;

@@ -16,7 +16,10 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
@@ -57,9 +60,12 @@ var import_rules = require("../../utils/rules");
 const isDebug = process.env.DEBUG;
 const pluginRoot = __dirname.includes("plugins/components-template") ? path.resolve(__dirname, "..") : path.resolve(__dirname, "plugins/components-template");
 const currentPath = isDebug ? path.resolve(pluginRoot, "./") : path.resolve(pluginRoot, "./dist");
-const createHtml = import_swig.default.compileFile(path.resolve(pluginRoot, "./index.html"), {
-  autoescape: false
-});
+const createHtml = import_swig.default.compileFile(
+  path.resolve(pluginRoot, "./index.html"),
+  {
+    autoescape: false
+  }
+);
 const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
 const htmlCommentRE = /<!--[\s\S]*?-->/g;
 const scriptModuleRE = new RegExp(`(<script\\b[^>]*type\\s*=\\s*(?:"module"|'module')[^>]*>)(.*?)<\\/script>`, "gims");
@@ -145,12 +151,21 @@ const componentsTemplate = () => {
           const { extendTemplate: externalHtml } = (0, import_config.getConfig)();
           const mdFiles = (0, import_rules.getComponentFiles)().map((file2) => `/${file2}`);
           const mdFileMap = mdFiles.map((file2) => [file2, file2]);
-          const mainFiles = yield Promise.all(mdFiles.map((file2) => (0, import_utils.resolveMainComponent)({ pluginContainer: { resolveId: this.resolve } }, file2).then((res) => res ? res.id.replace(process.cwd(), "") : "").then((id2) => [
-            file2.replace(/\.md$/, ".tsx.type$.json"),
-            id2.replace(/\.tsx$/, ".tsx.type$.json")
-          ])));
+          const mainFiles = yield Promise.all(
+            mdFiles.map(
+              (file2) => (0, import_utils.resolveMainComponent)(
+                { pluginContainer: { resolveId: this.resolve } },
+                file2
+              ).then((res) => res ? res.id.replace(process.cwd(), "") : "").then((id2) => [
+                file2.replace(/\.md$/, ".tsx.type"),
+                id2.replace(/\.tsx$/, ".tsx.type")
+              ])
+            )
+          );
           let html = createHtml({
-            moduleMaps: [...mdFileMap, ...mainFiles].filter(Boolean).map(([key, val]) => `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`),
+            moduleMaps: [...mdFileMap, ...mainFiles].filter(Boolean).map(
+              ([key, val]) => `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`
+            ),
             externalHtml,
             dirname: currentPath,
             base: config.base,
@@ -190,7 +205,13 @@ const componentsTemplate = () => {
         let url = (0, import_utils.cleanUrl)(req.url);
         if (req.method !== "GET" || isCompHTMLProxy(req.url) || !(req.headers.accept || "").includes("text/html") || !/(\.md|\.html|\/[\w|_|-]+)$/.test((0, import_utils.cleanUrl)(req.url))) {
           if (isRouteMap(url)) {
-            return (0, import_vite2.send)(req, res, `export default ${yield this.load(url)}`, "js", {});
+            return (0, import_vite2.send)(
+              req,
+              res,
+              `export default ${yield this.load(url)}`,
+              "js",
+              {}
+            );
           }
           if (url === "/") {
             res.writeHead(302, {

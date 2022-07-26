@@ -94,6 +94,9 @@ const mdjsx = () => {
 
         const replaceReact = (code) => {
           const matchInfo = code.match(/import React([ ,])?.+?;/);
+          if (!matchInfo) {
+            return code;
+          }
           const { index: matchedIndex, "0": matchedContent } = matchInfo;
           const index = matchedIndex + matchedContent.length;
           const before = code.slice(0, index);
@@ -110,9 +113,9 @@ const mdjsx = () => {
       const React = {...React$};
 
       const beforeCreateElement = React.createElement;
-      var $_ComponentWrap;
+      var $_REF = { wrap: null };
       React.createElement = (Comp,...rest) => {
-        const wrap = $_ComponentWrap;
+        const wrap = $_REF.wrap;
         let NextComp = Comp;
 
         if(NextComp === $_Component && wrap) {
@@ -159,9 +162,10 @@ const mdjsx = () => {
           return `${code.slice(
             0,
             lastIndex
-          )};export default function(mountNode, ComponentWrap){$_ComponentWrap = ComponentWrap;${code.slice(
-            lastIndex
-          )};};`;
+          )};export default function(mountNode, { wrap, renderType$ }){
+          try { $_REF.wrap = wrap; } catch(e) { }
+          ${code.slice(lastIndex)}
+          };`;
         };
 
         let nextCode: string = replaceReact(code);

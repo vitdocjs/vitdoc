@@ -17,19 +17,16 @@ export default function renderProperty({ properties }) {
   });
 
   return (
-    <React.Fragment>
-      <b className="block-title">API</b>
-      <Table
-        scroll={{ x: "100%" }}
-        dataSource={dateSource}
-        pagination={false}
-        bordered
-      >
-        <Table.Column dataIndex="name" title="Property" />
-        <Table.Column dataIndex="description" title="Description" />
-        <Table.Column dataIndex={["type", "name"]} title="Type" />
-        <Table.Column dataIndex={["defaultValue", "value"]} title="Default" />
-      </Table>
-    </React.Fragment>
+    <Table
+      scroll={{ x: "100%" }}
+      dataSource={dateSource}
+      pagination={false}
+      bordered
+    >
+      <Table.Column dataIndex="name" title="Property" />
+      <Table.Column dataIndex="description" title="Description" />
+      <Table.Column dataIndex={["type", "name"]} title="Type" />
+      <Table.Column dataIndex={["defaultValue", "value"]} title="Default" />
+    </Table>
   );
 }

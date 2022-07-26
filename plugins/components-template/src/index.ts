@@ -136,8 +136,8 @@ const componentsTemplate = () => {
             )
               .then((res) => (res ? res.id.replace(process.cwd(), "") : ""))
               .then((id) => [
-                file.replace(/\.md$/, ".tsx.type$.json"),
-                id.replace(/\.tsx$/, ".tsx.type$.json"),
+                file.replace(/\.md$/, ".tsx.type"),
+                id.replace(/\.tsx$/, ".tsx.type"),
               ])
           )
         );

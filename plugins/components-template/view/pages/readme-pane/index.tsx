@@ -1,71 +1,42 @@
-import Properties from "../../components/property";
-import VisionPane from "../../components/vision-pane/vision-pane";
-import React, { useState } from "react";
+import React from "react";
 
 import "./index.scss";
-import {
-  useComponentInfo,
-  useMarkdown,
-  useRoute,
-  useTypeFile,
-} from "../../utils/loaders";
+import { useMarkdown, useRoute } from "../../utils/loaders";
 import { MarkdownArea } from "../../components/markdown-area";
-import { LinkCopy } from "../../components/link-copy";
-import { ComponentPropsContext } from "../../context";
-
-const { Typography } = window["antd"];
-
-const { Title, Text } = Typography;
+import { PageTitle } from "./page-title";
+import { useUnmount } from "ahooks";
+import { propertiesPropsStore, propertiesStore } from "../../store";
+import { useSetAtom } from "jotai";
+import PropertyPane from "../../components/property-pane/property-pane";
 
 export default function ReadmePane() {
-  const [visionProps, setVisionProps] = useState({});
-  const [visionDefaultProps, setVisionDefaultProps] = useState();
-
   const { route } = useRoute();
 
-  const propertyTypes = useTypeFile();
-
-  const compInfo = useComponentInfo();
-
   const Components = useMarkdown();
+
+  const setProperties = useSetAtom(propertiesStore);
+  const setDefaultProps = useSetAtom(propertiesPropsStore);
+  useUnmount(() => {
+    setProperties({});
+    setDefaultProps({
+      current: undefined,
+      defaultProps: {},
+      props: {},
+    });
+  });
 
   return (
     <div id="public-component-show-container">
       {Components ? (
         <div className="component-page">
-          <a href={compInfo?.npmLink} className="link-title">
-            <Title level={1} className="component-name">
-              {propertyTypes?.displayName || compInfo?.packageName}
-              <LinkCopy route={route} />
-            </Title>
-            <span className="component-sub-title">
-              <Text type="secondary">Package: {compInfo?.packageName}</Text>
-              <Text type="secondary">Version: {compInfo?.packageVersion}</Text>
-            </span>
-          </a>
+          <PageTitle route={route} />
           <div className="component-main">
             <div className="component-part">
               <div className="component-description">
-                <ComponentPropsContext.Provider
-                  value={{
-                    pathHash: Components?.pathHash,
-                    error: Components?.error,
-                    componentProps: visionProps,
-                    onSetDefaultProps: setVisionDefaultProps,
-                  }}
-                >
-                  <MarkdownArea data={Components} />
-                </ComponentPropsContext.Provider>
-                <Properties properties={propertyTypes} />
+                <MarkdownArea data={Components} />
               </div>
             </div>
-            {propertyTypes && (
-              <VisionPane
-                properties={propertyTypes}
-                defaultProps={visionDefaultProps}
-                onPropsChange={setVisionProps}
-              />
-            )}
+            <PropertyPane />
           </div>
         </div>
       ) : (

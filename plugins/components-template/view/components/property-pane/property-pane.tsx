@@ -3,24 +3,41 @@ import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
 import CloseOutlined from "@ant-design/icons/CloseOutlined";
 import { PANE_VISIBLE } from "../../constants";
 import { Stage } from "./stage";
-import { useLocalStorageState, useRequest, useUpdateEffect } from "ahooks";
+import {
+  useLocalStorageState,
+  useMemoizedFn,
+  useRequest,
+  useUpdateEffect,
+} from "ahooks";
 import BugOutlined from "@ant-design/icons/BugOutlined";
 import { buildVisionFromTypes } from "./convert/typefile";
+import {
+  propertiesPropsStore,
+  propertiesStore as propStore,
+} from "../../store";
+import { useAtom } from "jotai";
 
 import "./index.scss";
 
 // @ts-ignore
 const { Button, Anchor } = window.antd;
 
-export default function VisionPane({
-  properties,
-  defaultProps,
-  onPropsChange,
-}) {
+export default function PropertyPane() {
+  const [properties] = useAtom(propStore);
   const [propertyDrawerShow, setPropertyDrawerShow] = useLocalStorageState(
     PANE_VISIBLE,
-    ""
+    {}
   );
+
+  const [storeProps, setStore] = useAtom(propertiesPropsStore);
+  const { defaultProps } = storeProps;
+
+  const onPropsChange = useMemoizedFn((props: any) => {
+    setStore({
+      ...storeProps,
+      props,
+    });
+  });
 
   const { data: prototypeOptions } = useRequest(
     async () => {

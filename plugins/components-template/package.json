@@ -25,6 +25,7 @@
     "ahooks": "latest",
     "copy-to-clipboard": "^3.3.1",
     "esbuild": "^0.14.49",
+    "jotai": "^1.7.6",
     "lodash": "^4.17.21",
     "react-router-dom": "^5.2.0"
   }
