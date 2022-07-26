@@ -62,11 +62,12 @@ export default function RouterSwitch() {
       >
         <a className="logo" href={npmLink}>
           <img
+            alt="Vite Docs"
             src={
               logo ||
-              "https://img.alicdn.com/tfs/TB1Zs2ouQL0gK0jSZFAXXcA9pXa-1142-200.png"
+              "//img.alicdn.com/imgextra/i1/O1CN01yPg2Vc1gAJ2EFm5iG_!!6000000004101-55-tps-1058-237.svg"
             }
-            style={{ width: 178, height: 31 }}
+            style={{ width: 178 }}
           />
         </a>
 
