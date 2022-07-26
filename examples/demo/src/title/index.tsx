@@ -25,11 +25,6 @@ interface IProps {
   subTitle?: string;
 }
 
-/**
- * One Stop Title组件
- * @author yee.wang
- * @workNo 206388
- */
 export function Title(props: IProps) {
   const { title, subTitle, theme = {} } = props;
   const { maxWidth = 1000, isMobile } = theme;

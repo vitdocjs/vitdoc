@@ -7,6 +7,11 @@
   transition: all 0.2s;
   margin-bottom: 20px;
 
+  &.active {
+    border-color: var(--main-color, #40a9ff);
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+
   .component-container {
     padding: 16px;
     min-height: 80px;
@@ -33,9 +38,11 @@
       &:not(:first-child) {
         margin-left: 16px;
       }
-      &:hover,
+      &:hover {
+        color: #000;
+      }
       &.active {
-        color: #000000;
+        color: var(--main-color, #40a9ff);
       }
       position: relative;
       display: flex;

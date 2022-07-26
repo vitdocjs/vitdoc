@@ -22,3 +22,11 @@ ReactDOM.render(
   mountNode,
 );
 ```
+
+#### API
+
+```tsx
+import ComponentType from './index.tsx.type';
+
+renderType$(ComponentType, mountNode);
+```

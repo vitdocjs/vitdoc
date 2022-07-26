@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import "./index.scss";
-import { ComponentArea, ComponentBlock } from "../component-area";
-import { useCreation, useEventEmitter, useMemoizedFn } from "ahooks";
+import { ComponentBlock } from "../component-area";
+import { useCreation, useMemoizedFn } from "ahooks";
 import { PropertyArea } from "../property-area";
 import HighLight from "../highlight";
 
@@ -16,31 +16,9 @@ export function MarkdownArea({ data: res }) {
   const { moduleMap, content, error, pathHash } = res;
 
   const getModule = useMemoizedFn((value) => moduleMap?.[value.trim()]);
-  const eventBus = useEventEmitter<string>();
 
-  const isCodeRenderIndexRef = useRef(0);
   const code = useMemoizedFn(({ language, value = "" }) => {
-    const jsx = /^[j|t]sx$/.test(language);
-    if (!jsx) {
-      return <HighLight lang={language} children={value} />;
-    }
-
-    const index = isCodeRenderIndexRef.current;
-    isCodeRenderIndexRef.current++;
-
-    const fn = getModule(value);
-
-    return (
-      <ComponentArea
-        pathHash={pathHash}
-        error={error}
-        eventBus={eventBus}
-        renderer={fn}
-        lang={language}
-        content={value}
-        defaultCodePanel={index === 0}
-      />
-    );
+    return <HighLight lang={language} children={value} />;
   });
 
   const markdownComponent = useCreation(
@@ -52,7 +30,14 @@ export function MarkdownArea({ data: res }) {
         renderers={{
           code,
           "component-block": (props) => {
-            return <ComponentBlock {...props} eventBus={eventBus} />;
+            return (
+              <ComponentBlock
+                {...props}
+                error={error}
+                pathHash={pathHash}
+                renderer={getModule(props.value)}
+              />
+            );
           },
           "property-code": (props) => {
             return (

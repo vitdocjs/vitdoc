@@ -3,9 +3,6 @@ const { Table } = window.antd;
 import React from "react";
 
 export default function renderProperty({ properties }) {
-  if (!properties) {
-    return null;
-  }
   const { props = {} } = properties;
 
   const dateSource = (Object.values(props) as any).map((val) => {

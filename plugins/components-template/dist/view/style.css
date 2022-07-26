@@ -2,7 +2,6 @@
   display: flex;
   position: relative;
   min-height: 100vh;
-  overflow: auto;
   width: 100%;
   flex: 1;
   padding: 8px 24px;
@@ -20,7 +19,6 @@
 }
 #public-component-show-container .component-part {
   flex: 1;
-  overflow: auto;
 }
 #public-component-show-container .component-name {
   margin-bottom: 0;
@@ -1128,6 +1126,10 @@
   transition: all 0.2s;
   margin-bottom: 20px;
 }
+.component-area.active {
+  border-color: var(--main-color, #40a9ff);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
 .component-area .component-container {
   padding: 16px;
   min-height: 80px;
@@ -1162,8 +1164,11 @@
 .component-area .code-box-actions > .code-box-code-action:not(:first-child) {
   margin-left: 16px;
 }
-.component-area .code-box-actions > .code-box-code-action:hover, .component-area .code-box-actions > .code-box-code-action.active {
-  color: #000000;
+.component-area .code-box-actions > .code-box-code-action:hover {
+  color: #000;
+}
+.component-area .code-box-actions > .code-box-code-action.active {
+  color: var(--main-color, #40a9ff);
 }
 .component-area .code-box-actions + .code-pane {
   border-top-right-radius: 0;
@@ -1193,7 +1198,7 @@
   cursor: help;
 }.vision-property-container {
   position: relative;
-  z-index: 999;
+  z-index: 800;
 }
 .vision-property-container .ant-anchor-ink {
   display: none;
@@ -1256,7 +1261,7 @@
   position: fixed;
   height: 100vh;
   border-right: 1px solid #f0f0f0;
-  z-index: 1000;
+  z-index: 800;
   background-color: #fff;
   width: 230px;
   display: flex;

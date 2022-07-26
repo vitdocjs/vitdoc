@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import HighLight from "../highlight";
-import { useBoolean, useMemoizedFn } from "ahooks";
+import {
+  useBoolean,
+  useCreation,
+  useEventEmitter,
+  useMemoizedFn,
+} from "ahooks";
 import CopyOutlined from "@ant-design/icons/CopyOutlined";
 import CodeOutlined from "@ant-design/icons/CodeOutlined";
 import CheckOutlined from "@ant-design/icons/CheckOutlined";
@@ -11,35 +16,48 @@ import { copyToClipboard } from "../link-copy";
 import "./index.scss";
 
 import dropRight from "lodash/dropRight";
-import takeRight from "lodash/takeRight";
 import { useAtom } from "jotai";
 import { propertiesPropsStore, useSetPartialProperties } from "../../store";
 
 const { Result, Tooltip } = window["antd"];
 
 export const ComponentBlock = (props) => {
-  const { children, lang, eventBus, content } = props;
+  const { children, lang, value: content, error, pathHash, renderer } = props;
 
   const beforeChildren = dropRight(children, 1);
-  const lastChild = takeRight(children, 1);
 
   const [checkCode, { toggle }] = useBoolean();
 
-  const handlerDebugComponent = useMemoizedFn(() => {
-    eventBus.emit("debug");
-  });
+  const [{ current }] = useAtom(propertiesPropsStore);
 
+  const eventBus = useEventEmitter();
+
+  const active = current !== undefined && current === content;
   return (
-    <div className="component-area">
+    <div
+      className={classNames("component-area", {
+        active,
+      })}
+    >
       {!!beforeChildren.length && (
         <div className="code-box-demo-description markdown-body">
           {beforeChildren}
         </div>
       )}
-      {lastChild}
+      <ComponentArea
+        pathHash={pathHash}
+        error={error}
+        renderer={renderer}
+        lang={lang}
+        content={content}
+        eventBus={eventBus}
+        // defaultCodePanel={index === 0}
+      />
       <div className="code-box-actions">
-        <Tooltip title="Debug" onClick={handlerDebugComponent}>
-          <BugOutlined className="code-box-code-action" />
+        <Tooltip title="Debug" onClick={eventBus.emit}>
+          <BugOutlined
+            className={classNames("code-box-code-action", { active })}
+          />
         </Tooltip>
         <CopyIcon content={content} />
         <Tooltip
@@ -60,29 +78,47 @@ export const ComponentBlock = (props) => {
 };
 
 export function ComponentArea(props) {
-  const { renderer, defaultCodePanel, eventBus, pathHash, error } = props;
+  const { renderer, content, eventBus, pathHash, error } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
   const newComp = useRef(new Map());
 
-  const [{ props: componentProps }] = useAtom(propertiesPropsStore);
+  let [{ defaultProps, props: componentStateProps, current }] =
+    useAtom(propertiesPropsStore);
   const setPartialProps = useSetPartialProperties();
   const defaultPropsRef = useRef();
 
-  eventBus.useSubscription((s) => {
-    if (s === "debug") {
-      setPartialProps({ defaultProps: defaultPropsRef.current || {} });
+  const componentProps = useCreation(() => {
+    if (!current) {
+      return componentStateProps;
     }
+
+    if (current === content) {
+      return componentStateProps;
+    }
+    return {};
+  }, [componentStateProps, current]);
+
+  eventBus.useSubscription(() => {
+    let content = props.content;
+    if (current !== undefined && current === content) {
+      content = undefined;
+    }
+    setPartialProps({
+      current: content,
+      defaultProps: defaultPropsRef.current || {},
+    });
   });
 
   const setDefaultProps = useMemoizedFn((props) => {
     defaultPropsRef.current = props;
 
-    defaultCodePanel &&
+    if (!Object.keys(defaultProps).length) {
       setPartialProps({
         defaultProps: props,
       });
+    }
   });
 
   const wrapProps = useMemoizedFn((Component, { React: OutReact }) => {

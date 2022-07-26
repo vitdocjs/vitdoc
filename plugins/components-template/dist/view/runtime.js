@@ -17494,7 +17494,7 @@ function LinkCopy({ route }) {
   });
 }
 const index$2 = "";
-function baseSlice$2(array, start, end) {
+function baseSlice$1(array, start, end) {
   var index2 = -1, length = array.length;
   if (start < 0) {
     start = -start > length ? 0 : length + start;
@@ -17511,7 +17511,7 @@ function baseSlice$2(array, start, end) {
   }
   return result;
 }
-var _baseSlice = baseSlice$2;
+var _baseSlice = baseSlice$1;
 var toNumber = toNumber_1;
 var INFINITY$2 = 1 / 0, MAX_INTEGER = 17976931348623157e292;
 function toFinite$1(value) {
@@ -17527,33 +17527,22 @@ function toFinite$1(value) {
 }
 var toFinite_1 = toFinite$1;
 var toFinite = toFinite_1;
-function toInteger$2(value) {
+function toInteger$1(value) {
   var result = toFinite(value), remainder = result % 1;
   return result === result ? remainder ? result - remainder : result : 0;
 }
-var toInteger_1 = toInteger$2;
-var baseSlice$1 = _baseSlice, toInteger$1 = toInteger_1;
-function dropRight(array, n, guard) {
-  var length = array == null ? 0 : array.length;
-  if (!length) {
-    return [];
-  }
-  n = guard || n === void 0 ? 1 : toInteger$1(n);
-  n = length - n;
-  return baseSlice$1(array, 0, n < 0 ? 0 : n);
-}
-var dropRight_1 = dropRight;
+var toInteger_1 = toInteger$1;
 var baseSlice = _baseSlice, toInteger = toInteger_1;
-function takeRight(array, n, guard) {
+function dropRight(array, n, guard) {
   var length = array == null ? 0 : array.length;
   if (!length) {
     return [];
   }
   n = guard || n === void 0 ? 1 : toInteger(n);
   n = length - n;
-  return baseSlice(array, n < 0 ? 0 : n, length);
+  return baseSlice(array, 0, n < 0 ? 0 : n);
 }
-var takeRight_1 = takeRight;
+var dropRight_1 = dropRight;
 const SUSPENSE_PROMISE = Symbol();
 const isSuspensePromise = (promise) => !!promise[SUSPENSE_PROMISE];
 const isSuspensePromiseAlreadyCancelled = (suspensePromise) => !suspensePromise[SUSPENSE_PROMISE].c;
@@ -18229,24 +18218,32 @@ const useSetPartialProperties = () => {
 };
 const { Result, Tooltip: Tooltip$1 } = window["antd"];
 const ComponentBlock = (props) => {
-  const { children, lang, eventBus, content: content2 } = props;
+  const { children, lang, value: content2, error, pathHash, renderer } = props;
   const beforeChildren = dropRight_1(children, 1);
-  const lastChild = takeRight_1(children, 1);
   const [checkCode, { toggle }] = useBoolean();
-  const handlerDebugComponent = useMemoizedFn(() => {
-    eventBus.emit("debug");
-  });
+  const [{ current }] = useAtom(propertiesPropsStore);
+  const eventBus = useEventEmitter();
+  const active = current !== void 0 && current === content2;
   return /* @__PURE__ */ modules$1.createElement("div", {
-    className: "component-area"
+    className: classNames("component-area", {
+      active
+    })
   }, !!beforeChildren.length && /* @__PURE__ */ modules$1.createElement("div", {
     className: "code-box-demo-description markdown-body"
-  }, beforeChildren), lastChild, /* @__PURE__ */ modules$1.createElement("div", {
+  }, beforeChildren), /* @__PURE__ */ modules$1.createElement(ComponentArea, {
+    pathHash,
+    error,
+    renderer,
+    lang,
+    content: content2,
+    eventBus
+  }), /* @__PURE__ */ modules$1.createElement("div", {
     className: "code-box-actions"
   }, /* @__PURE__ */ modules$1.createElement(Tooltip$1, {
     title: "Debug",
-    onClick: handlerDebugComponent
+    onClick: eventBus.emit
   }, /* @__PURE__ */ modules$1.createElement(BugOutlined2, {
-    className: "code-box-code-action"
+    className: classNames("code-box-code-action", { active })
   })), /* @__PURE__ */ modules$1.createElement(CopyIcon, {
     content: content2
   }), /* @__PURE__ */ modules$1.createElement(Tooltip$1, {
@@ -18260,23 +18257,39 @@ const ComponentBlock = (props) => {
   }));
 };
 function ComponentArea(props) {
-  const { renderer, defaultCodePanel, eventBus, pathHash, error } = props;
+  const { renderer, content: content2, eventBus, pathHash, error } = props;
   const componentRef = useRef();
   const invoked = useRef(false);
   const newComp = useRef(/* @__PURE__ */ new Map());
-  const [{ props: componentProps }] = useAtom(propertiesPropsStore);
+  let [{ defaultProps, props: componentStateProps, current }] = useAtom(propertiesPropsStore);
   const setPartialProps = useSetPartialProperties();
   const defaultPropsRef = useRef();
-  eventBus.useSubscription((s) => {
-    if (s === "debug") {
-      setPartialProps({ defaultProps: defaultPropsRef.current || {} });
+  const componentProps = useCreation(() => {
+    if (!current) {
+      return componentStateProps;
     }
+    if (current === content2) {
+      return componentStateProps;
+    }
+    return {};
+  }, [componentStateProps, current]);
+  eventBus.useSubscription(() => {
+    let content22 = props.content;
+    if (current !== void 0 && current === content22) {
+      content22 = void 0;
+    }
+    setPartialProps({
+      current: content22,
+      defaultProps: defaultPropsRef.current || {}
+    });
   });
   const setDefaultProps = useMemoizedFn((props2) => {
     defaultPropsRef.current = props2;
-    defaultCodePanel && setPartialProps({
-      defaultProps: props2
-    });
+    if (!Object.keys(defaultProps).length) {
+      setPartialProps({
+        defaultProps: props2
+      });
+    }
   });
   const wrapProps = useMemoizedFn((Component2, { React: OutReact }) => {
     var _a;
@@ -18339,9 +18352,6 @@ function CopyIcon({ content: content2 }) {
 }
 const { Table } = window.antd;
 function renderProperty({ properties }) {
-  if (!properties) {
-    return null;
-  }
   const { props = {} } = properties;
   const dateSource = Object.values(props).map((val) => {
     if (!!val.defaultValue) {
@@ -18405,15 +18415,16 @@ function remarkFrontMatter() {
         prevModules = [];
         return;
       }
-      prevModules.push(node);
       if (node.type === "code" && hasReact(node.value) && isJsx(node.lang)) {
         modules2.push({
+          ...node,
           type: "component-block",
           children: prevModules
         });
         prevModules = [];
         return;
       }
+      prevModules.push(node);
     });
     if (!!prevModules.length) {
       modules2.push(...prevModules);
@@ -18428,27 +18439,10 @@ function MarkdownArea({ data: res }) {
   }
   const { moduleMap, content: content2, error, pathHash } = res;
   const getModule = useMemoizedFn((value) => moduleMap == null ? void 0 : moduleMap[value.trim()]);
-  const eventBus = useEventEmitter();
-  const isCodeRenderIndexRef = useRef(0);
   const code = useMemoizedFn(({ language, value = "" }) => {
-    const jsx2 = /^[j|t]sx$/.test(language);
-    if (!jsx2) {
-      return /* @__PURE__ */ modules$1.createElement(HighLighter, {
-        lang: language,
-        children: value
-      });
-    }
-    const index2 = isCodeRenderIndexRef.current;
-    isCodeRenderIndexRef.current++;
-    const fn = getModule(value);
-    return /* @__PURE__ */ modules$1.createElement(ComponentArea, {
-      pathHash,
-      error,
-      eventBus,
-      renderer: fn,
+    return /* @__PURE__ */ modules$1.createElement(HighLighter, {
       lang: language,
-      content: value,
-      defaultCodePanel: index2 === 0
+      children: value
     });
   });
   const markdownComponent = useCreation(() => /* @__PURE__ */ modules$1.createElement(reactMarkdown, {
@@ -18459,7 +18453,9 @@ function MarkdownArea({ data: res }) {
       "component-block": (props) => {
         return /* @__PURE__ */ modules$1.createElement(ComponentBlock, {
           ...props,
-          eventBus
+          error,
+          pathHash,
+          renderer: getModule(props.value)
         });
       },
       "property-code": (props) => {
@@ -19071,7 +19067,10 @@ function PropertyPane() {
   const onPropsChange = useMemoizedFn((props) => {
     setStore({
       ...storeProps,
-      props
+      props: {
+        ...storeProps.props,
+        ...props
+      }
     });
   });
   const { data: prototypeOptions } = useRequest(async () => {

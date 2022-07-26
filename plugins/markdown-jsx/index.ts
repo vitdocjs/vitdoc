@@ -154,18 +154,21 @@ const mdjsx = () => {
             lastReg = regRes;
           }
 
+          const codeSegment = (
+            code
+          ) => `export default function(mountNode, { wrap, renderType$ }){
+          try { $_REF.wrap = wrap; } catch(e) { }
+          ${code}
+          };`;
+
           if (!lastReg!) {
             return code;
           }
           const lastIndex: number = lastReg.index + lastReg[0].length;
 
-          return `${code.slice(
-            0,
-            lastIndex
-          )};export default function(mountNode, { wrap, renderType$ }){
-          try { $_REF.wrap = wrap; } catch(e) { }
-          ${code.slice(lastIndex)}
-          };`;
+          return `${code.slice(0, lastIndex)};${codeSegment(
+            code.slice(lastIndex)
+          )}`;
         };
 
         let nextCode: string = replaceReact(code);

@@ -35,7 +35,10 @@ export default function PropertyPane() {
   const onPropsChange = useMemoizedFn((props: any) => {
     setStore({
       ...storeProps,
-      props,
+      props: {
+        ...storeProps.props,
+        ...props,
+      },
     });
   });
 
