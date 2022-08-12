@@ -18,6 +18,7 @@ export function remarkFrontMatter() {
         prevModules = [];
         return;
       }
+      prevModules.push(node);
       if (node.type === "code" && hasReact(node.value) && isJsx(node.lang)) {
         modules.push({
           ...node,
@@ -27,7 +28,6 @@ export function remarkFrontMatter() {
         prevModules = [];
         return;
       }
-      prevModules.push(node);
     });
 
     if (!!prevModules.length) {
