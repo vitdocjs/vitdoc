@@ -1,4 +1,4 @@
-import { hasReact, isJsx, isTypes } from "../../../../utils/lang";
+import { hasReact, isJsx, isTypes } from "../../../../../utils/lang";
 
 export function remarkFrontMatter() {
   return (tree, _file) => {

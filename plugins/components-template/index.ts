@@ -4,22 +4,20 @@ import Swig from "swig";
 
 import { mergeConfig, ViteDevServer } from "vite";
 import { send } from "vite";
-import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../../utils";
-import { getConfig } from "../../utils/config";
-import { getComponentFiles, getMainFiles } from "../../utils/rules";
+import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../utils";
+import { getConfig } from "../utils/config";
+import { getComponentFiles, getMainFiles } from "../utils/rules";
 
 const isDebug = process.env.DEBUG;
 
-const pluginRoot = __dirname.includes("plugins/components-template")
-  ? path.resolve(__dirname, "..")
-  : path.resolve(__dirname, "plugins/components-template");
+const pluginRoot = __dirname;
 
 const currentPath = isDebug
-  ? path.resolve(pluginRoot, "./")
-  : path.resolve(pluginRoot, "./dist");
+  ? path.resolve(__dirname, "./view/src")
+  : path.resolve(__dirname, "./view/dist");
 
 export const createHtml = Swig.compileFile(
-  path.resolve(pluginRoot, "./index.html"),
+  path.resolve(__dirname, "./index.html"),
   {
     // cache: false,
     autoescape: false,
@@ -177,7 +175,6 @@ const componentsTemplate = () => {
         } else if (server) {
           html = await server.transformIndexHtml(id, html);
         }
-
 
         return html;
       }

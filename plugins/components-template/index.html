@@ -16,28 +16,26 @@
   <body>
     <link
       rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/antd/4.18.9/antd.min.css"
+      href="//g.alicdn.com/code/lib/antd/4.18.9/antd.min.css"
     />
 
     <div id="component-root"></div>
 
     <script
       crossorigin="anonymous"
-      src="//cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"
+      src="//g.alicdn.com/code/lib/react/16.8.6/umd/react.production.min.js"
     ></script>
     <script
       crossorigin="anonymous"
-      src="//cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"
+      src="//g.alicdn.com/code/lib/react-dom/16.8.6/umd/react-dom.production.min.js"
     ></script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/antd/4.18.9/antd.min.js"></script>
+    <script src="//g.alicdn.com/code/lib/moment.js/2.24.0/moment.min.js"></script>
+    <script src="//g.alicdn.com/code/lib/antd/4.18.9/antd.min.js"></script>
 
     <script>
       window.pageConfig = {};
     </script>
-
-    {{ externalHtml }}
 
     <script type="module">
       globalThis.RuntimeModuleMap$ = {
@@ -56,11 +54,12 @@
         }
       }
 
-      import("{{dirname}}/view/runtime");
+      import("{{dirname}}/runtime");
     </script>
 
     {% if !isDebug %}
-    <script type="module" src="{{dirname}}/view/style.css"></script>
+    <script type="module" src="{{dirname}}/style.css"></script>
     {% endif %}
   </body>
+  {{ externalHtml }}
 </html>

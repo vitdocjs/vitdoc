@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cleanUrl } from "./config";
-import { isCSSLang, isJsx } from "../../../utils/lang";
+import { isCSSLang, isJsx } from "../../../../utils/lang";
 import { useRouteMatch } from "react-router-dom";
 
 declare global {

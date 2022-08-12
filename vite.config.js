@@ -2,11 +2,9 @@ require("esbuild-register");
 
 import { mergeConfig } from "vite";
 import TypeFile from "./plugins/type-file";
-const {
-  default: componentsTemplate,
-} = require("./plugins/components-template/lib");
 import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
+import componentsTemplate from "./plugins/components-template";
 import path from "path";
 import fs from "fs";
 
