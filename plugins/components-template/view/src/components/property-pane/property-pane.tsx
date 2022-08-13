@@ -59,6 +59,10 @@ export default function PropertyPane() {
     }
   }, [defaultProps]);
 
+  if (!Object.keys(properties).length) {
+    return null;
+  }
+
   return (
     <div className="vision-property-container">
       {propertyDrawerShow && prototypeOptions ? (

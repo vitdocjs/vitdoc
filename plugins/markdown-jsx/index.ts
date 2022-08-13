@@ -12,6 +12,7 @@ import {
 } from "../utils";
 import { isCSSLang, isJsx } from "../utils/lang";
 import { send } from "vite";
+import { appendTypes } from "./utils";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
@@ -74,6 +75,15 @@ const mdjsx = () => {
     },
     async load(id) {
       const file = cleanUrl(id);
+
+      const getMainModuleId = async () => {
+        return await resolveMainComponent(
+          // @ts-ignore
+          { pluginContainer: { resolveId: this.resolve } },
+          id
+        ).then((res) => (res ? res.id : ""));
+      };
+
       if (isMarkdownProxy(id)) {
         const [, fileIndex, lang] = id.match(mdProxyRE) || [];
 
@@ -86,11 +96,7 @@ const mdjsx = () => {
           return code;
         }
 
-        const mainModuleId = await resolveMainComponent(
-          // @ts-ignore
-          { pluginContainer: { resolveId: this.resolve } },
-          id
-        ).then((res) => (res ? res.id : ""));
+        const mainModuleId = await getMainModuleId();
 
         const replaceReact = (code) => {
           const matchInfo = code.match(/import React([ ,])?.+?;/);
@@ -124,15 +130,6 @@ const mdjsx = () => {
 
         return beforeCreateElement(NextComp, ...rest);
       }; `;
-
-          // if (!isBuild) {
-          //   wrappedReact = wrappedReact.replace(
-          //     /React\.createElement/g,
-          //     reactRefresh.runtimePragma
-          //   );
-          //
-          //   wrappedReact = `${wrappedReact} \n $RefreshReg$?.();`;
-          // }
 
           return `${reactCode}
       ${
@@ -183,8 +180,10 @@ const mdjsx = () => {
         return;
       }
 
-      const content = fs.readFileSync(id, "utf-8");
+      let content = fs.readFileSync(id, "utf-8");
       const pathHash = `_${getMD5(removeProcessCwd(id))}`;
+
+      content = await appendTypes(id, content, getMainModuleId);
 
       let moduleIds = {};
       const promises = (fromMarkdown(content) as any).children

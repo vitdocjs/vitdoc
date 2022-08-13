@@ -76,13 +76,7 @@ export const resolveMainComponent = async (
   mdPath: string
 ) => {
   const mainPath = path.join(mdPath, "../index");
-  const result = await server.pluginContainer.resolveId(mainPath);
-  if (result || path.dirname(mdPath) === "." || path.dirname(mdPath) === "/") {
-    return result;
-  }
-  if (!result) {
-    return resolveMainComponent(server, path.join(mdPath, "../../R.md"));
-  }
+  return server.pluginContainer.resolveId(mainPath);
 };
 
 export const addUrlParams = (

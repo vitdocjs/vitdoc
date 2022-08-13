@@ -9,12 +9,21 @@ import {
   isJsx,
 } from "./utils";
 import debounce from "lodash/debounce";
+import keyBy from "lodash/keyBy";
+import mapValues from "lodash/mapValues";
 import type { ModuleNode } from "vite";
 
-const TypeFile = ({ prefix = ".type" } = {}) => {
+const TypeFile = ({
+  prefix = ".type",
+  buildMetaFile = "meta.manifest.json" as string | false,
+} = {}) => {
   let lastDoc: Record<string, any> = {};
   const matchReg = new RegExp(`${prefix}$`);
   const requestedUrlMap = {};
+
+  let isBuild;
+  const metas: any[] = [];
+
   function getComponentDocs(fileName) {
     // console.time("get docs");
 
@@ -25,12 +34,15 @@ const TypeFile = ({ prefix = ".type" } = {}) => {
         module: 1, // commonjs
         target: 99,
       })
-      .parse([path.resolve(process.cwd(), fileName)]);
-
-    componentDoc.forEach((item) => {
-      delete item.block;
-      delete item.mtime;
-    });
+      .parse([path.resolve(process.cwd(), fileName)])
+      .map((item) => {
+        let { block, mtime, method, props, ...rest } = item;
+        props = mapValues(props, ({ parent, ...rest }) => rest);
+        return {
+          props,
+          ...rest,
+        };
+      });
 
     // console.timeEnd("get docs");
 
@@ -73,6 +85,9 @@ const TypeFile = ({ prefix = ".type" } = {}) => {
 
   return {
     name: "vite:type-file",
+    config(config, { command }) {
+      isBuild = command === "build";
+    },
     handleHotUpdate({ file, timestamp, server }) {
       const url = path.join("/", cleanUrl(path.relative(process.cwd(), file)));
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
@@ -109,6 +124,9 @@ const TypeFile = ({ prefix = ".type" } = {}) => {
           const fileName = file.replace(matchReg, "").replace(/^\//, "");
 
           componentDoc = getComponentDocs(fileName).doc;
+          if (isBuild && componentDoc) {
+            metas.push({ metas: keyBy(componentDoc, "exportName"), fileName });
+          }
         }
 
         return componentDoc
@@ -123,6 +141,15 @@ const TypeFile = ({ prefix = ".type" } = {}) => {
       }
 
       return;
+    },
+    generateBundle(options, bundle) {
+      if (buildMetaFile) {
+        bundle[buildMetaFile] = {
+          type: "asset",
+          fileName: buildMetaFile,
+          source: JSON.stringify(metas),
+        };
+      }
     },
   };
 };

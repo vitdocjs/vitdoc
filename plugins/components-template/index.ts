@@ -2,15 +2,12 @@
 import * as path from "path";
 import Swig from "swig";
 
-import { mergeConfig, ViteDevServer } from "vite";
-import { send } from "vite";
-import { cleanUrl, isHTMLProxy, resolveMainComponent } from "../utils";
+import { mergeConfig, send, ViteDevServer } from "vite";
+import { cleanUrl, isHTMLProxy } from "../utils";
 import { getConfig } from "../utils/config";
 import { getComponentFiles, getMainFiles } from "../utils/rules";
 
 const isDebug = process.env.DEBUG;
-
-const pluginRoot = __dirname;
 
 const currentPath = isDebug
   ? path.resolve(__dirname, "./view/src")
@@ -125,23 +122,9 @@ const componentsTemplate = () => {
         const mdFiles = getComponentFiles().map((file) => `/${file}`);
 
         const mdFileMap = mdFiles.map((file) => [file, file]);
-        const mainFiles = await Promise.all(
-          mdFiles.map((file) =>
-            resolveMainComponent(
-              // @ts-ignore
-              { pluginContainer: { resolveId: this.resolve } },
-              file
-            )
-              .then((res) => (res ? res.id.replace(process.cwd(), "") : ""))
-              .then((id) => [
-                file.replace(/\.md$/, ".tsx.type"),
-                id.replace(/\.tsx$/, ".tsx.type"),
-              ])
-          )
-        );
 
         let html = createHtml({
-          moduleMaps: [...mdFileMap, ...mainFiles]
+          moduleMaps: [...mdFileMap]
             .filter(Boolean)
             .map(
               ([key, val]) =>
