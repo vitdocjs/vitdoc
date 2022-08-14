@@ -1,6 +1,7 @@
-- [ ] .type.json 重构
-- [ ] 文档化
+- [x] .type.json 重构
+- [ ] 类型导出与组件解耦，仅读取Type类型
+- [x] 文档化
 - [ ] 拆包
-- [ ] Focus Debug
-- [ ] 默认展开
-- [ ] LOGO
+- [x] Focus Debug
+- [x] 默认展开
+- [x] LOGO
