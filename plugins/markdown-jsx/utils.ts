@@ -45,17 +45,3 @@ renderType$(ComponentType, mountNode);
   }
   return content;
 }
-
-export function wrapCachePromise(fn: (...args) => Promise<any>) {
-  let cache: any;
-  return async (...args) => {
-    if (cache) {
-      fn(...args).then((res) => {
-        cache = res;
-      });
-      return cache;
-    }
-    cache = await fn(...args);
-    return cache;
-  };
-}
