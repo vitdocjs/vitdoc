@@ -21,7 +21,22 @@ export function MarkdownArea({ data: res }) {
     return <HighLight lang={language} children={value} />;
   });
 
-  const markdownComponent = useCreation(
+  const componentBlock = useMemoizedFn((props) => {
+    return (
+      <ComponentBlock
+        {...props}
+        error={error}
+        pathHash={pathHash}
+        renderer={getModule(props.value)}
+      />
+    );
+  });
+
+  const propertyCode = useMemoizedFn((props) => (
+    <PropertyArea {...props} renderer={getModule(props.value)} />
+  ));
+
+  const markdownElements = useCreation(
     () => (
       // @ts-ignore
       <ReactMarkdown
@@ -29,21 +44,8 @@ export function MarkdownArea({ data: res }) {
         plugins={[remarkFrontMatter]}
         renderers={{
           code,
-          "component-block": (props) => {
-            return (
-              <ComponentBlock
-                {...props}
-                error={error}
-                pathHash={pathHash}
-                renderer={getModule(props.value)}
-              />
-            );
-          },
-          "property-code": (props) => {
-            return (
-              <PropertyArea {...props} renderer={getModule(props.value)} />
-            );
-          },
+          "component-block": componentBlock,
+          "property-code": propertyCode,
         }}
       >
         {content}
@@ -52,5 +54,5 @@ export function MarkdownArea({ data: res }) {
     [content, moduleMap]
   );
 
-  return <div className="markdown-area">{markdownComponent}</div>;
+  return <div className="markdown-area">{markdownElements}</div>;
 }

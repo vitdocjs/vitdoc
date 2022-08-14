@@ -134,6 +134,7 @@ export function ComponentArea(props) {
       const finalProps = Object.assign({}, props, componentProps);
       return OutReact.createElement(Component, finalProps);
     };
+    Object.assign(outputComp, Component);
 
     outputComp.visionProps = componentProps;
     outputComp.origin$ = Component;

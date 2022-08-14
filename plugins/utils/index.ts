@@ -1,7 +1,7 @@
 import { createHash } from "crypto";
 import fs from "fs";
 import path from "path";
-import type { ModuleNode, PluginContainer } from "vite";
+import type { ModuleNode } from "vite";
 
 export const queryRE = /\?.*$/;
 export const hashRE = /#.*$/;
@@ -72,7 +72,7 @@ export function removeProcessCwd(path: string) {
 }
 
 export const resolveMainComponent = async (
-  server: { pluginContainer: PluginContainer },
+  server: { pluginContainer },
   mdPath: string
 ) => {
   const mainPath = path.join(mdPath, "../index");

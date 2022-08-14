@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Properties from "../property";
 import { useAtom } from "jotai";
 import { propertiesStore } from "../../store";
+import { useUnmount } from "ahooks";
 
 export function PropertyArea(props) {
   const { renderer } = props;
@@ -10,6 +11,10 @@ export function PropertyArea(props) {
   const componentRef = useRef() as any;
 
   const [, setTypes] = useAtom(propertiesStore);
+
+  useUnmount(() => {
+    console.log("@@@@@@@@@@@@UNMOUNT!!");
+  });
 
   useEffect(() => {
     renderer(componentRef.current, {

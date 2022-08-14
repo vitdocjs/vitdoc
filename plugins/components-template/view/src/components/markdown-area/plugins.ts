@@ -1,6 +1,6 @@
 import { hasReact, isJsx, isTypes } from "../../../../../utils/lang";
 
-export function remarkFrontMatter() {
+export function remarkFrontMatter(options) {
   return (tree, _file) => {
     const modules: any = [];
     let prevModules: any[] = [];

@@ -77,8 +77,7 @@ const mdjsx = () => {
       const file = cleanUrl(id);
 
       const getMainModuleId = async () => {
-        return await resolveMainComponent(
-          // @ts-ignore
+        return resolveMainComponent(
           { pluginContainer: { resolveId: this.resolve } },
           id
         ).then((res) => (res ? res.id : ""));

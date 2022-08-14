@@ -118,7 +118,6 @@ export function useMarkdown() {
   if (results?.error) {
     return results;
   }
-
   let moduleMap;
   if (results) {
     const styleModules = results.modules.filter(({ lang }) => isCSSLang(lang));
@@ -126,8 +125,9 @@ export function useMarkdown() {
       if (!isJsx(currentValue.lang)) {
         return previousValue;
       }
+      const sourceKey = currentValue.sourcesContent.trim();
       return Object.assign(previousValue, {
-        [currentValue.sourcesContent.trim()]: (...args) => {
+        [sourceKey]: (...args) => {
           currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load();
