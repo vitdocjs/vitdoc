@@ -72,7 +72,21 @@ export function useTypeFile(): any {
 }
 
 export function useRouteMap(): any {
-  return useAsyncImport(`/route-map.json`);
+  const flatRouteMap = (tree) => {
+    const result: any[] = [];
+    tree.forEach((child) => {
+      if (Array.isArray(child.children)) {
+        result.push(...flatRouteMap(child.children));
+      } else {
+        result.push(child);
+      }
+    });
+    return result;
+  };
+  return useAsyncImport(`/route-map.json`, ({ default: items }) => ({
+    ...items,
+    flattenRoutes: flatRouteMap(items.tree),
+  }));
 }
 
 export function useComponentInfo(): any {

@@ -1,8 +1,7 @@
 import React from "react";
 import { LinkCopy } from "../../components/link-copy";
-import { useComponentInfo } from "../../utils/loaders";
-import { useAtom } from "jotai";
-import { propertiesStore } from "../../store";
+import { useComponentInfo, useRouteMap } from "../../utils/loaders";
+import { toName } from "../../utils";
 
 const { Typography } = window["antd"];
 
@@ -11,12 +10,16 @@ const { Title, Text } = Typography;
 export function PageTitle(props: { route: any }) {
   const compInfo = useComponentInfo();
 
-  const [propertyTypes] = useAtom(propertiesStore);
+  const { flattenRoutes = [] } = useRouteMap() || {};
+
+  const route = props.route;
+  const currentRoute = flattenRoutes.find(({ path }) => path === route);
+  console.log("######", flattenRoutes, props);
 
   return (
     <a href={compInfo?.npmLink} className="link-title">
       <Title level={1} className="component-name">
-        {propertyTypes?.displayName || compInfo?.packageName}
+        {toName(currentRoute?.name) || compInfo?.packageName}
         <LinkCopy route={props.route} />
       </Title>
       <span className="component-sub-title">

@@ -8,6 +8,7 @@ import classNames from "classnames";
 
 import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
 import DoubleRightOutlined from "@ant-design/icons/DoubleRightOutlined";
+import { toName } from "../../utils";
 
 // @ts-ignore
 const { Menu, Button } = window.antd;
@@ -18,12 +19,7 @@ function MenuLink(item) {
   return (
     <div className="nav-menu-link-item">
       <Link to={item.path}>
-        <span style={{ flex: 1 }}>
-          {item.name
-            .replace(/-/g, " ")
-            .replace(/\//g, " - ")
-            .replace(/^[a-z] /, "")}
-        </span>
+        <span style={{ flex: 1 }}>{toName(item.name)}</span>
       </Link>
       <LinkCopy route={item.path} />
     </div>
