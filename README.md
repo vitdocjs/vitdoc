@@ -16,20 +16,20 @@
 
 [English](./README.md) | 简体中文
 
-#### Features
+## Features
 
 - **`Vite`** 内核，高效极速的开发体验
 - 使用 `Markdown` 写法，让你快速为项目编写说明文档的同时，自动生成预览，在调试的同时生成文档
 - 自动分析 `TypeScript` 类型定义并生成 API 文档
 - 自动根据 `.md` 文件目录生成菜单导航
 
-##### Markdown 文档写法
+##### Markdown
 
-![毫秒级Markdown响应](http://md.xiaobe.top/static/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-07%20%E4%B8%8A%E5%8D%881.58.07.gif)
+![Markdown](http://md.xiaobe.top/static/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-07%20%E4%B8%8A%E5%8D%881.58.07.gif)
 
-##### TypeScript 类型识别
+##### TypeScript Types
 
-![TypeScript类型识别](http://md.xiaobe.top/static/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-07%20%E4%B8%8A%E5%8D%882.02.21.gif)
+![TypeScript Types](http://md.xiaobe.top/static/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-07%20%E4%B8%8A%E5%8D%882.02.21.gif)
 
 ## Usage & Guide
 
