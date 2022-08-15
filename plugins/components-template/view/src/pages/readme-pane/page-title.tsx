@@ -14,7 +14,6 @@ export function PageTitle(props: { route: any }) {
 
   const route = props.route;
   const currentRoute = flattenRoutes.find(({ path }) => path === route);
-  console.log("######", flattenRoutes, props);
 
   return (
     <a href={compInfo?.npmLink} className="link-title">
