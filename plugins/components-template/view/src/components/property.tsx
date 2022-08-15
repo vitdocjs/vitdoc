@@ -2,7 +2,7 @@
 const { Table } = window.antd;
 import React from "react";
 
-export default function renderProperty({ properties }) {
+export default function renderProperty({ loading = false, properties }) {
   const { props = {} } = properties;
 
   const dateSource = (Object.values(props) as any).map((val) => {
@@ -15,6 +15,7 @@ export default function renderProperty({ properties }) {
 
   return (
     <Table
+      loading={loading}
       scroll={{ x: "100%" }}
       dataSource={dateSource}
       pagination={false}

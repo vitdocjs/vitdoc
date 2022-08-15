@@ -20,5 +20,9 @@ export function PropertyArea(props) {
     });
   }, [renderer]);
 
-  return <div className="property-container" ref={componentRef} />;
+  return (
+    <div className="property-container" ref={componentRef}>
+      <Properties properties={{}} loading />
+    </div>
+  );
 }
