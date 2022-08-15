@@ -6,6 +6,10 @@
     "vdoc": "./bin/index.js"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaobebe/vite-docs.git"
+  },
   "dependencies": {
     "@types/node": "^14.14.35",
     "chalk": "^4.1.2",
