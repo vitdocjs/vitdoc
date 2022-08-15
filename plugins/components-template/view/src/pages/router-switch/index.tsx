@@ -63,7 +63,7 @@ export default function RouterSwitch() {
               logo ||
               "//img.alicdn.com/imgextra/i1/O1CN01yPg2Vc1gAJ2EFm5iG_!!6000000004101-55-tps-1058-237.svg"
             }
-            style={{ width: 178 }}
+            style={{ width: 160 }}
           />
         </a>
 
