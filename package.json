@@ -2,7 +2,7 @@
   "name": "vitdoc",
   "version": "1.0.0",
   "bin": {
-    "vite-docs": "./bin/index.js",
+    "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
   },
   "license": "MIT",
