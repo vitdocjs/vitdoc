@@ -9,7 +9,6 @@
     "vdoc": "./bin/index.js"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.5.0",
     "@types/node": "^14.14.35",
     "chalk": "^4.1.2",
     "classnames": "^2.2.6",
@@ -17,24 +16,12 @@
     "esbuild-register": "^3.3.2",
     "glob": "^7.1.6",
     "lodash": "^4.17.21",
-    "mdast-util-from-markdown": "^0.8.5",
-    "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
     "prettier": "^2.5.1",
-    "react": "^17.0.0",
-    "react-copy-to-clipboard": "^5.1.0",
-    "react-docgen-typescript-loader-add-tag": "^3.6.16",
-    "react-dom": "^17.0.0",
-    "react-markdown": "^5.0.3",
-    "react-refresh": "^0.11.0",
-    "react-syntax-highlighter": "^15.4.5",
     "sass": "^1.32.8",
     "shelljs.exec": "^1.1.8",
-    "styled-components": "^5.2.1",
     "swig": "^1.4.2",
     "typescript": "^4.2.3",
     "vite": "^3.0.6",
-    "vite-plugin-cdn-externals": "^1.0.5",
-    "zx": "^7.0.7"
+    "vite-plugin-cdn-externals": "^1.0.5"
   }
 }
