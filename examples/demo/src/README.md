@@ -1,9 +1,9 @@
 ---
-title: Title
-group:
-  title: Components
-  order: 0
+title: Welcome
+order: 0
 ---
+
+#### Welcome to the React Component Library
 
 ```tsx
 import { Title as Component } from '.';
@@ -28,12 +28,4 @@ ReactDOM.render(
   </div>,
   mountNode,
 );
-```
-
-#### API
-
-```tsx
-import ComponentType from './index.tsx.type';
-
-renderType$(ComponentType, mountNode);
 ```

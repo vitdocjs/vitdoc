@@ -5,8 +5,8 @@ import { ComponentBlock } from "../component-area";
 import { useCreation, useMemoizedFn } from "ahooks";
 import { PropertyArea } from "../property-area";
 import HighLight from "../highlight";
-
-import { remarkFrontMatter } from "./plugins";
+import remarkFrontMatter from "remark-frontmatter";
+import { remarkCodeBlock } from "./plugins";
 
 export function MarkdownArea({ data: res }) {
   if (!res) {
@@ -41,8 +41,9 @@ export function MarkdownArea({ data: res }) {
       // @ts-ignore
       <ReactMarkdown
         className="markdown-body"
-        plugins={[remarkFrontMatter]}
+        plugins={[remarkFrontMatter as any, remarkCodeBlock]}
         renderers={{
+          yaml: () => null,
           code,
           "component-block": componentBlock,
           "property-code": propertyCode,

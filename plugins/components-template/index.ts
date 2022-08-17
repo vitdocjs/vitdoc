@@ -6,6 +6,9 @@ import { mergeConfig, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy } from "../utils";
 import { getConfig } from "../utils/config";
 import { getComponentFiles, getMainFiles } from "../utils/rules";
+import { getMetas, parseMarkdown } from "../utils/markdown";
+import * as fs from "fs";
+import { MarkdownMeta } from "../utils/types";
 
 const isDebug = process.env.DEBUG;
 
@@ -28,34 +31,74 @@ const scriptModuleRE =
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = () => {
-  const routes = getComponentFiles().map((path) => `/${path}`);
+  let routes = getComponentFiles();
 
-  const tree = routes.reduce((prev, path) => {
-    const name = path.replace(/^\/src\//, "").replace(/(\/README)?\.md$/, "");
-    const [, groupName, rest] = name.match(/^(\w+?)\/(.+)/) || [];
+  const tree = routes.reduce((prev, readmePath, index) => {
+    const {
+      title,
+      group,
+      order: metaOrder,
+      sidemenu,
+    }: MarkdownMeta = getMetas(
+      parseMarkdown(fs.readFileSync(readmePath, "utf8"))
+    );
+
+    if (sidemenu === false) {
+      return prev;
+    }
+
+    readmePath = `/${readmePath}`;
+
+    const cleanPath = readmePath
+      .replace(/^\/src\//, "")
+      .replace(/(\/README)?\.md$/, "");
+
+    const matches = cleanPath.match(/^(\w+?)\/(.+)/) || [];
+
+    const groupName = group?.title ?? matches[1];
+
+    const order = metaOrder ?? index + 0.1;
+
     if (groupName) {
-      if (!prev.some(({ name }) => name === groupName)) {
-        prev.push({
+      const name = title ?? matches[2];
+      let nextChild = prev.find(({ name }) => name === groupName);
+      if (!nextChild) {
+        nextChild = {
           name: groupName,
+          order: group?.order ?? index + 0.1,
           children: [],
-        });
+        };
+        prev.push(nextChild);
       }
+      const groupChildren = nextChild.children;
 
-      prev[prev.findIndex(({ name }) => name === groupName)].children.push({
-        name: rest,
-        path,
+      groupChildren.push({
+        name,
+        order,
+        path: readmePath,
       });
     } else {
       // 没有子目录
       prev.push({
-        name,
-        path,
+        name: title ?? cleanPath,
+        order,
+        path: readmePath,
       });
     }
 
     return prev;
   }, []);
-  return { tree, routes };
+  console.log("######", tree);
+
+  const sort = (data) => {
+    if (Array.isArray(data.children)) {
+      data.children = sort(data.children);
+    }
+    return data.sort((a, b) => a.order - b.order);
+  };
+
+  routes = routes.map((path) => `/${path}`);
+  return { tree: sort(tree), routes };
 };
 
 export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);

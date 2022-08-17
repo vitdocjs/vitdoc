@@ -1,6 +1,4 @@
 import fs from "fs";
-import fromMarkdown from "mdast-util-from-markdown";
-
 import {
   addUrlParams,
   cleanUrl,
@@ -13,6 +11,7 @@ import {
 import { isCSSLang, isJsx } from "../utils/lang";
 import { send } from "vite";
 import { appendTypes } from "./utils";
+import { parseMarkdown } from "../utils/markdown";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
@@ -123,7 +122,7 @@ const mdjsx = () => {
         const wrap = $_REF.wrap;
         let NextComp = Comp;
 
-        if(NextComp === $_Component && wrap) {
+        if(Object.values($_Component).includes(NextComp) && wrap) {
           NextComp = wrap(Comp, { React: React$ });
         }
 
@@ -133,7 +132,7 @@ const mdjsx = () => {
           return `${reactCode}
       ${
         mainModuleId
-          ? `import $_Component from '${mainModuleId}';`
+          ? `import * as $_Component from '${mainModuleId}';`
           : `const $_Component = {};`
       }
       ${wrappedReact}
@@ -185,8 +184,8 @@ const mdjsx = () => {
       content = await appendTypes(id, content, getMainModuleId);
 
       let moduleIds = {};
-      const promises = (fromMarkdown(content) as any).children
-        .filter(
+      const promises = parseMarkdown(content)
+        .children.filter(
           ({ type, lang = "" }) =>
             type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
         )

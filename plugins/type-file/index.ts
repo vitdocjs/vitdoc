@@ -87,13 +87,15 @@ const TypeFile = ({
           metas.push({ metas: keyBy(componentDoc, "exportName"), fileName });
         }
 
-        if (!!Object.keys(componentDoc).length) {
-          // 补充 default
-          componentDoc.unshift({
-            ...componentDoc[0],
-            exportName: "default",
-          });
+        if (!Object.keys(componentDoc).length) {
+          return `export default {};`;
         }
+
+        // 补充 default
+        componentDoc.unshift({
+          ...componentDoc[0],
+          exportName: "default",
+        });
 
         return componentDoc
           .map((s) => {

@@ -1,8 +1,12 @@
 - [x] .type.json 重构
 - [x] 类型导出与组件解耦，仅读取Type类型
 - [x] 文档化
-- [ ] 拆包
 - [x] Focus Debug
 - [x] 默认展开
 - [x] LOGO
-- [ ] 未定义任何类型及未导出default场景
+- [x] 未定义任何类型及未导出default场景
+- [x] 自定义Title，.md 元数据
+- [ ] 使用默认依赖
+- [ ] 动态目录更新
+- [ ] Mock Build
+- [ ] 拆包

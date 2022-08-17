@@ -1,12 +1,5 @@
----
-title: Title
-group:
-  title: Components
-  order: 0
----
-
 ```tsx
-import { Title as Component } from '.';
+import { Title as Component } from '..';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

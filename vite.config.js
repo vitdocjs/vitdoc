@@ -1,5 +1,3 @@
-require("esbuild-register");
-
 import { mergeConfig } from "vite";
 import TypeFile from "./plugins/type-file";
 import cdnExternals from "vite-plugin-cdn-externals";
@@ -14,6 +12,7 @@ let config = {};
 
 try {
   if (fs.existsSync(`${cwd}/vite.config.js`)) {
+    require("esbuild-register");
     config = require(`${cwd}/vite.config.js`).default;
   }
 } catch (e) {

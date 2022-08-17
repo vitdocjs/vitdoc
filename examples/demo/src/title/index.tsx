@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './index.scss';
 
-interface IProps {
+export interface IProps {
   /**
    * 组件主题
    * @default {maxWidth:1000,isMobile:false}

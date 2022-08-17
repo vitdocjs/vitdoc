@@ -21,17 +21,18 @@
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
-    "react": "^17.0.0",
-    "react-syntax-highlighter": "^15.4.5",
-    "react-dom": "^17.0.0",
-    "react-markdown": "^5.0.3",
-    "lodash": "^4.17.11",
-    "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
-    "react-copy-to-clipboard": "^5.1.0",
     "ahooks": "latest",
     "esbuild": "^0.14.49",
     "jotai": "^1.7.6",
-    "react-router-dom": "^5.2.0"
+    "lodash": "^4.17.11",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "react": "^17.0.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^17.0.0",
+    "react-markdown": "^5.0.3",
+    "react-router-dom": "^5.2.0",
+    "react-syntax-highlighter": "^15.4.5",
+    "remark-frontmatter": "^4.0.1"
   }
 }

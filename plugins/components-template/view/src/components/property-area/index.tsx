@@ -15,7 +15,7 @@ export function PropertyArea(props) {
     renderer(componentRef.current, {
       renderType$: (types, mountNode = componentRef.current) => {
         setTypes(types);
-        return ReactDOM.render(<Properties properties={types} />, mountNode);
+        return ReactDOM.render(<Properties loading={false} properties={types} />, mountNode);
       },
     });
   }, [renderer]);
