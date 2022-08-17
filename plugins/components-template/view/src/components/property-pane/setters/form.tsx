@@ -3,8 +3,7 @@ import "./form.scss";
 import classNames from "classnames";
 import { Setters } from "./setters";
 
-// @ts-ignore
-const { List, Tooltip, Form } = window.antd;
+import { List, Tooltip, Form } from "antd";
 
 export function SetterFormItem({ name, tip, defaultValue, setter, ...rest }) {
   const Setter = Setters[setter];

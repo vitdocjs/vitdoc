@@ -39,7 +39,11 @@ export interface IProps {
  */
 export function Text(props: IProps) {
   const { visible = true, size } = props;
-  return <div className={'component-scope ' + size}>{visible ? 'Hello World' : ''}{size}</div>;
+  return (
+    <div className={'component-scope ' + size}>
+      {visible ? 'Hello World' : ''} {size}
+    </div>
+  );
 }
 
 export default Text;

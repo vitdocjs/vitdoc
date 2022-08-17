@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "devDependencies": {
     "@types/node": "^14.14.35",
+    "@types/react": "^17.0.0",
     "esbuild-node-tsc": "^1.2.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
@@ -14,6 +15,7 @@
     "typescript": "^4.2.3"
   },
   "scripts": {
+    "watch": "vite build --watch",
     "build": "vite build",
     "prepublishOnly": "npm run build"
   },
@@ -22,14 +24,15 @@
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
     "ahooks": "latest",
+    "antd": "^4.22.6",
     "esbuild": "^0.14.49",
     "jotai": "^1.7.6",
     "lodash": "^4.17.11",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
-    "react": "^17.0.0",
+    "react": "^16.8.6",
     "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "^17.0.0",
+    "react-dom": "^16.8.6",
     "react-markdown": "^5.0.3",
     "react-router-dom": "^5.2.0",
     "react-syntax-highlighter": "^15.4.5",

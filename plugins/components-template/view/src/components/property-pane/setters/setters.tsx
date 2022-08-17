@@ -1,7 +1,7 @@
 import React from "react";
 
 // @ts-ignore
-const { Input, Radio, InputNumber, Select, Switch } = window.antd;
+import {  Input, Radio, InputNumber, Select, Switch  } from "antd";
 
 export const Setters = {
   NumberSetter: (props) => <InputNumber {...props} style={{ width: 120 }} />,

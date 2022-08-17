@@ -1,6 +1,5 @@
 import { mergeConfig } from "vite";
 import TypeFile from "./plugins/type-file";
-import cdnExternals from "vite-plugin-cdn-externals";
 import mdjsx from "./plugins/markdown-jsx";
 import componentsTemplate from "./plugins/components-template";
 import path from "path";
@@ -49,19 +48,19 @@ export default mergeConfig(
       componentsTemplate(),
       TypeFile(),
       mdjsx(),
-      cdnExternals({
-        "@alifd/next": {
-          windowName: "Next",
-          find: /^@alif[e|d]\/next$/,
-        },
-        react: "React",
-        "react-dom": {
-          windowName: "ReactDOM",
-          find: /^react-dom$/,
-        },
-        moment: "moment",
-        "moment-timezone": "moment",
-      }),
+      // cdnExternals({
+      // "@alifd/next": {
+      //   windowName: "Next",
+      //   find: /^@alif[e|d]\/next$/,
+      // },
+      // react: "React",
+      // "react-dom": {
+      //   windowName: "ReactDOM",
+      //   find: /^react-dom$/,
+      // },
+      // moment: "moment",
+      // "moment-timezone": "moment",
+      // }),
     ],
   },
   config

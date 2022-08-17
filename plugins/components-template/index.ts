@@ -12,9 +12,7 @@ import { MarkdownMeta } from "../utils/types";
 
 const isDebug = process.env.DEBUG;
 
-const currentPath = isDebug
-  ? path.resolve(__dirname, "./view/src")
-  : path.resolve(__dirname, "./view/dist");
+const currentPath = path.resolve(__dirname, "./view/dist");
 
 export const createHtml = Swig.compileFile(
   path.resolve(__dirname, "./index.html"),
@@ -33,15 +31,31 @@ export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = () => {
   let routes = getComponentFiles();
 
-  const tree = routes.reduce((prev, readmePath, index) => {
+  const routeInfos = routes
+    .map((route, index) => {
+      const metas: MarkdownMeta = getMetas(
+        parseMarkdown(fs.readFileSync(route, "utf8"))
+      );
+
+      const order = metas.order ?? index + 0.1;
+
+      return {
+        ...metas,
+        order,
+        route,
+      };
+    })
+    .sort((a, b) => a.order - b.order);
+
+  const tree = routeInfos.reduce((prev, routeInfo, index) => {
     const {
       title,
       group,
       order: metaOrder,
       sidemenu,
-    }: MarkdownMeta = getMetas(
-      parseMarkdown(fs.readFileSync(readmePath, "utf8"))
-    );
+    }: MarkdownMeta = routeInfo;
+
+    let readmePath = routeInfo.route;
 
     if (sidemenu === false) {
       return prev;
@@ -88,7 +102,6 @@ export const getRoutes = () => {
 
     return prev;
   }, []);
-  console.log("######", tree);
 
   const sort = (data) => {
     if (Array.isArray(data.children)) {
@@ -97,7 +110,8 @@ export const getRoutes = () => {
     return data.sort((a, b) => a.order - b.order);
   };
 
-  routes = routes.map((path) => `/${path}`);
+  routes = routeInfos.map(({ route }) => `/${route}`);
+
   return { tree: sort(tree), routes };
 };
 
@@ -110,6 +124,7 @@ const componentsTemplate = () => {
   let server: ViteDevServer;
   let config;
   let isBuild;
+
   return {
     name: "vite:packages-template",
     enforce: "pre",
@@ -148,6 +163,12 @@ const componentsTemplate = () => {
       if (id === entry) {
         return "index.html";
       }
+      if (/^\/mock/.test(id)) {
+        const currentPath = id.replace(/^\//, "");
+        if (fs.existsSync(currentPath)) {
+          return currentPath;
+        }
+      }
     },
     async load(id) {
       let file = cleanUrl(id);
@@ -162,7 +183,9 @@ const componentsTemplate = () => {
         }
         const { extendTemplate: externalHtml } = getConfig();
 
-        const mdFiles = getComponentFiles().map((file) => `/${file}`);
+        const mdFiles = isBuild
+          ? getComponentFiles().map((file) => `/${file}`)
+          : [];
 
         const mdFileMap = mdFiles.map((file) => [file, file]);
 
@@ -175,6 +198,7 @@ const componentsTemplate = () => {
             ),
           externalHtml,
           dirname: currentPath,
+          cwd: process.cwd(),
           base: config.base,
           isDebug,
         });

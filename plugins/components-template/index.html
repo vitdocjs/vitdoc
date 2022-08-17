@@ -14,24 +14,7 @@
     </style>
   </head>
   <body>
-    <link
-      rel="stylesheet"
-      href="//g.alicdn.com/code/lib/antd/4.18.9/antd.min.css"
-    />
-
     <div id="component-root"></div>
-
-    <script
-      crossorigin="anonymous"
-      src="//g.alicdn.com/code/lib/react/16.8.6/umd/react.production.min.js"
-    ></script>
-    <script
-      crossorigin="anonymous"
-      src="//g.alicdn.com/code/lib/react-dom/16.8.6/umd/react-dom.production.min.js"
-    ></script>
-
-    <script src="//g.alicdn.com/code/lib/moment.js/2.24.0/moment.min.js"></script>
-    <script src="//g.alicdn.com/code/lib/antd/4.18.9/antd.min.js"></script>
 
     <script>
       window.pageConfig = {};
@@ -60,6 +43,7 @@
     {% if !isDebug %}
     <script type="module" src="{{dirname}}/style.css"></script>
     {% endif %}
+
+    {{ externalHtml }}
   </body>
-  {{ externalHtml }}
 </html>

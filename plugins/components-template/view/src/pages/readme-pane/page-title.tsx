@@ -3,7 +3,7 @@ import { LinkCopy } from "../../components/link-copy";
 import { useComponentInfo, useRouteMap } from "../../utils/loaders";
 import { toName } from "../../utils";
 
-const { Typography } = window["antd"];
+import {  Typography  } from "antd";
 
 const { Title, Text } = Typography;
 

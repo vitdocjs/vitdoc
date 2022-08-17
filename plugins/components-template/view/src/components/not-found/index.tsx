@@ -1,6 +1,6 @@
 import React from "react";
 
-const { Result } = window["antd"];
+import { Result } from "antd";
 
 export function NotFound() {
   return (

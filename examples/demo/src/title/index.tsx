@@ -38,7 +38,12 @@ export function Title(props: IProps) {
       </div>
       {subTitle && (
         <div className="cms-sub-title">
-          <span dangerouslySetInnerHTML={{ __html: subTitle.replace('\\n', '\n') }} />
+          <span
+            dangerouslySetInnerHTML={{
+              // @ts-ignore
+              __html: subTitle.replace('\\n', '\n'),
+            }}
+          />
         </div>
       )}
     </div>

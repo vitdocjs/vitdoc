@@ -1,14 +1,16 @@
-import * as React from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import ReadmePane from "./pages/readme-pane";
 import RouterSwitch from "./pages/router-switch";
 import {
   HashRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 import { useRouteMap } from "./utils/loaders";
+
+import "antd/dist/antd.min.css";
 
 export function App() {
   const { routes } = useRouteMap() || {};

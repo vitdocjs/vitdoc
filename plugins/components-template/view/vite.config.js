@@ -3,9 +3,13 @@ import cdnExternals from "vite-plugin-cdn-externals";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    "process.env.NODE_ENV": '"production"',
+  },
   build: {
     minify: false,
     outDir: "dist",
+    emptyOutDir: false,
     lib: {
       name: "runtime",
       entry: "./src/runtime.tsx",
@@ -17,13 +21,4 @@ export default defineConfig({
       },
     },
   },
-
-  plugins: [
-    cdnExternals({
-      react: "React",
-      "react-dom": "ReactDOM",
-      moment: "moment",
-      "moment-timezone": "moment",
-    }),
-  ],
 });

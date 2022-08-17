@@ -19,7 +19,7 @@ import dropRight from "lodash/dropRight";
 import { useAtom } from "jotai";
 import { propertiesPropsStore, useSetPartialProperties } from "../../store";
 
-const { Result, Tooltip } = window["antd"];
+import {  Result, Tooltip  } from "antd";
 
 export const ComponentBlock = (props) => {
   const { children, lang, value: content, error, pathHash, renderer } = props;

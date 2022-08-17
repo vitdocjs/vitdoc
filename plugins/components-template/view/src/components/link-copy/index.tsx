@@ -3,7 +3,7 @@ import React from "react";
 import copy from "copy-to-clipboard";
 
 // @ts-ignore
-const { message } = window.antd;
+import {  message  } from "antd";
 
 export function copyToClipboard(str: string) {
   copy(str);

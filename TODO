@@ -6,7 +6,7 @@
 - [x] LOGO
 - [x] 未定义任何类型及未导出default场景
 - [x] 自定义Title，.md 元数据
-- [ ] 使用默认依赖
-- [ ] 动态目录更新
-- [ ] Mock Build
+- [x] 使用默认依赖
+- [x] 动态目录更新
+- [x] Mock Build
 - [ ] 拆包

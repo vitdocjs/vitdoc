@@ -11,7 +11,7 @@ import DoubleRightOutlined from "@ant-design/icons/DoubleRightOutlined";
 import { toName } from "../../utils";
 
 // @ts-ignore
-const { Menu, Button } = window.antd;
+import {  Menu, Button  } from "antd";
 
 const { SubMenu } = Menu;
 

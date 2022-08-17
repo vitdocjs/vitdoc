@@ -37,7 +37,11 @@ export function useAsyncImport(
       const cUrl = cleanUrl(path);
 
       if (!window.RuntimeModuleMap$[cUrl]) {
-        throw `'${cUrl}' is not in runtime module map...`;
+        window.RuntimeModuleMap$[cUrl] = (cb) => {
+          cb && cb(cUrl);
+          return import(/* @vite-ignore */ cUrl);
+        };
+        // throw `'${cUrl}' is not in runtime module map...`;
       }
 
       const result = await window.RuntimeModuleMap$[cUrl]?.((filePath) => {

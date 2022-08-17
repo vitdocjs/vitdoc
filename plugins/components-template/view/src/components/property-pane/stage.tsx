@@ -3,7 +3,7 @@ import { SetterFormItem } from "./setters/form";
 import { useCreation } from "ahooks";
 
 // @ts-ignore
-const { List, Form } = window.antd;
+import { List, Form } from "antd";
 
 export function Stage({
   componentName,
@@ -36,7 +36,7 @@ export function Stage({
       <List
         className="pane-stage"
         dataSource={configure}
-        renderItem={(item) => {
+        renderItem={(item: any) => {
           return <SetterFormItem {...item} />;
         }}
       />

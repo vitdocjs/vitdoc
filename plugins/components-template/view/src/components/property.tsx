@@ -1,5 +1,5 @@
 // @ts-ignore
-const { Table } = window.antd;
+import {  Table  } from "antd";
 import React from "react";
 
 export default function renderProperty({ loading = false, properties }) {

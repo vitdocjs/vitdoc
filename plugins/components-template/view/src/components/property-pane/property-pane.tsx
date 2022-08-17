@@ -20,7 +20,7 @@ import { useAtom } from "jotai";
 import "./index.scss";
 
 // @ts-ignore
-const { Button, Anchor } = window.antd;
+import {  Button, Anchor  } from "antd";
 
 export default function PropertyPane() {
   const [properties] = useAtom(propStore);
