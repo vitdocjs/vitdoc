@@ -25,6 +25,11 @@ export default mergeConfig(
     build: {
       target: "esnext",
       outDir: "dist/stories",
+      rollupOptions: {
+        output: {
+          assetFileNames: "assets/[hash].[extname]",
+        },
+      },
       manifest: true,
     },
     server: {
