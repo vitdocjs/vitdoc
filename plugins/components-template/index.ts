@@ -145,6 +145,9 @@ const componentsTemplate = () => {
         build: {
           rollupOptions: {
             input: { index: entry },
+            output: {
+              assetFileNames: `assets/[hash][extname]"`,
+            },
           },
         },
       });
