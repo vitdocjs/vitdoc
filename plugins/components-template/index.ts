@@ -146,7 +146,7 @@ const componentsTemplate = () => {
           rollupOptions: {
             input: { index: entry },
             output: {
-              assetFileNames: `assets/[hash][extname]"`,
+              assetFileNames: `assets/[hash][extname]`,
             },
           },
         },
@@ -165,12 +165,6 @@ const componentsTemplate = () => {
 
       if (id === entry) {
         return "index.html";
-      }
-      if (/^\/mock/.test(id)) {
-        const currentPath = id.replace(/^\//, "");
-        if (fs.existsSync(currentPath)) {
-          return currentPath;
-        }
       }
     },
     async load(id) {
