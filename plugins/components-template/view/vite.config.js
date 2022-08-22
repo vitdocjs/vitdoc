@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import cdnExternals from "vite-plugin-cdn-externals";
 
 // https://vitejs.dev/config/
 export default defineConfig({

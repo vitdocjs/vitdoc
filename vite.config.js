@@ -44,24 +44,7 @@ export default mergeConfig(
         },
       ],
     },
-    plugins: [
-      componentsTemplate(),
-      TypeFile(),
-      mdjsx(),
-      // cdnExternals({
-      // "@alifd/next": {
-      //   windowName: "Next",
-      //   find: /^@alif[e|d]\/next$/,
-      // },
-      // react: "React",
-      // "react-dom": {
-      //   windowName: "ReactDOM",
-      //   find: /^react-dom$/,
-      // },
-      // moment: "moment",
-      // "moment-timezone": "moment",
-      // }),
-    ],
+    plugins: [componentsTemplate(), TypeFile(), mdjsx()],
   },
   config
 );
