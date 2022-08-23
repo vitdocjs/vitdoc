@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "bin": {
     "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
@@ -10,6 +10,10 @@
     "type": "git",
     "url": "https://github.com/xiaobebe/vite-docs.git"
   },
+  "files": [
+    "vite.config.js",
+    "plugins"
+  ],
   "dependencies": {
     "@types/node": "^14.18.24",
     "chalk": "^4.1.2",
