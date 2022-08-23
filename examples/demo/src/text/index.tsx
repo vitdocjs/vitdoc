@@ -13,7 +13,6 @@ export interface IProps {
 
   /**
    * 图片地址
-   * @vision.setter ImageSetter
    */
   image?: string;
 
@@ -25,7 +24,7 @@ export interface IProps {
   /**
    * 显示尺寸
    */
-  size?: 'large' | 'medium' | 'small';
+  size?: "large" | 'medium' | 'small';
 
   /**
    * Banner高度

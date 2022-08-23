@@ -1,27 +1,20 @@
 #### Basic Usage
 
+Write markdown here.
+
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './index';
+import Text from './index';
 
-ReactDOM.render(<Component size="medium" />, mountNode);
+ReactDOM.render(<Text size="large" />, mountNode);
 ```
 
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './index';
+import Text from './index';
 
 
-ReactDOM.render(<Component d size="medium" />, mountNode);
-```
-
-
-#### API
-
-```tsx
-import ComponentType from './index.tsx.type';
-
-renderType$(ComponentType, mountNode);
+ReactDOM.render(<Text d size="medium" />, mountNode);
 ```

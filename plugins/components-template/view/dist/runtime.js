@@ -53559,7 +53559,7 @@ function RouterSwitch() {
     href: npmLink
   }, /* @__PURE__ */ React$a.createElement("img", {
     alt: "Vite Docs",
-    src: logo || "//img.alicdn.com/imgextra/i1/O1CN01yPg2Vc1gAJ2EFm5iG_!!6000000004101-55-tps-1058-237.svg",
+    src: logo || "//img.alicdn.com/imgextra/i4/O1CN01U2BRev1JttIZWA0JX_!!6000000001087-55-tps-771-237.svg",
     style: { width: 160 }
   })), /* @__PURE__ */ React$a.createElement(Button$2, {
     className: "responsive-btn",

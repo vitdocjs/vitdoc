@@ -25,11 +25,11 @@
 
 ##### Markdown
 
-![Markdown](http://md.xiaobe.top/static/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-07%20%E4%B8%8A%E5%8D%881.58.07.gif)
+![Markdown](http://md.xiaobe.top/static/1.gif)
 
 ##### TypeScript Types
 
-![TypeScript Types](http://md.xiaobe.top/static/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62021-06-07%20%E4%B8%8A%E5%8D%882.02.21.gif)
+![TypeScript Types](http://md.xiaobe.top/static/2.gif)
 
 ## Usage & Guide
 
