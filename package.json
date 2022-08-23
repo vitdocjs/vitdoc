@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "bin": {
     "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
