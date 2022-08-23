@@ -4,6 +4,10 @@
   "description": "demo",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "scripts": {
+    "start": "vdoc",
+    "build": "vdoc build"
+  },
   "files": [
     "dist",
     "lib"
