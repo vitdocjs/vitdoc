@@ -1,24 +1,13 @@
 #!/usr/bin/env node
 
-// const { $ } = require("zx");
-// const path = require("path");
-const exec = require("shelljs.exec");
-const path = require("path");
+import path from "path";
+import { fileURLToPath } from "url";
 
-const shellSyncExec = (command, options = {}) => {
-  const { code, error } = exec(command, {
-    stdio: "inherit",
-    ...options,
-  });
-  if (!!code) {
-    throw new Error(error);
-    process.exit(1);
-  }
-};
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-process.argv.splice(0, 2);
-process.argv.unshift("--config", path.resolve(__dirname, "../vite.config.js"));
+function start() {
+  process.argv.push("--config", path.resolve(__dirname, "../vite.config.js"));
+  return import("../node_modules/vite/bin/vite.js");
+}
 
-const vitePath = path.resolve(__dirname, "../node_modules/.bin/vite");
-
-shellSyncExec(`${vitePath} ${process.argv.join(" ")}`);
+start();

@@ -1,6 +1,7 @@
 {
   "name": "vitdoc",
   "version": "1.0.3",
+  "type": "module",
   "bin": {
     "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
@@ -17,7 +18,6 @@
   "dependencies": {
     "@types/node": "^14.18.24",
     "chalk": "^4.1.2",
-    "classnames": "^2.3.1",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.3.3",
     "extract-typescript-types": "^1.0.2",
@@ -30,7 +30,6 @@
     "remark-frontmatter": "3",
     "remark-parse": "9",
     "sass": "^1.54.4",
-    "shelljs.exec": "^1.1.8",
     "swig": "^1.4.2",
     "typescript": "^4.7.4",
     "unified": "9",
