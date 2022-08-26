@@ -2,16 +2,14 @@
   <img src="./logo.svg" alt="Logo for project">
 </p>
 
-A tool help you generate documentation **lightweight, seamless, fast and beautiful**
-
 <p align="center">
-
-[![Using TypeScript](https://img.shields.io/badge/%3C/%3E-TypeScript-0072C4.svg)](https://www.typescriptlang.org/)
-[![MIT License](https://img.shields.io/npm/l/generator-bxd-oss.svg)](#License)
-[![](https://flat.badgen.net/npm/v/vitdoc?icon=npm)](https://www.npmjs.com/package/vitdoc)
-[![NPM downloads](http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square)](http://npmjs.com/vitdoc)
-
+    <a href="https://npmjs.com/package/vitdoc"><img src="https://img.shields.io/npm/v/vitdoc.svg" alt="npm package"></a>
+    <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vitdoc.svg" alt="node compatibility"></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/%3C/%3E-TypeScript-0072C4.svg" alt="TypeScript"></a>
+    <a href="http://npmjs.com/vitdoc"><img src="http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square" alt="NPM Downloads"></a>
 </p>
+
+A tool help you generate documentation **lightweight, seamless, fast and beautiful**
 
 English | [简体中文](./README.md)
 
@@ -37,7 +35,7 @@ You can check out the projects in the `examples` directory for a quick start.
 ```bash
 $ npm install -g vitdoc
 $ cd ../examples/demo
-$ vitdoc 
+$ vitdoc
 ```
 
 ## More Details
@@ -45,5 +43,3 @@ $ vitdoc
 - [【Video: 早早聊】如何使用 Vite 高效打造团队组件资产](https://www.bilibili.com/video/BV1ad4y1A773/)
 - [Vite + React 组件开发深入实践](https://juejin.cn/post/6971244304828203021)
 - [这一年我的对组件的思考](https://juejin.cn/post/6844904065684652045)
-
-

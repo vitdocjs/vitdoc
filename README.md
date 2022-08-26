@@ -2,16 +2,15 @@
   <img src="./logo.svg" alt="Logo for project">
 </p>
 
-一个**轻量、飞快、美观**的文档生成的工具，你可以利用它为你的项目生成文档。
-
+<br/>
 <p align="center">
-
-[![Using TypeScript](https://img.shields.io/badge/%3C/%3E-TypeScript-0072C4.svg)](https://www.typescriptlang.org/)
-[![MIT License](https://img.shields.io/npm/l/generator-bxd-oss.svg)](#License)
-[![](https://flat.badgen.net/npm/v/vitdoc?icon=npm)](https://www.npmjs.com/package/vitdoc)
-[![NPM downloads](http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square)](http://npmjs.com/vitdoc)
-
+    <a href="https://npmjs.com/package/vitdoc"><img src="https://img.shields.io/npm/v/vitdoc.svg" alt="npm package"></a>
+    <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vitdoc.svg" alt="node compatibility"></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/%3C/%3E-TypeScript-0072C4.svg" alt="TypeScript"></a>
+    <a href="http://npmjs.com/vitdoc"><img src="http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square" alt="NPM Downloads"></a>
 </p>
+
+一个 **轻量、飞快、美观** 的 React 组件文档生成套件
 
 [English](./README_EN.md) | 简体中文
 
