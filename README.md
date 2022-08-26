@@ -2,6 +2,8 @@
   <img src="./logo.svg" alt="Logo for project">
 </p>
 
+一个**轻量、飞快、美观**的文档生成的工具，你可以利用它为你的项目生成文档。
+
 <p align="center">
 
 [![Using TypeScript](https://img.shields.io/badge/%3C/%3E-TypeScript-0072C4.svg)](https://www.typescriptlang.org/)
@@ -10,9 +12,6 @@
 [![NPM downloads](http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square)](http://npmjs.com/vitdoc)
 
 </p>
-
-
-一个**轻量、飞快、美观**的文档生成的工具，你可以利用它为你的项目生成文档。
 
 [English](./README_EN.md) | 简体中文
 
@@ -38,7 +37,7 @@
 ```bash
 $ npm install -g vitdoc
 $ cd ../examples/demo
-$ vitdoc 
+$ vitdoc
 ```
 
 ## More Details
@@ -46,4 +45,3 @@ $ vitdoc
 - [【Video: 早早聊】如何使用 Vite 高效打造团队组件资产](https://www.aliyundrive.com/s/sDsVdQV7Qrn)
 - [Vite + React 组件开发深入实践](https://juejin.cn/post/6971244304828203021)
 - [这一年我的对组件的思考](https://juejin.cn/post/6844904065684652045)
-
