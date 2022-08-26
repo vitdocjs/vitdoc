@@ -2,8 +2,7 @@
   <img src="./logo.svg" alt="Logo for project">
 </p>
 
-
-
+A tool help you generate documentation **lightweight, seamless, fast and beautiful**
 
 <p align="center">
 
@@ -13,9 +12,6 @@
 [![NPM downloads](http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square)](http://npmjs.com/vitdoc)
 
 </p>
-
-
-A tool help you generate documentation **lightweight, seamless, fast and beautiful**
 
 English | [简体中文](./README.md)
 
