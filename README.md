@@ -42,6 +42,6 @@ $ vitdoc
 
 ## More Details
 
-- [【Video: 早早聊】如何使用 Vite 高效打造团队组件资产](https://www.aliyundrive.com/s/sDsVdQV7Qrn)
+- [【Video: 早早聊】如何使用 Vite 高效打造团队组件资产](https://www.bilibili.com/video/BV1ad4y1A773/)
 - [Vite + React 组件开发深入实践](https://juejin.cn/post/6971244304828203021)
 - [这一年我的对组件的思考](https://juejin.cn/post/6844904065684652045)

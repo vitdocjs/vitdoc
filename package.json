@@ -1,6 +1,7 @@
 {
   "name": "vitdoc",
   "version": "1.0.4",
+  "description": "Next generation documentation generator for React Component.",
   "type": "module",
   "bin": {
     "vitdoc": "./bin/index.js",
