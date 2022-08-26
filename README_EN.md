@@ -14,7 +14,7 @@
 
 A tool help you generate documentation **lightweight, seamless, fast and beautiful**
 
-English | [简体中文](./README-CN.md)
+English | [简体中文](./README.md)
 
 ## Features
 
