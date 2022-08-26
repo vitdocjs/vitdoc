@@ -61,7 +61,7 @@ export default function RouterSwitch() {
             alt="Vite Docs"
             src={
               logo ||
-              "//img.alicdn.com/imgextra/i3/O1CN01Y5OYR11yP6vYmrs6p_!!6000000006570-55-tps-565-175.svg"
+              "//img.alicdn.com/imgextra/i3/O1CN01BCd2cu1o77Cs9nwaV_!!6000000005177-55-tps-563-168.svg"
             }
             style={{ width: 160 }}
           />
