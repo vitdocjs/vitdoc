@@ -1,11 +1,14 @@
 {
   "name": "vitdoc",
-  "version": "1.0.4",
-  "description": "Next generation documentation generator for React Component.",
+  "version": "1.0.6",
+  "description": "Write stories to showcase and document your components.",
   "type": "module",
   "bin": {
     "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
+  },
+  "scripts": {
+    "prepublishOnly": "cd plugins/components-template/view && npm run build"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
