@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Write stories to showcase and document your components.",
   "type": "module",
   "bin": {

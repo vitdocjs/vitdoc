@@ -2,12 +2,15 @@
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 
+const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function start() {
   process.argv.push("--config", path.resolve(__dirname, "../vite.config.js"));
-  return import("../node_modules/vite/bin/vite.js");
+  const viteBin = path.resolve(require.resolve("vite"), "../bin/vite.js");
+  return import(viteBin);
 }
 
 start();
