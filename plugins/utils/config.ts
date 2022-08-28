@@ -8,8 +8,12 @@ import fs from "fs";
 export function getConfig(): ConfigType {
   require("esbuild-register");
 
-  const config: ConfigType =
-    require(path.resolve(process.cwd(), ".vitdocrc.ts"))?.default ?? {};
+  let config: ConfigType = {};
+
+  try {
+    config =
+      require(path.resolve(process.cwd(), ".vitdocrc.ts"))?.default ?? {};
+  } catch (e) {}
 
   try {
     if (config.htmlAppend) {
