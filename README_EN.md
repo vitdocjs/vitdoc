@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="./logo.svg" alt="Logo for project">
+  <a href="https://vitdocjs.github.io" target="_blank" rel="noopener noreferrer">
+    <img src="./logo.svg" alt="Logo for project">
+  </a>
 </p>
 
 <p align="center">
