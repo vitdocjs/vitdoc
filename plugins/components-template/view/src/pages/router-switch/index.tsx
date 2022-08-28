@@ -11,7 +11,7 @@ import DoubleRightOutlined from "@ant-design/icons/DoubleRightOutlined";
 import { toName } from "../../utils";
 
 // @ts-ignore
-import {  Menu, Button  } from "antd";
+import { Menu, Button } from "antd";
 
 const { SubMenu } = Menu;
 
@@ -29,7 +29,7 @@ function MenuLink(item) {
 export default function RouterSwitch() {
   const { tree: menuData, routes } = useRouteMap() || {};
 
-  const { npmLink, logo } = useComponentInfo() || ({} as any);
+  const { npmLink } = useComponentInfo() || ({} as any);
 
   const [showMenu, { toggle, setFalse }] = useBoolean(false);
 
@@ -60,7 +60,8 @@ export default function RouterSwitch() {
           <img
             alt="Vite Docs"
             src={
-              logo ||
+              // @ts-ignore
+              window.pageConfig.logo ||
               "//vitdocjs.github.io/logo-with-word.svg"
             }
             style={{ width: 160 }}

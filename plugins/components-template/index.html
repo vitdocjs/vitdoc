@@ -21,7 +21,9 @@
     <div id="component-root"></div>
 
     <script>
-      window.pageConfig = {};
+      window.pageConfig = {
+        logo: {{ logo }}
+      };
     </script>
 
     <script type="module">
@@ -46,6 +48,10 @@
 
     {% if !isDebug %}
     <script type="module" src="{{dirname}}/style.css"></script>
-    {% endif %} {{ externalHtml }}
+    {% endif %}
+
+    <!-- split -->
+
+    {{ externalHtml }}
   </body>
 </html>

@@ -178,7 +178,7 @@ const componentsTemplate = () => {
         if (!/^\//.test(file)) {
           file = `/${file}`;
         }
-        const { extendTemplate: externalHtml } = getConfig();
+        const { htmlAppend: externalHtml, logo } = getConfig();
 
         const mdFiles = isBuild
           ? getComponentFiles().map((file) => `/${file}`)
@@ -187,6 +187,7 @@ const componentsTemplate = () => {
         const mdFileMap = mdFiles.map((file) => [file, file]);
 
         let html = createHtml({
+          logo,
           moduleMaps: [...mdFileMap]
             .filter(Boolean)
             .map(

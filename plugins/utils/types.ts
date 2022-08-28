@@ -27,3 +27,15 @@ export type MarkdownMeta = {
     order?: number;
   };
 };
+
+export type ConfigType = {
+  /**
+   * 页面 Logo
+   */
+  logo?: string;
+
+  /**
+   * 扩展 HTML
+   */
+  htmlAppend?: string;
+};
