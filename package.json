@@ -3,6 +3,7 @@
   "version": "1.0.9",
   "description": "Write stories to showcase and document your components.",
   "type": "module",
+  "main": "./lib/index.js",
   "bin": {
     "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
