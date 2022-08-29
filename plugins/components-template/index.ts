@@ -186,7 +186,14 @@ const componentsTemplate = () => {
 
         const mdFileMap = mdFiles.map((file) => [file, file]);
 
+        const { name, description } = require(path.resolve(
+          process.cwd(),
+          "package.json"
+        ));
+
         let html = createHtml({
+          name,
+          description,
           logo,
           moduleMaps: [...mdFileMap]
             .filter(Boolean)
