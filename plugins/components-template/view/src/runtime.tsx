@@ -36,6 +36,7 @@ export function App() {
   return (
     <ProLayout
       title={false}
+      hide={routes.length < 2}
       collapsed={collapsed}
       onCollapse={toggle}
       breakpoint="lg"
