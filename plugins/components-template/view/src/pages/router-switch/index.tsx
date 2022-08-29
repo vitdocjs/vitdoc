@@ -61,7 +61,7 @@ export default function RouterSwitch() {
             alt="Vite Docs"
             src={
               // @ts-ignore
-              window.pageConfig.logo ||
+              window.pageConfig?.logo ||
               "//vitdocjs.github.io/logo-with-word.svg"
             }
             style={{ width: 160 }}
