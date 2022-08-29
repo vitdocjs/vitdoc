@@ -59,6 +59,9 @@ export function App() {
         </a>
       }
       route={{ routes: menuData }}
+      pageTitleRender={(props, defaultPageTitle) => {
+        return `${toName(defaultPageTitle)} - Vitdoc`;
+      }}
       subMenuItemRender={(item, dom: ReactElement, { collapsed }) => {
         if (collapsed) {
           return "";
