@@ -1,13 +1,23 @@
 import React from "react";
 
 import "./index.scss";
-import { useMarkdown, useRoute } from "../../utils/loaders";
+import {
+  useComponentInfo,
+  useMarkdown,
+  useRoute,
+  useRouteMap,
+} from "../../utils/loaders";
 import { MarkdownArea } from "../../components/markdown-area";
-import { PageTitle } from "./page-title";
 import { useUnmount } from "ahooks";
 import { propertiesPropsStore, propertiesStore } from "../../store";
 import { useSetAtom } from "jotai";
 import PropertyPane from "../../components/property-pane/property-pane";
+import { PageContainer } from "@ant-design/pro-layout";
+import { toName } from "../../utils";
+import { LinkCopy } from "../../components/link-copy";
+import { Typography } from "antd";
+
+const { Text } = Typography;
 
 export default function ReadmePane() {
   const { route } = useRoute();
@@ -25,11 +35,32 @@ export default function ReadmePane() {
     });
   });
 
+  const compInfo = useComponentInfo();
+
+  const { flattenRoutes = [] } = useRouteMap() || {};
+
+  const currentRoute = flattenRoutes.find(({ path }) => path === route);
+
   return (
     <div id="public-component-show-container">
       {Components ? (
-        <div className="component-page">
-          <PageTitle route={route} />
+        <PageContainer
+
+          title={
+            <LinkCopy route={route}>
+              {toName(currentRoute?.name) || compInfo?.packageName}
+            </LinkCopy>
+          }
+          subTitle={
+            <a href={compInfo?.npmLink} className="vitdoc-link-title">
+              <Text type="secondary">Package: {compInfo?.packageName}</Text>
+              <Text type="secondary" style={{ marginLeft: 8 }}>
+                Version: {compInfo?.packageVersion}
+              </Text>
+            </a>
+          }
+          className="vitdoc-component-page"
+        >
           <div className="component-main">
             <div className="component-part">
               <div className="component-description">
@@ -38,7 +69,7 @@ export default function ReadmePane() {
             </div>
             <PropertyPane />
           </div>
-        </div>
+        </PageContainer>
       ) : (
         "Loading..."
       )}

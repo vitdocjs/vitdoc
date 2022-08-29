@@ -2,8 +2,9 @@ import LinkOutlined from "@ant-design/icons/LinkOutlined";
 import React from "react";
 import copy from "copy-to-clipboard";
 
-// @ts-ignore
-import {  message  } from "antd";
+import "./index.scss";
+
+import { message } from "antd";
 
 export function copyToClipboard(str: string) {
   copy(str);
@@ -11,16 +12,19 @@ export function copyToClipboard(str: string) {
   message.success("Copy successfully !");
 }
 
-export function LinkCopy({ route }) {
+export function LinkCopy({ route, children }) {
   return (
-    <LinkOutlined
-      className="copy-link-icon"
-      onClick={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        const { origin, pathname } = location;
-        copyToClipboard(`${origin}${pathname}#${route}`);
-      }}
-    />
+    <div className="vitdoc-copy-link">
+      <span>{children}</span>
+      <LinkOutlined
+        className="vitdoc-copy-link-icon"
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          const { origin, pathname } = location;
+          copyToClipboard(`${origin}${pathname}#${route}`);
+        }}
+      />
+    </div>
   );
 }

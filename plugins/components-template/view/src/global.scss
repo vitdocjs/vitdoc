@@ -1,0 +1,34 @@
+@import "~antd/dist/antd.min.css";
+
+.vitdoc-layout {
+  &.vitdoc-layout-collapsed {
+    > section.ant-layout {
+      > *:not(.ant-layout) {
+        width: 0 !important;
+        max-width: 0 !important;
+        min-width: 0 !important;
+        .ant-pro-sider-logo {
+          display: none;
+        }
+        .ant-pro-sider-collapsed-button {
+          right: -30px;
+          border-radius: 0 25px 25px 0;
+        }
+      }
+    }
+  }
+
+  > section.ant-layout > aside {
+    background-color: #f7f9fa !important;
+    .ant-pro-menu-submenu {
+      margin: 0;
+    }
+  }
+
+  .vitdoc-component-page
+    > .ant-pro-page-container-warp
+    .ant-page-header-heading-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

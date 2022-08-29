@@ -5,6 +5,16 @@ export default defineConfig({
   define: {
     "process.env.NODE_ENV": '"production"',
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
+  resolve: {
+    alias: [{ find: /^~/, replacement: "" }],
+  },
   build: {
     minify: false,
     outDir: "dist",

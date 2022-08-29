@@ -1,11 +1,12 @@
 .component-area {
+  background: #fff;
   border: 1px solid #f0f0f0;
   border-radius: 2px;
   position: relative;
   display: inline-block;
   width: 100%;
   transition: all 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
   &.active {
     border-color: var(--main-color, #40a9ff);

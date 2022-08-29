@@ -20,7 +20,7 @@ import { useAtom } from "jotai";
 import "./index.scss";
 
 // @ts-ignore
-import {  Button, Anchor  } from "antd";
+import {  Button, Affix  } from "antd";
 
 export default function PropertyPane() {
   const [properties] = useAtom(propStore);
@@ -66,7 +66,7 @@ export default function PropertyPane() {
   return (
     <div className="vision-property-container">
       {propertyDrawerShow && prototypeOptions ? (
-        <Anchor offsetTop={20} style={{ backgroundColor: "unset" }}>
+        <Affix offsetTop={20} style={{ backgroundColor: "unset" }}>
           <div className="ant-drawer-wrapper-body ">
             <div className="component-block">
               <div className="ant-drawer-header">
@@ -94,17 +94,19 @@ export default function PropertyPane() {
               </div>
             </div>
           </div>
-        </Anchor>
+        </Affix>
       ) : (
-        <div
+        <Affix
+          offsetTop={20}
           className="icon-vision-property-show"
-          onClick={() => setPropertyDrawerShow("1")}
         >
-          <Button>
+          <Button
+            onClick={() => setPropertyDrawerShow("1")}
+          >
             <DoubleLeftOutlined />
             Debug Panel
           </Button>
-        </div>
+        </Affix>
       )}
     </div>
   );

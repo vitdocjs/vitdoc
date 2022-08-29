@@ -40,14 +40,6 @@
       }
     }
   }
-  .component-sub-title {
-    vertical-align: baseline;
-    margin-bottom: 8px;
-    display: block;
-    > span {
-      margin-right: 1em;
-    }
-  }
 
   .component-block {
     background: #fff;
@@ -73,9 +65,7 @@
   }
 
   .component-description {
-    border-top: 1px solid #eee;
     font-size: 14px;
-    padding: 20px 0;
 
     > .block-title {
       font-size: 1.3em;
