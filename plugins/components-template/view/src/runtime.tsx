@@ -61,6 +61,11 @@ export function App() {
       pageTitleRender={(props, defaultPageTitle) => {
         return `${defaultPageTitle} - Vitdoc`;
       }}
+      menu={{
+        defaultOpenAll: true,
+        hideMenuWhenCollapsed: true,
+        ignoreFlatMenu: true,
+      }}
       subMenuItemRender={(item, dom: ReactElement, { collapsed }) => {
         if (collapsed) {
           return "";
