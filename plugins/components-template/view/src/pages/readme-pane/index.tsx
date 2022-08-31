@@ -13,7 +13,6 @@ import { propertiesPropsStore, propertiesStore } from "../../store";
 import { useSetAtom } from "jotai";
 import PropertyPane from "../../components/property-pane/property-pane";
 import { PageContainer } from "@ant-design/pro-layout";
-import { toName } from "../../utils";
 import { LinkCopy } from "../../components/link-copy";
 import { Typography } from "antd";
 
@@ -48,7 +47,7 @@ export default function ReadmePane() {
 
           title={
             <LinkCopy route={route}>
-              {toName(currentRoute?.name) || compInfo?.packageName}
+              {currentRoute?.name || compInfo?.packageName}
             </LinkCopy>
           }
           subTitle={

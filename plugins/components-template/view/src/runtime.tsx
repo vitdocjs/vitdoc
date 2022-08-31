@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import { useComponentInfo, useRouteMap } from "./utils/loaders";
 import { ProLayout } from "@ant-design/pro-layout";
-import { toName } from "./utils";
 import { LinkCopy } from "./components/link-copy";
 import ReadmePane from "./pages/readme-pane";
 import { useBoolean } from "ahooks";
@@ -60,13 +59,13 @@ export function App() {
       }
       route={{ routes: menuData }}
       pageTitleRender={(props, defaultPageTitle) => {
-        return `${toName(defaultPageTitle)} - Vitdoc`;
+        return `${defaultPageTitle} - Vitdoc`;
       }}
       subMenuItemRender={(item, dom: ReactElement, { collapsed }) => {
         if (collapsed) {
           return "";
         }
-        return React.cloneElement(dom, { children: toName(item.name) });
+        return React.cloneElement(dom, { children: item.name });
       }}
       menuItemRender={(item, dom: ReactElement, { collapsed }) => {
         if (collapsed) {
@@ -74,7 +73,7 @@ export function App() {
         }
         return React.cloneElement(dom, {
           onClick: () => push(item.path!),
-          children: <LinkCopy route={item.path}>{toName(item.name)}</LinkCopy>,
+          children: <LinkCopy route={item.path}>{item.name}</LinkCopy>,
         });
       }}
     >

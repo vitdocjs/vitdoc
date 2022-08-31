@@ -6,8 +6,11 @@ import { ModuleGraph } from "vite";
 
 const TypeFile = ({
   prefix = ".type",
-  buildMetaFile = "meta.manifest.json" as string | false,
+  buildMetaFile = false as boolean | string,
 } = {}) => {
+  if (buildMetaFile === true) {
+    buildMetaFile = "types.manifest.json";
+  }
   const matchReg = new RegExp(`${prefix}$`);
   const requestedUrlMap = {};
 
@@ -112,7 +115,7 @@ const TypeFile = ({
     },
     generateBundle(options, bundle) {
       if (buildMetaFile) {
-        bundle[buildMetaFile] = {
+        bundle[buildMetaFile as string] = {
           type: "asset",
           fileName: buildMetaFile,
           source: JSON.stringify(metas),

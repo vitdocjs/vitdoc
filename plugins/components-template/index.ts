@@ -3,7 +3,7 @@ import * as path from "path";
 import Swig from "swig";
 
 import { mergeConfig, send, ViteDevServer } from "vite";
-import { cleanUrl, isHTMLProxy } from "../utils";
+import { cleanUrl, isHTMLProxy, toName } from "../utils";
 import { getConfig } from "../utils/config";
 import { getComponentFiles, getMainFiles } from "../utils/rules";
 import { getMetas, parseMarkdown } from "../utils/markdown";
@@ -69,12 +69,12 @@ export const getRoutes = () => {
 
     const matches = cleanPath.match(/^(\w+?)\/(.+)/) || [];
 
-    const groupName = group?.title ?? matches[1];
+    const groupName = group?.title ?? toName(matches[1]);
 
     const order = metaOrder ?? index + 0.1;
 
     if (groupName) {
-      const name = title ?? matches[2];
+      const name = title ?? toName(matches[2]);
       let nextChild = prev.find(({ name }) => name === groupName);
       if (!nextChild) {
         nextChild = {
@@ -94,7 +94,7 @@ export const getRoutes = () => {
     } else {
       // 没有子目录
       prev.push({
-        name: title ?? cleanPath,
+        name: title ?? toName(cleanPath),
         order,
         path: readmePath,
       });
@@ -119,11 +119,14 @@ export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 
 const entry = path.resolve(__dirname, "../index.html");
 
-const componentsTemplate = () => {
+const componentsTemplate = ({
+  buildMetaFile = "stories.manifest.json" as false | string,
+} = {}) => {
   let input = {};
   let server: ViteDevServer;
   let config;
   let isBuild;
+  let routeTree: any;
 
   return {
     name: "vite:packages-template",
@@ -171,7 +174,9 @@ const componentsTemplate = () => {
       let file = cleanUrl(id);
 
       if (isRouteMap(file)) {
-        return JSON.stringify(getRoutes());
+        const ctx = getRoutes();
+        routeTree = ctx.tree;
+        return JSON.stringify(ctx);
       }
 
       if (/\.html$/.test(file) && !/\.css$/.test(id)) {
@@ -304,6 +309,27 @@ const componentsTemplate = () => {
       return code
         .replace(/import_meta\["hot"]/g, "import.meta.hot")
         .replace(/const __vitePreload/g, "var __vitePreload2");
+    },
+    generateBundle(options, bundle) {
+      if (buildMetaFile) {
+        const flatRouteMap = (tree) => {
+          const result: any[] = [];
+          tree.forEach((child) => {
+            if (Array.isArray(child.children)) {
+              result.push(...flatRouteMap(child.children));
+            } else {
+              result.push(child);
+            }
+          });
+          return result;
+        };
+        const routeInfos = flatRouteMap(routeTree);
+        bundle[buildMetaFile as string] = {
+          type: "asset",
+          fileName: buildMetaFile,
+          source: JSON.stringify(routeInfos),
+        };
+      }
     },
   };
 };
