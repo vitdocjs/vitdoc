@@ -23,9 +23,9 @@
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
-    "@ant-design/pro-layout": "next",
+    "@ant-design/pro-layout": "^7.0.2",
     "ahooks": "latest",
-    "antd": "^4.22.6",
+    "antd": "^5.0.0-experimental.22",
     "esbuild": "^0.14.49",
     "jotai": "^1.7.6",
     "lodash": "^4.17.11",

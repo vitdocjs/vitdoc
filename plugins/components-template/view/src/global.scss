@@ -1,9 +1,16 @@
-@import "~antd/dist/antd.min.css";
-
 .vitdoc-layout {
+  .ant-pro-sider-logo {
+    padding-block-start: 10px !important;
+  }
+  .vitdoc-logo {
+    img {
+      height: 22px;
+    }
+  }
+
   &.vitdoc-layout-collapsed {
     > section.ant-layout {
-      > *:not(.ant-layout) {
+      > aside {
         width: 0 !important;
         max-width: 0 !important;
         min-width: 0 !important;
@@ -11,7 +18,7 @@
           display: none;
         }
         .ant-pro-sider-collapsed-button {
-          right: -70px;
+          right: -60px;
           border-radius: 0 25px 25px 0;
         }
       }
@@ -19,15 +26,19 @@
   }
 
   > section.ant-layout > aside {
+    .ant-menu-item-group:first-child {
+      margin-top: 8px;
+    }
+    .ant-pro-base-menu-group .ant-menu-item-group-title .anticon[role="img"] {
+      margin-inline-end: 0;
+    }
     background-color: #f7f9fa !important;
     .ant-pro-menu-submenu {
       margin: 0;
     }
   }
 
-  .vitdoc-component-page
-    > .ant-pro-page-container-warp
-    .ant-page-header-heading-left {
+  .vitdoc-component-page > .ant-page-header .ant-page-header-heading-left {
     flex-direction: column;
     align-items: flex-start;
   }

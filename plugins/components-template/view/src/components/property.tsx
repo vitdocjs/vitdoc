@@ -1,5 +1,5 @@
 // @ts-ignore
-import {  Table  } from "antd";
+import { Table } from "antd";
 import React from "react";
 
 export default function renderProperty({ loading = false, properties }) {
@@ -16,15 +16,18 @@ export default function renderProperty({ loading = false, properties }) {
   return (
     <Table
       loading={loading}
-      scroll={{ x: "100%" }}
       dataSource={dateSource}
       pagination={false}
       bordered
     >
-      <Table.Column dataIndex="name" title="Property" />
-      <Table.Column dataIndex="description" title="Description" />
-      <Table.Column dataIndex={["type", "name"]} title="Type" />
-      <Table.Column dataIndex={["defaultValue", "value"]} title="Default" />
+      <Table.Column width={100} dataIndex="name" title="Property" />
+      <Table.Column width={150} dataIndex="description" title="Description" />
+      <Table.Column width={120} dataIndex={["type", "name"]} title="Type" />
+      <Table.Column
+        width={120}
+        dataIndex={["defaultValue", "value"]}
+        title="Default"
+      />
     </Table>
   );
 }

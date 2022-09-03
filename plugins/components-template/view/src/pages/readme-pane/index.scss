@@ -1,12 +1,10 @@
 #public-component-show-container {
   display: flex;
   position: relative;
-  min-height: 100vh;
-  width: 0;
   flex: 1;
-  padding: 8px 24px;
   flex-direction: column;
   box-sizing: border-box;
+
   .link-title {
     display: flex;
     flex-direction: column;

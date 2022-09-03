@@ -16,11 +16,9 @@ import {
   propertiesStore as propStore,
 } from "../../store";
 import { useAtom } from "jotai";
+import { Button, Affix, Card, Space } from "antd";
 
 import "./index.scss";
-
-// @ts-ignore
-import {  Button, Affix  } from "antd";
 
 export default function PropertyPane() {
   const [properties] = useAtom(propStore);
@@ -67,44 +65,37 @@ export default function PropertyPane() {
     <div className="vision-property-container">
       {propertyDrawerShow && prototypeOptions ? (
         <Affix offsetTop={20} style={{ backgroundColor: "unset" }}>
-          <div className="ant-drawer-wrapper-body ">
-            <div className="component-block">
-              <div className="ant-drawer-header">
-                <div className="ant-drawer-title">
-                  <BugOutlined
-                    className="code-box-code-action"
-                    style={{ marginRight: 8 }}
-                  />
-                  Debug Panel
-                </div>
-                <button
-                  aria-label="Close"
-                  className="ant-drawer-close"
-                  onClick={() => setPropertyDrawerShow("")}
-                >
-                  <CloseOutlined />
-                </button>
-              </div>
-              <div className="ant-drawer-body">
-                <Stage
-                  {...prototypeOptions}
-                  initialValues={defaultProps}
-                  onValuesChange={onPropsChange}
-                />
-              </div>
-            </div>
-          </div>
+          <Card
+            className="vitdoc-debug-panel"
+            title={
+              <Space>
+                <BugOutlined className="code-box-code-action" />
+                Try to play
+              </Space>
+            }
+            extra={
+              <Button
+                type="text"
+                size="small"
+                aria-label="Close"
+                onClick={() => setPropertyDrawerShow("")}
+              >
+                <CloseOutlined />
+              </Button>
+            }
+          >
+            <Stage
+              {...prototypeOptions}
+              initialValues={defaultProps}
+              onValuesChange={onPropsChange}
+            />
+          </Card>
         </Affix>
       ) : (
-        <Affix
-          offsetTop={20}
-          className="icon-vision-property-show"
-        >
-          <Button
-            onClick={() => setPropertyDrawerShow("1")}
-          >
+        <Affix offsetTop={20} className="icon-vision-property-show">
+          <Button onClick={() => setPropertyDrawerShow("1")}>
             <DoubleLeftOutlined />
-            Debug Panel
+            Try to play
           </Button>
         </Affix>
       )}

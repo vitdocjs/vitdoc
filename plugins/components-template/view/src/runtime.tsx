@@ -20,6 +20,8 @@ import "./global.scss";
 export function App() {
   const { tree: menuData, routes } = useRouteMap() || {};
 
+  menuData?.forEach((item) => (item.icon = "📦"));
+
   const { push } = useHistory();
 
   const { npmLink } = useComponentInfo() || ({} as any);
@@ -34,6 +36,7 @@ export function App() {
 
   return (
     <ProLayout
+      siderMenuType="group"
       title={false}
       hide={routes.length < 2}
       collapsed={collapsed}
@@ -45,7 +48,7 @@ export function App() {
         collapsed && "vitdoc-layout-collapsed"
       )}
       logo={
-        <a className="logo" href={npmLink}>
+        <a className="vitdoc-logo" href={npmLink}>
           <img
             alt="Vite Docs"
             src={
@@ -65,12 +68,6 @@ export function App() {
         defaultOpenAll: true,
         hideMenuWhenCollapsed: true,
         ignoreFlatMenu: true,
-      }}
-      subMenuItemRender={(item, dom: ReactElement, { collapsed }) => {
-        if (collapsed) {
-          return "";
-        }
-        return React.cloneElement(dom, { children: item.name });
       }}
       menuItemRender={(item, dom: ReactElement, { collapsed }) => {
         if (collapsed) {
