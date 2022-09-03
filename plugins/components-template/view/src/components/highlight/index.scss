@@ -300,12 +300,6 @@
     &[class~='language-php']:before {
         content: 'php';
     }
-    @media screen and (max-width: 769px) {
-        &[class*='language-'] {
-            margin: 0.85rem -1.5rem;
-            border-radius: 0;
-        }
-    }
     .token.number {
         background-color: transparent;
         border-radius: 0;
