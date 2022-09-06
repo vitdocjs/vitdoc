@@ -312,22 +312,10 @@ const componentsTemplate = ({
     },
     generateBundle(options, bundle) {
       if (buildMetaFile) {
-        const flatRouteMap = (tree) => {
-          const result: any[] = [];
-          tree.forEach((child) => {
-            if (Array.isArray(child.children)) {
-              result.push(...flatRouteMap(child.children));
-            } else {
-              result.push(child);
-            }
-          });
-          return result;
-        };
-        const routeInfos = flatRouteMap(routeTree);
         bundle[buildMetaFile as string] = {
           type: "asset",
           fileName: buildMetaFile,
-          source: JSON.stringify(routeInfos),
+          source: JSON.stringify(routeTree),
         };
       }
     },
