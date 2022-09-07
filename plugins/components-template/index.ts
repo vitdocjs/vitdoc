@@ -257,7 +257,7 @@ const componentsTemplate = ({
             return send(
               req,
               res,
-              `export default ${await this.load(url)}`,
+              `export default ${await server.pluginContainer.load(url)}`,
               "js",
               {}
             );
