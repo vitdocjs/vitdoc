@@ -4,13 +4,27 @@ export function remarkCodeBlock(options) {
   return (tree, _file) => {
     const modules: any = [];
     let prevModules: any[] = [];
-    (tree.children as any[]).forEach((node) => {
-      if (node.type === "thematicBreak") {
+    const endBlock = () => {
+      if (prevModules.length === 1 && prevModules[0].type === "code") {
         modules.push(...prevModules);
         prevModules = [];
         return;
       }
+
+      modules.push({
+        type: "card-block",
+        children: prevModules,
+      });
+      prevModules = [];
+    };
+
+    (tree.children as any[]).forEach((node) => {
+      if (node.type === "thematicBreak") {
+        endBlock();
+        return;
+      }
       if (node.type === "code" && isJsx(node.lang) && isTypes(node.value)) {
+        // 类型定义
         modules.push(...prevModules, {
           ...node,
           type: "property-code",
@@ -31,7 +45,7 @@ export function remarkCodeBlock(options) {
     });
 
     if (!!prevModules.length) {
-      modules.push(...prevModules);
+      endBlock();
     }
 
     tree.children = modules;

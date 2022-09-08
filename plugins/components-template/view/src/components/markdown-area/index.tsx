@@ -4,9 +4,9 @@ import "./index.scss";
 import { ComponentBlock } from "../component-area";
 import { useCreation, useMemoizedFn } from "ahooks";
 import { PropertyArea } from "../property-area";
-import HighLight from "../highlight";
 import remarkFrontMatter from "remark-frontmatter";
 import { remarkCodeBlock } from "./plugins";
+import { mdRenderers } from "./renderers";
 
 export function MarkdownArea({ data: res }) {
   if (!res) {
@@ -16,10 +16,6 @@ export function MarkdownArea({ data: res }) {
   const { moduleMap, content, error, pathHash } = res;
 
   const getModule = useMemoizedFn((value) => moduleMap?.[value.trim()]);
-
-  const code = useMemoizedFn(({ language, value = "" }) => {
-    return <HighLight lang={language} children={value} />;
-  });
 
   const componentBlock = useMemoizedFn((props) => {
     return (
@@ -42,9 +38,9 @@ export function MarkdownArea({ data: res }) {
       <ReactMarkdown
         className="markdown-body"
         plugins={[remarkFrontMatter as any, remarkCodeBlock]}
+        allowDangerousHtml={true}
         renderers={{
-          yaml: () => null,
-          code,
+          ...mdRenderers,
           "component-block": componentBlock,
           "property-code": propertyCode,
         }}

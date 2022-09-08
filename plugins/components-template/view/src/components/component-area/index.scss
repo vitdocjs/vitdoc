@@ -8,6 +8,10 @@
   transition: all 0.2s;
   margin-bottom: 16px;
 
+  & + .code-pane {
+    margin-top: -0.85rem;
+  }
+
   &.active {
     border-color: var(--main-color, #40a9ff);
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);

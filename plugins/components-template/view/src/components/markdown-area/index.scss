@@ -1,7 +1,24 @@
-@import "theme.css";
+//@import "theme.css";
+@import "var.css";
+@import "vitepress.css";
 
 .markdown-area {
   width: 100%;
+
+  .vp-doc {
+    margin: 0;
+    min-width: 320px;
+    line-height: 24px;
+    font-family: var(--vp-font-family-base);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--vp-c-text-1);
+    direction: ltr;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
   ul,
   dl,

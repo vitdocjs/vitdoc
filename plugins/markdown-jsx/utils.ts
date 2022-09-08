@@ -20,7 +20,10 @@ export async function appendTypes(
 
     if (mainModuleId) {
       content += "\n";
-      const appendCode = `#### API
+      const appendCode = `
+---
+
+#### API
 
 \`\`\`tsx
 import ComponentType from '${removeProcessCwd(mainModuleId)}.type';

@@ -19,7 +19,9 @@ import dropRight from "lodash/dropRight";
 import { useAtom } from "jotai";
 import { propertiesPropsStore, useSetPartialProperties } from "../../store";
 
-import {  Result, Tooltip  } from "antd";
+import { Result, Tooltip as _Tooltip } from "antd";
+
+const Tooltip = _Tooltip as any;
 
 export const ComponentBlock = (props) => {
   const { children, lang, value: content, error, pathHash, renderer } = props;
@@ -40,7 +42,7 @@ export const ComponentBlock = (props) => {
       })}
     >
       {!!beforeChildren.length && (
-        <div className="code-box-demo-description markdown-body">
+        <div className="code-box-demo-description markdown-body vp-doc">
           {beforeChildren}
         </div>
       )}
