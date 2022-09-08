@@ -26,6 +26,8 @@
     "@ant-design/pro-layout": "^7.0.2",
     "ahooks": "latest",
     "antd": "^5.0.0-experimental.22",
+    "classnames": "^2.3.1",
+    "copy-to-clipboard": "^3.3.2",
     "esbuild": "^0.14.49",
     "jotai": "^1.7.6",
     "lodash": "^4.17.11",

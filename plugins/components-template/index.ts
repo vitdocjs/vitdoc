@@ -1,8 +1,7 @@
 // @ts-ignore
 import * as path from "path";
 import Swig from "swig";
-
-import { mergeConfig, send, ViteDevServer } from "vite";
+import { mergeConfig, normalizePath, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy, toName } from "../utils";
 import { getConfig } from "../utils/config";
 import { getComponentFiles, getMainFiles } from "../utils/rules";
@@ -207,7 +206,10 @@ const componentsTemplate = ({
                 `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`
             ),
           externalHtml,
-          dirname: currentPath,
+          runtime: {
+            js: normalizePath(`${currentPath}/runtime`),
+            css: normalizePath(`${currentPath}/style.css`),
+          },
           cwd: process.cwd(),
           base: config.base,
           isDebug,

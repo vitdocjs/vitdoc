@@ -50,12 +50,9 @@
         }
       }
 
-      import("{{dirname}}/runtime");
+      import("{{runtime.js}}");
+      import("{{runtime.css}}")
     </script>
-
-    {% if !isDebug %}
-    <script type="module" src="{{dirname}}/style.css"></script>
-    {% endif %}
 
     <!-- split -->
 

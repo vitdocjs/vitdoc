@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "type": "module",
   "main": "./lib/index.js",
