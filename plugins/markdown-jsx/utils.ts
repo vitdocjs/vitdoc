@@ -16,7 +16,7 @@ export async function appendTypes(
   if (!content.includes("renderType$")) {
     const mainModuleId = await getMainModuleId();
 
-    const readmeFile = removeProcessCwd(id);
+    // const readmeFile = removeProcessCwd(id);
 
     if (mainModuleId) {
       content += "\n";
@@ -31,17 +31,17 @@ import ComponentType from '${removeProcessCwd(mainModuleId)}.type';
 renderType$(ComponentType, mountNode);
 \`\`\``;
 
-      console.log(
-        chalk.yellow(
-          `[Warning] The file '${removeProcessCwd(
-            readmeFile
-          )}' document miss the type define.`
-        )
-      );
-      console.log(
-        chalk.yellow(`Please append following code to your .md file.`)
-      );
-      console.log(chalk.dim(appendCode));
+      // console.log(
+      //   chalk.yellow(
+      //     `[Warning] The file '${removeProcessCwd(
+      //       readmeFile
+      //     )}' document miss the type define.`
+      //   )
+      // );
+      // console.log(
+      //   chalk.yellow(`Please append following code to your .md file.`)
+      // );
+      // console.log(chalk.dim(appendCode));
 
       content += appendCode;
     }

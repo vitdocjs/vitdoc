@@ -5,6 +5,10 @@ export function remarkCodeBlock(options) {
     const modules: any = [];
     let prevModules: any[] = [];
     const endBlock = () => {
+      if (!prevModules.length) {
+        return;
+      }
+
       if (prevModules.length === 1 && prevModules[0].type === "code") {
         modules.push(...prevModules);
         prevModules = [];

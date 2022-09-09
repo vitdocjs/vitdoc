@@ -4,6 +4,7 @@
   flex: 1;
   flex-direction: column;
   box-sizing: border-box;
+  max-width: 100%;
 
   .link-title {
     display: flex;
@@ -16,6 +17,7 @@
     display: flex;
   }
   .component-part {
+    width: 100%;
     flex: 1;
   }
 

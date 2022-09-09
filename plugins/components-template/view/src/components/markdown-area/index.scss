@@ -1,6 +1,5 @@
-//@import "theme.css";
-@import "var.css";
-@import "vitepress.css";
+@import "./theme/var.css";
+@import "./theme/vue.css";
 
 .markdown-area {
   width: 100%;
