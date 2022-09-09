@@ -16,6 +16,10 @@
   line-height: 1.4;
 }
 
+.vp-doc p {
+  font-size: 16px;
+}
+
 .vp-doc > h1 {
   font-size: 28px;
 }
@@ -92,6 +96,10 @@
   color: var(--vp-c-brand);
   text-decoration-style: dotted;
   transition: color 0.25s;
+}
+
+.vp-doc a:visited {
+  color: var(--vp-c-brand);
 }
 
 .vp-doc a:hover {

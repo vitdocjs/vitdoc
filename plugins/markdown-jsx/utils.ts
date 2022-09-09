@@ -1,5 +1,4 @@
 import { removeProcessCwd } from "../utils";
-import chalk from "chalk";
 
 /**
  * 添加类型定义
