@@ -9,7 +9,11 @@ export const mdRenderers = {
   },
   link: ({ node, ...props }) => <a {...props} target="_blank" />,
   "card-block": ({ children }) => (
-    <Card className="vp-doc" style={{ marginBottom: 16 }}>
+    <Card
+      className="vp-doc"
+      style={{ marginBottom: 16 }}
+      bodyStyle={{ padding: "8px 24px" }}
+    >
       {children}
     </Card>
   ),
