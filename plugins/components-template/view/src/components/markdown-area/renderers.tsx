@@ -11,12 +11,8 @@ export const mdRenderers = {
   link: ({ node, ...props }) => <a {...props} target="_blank" />,
   ...directiveRenderers,
   "card-block": ({ children }) => (
-    <Card
-      className="vp-doc"
-      style={{ marginBottom: 16 }}
-      bodyStyle={{ padding: "8px 24px" }}
-    >
-      {children}
+    <Card style={{ marginBottom: 16 }} bodyStyle={{ padding: "8px 24px" }}>
+      <div className="vp-doc">{children}</div>
     </Card>
   ),
 };

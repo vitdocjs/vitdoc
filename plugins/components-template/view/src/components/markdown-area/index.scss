@@ -3,47 +3,4 @@
 
 .markdown-area {
   width: 100%;
-
-  .vp-doc {
-    margin: 0;
-    min-width: 320px;
-    line-height: 24px;
-    font-family: var(--vp-font-family-base);
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--vp-c-text-1);
-    direction: ltr;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  ul,
-  dl,
-  ol {
-    > li {
-      list-style-type: inherit;
-      line-height: 1.5;
-    }
-  }
-
-  ul {
-    list-style-type: disc;
-    list-style-position: inside;
-  }
-  ol {
-    list-style-type: decimal;
-    list-style-position: inside;
-  }
-  ul ul,
-  ol ul {
-    list-style-type: circle;
-    list-style-position: inside;
-  }
-  ol ol,
-  ul ol {
-    list-style-type: lower-latin;
-    list-style-position: inside;
-  }
 }

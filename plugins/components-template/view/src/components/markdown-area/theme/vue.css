@@ -1,3 +1,18 @@
+.vp-doc {
+  margin: 0;
+  min-width: 320px;
+  line-height: 24px;
+  font-family: var(--vp-font-family-base);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--vp-c-text-1);
+  direction: ltr;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /**
  * Headings
  * -------------------------------------------------------------------------- */
@@ -16,7 +31,7 @@
   line-height: 1.4;
 }
 
-.vp-doc p {
+.vp-doc > p {
   font-size: 16px;
 }
 
@@ -98,7 +113,8 @@
   transition: color 0.25s;
 }
 
-.vp-doc a:visited {
+.vp-doc a:visited,
+.vp-doc a:link {
   color: var(--vp-c-brand);
 }
 
@@ -117,6 +133,10 @@
 .vp-doc ul,
 .vp-doc ol {
   padding-left: 1.25rem;
+}
+
+.vp-doc > ul,
+.vp-doc > ol {
   margin: 16px 0;
 }
 
