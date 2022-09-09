@@ -5,6 +5,7 @@ import { ComponentBlock } from "../component-area";
 import { useCreation, useMemoizedFn } from "ahooks";
 import { PropertyArea } from "../property-area";
 import remarkFrontMatter from "remark-frontmatter";
+import remarkDirective from "remark-directive";
 import { remarkCodeBlock } from "./plugins";
 import { mdRenderers } from "./renderers";
 
@@ -37,7 +38,7 @@ export function MarkdownArea({ data: res }) {
       // @ts-ignore
       <ReactMarkdown
         className="markdown-body"
-        plugins={[remarkFrontMatter as any, remarkCodeBlock]}
+        plugins={[remarkDirective, remarkFrontMatter as any, remarkCodeBlock]}
         allowDangerousHtml={true}
         renderers={{
           ...mdRenderers,

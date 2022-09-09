@@ -1,6 +1,6 @@
 import { hasReact, isJsx, isTypes } from "../../../../../utils/lang";
 
-export function remarkCodeBlock(options) {
+export function remarkCodeBlock() {
   return (tree, _file) => {
     const modules: any = [];
     let prevModules: any[] = [];

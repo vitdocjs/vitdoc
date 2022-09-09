@@ -3,9 +3,18 @@ title: Welcome
 order: 0
 ---
 
+# 快速上手
+
+## 环境准备
+
+:::tip{title="环境准备"}
+Vite 需要 [Node.js](https://nodejs.org/en/) 版本 14.18+，16+。然而，有些模板需要依赖更高的 Node 版本才能正常运行，当你的包管理器发出警告时，请注意升级你的 Node 版本。
+:::
+
 ## 方式 1： 仓库模板初始化
 
 你可以直接使用 [vitdoc-template](https://github.com/vitdocjs/vitdoc-template) 进行仓库初始化，访问 https://github.com/vitdocjs/vitdoc-template 了解更多。
+
 
 该模板中已经为你提供一些组件和文档用法，完成初始化后即可按照以下步骤进行开发：
 
@@ -51,7 +60,6 @@ echo '# Hello Vitdoc' > components/README.md
 ```bash
 yarn docs:dev
 ```
-
 ---
 
 #### Welcome to the React Component Library
@@ -80,3 +88,4 @@ ReactDOM.render(
   mountNode,
 );
 ```
+

@@ -39,6 +39,7 @@
     "react-markdown": "^5.0.3",
     "react-router-dom": "^5.2.0",
     "react-syntax-highlighter": "^15.4.5",
+    "remark-directive": "^1.0.0",
     "remark-frontmatter": "^4.0.1"
   }
 }
