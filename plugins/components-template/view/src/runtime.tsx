@@ -20,7 +20,7 @@ import "./global.scss";
 export function App() {
   const { tree: menuData, routes } = useRouteMap() || {};
 
-  menuData?.forEach((item) => (item.icon = "📦"));
+  menuData?.forEach((item) => (item.icon = <span>📦</span>));
 
   const { push } = useHistory();
 
