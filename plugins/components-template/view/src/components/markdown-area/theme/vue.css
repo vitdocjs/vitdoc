@@ -47,6 +47,10 @@
   font-size: 20px;
 }
 
+.vp-doc > h4 {
+  font-size: 17px;
+}
+
 .vp-doc .header-anchor {
   float: left;
   margin-left: -0.87em;
@@ -85,11 +89,16 @@
 
 .vp-doc p,
 .vp-doc summary {
-  margin: 16px 0;
+  margin: 1em 0;
+}
+
+.vp-doc p:first-child,
+.vp-doc summary:first-child {
+  margin-top: 0.2em;
 }
 
 .vp-doc p {
-  line-height: 28px;
+  line-height: 1.6;
 }
 
 .vp-doc blockquote {
