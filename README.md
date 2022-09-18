@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://stackblitz.com/edit/vitejs-vite-9ljkzv?file=src%2FREADME.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+  <a href="https://stackblitz.com/edit/vitdoc?file=src/README.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
 </p>
 
 

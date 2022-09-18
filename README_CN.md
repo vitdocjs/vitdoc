@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://stackblitz.com/edit/vitejs-vite-9ljkzv?file=src%2FREADME.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+  <a href="https://stackblitz.com/edit/vitdoc?file=src/README.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
 </p>
 
 基于 [Vite](https://github.com/vitejs/vite)，使用 `markdown` 编写 React 组件文档，自动提取组件接口定义。
