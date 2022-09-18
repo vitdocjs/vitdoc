@@ -4,7 +4,6 @@
   </a>
 </p>
 
-<br/>
 <p align="center">
     <a href="https://npmjs.com/package/vitdoc"><img src="https://img.shields.io/npm/v/vitdoc.svg" alt="npm package"></a>
     <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vitdoc.svg" alt="node compatibility"></a>
@@ -12,16 +11,19 @@
     <a href="http://npmjs.com/vitdoc"><img src="http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square" alt="NPM Downloads"></a>
 </p>
 
-一个 **轻量、飞快、美观** 的 React 组件文档生成套件
+Based on [Vite](https://github.com/vitejs/vite), use `markdown` to write React component documentation, and automatically extract component interface definitions.
 
-[English](./README_EN.md) | 简体中文
+Inspired by [dumi](https://github.com/umijs/dumi)、[Histoire](https://github.com/histoire-dev/histoire)
+
+
+English | [简体中文](./README_CN.md)
 
 ## Features
 
-- **`Vite`** 内核，高效极速的开发体验
-- 使用 `Markdown` 写法，让你快速为项目编写说明文档的同时，自动生成预览，在调试的同时生成文档
-- 自动分析 `TypeScript` 类型定义并生成 API 文档
-- 自动根据 `.md` 文件目录生成菜单导航
+- **`Vite`** kernel, efficient and fast development experience.
+- Using the `Markdown` writing, you can quickly write documentation for the project, automatically generate a preview, and generate documents while debugging.
+- Automatically analyze `TypeScript` type definitions and generate API documentation.
+- Automatically generate menu navigation based on `.md` file directory.
 
 ##### Markdown
 
@@ -33,7 +35,7 @@
 
 ## Usage & Guide
 
-你可以查看 `examples` 目录下的项目，便于你快速开始使用。
+You can check out the projects in the `examples` directory for a quick start.
 
 ```bash
 $ npm install -g vitdoc
