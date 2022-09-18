@@ -11,6 +11,11 @@
     <a href="http://npmjs.com/vitdoc"><img src="http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square" alt="NPM Downloads"></a>
 </p>
 
+<p align="center">
+  <a href="https://stackblitz.com/edit/vitejs-vite-9ljkzv?file=src%2FREADME.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+</p>
+
+
 Based on [Vite](https://github.com/vitejs/vite), use `markdown` to write React component documentation, and automatically extract component interface definitions.
 
 Inspired by [dumi](https://github.com/umijs/dumi)、[Histoire](https://github.com/histoire-dev/histoire)

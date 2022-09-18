@@ -12,6 +12,10 @@
     <a href="http://npmjs.com/vitdoc"><img src="http://img.shields.io/npm/dm/vitdoc.svg?style=flat-square" alt="NPM Downloads"></a>
 </p>
 
+<p align="center">
+  <a href="https://stackblitz.com/edit/vitejs-vite-9ljkzv?file=src%2FREADME.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+</p>
+
 基于 [Vite](https://github.com/vitejs/vite)，使用 `markdown` 编写 React 组件文档，自动提取组件接口定义。
 
 启发于：[dumi](https://github.com/umijs/dumi)、[Histoire](https://github.com/histoire-dev/histoire)
