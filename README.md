@@ -50,6 +50,6 @@ $ vitdoc
 
 ## More Details
 
-- [【Video: 早早聊】如何使用 Vite 高效打造团队组件资产](https://www.bilibili.com/video/BV1ad4y1A773/)
-- [Vite + React 组件开发深入实践](https://juejin.cn/post/6971244304828203021)
-- [这一年我的对组件的思考](https://juejin.cn/post/6844904065684652045)
+- [[Bilibili] Why do Vitdoc?](https://www.bilibili.com/video/BV1ad4y1A773/)
+- [[Article] Increase team performance by doing components](https://juejin.cn/post/6971244304828203021)
+- [[Article] Use Vite to make a react component inspiration](https://juejin.cn/post/6844904065684652045)
