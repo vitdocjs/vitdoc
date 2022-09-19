@@ -22,22 +22,22 @@
 
 [English](./README_EN.md) | 简体中文
 
-## Features
+## 功能
 
 - **`Vite`** 内核，高效极速的开发体验
 - 使用 `Markdown` 写法，让你快速为项目编写说明文档的同时，自动生成预览，在调试的同时生成文档
 - 自动分析 `TypeScript` 类型定义并生成 API 文档
 - 自动根据 `.md` 文件目录生成菜单导航
 
-##### Markdown
+##### 通过markdown写文档
 
 ![Markdown](http://md.xiaobe.top/static/1.gif)
 
-##### TypeScript Types
+##### 提取ts类型
 
 ![TypeScript Types](http://md.xiaobe.top/static/2.gif)
 
-## Usage & Guide
+## 用法 & 指南
 
 你可以查看 `examples` 目录下的项目，便于你快速开始使用。
 
@@ -47,7 +47,7 @@ $ cd ../examples/demo
 $ vitdoc
 ```
 
-## More Details
+## 了解跟多
 
 - [【哔哩哔哩】为什么做 Vitdoc ?](https://www.bilibili.com/video/BV1ad4y1A773/)
 - [通过做好组件增加团队效能](https://juejin.cn/post/6844904065684652045)

@@ -30,11 +30,11 @@ English | [简体中文](./README_CN.md)
 - Automatically analyze `TypeScript` type definitions and generate API documentation.
 - Automatically generate menu navigation based on `.md` file directory.
 
-##### Markdown
+##### Write documentation by markdown
 
 ![Markdown](http://md.xiaobe.top/static/1.gif)
 
-##### TypeScript Types
+##### Extract ts interface
 
 ![TypeScript Types](http://md.xiaobe.top/static/2.gif)
 
