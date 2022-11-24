@@ -146,10 +146,11 @@ export function useMarkdown() {
       const sourceKey = currentValue.sourcesContent.trim();
       return Object.assign(previousValue, {
         [sourceKey]: (...args) => {
-          currentValue.load(...args);
+          const result = currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load();
           });
+          return result;
         },
       });
     }, {});

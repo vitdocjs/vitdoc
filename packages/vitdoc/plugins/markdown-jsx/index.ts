@@ -8,7 +8,7 @@ import {
   removeProcessCwd,
   resolveMainComponent,
 } from "../utils";
-import { isCSSLang, isJsx } from "../utils/lang";
+import { isCSSLang, isInlineMeta, isJsx } from "../utils/lang";
 import { send } from "vite";
 import { appendTypes } from "./utils";
 import { parseMarkdown } from "../utils/markdown";
@@ -149,16 +149,23 @@ const mdjsx = () => {
             lastReg = regRes;
           }
 
-          const codeSegment = (
-            code
-          ) => `export default function(mountNode, { wrap, renderType$ }){
-          try { $_REF.wrap = wrap; } catch(e) { }
-          ${code}
-          };`;
+          const prependSetWrap = (code) =>
+            `export const setWrap$ = (f, s) => s.wrap && ($_REF.wrap = s.wrap); ${code}`;
+
+          const codeSegment = (code) => {
+            if (code.includes("export default")) {
+              return prependSetWrap(code);
+            }
+
+            code = `export default function(mountNode, { wrap, renderType$ }){ ${code} };`;
+
+            return prependSetWrap(code);
+          };
 
           if (!lastReg!) {
             return code;
           }
+
           const lastIndex: number = lastReg.index + lastReg[0].length;
 
           return `${code.slice(0, lastIndex)};${codeSegment(
@@ -185,11 +192,16 @@ const mdjsx = () => {
 
       let moduleIds = {};
       const promises = parseMarkdown(content)
-        .children.filter(
-          ({ type, lang = "" }) =>
-            type === "code" && (isJsx(<string>lang) || isCSSLang(<string>lang))
-        )
+        .children.filter(({ value, type, meta, lang = "" }) => {
+          if (type !== "code") return false;
+          if (!isJsx(<string>lang) && !isCSSLang(<string>lang)) return false;
+
+          if (isInlineMeta(meta)) return false;
+
+          return true;
+        })
         .map(async (item, index) => {
+          console.log("🚀 #### ~ .map ~ item", item);
           let content = <string>item.value || "";
           let lang = item.lang;
 
@@ -205,7 +217,6 @@ const mdjsx = () => {
           markdownMap[`${file}_${fileName}`] = content;
 
           const params = `markdown-proxy&index=${fileName}`;
-          // id = id.replace(cwd + "/", "");
           let moduleID = addUrlParams(id, params);
 
           isBuild &&
@@ -233,9 +244,10 @@ const mdjsx = () => {
           ${Object.entries(moduleIds).reduce(
             (prev, [k, v]) =>
               prev.concat(`${k}: function () { 
-                import('${v}').then(res => { 
+                return import('${v}').then(res => { 
                   const fn = res.default;
-                  typeof fn === 'function' && fn.apply(null, arguments); 
+                  res.setWrap$?.apply(null, arguments);
+                  return typeof fn === 'function' && fn.apply(null, arguments); 
                 });
               },`),
             ""
@@ -257,6 +269,6 @@ const mdjsx = () => {
         `,
       };
     },
-  };
+  } as any;
 };
 export default mdjsx;

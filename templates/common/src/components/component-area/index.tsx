@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 import HighLight from "../highlight";
 import {
   useBoolean,
@@ -150,6 +151,11 @@ export function ComponentArea(props) {
   useEffect(() => {
     renderer(componentRef.current, {
       wrap: wrapProps,
+    }).then((ele) => {
+      if (ele) {
+        // export default mode
+        ReactDOM.render(ele, componentRef.current);
+      }
     });
   }, [renderer, componentProps]);
 

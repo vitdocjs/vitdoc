@@ -10,3 +10,11 @@ export function isTypes(str) {
 
 export const isCSSLang = (lang: string) =>
   /^(css|less|sass|scss|styl|stylus|postcss)$/.test(lang);
+
+export const isInlineMeta = (meta: string) => {
+  const metas = (meta ?? "")
+    .split("|")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return metas.includes("inline");
+};

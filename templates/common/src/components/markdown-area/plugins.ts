@@ -1,4 +1,4 @@
-import { hasReact, isJsx, isTypes } from "../../utils/lang";
+import { isInlineMeta, isJsx, isTypes } from "../../utils/lang";
 
 export function remarkCodeBlock() {
   return (tree, _file) => {
@@ -37,7 +37,13 @@ export function remarkCodeBlock() {
         return;
       }
       prevModules.push(node);
-      if (node.type === "code" && hasReact(node.value) && isJsx(node.lang)) {
+
+    
+      if (
+        node.type === "code" &&
+        isJsx(node.lang) &&
+        !isInlineMeta(node.meta)
+      ) {
         modules.push({
           ...node,
           type: "component-block",
