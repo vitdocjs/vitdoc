@@ -1,0 +1,47 @@
+{
+  "name": "vitdoc",
+  "version": "1.0.14",
+  "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
+  "type": "module",
+  "main": "./lib/index.js",
+  "bin": {
+    "vitdoc": "./bin/index.js",
+    "vdoc": "./bin/index.js"
+  },
+  "scripts": {
+    "prepublishOnly": "cd plugins/components-template/view && npm run build"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vitdocjs/vitdoc.git"
+  },
+  "files": [
+    "vite.config.js",
+    "plugins"
+  ],
+  "dependencies": {
+    "@types/node": "^14.18.24",
+    "chalk": "^4.1.2",
+    "esbuild": "^0.14.54",
+    "esbuild-register": "^3.3.3",
+    "extract-typescript-types": "^1.0.2",
+    "glob": "^7.2.3",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "mdast-util-from-markdown": "^0.8.5",
+    "prettier": "^2.7.1",
+    "remark": "13",
+    "remark-frontmatter": "3",
+    "remark-parse": "9",
+    "sass": "^1.54.4",
+    "swig": "^1.4.2",
+    "typescript": "^4.7.4",
+    "unified": "9",
+    "vitdoc-template-default": "workspace:^1.0.0",
+    "vite": "^3.0.8"
+  }
+}

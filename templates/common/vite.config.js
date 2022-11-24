@@ -16,6 +16,7 @@ export default defineConfig({
     alias: [{ find: /^~/, replacement: "" }],
   },
   build: {
+    target: "esnext",
     minify: false,
     outDir: "dist",
     emptyOutDir: false,

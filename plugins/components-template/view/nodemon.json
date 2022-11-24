@@ -1,6 +1,0 @@
-{
-  "watch": ["src"],
-  "ext": "ts,mjs,js,json,graphql",
-  "exec": "etsc",
-  "legacyWatch": true
-}

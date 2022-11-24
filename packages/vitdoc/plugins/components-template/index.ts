@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as path from "path";
 import Swig from "swig";
 import { mergeConfig, normalizePath, send, ViteDevServer } from "vite";
@@ -10,8 +9,6 @@ import * as fs from "fs";
 import { MarkdownMeta } from "../utils/types";
 
 const isDebug = process.env.DEBUG;
-
-const currentPath = path.resolve(__dirname, "./view/dist");
 
 export const createHtml = Swig.compileFile(
   path.resolve(__dirname, "./index.html"),
@@ -119,6 +116,7 @@ export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 const entry = path.resolve(__dirname, "../index.html");
 
 const componentsTemplate = ({
+  templatePath = require.resolve("vitdoc-template-default"),
   buildMetaFile = "stories.manifest.json" as false | string,
 } = {}) => {
   let input = {};
@@ -207,8 +205,8 @@ const componentsTemplate = ({
             ),
           externalHtml,
           runtime: {
-            js: normalizePath(`${currentPath}/runtime`),
-            css: normalizePath(`${currentPath}/style.css`),
+            js: normalizePath(`${templatePath}`),
+            css: normalizePath(`${templatePath.replace(/\.js$/, ".css")}`),
           },
           cwd: process.cwd(),
           base: config.base,
@@ -304,7 +302,7 @@ const componentsTemplate = ({
       });
     },
     transform(code, id) {
-      if (!new RegExp(`^${currentPath}`).test(id) && !/\.js$/.test(id)) {
+      if (!new RegExp(`^${templatePath}`).test(id) && !/\.js$/.test(id)) {
         return;
       }
 

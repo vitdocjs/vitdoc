@@ -5,8 +5,8 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "start": "vdoc",
-    "build": "vdoc build"
+    "start": "vitdoc",
+    "build": "vitdoc build"
   },
   "files": [
     "dist",
@@ -31,6 +31,7 @@
     "react-syntax-highlighter": "^15.4.5"
   },
   "devDependencies": {
+    "vitdoc": "workspace:^1.0.14",
     "@alifd/next": "^1.23.22",
     "@types/lodash": "^4.14.116",
     "@types/react-dom": "^16.8.0",

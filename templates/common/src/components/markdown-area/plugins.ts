@@ -1,4 +1,4 @@
-import { hasReact, isJsx, isTypes } from "../../../../../utils/lang";
+import { hasReact, isJsx, isTypes } from "../../utils/lang";
 
 export function remarkCodeBlock() {
   return (tree, _file) => {

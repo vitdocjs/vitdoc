@@ -1,13 +1,18 @@
 {
-  "name": "vite-plugin-components-template",
+  "name": "vitdoc-template-default",
   "version": "1.0.0",
-  "description": "",
-  "main": "lib/index.js",
+  "description": "The default template for vitdoc",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@types/node": "^14.18.27",
     "@types/react": "^17.0.49",
     "@types/react-router-dom": "^5.3.3",
     "esbuild-node-tsc": "^1.8.9",
+    "esbuild-sass-plugin": "^2.4.1",
+    "father": "^4.1.0",
     "less": "^4.1.3",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
@@ -15,6 +20,10 @@
     "typescript": "^4.8.3"
   },
   "scripts": {
+    "dev": "father dev",
+    "esbuild:dev": "node build.mjs",
+    "init": "def dev",
+    "prettier": "pretty-quick --staged",
     "watch": "vite build --watch",
     "build": "vite build",
     "prepublishOnly": "npm run build"
@@ -24,8 +33,8 @@
   "dependencies": {
     "@ant-design/icons": "4.7.0",
     "@ant-design/pro-layout": "7.0.5",
-    "ahooks": "latest",
-    "antd": "5.0.0-experimental.23",
+    "ahooks": "^3.0.0",
+    "antd": "^5.0.0",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.2",
     "esbuild": "^0.14.54",

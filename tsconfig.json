@@ -1,26 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./lib",
-    "module": "esnext",
-    "lib": ["esnext", "es5", "dom"],
-    "sourceMap": true,
-    "allowJs": false,
     "jsx": "react",
-    "removeComments": false,
+    "strict": true,
     "declaration": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": false,
-    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "removeComments": false,
     "esModuleInterop": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "traceResolution": true,
-    "typeRoots": ["./@types", "./node_modules/@types"],
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "types": ["vitest/globals"]
   }
 }
