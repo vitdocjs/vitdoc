@@ -44,7 +44,6 @@ export default function ReadmePane() {
     <div id="public-component-show-container">
       {Components ? (
         <PageContainer
-
           title={
             <LinkCopy route={route}>
               {currentRoute?.name || compInfo?.packageName}

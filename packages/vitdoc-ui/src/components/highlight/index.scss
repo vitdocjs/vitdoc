@@ -1,0 +1,313 @@
+.code-pane {
+    position: relative;
+    background-color: #282c34;
+    border-radius: 6px;
+    font-size: 15px;
+
+    &:hover {
+        > .icon-copy {
+            opacity: 1;
+        }
+    }
+    > .icon-copy {
+        opacity: 0;
+        transition: all 0.2s;
+        position: absolute;
+        z-index: 3;
+        top: 0.8em;
+        right: 1em;
+        cursor: pointer;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+        background: #282c34;
+    }
+
+    :not(pre) > code[class*='language-'],
+    pre[class*='language-'] {
+        background: #2d2d2d;
+    }
+
+    :not(pre) > code[class*='language-'] {
+        padding: 0.1em;
+        border-radius: 0.3em;
+        white-space: normal;
+    }
+
+    .token.comment,
+    .token.block-comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+        color: #999;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+        background-color: transparent;
+    }
+
+    .token.punctuation {
+        color: #ccc;
+    }
+
+    .token.tag,
+    .token.attr-name,
+    .token.namespace,
+    .token.deleted {
+        color: #e2777a;
+    }
+
+    .token.function-name {
+        color: #6196cc;
+    }
+
+    .token.boolean,
+    .token.number,
+    .token.function {
+        color: #f08d49;
+    }
+
+    .token.property,
+    .token.class-name,
+    .token.constant,
+    .token.symbol {
+        color: #f8c555;
+    }
+
+    .token.selector,
+    .token.important,
+    .token.atrule,
+    .token.keyword,
+    .token.builtin {
+        color: #cc99cd;
+    }
+
+    .token.string,
+    .token.char,
+    .token.attr-value,
+    .token.regex,
+    .token.variable {
+        color: #7ec699;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url {
+        color: #67cdcc;
+    }
+
+    .token.important,
+    .token.bold {
+        font-weight: bold;
+    }
+    .token.italic {
+        font-style: italic;
+    }
+
+    .token.entity {
+        cursor: help;
+    }
+    code .token.deleted {
+        color: #ec5975;
+    }
+    code .token.inserted {
+        color: #3eaf7c;
+    }
+    pre,
+    pre[class*='language-'] {
+        line-height: 1.5;
+        padding: 1.25rem 1.5rem;
+        margin: 0.85rem 0;
+        background-color: #282c34;
+        border-radius: 6px;
+    }
+    pre code,
+    pre[class*='language-'] code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
+        font-size: 0.9em;
+        color: #fff;
+        padding: 0;
+        background-color: transparent;
+        border-radius: 0;
+    }
+    &[class*='language-'] .highlight-lines {
+        user-select: none;
+        padding-top: 1.3rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        line-height: 1.4;
+    }
+    &[class*='language-'] .highlight-lines .highlighted {
+        background-color: rgba(0, 0, 0, 0.66);
+    }
+    &[class*='language-'] pre,
+    &[class*='language-'] pre[class*='language-'] {
+        background: transparent;
+        position: relative;
+        z-index: 1;
+    }
+    &[class*='language-']::before {
+        position: absolute;
+        z-index: 3;
+        top: 0.8em;
+        right: 1em;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.4);
+    }
+    &[class*='language-']:not(.line-numbers-mode) .line-numbers-wrapper {
+        display: none;
+    }
+    &[class*='language-'].line-numbers-mode .highlight-lines .highlighted {
+        position: relative;
+    }
+    &[class*='language-'].line-numbers-mode .highlight-lines .highlighted:before {
+        content: ' ';
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 3.5rem;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.66);
+    }
+    &[class*='language-'].line-numbers-mode pre {
+        padding-left: 4.5rem;
+        vertical-align: middle;
+    }
+    &[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+        position: absolute;
+        top: 0;
+        width: 3.5rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.3);
+        padding: 1.25rem 0;
+        line-height: 1.4;
+    }
+    &[class*='language-'].line-numbers-mode .line-numbers-wrapper br {
+        user-select: none;
+    }
+    &[class*='language-'].line-numbers-mode .line-numbers-wrapper .line-number {
+        position: relative;
+        z-index: 4;
+        user-select: none;
+        font-size: 0.85em;
+    }
+    &[class*='language-'].line-numbers-mode::after {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 3.5rem;
+        height: 100%;
+        border-radius: 6px 0 0 6px;
+        border-right: 1px solid rgba(0, 0, 0, 0.66);
+        background-color: #282c34;
+    }
+    &[class~='language-js']:before {
+        content: 'js';
+    }
+    &[class~='language-ts']:before {
+        content: 'ts';
+    }
+    &[class~='language-html']:before {
+        content: 'html';
+    }
+    &[class~='language-md']:before {
+        content: 'md';
+    }
+    &[class~='language-vue']:before {
+        content: 'vue';
+    }
+    &[class~='language-css']:before {
+        content: 'css';
+    }
+    &[class~='language-sass']:before {
+        content: 'sass';
+    }
+    &[class~='language-scss']:before {
+        content: 'scss';
+    }
+    &[class~='language-less']:before {
+        content: 'less';
+    }
+    &[class~='language-stylus']:before {
+        content: 'stylus';
+    }
+    &[class~='language-go']:before {
+        content: 'go';
+    }
+    &[class~='language-java']:before {
+        content: 'java';
+    }
+    &[class~='language-c']:before {
+        content: 'c';
+    }
+    &[class~='language-sh']:before {
+        content: 'sh';
+    }
+    &[class~='language-yaml']:before {
+        content: 'yaml';
+    }
+    &[class~='language-py']:before {
+        content: 'py';
+    }
+    &[class~='language-docker']:before {
+        content: 'docker';
+    }
+    &[class~='language-dockerfile']:before {
+        content: 'dockerfile';
+    }
+    &[class~='language-makefile']:before {
+        content: 'makefile';
+    }
+    &[class~='language-javascript']:before {
+        content: 'js';
+    }
+    &[class~='language-jsx']:before {
+        content: 'jsx';
+    }
+    &[class~='language-typescript']:before {
+        content: 'ts';
+    }
+    &[class~='language-tsx']:before {
+        content: 'tsx';
+    }
+    &[class~='language-markup']:before {
+        content: 'html';
+    }
+    &[class~='language-markdown']:before {
+        content: 'md';
+    }
+    &[class~='language-json']:before {
+        content: 'json';
+    }
+    &[class~='language-ruby']:before {
+        content: 'rb';
+    }
+    &[class~='language-python']:before {
+        content: 'py';
+    }
+    &[class~='language-bash']:before {
+        content: 'sh';
+    }
+    &[class~='language-php']:before {
+        content: 'php';
+    }
+    .token.number {
+        background-color: transparent;
+        border-radius: 0;
+        font-size: inherit;
+        height: inherit;
+        margin-right: inherit;
+        min-width: auto;
+        padding: 0;
+        text-align: center;
+    }
+}

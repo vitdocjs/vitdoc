@@ -69,11 +69,11 @@ export function App() {
         hideMenuWhenCollapsed: true,
         ignoreFlatMenu: true,
       }}
-      menuItemRender={(item, dom: ReactElement, { collapsed }) => {
+      menuItemRender={(item, dom, { collapsed }) => {
         if (collapsed) {
           return "";
         }
-        return React.cloneElement(dom, {
+        return React.cloneElement(dom as any, {
           onClick: () => push(item.path!),
           children: <LinkCopy route={item.path}>{item.name}</LinkCopy>,
         });

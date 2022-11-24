@@ -1,0 +1,79 @@
+.component-area {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+
+  & + .code-pane {
+    margin-top: -0.85rem;
+  }
+
+  &.active {
+    border-color: var(--main-color, #40a9ff);
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+
+  .component-container {
+    padding: 16px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .code-box-demo-description:not(:empty) {
+    padding: 12px 16px;
+    padding-bottom: 0;
+    border-bottom: 1px dashed #f0f0f0;
+  }
+
+  .code-box-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 0;
+    padding-right: 16px;
+    border-top: 1px dashed #f0f0f0;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    > .code-box-code-action {
+      &:not(:first-child) {
+        margin-left: 16px;
+      }
+      &:hover {
+        color: #000;
+      }
+      &.active {
+        color: var(--main-color, #40a9ff);
+      }
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 16px;
+      height: 16px;
+      color: #00000073;
+      cursor: pointer;
+      transition: all 0.24s;
+    }
+  }
+  .code-box-actions + .code-pane {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+
+    > pre.prismjs {
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+  }
+}
+
+.debug-component-scope {
+  position: relative;
+  display: block;
+  .debug-properties-icon {
+    position: absolute;
+  }
+}

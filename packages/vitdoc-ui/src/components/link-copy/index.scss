@@ -1,0 +1,21 @@
+.vitdoc-copy-link {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    .vitdoc-copy-link-icon.anticon {
+      display: block;
+    }
+  }
+  &-icon.anticon {
+    margin-left: 12px;
+    color: inherit;
+    transition: all 0.3s;
+    display: none;
+    &:hover {
+      color: var(--ant-primary-color) !important;
+    }
+  }
+}
