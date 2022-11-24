@@ -4,11 +4,11 @@
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "private": true,
   "scripts": {
-    "dev": "pnpm -r --no-sort dev",
+    "dev": "pnpm -r --no-sort --filter='./templates/*' --filter='./packages/*' dev",
+    "example:dev": "pnpm -r --filter='./examples/*' dev",
     "test": "vitest run",
     "prettier": "pretty-quick --staged",
     "build": "pnpm -r run build",
-    "example:dev": "pnpm -r --filter='./examples/*' run dev",
     "release": "bumpp package.json packages/**/package.json",
     "prepublishOnly": "npm run test && npm run build"
   },
