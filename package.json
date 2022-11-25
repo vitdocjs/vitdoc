@@ -21,9 +21,10 @@
     "url": "https://github.com/vitdocjs/vitdoc.git"
   },
   "devDependencies": {
-    "father": "^4.1.0",
-    "esbuild-sass-plugin": "^2.4.1",
     "esbuild": "^0.14.54",
-    "vite": "^3.0.8"
+    "esbuild-sass-plugin": "^2.4.1",
+    "father": "^4.1.0",
+    "vite": "^3.0.8",
+    "vitest": "^0.25.3"
   }
 }

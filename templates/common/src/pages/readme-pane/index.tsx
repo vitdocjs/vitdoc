@@ -1,16 +1,17 @@
+import { PageContainer } from "@ant-design/pro-layout";
+import { useUnmount } from "ahooks";
+import { Typography } from "antd";
 import React from "react";
 import {
+  LinkCopy,
+  MarkdownArea,
+  PropertyPane,
+  Store,
   useComponentInfo,
   useMarkdown,
   useRoute,
   useRouteMap,
 } from "vitdoc-ui";
-import { useUnmount } from "ahooks";
-import { propertiesPropsStore, propertiesStore } from "../../store";
-import { useSetAtom } from "jotai";
-import { PageContainer } from "@ant-design/pro-layout";
-import { Typography } from "antd";
-import { LinkCopy, PropertyPane, MarkdownArea } from "vitdoc-ui";
 
 import "./index.scss";
 
@@ -21,8 +22,9 @@ export default function ReadmePane() {
 
   const Components = useMarkdown();
 
-  const setProperties = useSetAtom(propertiesStore);
-  const setDefaultProps = useSetAtom(propertiesPropsStore);
+  const setProperties = Store.useSetProperties();
+  const setDefaultProps = Store.useSetDefaultProps();
+
   useUnmount(() => {
     setProperties({});
     setDefaultProps({

@@ -1,4 +1,4 @@
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useSetAtom } from "jotai";
 import { useMemoizedFn } from "ahooks";
 
 export const propertiesStore = atom({} as any);
@@ -24,3 +24,7 @@ export const useSetPartialProperties = () => {
     });
   });
 };
+
+
+export const useSetProperties = () => useSetAtom(propertiesStore);
+export const useSetDefaultProps = () => useSetAtom(propertiesPropsStore);

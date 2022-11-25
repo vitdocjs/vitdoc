@@ -8,3 +8,4 @@ export * from "./components/not-found";
 export * from "./components/property";
 
 export * from "./utils/loaders";
+export * as Store from "./store";
