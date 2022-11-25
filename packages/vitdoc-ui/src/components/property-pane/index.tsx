@@ -20,7 +20,7 @@ import { Button, Affix, Card, Space } from "antd";
 
 import "./index.scss";
 
-export default function PropertyPane() {
+export function PropertyPane() {
   const [properties] = useAtom(propStore);
   const [propertyDrawerShow, setPropertyDrawerShow] = useLocalStorageState(
     PANE_VISIBLE,

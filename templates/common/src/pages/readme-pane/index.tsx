@@ -1,20 +1,18 @@
 import React from "react";
-
-import "./index.scss";
 import {
   useComponentInfo,
   useMarkdown,
   useRoute,
   useRouteMap,
-} from "../../utils/loaders";
-import { MarkdownArea } from "../../components/markdown-area";
+} from "vitdoc-ui";
 import { useUnmount } from "ahooks";
 import { propertiesPropsStore, propertiesStore } from "../../store";
 import { useSetAtom } from "jotai";
-import PropertyPane from "../../components/property-pane/property-pane";
 import { PageContainer } from "@ant-design/pro-layout";
-import { LinkCopy } from "../../components/link-copy";
 import { Typography } from "antd";
+import { LinkCopy, PropertyPane, MarkdownArea } from "vitdoc-ui";
+
+import "./index.scss";
 
 const { Text } = Typography;
 

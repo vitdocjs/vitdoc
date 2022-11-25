@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "father": "^4.1.0",
+    "esbuild-sass-plugin": "^2.4.1",
+    "esbuild": "^0.14.54",
     "vite": "^3.0.8"
   }
 }

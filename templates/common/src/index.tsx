@@ -1,4 +1,7 @@
-import React, { ReactElement } from "react";
+import { ProLayout } from "@ant-design/pro-layout";
+import { useBoolean } from "ahooks";
+import classNames from "classnames";
+import React from "react";
 import ReactDOM from "react-dom";
 import {
   HashRouter as Router,
@@ -6,14 +9,10 @@ import {
   Route,
   Switch,
   useHistory,
-  useLocation,
+  useLocation
 } from "react-router-dom";
-import { useComponentInfo, useRouteMap } from "./utils/loaders";
-import { ProLayout } from "@ant-design/pro-layout";
-import { LinkCopy } from "./components/link-copy";
 import ReadmePane from "./pages/readme-pane";
-import { useBoolean } from "ahooks";
-import classNames from "classnames";
+import { LinkCopy, useComponentInfo, useRouteMap } from "vitdoc-ui";
 
 import "./global.scss";
 

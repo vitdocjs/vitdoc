@@ -2,16 +2,15 @@
   "name": "vitdoc-ui",
   "version": "1.0.14",
   "description": "The UI component for vitdoc theme",
-  "type": "module",
-  "main": "./lib/index.js",
-  "bin": {
-    "vitdoc": "./bin/index.js",
-    "vdoc": "./bin/index.js"
-  },
+  "main": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "scripts": {
-    "dev": "node build.mjs",
-    "build": "NODE_ENV='production' node build.mjs",
-    "prepublishOnly": "npm run build"
+    "build": "father build",
+    "dev": "father dev",
+    "init": "def dev",
+    "prepublishOnly": "npm run build",
+    "prettier": "pretty-quick --staged",
+    "test": "vitest run"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
@@ -23,7 +22,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
-    "@ant-design/pro-layout": "^7.2.6",
     "ahooks": "^3.7.2",
     "antd": "^5.0.1",
     "classnames": "^2.3.2",

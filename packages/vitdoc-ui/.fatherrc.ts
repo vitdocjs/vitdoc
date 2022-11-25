@@ -1,7 +1,8 @@
 import { defineConfig } from "father";
 
 export default defineConfig({
-  platform: "node",
-  esm: {},
-  cjs: {},
+  platform: "browser",
+  esm: {
+    transformer: "esbuild",
+  },
 });
