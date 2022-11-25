@@ -1,5 +1,5 @@
 import * as path from "path";
-import { cleanUrl, isCSSRequest, isJsx } from "../utils";
+import { cleanUrl, isCSSRequest, isJsx } from "../../utils";
 import keyBy from "lodash/keyBy";
 import { fork } from "child_process";
 import { ModuleGraph } from "vite";

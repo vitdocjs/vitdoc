@@ -1,12 +1,12 @@
 import * as path from "path";
 import Swig from "swig";
 import { mergeConfig, normalizePath, send, ViteDevServer } from "vite";
-import { cleanUrl, isHTMLProxy, toName } from "../utils";
-import { getConfig } from "../utils/config";
-import { getComponentFiles, getMainFiles } from "../utils/rules";
-import { getMetas, parseMarkdown } from "../utils/markdown";
+import { cleanUrl, isHTMLProxy, toName } from "../../utils";
+import { getConfig } from "../../utils/config";
+import { getComponentFiles, getMainFiles } from "../../utils/rules";
+import { getMetas, parseMarkdown } from "../../utils/markdown";
 import * as fs from "fs";
-import { MarkdownMeta } from "../utils/types";
+import { MarkdownMeta } from "../../utils/types";
 
 const isDebug = process.env.DEBUG;
 

@@ -7,11 +7,11 @@ import {
   removeImportQuery,
   removeProcessCwd,
   resolveMainComponent,
-} from "../utils";
-import { isCSSLang, isInlineMeta, isJsx } from "../utils/lang";
+} from "../../utils";
+import { isCSSLang, isInlineMeta, isJsx } from "../../utils/lang";
 import { send } from "vite";
 import { appendTypes } from "./utils";
-import { parseMarkdown } from "../utils/markdown";
+import { parseMarkdown } from "../../utils/markdown";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
@@ -192,7 +192,7 @@ const mdjsx = () => {
 
       let moduleIds = {};
       const promises = parseMarkdown(content)
-        .children.filter(({ value, type, meta, lang = "" }) => {
+        .children.filter(({ type, meta, lang = "" }) => {
           if (type !== "code") return false;
           if (!isJsx(<string>lang) && !isCSSLang(<string>lang)) return false;
 
@@ -201,7 +201,6 @@ const mdjsx = () => {
           return true;
         })
         .map(async (item, index) => {
-          console.log("🚀 #### ~ .map ~ item", item);
           let content = <string>item.value || "";
           let lang = item.lang;
 

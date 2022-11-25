@@ -1,4 +1,4 @@
-import { removeProcessCwd } from "../utils";
+import { removeProcessCwd } from "../../utils";
 
 /**
  * 添加类型定义
