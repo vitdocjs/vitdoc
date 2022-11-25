@@ -11,7 +11,7 @@ import {
   useMarkdown,
   useRoute,
   useRouteMap,
-} from "vitdoc-ui";
+} from "@vitdoc/ui";
 
 import "./index.scss";
 

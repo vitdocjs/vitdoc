@@ -9,9 +9,11 @@ esbuild
     minify: isProd,
     watch: !isProd,
     bundle: true,
-    outfile: "dist/index.js",
+    target: ["esnext"],
     format: "esm",
+    outfile: "dist/index.js",
     entryPoints: ["src/index.tsx"],
+    external: ["virtual:vitdoc/template"],
     plugins: [sassPlugin()],
   })
   .then(() => console.log("⚡ Build complete! ⚡"))

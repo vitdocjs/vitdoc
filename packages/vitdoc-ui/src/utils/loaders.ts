@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cleanUrl } from "./config";
 import { isCSSLang, isJsx } from "../utils/lang";
-import { useRouteMatch } from "react-router-dom";
+import { useLocation, useMatch, useMatches } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -15,7 +15,8 @@ function addRegistry(file, fn) {
 }
 
 export function useRoute() {
-  const { url: route } = useRouteMatch();
+  const { pathname: route } = useMatch(useLocation().pathname)!;
+  // console.log("🚀 #### ~ useRoute ~ d", d);
 
   return { route };
 }

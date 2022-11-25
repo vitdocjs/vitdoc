@@ -5,7 +5,7 @@ import yaml from "js-yaml";
 
 export function parseMarkdown(content: string) {
   return unified()
-    .use(remarkParse)
+    .use(remarkParse as any)
     .use(remarkFrontMatter)
     .parse(content) as any;
 }

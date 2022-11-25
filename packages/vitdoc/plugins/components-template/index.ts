@@ -10,14 +10,6 @@ import { MarkdownMeta } from "../../utils/types";
 
 const isDebug = process.env.DEBUG;
 
-export const createHtml = Swig.compileFile(
-  path.resolve(__dirname, "./index.html"),
-  {
-    // cache: false,
-    autoescape: false,
-  }
-);
-
 const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
 const htmlCommentRE = /<!--[\s\S]*?-->/g;
 const scriptModuleRE =
@@ -113,10 +105,11 @@ export const getRoutes = () => {
 
 export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 
-const entry = path.resolve(__dirname, "../index.html");
+const vitdocRuntimeId = "virtual:vitdoc/runtime";
+const vitdocTemplateId = "virtual:vitdoc/template";
 
 const componentsTemplate = ({
-  templatePath = require.resolve("vitdoc-template-default"),
+  templatePath = require.resolve("@vitdoc/template-default"),
   buildMetaFile = "stories.manifest.json" as false | string,
 } = {}) => {
   let input = {};
@@ -124,6 +117,13 @@ const componentsTemplate = ({
   let config;
   let isBuild;
   let routeTree: any;
+
+  const entry = require.resolve("@vitdoc/runtime/index.html");
+
+  const createHtml = Swig.compileFile(entry, {
+    // cache: false,
+    autoescape: false,
+  });
 
   return {
     name: "vite:packages-template",
@@ -163,12 +163,27 @@ const componentsTemplate = ({
         return "route-map.json";
       }
 
+      if (vitdocTemplateId === id) {
+        return vitdocTemplateId;
+      }
+
+      if (vitdocRuntimeId === id) {
+        return require.resolve("@vitdoc/runtime");
+      }
+
       if (id === entry) {
         return "index.html";
       }
     },
-    async load(id) {
+    async load(id: string) {
       let file = cleanUrl(id);
+
+      if (id.endsWith(vitdocTemplateId)) {
+        return `import '${templatePath.replace(
+          /\.js$/,
+          ".css"
+        )}'; export * from '${templatePath}';`;
+      }
 
       if (isRouteMap(file)) {
         const ctx = getRoutes();
@@ -204,10 +219,6 @@ const componentsTemplate = ({
                 `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`
             ),
           externalHtml,
-          runtime: {
-            js: normalizePath(`${templatePath}`),
-            css: normalizePath(`${templatePath.replace(/\.js$/, ".css")}`),
-          },
           cwd: process.cwd(),
           base: config.base,
           isDebug,

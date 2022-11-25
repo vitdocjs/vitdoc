@@ -29,7 +29,7 @@
 
     <script>
       window.pageConfig = {
-        logo: "{{ logo }}"
+        logo: "{{ logo }}",
       };
     </script>
 
@@ -49,10 +49,10 @@
           });
         }
       }
-
-      import("{{runtime.js}}");
-      import("{{runtime.css}}")
+      import("virtual:vitdoc/runtime");
     </script>
+
+    <!-- <script type="module" src="/virtual:vitdoc/runtime"></script> -->
 
     <!-- split -->
 

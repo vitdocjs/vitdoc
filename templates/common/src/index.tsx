@@ -4,15 +4,16 @@ import classNames from "classnames";
 import React from "react";
 import ReactDOM from "react-dom";
 import {
-  HashRouter as Router,
-  Redirect,
+  HashRouter,
+  Navigate,
   Route,
-  Switch,
-  useHistory,
-  useLocation
+  Routes,
+  useLocation,
+  useMatches,
+  useNavigate,
 } from "react-router-dom";
 import ReadmePane from "./pages/readme-pane";
-import { LinkCopy, useComponentInfo, useRouteMap } from "vitdoc-ui";
+import { LinkCopy, useComponentInfo, useRouteMap } from "@vitdoc/ui";
 
 import "./global.scss";
 
@@ -21,13 +22,14 @@ export function App() {
 
   menuData?.forEach((item) => (item.icon = <span>📦</span>));
 
-  const { push } = useHistory();
+  const push = useNavigate();
 
   const { npmLink } = useComponentInfo() || ({} as any);
 
   const [collapsed, { toggle }] = useBoolean(false);
 
   const { pathname } = useLocation();
+  console.log("🚀 #### ~ App ~ pathname", pathname);
 
   if (!routes) {
     return null;
@@ -78,25 +80,34 @@ export function App() {
         });
       }}
     >
-      <Switch>
+      <Routes>
         {routes.map((route) => {
           return (
-            <Route path={route}>
-              <div style={{ display: "flex" }} className="code-box-demo">
-                <ReadmePane key={`${route}_readme_pane`} />
-              </div>
-            </Route>
+            <Route
+              path={route}
+              element={
+                <div style={{ display: "flex" }} className="code-box-demo">
+                  <ReadmePane key={`${route}_readme_pane`} />
+                </div>
+              }
+            />
           );
         })}
-        <Redirect to={routes[0]} />
-      </Switch>
+        <Route path="*" element={<Navigate to={routes[0]} replace={true} />} />
+      </Routes>
     </ProLayout>
   );
 }
 
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.querySelector("#component-root")
-);
+export function mount({ container }) {
+  ReactDOM.render(
+    <HashRouter>
+      <App />
+    </HashRouter>,
+    container
+  );
+}
+
+export function unmount({ container }) {
+  ReactDOM.unmountComponentAtNode(container);
+}

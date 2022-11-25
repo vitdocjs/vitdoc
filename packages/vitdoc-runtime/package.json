@@ -1,11 +1,11 @@
 {
-  "name": "@vitdoc/template-default",
+  "name": "@vitdoc/runtime",
   "version": "1.0.0",
-  "description": "The default template for vitdoc",
-  "type": "module",
+  "description": "The runtime of vitdoc",
   "main": "./dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "index.html"
   ],
   "scripts": {
     "dev": "node build.mjs",
@@ -15,15 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ant-design/pro-layout": "^7.2.6",
-    "ahooks": "^3.7.2",
-    "antd": "^5.0.1",
+    "@vitdoc/ui": "workspace:^1.0.14",
     "classnames": "^2.3.2",
-    "jotai": "^1.10.0",
-    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.4.3",
-    "@vitdoc/ui": "workspace:^1.0.14"
+    "react-router": "^6.4.3",
+    "react-router-dom": "^6.4.3"
   }
 }
