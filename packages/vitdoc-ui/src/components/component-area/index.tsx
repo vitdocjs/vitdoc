@@ -11,6 +11,7 @@ import CopyOutlined from "@ant-design/icons/CopyOutlined";
 import CodeOutlined from "@ant-design/icons/CodeOutlined";
 import CheckOutlined from "@ant-design/icons/CheckOutlined";
 import BugOutlined from "@ant-design/icons/BugOutlined";
+import FileSearchOutlined from "@ant-design/icons/FileSearchOutlined";
 import classNames from "classnames";
 import { copyToClipboard } from "../link-copy";
 
@@ -25,7 +26,15 @@ import { Result, Tooltip as _Tooltip } from "antd";
 const Tooltip = _Tooltip as any;
 
 export const ComponentBlock = (props) => {
-  const { children, lang, value: content, error, pathHash, renderer } = props;
+  const {
+    children,
+    lang,
+    value: content,
+    route,
+    error,
+    pathHash,
+    renderer,
+  } = props;
 
   const beforeChildren = dropRight(children, 1);
 
@@ -59,6 +68,16 @@ export const ComponentBlock = (props) => {
       <div className="code-box-actions">
         <Tooltip title="Debug" onClick={eventBus.emit}>
           <BugOutlined
+            className={classNames("code-box-code-action", { active })}
+          />
+        </Tooltip>
+        <Tooltip
+          title="Open in page"
+          onClick={() => {
+            open(`/#${route}`);
+          }}
+        >
+          <FileSearchOutlined
             className={classNames("code-box-code-action", { active })}
           />
         </Tooltip>
@@ -103,7 +122,7 @@ export function ComponentArea(props) {
     return {};
   }, [componentStateProps, current]);
 
-  eventBus.useSubscription(() => {
+  eventBus?.useSubscription(() => {
     let content = props.content;
     if (current !== undefined && current === content) {
       content = undefined;

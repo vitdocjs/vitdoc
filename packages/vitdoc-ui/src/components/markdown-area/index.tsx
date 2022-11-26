@@ -14,23 +14,30 @@ export function MarkdownArea({ data: res }) {
     return null;
   }
 
-  const { moduleMap, content, error, pathHash } = res;
+  const { modules, content, error, pathHash } = res;
 
-  const getModule = useMemoizedFn((value) => moduleMap?.[value.trim()]);
+  const getModule = useMemoizedFn((value) => {
+    return modules.find(({ content }) => content === value);
+  });
 
   const componentBlock = useMemoizedFn((props) => {
+    const module = getModule(props.value.trim());
+    if (!module) {
+      return null;
+    }
     return (
       <ComponentBlock
         {...props}
         error={error}
         pathHash={pathHash}
-        renderer={getModule(props.value)}
+        route={module.route}
+        renderer={module.renderer}
       />
     );
   });
 
   const propertyCode = useMemoizedFn((props) => (
-    <PropertyArea {...props} renderer={getModule(props.value)} />
+    <PropertyArea {...props} renderer={getModule(props.value).renderer} />
   ));
 
   const markdownElements = useCreation(
@@ -49,7 +56,7 @@ export function MarkdownArea({ data: res }) {
         {content}
       </ReactMarkdown>
     ),
-    [content, moduleMap]
+    [content, modules]
   );
 
   return <div className="markdown-area">{markdownElements}</div>;

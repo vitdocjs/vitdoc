@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cleanUrl } from "./config";
-import { isCSSLang, isJsx } from "../utils/lang";
+import { isCSSLang, isJsx, isTypes } from "../utils/lang";
 import { useLocation, useMatch, useMatches } from "react-router-dom";
 
 declare global {
@@ -16,7 +16,6 @@ function addRegistry(file, fn) {
 
 export function useRoute() {
   const { pathname: route } = useMatch(useLocation().pathname)!;
-  // console.log("🚀 #### ~ useRoute ~ d", d);
 
   return { route };
 }
@@ -111,8 +110,18 @@ export function useComponentInfo(): any {
   });
 }
 
-export function useMarkdown() {
-  const { route } = useRoute();
+export type ModuleInfo = {
+  content: string;
+  route: string;
+  lang: string;
+  type: "api" | "demo";
+  renderer: () => any;
+};
+
+export function useMarkdown(route?: string) {
+  if (!route) {
+    route = useRoute().route;
+  }
 
   const readmeFile = route.replace(".html", ".md");
   const disposeArr = useRef<Array<() => void>>([]);
@@ -137,16 +146,20 @@ export function useMarkdown() {
   if (results?.error) {
     return results;
   }
-  let moduleMap;
+  let modules: ModuleInfo[] = [];
   if (results) {
     const styleModules = results.modules.filter(({ lang }) => isCSSLang(lang));
-    moduleMap = results.modules.reduce((previousValue, currentValue) => {
+    modules = results.modules.reduce((previousValue, currentValue, index) => {
       if (!isJsx(currentValue.lang)) {
         return previousValue;
       }
       const sourceKey = currentValue.sourcesContent.trim();
-      return Object.assign(previousValue, {
-        [sourceKey]: (...args) => {
+      previousValue.push({
+        content: sourceKey,
+        route: `/~${route}/${index}`,
+        lang: currentValue.lang,
+        type: isTypes(sourceKey) ? "api" : "demo",
+        renderer: (...args) => {
           const result = currentValue.load(...args);
           styleModules.forEach((mod) => {
             mod.load();
@@ -154,7 +167,9 @@ export function useMarkdown() {
           return result;
         },
       });
-    }, {});
+
+      return previousValue;
+    }, [] as ModuleInfo[]);
   }
 
   if (!results) {
@@ -167,6 +182,7 @@ export function useMarkdown() {
     error,
     content: results.content,
     pathHash: results.pathHash,
-    moduleMap,
+    route,
+    modules,
   };
 }

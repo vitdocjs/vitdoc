@@ -29,7 +29,6 @@ export function App() {
   const [collapsed, { toggle }] = useBoolean(false);
 
   const { pathname } = useLocation();
-  console.log("🚀 #### ~ App ~ pathname", pathname);
 
   if (!routes) {
     return null;

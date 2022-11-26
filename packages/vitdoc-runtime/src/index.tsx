@@ -1,17 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Routes } from "react-router";
-import { HashRouter as Router } from "react-router-dom";
-import { PureDoc } from "./pure";
 
-import { Renderer } from "./renderer";
-
-ReactDOM.render(
-  <Router>
-    <Routes>
-      <Route path="~/*" element={<PureDoc />} />
-      <Route path="*" element={<Renderer />} />
-    </Routes>
-  </Router>,
-  document.querySelector("#component-root")
-);
+if (/^#\/~\//.test(location.hash)) {
+  // Pure mode
+  import("./pure").then(({ PureDoc }) => {
+    ReactDOM.render(<PureDoc />, document.querySelector("#component-root"));
+  });
+} else {
+  import("virtual:vitdoc/template").then(({ mount }) => {
+    mount({ container: document.querySelector("#component-root") });
+  });
+}
