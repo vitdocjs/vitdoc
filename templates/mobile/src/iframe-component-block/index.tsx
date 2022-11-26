@@ -54,12 +54,12 @@ export const IframeComponentBlock = (props: RendererProps) => {
       <div className="mobile-container">
         <div className="highlight">
           <HighLighter lang={lang} children={content} />
-          <div className="code-box-actions">
-            <CopyIcon content={content} />
-          </div>
         </div>
         <div className="device-container">
-          <Device url={`#${route}`} />
+          <Device
+            actions={[<CopyIcon content={content} />]}
+            url={`#${route}`}
+          />
         </div>
       </div>
     </div>
