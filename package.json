@@ -4,12 +4,12 @@
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "private": true,
   "scripts": {
-    "dev": "pnpm -r --no-sort --filter='./templates/*' --filter='./packages/*' dev",
-    "example:dev": "pnpm -r --filter='./examples/*' dev",
+    "dev": "turbo --filter='./templates/*' --filter='./packages/*' dev",
+    "example:dev": "turbo --filter='./examples/*' dev",
     "test": "vitest run",
     "prettier": "pretty-quick --staged",
-    "build": "pnpm -r run build",
-    "release": "bumpp package.json packages/**/package.json",
+    "build": "turbo --filter='./templates/*' --filter='./packages/*' build",
+    "release": "pnpm run buld && changeset version && changeset publish",
     "prepublishOnly": "npm run test && npm run build"
   },
   "engines": {
@@ -21,9 +21,11 @@
     "url": "https://github.com/vitdocjs/vitdoc.git"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.2",
     "esbuild": "^0.14.54",
     "esbuild-sass-plugin": "^2.4.1",
     "father": "^4.1.0",
+    "turbo": "^1.6.3",
     "vite": "^3.2.4",
     "vitest": "^0.25.3"
   }
