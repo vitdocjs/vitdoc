@@ -1,28 +1,30 @@
 export type MarkdownMeta = {
   /**
-   * 用于配置该页面的标题，将会被用作该页面标题的子标题以及左侧菜单。
+   * For configuring the title of the page, which will be used as the subtitle of the page title and the left menu.
    */
   title?: string;
+
   /**
-   * 控制该文档的显示顺序，数值越小排序越靠前。
+   * Controls the display order of the document, the smaller the number, the earlier the sort.
    */
   order?: number;
+
   /**
-   * 控制侧边栏菜单的显示或隐藏。
+   * Controls the display or hiding of the sidebar menu.
    */
   sidemenu?: boolean;
 
   /**
-   * 该配置用于对当前页面进行分组，这样可以在侧边栏菜单进行分组显示
+   * For grouping the current page, so that you can group display in the sidebar menu
    */
   group?: {
     /**
-     * 分组名称
+     * Group name
      */
     title?: string;
 
     /**
-     * 分组的排序，数值越小排序越靠前
+     * Group sort, the smaller the number, the earlier the sort.
      */
     order?: number;
   };
@@ -30,12 +32,18 @@ export type MarkdownMeta = {
 
 export type ConfigType = {
   /**
-   * 页面 Logo
+   * Page Logo
    */
   logo?: string;
 
   /**
-   * 扩展 HTML
+   * Expand the html
    */
   htmlAppend?: string;
+
+  /**
+   * Page template
+   * @default "@vitdoc/template-default"
+   */
+  template?: string;
 };
