@@ -4,3 +4,31 @@
 .markdown-area {
   width: 100%;
 }
+
+.md-table-container {
+  width: 100%;
+  overflow: auto;
+  table {
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    width: 100%;
+    word-break: normal;
+    word-break: keep-all;
+  }
+
+  table th {
+    font-weight: bold;
+    background: #fafafa;
+  }
+
+  table th,
+  table td {
+    padding: 16px 24px;
+    border: 1px solid #ebedf1;
+  }
+
+  table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+  }
+}

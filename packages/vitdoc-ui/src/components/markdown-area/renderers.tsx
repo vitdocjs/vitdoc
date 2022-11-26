@@ -1,6 +1,6 @@
-import HighLight from "../highlight";
-import React from "react";
 import { Card } from "antd";
+import React from "react";
+import HighLight from "../highlight";
 import * as directiveRenderers from "./custom-block";
 
 export const mdRenderers = {
@@ -9,6 +9,11 @@ export const mdRenderers = {
     return <HighLight lang={language} children={value} />;
   },
   link: ({ node, ...props }) => <a {...props} target="_blank" />,
+  table: ({ children }) => (
+    <div className="md-table-container">
+      <table>{children}</table>
+    </div>
+  ),
   ...directiveRenderers,
   "card-block": ({ children }) => (
     <Card style={{ marginBottom: 16 }} bodyStyle={{ padding: "8px 24px" }}>
