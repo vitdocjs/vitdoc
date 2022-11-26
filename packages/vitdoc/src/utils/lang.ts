@@ -16,5 +16,5 @@ export const isInlineMeta = (meta: string) => {
     .split("|")
     .map((item) => item.trim())
     .filter(Boolean);
-  return metas.includes("inline");
+  return metas.includes("pure");
 };
