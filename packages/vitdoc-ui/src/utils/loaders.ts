@@ -117,8 +117,15 @@ export type ModuleInfo = {
   type: "api" | "demo";
   renderer: () => any;
 };
+export type MarkdownResult = ReturnType<typeof useMarkdown>;
 
-export function useMarkdown(route?: string) {
+export function useMarkdown(route?: string): null | {
+  error?: ModuleLoadError;
+  content: string;
+  pathHash: string;
+  route: string;
+  modules: ModuleInfo[];
+} {
   if (!route) {
     route = useRoute().route;
   }

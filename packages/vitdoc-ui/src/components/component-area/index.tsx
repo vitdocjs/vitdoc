@@ -15,26 +15,24 @@ import FileSearchOutlined from "@ant-design/icons/FileSearchOutlined";
 import classNames from "classnames";
 import { copyToClipboard } from "../link-copy";
 
-import "./index.scss";
-
 import dropRight from "lodash/dropRight";
 import { useAtom } from "jotai";
 import { propertiesPropsStore, useSetPartialProperties } from "../../store";
 
 import { Result, Tooltip as _Tooltip } from "antd";
+import { RendererProps } from "../../types";
+
+import "./index.scss";
 
 const Tooltip = _Tooltip as any;
 
-export const ComponentBlock = (props) => {
-  const {
-    children,
-    lang,
-    value: content,
-    route,
-    error,
-    pathHash,
-    renderer,
-  } = props;
+export const ComponentBlock = (props: RendererProps) => {
+  const { pathHash, error, getModule, value: content, children } = props;
+
+  const { lang, renderer, route } = useCreation(
+    () => getModule(content.trim())!,
+    [content]
+  );
 
   const beforeChildren = dropRight(children, 1);
 

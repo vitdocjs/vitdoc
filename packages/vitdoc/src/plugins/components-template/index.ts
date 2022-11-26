@@ -1,12 +1,11 @@
+import * as fs from "fs";
 import * as path from "path";
 import Swig from "swig";
-import { mergeConfig, normalizePath, send, ViteDevServer } from "vite";
+import { mergeConfig, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
-import { getConfig } from "../../utils/config";
-import { getComponentFiles, getMainFiles } from "../../utils/rules";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
-import * as fs from "fs";
-import { MarkdownMeta } from "../../utils/types";
+import { getComponentFiles, getMainFiles } from "../../utils/rules";
+import { ConfigType, MarkdownMeta } from "../../utils/types";
 
 const isDebug = process.env.DEBUG;
 
@@ -108,10 +107,14 @@ export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 const vitdocRuntimeId = "virtual:vitdoc/runtime";
 const vitdocTemplateId = "virtual:vitdoc/template";
 
-const componentsTemplate = ({
-  templatePath = require.resolve("@vitdoc/template-default"),
-  buildMetaFile = "stories.manifest.json" as false | string,
-} = {}) => {
+const componentsTemplate = (
+  {
+    metaFileName: buildMetaFile = "stories.manifest.json" as false | string,
+    template: templatePath = require.resolve("@vitdoc/template-default"),
+    htmlAppend: externalHtml,
+    logo,
+  } = {} as ConfigType
+) => {
   let input = {};
   let server: ViteDevServer;
   let config;
@@ -195,7 +198,6 @@ const componentsTemplate = ({
         if (!/^\//.test(file)) {
           file = `/${file}`;
         }
-        const { htmlAppend: externalHtml, logo } = getConfig();
 
         const mdFiles = isBuild
           ? getComponentFiles().map((file) => `/${file}`)

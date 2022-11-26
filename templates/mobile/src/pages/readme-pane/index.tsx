@@ -1,17 +1,17 @@
 import { PageContainer } from "@ant-design/pro-layout";
-import { useUnmount } from "ahooks";
-import { Typography } from "antd";
-import React from "react";
 import {
   LinkCopy,
   MarkdownArea,
-  PropertyPane,
   Store,
   useComponentInfo,
   useMarkdown,
   useRoute,
   useRouteMap,
 } from "@vitdoc/ui";
+import { useUnmount } from "ahooks";
+import { Typography } from "antd";
+import React from "react";
+import { IframeComponentBlock } from "../../iframe-component-block";
 
 import "./index.scss";
 
@@ -62,10 +62,14 @@ export default function ReadmePane() {
           <div className="component-main">
             <div className="component-part">
               <div className="component-description">
-                <MarkdownArea data={Components} />
+                <MarkdownArea
+                  data={Components}
+                  renderers={{
+                    "component-block": IframeComponentBlock,
+                  }}
+                />
               </div>
             </div>
-            <PropertyPane />
           </div>
         </PageContainer>
       ) : (

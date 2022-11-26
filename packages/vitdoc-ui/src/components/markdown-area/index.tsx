@@ -1,44 +1,50 @@
+import { useCreation, useMemoizedFn } from "ahooks";
+import mapValues from "lodash/mapValues";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import "./index.scss";
-import { ComponentBlock } from "../component-area";
-import { useCreation, useMemoizedFn } from "ahooks";
-import { PropertyArea } from "../property-area";
-import remarkFrontMatter from "remark-frontmatter";
 import remarkDirective from "remark-directive";
+import remarkFrontMatter from "remark-frontmatter";
+import { MarkdownResult } from "../../utils/loaders";
+import { ComponentBlock } from "../component-area";
+import { PropertyArea } from "../property-area";
 import { remarkCodeBlock } from "./plugins";
 import { mdRenderers } from "./renderers";
 
-export function MarkdownArea({ data: res }) {
+import "./index.scss";
+
+export function MarkdownArea({
+  data: res,
+  renderers,
+}: {
+  data: MarkdownResult;
+  renderers?: Record<string, React.ComponentType<any>>;
+}) {
   if (!res) {
     return null;
   }
 
-  const { modules, content, error, pathHash } = res;
+  const { modules, content } = res;
 
   const getModule = useMemoizedFn((value) => {
     return modules.find(({ content }) => content === value);
   });
 
-  const componentBlock = useMemoizedFn((props) => {
-    const module = getModule(props.value.trim());
-    if (!module) {
-      return null;
-    }
-    return (
-      <ComponentBlock
-        {...props}
-        error={error}
-        pathHash={pathHash}
-        route={module.route}
-        renderer={module.renderer}
-      />
+  const nextRenderers = useCreation(() => {
+    return mapValues(
+      {
+        ...mdRenderers,
+        "component-block": ComponentBlock,
+        "property-code": (props) => (
+          <PropertyArea
+            {...props}
+            renderer={getModule(props.value)?.renderer}
+          />
+        ),
+        ...renderers,
+      },
+      (fn) => (props) => fn({ ...props, modules, getModule })
     );
-  });
-
-  const propertyCode = useMemoizedFn((props) => (
-    <PropertyArea {...props} renderer={getModule(props.value).renderer} />
-  ));
+  }, [renderers]);
 
   const markdownElements = useCreation(
     () => (
@@ -47,11 +53,7 @@ export function MarkdownArea({ data: res }) {
         className="markdown-body"
         plugins={[remarkDirective, remarkFrontMatter as any, remarkCodeBlock]}
         allowDangerousHtml={true}
-        renderers={{
-          ...mdRenderers,
-          "component-block": componentBlock,
-          "property-code": propertyCode,
-        }}
+        renderers={nextRenderers}
       >
         {content}
       </ReactMarkdown>

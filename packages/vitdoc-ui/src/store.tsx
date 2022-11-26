@@ -4,12 +4,12 @@ import { useMemoizedFn } from "ahooks";
 export const propertiesStore = atom({} as any);
 
 export type PropertiesStoreType = {
-  current?: number;
+  current?: string;
   defaultProps: Record<string, any>;
   props: Record<string, any>;
 };
 export const propertiesPropsStore = atom({
-  current: undefined as undefined | number,
+  current: undefined as undefined | string,
   defaultProps: {} as any,
   props: {} as any,
 } as PropertiesStoreType);
@@ -24,7 +24,6 @@ export const useSetPartialProperties = () => {
     });
   });
 };
-
 
 export const useSetProperties = () => useSetAtom(propertiesStore);
 export const useSetDefaultProps = () => useSetAtom(propertiesPropsStore);

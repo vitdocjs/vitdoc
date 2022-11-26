@@ -1,22 +1,14 @@
 import { mergeConfig } from "vite";
-import TypeFile from "./plugins/type-file";
-import mdjsx from "./plugins/markdown-jsx";
-import componentsTemplate from "./plugins/components-template";
+import componentsTemplate from "./dist/esm/plugins/components-template";
+import mdjsx from "./dist/esm/plugins/markdown-jsx";
+import TypeFile from "./dist/esm/plugins/type-file";
+import { getConfig } from "./dist/esm/utils/config";
+import { resolveConfig } from "esbuild-resolve-config";
 import path from "path";
-import fs from "fs";
 
 const cwd = process.cwd();
 
-let config = {};
-
-try {
-  if (fs.existsSync(`${cwd}/vite.config.js`)) {
-    require("esbuild-register");
-    config = require(`${cwd}/vite.config.js`).default;
-  }
-} catch (e) {
-  console.log(e);
-}
+const config = resolveConfig<any>("vite.config", { defaultConfig: {} });
 
 // https://vitejs.dev/config/
 export default mergeConfig(
@@ -44,7 +36,7 @@ export default mergeConfig(
         },
       ],
     },
-    plugins: [componentsTemplate(), TypeFile(), mdjsx()],
+    plugins: [componentsTemplate(getConfig()), TypeFile(), mdjsx()],
   },
   config
 );

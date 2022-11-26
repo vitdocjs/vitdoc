@@ -3,12 +3,14 @@
   "version": "1.0.14",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "type": "module",
-  "main": "./lib/index.js",
+  "main": "./dist/esm/index.js",
   "bin": {
     "vitdoc": "./bin/index.js",
     "vdoc": "./bin/index.js"
   },
   "scripts": {
+    "dev": "father dev",
+    "build": "father build",
     "prepublishOnly": "cd plugins/components-template/view && npm run build"
   },
   "engines": {
@@ -21,15 +23,18 @@
   },
   "files": [
     "vite.config.js",
-    "plugins"
+    "lib",
+    "esm"
   ],
   "dependencies": {
     "@types/node": "^14.18.24",
     "@vitdoc/runtime": "workspace:^1.0.0",
     "@vitdoc/template-default": "workspace:^1.0.0",
+    "@whyframe/jsx": "^0.1.8",
     "chalk": "^4.1.2",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.3.3",
+    "esbuild-resolve-config": "^1.0.7",
     "extract-typescript-types": "^1.0.2",
     "glob": "^7.2.3",
     "js-yaml": "^4.1.0",

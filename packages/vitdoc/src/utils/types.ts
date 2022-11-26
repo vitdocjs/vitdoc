@@ -46,4 +46,9 @@ export type ConfigType = {
    * @default "@vitdoc/template-default"
    */
   template?: string;
+
+  /**
+   * meta data file name
+   */
+  metaFileName?: string | false;
 };
