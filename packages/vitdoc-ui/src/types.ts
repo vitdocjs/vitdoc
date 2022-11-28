@@ -1,4 +1,4 @@
-import { MarkdownResult, ModuleInfo } from "./utils/loaders";
+import { MarkdownResult, ModuleInfo } from "./hooks/loaders";
 import { ReactNode } from "react";
 
 export type RendererProps = MarkdownResult & {

@@ -9,19 +9,62 @@ import {
   resolveMainComponent,
 } from "../../utils";
 import { isCSSLang, isInlineMeta, isJsx } from "../../utils/lang";
-import { send } from "vite";
+import { send, transformWithEsbuild } from "vite";
 import { appendTypes } from "./utils";
 import { parseMarkdown } from "../../utils/markdown";
-import markdownTransformer from "dumi/dist/loaders/markdown/transformer";
-import ReactTechStack from "dumi/dist/techStacks/react";
+import markdownTransformer, {
+  type IMdTransformerResult,
+} from "dumi/dist/loaders/markdown/transformer";
+import type { IMdLoaderOptions } from "dumi/dist/loaders/markdown";
+import ReactTechStack from "./markdown/react-tech-statck";
+import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
+import { IDemoData, transformDemo } from "./demo/transform-demo";
 
-const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
+const mdProxyRE = /markdown-proxy&id=(.+)$/;
+const VIRTUAL_DEMO_KEY = "virtual:vitdoc/demo/";
 
 export const isMarkdownProxy = (id) => mdProxyRE.test(id);
+export const getDemoId = (id) => id.match(mdProxyRE)?.[1];
 
 const mdjsx = () => {
-  let markdownMap = {};
+  let markdownMap: Record<string, IDemoData> = {};
   let isBuild: boolean;
+
+  function emit(
+    this: any,
+    id: string,
+    opts: Pick<IThemeLoadResult, "builtins">,
+    ret: IMdTransformerResult
+  ) {
+    const { demos, embeds, texts } = ret.meta;
+
+    // TODO:: declare embedded files as loader dependency, for re-compiling when file changed
+    // embeds!.forEach((file) => this.addDependency(file));
+
+    demos?.forEach((file) => {
+      markdownMap[file.id] = {
+        filename: id,
+        ...file,
+      };
+    });
+
+    // import all builtin components, may be used by markdown content
+    return `${Object.values(opts.builtins)
+      .map((item) => `import ${item.specifier} from '${item.source}';`)
+      .join("\n")}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { DumiPage } from "${require.resolve("@vitdoc/ui")}";
+
+const $$contentTexts = ${JSON.stringify(texts)};
+
+function MarkdownContent({ container }) {
+  return ReactDOM.render(${ret.content}, container);
+}
+
+export default MarkdownContent;
+`;
+  }
 
   return {
     name: "vite:markdown-jsx",
@@ -70,6 +113,9 @@ const mdjsx = () => {
     },
 
     async resolveId(id) {
+      if (isMarkdownProxy(id)) {
+        return id;
+      }
       if (/\.md/.test(id)) {
         return id;
       }
@@ -85,102 +131,15 @@ const mdjsx = () => {
       };
 
       if (isMarkdownProxy(id)) {
-        const [, fileIndex, lang] = id.match(mdProxyRE) || [];
+        const demoId = getDemoId(id);
 
-        const code = markdownMap[`${file}_${fileIndex}.${lang}`];
-        if (!code) {
-          return "";
+        const demoInfo = markdownMap[demoId];
+
+        if (!demoId || !demoInfo) {
+          return null;
         }
 
-        if (!isJsx(lang)) {
-          return code;
-        }
-
-        const mainModuleId = await getMainModuleId();
-
-        const replaceReact = (code) => {
-          const matchInfo = code.match(/import React([ ,])?.+?;/);
-          if (!matchInfo) {
-            return code;
-          }
-          const { index: matchedIndex, "0": matchedContent } = matchInfo;
-          const index = matchedIndex + matchedContent.length;
-          const before = code.slice(0, index);
-          const after = code.slice(index);
-
-          const reactCode = before.replace(
-            /import React([ ,])?/,
-            (d, matchInfo) => {
-              return `import React$${matchInfo}`;
-            }
-          );
-
-          let wrappedReact = `
-      const React = {...React$};
-
-      const beforeCreateElement = React.createElement;
-      var $_REF = { wrap: null };
-      React.createElement = (Comp,...rest) => {
-        const wrap = $_REF.wrap;
-        let NextComp = Comp;
-
-        if(Object.values($_Component).includes(NextComp) && wrap) {
-          NextComp = wrap(Comp, { React: React$ });
-        }
-
-        return beforeCreateElement(NextComp, ...rest);
-      }; `;
-
-          return `${reactCode}
-      ${
-        mainModuleId
-          ? `import * as $_Component from '${mainModuleId}';`
-          : `const $_Component = {};`
-      }
-      ${wrappedReact}
-      ${after}
-      `;
-        };
-
-        const replaceExport = (code) => {
-          const reg = /import .+ from .+;/g;
-
-          let regRes: RegExpExecArray | null;
-          let lastReg: RegExpExecArray | null;
-          while ((regRes = reg.exec(code))) {
-            lastReg = regRes;
-          }
-
-          const prependSetWrap = (code) =>
-            `export const setWrap$ = (f, s) => s.wrap && ($_REF.wrap = s.wrap); ${code}`;
-
-          const codeSegment = (code) => {
-            if (code.includes("export default")) {
-              return prependSetWrap(code);
-            }
-
-            code = `export default function(mountNode, { wrap, renderType$ }){ ${code} };`;
-
-            return prependSetWrap(code);
-          };
-
-          if (!lastReg!) {
-            return code;
-          }
-
-          const lastIndex: number = lastReg.index + lastReg[0].length;
-
-          return `${code.slice(0, lastIndex)};${codeSegment(
-            code.slice(lastIndex)
-          )}`;
-        };
-
-        let nextCode: string = replaceReact(code);
-
-        nextCode = replaceExport(nextCode);
-        // nextCode = addHMR(nextCode);
-
-        return nextCode;
+        return transformDemo(demoInfo);
       }
 
       if (!/\.md$/.test(id)) {
@@ -192,7 +151,7 @@ const mdjsx = () => {
 
       // content = await appendTypes(id, content, getMainModuleId);
 
-      const res = await markdownTransformer(content, {
+      const res = (await markdownTransformer(content, {
         cwd: process.cwd(),
         fileAbsPath: id,
         alias: {},
@@ -203,8 +162,45 @@ const mdjsx = () => {
           codeBlockMode: "active",
         },
         routers: {},
-      });
-      console.log("🚀 #### ~ load ~ res", res);
+      })) as IMdTransformerResult;
+
+      const code = emit.call(
+        this,
+        id,
+        {
+          builtins: {
+            DumiDemo: {
+              specifier: "{ DumiDemo }",
+              source: require.resolve("@vitdoc/ui"),
+            },
+            DumiDemoGrid: {
+              specifier: "{ DumiDemoGrid }",
+              source: require.resolve("@vitdoc/ui"),
+            },
+            Link: {
+              specifier: "{ Link }",
+              source: require.resolve("@vitdoc/ui"),
+            },
+          },
+        },
+        res
+      );
+
+      return transformWithEsbuild(code, `${id}.jsx`);
+
+      // const demos = res.meta.demos || [];
+      // demos.forEach((item) => {
+      //   const params = `markdown-proxy&index=${item.id}`;
+      //   let moduleID = addUrlParams(id, params);
+      //   isBuild &&
+      //     this.emitFile({
+      //       type: "chunk",
+      //       id: moduleID,
+      //       importer: id,
+      //     });
+      // });
+
+      return { code: `export default ${JSON.stringify(res)}` };
 
       let moduleIds = {};
       const promises = parseMarkdown(content)

@@ -1,9 +1,4 @@
-import {
-  BugOutlined,
-  CheckOutlined,
-  CopyOutlined,
-  FileSearchOutlined,
-} from "@ant-design/icons";
+import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { copyToClipboard, HighLighter, RendererProps, Store } from "@vitdoc/ui";
 import {
   useBoolean,

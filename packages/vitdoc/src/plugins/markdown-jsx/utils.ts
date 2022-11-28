@@ -47,3 +47,4 @@ renderType$(ComponentType, mountNode);
   }
   return content;
 }
+

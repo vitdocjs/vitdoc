@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { cleanUrl } from "./config";
+import { cleanUrl } from "../utils/config";
 import { isCSSLang, isJsx, isTypes } from "../utils/lang";
 import { useLocation, useMatch, useMatches } from "react-router-dom";
 
@@ -34,7 +34,7 @@ export function useAsyncImport(
         const Comp = cb(newModule);
         setModule(() => Comp);
       };
-      const cUrl = cleanUrl(path);
+      const cUrl = path;
 
       if (!window.RuntimeModuleMap$[cUrl]) {
         window.RuntimeModuleMap$[cUrl] = (cb) => {
@@ -119,77 +119,25 @@ export type ModuleInfo = {
 };
 export type MarkdownResult = ReturnType<typeof useMarkdown>;
 
-export function useMarkdown(route?: string): null | {
-  error?: ModuleLoadError;
-  content: string;
-  pathHash: string;
-  route: string;
-  modules: ModuleInfo[];
-} {
+export const useDemo = (id: string, route?: string) => {
+  if (!route) {
+    route = location.hash.replace("#", "");
+  }
+  // const readmeFile = route.replace(".html", ".md");
+
+  const results: any = useAsyncImport(`${route}?markdown-proxy&id=${id}`);
+
+  return results;
+};
+
+export const useMarkdown = (route?: string) => {
   if (!route) {
     route = useRoute().route;
   }
 
   const readmeFile = route.replace(".html", ".md");
-  const disposeArr = useRef<Array<() => void>>([]);
 
-  useEffect(
-    () => () => {
-      let fn;
-      while ((fn = disposeArr.current.pop())) {
-        fn();
-      }
-    },
-    []
-  );
+  const results: any = useAsyncImport(readmeFile);
 
-  const results: any = useAsyncImport(
-    readmeFile,
-    ({ default: packageInfo }) => {
-      return packageInfo;
-    }
-  );
-
-  if (results?.error) {
-    return results;
-  }
-  let modules: ModuleInfo[] = [];
-  if (results) {
-    const styleModules = results.modules.filter(({ lang }) => isCSSLang(lang));
-    modules = results.modules.reduce((previousValue, currentValue, index) => {
-      if (!isJsx(currentValue.lang)) {
-        return previousValue;
-      }
-      const sourceKey = currentValue.sourcesContent.trim();
-      previousValue.push({
-        content: sourceKey,
-        route: `/~${route}/${index}`,
-        lang: currentValue.lang,
-        type: isTypes(sourceKey) ? "api" : "demo",
-        renderer: (...args) => {
-          const result = currentValue.load(...args);
-          styleModules.forEach((mod) => {
-            mod.load();
-          });
-          return result;
-        },
-      });
-
-      return previousValue;
-    }, [] as ModuleInfo[]);
-  }
-
-  if (!results) {
-    return null;
-  }
-
-  let error: ModuleLoadError | undefined;
-
-  return {
-    error,
-    content: results.content,
-    pathHash: results.pathHash,
-    route,
-    modules,
-  };
-}
+  return results;
+};
