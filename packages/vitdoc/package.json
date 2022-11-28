@@ -2,15 +2,15 @@
   "name": "vitdoc",
   "version": "1.0.14",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
-  "type": "module",
-  "main": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
   "bin": {
-    "vitdoc": "./bin/index.js",
-    "vdoc": "./bin/index.js"
+    "vitdoc": "./bin/index.mjs",
+    "vdoc": "./bin/index.mjs"
   },
   "scripts": {
     "dev": "father dev",
     "build": "father build",
+    "prebundle": "esbuild ./prebundle/markdown --bundle --outfile=compiled/markdown.js --external:esbuild --external:fsevents --external:@umijs/core --external:father --external:deepmerge --external:@umijs/utils --external:enhanced-resolve --format=cjs --platform=node",
     "prepublishOnly": "cd plugins/components-template/view && npm run build"
   },
   "engines": {
@@ -24,7 +24,7 @@
   "files": [
     "vite.config.js",
     "lib",
-    "esm"
+    "cjs"
   ],
   "dependencies": {
     "@types/node": "^14.18.24",
@@ -32,6 +32,7 @@
     "@vitdoc/template-default": "workspace:^1.0.0",
     "@whyframe/jsx": "^0.1.8",
     "chalk": "^4.1.2",
+    "dumi": "^2.0.6",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.3.3",
     "esbuild-resolve-config": "^1.0.7",

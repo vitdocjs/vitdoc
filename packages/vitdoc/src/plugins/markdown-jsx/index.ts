@@ -12,6 +12,8 @@ import { isCSSLang, isInlineMeta, isJsx } from "../../utils/lang";
 import { send } from "vite";
 import { appendTypes } from "./utils";
 import { parseMarkdown } from "../../utils/markdown";
+import markdownTransformer from "dumi/dist/loaders/markdown/transformer";
+import ReactTechStack from "dumi/dist/techStacks/react";
 
 const mdProxyRE = /markdown-proxy&index=(\d+)\.(\w+)$/;
 
@@ -188,7 +190,21 @@ const mdjsx = () => {
       let content = fs.readFileSync(id, "utf-8");
       const pathHash = `_${getMD5(removeProcessCwd(id))}`;
 
-      content = await appendTypes(id, content, getMainModuleId);
+      // content = await appendTypes(id, content, getMainModuleId);
+
+      const res = await markdownTransformer(content, {
+        cwd: process.cwd(),
+        fileAbsPath: id,
+        alias: {},
+        techStacks: [new ReactTechStack()],
+        resolve: {
+          docDirs: ["docs"],
+          atomDirs: [{ type: "component", dir: "src" }],
+          codeBlockMode: "active",
+        },
+        routers: {},
+      });
+      console.log("🚀 #### ~ load ~ res", res);
 
       let moduleIds = {};
       const promises = parseMarkdown(content)

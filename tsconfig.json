@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "types": ["vitest/globals"]
   }
 }
