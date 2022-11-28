@@ -1,21 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import {
+  VitDocMarkdownContext,
+  type VitDocMarkdownContextType,
+} from "../../context";
 import { useMarkdown } from "../../hooks/loaders";
+import { mdRenderers } from "./renderers";
 
 import "./index.scss";
 
-export function MarkdownArea({
-  renderers,
-}: {
-  renderers?: Record<string, React.ComponentType<any>>;
-}) {
-  const ref = useRef<any>();
-  const renderMarkdown = useMarkdown();
+export function MarkdownArea(props: VitDocMarkdownContextType) {
+  const MarkdownContent = useMarkdown();
 
-  useEffect(() => {
-    if (renderMarkdown) {
-      renderMarkdown({ container: ref.current });
-    }
-  }, [renderMarkdown]);
+  const renderers = { ...mdRenderers, ...props.renderers };
 
-  return <div className="markdown-area" ref={ref} />;
+  return MarkdownContent ? (
+    <div className="markdown-area">
+      <VitDocMarkdownContext.Provider value={{ renderers }}>
+        <MarkdownContent />
+      </VitDocMarkdownContext.Provider>
+    </div>
+  ) : null;
 }

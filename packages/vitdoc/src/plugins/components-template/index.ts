@@ -182,10 +182,12 @@ const componentsTemplate = (
       let file = cleanUrl(id);
 
       if (id.endsWith(vitdocTemplateId)) {
-        return `import '${templatePath.replace(
-          /\.js$/,
-          ".css"
-        )}'; export * from '${templatePath}';`;
+        const cssPath = templatePath.replace(/\.js$/, ".css");
+        let code = `export * from '${templatePath}';`;
+        if (fs.existsSync(cssPath)) {
+          code = `import '${cssPath}';\n${code}`;
+        }
+        return code;
       }
 
       if (isRouteMap(file)) {

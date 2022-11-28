@@ -58,8 +58,8 @@ import { DumiPage } from "${require.resolve("@vitdoc/ui")}";
 
 const $$contentTexts = ${JSON.stringify(texts)};
 
-function MarkdownContent({ container }) {
-  return ReactDOM.render(${ret.content}, container);
+function MarkdownContent() {
+  return ${ret.content};
 }
 
 export default MarkdownContent;

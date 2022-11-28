@@ -8,8 +8,10 @@
     "dist"
   ],
   "scripts": {
-    "dev": "node build.mjs",
-    "build": "NODE_ENV='production' node build.mjs",
+    "dev": "father dev",
+    "build": "father build",
+    "dev_e": "node build.mjs",
+    "build_e": "NODE_ENV='production' node build.mjs",
     "prepublishOnly": "npm run build"
   },
   "author": "",

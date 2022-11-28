@@ -81,10 +81,21 @@ export async function transformDemo(demo: IDemoData) {
     return `${code.slice(0, lastIndex)};${codeSegment(code.slice(lastIndex))}`;
   };
 
+  function appendContent(code: string) {
+    return `
+      ${code}
+      export const content$ = \`${
+        // encode content to avoid unexpected escape
+        demo.component.replace(/`/g, "\\`")
+      }\`;
+    `;
+  }
+
   let code = demo.component;
 
   code = replaceReact(code);
   code = replaceExport(code);
+  code = appendContent(code);
 
   return transformWithEsbuild(code, `${demo.filename}.tsx`, {
     sourcefile: demo.filename,

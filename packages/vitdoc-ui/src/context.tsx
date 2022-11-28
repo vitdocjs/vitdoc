@@ -1,5 +1,7 @@
 import React from "react";
 
-export type VitDocContextType = {};
+export type VitDocMarkdownContextType = {
+  renderers?: Record<string, React.ComponentType<any>>;
+};
 
-export const VitDocContext = React.createContext<VitDocContextType>(null);
+export const VitDocMarkdownContext = React.createContext<VitDocMarkdownContextType>({});

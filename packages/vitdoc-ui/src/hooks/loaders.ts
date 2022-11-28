@@ -123,9 +123,12 @@ export const useDemo = (id: string, route?: string) => {
   if (!route) {
     route = location.hash.replace("#", "");
   }
-  // const readmeFile = route.replace(".html", ".md");
 
-  const results: any = useAsyncImport(`${route}?markdown-proxy&id=${id}`);
+  const results: any = useAsyncImport(
+    `${route}?markdown-proxy&id=${id}`,
+    (info) => info
+  );
+  console.log("🚀 #### ~ useDemo ~ results", results);
 
   return results;
 };
