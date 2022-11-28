@@ -1,18 +1,25 @@
-import { ComponentType, useEffect, useMemo, useRef, useState } from "react";
-import { cleanUrl } from "../utils/config";
-import { isCSSLang, isJsx, isTypes } from "../utils/lang";
-import { useLocation, useMatch, useMatches } from "react-router-dom";
-import { RendererProps } from "../types";
+import { useMemoizedFn, useSafeState } from "ahooks";
+import EventEmitter from "eventemitter3";
+import { useContext, useEffect, useMemo } from "react";
+import { useLocation, useMatch } from "react-router-dom";
+import { VitDocMarkdownContext } from "../context";
 
 declare global {
   interface Window {
     RuntimeModuleMap$: Record<string, (cb: any) => Promise<any>>;
-    HotReloadRegister$: (p: string, cb: () => void) => void;
+    HotReloadRegister$: (p: string, EventEmitter) => void;
+
+    HMRRegisterMap$: Record<string, EventEmitter>;
   }
 }
 
-function addRegistry(file, fn) {
-  window.HotReloadRegister$?.(file, fn);
+function getEventEmitter(file) {
+  return window.HMRRegisterMap$[file] ?? new EventEmitter();
+}
+
+function addRegistry(file, emitter) {
+  // window.HMRRegisterMap$[file] = hmrEmitter;
+  window.HotReloadRegister$(file, emitter);
 }
 
 export function useRoute() {
@@ -27,14 +34,24 @@ export function useAsyncImport(
   path: string,
   cb = ({ default: Comp }: any) => Comp
 ) {
-  const [Module, setModule] = useState<any>();
+  const [Module, setModule] = useSafeState<any>();
+
+  const emitter = getEventEmitter(path);
+
+  const setNewModule = useMemoizedFn((newModule) => {
+    const Comp = cb(newModule);
+    setModule(() => Comp);
+  });
+
+  useEffect(() => {
+    emitter.once("update", setNewModule);
+    return () => {
+      emitter.off("update", setNewModule);
+    };
+  }, [Module]);
 
   useMemo(async () => {
     try {
-      const setNewModule = (newModule) => {
-        const Comp = cb(newModule);
-        setModule(() => Comp);
-      };
       const cUrl = path;
 
       if (!window.RuntimeModuleMap$[cUrl]) {
@@ -42,11 +59,10 @@ export function useAsyncImport(
           cb && cb(cUrl);
           return import(/* @vite-ignore */ cUrl);
         };
-        // throw `'${cUrl}' is not in runtime module map...`;
       }
 
       const result = await window.RuntimeModuleMap$[cUrl]?.((filePath) => {
-        addRegistry(filePath, setNewModule);
+        addRegistry(filePath, emitter);
       });
 
       setNewModule(result);
@@ -120,53 +136,43 @@ export type ModuleInfo = {
 };
 export type MarkdownResult = ReturnType<typeof useMarkdown>;
 
-export const useDemo = (
-  id: string,
-  route?: string
-): RendererProps | undefined => {
-  if (!route) {
-    route = location.hash.replace("#", "");
+export const useMarkdown = (route?: string) => {
+  if (useContext(VitDocMarkdownContext).context) {
+    return useContext(VitDocMarkdownContext).context;
   }
-
-  const results: any = useAsyncImport(
-    `${route}?markdown-proxy&id=${id}`,
-    (info) => info
-  );
-
-  if (!results) {
-    return undefined;
-  }
-
-  if (results.error) {
-    return results;
-  }
-
-  const { meta$ = {}, default: renderer } = results;
-
-  return {
-    pathHash: meta$?.pathHash,
-    value: meta$?.component ?? "",
-    getModule() {
-      const module = {
-        lang: "tsx",
-        renderer,
-        content: meta$.content$,
-        route: `/~${route}/${id}`,
-        type: "demo" as any,
-      };
-      return module;
-    },
-  };
-};
-
-export const useMarkdown = (route?: string): ComponentType | undefined => {
   if (!route) {
     route = useRoute().route;
   }
 
   const readmeFile = route.replace(".html", ".md");
 
-  const results = useAsyncImport(readmeFile);
+  const mdInfo = useAsyncImport(readmeFile, (modules) => modules);
 
-  return results;
+  if (!mdInfo) {
+    return undefined;
+  }
+
+  if (mdInfo.error) {
+    return mdInfo;
+  }
+
+  const { meta$, default: Markdown } = mdInfo;
+
+  return {
+    pathHash: meta$?.pathHash,
+    Markdown,
+    getModule(id: string) {
+      const demo = meta$.demos.find((demo) => demo.id === id);
+      if (!demo) return undefined;
+
+      return {
+        lang: "tsx",
+        renderer: (...props) =>
+          demo?.load().then((res) => res.default(...props)),
+        content: demo.content,
+        route: `/~${route}/${id}`,
+        type: "demo" as any,
+      };
+    },
+  };
 };

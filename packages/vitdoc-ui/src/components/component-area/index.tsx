@@ -1,25 +1,25 @@
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import HighLight from "../highlight";
+import BugOutlined from "@ant-design/icons/BugOutlined";
+import CheckOutlined from "@ant-design/icons/CheckOutlined";
+import CodeOutlined from "@ant-design/icons/CodeOutlined";
+import CopyOutlined from "@ant-design/icons/CopyOutlined";
+import FileSearchOutlined from "@ant-design/icons/FileSearchOutlined";
 import {
   useBoolean,
   useCreation,
   useEventEmitter,
   useMemoizedFn,
 } from "ahooks";
-import CopyOutlined from "@ant-design/icons/CopyOutlined";
-import CodeOutlined from "@ant-design/icons/CodeOutlined";
-import CheckOutlined from "@ant-design/icons/CheckOutlined";
-import BugOutlined from "@ant-design/icons/BugOutlined";
-import FileSearchOutlined from "@ant-design/icons/FileSearchOutlined";
 import classNames from "classnames";
+import React, { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import HighLight from "../highlight";
 import { copyToClipboard } from "../link-copy";
 
-import dropRight from "lodash/dropRight";
 import { useAtom } from "jotai";
+import dropRight from "lodash/dropRight";
 import { propertiesPropsStore, useSetPartialProperties } from "../../store";
 
-import { Result, Tooltip as _Tooltip } from "antd";
+import { Tooltip as _Tooltip } from "antd";
 import { RendererProps } from "../../types";
 
 import "./index.scss";
@@ -30,15 +30,15 @@ export const ComponentBlock = (props: RendererProps) => {
   const {
     pathHash,
     getModule,
-    value: content = "",
+    demoid: id = "",
 
     // TODO::
     children,
   } = props;
 
-  const { lang, renderer, route } = useCreation(
-    () => getModule?.(content?.trim()) ?? ({} as any),
-    [content]
+  const { lang, renderer, content, route } = useCreation(
+    () => getModule?.(id?.trim()) ?? ({} as any),
+    [id]
   );
 
   const beforeChildren = dropRight(children, 1);
@@ -49,6 +49,7 @@ export const ComponentBlock = (props: RendererProps) => {
 
   const eventBus = useEventEmitter();
 
+  // TODO::
   const active = current !== undefined && current === content;
   return (
     <div
@@ -172,13 +173,14 @@ export function ComponentArea(props) {
   });
 
   useEffect(() => {
-    const ele = renderer(componentRef.current, {
+    renderer(componentRef.current, {
       wrap: wrapProps,
+    }).then((ele) => {
+      if (ele) {
+        // export default mode
+        ReactDOM.render(ele, componentRef.current);
+      }
     });
-    if (ele) {
-      // export default mode
-      ReactDOM.render(ele, componentRef.current);
-    }
   }, [renderer, componentProps]);
 
   return (
@@ -204,7 +206,7 @@ export function CopyIcon({ content }) {
     <Tooltip
       title={copied ? "Copied!" : "Copy Code"}
       onClick={copy}
-      onVisibleChange={(v) => {
+      onOpenChange={(v) => {
         !v &&
           setTimeout(() => {
             setFalse();

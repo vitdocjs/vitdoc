@@ -1,7 +1,7 @@
 import { Result } from "antd";
 import React, { useContext } from "react";
 import { VitDocMarkdownContext } from "../../context";
-import { useDemo } from "../../hooks/loaders";
+import { useMarkdown } from "../../hooks/loaders";
 import { ComponentBlock } from "../component-area";
 
 export function DumiPage(props) {
@@ -11,13 +11,16 @@ export function DumiPage(props) {
 export function DumiDemo(props) {
   const id = props.demo.id;
 
-  const demos = useDemo(id);
-  if (!demos) {
-    return null;
-  }
-  const { value, pathHash, getModule, error } = demos;
+  const markdowns = useMarkdown();
+
   const { renderers } = useContext(VitDocMarkdownContext)!;
   const CodeBlock = renderers?.["code-block"] ?? ComponentBlock;
+
+  if (!markdowns) {
+    return null;
+  }
+
+  const { pathHash, getModule, error } = markdowns;
 
   if (error) {
     return (
@@ -35,7 +38,7 @@ export function DumiDemo(props) {
     );
   }
 
-  return <CodeBlock pathHash={pathHash} value={value} getModule={getModule} />;
+  return <CodeBlock key={id} pathHash={pathHash} demoid={id} getModule={getModule} />;
 }
 
 export function DumiDemoGrid(props) {

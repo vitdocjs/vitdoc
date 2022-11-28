@@ -9,6 +9,7 @@ export type IDemoData = NonUndefined<
 
 export async function transformDemo(demo: IDemoData) {
   const mainModuleId = "";
+
   const replaceReact = (code) => {
     const matchInfo = code.match(/import React([ ,])?.+?;/);
     if (!matchInfo) {
@@ -84,21 +85,21 @@ export async function transformDemo(demo: IDemoData) {
   function appendMeta(code: string) {
     return `
       ${code}
-      export const meta$ = ${JSON.stringify({
-        pathHash: demo.pathHash,
-        component: demo.component,
-      })};
-     
+      export const content$ = ${JSON.stringify({ value: demo.component })};
     `;
   }
 
-
   let code = demo.component;
-  console.log("🚀 #### ~ transformDemo ~ code", code);
 
-  code = replaceReact(code);
-  code = replaceExport(code);
-  code = appendMeta(code);
+  if (code.includes("webpackChunkName")) {
+    code = `import React,{ Suspense } from 'react';
+    const DemoComponent = ${code};
+    export default () => <Suspense fallback='Loading...'><DemoComponent /></Suspense>;`;
+  } else {
+    code = replaceReact(code);
+    code = replaceExport(code);
+    code = appendMeta(code);
+  }
 
   return transformWithEsbuild(code, `${demo.filename}.tsx`, {
     sourcefile: demo.filename,

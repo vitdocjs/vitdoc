@@ -40,7 +40,7 @@ export function Text(props: IProps) {
   const { visible = true, size } = props;
   return (
     <div className={'component-scope ' + size}>
-      {visible ? 'Hello Wor2l3dd2222223dd221' : ''} {size}
+      {visible ? 'Hello World' : ''} {size}
     </div>
   );
 }

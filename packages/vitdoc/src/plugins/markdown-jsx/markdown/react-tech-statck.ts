@@ -1,5 +1,4 @@
 import { IDumiTechStack } from "dumi/dist/types";
-import { transformWithEsbuild } from "vite";
 
 export default class ReactTechStack implements IDumiTechStack {
   name = "react";

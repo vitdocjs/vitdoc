@@ -40,17 +40,17 @@
         {{moduleMaps}}
       };
 
-      globalThis.HotReloadRegister$ = (file, fn)=>{
+      globalThis.HMRRegisterMap$ = {};
+
+      globalThis.$VitDocUpdateHMRNewModule$ = (modulePath, module) => {
+        globalThis.HMRRegisterMap$[modulePath]?.emit('update', module);
+      };
+      globalThis.HotReloadRegister$ = (file, emitter) => {
         if (import.meta.hot) {
-          import("/@vite/client").then(({ createHotContext }) => {
-              console.log("🚀 #### ~ createHotContext ~ file", file);
-            createHotContext(file).accept((newModule) => {
-              console.log("🚀 #### ~ createHotContext ~ file", file,newModule);
-              fn(newModule);
-            });
-          });
+          globalThis.HMRRegisterMap$[file] = emitter;
         }
       }
+
       import("virtual:vitdoc/runtime");
     </script>
 

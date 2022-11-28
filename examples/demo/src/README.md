@@ -15,7 +15,6 @@ Vite 需要 [Node.js](https://nodejs.org/en/) 版本 14.18+，16+。然而，有
 
 你可以直接使用 [vitdoc-template](https://github.com/vitdocjs/vitdoc-template) 进行仓库初始化，访问 https://github.com/vitdocjs/vitdoc-template 了解更多。
 
-
 该模板中已经为你提供一些组件和文档用法，完成初始化后即可按照以下步骤进行开发：
 
 ```bash
@@ -60,6 +59,7 @@ echo '# Hello Vitdoc' > components/README.md
 ```bash
 yarn docs:dev
 ```
+
 ---
 
 #### Welcome to the React Component Library
@@ -69,7 +69,7 @@ import { Title as Component } from '.';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(
+export default () => (
   <div style={{ display: 'flex', flexDirection: 'column' }}>
     <Component
       title="Training Material"
@@ -84,8 +84,6 @@ ReactDOM.render(
       title="PREPARE FOR 12.12 WITH 6 KEY FOCUS"
       subTitle="Ensure that you meet our campaign criteria.<br /> Click on the respective image below to unlock tips on how to soar this 12.12 !"
     />
-  </div>,
-  mountNode,
+  </div>
 );
 ```
-

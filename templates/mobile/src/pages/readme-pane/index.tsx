@@ -4,8 +4,6 @@ import {
   MarkdownArea,
   Store,
   useComponentInfo,
-  useMarkdown,
-  useDemo,
   useRoute,
   useRouteMap,
 } from "@vitdoc/ui";

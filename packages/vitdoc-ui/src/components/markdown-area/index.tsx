@@ -1,3 +1,4 @@
+import { useUnmount } from "ahooks";
 import React from "react";
 import {
   VitDocMarkdownContext,
@@ -15,8 +16,10 @@ export function MarkdownArea(props: VitDocMarkdownContextType) {
 
   return MarkdownContent ? (
     <div className="markdown-area">
-      <VitDocMarkdownContext.Provider value={{ renderers }}>
-        <MarkdownContent />
+      <VitDocMarkdownContext.Provider
+        value={{ context: MarkdownContent, renderers }}
+      >
+        <MarkdownContent.Markdown />
       </VitDocMarkdownContext.Provider>
     </div>
   ) : null;

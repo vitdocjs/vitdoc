@@ -59,7 +59,7 @@ export function CopyIcon({ content }) {
   return (
     <Tooltip
       title={copied ? "Copied!" : "Copy Code"}
-      onVisibleChange={(v) => {
+      onOpenChange={(v) => {
         !v &&
           setTimeout(() => {
             setFalse();
