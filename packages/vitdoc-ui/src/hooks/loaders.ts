@@ -132,8 +132,13 @@ export const useDemo = (
     `${route}?markdown-proxy&id=${id}`,
     (info) => info
   );
+
   if (!results) {
     return undefined;
+  }
+
+  if (results.error) {
+    return results;
   }
 
   const { meta$ = {}, default: renderer } = results;

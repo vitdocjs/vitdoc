@@ -3,6 +3,7 @@ import markdownTransformer, {
   type IMdTransformerResult,
 } from "dumi/dist/loaders/markdown/transformer";
 import fs from "fs";
+import { ModuleGraph, Plugin } from "vite";
 import { send, transformWithEsbuild } from "vite";
 import {
   addUrlParams,
@@ -26,6 +27,7 @@ export const getDemoId = (id) => id.match(mdProxyRE)?.[1];
 const mdjsx = () => {
   let markdownMap: Record<string, IDemoData> = {};
   let isBuild: boolean;
+  let moduleGraph: ModuleGraph;
 
   function emit(
     this: any,
@@ -34,6 +36,10 @@ const mdjsx = () => {
     ret: IMdTransformerResult
   ) {
     const { demos, embeds, texts } = ret.meta;
+
+    if (moduleGraph) {
+      // moduleGraph.updateModuleInfo
+    }
 
     // TODO:: declare embedded files as loader dependency, for re-compiling when file changed
     // embeds!.forEach((file) => this.addDependency(file));
@@ -76,7 +82,8 @@ export default MarkdownContent;
     },
 
     configureServer(_server) {
-      const { middlewares, moduleGraph, transformRequest } = _server;
+      const { middlewares, transformRequest } = _server;
+      moduleGraph = _server.moduleGraph;
 
       middlewares.use(async (req, res, next) => {
         if (
@@ -93,20 +100,31 @@ export default MarkdownContent;
         return next();
 
         try {
-          const url = removeImportQuery(req.url);
-          const result = await transformRequest(url);
+          // const url = removeImportQuery(req.url);
+          // const result = await transformRequest(url);
+          // const mod = await moduleGraph.getModuleByUrl(req.url!);
+          // mod &&
+          //   moduleGraph.updateModuleInfo(
+          //     mod,
+          //     mod.importedModules,
+          //     mod.importedBindings,
+          //     new Set(),
+          //     null,
+          //     true
+          //   );
+          // return send(req, res, result.code, "js", {});
           const readmeMod = await moduleGraph.getModuleByUrl(cleanUrl(url));
           // const mod = await moduleGraph.getModuleByUrl(url);
 
-          // readmeMod &&
-          await moduleGraph.updateModuleInfo(
-            readmeMod,
-            new Set([...Array.from(readmeMod.importedModules), url]),
-            null,
-            new Set(),
-            null,
-            true
-          );
+          readmeMod &&
+            (await moduleGraph.updateModuleInfo(
+              readmeMod,
+              new Set([...Array.from(readmeMod.importedModules), url]),
+              null,
+              new Set(),
+              null,
+              true
+            ));
 
           return send(req, res, result.code, "js", {});
         } catch (e) {
@@ -141,8 +159,9 @@ export default MarkdownContent;
           return null;
         }
 
-        console.log("🚀 #### ~ load ~ demoInfo", await transformDemo(demoInfo));
-        return transformDemo(demoInfo);
+        const demoCode = await transformDemo(demoInfo);
+
+        return demoCode;
       }
 
       if (!/\.md$/.test(id)) {
@@ -150,100 +169,25 @@ export default MarkdownContent;
       }
 
       return emitMarkdown.call(this, id, emit);
-
-      // const demos = res.meta.demos || [];
-      // demos.forEach((item) => {
-      //   const params = `markdown-proxy&index=${item.id}`;
-      //   let moduleID = addUrlParams(id, params);
-      //   isBuild &&
-      //     this.emitFile({
-      //       type: "chunk",
-      //       id: moduleID,
-      //       importer: id,
-      //     });
-      // });
-
-      return { code: `export default ${JSON.stringify(res)}` };
-
-      let moduleIds = {};
-      const promises = parseMarkdown(content)
-        .children.filter(({ type, meta, lang = "" }) => {
-          if (type !== "code") return false;
-          if (!isJsx(<string>lang) && !isCSSLang(<string>lang)) return false;
-
-          if (isInlineMeta(meta)) return false;
-
-          return true;
-        })
-        .map(async (item, index) => {
-          let content = <string>item.value || "";
-          let lang = item.lang;
-
-          if (isCSSLang(lang)) {
-            content = `.${pathHash}{ ${content} }`;
-            if (lang === "css") {
-              lang = "scss";
-            }
-          }
-
-          const fileName = `${index}.${lang}`;
-
-          markdownMap[`${file}_${fileName}`] = content;
-
-          const params = `markdown-proxy&index=${fileName}`;
-          let moduleID = addUrlParams(id, params);
-
-          isBuild &&
-            this.emitFile({
-              type: "chunk",
-              id: moduleID,
-              importer: id,
-            });
-
-          moduleIds[index] = moduleID;
-
-          return {
-            lang,
-            sourcesContent: content,
-          };
-        });
-
-      const modules = await Promise.all(promises);
-
-      const hash = getAssetHash(content);
-
-      return {
-        code: `
-        const modules = {
-          ${Object.entries(moduleIds).reduce(
-            (prev, [k, v]) =>
-              prev.concat(`${k}: function () { 
-                return import('${v}').then(res => { 
-                  const fn = res.default;
-                  res.setWrap$?.apply(null, arguments);
-                  return typeof fn === 'function' && fn.apply(null, arguments); 
-                });
-              },`),
-            ""
-          )}
-        }
-
-        const exportModules = ${JSON.stringify({
-          pathHash,
-          hash,
-          content,
-          modules,
-        })}
-  
-        exportModules.modules.forEach((item,index)=>{
-          item.load = modules[index];
-        })
-        
-        export default exportModules;
-        `,
-      };
     },
-  } as any;
+    async handleHotUpdate({ file, modules }) {
+      modules[0].importers;
+      console.log(
+        "🚀 #### ~ handleHotUpdate ~ modules[0].importers",
+        modules[0].importers
+      );
+    },
+
+    transform(code, id) {
+      if (!moduleGraph) {
+        return;
+      }
+      if (isMarkdownProxy(id)) {
+        const mod = moduleGraph.getModuleById(id);
+        // @ts-ignore
+      }
+    },
+  } as Plugin;
 };
 export default mdjsx;
 async function emitMarkdown(this: any, id: any, emit) {
@@ -262,7 +206,7 @@ async function emitMarkdown(this: any, id: any, emit) {
     routers: {},
   })) as IMdTransformerResult;
 
-  emit.call(
+  return emit.call(
     this,
     id,
     {
@@ -283,5 +227,4 @@ async function emitMarkdown(this: any, id: any, emit) {
     },
     res
   );
-  return res;
 }

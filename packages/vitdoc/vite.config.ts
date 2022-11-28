@@ -2,6 +2,7 @@ import { mergeConfig } from "vite";
 import componentsTemplate from "./dist/cjs/plugins/components-template";
 import mdjsx from "./dist/cjs/plugins/markdown-jsx";
 import TypeFile from "./dist/cjs/plugins/type-file";
+import react from "@vitejs/plugin-react";
 import { getConfig } from "./dist/cjs/utils/config";
 import { resolveConfig } from "esbuild-resolve-config";
 import path from "path";
@@ -36,7 +37,7 @@ export default mergeConfig(
         },
       ],
     },
-    plugins: [componentsTemplate(getConfig()), TypeFile(), mdjsx()],
+    plugins: [componentsTemplate(getConfig()), TypeFile(), mdjsx(), react()],
   },
   config
 );

@@ -9,7 +9,7 @@ import Text from './index';
 
 ReactDOM.render(
   <div>
-    ddfff
+    ddfffaddd33dd22dda2dd2ddddd2ddd211
     <Text size="large" />
   </div>,
   mountNode,
@@ -18,8 +18,12 @@ ReactDOM.render(
 
 ```tsx
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Text from './index';
 
-ReactDOM.render(<Text d size="medium" />, mountNode);
+export default () => (
+  <div>
+    <Text size="medium" />
+    dddddddd22333322dd22222222222222222222
+  </div>
+);
 ```

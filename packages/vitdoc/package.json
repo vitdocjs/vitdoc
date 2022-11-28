@@ -31,6 +31,7 @@
     "@vitdoc/runtime": "workspace:^1.0.0",
     "@vitdoc/template-default": "workspace:^1.0.0",
     "@vitdoc/ui": "workspace:^1.0.14",
+    "@vitejs/plugin-react": "^2.2.0",
     "@whyframe/jsx": "^0.1.8",
     "chalk": "^4.1.2",
     "dumi": "^2.0.6",

@@ -43,7 +43,9 @@
       globalThis.HotReloadRegister$ = (file, fn)=>{
         if (import.meta.hot) {
           import("/@vite/client").then(({ createHotContext }) => {
+              console.log("🚀 #### ~ createHotContext ~ file", file);
             createHotContext(file).accept((newModule) => {
+              console.log("🚀 #### ~ createHotContext ~ file", file,newModule);
               fn(newModule);
             });
           });

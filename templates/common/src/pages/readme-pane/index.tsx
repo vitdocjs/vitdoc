@@ -62,7 +62,7 @@ export default function ReadmePane() {
           <div className="component-main">
             <div className="component-part">
               <div className="component-description">
-                <MarkdownArea data={Components} />
+                <MarkdownArea />
               </div>
             </div>
             <PropertyPane />

@@ -30,14 +30,14 @@ export const ComponentBlock = (props: RendererProps) => {
   const {
     pathHash,
     getModule,
-    value: content,
+    value: content = "",
 
-    // TODO:: 
+    // TODO::
     children,
   } = props;
 
   const { lang, renderer, route } = useCreation(
-    () => getModule(content.trim())!,
+    () => getModule?.(content?.trim()) ?? ({} as any),
     [content]
   );
 
@@ -172,38 +172,23 @@ export function ComponentArea(props) {
   });
 
   useEffect(() => {
-    renderer(componentRef.current, {
+    const ele = renderer(componentRef.current, {
       wrap: wrapProps,
-    })?.then((ele) => {
-      if (ele) {
-        // export default mode
-        ReactDOM.render(ele, componentRef.current);
-      }
     });
+    if (ele) {
+      // export default mode
+      ReactDOM.render(ele, componentRef.current);
+    }
   }, [renderer, componentProps]);
 
   return (
-    <>
-      {error ? (
-        <Result
-          status="warning"
-          title="Resource load failed"
-          subTitle={
-            <span style={{ whiteSpace: "pre-wrap", textAlign: "left" }}>
-              {error.message}
-            </span>
-          }
-        />
-      ) : (
-        <div className={pathHash}>
-          <div
-            className="component-container"
-            id="vite-component-container"
-            ref={componentRef}
-          />
-        </div>
-      )}
-    </>
+    <div className={pathHash}>
+      <div
+        className="component-container"
+        id="vite-component-container"
+        ref={componentRef}
+      />
+    </div>
   );
 }
 

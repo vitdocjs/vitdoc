@@ -88,10 +88,13 @@ export async function transformDemo(demo: IDemoData) {
         pathHash: demo.pathHash,
         component: demo.component,
       })};
+     
     `;
   }
 
+
   let code = demo.component;
+  console.log("🚀 #### ~ transformDemo ~ code", code);
 
   code = replaceReact(code);
   code = replaceExport(code);
