@@ -27,7 +27,14 @@ import "./index.scss";
 const Tooltip = _Tooltip as any;
 
 export const ComponentBlock = (props: RendererProps) => {
-  const { pathHash, error, getModule, value: content, children } = props;
+  const {
+    pathHash,
+    getModule,
+    value: content,
+
+    // TODO:: 
+    children,
+  } = props;
 
   const { lang, renderer, route } = useCreation(
     () => getModule(content.trim())!,
@@ -56,7 +63,6 @@ export const ComponentBlock = (props: RendererProps) => {
       )}
       <ComponentArea
         pathHash={pathHash}
-        error={error}
         renderer={renderer}
         lang={lang}
         content={content}
@@ -168,7 +174,7 @@ export function ComponentArea(props) {
   useEffect(() => {
     renderer(componentRef.current, {
       wrap: wrapProps,
-    }).then((ele) => {
+    })?.then((ele) => {
       if (ele) {
         // export default mode
         ReactDOM.render(ele, componentRef.current);

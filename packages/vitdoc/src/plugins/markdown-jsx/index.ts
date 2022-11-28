@@ -1,4 +1,9 @@
+import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
+import markdownTransformer, {
+  type IMdTransformerResult,
+} from "dumi/dist/loaders/markdown/transformer";
 import fs from "fs";
+import { send, transformWithEsbuild } from "vite";
 import {
   addUrlParams,
   cleanUrl,
@@ -6,19 +11,11 @@ import {
   getMD5,
   removeImportQuery,
   removeProcessCwd,
-  resolveMainComponent,
 } from "../../utils";
 import { isCSSLang, isInlineMeta, isJsx } from "../../utils/lang";
-import { send, transformWithEsbuild } from "vite";
-import { appendTypes } from "./utils";
 import { parseMarkdown } from "../../utils/markdown";
-import markdownTransformer, {
-  type IMdTransformerResult,
-} from "dumi/dist/loaders/markdown/transformer";
-import type { IMdLoaderOptions } from "dumi/dist/loaders/markdown";
-import ReactTechStack from "./markdown/react-tech-statck";
-import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
+import ReactTechStack from "./markdown/react-tech-statck";
 
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 const VIRTUAL_DEMO_KEY = "virtual:vitdoc/demo/";
@@ -41,15 +38,18 @@ const mdjsx = () => {
     // TODO:: declare embedded files as loader dependency, for re-compiling when file changed
     // embeds!.forEach((file) => this.addDependency(file));
 
+    const pathHash = `_${getMD5(removeProcessCwd(id))}`;
+
     demos?.forEach((file) => {
       markdownMap[file.id] = {
+        pathHash,
         filename: id,
         ...file,
       };
     });
 
     // import all builtin components, may be used by markdown content
-    return `${Object.values(opts.builtins)
+    const code = `${Object.values(opts.builtins)
       .map((item) => `import ${item.specifier} from '${item.source}';`)
       .join("\n")}
 import React from 'react';
@@ -64,6 +64,8 @@ function MarkdownContent() {
 
 export default MarkdownContent;
 `;
+
+    return transformWithEsbuild(code, `${id}.jsx`);
   }
 
   return {
@@ -87,6 +89,8 @@ export default MarkdownContent;
         if (!isMarkdownProxy(req.url)) {
           return next();
         }
+
+        return next();
 
         try {
           const url = removeImportQuery(req.url);
@@ -123,22 +127,21 @@ export default MarkdownContent;
     async load(id) {
       const file = cleanUrl(id);
 
-      const getMainModuleId = async () => {
-        return resolveMainComponent(
-          { pluginContainer: { resolveId: this.resolve } },
-          id
-        ).then((res) => (res ? res.id : ""));
-      };
-
       if (isMarkdownProxy(id)) {
         const demoId = getDemoId(id);
 
-        const demoInfo = markdownMap[demoId];
+        let demoInfo = markdownMap[demoId];
+
+        if (!demoInfo) {
+          await emitMarkdown.call(this, file, emit);
+          demoInfo = markdownMap[demoId];
+        }
 
         if (!demoId || !demoInfo) {
           return null;
         }
 
+        console.log("🚀 #### ~ load ~ demoInfo", await transformDemo(demoInfo));
         return transformDemo(demoInfo);
       }
 
@@ -146,47 +149,7 @@ export default MarkdownContent;
         return;
       }
 
-      let content = fs.readFileSync(id, "utf-8");
-      const pathHash = `_${getMD5(removeProcessCwd(id))}`;
-
-      // content = await appendTypes(id, content, getMainModuleId);
-
-      const res = (await markdownTransformer(content, {
-        cwd: process.cwd(),
-        fileAbsPath: id,
-        alias: {},
-        techStacks: [new ReactTechStack()],
-        resolve: {
-          docDirs: ["docs"],
-          atomDirs: [{ type: "component", dir: "src" }],
-          codeBlockMode: "active",
-        },
-        routers: {},
-      })) as IMdTransformerResult;
-
-      const code = emit.call(
-        this,
-        id,
-        {
-          builtins: {
-            DumiDemo: {
-              specifier: "{ DumiDemo }",
-              source: require.resolve("@vitdoc/ui"),
-            },
-            DumiDemoGrid: {
-              specifier: "{ DumiDemoGrid }",
-              source: require.resolve("@vitdoc/ui"),
-            },
-            Link: {
-              specifier: "{ Link }",
-              source: require.resolve("@vitdoc/ui"),
-            },
-          },
-        },
-        res
-      );
-
-      return transformWithEsbuild(code, `${id}.jsx`);
+      return emitMarkdown.call(this, id, emit);
 
       // const demos = res.meta.demos || [];
       // demos.forEach((item) => {
@@ -283,3 +246,42 @@ export default MarkdownContent;
   } as any;
 };
 export default mdjsx;
+async function emitMarkdown(this: any, id: any, emit) {
+  let content = fs.readFileSync(id, "utf-8");
+
+  const res = (await markdownTransformer(content, {
+    cwd: process.cwd(),
+    fileAbsPath: id,
+    alias: {},
+    techStacks: [new ReactTechStack()],
+    resolve: {
+      docDirs: ["docs"],
+      atomDirs: [{ type: "component", dir: "src" }],
+      codeBlockMode: "active",
+    },
+    routers: {},
+  })) as IMdTransformerResult;
+
+  emit.call(
+    this,
+    id,
+    {
+      builtins: {
+        DumiDemo: {
+          specifier: "{ DumiDemo }",
+          source: require.resolve("@vitdoc/ui"),
+        },
+        DumiDemoGrid: {
+          specifier: "{ DumiDemoGrid }",
+          source: require.resolve("@vitdoc/ui"),
+        },
+        Link: {
+          specifier: "{ Link }",
+          source: require.resolve("@vitdoc/ui"),
+        },
+      },
+    },
+    res
+  );
+  return res;
+}

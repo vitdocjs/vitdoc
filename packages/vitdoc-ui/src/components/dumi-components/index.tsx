@@ -15,11 +15,11 @@ export function DumiDemo(props) {
   if (!demos) {
     return null;
   }
-  const { default: render, content$, setWrap$ } = demos;
+  const { value, pathHash, getModule } = demos;
   const { renderers } = useContext(VitDocMarkdownContext)!;
   const CodeBlock = renderers?.["code-block"] ?? ComponentBlock;
 
-  return <CodeBlock value={content$} getModule={() => render} lang="tsx" />;
+  return <CodeBlock pathHash={pathHash} value={value} getModule={getModule} />;
 }
 
 export function DumiDemoGrid(props) {

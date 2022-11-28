@@ -1,8 +1,7 @@
-import { MarkdownResult, ModuleInfo } from "./hooks/loaders";
-import { ReactNode } from "react";
+import { ModuleInfo } from "./hooks/loaders";
 
-export type RendererProps = MarkdownResult & {
+export type RendererProps = {
+  pathHash: string;
   value: string;
   getModule: (content: string) => ModuleInfo | undefined;
-  children?: ReactNode;
 };

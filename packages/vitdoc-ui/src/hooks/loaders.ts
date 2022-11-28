@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { ComponentType, useEffect, useMemo, useRef, useState } from "react";
 import { cleanUrl } from "../utils/config";
 import { isCSSLang, isJsx, isTypes } from "../utils/lang";
 import { useLocation, useMatch, useMatches } from "react-router-dom";
+import { RendererProps } from "../types";
 
 declare global {
   interface Window {
@@ -119,7 +120,10 @@ export type ModuleInfo = {
 };
 export type MarkdownResult = ReturnType<typeof useMarkdown>;
 
-export const useDemo = (id: string, route?: string) => {
+export const useDemo = (
+  id: string,
+  route?: string
+): RendererProps | undefined => {
   if (!route) {
     route = location.hash.replace("#", "");
   }
@@ -128,19 +132,36 @@ export const useDemo = (id: string, route?: string) => {
     `${route}?markdown-proxy&id=${id}`,
     (info) => info
   );
-  console.log("🚀 #### ~ useDemo ~ results", results);
+  if (!results) {
+    return undefined;
+  }
 
-  return results;
+  const { meta$ = {}, default: renderer } = results;
+
+  return {
+    pathHash: meta$?.pathHash,
+    value: meta$?.component ?? "",
+    getModule() {
+      const module = {
+        lang: "tsx",
+        renderer,
+        content: meta$.content$,
+        route: `/~${route}/${id}`,
+        type: "demo" as any,
+      };
+      return module;
+    },
+  };
 };
 
-export const useMarkdown = (route?: string) => {
+export const useMarkdown = (route?: string): ComponentType | undefined => {
   if (!route) {
     route = useRoute().route;
   }
 
   const readmeFile = route.replace(".html", ".md");
 
-  const results: any = useAsyncImport(readmeFile);
+  const results = useAsyncImport(readmeFile);
 
   return results;
 };

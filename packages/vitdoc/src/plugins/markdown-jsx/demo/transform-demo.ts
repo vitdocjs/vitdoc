@@ -5,7 +5,7 @@ import { transformWithEsbuild } from "vite";
 type NonUndefined<T> = T extends undefined ? never : T;
 export type IDemoData = NonUndefined<
   IMdTransformerResult["meta"]["demos"]
->[number] & { filename: string };
+>[number] & { filename: string; pathHash: string };
 
 export async function transformDemo(demo: IDemoData) {
   const mainModuleId = "";
@@ -81,13 +81,13 @@ export async function transformDemo(demo: IDemoData) {
     return `${code.slice(0, lastIndex)};${codeSegment(code.slice(lastIndex))}`;
   };
 
-  function appendContent(code: string) {
+  function appendMeta(code: string) {
     return `
       ${code}
-      export const content$ = \`${
-        // encode content to avoid unexpected escape
-        demo.component.replace(/`/g, "\\`")
-      }\`;
+      export const meta$ = ${JSON.stringify({
+        pathHash: demo.pathHash,
+        component: demo.component,
+      })};
     `;
   }
 
@@ -95,7 +95,7 @@ export async function transformDemo(demo: IDemoData) {
 
   code = replaceReact(code);
   code = replaceExport(code);
-  code = appendContent(code);
+  code = appendMeta(code);
 
   return transformWithEsbuild(code, `${demo.filename}.tsx`, {
     sourcefile: demo.filename,
