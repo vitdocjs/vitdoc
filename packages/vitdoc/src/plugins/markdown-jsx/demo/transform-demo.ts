@@ -2,6 +2,7 @@ import type { IParsedBlockAsset } from "dumi/dist/assetParsers/block";
 import path from "path";
 import { normalizePath, transformWithEsbuild } from "vite";
 import { removeProcessCwd } from "../../../utils";
+import { appendHmr } from "../../hmr/utils";
 
 export type IDemoData = {
   filename: string;
@@ -12,7 +13,7 @@ export type IDemoData = {
   sources: IParsedBlockAsset["sources"];
 };
 
-export async function transformDemo(demo: IDemoData) {
+export async function transformDemo(id: string, demo: IDemoData) {
   let mainModuleId = Object.keys(demo.sources ?? {})[0] ?? "";
 
   if (!/^\./.test(mainModuleId)) {
@@ -108,6 +109,7 @@ export async function transformDemo(demo: IDemoData) {
     code = replaceReact(code);
     code = replaceExport(code);
     code = appendMeta(code);
+    // code = appendHmr(code, id);
   }
 
   return transformWithEsbuild(code, `${demo.filename}.tsx`, {

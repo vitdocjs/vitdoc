@@ -2,6 +2,7 @@ import { mergeConfig } from "vite";
 import componentsTemplate from "./dist/cjs/plugins/components-template";
 import mdjsx from "./dist/cjs/plugins/markdown-jsx";
 import TypeFile from "./dist/cjs/plugins/type-file";
+import vitDocHMR from "./dist/cjs/plugins/hmr";
 import react from "@vitejs/plugin-react";
 import { getConfig } from "./dist/cjs/utils/config";
 import { resolveConfig } from "esbuild-resolve-config";
@@ -37,7 +38,13 @@ export default mergeConfig(
         },
       ],
     },
-    plugins: [componentsTemplate(getConfig()), TypeFile(), mdjsx(), react()],
+    plugins: [
+      componentsTemplate(getConfig()),
+      TypeFile(),
+      mdjsx(),
+      vitDocHMR(),
+      react(),
+    ],
   },
   config
 );

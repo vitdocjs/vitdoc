@@ -4,9 +4,10 @@ import type { Transformer } from "unified";
 import { removeProcessCwd, resolveMainComponent } from "../../../utils";
 
 let visit: typeof import("unist-util-visit").visit;
+let SKIP: typeof import("unist-util-visit").SKIP;
 
 (async () => {
-  ({ visit } = await import("unist-util-visit"));
+  ({ visit, SKIP } = await import("unist-util-visit"));
 })();
 
 /**
@@ -16,7 +17,7 @@ export default function rehypeAPI(opts: {
   cwd: string;
   fileAbsPath: string;
 }): Transformer<Root> {
-  return async (tree) => {
+  return async (tree, vFile: any) => {
     const markdownFile = opts.fileAbsPath;
 
     visit<Root, "element">(tree, "element", (node) => {
@@ -45,6 +46,18 @@ export default function rehypeAPI(opts: {
           return file;
         })();
         node.properties.type = node.properties.type ?? `default`;
+
+        vFile.data.apis = [...(vFile.data.apis ?? []), node.properties];
+
+        node.JSXAttributes = [
+          {
+            type: "JSXAttribute",
+            name: "load",
+            value: `() => import('${node.properties.src}')`,
+          },
+        ];
+
+        return SKIP;
       }
     });
   };

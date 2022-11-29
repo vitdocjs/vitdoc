@@ -1,14 +1,16 @@
-import { useMemoizedFn, useSafeState } from "ahooks";
+import { useMemoizedFn, useRequest, useSafeState } from "ahooks";
 import EventEmitter from "eventemitter3";
 import { useContext, useEffect, useMemo } from "react";
 import { useLocation, useMatch } from "react-router-dom";
 import { VitDocMarkdownContext } from "../context";
+import identity from "lodash/identity";
+
+import { accept, waitForOneFile } from "virtual:vitdoc-hmr";
 
 declare global {
   interface Window {
     RuntimeModuleMap$: Record<string, (cb: any) => Promise<any>>;
     HotReloadRegister$: (p: string, EventEmitter) => void;
-
     HMRRegisterMap$: Record<string, EventEmitter>;
   }
 }
@@ -29,6 +31,24 @@ export function useRoute() {
 }
 
 export class ModuleLoadError extends Error {}
+
+export function useLoadModule(
+  load: () => Promise<any>,
+  format: (data: any) => any = identity
+) {
+  const actions = useRequest(() => {
+    // TODO:: MARKDOWN REFRESH!!
+    return Promise.all([waitForOneFile(), load()]).then(([{ on }, res]) => {
+      on((newModule) => {
+        actions.mutate(format(newModule));
+      });
+
+      return format(res);
+    });
+  });
+
+  return actions;
+}
 
 export function useAsyncImport(
   path: string,

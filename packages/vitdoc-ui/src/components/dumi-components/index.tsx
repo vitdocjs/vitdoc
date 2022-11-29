@@ -64,8 +64,8 @@ export function DumiDemoGrid(props) {
     <div className="demo-grid-container">
       {items.map((col, i) => (
         <section style={{ flex: 1 }} key={String(i)}>
-          {col.map((item) => {
-            return <DumiDemo key={`grid-${item.demo.id}-${i}`} {...item} />;
+          {col.map((item, k) => {
+            return <DumiDemo key={`grid-${item.demo.id}-${k}`} {...item} />;
           })}
         </section>
       ))}

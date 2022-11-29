@@ -44,7 +44,7 @@ const mdjsx = () => {
           return null;
         }
 
-        const demoCode = await transformDemo(demoInfo);
+        const demoCode = await transformDemo(id, demoInfo);
 
         return demoCode;
       }

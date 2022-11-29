@@ -5,14 +5,15 @@ import last from "lodash/last";
 import { Divider } from "antd";
 
 import "./index.scss";
+import { DumiDemo, DumiDemoGrid } from "../dumi-components";
 
 export function CardBlock(props) {
   const children = React.Children.toArray(props.children);
   const [beforeChildren, codeChilren] = useCreation(() => {
     const lastChild = last(children, 1);
     if (
-      lastChild?.type?.name === "DumiDemo" ||
-      lastChild?.type?.name === "DumiDemoGrid"
+      lastChild?.type === DumiDemo ||
+      lastChild?.type === DumiDemoGrid
     ) {
       return [dropRight(children, 1), lastChild];
     } else {

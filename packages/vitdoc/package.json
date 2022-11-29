@@ -38,6 +38,7 @@
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.3.3",
     "esbuild-resolve-config": "^1.0.7",
+    "eventemitter3": "^4.0.7",
     "extract-typescript-types": "^1.0.2",
     "glob": "^7.2.3",
     "hast-util-to-string": "^2.0.0",

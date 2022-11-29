@@ -1,8 +1,10 @@
 import { fork } from "child_process";
 import keyBy from "lodash/keyBy";
 import * as path from "path";
-import { ModuleGraph, normalizePath, Plugin } from "vite";
+import { ModuleGraph, normalizePath, Plugin, ViteDevServer } from "vite";
 import { cleanUrl, isCSSRequest, isJsx } from "../../utils";
+
+import { appendHmr } from "../hmr/utils";
 
 const TypeFile = ({
   prefix = ".type",
@@ -31,12 +33,14 @@ const TypeFile = ({
   };
 
   let moduleGraph: ModuleGraph;
+  let server: ViteDevServer;
+
   return {
     name: "vite:type-file",
     config(config, { command }) {
       isBuild = command === "build";
     },
-    async handleHotUpdate({ file, modules }) {
+    async handleHotUpdate({ file, server }) {
       const url = path.join("/", cleanUrl(path.relative(process.cwd(), file)));
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
@@ -45,7 +49,9 @@ const TypeFile = ({
       // append the type file to the HMR update
       const typeModule = await moduleGraph.getModuleById(`${url}${prefix}`);
       if (typeModule) {
-        modules.push(typeModule);
+        server.watcher.emit("change", typeModule.file);
+
+        return;
       }
 
       return;
@@ -59,6 +65,7 @@ const TypeFile = ({
     },
 
     configureServer(_server) {
+      server = _server;
       moduleGraph = _server.moduleGraph;
     },
 
@@ -96,20 +103,7 @@ const TypeFile = ({
           })
           .join("\n");
 
-        const appendHmr = (code: string) => {
-          return `
-            ${code}
-
-            if(import.meta.hot){
-              import.meta.hot.accept((newModule) => {
-		            return globalThis.$VitDocUpdateHMRNewModule$?.("${file}", newModule);
-              })
-            }
-
-            `;
-        };
-
-        code = appendHmr(code);
+        code = appendHmr(code, file);
 
         return code;
       }
