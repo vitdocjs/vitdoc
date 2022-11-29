@@ -41,8 +41,9 @@ const TypeFile = ({
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
       }
-      const typeModule = await moduleGraph.getModuleById(`${url}${prefix}`);
-      modules.push(typeModule);
+      // TODO:: FIXME
+      // const typeModule = await moduleGraph.getModuleById(`${url}${prefix}`);
+      // modules.push(typeModule);
 
       return;
     },

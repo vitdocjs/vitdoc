@@ -45,5 +45,4 @@ export function Text(props: IProps) {
   );
 }
 
-
 export default Text;

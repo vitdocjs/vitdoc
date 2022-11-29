@@ -69,9 +69,7 @@ export const ComponentBlock = (props: RendererProps) => {
             open(`/#${route}`);
           }}
         >
-          <FileSearchOutlined
-            className={classNames("code-box-code-action")}
-          />
+          <FileSearchOutlined className={classNames("code-box-code-action")} />
         </Tooltip>
         <CopyIcon content={content} />
         <Tooltip
@@ -92,7 +90,7 @@ export const ComponentBlock = (props: RendererProps) => {
 };
 
 export function ComponentArea(props) {
-  const { renderer, content, eventBus, pathHash, error } = props;
+  const { renderer, content, eventBus, pathHash } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);

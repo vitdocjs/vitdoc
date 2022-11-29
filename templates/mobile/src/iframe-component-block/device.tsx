@@ -1,5 +1,5 @@
 import { QRCodeSVG } from "qrcode.react";
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import React, { useState } from "react";
 import {
   CheckOutlined,
@@ -16,6 +16,7 @@ import "./device.scss";
 
 interface IDeviceProps {
   className?: string;
+  actions?: ReactNode;
   url: string;
 }
 

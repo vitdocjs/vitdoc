@@ -22,7 +22,6 @@ import Text from './index';
 function App() {
   return (
     <div>
-      d d
       <Text size="medium" />
     </div>
   );

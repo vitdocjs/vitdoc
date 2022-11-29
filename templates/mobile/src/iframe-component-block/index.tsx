@@ -1,51 +1,35 @@
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { copyToClipboard, HighLighter, RendererProps, Store } from "@vitdoc/ui";
-import {
-  useBoolean,
-  useCreation,
-  useEventEmitter,
-  useMemoizedFn,
-} from "ahooks";
+import { useBoolean, useCreation, useMemoizedFn } from "ahooks";
 import classNames from "classnames";
-import React from "react";
-
+import React, { useEffect } from "react";
 import { useAtom } from "jotai";
-import dropRight from "lodash/dropRight";
-
+import noop from "lodash/noop";
 import { Tooltip as _Tooltip } from "antd";
-
 import { Device } from "./device";
+
 import "./index.scss";
 
 const Tooltip = _Tooltip as any;
 
 export const IframeComponentBlock = (props: RendererProps) => {
-  const { pathHash, error, getModule, value: content, children } = props;
+  const { getModule, demoid: id = "" } = props;
 
-  const { lang, renderer, route } = useCreation(
-    () => getModule(content.trim())!,
-    [content]
+  const { lang, content, route } = useCreation(
+    () => getModule?.(id?.trim()) ?? ({} as any),
+    [id]
   );
 
-  const beforeChildren = dropRight(children, 1);
-
   const [{ current }] = useAtom(Store.propertiesPropsStore);
-
-  const eventBus = useEventEmitter();
 
   const active = current !== undefined && current === content;
 
   return (
     <div
-      className={classNames("mobile-component-area", {
+      className={classNames("mobile-component-area", "component-area", {
         active,
       })}
     >
-      {!!beforeChildren.length && (
-        <div className="code-box-demo-description markdown-body vp-doc">
-          {beforeChildren}
-        </div>
-      )}
       <div className="mobile-container">
         <div className="highlight">
           <HighLighter lang={lang} children={content} />

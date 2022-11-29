@@ -4,6 +4,7 @@ import {
   MarkdownArea,
   Store,
   useComponentInfo,
+  useMarkdown,
   useRoute,
   useRouteMap,
 } from "@vitdoc/ui";
@@ -18,6 +19,8 @@ const { Text } = Typography;
 
 export default function ReadmePane() {
   const { route } = useRoute();
+
+  const Components = useMarkdown();
 
   const setProperties = Store.useSetProperties();
   const setDefaultProps = Store.useSetDefaultProps();
@@ -39,7 +42,7 @@ export default function ReadmePane() {
 
   return (
     <div id="public-component-show-container">
-      {compInfo ? (
+      {Components ? (
         <PageContainer
           title={
             <LinkCopy route={route}>

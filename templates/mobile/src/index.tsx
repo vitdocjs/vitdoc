@@ -23,8 +23,6 @@ export function App() {
 
   const push = useNavigate();
 
-  const { npmLink } = useComponentInfo() || ({} as any);
-
   const [collapsed, { toggle }] = useBoolean(false);
 
   const { pathname } = useLocation();
@@ -47,17 +45,15 @@ export function App() {
         collapsed && "vitdoc-layout-collapsed"
       )}
       logo={
-        <a className="vitdoc-logo" href={npmLink}>
-          <img
-            alt="Vite Docs"
-            src={
-              // @ts-ignore
-              window.pageConfig?.logo ||
-              "//vitdocjs.github.io/logo-with-word.svg"
-            }
-            style={{ minHeight: 30 }}
-          />
-        </a>
+        <img
+          alt="Vite Docs"
+          onClick={() => push("/")}
+          src={
+            // @ts-ignore
+            window.pageConfig?.logo || "//vitdocjs.github.io/logo-with-word.svg"
+          }
+          style={{ minHeight: 30 }}
+        />
       }
       route={{ routes: menuData }}
       pageTitleRender={(props, defaultPageTitle) => {
@@ -82,6 +78,7 @@ export function App() {
         {routes.map((route) => {
           return (
             <Route
+              key={route}
               path={route}
               element={
                 <div style={{ display: "flex" }} className="code-box-demo">

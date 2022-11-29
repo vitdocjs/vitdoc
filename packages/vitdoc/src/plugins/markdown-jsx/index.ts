@@ -69,7 +69,6 @@ const mdjsx = () => {
         return;
       }
 
-
       return transformMarkdown.call(this, {
         id,
         cwd: process.cwd(),
