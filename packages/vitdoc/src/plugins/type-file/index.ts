@@ -1,8 +1,8 @@
-import * as path from "path";
-import { cleanUrl, isCSSRequest, isJsx } from "../../utils";
-import keyBy from "lodash/keyBy";
 import { fork } from "child_process";
-import { ModuleGraph } from "vite";
+import keyBy from "lodash/keyBy";
+import * as path from "path";
+import { ModuleGraph, normalizePath, Plugin } from "vite";
+import { cleanUrl, isCSSRequest, isJsx } from "../../utils";
 
 const TypeFile = ({
   prefix = ".type",
@@ -41,20 +41,19 @@ const TypeFile = ({
       if (isCSSRequest(file) || !isJsx(url) || !requestedUrlMap[url]) {
         return;
       }
-      // TODO:: FIXME
-      // const typeModule = await moduleGraph.getModuleById(`${url}${prefix}`);
-      // modules.push(typeModule);
+
+      // append the type file to the HMR update
+      const typeModule = await moduleGraph.getModuleById(`${url}${prefix}`);
+      if (typeModule) {
+        modules.push(typeModule);
+      }
 
       return;
     },
 
-    resolveId(id, importer) {
+    resolveId(id) {
       if (matchReg.test(id)) {
-        if (/^\/src/.test(id)) {
-          // REMOVE
-          return id;
-        }
-        return path.join(path.relative(process.cwd(), importer), "..", id);
+        return id;
       }
       return;
     },
@@ -70,21 +69,7 @@ const TypeFile = ({
         requestedUrlMap[file.replace(matchReg, "")] = true;
 
         const mainUrl = file.replace(matchReg, "");
-        const fileName = mainUrl.replace(/^\//, "");
-
-        // Dev mode import deps
-        // 为了更好的性能，此处在 handleHotUpdate 中处理，仅对一层 Imported 依赖处理
-        // if (moduleGraph) {
-        // const typeModule = await moduleGraph.getModuleById(id);
-        // await moduleGraph.updateModuleInfo(
-        //   typeModule,
-        //   new Set([...Array.from(typeModule.importedModules), mainUrl]),
-        //   null,
-        //   new Set(),
-        //   null,
-        //   true
-        // );
-        // }
+        const fileName = normalizePath(mainUrl.replace(/^\//, ""));
 
         const componentDoc: any = await getComponentDocs(fileName);
         if (isBuild && componentDoc) {
@@ -101,7 +86,7 @@ const TypeFile = ({
           exportName: "default",
         });
 
-        return componentDoc
+        let code = componentDoc
           .map((s) => {
             const { exportName } = s;
             if (exportName === "default") {
@@ -110,6 +95,23 @@ const TypeFile = ({
             return `export const ${exportName} = ${JSON.stringify(s)}`;
           })
           .join("\n");
+
+        const appendHmr = (code: string) => {
+          return `
+            ${code}
+
+            if(import.meta.hot){
+              import.meta.hot.accept((newModule) => {
+		            return globalThis.$VitDocUpdateHMRNewModule$?.("${file}", newModule);
+              })
+            }
+
+            `;
+        };
+
+        code = appendHmr(code);
+
+        return code;
       }
 
       return;
@@ -120,9 +122,9 @@ const TypeFile = ({
           type: "asset",
           fileName: buildMetaFile,
           source: JSON.stringify(metas),
-        };
+        } as any;
       }
     },
-  };
+  } as Plugin;
 };
 export default TypeFile;

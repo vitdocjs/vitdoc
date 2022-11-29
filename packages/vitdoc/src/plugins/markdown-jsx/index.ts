@@ -23,23 +23,7 @@ const mdjsx = () => {
     },
 
     configureServer(_server) {
-      const { middlewares, transformRequest } = _server;
       moduleGraph = _server.moduleGraph;
-
-      middlewares.use(async (req, res, next) => {
-        if (
-          req.method !== "GET" ||
-          (req.headers.accept || "").includes("text/html")
-        ) {
-          return next();
-        }
-
-        if (!isMarkdownProxy(req.url)) {
-          return next();
-        }
-
-        return next();
-      });
     },
 
     async resolveId(id) {

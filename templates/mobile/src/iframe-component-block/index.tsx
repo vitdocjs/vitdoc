@@ -36,7 +36,7 @@ export const IframeComponentBlock = (props: RendererProps) => {
         </div>
         <div className="device-container">
           <Device
-            actions={[<CopyIcon content={content} />]}
+            actions={[<CopyIcon key="copy-icon" content={content} />]}
             url={`#${route}`}
           />
         </div>
