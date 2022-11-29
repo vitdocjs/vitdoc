@@ -1,4 +1,8 @@
 - [x] Custom Templates
 - [x] Resolve export default
-- [ ] html format
+- [x] html format
+- [ ] DemoGrid
+- [ ] dumi card-block
+- [ ] API
+- [ ] theme
 - [ ] Types HMR

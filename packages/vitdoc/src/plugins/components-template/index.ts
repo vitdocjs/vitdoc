@@ -15,13 +15,13 @@ const scriptModuleRE =
   /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = () => {
+export const getRoutes = async () => {
   let routes = getComponentFiles();
 
-  const routeInfos = routes
-    .map((route, index) => {
+  let routeInfos = await Promise.all(
+    routes.map(async (route, index) => {
       const metas: MarkdownMeta = getMetas(
-        parseMarkdown(fs.readFileSync(route, "utf8"))
+        await parseMarkdown(fs.readFileSync(route, "utf8"))
       );
 
       const order = metas.order ?? index + 0.1;
@@ -32,7 +32,9 @@ export const getRoutes = () => {
         route,
       };
     })
-    .sort((a, b) => a.order - b.order);
+  );
+
+  routeInfos = routeInfos.sort((a, b) => a.order - b.order);
 
   const tree = routeInfos.reduce((prev, routeInfo, index) => {
     const {
@@ -191,7 +193,7 @@ const componentsTemplate = (
       }
 
       if (isRouteMap(file)) {
-        const ctx = getRoutes();
+        const ctx = await getRoutes();
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }

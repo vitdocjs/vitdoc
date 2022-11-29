@@ -7,6 +7,7 @@ import ReactTechStack from "./react-tech-statck";
 import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
 import { transformWithEsbuild } from "vite";
 import { getMD5, removeProcessCwd } from "../../../utils";
+import { remarkCardBlock } from "./remarkCardBlock";
 
 export async function transformMarkdown(this: any, { id, route, emitDemo }) {
   let content = fs.readFileSync(id, "utf-8");
@@ -16,6 +17,7 @@ export async function transformMarkdown(this: any, { id, route, emitDemo }) {
     fileAbsPath: id,
     alias: {},
     techStacks: [new ReactTechStack()],
+    extraRemarkPlugins: [remarkCardBlock],
     resolve: {
       docDirs: ["docs"],
       atomDirs: [{ type: "component", dir: "src" }],
@@ -23,6 +25,7 @@ export async function transformMarkdown(this: any, { id, route, emitDemo }) {
     },
     routers: {},
   })) as IMdTransformerResult;
+  console.log("🚀 #### ~ transformMarkdown ~ res", res);
 
   function emit(
     this: any,
@@ -101,7 +104,7 @@ if(import.meta.hot) {
           source: require.resolve("@vitdoc/ui"),
         },
         defaultUI: {
-          specifier: "{ HighLighter as SourceCode }",
+          specifier: "{ HighLighter as SourceCode, CardBlock }",
           source: require.resolve("@vitdoc/ui"),
         },
       },

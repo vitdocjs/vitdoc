@@ -1,0 +1,13 @@
+.vitdoc-card-block {
+  margin-bottom: 16px;
+  .code-box-demo-description {
+    padding: 12px 16px;
+  }
+  .code-box-demo-description + .component-area {
+    margin-top: -12px;
+    border-top: 1px dashed #f0f0f0;
+  }
+  .component-area {
+    margin-bottom: 0;
+  }
+}
