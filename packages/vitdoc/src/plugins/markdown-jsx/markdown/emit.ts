@@ -25,8 +25,8 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
     extraRemarkPlugins: [remarkCardBlock],
     extraRehypePlugins: [[rehypeAPI, { cwd: process.cwd(), fileAbsPath: id }]],
     resolve: {
-      docDirs: ["docs"],
-      atomDirs: [{ type: "component", dir: "src" }],
+      docDirs: [],
+      atomDirs: [],
       codeBlockMode: "active",
     },
     routers: {},
@@ -38,7 +38,7 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
     opts: Pick<IThemeLoadResult, "builtins">,
     ret: IMdTransformerResult
   ) {
-    const { demos, texts } = ret.meta;
+    const { demos, texts, frontmatter } = ret.meta;
 
     // TODO:: declare embedded files as loader dependency, for re-compiling when file changed
     // embeds!.forEach((file) => this.addDependency(file));
@@ -48,7 +48,11 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
     const meta = {
       filename: id,
       pathHash,
-      demos: demos?.map(({ id, component: content }) => ({ id, content })),
+      frontmatter,
+      demos: demos?.map(({ id, component: content, asset }: any) => {
+        const assets: any[] = Object.values(asset?.dependencies || {});
+        return { id, content: assets[0]?.value };
+      }),
     };
 
     demos?.forEach((demo) => {
@@ -96,6 +100,7 @@ if(import.meta.hot) {
     id,
     {
       builtins: {
+        // TODO:: dynamic import
         DumiDemo: {
           specifier: "{ DumiDemo }",
           source: require.resolve("@vitdoc/ui"),

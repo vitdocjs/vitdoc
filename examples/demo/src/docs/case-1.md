@@ -1,8 +1,7 @@
 #### Basic Usage
 
-Hello ddddd
 
-```tsx
+```tsx 
 import { Title as Component } from '..';
 import React from 'react';
 import ReactDOM from 'react-dom';

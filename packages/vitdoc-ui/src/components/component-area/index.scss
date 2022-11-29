@@ -5,15 +5,24 @@
   position: relative;
   display: inline-block;
   width: 100%;
+  overflow: hidden;
   transition: all 0.2s;
   margin-bottom: 16px;
+
+  .code-box-divider {
+    margin: 0;
+    height: 0;
+    > .ant-divider-inner-text {
+      margin-top: -12px;
+    }
+  }
 
   & + .code-pane {
     margin-top: -0.85rem;
   }
 
   &.active {
-    border-color: var(--main-color, #40a9ff);
+    border: 1px solid var(--main-color, #40a9ff) !important;
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
   }
 
@@ -25,13 +34,11 @@
     justify-content: center;
   }
 
- 
   .code-box-actions {
     display: flex;
     justify-content: flex-end;
     padding: 12px 0;
     padding-right: 16px;
-    border-top: 1px dashed #f0f0f0;
     opacity: 0.7;
     transition: opacity 0.3s;
     > .code-box-code-action {

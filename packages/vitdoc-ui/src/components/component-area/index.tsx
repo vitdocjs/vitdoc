@@ -1,8 +1,10 @@
-import BugOutlined from "@ant-design/icons/BugOutlined";
-import CheckOutlined from "@ant-design/icons/CheckOutlined";
-import CodeOutlined from "@ant-design/icons/CodeOutlined";
-import CopyOutlined from "@ant-design/icons/CopyOutlined";
-import FileSearchOutlined from "@ant-design/icons/FileSearchOutlined";
+import {
+  BugOutlined,
+  CheckOutlined,
+  CodeOutlined,
+  CopyOutlined,
+  FileSearchOutlined,
+} from "@ant-design/icons";
 import {
   useBoolean,
   useCreation,
@@ -14,12 +16,9 @@ import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import HighLight from "../highlight";
 import { copyToClipboard } from "../link-copy";
-
 import { useAtom } from "jotai";
-import dropRight from "lodash/dropRight";
 import { propertiesPropsStore, useSetPartialProperties } from "../../store";
-
-import { Tooltip as _Tooltip } from "antd";
+import { Divider, Tooltip as _Tooltip } from "antd";
 import { RendererProps } from "../../types";
 
 import "./index.scss";
@@ -27,21 +26,12 @@ import "./index.scss";
 const Tooltip = _Tooltip as any;
 
 export const ComponentBlock = (props: RendererProps) => {
-  const {
-    pathHash,
-    getModule,
-    demoid: id = "",
-
-    // TODO::
-    children,
-  } = props;
+  const { pathHash, getModule, demoid: id = "", title } = props;
 
   const { lang, renderer, content, route } = useCreation(
     () => getModule?.(id?.trim()) ?? ({} as any),
     [id]
   );
-
-  const beforeChildren = dropRight(children, 1);
 
   const [checkCode, { toggle }] = useBoolean();
 
@@ -57,19 +47,16 @@ export const ComponentBlock = (props: RendererProps) => {
         active,
       })}
     >
-      {!!beforeChildren.length && (
-        <div className="code-box-demo-description markdown-body vp-doc">
-          {beforeChildren}
-        </div>
-      )}
       <ComponentArea
         pathHash={pathHash}
         renderer={renderer}
         lang={lang}
         content={content}
         eventBus={eventBus}
-        // defaultCodePanel={index === 0}
       />
+      <Divider orientation="left" dashed className="code-box-divider">
+        {title}
+      </Divider>
       <div className="code-box-actions">
         <Tooltip title="Debug" onClick={eventBus.emit}>
           <BugOutlined
@@ -83,7 +70,7 @@ export const ComponentBlock = (props: RendererProps) => {
           }}
         >
           <FileSearchOutlined
-            className={classNames("code-box-code-action", { active })}
+            className={classNames("code-box-code-action")}
           />
         </Tooltip>
         <CopyIcon content={content} />

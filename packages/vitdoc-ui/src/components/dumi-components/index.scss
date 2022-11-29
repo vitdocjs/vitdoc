@@ -1,0 +1,11 @@
+.demo-grid-container {
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+  > section {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+}

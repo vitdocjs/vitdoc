@@ -154,6 +154,7 @@ export const useMarkdown = (route?: string) => {
 
   return {
     pathHash: meta$?.pathHash,
+    frontmatter: meta$?.frontmatter,
     Markdown,
     getModule(id: string) {
       const demo = meta$.demos.find((demo) => demo.id === id);

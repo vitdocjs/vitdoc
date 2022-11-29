@@ -2,6 +2,7 @@
 - [x] Resolve export default
 - [x] html format
 - [ ] DemoGrid
+- [ ] Props
 - [x] dumi card-block
 - [x] API
 - [ ] theme
