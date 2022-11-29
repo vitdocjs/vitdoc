@@ -1,4 +1,4 @@
-import { ModuleGraph, Plugin } from "vite";
+import { ModuleGraph, Plugin, UserConfig } from "vite";
 import { cleanUrl, removeProcessCwd } from "../../utils";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/emit";
@@ -12,11 +12,13 @@ const mdjsx = () => {
   let markdownMap: Record<string, IDemoData> = {};
   let isBuild: boolean;
   let moduleGraph: ModuleGraph;
+  let config: UserConfig;
 
   return {
     name: "vite:markdown-jsx",
     config(resolvedConfig, { command }) {
       // store the resolved config
+      config = resolvedConfig;
       isBuild = command === "build";
     },
 
@@ -67,11 +69,10 @@ const mdjsx = () => {
         return;
       }
 
-      const route = removeProcessCwd(id);
 
       return transformMarkdown.call(this, {
         id,
-        route,
+        cwd: process.cwd(),
         emitDemo(info) {
           markdownMap[info.id] = info;
         },
@@ -84,8 +85,6 @@ const mdjsx = () => {
         }
       });
     },
-
-
   } as Plugin;
 };
 export default mdjsx;

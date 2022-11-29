@@ -23,10 +23,3 @@ ReactDOM.render(
 );
 ```
 
-#### API
-
-```tsx
-import ComponentType from './index.tsx.type';
-
-renderType$(ComponentType, mountNode);
-```

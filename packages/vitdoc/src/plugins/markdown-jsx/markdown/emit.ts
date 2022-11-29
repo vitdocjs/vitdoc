@@ -6,11 +6,16 @@ import ReactTechStack from "./react-tech-statck";
 
 import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
 import { transformWithEsbuild } from "vite";
-import { getMD5, removeProcessCwd } from "../../../utils";
+import { getMD5, removeProcessCwd, resolveMainComponent } from "../../../utils";
 import { remarkCardBlock } from "./remarkCardBlock";
+import rehypeAPI from "./rehypeAPI";
+import { appendTypes } from "../utils";
 
-export async function transformMarkdown(this: any, { id, route, emitDemo }) {
+export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
+  const route = removeProcessCwd(id, cwd);
   let content = fs.readFileSync(id, "utf-8");
+
+  content = appendTypes(content, () => resolveMainComponent(id, cwd));
 
   const res = (await markdownTransformer(content, {
     cwd: process.cwd(),
@@ -18,6 +23,7 @@ export async function transformMarkdown(this: any, { id, route, emitDemo }) {
     alias: {},
     techStacks: [new ReactTechStack()],
     extraRemarkPlugins: [remarkCardBlock],
+    extraRehypePlugins: [[rehypeAPI, { cwd: process.cwd(), fileAbsPath: id }]],
     resolve: {
       docDirs: ["docs"],
       atomDirs: [{ type: "component", dir: "src" }],
@@ -25,7 +31,6 @@ export async function transformMarkdown(this: any, { id, route, emitDemo }) {
     },
     routers: {},
   })) as IMdTransformerResult;
-  console.log("🚀 #### ~ transformMarkdown ~ res", res);
 
   function emit(
     this: any,
@@ -104,7 +109,7 @@ if(import.meta.hot) {
           source: require.resolve("@vitdoc/ui"),
         },
         defaultUI: {
-          specifier: "{ HighLighter as SourceCode, CardBlock }",
+          specifier: "{ HighLighter as SourceCode, CardBlock, Container, API }",
           source: require.resolve("@vitdoc/ui"),
         },
       },

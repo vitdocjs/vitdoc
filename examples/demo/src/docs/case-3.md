@@ -1,5 +1,4 @@
 ```tsx
-
 import { Title as Component } from '..';
 import React from 'react';
 
@@ -24,8 +23,4 @@ export default () => (
 
 #### API
 
-```tsx
-import ComponentType from '../title/index.tsx.type';
-
-renderType$(ComponentType, mountNode);
-```
+<API src="../title/index.tsx" />

@@ -8,3 +8,5 @@ export default () => {
   return <div>hell3aao</div>;
 };
 ```
+
+<API type="IProps" ></API>

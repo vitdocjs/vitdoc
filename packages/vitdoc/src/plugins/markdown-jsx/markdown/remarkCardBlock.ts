@@ -12,6 +12,29 @@ let toString: typeof import("hast-util-to-string").toString;
   ({ toString } = await import("hast-util-to-string"));
 })();
 
+const isAPI = (node: any) => {
+  if (node.type === "code" && isJsx(node.lang) && isTypes(node.value))
+    return true;
+
+  if (/^<API/.test(node.children?.[0]?.value ?? node.value)) {
+    return true;
+  }
+
+  return false;
+};
+
+const isCode = (node: any) => {
+  if (/^<code/.test(node.children?.[0]?.value)) {
+    // <code .... />
+    return true;
+  }
+  if (node.type === "code" && isJsx(node.lang) && !isInlineMeta(node.meta)) {
+    return true;
+  }
+
+  return false;
+};
+
 /**
  * rehype plugin for extract fallback description from markdown content
  */
@@ -19,16 +42,10 @@ export function remarkCardBlock(this: any): Transformer<Root> {
   return (tree) => {
     const modules: any = [];
     let prevModules: any[] = [];
-    const endBlock = () => {
+    const endHtml = () => {
       if (!prevModules.length) {
         return;
       }
-
-      // if (prevModules.length === 1 && prevModules[0].type === "code") {
-      //   modules.push(...prevModules);
-      //   prevModules = [];
-      //   return;
-      // }
 
       modules.push(
         {
@@ -45,37 +62,27 @@ export function remarkCardBlock(this: any): Transformer<Root> {
 
     (tree.children as any[]).forEach((node) => {
       if (node.type === "thematicBreak") {
-        endBlock();
+        endHtml();
         return;
       }
 
-      if (node.type === "code" && isJsx(node.lang) && isTypes(node.value)) {
+      if (isAPI(node)) {
         // 类型定义
-        modules.push(...prevModules, {
-          ...node,
-          type: "propertyCode",
-        });
+        modules.push(...prevModules, node);
         prevModules = [];
         return;
       }
+
       prevModules.push(node);
 
-      if (/^<code/.test(node.children?.[0]?.value)) {
+      if (isCode(node)) {
         // <code .... />
-        return endBlock();
-      }
-      if (
-        node.type === "code" &&
-        isJsx(node.lang) &&
-        !isInlineMeta(node.meta)
-      ) {
-        endBlock();
-        return;
+        return endHtml();
       }
     });
 
     if (!!prevModules.length) {
-      endBlock();
+      endHtml();
     }
 
     tree.children = modules;

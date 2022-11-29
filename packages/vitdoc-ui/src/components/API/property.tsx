@@ -2,7 +2,10 @@
 import { Table } from "antd";
 import React from "react";
 
-export default function renderProperty({ loading = false, properties }) {
+export default function renderProperty({
+  loading = false,
+  properties = {} as any,
+}) {
   const { props = {} } = properties;
 
   const dateSource = (Object.values(props) as any).map((val) => {
@@ -15,6 +18,7 @@ export default function renderProperty({ loading = false, properties }) {
 
   return (
     <Table
+      rowKey={(record) => record.name}
       loading={loading}
       dataSource={dateSource}
       pagination={false}
@@ -22,10 +26,16 @@ export default function renderProperty({ loading = false, properties }) {
     >
       <Table.Column width={100} dataIndex="name" title="Property" />
       <Table.Column width={150} dataIndex="description" title="Description" />
-      <Table.Column width={120} dataIndex={["type", "name"]} title="Type" />
+      <Table.Column
+        width={120}
+        dataIndex={["type", "name"]}
+        title="Type"
+        render={(v) => <code>{v ?? "--"}</code>}
+      />
       <Table.Column
         width={120}
         dataIndex={["defaultValue", "value"]}
+        render={(v) => <code>{v ?? "--"}</code>}
         title="Default"
       />
     </Table>

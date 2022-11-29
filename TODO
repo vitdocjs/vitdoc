@@ -2,7 +2,7 @@
 - [x] Resolve export default
 - [x] html format
 - [ ] DemoGrid
-- [ ] dumi card-block
-- [ ] API
+- [x] dumi card-block
+- [x] API
 - [ ] theme
 - [ ] Types HMR

@@ -7,7 +7,7 @@ order: 0
 
 ## 环境准备
 
-:::tip{title="环境准备"}
+:::info{title="环境准备"}
 Vite 需要 [Node.js](https://nodejs.org/en/) 版本 14.18+，16+。然而，有些模板需要依赖更高的 Node 版本才能正常运行，当你的包管理器发出警告时，请注意升级你的 Node 版本。
 :::
 

@@ -1,7 +1,6 @@
 import { Card } from "antd";
 import React from "react";
 import HighLight from "../highlight";
-import * as directiveRenderers from "./custom-block";
 
 export const mdRenderers = {
   yaml: () => null,
@@ -14,7 +13,6 @@ export const mdRenderers = {
       <table>{children}</table>
     </div>
   ),
-  ...directiveRenderers,
   "card-block": ({ children }) => (
     <Card style={{ marginBottom: 16 }} bodyStyle={{ padding: "8px 24px" }}>
       <div className="vp-doc">{children}</div>

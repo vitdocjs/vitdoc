@@ -82,14 +82,8 @@ export function useAsyncImport(
   return Module;
 }
 
-export function useTypeFile(): any {
-  const { route } = useRoute();
-
-  const typeFile = route.replace(".md", ".tsx.type");
-
-  return useAsyncImport(typeFile, ({ default: property }) => {
-    return property;
-  });
+export function useTypeFile(typeFile, type = "default"): any {
+  return useAsyncImport(typeFile, (opts) => opts[type]);
 }
 
 export function useRouteMap(): any {

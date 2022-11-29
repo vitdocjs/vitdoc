@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import { getCorrectConfigFile } from "esbuild-resolve-config";
 import fs from "fs";
 import path from "path";
 import type { ModuleNode } from "vite";
@@ -67,16 +68,27 @@ export const getImporter = (
   }
 };
 
-export function removeProcessCwd(path: string) {
-  return path.replace(process.cwd(), "");
+export function removeProcessCwd(path: string, cwd = process.cwd()) {
+  return path.replace(cwd, "");
 }
 
-export const resolveMainComponent = async (
-  server: { pluginContainer },
-  mdPath: string
-) => {
+export const resolveMainComponent = (mdPath: string, cwd?: string) => {
   const mainPath = path.join(mdPath, "../index");
-  return server.pluginContainer.resolveId(mainPath);
+  const file = (() => {
+    const exts = [".tsx"];
+
+    const ext = exts.find((ext) => fs.existsSync(`${mainPath}${ext}`));
+
+    if (ext) {
+      return `${mainPath}${ext}`;
+    }
+    return null;
+  })();
+  if (file && cwd) {
+    return removeProcessCwd(file, cwd);
+  }
+
+  return file;
 };
 
 export const addUrlParams = (
@@ -122,7 +134,6 @@ export function getMD5(str: string) {
   hash.update(str);
   return hash.digest("hex");
 }
-
 
 export function toName(name: string | undefined) {
   if (!name) {

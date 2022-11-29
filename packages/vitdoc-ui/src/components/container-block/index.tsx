@@ -3,12 +3,12 @@ import classNames from "classnames";
 
 import "./style.scss";
 
-export const containerDirective = ({ children, name, attributes }) => {
-  if (name === "details") {
+export const Container = ({ children, type, ...attributes }) => {
+  if (type === "details") {
     return (
       <details
         {...attributes}
-        className={classNames(`${name} custom-block`, attributes.class)}
+        className={classNames(`${type} custom-block`, attributes.class)}
       >
         <summary>{attributes.title}</summary>
         {children}
@@ -18,7 +18,7 @@ export const containerDirective = ({ children, name, attributes }) => {
   return (
     <div
       {...attributes}
-      className={classNames(`${name} custom-block`, attributes.class)}
+      className={classNames(`${type} custom-block`, attributes.class)}
     >
       <p className="custom-block-title">{attributes.title}</p>
       {children}

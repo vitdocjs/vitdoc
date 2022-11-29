@@ -3,48 +3,30 @@ import { removeProcessCwd } from "../../utils";
 /**
  * 添加类型定义
  * @param content
- * @param getMainModuleId
- * @param id
  * @return {Promise<string>}
  */
-export async function appendTypes(
-  id: string,
-  content: string,
-  getMainModuleId: () => Promise<string>
-) {
-  if (!content.includes("renderType$")) {
-    const mainModuleId = await getMainModuleId();
+export function appendTypes(content: string, getMainComponent) {
+  if (!!content.includes("<API")) {
+    return content;
+  }
 
-    // const readmeFile = removeProcessCwd(id);
+  const mainFile = getMainComponent();
+  if (!mainFile) {
+    return content;
+  }
 
-    if (mainModuleId) {
-      content += "\n";
-      const appendCode = `
+  content += "\n";
+  const appendCode = `
+
 ---
 
 #### API
 
-\`\`\`tsx
-import ComponentType from '${removeProcessCwd(mainModuleId)}.type';
+<API src="${mainFile + ".type"}" />
+`;
 
-renderType$(ComponentType, mountNode);
-\`\`\``;
 
-      // console.log(
-      //   chalk.yellow(
-      //     `[Warning] The file '${removeProcessCwd(
-      //       readmeFile
-      //     )}' document miss the type define.`
-      //   )
-      // );
-      // console.log(
-      //   chalk.yellow(`Please append following code to your .md file.`)
-      // );
-      // console.log(chalk.dim(appendCode));
+  content += appendCode;
 
-      content += appendCode;
-    }
-  }
   return content;
 }
-
