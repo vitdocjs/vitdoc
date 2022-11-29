@@ -163,7 +163,10 @@ export const useMarkdown = (route?: string) => {
       return {
         lang: "tsx",
         renderer: (...props) =>
-          demo?.load().then((res) => res.default(...props)),
+          demo?.load().then((res) => {
+            res.setWrap$?.(...props);
+            return res.default(...props);
+          }),
         content: demo.content,
         route: `/~${route}/${id}`,
         type: "demo" as any,

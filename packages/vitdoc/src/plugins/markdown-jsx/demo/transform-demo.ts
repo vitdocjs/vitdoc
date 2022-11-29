@@ -1,14 +1,23 @@
-import type { IMdTransformerResult } from "dumi/dist/loaders/markdown/transformer";
-import { transformWithEsbuild } from "vite";
+import type { IParsedBlockAsset } from "dumi/dist/assetParsers/block";
+import path from "path";
+import { normalizePath, transformWithEsbuild } from "vite";
+import { removeProcessCwd } from "../../../utils";
 
-// type is value of IMdTransformerResult["meta"]["demos"]
-type NonUndefined<T> = T extends undefined ? never : T;
-export type IDemoData = NonUndefined<
-  IMdTransformerResult["meta"]["demos"]
->[number] & { filename: string; pathHash: string };
+export type IDemoData = {
+  filename: string;
+  pathHash: string;
+  id: string;
+  component: string;
+  asset: IParsedBlockAsset["asset"];
+  sources: IParsedBlockAsset["sources"];
+};
 
 export async function transformDemo(demo: IDemoData) {
-  const mainModuleId = "";
+  let mainModuleId = Object.keys(demo.sources ?? {})[0] ?? "";
+
+  if (!/^\./.test(mainModuleId)) {
+    mainModuleId = `./${mainModuleId}`;
+  }
 
   const replaceReact = (code) => {
     const matchInfo = code.match(/import React([ ,])?.+?;/);
@@ -68,7 +77,7 @@ export async function transformDemo(demo: IDemoData) {
         return prependSetWrap(code);
       }
 
-      code = `export default function(mountNode, { wrap, renderType$ }){ ${code} };`;
+      code = `export default function(mountNode){ ${code} };`;
 
       return prependSetWrap(code);
     };

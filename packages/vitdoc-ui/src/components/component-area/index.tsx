@@ -98,6 +98,7 @@ export function ComponentArea(props) {
 
   let [{ defaultProps, props: componentStateProps, current }] =
     useAtom(propertiesPropsStore);
+
   const setPartialProps = useSetPartialProperties();
   const defaultPropsRef = useRef();
 
@@ -128,7 +129,7 @@ export function ComponentArea(props) {
 
     if (!Object.keys(defaultProps).length) {
       setPartialProps({
-        defaultProps: props,
+        defaultProps: { ...props },
       });
     }
   });
@@ -140,7 +141,9 @@ export function ComponentArea(props) {
 
     const outputComp = (props) => {
       if (!invoked.current) {
-        setDefaultProps(props);
+        useEffect(() => {
+          setDefaultProps(props);
+        }, []);
         invoked.current = true;
       }
       const finalProps = Object.assign({}, props, componentProps);

@@ -56,7 +56,11 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
     };
 
     demos?.forEach((demo) => {
-      emitDemo?.(demo);
+      emitDemo?.({
+        filename: id,
+        pathHash,
+        ...demo,
+      });
     });
 
     // import all builtin components, may be used by markdown content
