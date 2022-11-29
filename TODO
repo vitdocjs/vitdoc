@@ -5,6 +5,7 @@
 - [x] Props
 - [x] dumi card-block
 - [x] API
-- [ ] Refactor Component demo load
+- [x] Refactor Component demo load
 - [ ] theme
+- [ ] css
 - [x] Types HMR

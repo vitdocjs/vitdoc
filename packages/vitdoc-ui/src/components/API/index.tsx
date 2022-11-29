@@ -10,7 +10,7 @@ import { useLoadModule } from "../../hooks/loaders";
 export function API(props: {
   src: string;
   type: string;
-  load: () => Promise<any>;
+  load: Parameters<typeof useLoadModule>[0];
 }) {
   const { loading, data: types } = useLoadModule(
     props.load,

@@ -1,27 +1,14 @@
-import { useMemoizedFn, useRequest, useSafeState } from "ahooks";
-import EventEmitter from "eventemitter3";
-import { useContext, useEffect, useMemo } from "react";
-import { useLocation, useMatch } from "react-router-dom";
-import { VitDocMarkdownContext } from "../context";
+import { useMemoizedFn, useRequest } from "ahooks";
 import identity from "lodash/identity";
+import { useEffect } from "react";
+import { useLocation, useMatch } from "react-router-dom";
 
-import { accept, waitForOneFile } from "virtual:vitdoc-hmr";
+import { accept } from "virtual:vitdoc-hmr";
 
 declare global {
   interface Window {
-    RuntimeModuleMap$: Record<string, (cb: any) => Promise<any>>;
-    HotReloadRegister$: (p: string, EventEmitter) => void;
-    HMRRegisterMap$: Record<string, EventEmitter>;
+    RuntimeModuleMap$: Record<string, () => Promise<any>>;
   }
-}
-
-function getEventEmitter(file) {
-  return window.HMRRegisterMap$[file] ?? new EventEmitter();
-}
-
-function addRegistry(file, emitter) {
-  // window.HMRRegisterMap$[file] = hmrEmitter;
-  window.HotReloadRegister$(file, emitter);
 }
 
 export function useRoute() {
@@ -32,74 +19,55 @@ export function useRoute() {
 
 export class ModuleLoadError extends Error {}
 
-export function useLoadModule(
-  load: () => Promise<any>,
-  format: (data: any) => any = identity
+const loadedMap = {};
+export function useLoadModule<T>(
+  payload: { id: string; load: () => Promise<any> } | undefined,
+  format: (data: any) => T = identity
 ) {
-  const actions = useRequest(() => {
-    // TODO:: MARKDOWN REFRESH!!
-    return Promise.all([waitForOneFile(), load()]).then(([{ on }, res]) => {
-      on((newModule) => {
-        actions.mutate(format(newModule));
-      });
+  const dealWithResult = useMemoizedFn((data) => {
+    const result = format(data);
 
-      return format(res);
-    });
+    loadedMap[payload!.id] = result;
+
+    return result;
   });
+
+  const actions = useRequest<T, any>(
+    () => {
+      return payload!.load().then((res) => {
+        accept(payload!.id).on((newModule) => {
+          actions.mutate(dealWithResult(newModule));
+        });
+
+        return dealWithResult(res);
+      });
+    },
+    {
+      ready: !!payload,
+    }
+  );
+
+  actions.data = actions.data ?? (payload?.id && loadedMap[payload.id]);
+  if (actions.data && !!actions.loading) {
+    actions.loading = false;
+  }
 
   return actions;
 }
 
-export function useAsyncImport(
+export function useAsyncImport<T>(
   path: string,
-  cb = ({ default: Comp }: any) => Comp
-) {
-  const [Module, setModule] = useSafeState<any>();
-
-  const emitter = getEventEmitter(path);
-
-  const setNewModule = useMemoizedFn((newModule) => {
-    const Comp = cb(newModule);
-    setModule(() => Comp);
-  });
-
-  useEffect(() => {
-    emitter.once("update", setNewModule);
-    return () => {
-      emitter.off("update", setNewModule);
-    };
-  }, [Module]);
-
-  useMemo(async () => {
-    try {
-      const cUrl = path;
-
-      if (!window.RuntimeModuleMap$[cUrl]) {
-        window.RuntimeModuleMap$[cUrl] = (cb) => {
-          cb && cb(cUrl);
-          return import(/* @vite-ignore */ cUrl);
-        };
-      }
-
-      const result = await window.RuntimeModuleMap$[cUrl]?.((filePath) => {
-        addRegistry(filePath, emitter);
-      });
-
-      setNewModule(result);
-    } catch (e) {
-      console.error(`Load module ${path} error:`, e);
-      setModule({
-        error: new ModuleLoadError(
-          [
-            `Please make sure follow files exist in your project`,
-            `-  ${path}`,
-          ].join("\n")
-        ),
-      });
-    }
-  }, [path]);
-
-  return Module;
+  cb: Parameters<typeof useLoadModule<T>>[1]
+): ReturnType<typeof useLoadModule<T>> {
+  return useLoadModule(
+    {
+      id: path,
+      load:
+        window.RuntimeModuleMap$[path] ??
+        ((() => import(/* @vite-ignore */ path)) as any),
+    },
+    cb
+  );
 }
 
 export function useTypeFile(typeFile, type = "default"): any {
@@ -121,7 +89,7 @@ export function useRouteMap(): any {
   return useAsyncImport(`/route-map.json`, ({ default: items }) => ({
     ...items,
     flattenRoutes: flatRouteMap(items.tree),
-  }));
+  }))?.data;
 }
 
 export function useComponentInfo(): any {
@@ -138,7 +106,7 @@ export function useComponentInfo(): any {
       npmLink: `${registry}/package/${packageName}/v/${packageVersion}`,
       logo: packageInfo.componentConfig?.logo,
     };
-  });
+  })?.data;
 }
 
 export type ModuleInfo = {
@@ -150,47 +118,48 @@ export type ModuleInfo = {
 };
 export type MarkdownResult = ReturnType<typeof useMarkdown>;
 
+export function useDemo(load: Parameters<typeof useLoadModule>[0] | undefined) {
+  const actions = useLoadModule(load, (res) => {
+    const content = res.content$.value;
+    const route = load!.id.replace(/(.+\.md)\?.+/, "$1");
+    const demoId = load!.id.replace(/.+markdown-proxy&id=(.+)/, "$1");
+    return {
+      lang: "tsx",
+      renderer: async (...props) => {
+        res.setWrap$?.(...props);
+        return res.default(...props);
+      },
+      content,
+      route: `/~${route}/${demoId}`,
+      type: "demo" as any,
+    };
+  });
+
+  useEffect(actions.refresh, [load]);
+
+  return actions;
+}
+
 export const useMarkdown = (route?: string) => {
-  if (useContext(VitDocMarkdownContext).context) {
-    return useContext(VitDocMarkdownContext).context;
-  }
   if (!route) {
     route = useRoute().route;
   }
 
   const readmeFile = route.replace(".html", ".md");
 
-  const mdInfo = useAsyncImport(readmeFile, (modules) => modules);
+  return useAsyncImport(readmeFile, (modules) => {
+    const { meta$, default: Markdown } = modules;
 
-  if (!mdInfo) {
-    return undefined;
-  }
+    return {
+      pathHash: meta$?.pathHash,
+      frontmatter: meta$?.frontmatter,
+      Markdown,
+      getModule(id: string): Parameters<typeof useDemo>[0] | undefined {
+        const demo = meta$.demos.find((demo) => demo.id === id);
+        if (!demo) return undefined;
 
-  if (mdInfo.error) {
-    return mdInfo;
-  }
-
-  const { meta$, default: Markdown } = mdInfo;
-
-  return {
-    pathHash: meta$?.pathHash,
-    frontmatter: meta$?.frontmatter,
-    Markdown,
-    getModule(id: string) {
-      const demo = meta$.demos.find((demo) => demo.id === id);
-      if (!demo) return undefined;
-
-      return {
-        lang: "tsx",
-        renderer: (...props) =>
-          demo?.load().then((res) => {
-            res.setWrap$?.(...props);
-            return res.default(...props);
-          }),
-        content: demo.content,
-        route: `/~${route}/${id}`,
-        type: "demo" as any,
-      };
-    },
-  };
+        return demo.load;
+      },
+    };
+  });
 };

@@ -3,8 +3,9 @@ import chunk from "lodash/chunk";
 import unzip from "lodash/unzip";
 import React, { useContext } from "react";
 import { VitDocMarkdownContext } from "../../context";
-import { useMarkdown } from "../../hooks/loaders";
+import { useDemo, useLoadModule, useMarkdown } from "../../hooks/loaders";
 import { ComponentBlock } from "../component-area";
+import { Card } from "antd";
 
 import "./index.scss";
 
@@ -15,16 +16,14 @@ export function DumiPage(props) {
 export function DumiDemo(props) {
   const id = props.demo.id;
 
-  const markdowns = useMarkdown();
+  const { loading, error, data } = useDemo(props.load);
 
   const { renderers } = useContext(VitDocMarkdownContext)!;
   const CodeBlock = renderers?.["code-block"] ?? ComponentBlock;
 
-  if (!markdowns) {
-    return null;
+  if (!!loading) {
+    return <Card className="component-area" loading />;
   }
-
-  const { pathHash, getModule, error } = markdowns;
 
   if (error) {
     return (
@@ -45,16 +44,19 @@ export function DumiDemo(props) {
   return (
     <CodeBlock
       key={id}
-      pathHash={pathHash}
       demoid={id}
-      getModule={getModule}
+      getModule={() => data}
       {...props.previewerProps}
     />
   );
 }
 
 export function DumiDemoGrid(props) {
-  const markdowns = useMarkdown();
+  const { data: markdowns } = useMarkdown();
+
+  if (!markdowns) {
+    return null;
+  }
 
   const cols = markdowns.frontmatter?.demo?.cols ?? 1;
 

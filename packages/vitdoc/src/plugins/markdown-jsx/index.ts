@@ -1,7 +1,6 @@
 import { ModuleGraph, Plugin, UserConfig } from "vite";
-import { cleanUrl, removeProcessCwd } from "../../utils";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
-import { transformMarkdown } from "./markdown/emit";
+import { transformMarkdown } from "./markdown/transform";
 
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 
@@ -44,7 +43,7 @@ const mdjsx = () => {
           return null;
         }
 
-        const demoCode = await transformDemo(id, demoInfo);
+        const demoCode = await transformDemo(demoInfo);
 
         return demoCode;
       }

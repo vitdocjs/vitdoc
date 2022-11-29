@@ -13,7 +13,7 @@ export type IDemoData = {
   sources: IParsedBlockAsset["sources"];
 };
 
-export async function transformDemo(id: string, demo: IDemoData) {
+export async function transformDemo(demo: IDemoData) {
   let mainModuleId = Object.keys(demo.sources ?? {})[0] ?? "";
 
   if (!/^\./.test(mainModuleId)) {
@@ -93,9 +93,10 @@ export async function transformDemo(id: string, demo: IDemoData) {
   };
 
   function appendMeta(code: string) {
+    const content = Object.values(demo.asset?.dependencies || {})[0]?.value;
     return `
       ${code}
-      export const content$ = ${JSON.stringify({ value: demo.component })};
+      export const content$ = ${JSON.stringify({ value: content })};
     `;
   }
 
@@ -108,9 +109,9 @@ export async function transformDemo(id: string, demo: IDemoData) {
   } else {
     code = replaceReact(code);
     code = replaceExport(code);
-    code = appendMeta(code);
-    // code = appendHmr(code, id);
   }
+
+  code = appendMeta(code);
 
   return transformWithEsbuild(code, `${demo.filename}.tsx`, {
     sourcefile: demo.filename,

@@ -10,6 +10,8 @@ import { getMD5, removeProcessCwd, resolveMainComponent } from "../../../utils";
 import { remarkCardBlock } from "./remarkCardBlock";
 import rehypeAPI from "./rehypeAPI";
 import { appendTypes } from "../utils";
+import rehypeDemo from "./rehypeDemo";
+import { stringifyEval } from "./eval-stringify";
 
 export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
   const route = removeProcessCwd(id, cwd);
@@ -23,7 +25,10 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
     alias: {},
     techStacks: [new ReactTechStack()],
     extraRemarkPlugins: [remarkCardBlock],
-    extraRehypePlugins: [[rehypeAPI, { cwd: process.cwd(), fileAbsPath: id }]],
+    extraRehypePlugins: [
+      [rehypeAPI, { cwd: process.cwd(), fileAbsPath: id }],
+      [rehypeDemo, { cwd: process.cwd(), fileAbsPath: id, emitDemo }],
+    ],
     resolve: {
       docDirs: [],
       atomDirs: [],
@@ -49,9 +54,10 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
       filename: id,
       pathHash,
       frontmatter,
-      demos: demos?.map(({ id, component: content, asset }: any) => {
+      demos: demos?.map((infos: any) => {
+        const { asset, id } = infos as any;
         const assets: any[] = Object.values(asset?.dependencies || {});
-        return { id, content: assets[0]?.value };
+        return { id, content: assets[0]?.value, load: infos.load };
       }),
     };
 
@@ -72,14 +78,7 @@ import ReactDOM from 'react-dom';
 import { DumiPage } from "${require.resolve("@vitdoc/ui")}";
 
 const $$contentTexts = ${JSON.stringify(texts)};
-export const meta$ = ${JSON.stringify(meta)};
-
-${demos
-  ?.map(
-    (demo, index) =>
-      `meta$.demos[${index}].load = () => import('${route}?markdown-proxy&id=${demo.id}');`
-  )
-  .join("\n")}
+export const meta$ = ${stringifyEval(meta)};
 
 
 function MarkdownContent() {

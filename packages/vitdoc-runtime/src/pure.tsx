@@ -1,4 +1,10 @@
-import { ComponentArea, useMarkdown, useRoute, useRouteMap } from "@vitdoc/ui";
+import {
+  ComponentArea,
+  useDemo,
+  useMarkdown,
+  useRoute,
+  useRouteMap,
+} from "@vitdoc/ui";
 import React from "react";
 import { Route, Routes, useParams } from "react-router";
 import { HashRouter as Router } from "react-router-dom";
@@ -10,18 +16,22 @@ export function Demo() {
     .route.replace(/^\/~/, "")
     .replace(new RegExp(`/${index}$`), "");
 
-  const demoInfo = useMarkdown(route);
+  const { data: demoInfo } = useMarkdown(route);
+  const { getModule, pathHash } = demoInfo ?? {};
+  const load = getModule?.(index!);
 
-  if (!demoInfo) {
+  const { data } = useDemo(load);
+
+  if (!demoInfo || !data) {
     return null;
   }
 
-  const { getModule, pathHash } = demoInfo;
-
-  const { renderer, content } = getModule(index!) ?? {};
-
   return (
-    <ComponentArea pathHash={pathHash} content={content} renderer={renderer} />
+    <ComponentArea
+      pathHash={pathHash}
+      content={data.content}
+      renderer={data.renderer}
+    />
   );
 }
 

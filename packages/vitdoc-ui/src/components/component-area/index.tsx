@@ -26,11 +26,11 @@ import "./index.scss";
 const Tooltip = _Tooltip as any;
 
 export const ComponentBlock = (props: RendererProps) => {
-  const { pathHash, getModule, demoid: id = "", title } = props;
+  const { getModule, demoid: id = "", title } = props;
 
   const { lang, renderer, content, route } = useCreation(
     () => getModule?.(id?.trim()) ?? ({} as any),
-    [id]
+    [getModule]
   );
 
   const [checkCode, { toggle }] = useBoolean();
@@ -39,8 +39,8 @@ export const ComponentBlock = (props: RendererProps) => {
 
   const eventBus = useEventEmitter();
 
-  // TODO::
   const active = current !== undefined && current === content;
+
   return (
     <div
       className={classNames("component-area", {
@@ -48,7 +48,6 @@ export const ComponentBlock = (props: RendererProps) => {
       })}
     >
       <ComponentArea
-        pathHash={pathHash}
         renderer={renderer}
         lang={lang}
         content={content}
@@ -90,7 +89,7 @@ export const ComponentBlock = (props: RendererProps) => {
 };
 
 export function ComponentArea(props) {
-  const { renderer, content, eventBus, pathHash } = props;
+  const { renderer, content, eventBus } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
@@ -172,13 +171,11 @@ export function ComponentArea(props) {
   }, [renderer, componentProps]);
 
   return (
-    <div className={pathHash}>
-      <div
-        className="component-container"
-        id="vite-component-container"
-        ref={componentRef}
-      />
-    </div>
+    <div
+      className="component-container"
+      id="vite-component-container"
+      ref={componentRef}
+    />
   );
 }
 

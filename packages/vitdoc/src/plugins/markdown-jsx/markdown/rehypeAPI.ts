@@ -53,7 +53,7 @@ export default function rehypeAPI(opts: {
           {
             type: "JSXAttribute",
             name: "load",
-            value: `() => import('${node.properties.src}')`,
+            value: `{id: '${node.properties.src}', load: () => import('${node.properties.src}') }`,
           },
         ];
 

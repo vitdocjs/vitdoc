@@ -5,16 +5,17 @@ import {
 } from "../../context";
 import { useMarkdown } from "../../hooks/loaders";
 import { mdRenderers } from "./renderers";
+import classNames from "classnames";
 
 import "./index.scss";
 
 export function MarkdownArea(props: VitDocMarkdownContextType) {
-  const MarkdownContent = useMarkdown();
+  const { data: MarkdownContent } = useMarkdown();
 
   const renderers = { ...mdRenderers, ...props.renderers };
 
   return MarkdownContent ? (
-    <div className="markdown-area">
+    <div className={classNames("markdown-area", MarkdownContent.pathHash)}>
       <VitDocMarkdownContext.Provider
         value={{ context: MarkdownContent, renderers }}
       >
