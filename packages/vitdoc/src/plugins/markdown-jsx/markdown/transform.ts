@@ -11,6 +11,7 @@ import rehypeAPI from "./rehypeAPI";
 import { appendTypes } from "../utils";
 import rehypeDemo from "./rehypeDemo";
 import { stringifyEval } from "./eval-stringify";
+import remarkStyle from "./remarkStyle";
 
 export async function transformMarkdown(
   this: any,
@@ -25,7 +26,10 @@ export async function transformMarkdown(
     fileAbsPath: id,
     alias: {},
     techStacks: [new ReactTechStack()],
-    extraRemarkPlugins: [remarkCardBlock],
+    extraRemarkPlugins: [
+      remarkCardBlock,
+      [remarkStyle, { cwd: process.cwd(), fileAbsPath: id }],
+    ],
     extraRehypePlugins: [
       [rehypeAPI, { cwd: process.cwd(), fileAbsPath: id }],
       [rehypeDemo, { cwd: process.cwd(), fileAbsPath: id, emitDemo }],
@@ -49,7 +53,10 @@ export async function transformMarkdown(
     // TODO:: declare embedded files as loader dependency, for re-compiling when file changed
     // embeds!.forEach((file) => this.addDependency(file));
 
-    const pathHash = `_${getMD5(removeProcessCwd(id))}`;
+    const route = removeProcessCwd(id);
+    const pathHash = `_${getMD5(route)}`;
+
+    const styles = (ret.meta.styles as any[]) ?? [];
 
     const meta = {
       filename: id,
@@ -58,9 +65,17 @@ export async function transformMarkdown(
       demos: demos?.map((infos: any) => {
         const { asset, id } = infos as any;
         const assets: any[] = Object.values(asset?.dependencies || {});
-        return { id, content: assets[0]?.value, load: infos.load };
+        return { id, style: assets[0]?.value, load: infos.load };
       }),
     };
+
+    styles?.forEach((style) => {
+      emitDemo?.({
+        filename: id,
+        pathHash,
+        ...style,
+      });
+    });
 
     demos?.forEach((demo) => {
       emitDemo?.({
@@ -80,6 +95,9 @@ import ReactDOM from 'react-dom';
 const $$contentTexts = ${JSON.stringify(texts)};
 export const meta$ = ${stringifyEval(meta)};
 
+${styles
+  .map((style) => `import '${id}?markdown-proxy&id=${style.id}.scss';`)
+  .join("\n")}
 
 function MarkdownContent() {
   return ${ret.content};

@@ -2,9 +2,10 @@ import type { IParsedBlockAsset } from "dumi/dist/assetParsers/block";
 import { transformWithEsbuild } from "vite";
 
 export type IDemoData = {
+  id: string;
+  lang?: string;
   filename: string;
   pathHash: string;
-  id: string;
   component: string;
   asset: IParsedBlockAsset["asset"];
   sources: IParsedBlockAsset["sources"];

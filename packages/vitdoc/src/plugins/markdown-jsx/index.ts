@@ -2,6 +2,7 @@ import type { IThemeComponent } from "dumi/dist/features/theme/loader";
 import { getExportsStatic } from "pkg-exports";
 import { ModuleGraph, Plugin, UserConfig } from "vite";
 import { ConfigType } from "../../types";
+import { isCSSLang } from "../../utils/lang";
 import { resolveTheme } from "../../utils/theme";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
@@ -9,7 +10,8 @@ import { transformMarkdown } from "./markdown/transform";
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 
 export const isMarkdownProxy = (id) => mdProxyRE.test(id);
-export const getDemoId = (id) => id.match(mdProxyRE)?.[1];
+export const getDemoId = (id) =>
+  id.match(mdProxyRE)?.[1]?.match(/(.+?)(\.\w+)?$/)?.[1];
 
 const mdjsx = (vitdocConfig: ConfigType) => {
   let markdownMap: Record<string, IDemoData> = {};
@@ -61,6 +63,10 @@ const mdjsx = (vitdocConfig: ConfigType) => {
 
         if (!demoId || !demoInfo) {
           return null;
+        }
+
+        if (isCSSLang(demoInfo.lang ?? "")) {
+          return `.${demoInfo.pathHash}{${demoInfo.component}}`;
         }
 
         const demoCode = await transformDemo(demoInfo);
