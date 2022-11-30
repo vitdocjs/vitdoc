@@ -1,17 +1,35 @@
 import { ModuleGraph, Plugin, UserConfig } from "vite";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
+import { getExportsRuntime, getExportsStatic } from "pkg-exports";
+import { ConfigType } from "../../types";
+import type { IThemeComponent } from "dumi/dist/features/theme/loader";
 
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 
 export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 export const getDemoId = (id) => id.match(mdProxyRE)?.[1];
 
-const mdjsx = () => {
+const mdjsx = (vitdocConfig: ConfigType) => {
   let markdownMap: Record<string, IDemoData> = {};
   let isBuild: boolean;
   let moduleGraph: ModuleGraph;
   let config: UserConfig;
+
+  const getBuiltins = (async () => {
+    const source = `${vitdocConfig.template!}/theme`;
+    const themes = await getExportsStatic(source);
+    return themes.reduce(
+      (acc, theme) =>
+        Object.assign(acc, {
+          [theme]: {
+            specifier: `{ ${theme} }`,
+            source,
+          } as IThemeComponent,
+        }),
+      {}
+    );
+  })();
 
   return {
     name: "vite:markdown-jsx",
@@ -55,6 +73,7 @@ const mdjsx = () => {
       return transformMarkdown.call(this, {
         id,
         cwd: process.cwd(),
+        builtins: await getBuiltins,
         emitDemo(info) {
           markdownMap[info.id] = info;
         },

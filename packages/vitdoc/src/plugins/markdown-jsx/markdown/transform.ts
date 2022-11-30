@@ -13,7 +13,10 @@ import { appendTypes } from "../utils";
 import rehypeDemo from "./rehypeDemo";
 import { stringifyEval } from "./eval-stringify";
 
-export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
+export async function transformMarkdown(
+  this: any,
+  { id, cwd, emitDemo, builtins }
+) {
   const route = removeProcessCwd(id, cwd);
   let content = fs.readFileSync(id, "utf-8");
 
@@ -75,7 +78,6 @@ export async function transformMarkdown(this: any, { id, cwd, emitDemo }) {
       .join("\n")}
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DumiPage } from "${require.resolve("@vitdoc/ui")}";
 
 const $$contentTexts = ${JSON.stringify(texts)};
 export const meta$ = ${stringifyEval(meta)};
@@ -102,25 +104,7 @@ if(import.meta.hot) {
     this,
     id,
     {
-      builtins: {
-        // TODO:: dynamic import
-        DumiDemo: {
-          specifier: "{ DumiDemo }",
-          source: require.resolve("@vitdoc/ui"),
-        },
-        DumiDemoGrid: {
-          specifier: "{ DumiDemoGrid }",
-          source: require.resolve("@vitdoc/ui"),
-        },
-        Link: {
-          specifier: "{ Link }",
-          source: require.resolve("@vitdoc/ui"),
-        },
-        defaultUI: {
-          specifier: "{ HighLighter as SourceCode, CardBlock, Container, API }",
-          source: require.resolve("@vitdoc/ui"),
-        },
-      },
+      builtins,
     },
     res
   );

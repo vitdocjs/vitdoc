@@ -1,5 +1,36 @@
-import EventEmitter from "eventemitter3";
+class EventEmitter {
+  events: {};
+  constructor() {
+    this.events = {};
+  }
+  on(name, fn) {
+    if (!this.events[name]) {
+      this.events[name] = [];
+    }
+    this.events[name].push(fn);
+  }
 
+  once(name, fn) {
+    const once = (...args) => {
+      fn(...args);
+      this.off(name, once);
+    };
+
+    this.on(name, once);
+  }
+
+  emit(name, ...args) {
+    if (this.events[name]) {
+      this.events[name].forEach((fn) => fn(...args));
+    }
+  }
+
+  off(name, fn) {
+    if (this.events[name]) {
+      this.events[name] = this.events[name].filter((f) => f !== fn);
+    }
+  }
+}
 declare global {
   interface Window {
     HMRRegisterMap$: Record<string, EventEmitter>;

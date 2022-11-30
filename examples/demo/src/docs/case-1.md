@@ -1,7 +1,6 @@
 #### Basic Usage
 
-
-```tsx 
+```tsx
 import { Title as Component } from '..';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -25,4 +24,3 @@ ReactDOM.render(
   mountNode,
 );
 ```
-

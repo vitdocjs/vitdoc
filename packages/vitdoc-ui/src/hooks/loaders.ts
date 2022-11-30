@@ -3,8 +3,6 @@ import identity from "lodash/identity";
 import { useEffect } from "react";
 import { useLocation, useMatch } from "react-router-dom";
 
-let accept: typeof import("virtual:vitdoc-hmr").accept;
-
 declare global {
   interface Window {
     RuntimeModuleMap$: Record<string, () => Promise<any>>;
@@ -35,9 +33,13 @@ export function useLoadModule<T>(
   const actions = useRequest<T, any>(
     () => {
       return payload!.load().then((res) => {
-        accept?.(payload!.id).on((newModule) => {
-          actions.mutate(dealWithResult(newModule));
-        });
+        import("virtual:vitdoc-hmr")
+          .then(({ accept }) => {
+            accept?.(payload!.id).on((newModule) => {
+              actions.mutate(dealWithResult(newModule));
+            });
+          })
+          .catch(() => {});
 
         return dealWithResult(res);
       });

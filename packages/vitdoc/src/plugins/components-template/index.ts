@@ -1,11 +1,12 @@
 import * as fs from "fs";
 import * as path from "path";
 import Swig from "swig";
+import { resolve } from "mlly";
 import { mergeConfig, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
 import { getComponentFiles, getMainFiles } from "../../utils/rules";
-import { ConfigType, MarkdownMeta } from "../../utils/types";
+import { ConfigType, MarkdownMeta } from "../../types";
 
 const isDebug = process.env.DEBUG;
 
@@ -106,13 +107,13 @@ export const getRoutes = async () => {
 
 export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
 
-const vitdocRuntimeId = "virtual:vitdoc/runtime";
-const vitdocTemplateId = "virtual:vitdoc/template";
+const vitdocRuntimeId = "virtual:vitdoc-runtime";
+const vitdocTemplateId = "virtual:vitdoc-template";
 
 const componentsTemplate = (
   {
     metaFileName: buildMetaFile = "stories.manifest.json" as false | string,
-    template: templatePath = require.resolve("@vitdoc/template-default"),
+    template: templatePath = "@vitdoc/template-default",
     htmlAppend: externalHtml,
     logo,
   } = {} as ConfigType
@@ -123,7 +124,7 @@ const componentsTemplate = (
   let isBuild;
   let routeTree: any;
 
-  const entry = require.resolve("@vitdoc/ui/runtime/index.html");
+  const entry = require.resolve("@vitdoc/runtime/index.html");
 
   const createHtml = Swig.compileFile(entry, {
     // cache: false,
@@ -173,7 +174,7 @@ const componentsTemplate = (
       }
 
       if (vitdocRuntimeId === id) {
-        return require.resolve("@vitdoc/ui/runtime");
+        return require.resolve("@vitdoc/runtime");
       }
 
       if (id === entry) {
@@ -184,10 +185,12 @@ const componentsTemplate = (
       let file = cleanUrl(id);
 
       if (id.endsWith(vitdocTemplateId)) {
-        const cssPath = templatePath.replace(/\.js$/, ".css");
         let code = `export * from '${templatePath}';`;
-        if (fs.existsSync(cssPath)) {
-          code = `import '${cssPath}';\n${code}`;
+        const resolvedPath = await resolve(`${templatePath}/style.css`).catch(
+          (e) => null
+        );
+        if (resolvedPath) {
+          code = `${code};\n  import '${templatePath}/style.css';`;
         }
         return code;
       }

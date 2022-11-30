@@ -1,16 +1,17 @@
 {
-  "name": "@vitdoc/template-default",
+  "name": "@vitdoc/runtime",
   "version": "1.0.0",
-  "description": "The default template for vitdoc",
+  "description": "The runtime for vitdoc",
   "files": [
-    "dist"
+    "dist",
+    "index.html"
   ],
   "type": "module",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./theme": "./dist/theme.js",
     "./style.css": "./dist/style.css",
+    "./index.html": "./index.html",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -33,6 +34,7 @@
     "jotai": "^1.10.0",
     "lodash": "^4.17.21",
     "react-router-dom": "^6.4.3",
+    "react-router": "^6.4.3",
     "sass": "^1.56.1",
     "vite": "^3.2.4"
   }

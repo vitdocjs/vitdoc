@@ -109,3 +109,5 @@ export function mount({ container }) {
 export function unmount({ container }) {
   ReactDOM.unmountComponentAtNode(container);
 }
+
+export * as Theme from "./theme";

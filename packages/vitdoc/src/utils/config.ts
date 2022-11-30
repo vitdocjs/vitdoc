@@ -1,13 +1,15 @@
-/**
- * Created by yee.wang on 2021/3/26
- **/
 import fs from "fs";
-import { ConfigType } from "./types";
+import { ConfigType } from "../types";
 
 import { resolveConfig } from "esbuild-resolve-config";
 
 export function getConfig(): ConfigType {
-  const config: ConfigType = resolveConfig<ConfigType>(".vitdocrc") ?? {};
+  const config: ConfigType =
+    resolveConfig<ConfigType>(".vitdocrc", {
+      defaultConfig: {
+        template: "@vitdoc/template-default",
+      },
+    }) ?? {};
 
   try {
     if (config.htmlAppend) {

@@ -3,17 +3,17 @@
   "version": "1.0.14",
   "description": "The UI component for vitdoc theme",
   "main": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "type": "module",
   "exports": {
     ".": "./dist/esm/index.js",
+    "./theme": "./dist/esm/theme.js",
     "./package.json": "./package.json",
     "./runtime": "./dist/esm/runtime/index.js",
     "./runtime/index.html": "./dist/esm/runtime/index.html"
   },
   "scripts": {
-    "build": "father build",
     "dev": "father dev",
-    "init": "def dev",
+    "build": "father build",
     "prepublishOnly": "npm run build",
     "prettier": "pretty-quick --staged",
     "test": "vitest run"
