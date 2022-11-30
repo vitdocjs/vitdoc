@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
-import DoubleLeftOutlined from "@ant-design/icons/DoubleLeftOutlined";
-import CloseOutlined from "@ant-design/icons/CloseOutlined";
+import {
+  DoubleLeftOutlined,
+  CloseOutlined,
+  BugOutlined,
+} from "@ant-design/icons";
 import { PANE_VISIBLE } from "../../constants";
 import { Stage } from "./stage";
 import {
@@ -9,7 +12,6 @@ import {
   useRequest,
   useUpdateEffect,
 } from "ahooks";
-import BugOutlined from "@ant-design/icons/BugOutlined";
 import { buildVisionFromTypes } from "./convert/typefile";
 import {
   propertiesPropsStore,

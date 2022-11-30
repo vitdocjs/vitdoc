@@ -4,7 +4,7 @@ import {
   useMarkdown,
   useRoute,
   useRouteMap,
-} from "@vitdoc/ui";
+} from "../";
 import React from "react";
 import { Route, Routes, useParams } from "react-router";
 import { HashRouter as Router } from "react-router-dom";

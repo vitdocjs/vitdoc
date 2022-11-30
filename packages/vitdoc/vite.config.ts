@@ -7,6 +7,7 @@ import react from "@vitejs/plugin-react";
 import { getConfig } from "./dist/cjs/utils/config";
 import { resolveConfig } from "esbuild-resolve-config";
 import path from "path";
+import { UserConfig } from "vite";
 
 const cwd = process.cwd();
 
@@ -16,6 +17,9 @@ const config = resolveConfig<any>("vite.config", { defaultConfig: {} });
 export default mergeConfig(
   {
     base: process.env.VITE_BASE_HOST || "/",
+    optimizeDeps: {
+      include: [require.resolve("@vitdoc/template-default")],
+    },
     build: {
       target: "esnext",
       outDir: "dist/stories",

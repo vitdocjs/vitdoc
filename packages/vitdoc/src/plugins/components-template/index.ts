@@ -123,7 +123,7 @@ const componentsTemplate = (
   let isBuild;
   let routeTree: any;
 
-  const entry = require.resolve("@vitdoc/runtime/index.html");
+  const entry = require.resolve("@vitdoc/ui/runtime/index.html");
 
   const createHtml = Swig.compileFile(entry, {
     // cache: false,
@@ -173,7 +173,7 @@ const componentsTemplate = (
       }
 
       if (vitdocRuntimeId === id) {
-        return require.resolve("@vitdoc/runtime");
+        return require.resolve("@vitdoc/ui/runtime");
       }
 
       if (id === entry) {

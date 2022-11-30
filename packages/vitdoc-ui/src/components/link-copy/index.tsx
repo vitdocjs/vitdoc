@@ -1,4 +1,4 @@
-import LinkOutlined from "@ant-design/icons/LinkOutlined";
+import { LinkOutlined } from "@ant-design/icons";
 import React from "react";
 import copy from "copy-to-clipboard";
 
