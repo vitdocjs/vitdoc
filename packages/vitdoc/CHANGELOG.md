@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.1.2
+
+### Patch Changes
+
+- remove vitdoc/ui dep
+
 ## 1.1.1
 
 ### Patch Changes
