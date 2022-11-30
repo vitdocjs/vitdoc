@@ -1,6 +1,6 @@
 {
   "name": "vitdoc-monorepo",
-  "version": "1.0.14",
+  "version": "2.0.1",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "vitest run",
     "prettier": "pretty-quick --staged",
     "build": "turbo --filter='./templates/*' --filter='./packages/*' build",
-    "release": "pnpm run build && changeset version && changeset publish"
+    "release": "bumpp package.json packages/**/package.json && pnpm -r --no-git-checks publish --access public"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
@@ -20,10 +20,9 @@
     "url": "https://github.com/vitdocjs/vitdoc.git"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.7",
-    "@changesets/cli": "^2.25.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "bumpp": "^8.2.1",
     "esbuild": "^0.14.54",
     "esbuild-sass-plugin": "^2.4.1",
     "father": "^4.1.0",
