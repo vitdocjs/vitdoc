@@ -18,6 +18,7 @@ export function useRoute() {
 export class ModuleLoadError extends Error {}
 
 const loadedMap = {};
+
 export function useLoadModule<T>(
   payload: { id: string; load: () => Promise<any> } | undefined,
   format: (data: any) => T = identity

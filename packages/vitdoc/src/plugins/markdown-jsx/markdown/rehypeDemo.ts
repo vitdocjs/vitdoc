@@ -25,12 +25,13 @@ export default function rehypeDemo(opts: {
       const loadFile = `${route}?markdown-proxy&id=${demoId}`;
 
       const loadFn = `{id: '${loadFile}', load: () => import('${loadFile}') }`;
-      vFile.data.demos?.forEach((demo) => {
-        demo.load = loadFn;
-      });
+
+      const matchedDemo = vFile.data.demos?.find((demo) => demo.id === demoId);
+      if (matchedDemo) matchedDemo.load = loadFn;
 
       return loadFn;
     }
+
     visit<Root, "element">(tree, "element", (node) => {
       if (node.tagName === "DumiDemo") {
         const demoId = get(node, 'data["$demo-prop-value-key"].demo.id', "");

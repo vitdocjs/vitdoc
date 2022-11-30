@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.1.11
+
+### Patch Changes
+
+- fix exception of demo id
+  - @vitdoc/runtime@1.1.11
+  - @vitdoc/template-default@1.1.10
+
 ## 1.1.10
 
 ### Patch Changes
