@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.9
+
+### Patch Changes
+
+- fix all versions
+- Updated dependencies
+  - @vitdoc/runtime@1.1.10
+  - @vitdoc/template-default@1.1.10
+
 ## 2.0.0
 
 ### Major Changes

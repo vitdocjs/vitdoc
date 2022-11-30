@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.1.9
+
+### Patch Changes
+
+- fix all versions
+
 ## 2.0.0
 
 ### Major Changes

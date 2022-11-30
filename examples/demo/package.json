@@ -27,11 +27,11 @@
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
-    "@vitdoc/template-default": "workspace:^1.0.1",
+    "@vitdoc/template-default": "workspace:^1.1.10",
     "@alifd/next": "^1.23.22",
     "@types/lodash": "^4.14.116",
     "@types/react-dom": "^16.8.0",
-    "@vitdoc/template-mobile": "workspace:^1.0.1",
+    "@vitdoc/template-mobile": "workspace:^1.1.10",
     "moment-timezone": "^0.5.33",
     "pre-commit": "^1.2.2",
     "prettier": "^2.3.2",
