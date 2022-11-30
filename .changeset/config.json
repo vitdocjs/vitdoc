@@ -1,12 +1,5 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    {
-      "repo": "vitdocjs/vitdoc"
-    }
-  ],
-
   "commit": false,
   "fixed": [],
   "linked": [],

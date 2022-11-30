@@ -1,5 +1,17 @@
 # vitdoc
 
+## 2.0.0
+
+### Major Changes
+
+- b85499a: fix: package.json files
+
+### Patch Changes
+
+- fix: empty npm
+  - @vitdoc/runtime@1.0.1
+  - @vitdoc/template-default@1.0.1
+
 ## 1.1.2
 
 ### Patch Changes
