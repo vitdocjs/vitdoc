@@ -15,8 +15,7 @@
   ],
   "scripts": {
     "dev": "father dev",
-    "build": "vite build",
-    "prepublishOnly": "npm run build"
+    "build": "vite build"
   },
   "author": "",
   "license": "ISC",

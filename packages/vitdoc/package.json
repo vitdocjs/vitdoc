@@ -9,8 +9,7 @@
   },
   "scripts": {
     "dev": "father dev",
-    "build": "father build",
-    "prepublishOnly": "cd plugins/components-template/view && npm run build"
+    "build": "father build"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"

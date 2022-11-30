@@ -14,7 +14,6 @@
   "scripts": {
     "dev": "father dev",
     "build": "father build",
-    "prepublishOnly": "npm run build",
     "prettier": "pretty-quick --staged",
     "test": "vitest run"
   },

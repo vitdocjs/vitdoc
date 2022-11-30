@@ -9,8 +9,7 @@
     "test": "vitest run",
     "prettier": "pretty-quick --staged",
     "build": "turbo --filter='./templates/*' --filter='./packages/*' build",
-    "release": "pnpm run buld && changeset version && changeset publish",
-    "prepublishOnly": "npm run test && npm run build"
+    "release": "pnpm run build && changeset version && changeset publish"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"

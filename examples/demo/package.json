@@ -4,6 +4,7 @@
   "description": "demo",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "private": true,
   "scripts": {
     "dev": "vitdoc",
     "build": "vitdoc build"
