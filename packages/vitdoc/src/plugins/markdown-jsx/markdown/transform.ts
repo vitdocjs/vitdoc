@@ -11,7 +11,6 @@ import rehypeAPI from "./rehypeAPI";
 import { appendTypes } from "../utils";
 import rehypeDemo from "./rehypeDemo";
 import { stringifyEval } from "./eval-stringify";
-import { appendHmr } from "../../../plugins/hmr/utils";
 
 export async function transformMarkdown(
   this: any,
@@ -89,8 +88,6 @@ function MarkdownContent() {
 
 export default MarkdownContent;
 `;
-
-    code = appendHmr(code, route);
 
     return transformWithEsbuild(code, `${id}.jsx`);
   }

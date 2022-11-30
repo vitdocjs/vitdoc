@@ -4,8 +4,6 @@ import * as path from "path";
 import { ModuleGraph, normalizePath, Plugin, ViteDevServer } from "vite";
 import { cleanUrl, isCSSRequest, isJsx } from "../../utils";
 
-import { appendHmr } from "../hmr/utils";
-
 const TypeFile = ({
   prefix = ".type",
   buildMetaFile = false as boolean | string,
@@ -102,8 +100,6 @@ const TypeFile = ({
             return `export const ${exportName} = ${JSON.stringify(s)}`;
           })
           .join("\n");
-
-        code = appendHmr(code, file);
 
         return code;
       }

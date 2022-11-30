@@ -1,8 +1,5 @@
 import type { IParsedBlockAsset } from "dumi/dist/assetParsers/block";
-import path from "path";
-import { normalizePath, transformWithEsbuild } from "vite";
-import { removeProcessCwd } from "../../../utils";
-import { appendHmr } from "../../hmr/utils";
+import { transformWithEsbuild } from "vite";
 
 export type IDemoData = {
   filename: string;
