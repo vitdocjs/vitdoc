@@ -2,6 +2,7 @@ import type { IThemeComponent } from "dumi/dist/features/theme/loader";
 import { getExportsStatic } from "pkg-exports";
 import { ModuleGraph, Plugin, UserConfig } from "vite";
 import { ConfigType } from "../../types";
+import { resolveTheme } from "../../utils/theme";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
 
@@ -16,8 +17,9 @@ const mdjsx = (vitdocConfig: ConfigType) => {
   let moduleGraph: ModuleGraph;
   let config: UserConfig;
 
+  const themePromise = resolveTheme(vitdocConfig.template!);
   const getBuiltins = (async () => {
-    const source = `${vitdocConfig.template!}/theme`;
+    const { theme: source } = (await themePromise)!;
     const themes = await getExportsStatic(source);
     return themes.reduce(
       (acc, theme) =>

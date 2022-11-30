@@ -1,12 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
 import Swig from "swig";
-import { resolve } from "mlly";
+import { fileURLToPath, resolve } from "mlly";
 import { mergeConfig, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
 import { getComponentFiles, getMainFiles } from "../../utils/rules";
 import { ConfigType, MarkdownMeta } from "../../types";
+import { resolveTheme } from "../../utils/theme";
 
 const isDebug = process.env.DEBUG;
 
@@ -126,6 +127,8 @@ const componentsTemplate = (
 
   const entry = require.resolve("@vitdoc/runtime/index.html");
 
+  const themePromise = resolveTheme(templatePath);
+
   const createHtml = Swig.compileFile(entry, {
     // cache: false,
     autoescape: false,
@@ -185,12 +188,10 @@ const componentsTemplate = (
       let file = cleanUrl(id);
 
       if (id.endsWith(vitdocTemplateId)) {
-        let code = `export * from '${templatePath}';`;
-        const resolvedPath = await resolve(`${templatePath}/style.css`).catch(
-          (e) => null
-        );
-        if (resolvedPath) {
-          code = `${code};\n  import '${templatePath}/style.css';`;
+        const { js, css } = (await themePromise)!;
+        let code = `export * from '${js}';`;
+        if (css) {
+          code = `${code};\n  import '${css}';`;
         }
         return code;
       }

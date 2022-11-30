@@ -4,12 +4,13 @@ import { ConfigType } from "../types";
 import { resolveConfig } from "esbuild-resolve-config";
 
 export function getConfig(): ConfigType {
+  const defaultConfig = {
+    template: "@vitdoc/template-default",
+  };
   const config: ConfigType =
     resolveConfig<ConfigType>(".vitdocrc", {
-      defaultConfig: {
-        template: "@vitdoc/template-default",
-      },
-    }) ?? {};
+      defaultConfig,
+    }) ?? defaultConfig;
 
   try {
     if (config.htmlAppend) {
@@ -21,3 +22,4 @@ export function getConfig(): ConfigType {
 
   return config;
 }
+

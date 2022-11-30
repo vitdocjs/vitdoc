@@ -16,7 +16,6 @@ export async function transformMarkdown(
   this: any,
   { id, cwd, emitDemo, builtins }
 ) {
-  const route = removeProcessCwd(id, cwd);
   let content = fs.readFileSync(id, "utf-8");
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
