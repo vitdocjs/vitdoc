@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.11
+
+### Patch Changes
+
+- feat: add tsconfig alias resolve
+
 ## 1.1.10
 
 ### Patch Changes

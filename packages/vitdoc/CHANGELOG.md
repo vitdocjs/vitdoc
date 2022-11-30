@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.10
+
+### Patch Changes
+
+- feat: add tsconfig alias resolve
+- Updated dependencies
+  - @vitdoc/runtime@1.1.11
+  - @vitdoc/template-default@1.1.10
+
 ## 1.1.9
 
 ### Patch Changes

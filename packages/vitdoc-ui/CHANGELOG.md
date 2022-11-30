@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.1.10
+
+### Patch Changes
+
+- feat: add tsconfig alias resolve
+
 ## 1.1.9
 
 ### Patch Changes
