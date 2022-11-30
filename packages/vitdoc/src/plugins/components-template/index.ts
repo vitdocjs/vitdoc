@@ -8,6 +8,7 @@ import { getMetas, parseMarkdown } from "../../utils/markdown";
 import { getComponentFiles, getMainFiles } from "../../utils/rules";
 import { ConfigType, MarkdownMeta } from "../../types";
 import { resolveTheme } from "../../utils/theme";
+import convertAliasByTsconfigPaths from "resolve-ts-alias";
 
 const isDebug = process.env.DEBUG;
 
@@ -140,7 +141,13 @@ const componentsTemplate = (
     config(resolvedConfig, { command }) {
       // store the resolved config
       isBuild = command === "build";
+
+      const { bundless: alias } = convertAliasByTsconfigPaths(process.cwd());
+
       config = mergeConfig(resolvedConfig, {
+        resolve: {
+          alias,
+        },
         optimizeDeps: {
           entries: getMainFiles(),
         },

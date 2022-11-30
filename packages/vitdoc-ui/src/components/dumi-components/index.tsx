@@ -47,6 +47,8 @@ export function DumiDemo(props) {
       demoid={id}
       getModule={() => data}
       {...props.previewerProps}
+      className={props.className}
+      style={props.style}
     />
   );
 }

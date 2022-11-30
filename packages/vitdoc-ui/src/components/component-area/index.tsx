@@ -172,7 +172,8 @@ export function ComponentArea(props) {
 
   return (
     <div
-      className="component-container"
+      className={classNames("component-container", props.className)}
+      style={props.style}
       id="vite-component-container"
       ref={componentRef}
     />

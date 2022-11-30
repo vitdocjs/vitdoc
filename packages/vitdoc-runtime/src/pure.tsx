@@ -28,6 +28,7 @@ export function Demo() {
 
   return (
     <ComponentArea
+      style={{ width: "100%" }}
       pathHash={pathHash}
       content={data.content}
       renderer={data.renderer}
