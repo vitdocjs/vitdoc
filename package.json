@@ -1,6 +1,6 @@
 {
   "name": "vitdoc-monorepo",
-  "version": "2.0.1",
+  "version": "1.0.14",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "private": true,
   "scripts": {
@@ -20,6 +20,8 @@
     "url": "https://github.com/vitdocjs/vitdoc.git"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "bumpp": "^8.2.1",
