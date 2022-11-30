@@ -20,9 +20,8 @@
     "url": "https://github.com/vitdocjs/vitdoc.git"
   },
   "files": [
-    "vite.config.js",
-    "lib",
-    "cjs"
+    "config",
+    "dist"
   ],
   "dependencies": {
     "@types/node": "^14.18.33",

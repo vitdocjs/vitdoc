@@ -25,6 +25,9 @@
     "type": "git",
     "url": "https://github.com/vitdocjs/vitdoc.git"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
     "ahooks": "^3.7.2",
