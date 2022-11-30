@@ -40,23 +40,8 @@
         {{moduleMaps}}
       };
 
-      globalThis.HMRRegisterMap$ = {};
-
-      globalThis.$VitDocUpdateHMRNewModule$ = (modulePath, module) => {
-        globalThis.HMRRegisterMap$[modulePath]?.emit('update', module);
-      };
-      globalThis.HotReloadRegister$ = (file, emitter) => {
-        if (import.meta.hot) {
-          globalThis.HMRRegisterMap$[file] = emitter;
-        }
-      }
-
       import("virtual:vitdoc-runtime");
     </script>
-
-    <!-- <script type="module" src="/virtual:vitdoc-runtime"></script> -->
-
-    <!-- split -->
 
     {{ externalHtml }}
   </body>

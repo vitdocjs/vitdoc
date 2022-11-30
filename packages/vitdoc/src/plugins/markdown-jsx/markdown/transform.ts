@@ -3,7 +3,6 @@ import markdownTransformer, {
 } from "dumi/dist/loaders/markdown/transformer";
 import fs from "fs";
 import ReactTechStack from "./react-tech-statck";
-
 import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
 import { transformWithEsbuild } from "vite";
 import { getMD5, removeProcessCwd, resolveMainComponent } from "../../../utils";
@@ -12,6 +11,7 @@ import rehypeAPI from "./rehypeAPI";
 import { appendTypes } from "../utils";
 import rehypeDemo from "./rehypeDemo";
 import { stringifyEval } from "./eval-stringify";
+import { appendHmr } from "../../../plugins/hmr/utils";
 
 export async function transformMarkdown(
   this: any,
@@ -73,7 +73,7 @@ export async function transformMarkdown(
     });
 
     // import all builtin components, may be used by markdown content
-    const code = `${Object.values(opts.builtins)
+    let code = `${Object.values(opts.builtins)
       .map((item) => `import ${item.specifier} from '${item.source}';`)
       .join("\n")}
 import React from 'react';
@@ -88,14 +88,9 @@ function MarkdownContent() {
 }
 
 export default MarkdownContent;
-
-if(import.meta.hot) {
-	import.meta.hot.accept((newModule)=>{
-		globalThis.$VitDocUpdateHMRNewModule$?.("${route}", newModule);
-	});
-}
-
 `;
+
+    code = appendHmr(code, route);
 
     return transformWithEsbuild(code, `${id}.jsx`);
   }

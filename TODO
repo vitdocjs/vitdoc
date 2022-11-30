@@ -6,6 +6,7 @@
 - [x] dumi card-block
 - [x] API
 - [x] Refactor Component demo load
-- [ ] theme
+- [x] theme
+- [ ] otp hmr
 - [ ] css
 - [x] Types HMR

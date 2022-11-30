@@ -51,10 +51,10 @@
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.1",
     "unist-util-visit-parents": "^5.1.1",
-    "dumi": "^2.0.7",
     "vite": "^3.2.4"
   },
   "devDependencies": {
+    "dumi": "^2.0.7",
     "@types/hast": "^2.3.4"
   }
 }

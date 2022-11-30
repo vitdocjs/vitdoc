@@ -1,5 +1,5 @@
 import react from "@vitejs/plugin-react";
-import { vitdoc } from "./dist/cjs/preset";
+import { vitdoc } from "../dist/cjs/preset";
 import { resolveConfig } from "esbuild-resolve-config";
 import { mergeConfig } from "vite";
 
