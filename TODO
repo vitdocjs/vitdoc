@@ -7,6 +7,7 @@
 - [x] API
 - [x] Refactor Component demo load
 - [x] theme
-- [ ] otp hmr
+- [x] otp hmr
+- [x] dumi prebundle
 - [ ] css
 - [x] Types HMR

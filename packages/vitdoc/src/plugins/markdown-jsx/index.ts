@@ -1,9 +1,9 @@
+import type { IThemeComponent } from "dumi/dist/features/theme/loader";
+import { getExportsStatic } from "pkg-exports";
 import { ModuleGraph, Plugin, UserConfig } from "vite";
+import { ConfigType } from "../../types";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
-import { getExportsRuntime, getExportsStatic } from "pkg-exports";
-import { ConfigType } from "../../types";
-import type { IThemeComponent } from "dumi/dist/features/theme/loader";
 
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 

@@ -2,7 +2,7 @@
   "name": "vitdoc",
   "version": "1.0.14",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/index.js",
   "bin": {
     "vitdoc": "./bin/index.mjs",
     "vdoc": "./bin/index.mjs"
@@ -10,7 +10,6 @@
   "scripts": {
     "dev": "father dev",
     "build": "father build",
-    "prebundle": "esbuild ./prebundle/markdown --bundle --outfile=compiled/markdown.js --external:esbuild --external:fsevents --external:@umijs/core --external:father --external:deepmerge --external:@umijs/utils --external:enhanced-resolve --format=cjs --platform=node",
     "prepublishOnly": "cd plugins/components-template/view && npm run build"
   },
   "engines": {
@@ -28,6 +27,9 @@
   ],
   "dependencies": {
     "@types/node": "^14.18.33",
+    "@umijs/bundler-utils": "^4.0.33",
+    "@umijs/core": "^4.0.33",
+    "@umijs/utils": "^4.0.33",
     "@vitdoc/runtime": "workspace:^1.0.0",
     "@vitdoc/template-default": "workspace:^1.0.0",
     "@vitdoc/ui": "workspace:^1.0.14",
@@ -41,6 +43,7 @@
     "hast-util-to-string": "^2.0.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
+    "mlly": "^1.0.0",
     "pkg-exports": "^0.1.2",
     "prettier": "^2.8.0",
     "remark-frontmatter": "^4.0.1",
@@ -48,13 +51,13 @@
     "sass": "^1.56.1",
     "swig": "^1.4.2",
     "typescript": "^4.9.3",
-    "unified": "^10.1.2",
-    "unist-util-visit": "^4.1.1",
-    "unist-util-visit-parents": "^5.1.1",
     "vite": "^3.2.4"
   },
   "devDependencies": {
-    "dumi": "^2.0.7",
-    "@types/hast": "^2.3.4"
+    "unified": "^10.1.2",
+    "unist-util-visit": "^4.1.1",
+    "unist-util-visit-parents": "^5.1.1",
+    "@types/hast": "^2.3.4",
+    "dumi": "^2.0.7"
   }
 }
