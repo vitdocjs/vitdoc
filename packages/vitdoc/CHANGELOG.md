@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.1.13
+
+### Patch Changes
+
+- 🐛 fix: get main component
+
 ## 1.1.12
 
 ### Patch Changes

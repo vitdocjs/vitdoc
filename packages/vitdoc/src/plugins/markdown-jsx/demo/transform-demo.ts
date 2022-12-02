@@ -1,4 +1,5 @@
 import type { IParsedBlockAsset } from "dumi/dist/assetParsers/block";
+import { resolveMainComponent, removeProcessCwd } from "../../../utils";
 import { transformWithEsbuild } from "vite";
 
 export type IDemoData = {
@@ -12,10 +13,10 @@ export type IDemoData = {
 };
 
 export async function transformDemo(demo: IDemoData) {
-  let mainModuleId = Object.keys(demo.sources ?? {})[0] ?? "";
+  let mainModuleId = resolveMainComponent(demo.filename);
 
-  if (!!mainModuleId && !/^\./.test(mainModuleId)) {
-    mainModuleId = `./${mainModuleId}`;
+  if (!!mainModuleId) {
+    mainModuleId = removeProcessCwd(mainModuleId);
   }
 
   const replaceReact = (code) => {
