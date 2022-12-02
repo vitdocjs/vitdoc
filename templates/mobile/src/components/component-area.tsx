@@ -10,3 +10,5 @@ export function DumiDemo(props) {
     />
   );
 }
+
+DumiDemo.vitdocDemo$ = true;

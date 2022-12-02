@@ -52,6 +52,7 @@ export function DumiDemo(props) {
     />
   );
 }
+DumiDemo.vitdocDemo$ = true;
 
 export function DumiDemoGrid(props) {
   const { data: markdowns } = useMarkdown();
@@ -76,6 +77,7 @@ export function DumiDemoGrid(props) {
     </div>
   );
 }
+DumiDemoGrid.vitdocDemo$ = true;
 
 export function Link(props) {
   return "LINK";
