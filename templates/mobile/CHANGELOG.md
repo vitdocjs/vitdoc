@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.13
+
+### Patch Changes
+
+- 🐛 fix: mobile hmr
+
 ## 1.1.12
 
 ### Patch Changes

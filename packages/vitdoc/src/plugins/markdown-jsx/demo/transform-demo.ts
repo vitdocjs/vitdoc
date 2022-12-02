@@ -14,7 +14,7 @@ export type IDemoData = {
 export async function transformDemo(demo: IDemoData) {
   let mainModuleId = Object.keys(demo.sources ?? {})[0] ?? "";
 
-  if (!/^\./.test(mainModuleId)) {
+  if (!!mainModuleId && !/^\./.test(mainModuleId)) {
     mainModuleId = `./${mainModuleId}`;
   }
 

@@ -1,5 +1,6 @@
 import { useMemoizedFn, useRequest } from "ahooks";
 import identity from "lodash/identity";
+import React from "react";
 import { useEffect } from "react";
 import { useLocation, useMatch } from "react-router-dom";
 
@@ -130,7 +131,7 @@ export function useDemo(load: Parameters<typeof useLoadModule>[0] | undefined) {
       lang: "tsx",
       renderer: async (...props) => {
         res.setWrap$?.(...props);
-        return res.default(...props);
+        return React.createElement(() => res.default(...props));
       },
       content,
       route: `/~${route}/${demoId}`,

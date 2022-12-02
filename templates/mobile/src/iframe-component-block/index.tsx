@@ -17,7 +17,7 @@ export const IframeComponentBlock = (props: RendererProps) => {
 
   const { lang, content, route } = useCreation(
     () => getModule?.(id?.trim()) ?? ({} as any),
-    [id]
+    [getModule]
   );
 
   const [{ current }] = useAtom(Store.propertiesPropsStore);
