@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.16
+
+### Patch Changes
+
+- upgrade antd
+
 ## 1.1.15
 
 ### Patch Changes

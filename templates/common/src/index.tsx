@@ -69,6 +69,7 @@ export function App() {
         if (collapsed) {
           return "";
         }
+
         return React.cloneElement(dom as any, {
           onClick: () => push(item.path!),
           children: <LinkCopy route={item.path}>{item.name}</LinkCopy>,

@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.14
+
+### Patch Changes
+
+- upgrade antd
+
 ## 1.1.13
 
 ### Patch Changes
