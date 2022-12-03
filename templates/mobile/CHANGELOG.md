@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.12
+
+### Patch Changes
+
+- remove antd :where
+
 ## 1.1.11
 
 ### Patch Changes

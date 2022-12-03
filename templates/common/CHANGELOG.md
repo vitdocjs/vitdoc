@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.11
+
+### Patch Changes
+
+- remove antd :where
+
 ## 1.1.10
 
 ### Patch Changes
