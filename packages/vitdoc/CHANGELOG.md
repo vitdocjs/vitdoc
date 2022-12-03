@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.1.14
+
+### Patch Changes
+
+- fix: antd compatibility
+- Updated dependencies
+  - @vitdoc/template-default@1.1.12
+
 ## 1.1.13
 
 ### Patch Changes
