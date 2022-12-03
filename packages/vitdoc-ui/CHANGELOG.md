@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.1.14
+
+### Patch Changes
+
+- fix antd css in js
+
 ## 1.1.13
 
 ### Patch Changes

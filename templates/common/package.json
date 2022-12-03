@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/template-default",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "The default template for vitdoc",
   "files": [
     "dist"
@@ -24,15 +24,15 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@ant-design/cssinjs": "^1.1.0",
-    "@ant-design/pro-layout": "^7.2.6",
-    "@vitdoc/ui": "workspace:*",
+    "@ant-design/cssinjs": "^0.0.0-alpha.38",
+    "@ant-design/pro-layout": "^7.3.3",
+    "@vitdoc/ui": "workspace:1.1.14",
     "ahooks": "^3.7.2",
-    "antd": "^5.0.1",
+    "antd": "^5.0.3",
     "classnames": "^2.3.2",
-    "jotai": "^1.10.0",
+    "jotai": "^1.11.0",
     "lodash": "^4.17.21",
-    "react-router-dom": "^6.4.3",
+    "react-router-dom": "^6.4.4",
     "sass": "^1.56.1",
     "vite": "^3.2.4"
   }

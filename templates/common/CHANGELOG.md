@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.13
+
+### Patch Changes
+
+- fix antd css in js
+
 ## 1.1.12
 
 ### Patch Changes

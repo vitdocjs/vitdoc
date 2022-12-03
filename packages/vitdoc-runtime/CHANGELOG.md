@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.12
+
+### Patch Changes
+
+- fix antd css in js
+
 ## 1.1.11
 
 ### Patch Changes

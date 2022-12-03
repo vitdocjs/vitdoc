@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.15
+
+### Patch Changes
+
+- fix antd css in js
+- Updated dependencies
+  - @vitdoc/runtime@1.1.12
+  - @vitdoc/template-default@1.1.13
+
 ## 1.1.14
 
 ### Patch Changes

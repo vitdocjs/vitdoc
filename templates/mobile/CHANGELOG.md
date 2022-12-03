@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.15
+
+### Patch Changes
+
+- fix antd css in js
+
 ## 1.1.14
 
 ### Patch Changes
