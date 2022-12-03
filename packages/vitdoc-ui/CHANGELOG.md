@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.1.13
+
+### Patch Changes
+
+- 🐛 fix: mobile hmr
+
+## 1.1.12
+
+### Patch Changes
+
+- fix: mobile demo item
+
 ## 1.1.11
 
 ### Patch Changes

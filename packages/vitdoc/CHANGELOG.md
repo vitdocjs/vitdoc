@@ -1,5 +1,19 @@
 # vitdoc
 
+## 1.1.13
+
+### Patch Changes
+
+- 🐛 fix: get main component
+
+## 1.1.12
+
+### Patch Changes
+
+- 🐛 fix: mobile hmr
+  - @vitdoc/runtime@1.1.11
+  - @vitdoc/template-default@1.1.10
+
 ## 1.1.11
 
 ### Patch Changes
