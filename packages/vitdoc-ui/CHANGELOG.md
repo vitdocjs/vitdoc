@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.1.15
+
+### Patch Changes
+
+- fix: component area style
+
 ## 1.1.14
 
 ### Patch Changes

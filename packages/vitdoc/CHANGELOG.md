@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.16
+
+### Patch Changes
+
+- fix: component area style
+- Updated dependencies
+  - @vitdoc/runtime@1.1.13
+  - @vitdoc/template-default@1.1.16
+
 ## 1.1.15
 
 ### Patch Changes
