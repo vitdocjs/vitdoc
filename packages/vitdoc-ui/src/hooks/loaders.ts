@@ -127,11 +127,18 @@ export function useDemo(load: Parameters<typeof useLoadModule>[0] | undefined) {
     const content = res.content$.value;
     const route = load!.id.replace(/(.+\.md)\?.+/, "$1");
     const demoId = load!.id.replace(/.+markdown-proxy&id=(.+)/, "$1");
+
     return {
       lang: "tsx",
       renderer: async (...props) => {
         res.setWrap$?.(...props);
-        return React.createElement(() => res.default(...props));
+
+        if (res.IS_FN_DEMO$) {
+          res.default(...props);
+          return;
+        }
+
+        return React.createElement(res.default);
       },
       content,
       route: `/~${route}/${demoId}`,

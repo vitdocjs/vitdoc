@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.21
+
+### Patch Changes
+
+- fix: antd5 route key
+
 ## 1.1.20
 
 ### Patch Changes

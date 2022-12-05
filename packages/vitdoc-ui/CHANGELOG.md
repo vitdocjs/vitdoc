@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.1.18
+
+### Patch Changes
+
+- fix: antd5 route key
+
 ## 1.1.17
 
 ### Patch Changes

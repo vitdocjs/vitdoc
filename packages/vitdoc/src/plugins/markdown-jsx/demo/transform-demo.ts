@@ -77,7 +77,7 @@ export async function transformDemo(demo: IDemoData) {
         return prependSetWrap(code);
       }
 
-      code = `export default function(mountNode){ ${code} };`;
+      code = `export default function(mountNode){ ${code} };export const IS_FN_DEMO$ = true;`;
 
       return prependSetWrap(code);
     };
@@ -112,7 +112,6 @@ export async function transformDemo(demo: IDemoData) {
 
   code = appendMeta(code);
 
-  return transformWithEsbuild(code, `${demo.filename}.tsx`, {
-    sourcefile: demo.filename,
-  });
+  return code;
+
 }

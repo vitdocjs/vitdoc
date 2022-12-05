@@ -71,6 +71,7 @@ export const getRoutes = async () => {
       if (!nextChild) {
         nextChild = {
           name: groupName,
+          key: groupName,
           order: group?.order ?? index + 0.1,
           children: [],
         };

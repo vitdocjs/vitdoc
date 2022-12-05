@@ -1,6 +1,6 @@
 import type { IThemeComponent } from "dumi/dist/features/theme/loader";
 import { getExportsStatic } from "pkg-exports";
-import { ModuleGraph, Plugin, UserConfig } from "vite";
+import { ModuleGraph, Plugin, transformWithEsbuild, UserConfig } from "vite";
 import { ConfigType } from "../../types";
 import { isCSSLang } from "../../utils/lang";
 import { resolveTheme } from "../../utils/theme";
@@ -71,7 +71,10 @@ const mdjsx = (vitdocConfig: ConfigType) => {
 
         const demoCode = await transformDemo(demoInfo);
 
-        return demoCode;
+        const vFile = `${id}.tsx`;
+        return transformWithEsbuild(demoCode, vFile, {
+          sourcefile: vFile,
+        });
       }
 
       if (!/\.md$/.test(id)) {

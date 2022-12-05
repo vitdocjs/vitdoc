@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.18
+
+### Patch Changes
+
+- fix: antd5 route key
+- Updated dependencies
+  - @vitdoc/runtime@1.1.16
+  - @vitdoc/template-default@1.1.19
+
 ## 1.1.17
 
 ### Patch Changes

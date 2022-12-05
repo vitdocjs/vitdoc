@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.19
+
+### Patch Changes
+
+- fix: antd5 route key
+
 ## 1.1.18
 
 ### Patch Changes

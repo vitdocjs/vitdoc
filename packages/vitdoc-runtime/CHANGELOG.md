@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.16
+
+### Patch Changes
+
+- fix: antd5 route key
+
 ## 1.1.15
 
 ### Patch Changes
