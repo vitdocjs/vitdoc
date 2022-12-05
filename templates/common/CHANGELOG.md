@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.15
+
+### Patch Changes
+
+- fix: component style
+
 ## 1.1.14
 
 ### Patch Changes

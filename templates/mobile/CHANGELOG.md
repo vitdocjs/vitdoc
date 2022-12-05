@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.17
+
+### Patch Changes
+
+- fix: component style
+
 ## 1.1.16
 
 ### Patch Changes
