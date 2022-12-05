@@ -30,7 +30,7 @@ export function PropertyPane() {
   );
 
   const [storeProps, setStore] = useAtom(propertiesPropsStore);
-  const { defaultProps } = storeProps;
+  const { current, defaultProps } = storeProps;
 
   const onPropsChange = useMemoizedFn((props: any) => {
     setStore({
@@ -43,21 +43,15 @@ export function PropertyPane() {
   });
 
   const { data: prototypeOptions } = useRequest(
-    async () => {
-      return buildVisionFromTypes(properties);
-    },
+    () => buildVisionFromTypes(properties),
     {
       refreshDeps: [properties],
     }
   );
 
-  const renderIndex = useRef(0);
   useUpdateEffect(() => {
-    renderIndex.current++;
-    if (renderIndex.current > 1) {
-      setPropertyDrawerShow("1");
-    }
-  }, [defaultProps]);
+    !!current && setPropertyDrawerShow("1");
+  }, [current]);
 
   if (!Object.keys(properties).length) {
     return null;
@@ -87,7 +81,7 @@ export function PropertyPane() {
             }
           >
             <Stage
-              {...prototypeOptions}
+              {...(prototypeOptions as any)}
               initialValues={defaultProps}
               onValuesChange={onPropsChange}
             />

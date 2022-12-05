@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.19
+
+### Patch Changes
+
+- fix: property style
+- Updated dependencies
+  - @vitdoc/template-default@1.1.20
+  - @vitdoc/runtime@1.1.17
+
 ## 1.1.18
 
 ### Patch Changes

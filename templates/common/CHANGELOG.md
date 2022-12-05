@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.20
+
+### Patch Changes
+
+- fix: property style
+
 ## 1.1.19
 
 ### Patch Changes

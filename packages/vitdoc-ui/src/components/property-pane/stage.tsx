@@ -6,7 +6,6 @@ import { useCreation } from "ahooks";
 import { List, Form } from "antd";
 
 export function Stage({
-  componentName,
   configure,
   initialValues,
   onValuesChange,

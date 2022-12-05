@@ -99,9 +99,7 @@ export function App() {
 export function mount({ container }) {
   ReactDOM.render(
     <HashRouter>
-      <StyleProvider hashPriority="high">
-        <App />
-      </StyleProvider>
+      <App />
     </HashRouter>,
     container
   );

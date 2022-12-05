@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.17
+
+### Patch Changes
+
+- fix: property style
+
 ## 1.1.16
 
 ### Patch Changes

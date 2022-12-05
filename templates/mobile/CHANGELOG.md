@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.22
+
+### Patch Changes
+
+- fix: property style
+
 ## 1.1.21
 
 ### Patch Changes
