@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.17
+
+### Patch Changes
+
+- fix: style of component area
+
 ## 1.1.16
 
 ### Patch Changes

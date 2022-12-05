@@ -5,7 +5,6 @@
   position: relative;
   display: inline-block;
   width: 100%;
-  overflow: auto;
   transition: all 0.2s;
   margin-bottom: 16px;
 
@@ -29,6 +28,7 @@
   .component-container {
     padding: 16px;
     min-height: 80px;
+    overflow: auto;
     display: flex;
     align-items: center;
     justify-content: center;

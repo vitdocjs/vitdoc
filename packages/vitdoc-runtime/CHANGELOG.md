@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.14
+
+### Patch Changes
+
+- fix: style of component area
+
 ## 1.1.13
 
 ### Patch Changes
