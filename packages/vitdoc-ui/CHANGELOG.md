@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.1.17
+
+### Patch Changes
+
+- fix style of ui template
+
 ## 1.1.16
 
 ### Patch Changes

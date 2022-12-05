@@ -1,4 +1,7 @@
 .property-container {
+  .ant-table-content {
+    overflow: auto;
+  }
   code {
     font-size: 13px;
     color: var(--vp-c-text-code);

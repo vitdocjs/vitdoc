@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.1.18
+
+### Patch Changes
+
+- fix style of ui template
+
 ## 1.1.17
 
 ### Patch Changes

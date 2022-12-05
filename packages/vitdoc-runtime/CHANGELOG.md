@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.15
+
+### Patch Changes
+
+- fix style of ui template
+
 ## 1.1.14
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.20
+
+### Patch Changes
+
+- fix style of ui template
+
 ## 1.1.19
 
 ### Patch Changes
