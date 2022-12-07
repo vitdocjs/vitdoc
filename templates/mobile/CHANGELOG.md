@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.23
+
+### Patch Changes
+
+- upgrade deps & fix react-dom optimizer
+
 ## 1.1.22
 
 ### Patch Changes

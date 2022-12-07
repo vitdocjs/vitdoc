@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.1.20
+
+### Patch Changes
+
+- upgrade deps & fix react-dom optimizer
+- Updated dependencies
+  - @vitdoc/runtime@1.1.18
+  - @vitdoc/template-default@1.1.21
+
 ## 1.1.19
 
 ### Patch Changes

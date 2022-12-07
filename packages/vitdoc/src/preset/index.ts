@@ -19,6 +19,9 @@ export function vitdoc(config: ConfigType = {}): Plugin[] {
         return mergeConfig(
           {
             base: process.env.VITE_BASE_HOST || "/",
+            optimizeDeps: {
+              include: ["react-dom", "react"],
+            },
             build: {
               target: "esnext",
               outDir: "dist/stories",

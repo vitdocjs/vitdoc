@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.18
+
+### Patch Changes
+
+- upgrade deps & fix react-dom optimizer
+
 ## 1.1.17
 
 ### Patch Changes
