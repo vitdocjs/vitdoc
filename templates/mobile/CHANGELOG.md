@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.1.24
+
+### Patch Changes
+
+- feat: support vite plugin
+
 ## 1.1.23
 
 ### Patch Changes

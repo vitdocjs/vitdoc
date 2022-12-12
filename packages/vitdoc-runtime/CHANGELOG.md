@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.1.19
+
+### Patch Changes
+
+- feat: support vite plugin
+
 ## 1.1.18
 
 ### Patch Changes

@@ -1,17 +1,17 @@
-import path from "path";
-import { mergeConfig } from "vite";
-import { Plugin } from "vite";
-import mdjsx from "../plugins/markdown-jsx";
-import componentsTemplate from "../plugins/components-template";
-import TypeFile from "../plugins/type-file";
-import vitDocHMR from "../plugins/hmr";
-import { getConfig } from "../utils/config";
-import { ConfigType } from "../types";
 import deepmerge from "lodash/merge";
+import path from "path";
+import { mergeConfig, Plugin } from "vite";
+import componentsTemplate from "../plugins/components-template";
+import vitDocHMR from "../plugins/hmr";
+import mdjsx from "../plugins/markdown-jsx";
+import TypeFile from "../plugins/type-file";
+import { ConfigType } from "../types";
+import { getConfig } from "../utils/config";
 
 export function vitdoc(config: ConfigType = {}): Plugin[] {
   const cwd = process.cwd();
   config = deepmerge(getConfig(), config);
+
   return [
     {
       name: "vitdoc:config",

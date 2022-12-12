@@ -7,11 +7,6 @@ export default defineConfig({
     ? undefined
     : {
         output: "dist",
-        ignores: ["src/plugins/*"],
         transformer: "esbuild",
       },
-  cjs: {
-    input: "src/plugins",
-    output: "dist/plugins",
-  },
 });

@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/template-mobile",
-  "version": "1.1.23",
+  "version": "1.1.24",
   "description": "The mobile template for vitdoc",
   "type": "module",
   "main": "dist/index.js",
@@ -8,7 +8,6 @@
     ".": "./dist/index.js",
     "./theme": "./dist/theme.js",
     "./style.css": "./dist/style.css",
-    "./plugins": "./dist/plugins/index.js",
     "./package.json": "./package.json"
   },
   "files": [
@@ -16,12 +15,11 @@
   ],
   "scripts": {
     "dev": "father dev",
-    "build": "vite build && father build "
+    "build": "vite build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@yuo/postcss-px2vw": "^1.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

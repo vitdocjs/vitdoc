@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.1.22
+
+### Patch Changes
+
+- feat: support vite plugin
+- Updated dependencies
+  - @vitdoc/runtime@1.1.19
+
 ## 1.1.21
 
 ### Patch Changes
