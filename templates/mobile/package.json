@@ -8,6 +8,7 @@
     ".": "./dist/index.js",
     "./theme": "./dist/theme.js",
     "./style.css": "./dist/style.css",
+    "./plugins": "./dist/plugins/index.js",
     "./package.json": "./package.json"
   },
   "files": [
@@ -15,11 +16,12 @@
   ],
   "scripts": {
     "dev": "father dev",
-    "build": "vite build"
+    "build": "vite build && father build "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@yuo/postcss-px2vw": "^1.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

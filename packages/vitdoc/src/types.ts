@@ -1,3 +1,5 @@
+import { Plugin } from "vite";
+
 export type MarkdownMeta = {
   /**
    * For configuring the title of the page, which will be used as the subtitle of the page title and the left menu.
@@ -51,4 +53,9 @@ export type ConfigType = {
    * meta data file name
    */
   metaFileName?: string | false;
+
+  /**
+   * Plugins for vite
+   */
+  plugins?: Plugin[];
 };

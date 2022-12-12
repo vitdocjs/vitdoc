@@ -52,5 +52,6 @@ export function vitdoc(config: ConfigType = {}): Plugin[] {
     TypeFile(),
     mdjsx(config),
     vitDocHMR(),
+    ...(config.plugins || []),
   ] as Plugin[];
 }

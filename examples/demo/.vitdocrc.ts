@@ -1,4 +1,5 @@
 export default {
   logo: '',
-  // template: '@vitdoc/template-mobile',
+
+  template: '@vitdoc/template-mobile',
 };
