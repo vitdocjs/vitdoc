@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.1.21
+
+### Patch Changes
+
+- fix: target of markdown demo
+
 ## 1.1.20
 
 ### Patch Changes

@@ -73,6 +73,7 @@ const mdjsx = (vitdocConfig: ConfigType) => {
 
         const vFile = `${id}.tsx`;
         return transformWithEsbuild(demoCode, vFile, {
+          target: "esnext",
           sourcefile: vFile,
         });
       }
