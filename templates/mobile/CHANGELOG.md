@@ -1,5 +1,17 @@
 # @vitdoc/template-mobile
 
+## 1.1.26
+
+### Patch Changes
+
+- fix qrcode path
+
+## 1.1.25
+
+### Patch Changes
+
+- fix: absolute path of qrcode
+
 ## 1.1.24
 
 ### Patch Changes

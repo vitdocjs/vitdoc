@@ -9,7 +9,7 @@ import {
   SyncOutlined,
 } from "@ant-design/icons";
 import { copyToClipboard } from "@vitdoc/ui";
-import { useBoolean, useMemoizedFn } from "ahooks";
+import { useBoolean, useCreation, useMemoizedFn } from "ahooks";
 import { Popover, Tooltip } from "antd";
 
 import "./device.scss";
@@ -24,6 +24,13 @@ export const Device: FC<IDeviceProps> = ({ actions = null, url }) => {
   const [renderKey, setRenderKey] = useState(Math.random());
   const mode = "demo";
 
+  const qrUrl = useCreation(() => {
+    const ins = new URL(location.href);
+    ins.hash = url;
+
+    return ins.toString();
+  }, [url]);
+
   return (
     <div className={"adm-doc-device"} data-device-type="iOS" data-mode={mode}>
       <iframe title="vitdoc-previewer" src={url} key={renderKey} />
@@ -35,7 +42,7 @@ export const Device: FC<IDeviceProps> = ({ actions = null, url }) => {
             onClick={() => open(url)}
           />
         </Tooltip>
-        <Popover content={<QRCodeSVG value={url} size={96} />}>
+        <Popover content={<QRCodeSVG value={qrUrl} size={96} />}>
           <QrcodeOutlined className="code-box-code-action" />
         </Popover>
         <Tooltip title="Refresh">
