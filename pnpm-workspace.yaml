@@ -1,4 +1,5 @@
 packages:
+  - "compile"
   - "packages/*"
   - "templates/*"
   - "examples/*"

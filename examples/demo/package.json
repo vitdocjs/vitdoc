@@ -30,15 +30,15 @@
     "@alifd/next": "^1.26.9",
     "@types/lodash": "^4.14.191",
     "@types/react-dom": "^16.9.17",
-    "@vitdoc/template-default": "workspace:^1.1.21",
-    "@vitdoc/template-mobile": "workspace:^1.1.24",
+    "@vitdoc/template-default": "workspace:^1.2.0",
+    "@vitdoc/template-mobile": "workspace:^1.2.0",
     "moment-timezone": "^0.5.33",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.0",
     "pretty-quick": "^1.11.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "vitdoc": "workspace:1.1.22",
+    "vitdoc": "workspace:1.2.0",
     "vite-plugin-px2vw": "^1.0.0"
   },
   "sideEffects": [

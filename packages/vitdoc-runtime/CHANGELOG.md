@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: upgrade vite version
+
 ## 1.1.19
 
 ### Patch Changes

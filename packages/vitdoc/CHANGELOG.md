@@ -1,5 +1,17 @@
 # vitdoc
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: upgrade vite version
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/runtime@1.2.0
+  - @vitdoc/template-default@1.2.0
+
 ## 1.1.22
 
 ### Patch Changes

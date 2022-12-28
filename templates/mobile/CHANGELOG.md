@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: upgrade vite version
+
 ## 1.1.26
 
 ### Patch Changes

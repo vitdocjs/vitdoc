@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: upgrade vite version
+
 ## 1.1.21
 
 ### Patch Changes

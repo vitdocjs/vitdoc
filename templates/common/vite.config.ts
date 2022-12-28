@@ -1,8 +1,9 @@
+import pkg from "@vitdoc/compile";
+const { viteIgnore } = pkg;
 import path from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  resolve: {},
   build: {
     outDir: "dist",
     cssCodeSplit: false,
@@ -22,4 +23,5 @@ export default defineConfig({
       output: {},
     },
   },
+  plugins: [viteIgnore()],
 });

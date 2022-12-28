@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.1.22",
+  "version": "1.2.0",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./dist/index.js",
   "bin": {
@@ -28,8 +28,8 @@
     "@umijs/bundler-utils": "^4.0.34",
     "@umijs/core": "^4.0.34",
     "@umijs/utils": "^4.0.34",
-    "@vitdoc/runtime": "workspace:^1.1.19",
-    "@vitdoc/template-default": "workspace:^1.1.21",
+    "@vitdoc/runtime": "workspace:^1.2.0",
+    "@vitdoc/template-default": "workspace:^1.2.0",
     "@vitejs/plugin-react": "^2.2.0",
     "chalk": "^4.1.2",
     "dumi": "^2.0.12",
@@ -54,7 +54,7 @@
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.1",
     "unist-util-visit-parents": "^5.1.1",
-    "vite": "^3.2.5"
+    "vite": "^4.0.3"
   },
   "devDependencies": {
     "@types/hast": "^2.3.4",

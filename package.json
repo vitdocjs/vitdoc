@@ -4,7 +4,7 @@
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "private": true,
   "scripts": {
-    "dev": "turbo --filter='./templates/*' --filter='./packages/*' dev",
+    "dev": "turbo --filter='./templates/*' --filter='./packages/*' --filter='./compile' dev",
     "example:dev": "turbo --filter='./examples/*' dev",
     "test": "vitest run",
     "prettier": "pretty-quick --staged",
@@ -30,7 +30,7 @@
     "esbuild-sass-plugin": "^2.4.3",
     "father": "^4.1.0",
     "turbo": "^1.6.3",
-    "vite": "^3.2.5",
+    "vite": "^4.0.3",
     "vitest": "^0.25.5"
   }
 }

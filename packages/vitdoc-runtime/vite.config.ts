@@ -1,3 +1,5 @@
+import pkg from "@vitdoc/compile";
+const { viteIgnore } = pkg;
 import path from "path";
 import { defineConfig } from "vite";
 
@@ -23,7 +25,7 @@ export default defineConfig({
         "virtual:vitdoc-template",
         "virtual:vitdoc-hmr",
       ],
-      output: {},
     },
   },
+  plugins: [viteIgnore()],
 });
