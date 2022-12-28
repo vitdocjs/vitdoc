@@ -32,10 +32,5 @@
     "turbo": "^1.6.3",
     "vite": "^3.2.5",
     "vitest": "^0.25.5"
-  },
-  "pnpm": {
-    "overrides": {
-      "@ant-design/cssinjs": "^1.1.0"
-    }
   }
 }

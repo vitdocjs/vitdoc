@@ -1,4 +1,3 @@
-import { StyleProvider } from "@ant-design/cssinjs";
 import { ProLayout } from "@ant-design/pro-layout";
 import { LinkCopy, useRouteMap } from "@vitdoc/ui";
 import { useBoolean } from "ahooks";
