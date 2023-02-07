@@ -2,6 +2,7 @@ import type { IThemeComponent } from "dumi/dist/features/theme/loader";
 import { getExportsStatic } from "pkg-exports";
 import { ModuleGraph, Plugin, transformWithEsbuild, UserConfig } from "vite";
 import { ConfigType } from "../../types";
+import { cleanUrl } from "../../utils";
 import { isCSSLang } from "../../utils/lang";
 import { resolveTheme } from "../../utils/theme";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
@@ -15,6 +16,7 @@ export const getDemoId = (id) =>
 
 const mdjsx = (vitdocConfig: ConfigType) => {
   let markdownMap: Record<string, IDemoData> = {};
+  let transformPromises: Record<string, Promise<any>> = {};
   let isBuild: boolean;
   let moduleGraph: ModuleGraph;
   let config: UserConfig;
@@ -59,6 +61,9 @@ const mdjsx = (vitdocConfig: ConfigType) => {
       if (isMarkdownProxy(id)) {
         const demoId = getDemoId(id);
 
+        // wait for the markdown transform to finish
+        await transformPromises[cleanUrl(id)];
+
         let demoInfo = markdownMap[demoId];
 
         if (!demoId || !demoInfo) {
@@ -82,7 +87,7 @@ const mdjsx = (vitdocConfig: ConfigType) => {
         return;
       }
 
-      return transformMarkdown.call(this, {
+      transformPromises[id] = transformMarkdown.call(this, {
         id,
         cwd: process.cwd(),
         builtins: await getBuiltins,
@@ -90,8 +95,10 @@ const mdjsx = (vitdocConfig: ConfigType) => {
           markdownMap[info.id] = info;
         },
       });
+
+      return transformPromises[id];
     },
-    async handleHotUpdate({ modules }) {
+    handleHotUpdate({ modules }) {
       modules?.forEach((module) => {
         if (isMarkdownProxy(module.id)) {
           delete markdownMap[getDemoId(module.id)];

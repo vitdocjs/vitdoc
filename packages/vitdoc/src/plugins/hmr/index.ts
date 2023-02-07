@@ -1,7 +1,6 @@
-import { fileURLToPath, resolve } from "mlly";
 import path from "path";
+import { Plugin } from "vite";
 import { removeProcessCwd } from "../../utils";
-import { mergeConfig, Plugin } from "vite";
 import { appendHmr } from "./utils";
 
 export default function VitDocHmr() {
@@ -18,7 +17,7 @@ export default function VitDocHmr() {
       if (/\.md$/.test(id)) {
         return appendHmr(code, removeProcessCwd(id));
       }
-      if(/\.type$/.test(id)) {
+      if (/\.type$/.test(id)) {
         return appendHmr(code, removeProcessCwd(id));
       }
     },

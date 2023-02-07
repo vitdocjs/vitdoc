@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.2.1
+
+### Patch Changes
+
+- 🐛 fix: transform order
+
 ## 1.2.0
 
 ### Minor Changes
