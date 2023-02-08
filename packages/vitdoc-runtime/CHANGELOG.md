@@ -1,5 +1,17 @@
 # @vitdoc/runtime
 
+## 1.2.3
+
+### Patch Changes
+
+- upgrade hashchange
+
+## 1.2.2
+
+### Patch Changes
+
+- fix: hashchange
+
 ## 1.2.1
 
 ### Patch Changes

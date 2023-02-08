@@ -1,5 +1,23 @@
 # vitdoc
 
+## 1.2.4
+
+### Patch Changes
+
+- upgrade hashchange
+- Updated dependencies
+  - @vitdoc/runtime@1.2.3
+  - @vitdoc/template-default@1.2.4
+
+## 1.2.3
+
+### Patch Changes
+
+- fix: hashchange
+- Updated dependencies
+  - @vitdoc/runtime@1.2.2
+  - @vitdoc/template-default@1.2.3
+
 ## 1.2.2
 
 ### Patch Changes

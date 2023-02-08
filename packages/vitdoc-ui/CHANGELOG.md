@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.1.25
+
+### Patch Changes
+
+- upgrade hashchange
+
+## 1.1.24
+
+### Patch Changes
+
+- fix: hashchange
+
 ## 1.1.23
 
 ### Patch Changes

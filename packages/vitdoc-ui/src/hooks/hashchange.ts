@@ -1,21 +1,17 @@
-import { useEffect, useMemo, useRef } from "react";
-import { useLocation } from "react-router";
+import { useMemoizedFn } from "ahooks";
+import { useNavigate as _useNavigate } from "react-router-dom";
 
-export function useHashChange() {
-  const location = useLocation();
-  const lastUrl = useRef(window.location.href);
-  useMemo(() => {
-    window.addEventListener("hashchange", (e) => {
-      lastUrl.current = e.newURL;
-    });
-  }, []);
-  useEffect(() => {
-    if (lastUrl.current === window.location.href) return;
+export function useNavigate() {
+  const push = _useNavigate();
+
+  return useMemoizedFn((newUrl) => {
+    const oldURL = window.location.href;
+    push(newUrl);
+
     const event = new HashChangeEvent("hashchange", {
-      oldURL: lastUrl.current,
+      oldURL,
       newURL: window.location.href,
     });
-
     window.dispatchEvent(event);
-  }, [location]);
+  });
 }
