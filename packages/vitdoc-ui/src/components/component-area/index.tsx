@@ -65,7 +65,7 @@ export const ComponentBlock = (props: RendererProps) => {
         <Tooltip
           title="Open in page"
           onClick={() => {
-            open(`/#${route}`);
+            open(`#${route}`);
           }}
         >
           <FileSearchOutlined className={classNames("code-box-code-action")} />

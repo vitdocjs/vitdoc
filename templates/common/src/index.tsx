@@ -1,5 +1,5 @@
 import { ProLayout } from "@ant-design/pro-layout";
-import { LinkCopy, useRouteMap } from "@vitdoc/ui";
+import { LinkCopy, useRouteMap, useHashChange } from "@vitdoc/ui";
 import { useBoolean } from "ahooks";
 import classNames from "classnames";
 import React from "react";
@@ -21,6 +21,7 @@ export function App() {
 
   menuData?.forEach((item) => (item.icon = <span>📦</span>));
 
+  useHashChange();
   const push = useNavigate();
 
   const [collapsed, { toggle }] = useBoolean(false);
