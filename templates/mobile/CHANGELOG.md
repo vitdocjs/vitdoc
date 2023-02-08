@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.2.2
+
+### Patch Changes
+
+- upgrade deps
+
 ## 1.2.1
 
 ### Patch Changes
