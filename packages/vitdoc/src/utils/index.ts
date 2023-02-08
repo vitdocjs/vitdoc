@@ -1,5 +1,4 @@
 import { createHash } from "crypto";
-import { getCorrectConfigFile } from "esbuild-resolve-config";
 import fs from "fs";
 import path from "path";
 import type { ModuleNode } from "vite";
