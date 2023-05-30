@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/template-mobile",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "The mobile template for vitdoc",
   "type": "module",
   "main": "dist/index.js",
@@ -25,17 +25,17 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^4.8.0",
-    "@ant-design/pro-layout": "^7.3.4",
-    "@vitdoc/compile": "workspace:^9.9.9",
-    "@vitdoc/ui": "workspace:1.1.25",
-    "ahooks": "^3.7.2",
-    "antd": "^5.0.4",
+    "@ant-design/pro-layout": "^7.14.0",
+    "@vitdoc/compile": "workspace:^",
+    "@vitdoc/ui": "workspace:*",
+    "ahooks": "^3.7.7",
+    "antd": "^5.5.1",
     "classnames": "^2.3.2",
-    "jotai": "^1.11.1",
+    "jotai": "^1.13.1",
     "lodash": "^4.17.21",
     "qrcode.react": "^3.1.0",
-    "react-router-dom": "^6.4.4",
-    "sass": "^1.56.1",
-    "vite": "^4.0.3"
+    "react-router-dom": "^6.11.2",
+    "sass": "^1.62.1",
+    "vite": "^4.3.9"
   }
 }

@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.2.5
+
+### Patch Changes
+
+- upgrade deps
+- Updated dependencies
+  - @vitdoc/runtime@1.2.4
+  - @vitdoc/template-default@1.2.5
+
 ## 1.2.4
 
 ### Patch Changes

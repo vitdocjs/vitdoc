@@ -22,24 +22,24 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.39",
+    "moment-timezone": "^0.5.43",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@alifd/next": "^1.26.9",
-    "@types/lodash": "^4.14.191",
-    "@types/react-dom": "^16.9.17",
-    "@vitdoc/template-default": "workspace:^1.2.4",
-    "@vitdoc/template-mobile": "workspace:^1.2.4",
+    "@alifd/next": "^1.26.18",
+    "@types/lodash": "^4.14.195",
+    "@types/react-dom": "^16.9.19",
+    "@vitdoc/template-default": "workspace:^",
+    "@vitdoc/template-mobile": "workspace:^",
     "moment-timezone": "^0.5.33",
     "pre-commit": "^1.2.2",
-    "prettier": "^2.8.0",
+    "prettier": "^2.8.8",
     "pretty-quick": "^1.11.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "vitdoc": "workspace:1.2.4",
-    "vite-plugin-px2vw": "^1.0.0"
+    "vitdoc": "workspace:*",
+    "vite-plugin-px2vw": "^1.0.2"
   },
   "sideEffects": [
     "*.css",
