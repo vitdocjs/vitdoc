@@ -24,13 +24,13 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
-    "@types/react": "^17.0.60",
+    "@types/react": "^17.0.62",
     "@types/react-dom": "^17.0.20",
     "bumpp": "^8.2.1",
     "esbuild": "^0.14.54",
-    "esbuild-sass-plugin": "^2.9.0",
-    "father": "^4.2.1",
-    "turbo": "^1.9.9",
+    "esbuild-sass-plugin": "^2.10.0",
+    "father": "^4.2.3",
+    "turbo": "^1.10.6",
     "vite": "^4.3.9",
     "vitest": "^0.25.8"
   }

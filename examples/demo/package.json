@@ -27,7 +27,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@alifd/next": "^1.26.18",
+    "@alifd/next": "^1.26.19",
     "@types/lodash": "^4.14.195",
     "@types/react-dom": "^16.9.19",
     "@vitdoc/template-default": "workspace:^",
