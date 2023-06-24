@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: support custom docs path & collapse style
+
 ## 1.1.26
 
 ### Patch Changes

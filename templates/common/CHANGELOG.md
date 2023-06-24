@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: support custom docs path & collapse style
+
 ## 1.2.5
 
 ### Patch Changes
