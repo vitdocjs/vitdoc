@@ -228,7 +228,9 @@ const componentsTemplate = (
           isDebug,
         });
 
-        html = await server.transformIndexHtml(id, html);
+        if (server) {
+          html = await server.transformIndexHtml(id, html);
+        }
 
         return html;
       }
