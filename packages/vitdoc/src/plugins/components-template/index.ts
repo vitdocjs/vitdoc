@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
 import Swig from "swig";
-import { fileURLToPath, resolve } from "mlly";
 import { mergeConfig, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
@@ -11,11 +10,6 @@ import { resolveTheme } from "../../utils/theme";
 import convertAliasByTsconfigPaths from "resolve-ts-alias";
 
 const isDebug = process.env.DEBUG;
-
-const compHtmlProxyRE = /\?component-html-proxy&index=(\d+)\.js$/;
-const htmlCommentRE = /<!--[\s\S]*?-->/g;
-const scriptModuleRE =
-  /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^>]*>)(.*?)<\/script>/gims;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = async () => {
@@ -108,8 +102,6 @@ export const getRoutes = async () => {
   return { tree: sort(tree), routes };
 };
 
-export const isCompHTMLProxy = (id) => compHtmlProxyRE.test(id);
-
 const vitdocRuntimeId = "virtual:vitdoc-runtime";
 const vitdocTemplateId = "virtual:vitdoc-template";
 
@@ -170,12 +162,6 @@ const componentsTemplate = (
       });
     },
     resolveId(id) {
-      if (isHTMLProxy(id)) {
-        return id.replace(/\?html-proxy/g, "?component-html-proxy");
-      }
-      if (isCompHTMLProxy(id)) {
-        return id;
-      }
       if (isRouteMap(id)) {
         return "route-map.json";
       }
@@ -210,7 +196,7 @@ const componentsTemplate = (
         return JSON.stringify(ctx);
       }
 
-      if (/\.html$/.test(file) && !/\.css$/.test(id)) {
+      if (/\.html$/.test(file) && !isHTMLProxy(id) && !/\.css$/.test(id)) {
         if (!/^\//.test(file)) {
           file = `/${file}`;
         }
@@ -242,28 +228,7 @@ const componentsTemplate = (
           isDebug,
         });
 
-        if (isCompHTMLProxy(id)) {
-          const proxyMatch = id.match(compHtmlProxyRE);
-          if (proxyMatch) {
-            const index = Number(proxyMatch[1]);
-            html = html.replace(htmlCommentRE, "");
-            let match;
-            scriptModuleRE.lastIndex = 0;
-            for (let i = 0; i <= index; i++) {
-              match = scriptModuleRE.exec(html);
-              if (match[2] && match[2].includes("globalThis.RuntimeModuleM")) {
-                break;
-              }
-            }
-            if (match) {
-              return match[2];
-            } else {
-              throw new Error(`No matching html proxy module found from ${id}`);
-            }
-          }
-        } else if (server) {
-          html = await server.transformIndexHtml(id, html);
-        }
+        html = await server.transformIndexHtml(id, html);
 
         return html;
       }
@@ -278,7 +243,6 @@ const componentsTemplate = (
 
         if (
           req.method !== "GET" ||
-          isCompHTMLProxy(<string>req.url) ||
           !(req.headers.accept || "").includes("text/html") ||
           !/(\.md|\.html|\/[\w|_|-]+)$/.test(cleanUrl(req.url))
         ) {
