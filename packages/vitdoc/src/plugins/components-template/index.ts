@@ -4,10 +4,15 @@ import Swig from "swig";
 import { mergeConfig, send, ViteDevServer } from "vite";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
-import { getComponentFiles, getMainFiles } from "../../utils/rules";
+import {
+  getComponentFiles,
+  getMainFiles,
+  getPackageAlias,
+} from "../../utils/rules";
 import { ConfigType, MarkdownMeta } from "../../types";
 import { resolveTheme } from "../../utils/theme";
 import convertAliasByTsconfigPaths from "resolve-ts-alias";
+import { fsExtra, glob } from "@umijs/utils";
 
 const isDebug = process.env.DEBUG;
 
@@ -50,7 +55,8 @@ export const getRoutes = async () => {
     readmePath = `/${readmePath}`;
 
     const cleanPath = readmePath
-      .replace(/^\/src\//, "")
+      // remove the first path segment to match the route path
+      .replace(/^\/\w+\//, "")
       .replace(/(\/README)?\.md$/, "");
 
     const matches = cleanPath.match(/^(\w+?)\/(.+)/) || [];
@@ -139,7 +145,10 @@ const componentsTemplate = (
 
       config = mergeConfig(resolvedConfig, {
         resolve: {
-          alias,
+          alias: {
+            ...alias,
+            ...getPackageAlias(),
+          },
         },
         optimizeDeps: {
           entries: getMainFiles(),

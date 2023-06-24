@@ -15,6 +15,7 @@
 - [x] css convert
 - [x] demo exception
 
-- [ ] custom docs path 
+- [x] custom docs path 
+- [x] entry alias
 - [x] notice style
 - [x] collapse style

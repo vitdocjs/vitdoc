@@ -68,10 +68,11 @@ export function App() {
           return "";
         }
 
-        return React.cloneElement(dom as any, {
-          onClick: () => push(item.path!),
-          children: <LinkCopy route={item.path}>{item.name}</LinkCopy>,
-        });
+        return (
+          <div onClick={() => push(item.path!)}>
+            <LinkCopy route={item.path}>{item.name}</LinkCopy>
+          </div>
+        );
       }}
     >
       <Routes>
