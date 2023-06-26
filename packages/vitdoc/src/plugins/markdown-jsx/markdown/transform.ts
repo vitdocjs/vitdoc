@@ -15,7 +15,7 @@ import remarkStyle from "./remarkStyle";
 
 export async function transformMarkdown(
   this: any,
-  { id, cwd, emitDemo, builtins }
+  { id, cwd, emitDemo, builtins, alias }
 ) {
   let content = fs.readFileSync(id, "utf-8");
 
@@ -24,7 +24,7 @@ export async function transformMarkdown(
   const res = (await markdownTransformer(content, {
     cwd: process.cwd(),
     fileAbsPath: id,
-    alias: {},
+    alias,
     techStacks: [new ReactTechStack()],
     extraRemarkPlugins: [
       remarkCardBlock,
@@ -34,12 +34,14 @@ export async function transformMarkdown(
       [rehypeAPI, { cwd: process.cwd(), fileAbsPath: id }],
       [rehypeDemo, { cwd: process.cwd(), fileAbsPath: id, emitDemo }],
     ],
+    // @ts-ignore
     resolve: {
       docDirs: [],
       atomDirs: [],
       codeBlockMode: "active",
     },
-    routers: {},
+    // @ts-ignore
+    routers: {} ,
   })) as IMdTransformerResult;
 
   function emit(

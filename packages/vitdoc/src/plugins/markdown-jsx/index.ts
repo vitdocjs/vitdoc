@@ -7,6 +7,7 @@ import { isCSSLang } from "../../utils/lang";
 import { resolveTheme } from "../../utils/theme";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
+import { transformAliasToDumi } from "../../utils/alias";
 
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 
@@ -88,6 +89,7 @@ const mdjsx = (vitdocConfig: ConfigType) => {
       }
 
       transformPromises[id] = transformMarkdown.call(this, {
+        alias: transformAliasToDumi(config.resolve?.alias!),
         id,
         cwd: process.cwd(),
         builtins: await getBuiltins,
