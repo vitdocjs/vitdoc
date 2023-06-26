@@ -1,7 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
+import convertAliasByTsconfigPaths from "resolve-ts-alias";
 import Swig from "swig";
 import { mergeConfig, send, ViteDevServer } from "vite";
+import { ConfigType, MarkdownMeta } from "../../types";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
 import {
@@ -9,16 +11,13 @@ import {
   getMainFiles,
   getPackageAlias,
 } from "../../utils/rules";
-import { ConfigType, MarkdownMeta } from "../../types";
 import { resolveTheme } from "../../utils/theme";
-import convertAliasByTsconfigPaths from "resolve-ts-alias";
-import { fsExtra, glob } from "@umijs/utils";
 
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = async () => {
-  let routes = getComponentFiles();
+export const getRoutes = async (docDirs: string[]) => {
+  let routes = getComponentFiles(docDirs);
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
@@ -38,7 +37,7 @@ export const getRoutes = async () => {
 
   routeInfos = routeInfos.sort((a, b) => a.order - b.order);
 
-  const tree = routeInfos.reduce((prev, routeInfo, index) => {
+  const tree = routeInfos.reduce<any>((prev, routeInfo, index) => {
     const {
       title,
       group,
@@ -67,7 +66,7 @@ export const getRoutes = async () => {
 
     if (groupName) {
       const name = title ?? toName(matches[2]);
-      let nextChild = prev.find(({ name }) => name === groupName);
+      let nextChild: any = prev.find(({ name }) => name === groupName);
       if (!nextChild) {
         nextChild = {
           name: groupName,
@@ -117,6 +116,7 @@ const componentsTemplate = (
     template: templatePath = "@vitdoc/template-default",
     htmlAppend: externalHtml,
     logo,
+    docDirs = ["docs", "src"],
   } = {} as ConfigType
 ) => {
   let input = {};
@@ -200,7 +200,7 @@ const componentsTemplate = (
       }
 
       if (isRouteMap(file)) {
-        const ctx = await getRoutes();
+        const ctx = await getRoutes(docDirs);
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }
@@ -211,7 +211,7 @@ const componentsTemplate = (
         }
 
         const mdFiles = isBuild
-          ? getComponentFiles().map((file) => `/${file}`)
+          ? getComponentFiles(docDirs).map((file) => `/${file}`)
           : [];
 
         const mdFileMap = mdFiles.map((file) => [file, file]);
@@ -284,7 +284,7 @@ const componentsTemplate = (
           return;
         }
         if (/\/[\w|_|-]+$/.test(url)) {
-          const files = getComponentFiles(path.join(".", url));
+          const files = getComponentFiles([path.join(".", url)]);
           const mdFile = files[0] || path.join(url, "README.html");
 
           url = path.join("/", mdFile.replace(/\.md$/, ".html"));

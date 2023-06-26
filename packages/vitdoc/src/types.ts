@@ -58,4 +58,10 @@ export type ConfigType = {
    * Plugins for vite
    */
   plugins?: Plugin[];
+
+  /**
+   * Document directory
+   * @default ["docs", "src"]
+   */
+  docDirs?: string[];
 };

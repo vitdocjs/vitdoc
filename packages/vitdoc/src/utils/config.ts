@@ -6,6 +6,7 @@ import { resolveConfig } from "esbuild-resolve-config";
 export function getConfig(): ConfigType {
   const defaultConfig = {
     template: "@vitdoc/template-default",
+    docDirs: ["docs", "src"],
   };
   const config: ConfigType =
     resolveConfig<ConfigType>(".vitdocrc", {
@@ -22,4 +23,3 @@ export function getConfig(): ConfigType {
 
   return config;
 }
-

@@ -2,12 +2,16 @@ import { fsExtra } from "@umijs/utils";
 import glob from "glob";
 import path from "path";
 
-export const getComponentFiles = (path: string = "") => {
-  const files = glob
-    .sync(`${path ? `${path}/` : ""}{,!(node_modules)/**/}*.md`, {
-      cwd: process.cwd(),
-    })
-    .filter((file) => !!/\//.test(file));
+export const getComponentFiles = (paths: string[]) => {
+  const files = paths.reduce<string[]>((prev, path) => {
+    const files = glob
+      .sync(`${path ? `${path}/` : ""}{,!(node_modules)/**/}*.md`, {
+        cwd: process.cwd(),
+      })
+      .filter((file) => !!/\//.test(file));
+    return [...prev, ...files];
+  }, []);
+
   return files;
 };
 
