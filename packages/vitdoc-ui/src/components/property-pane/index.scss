@@ -16,6 +16,9 @@
 
     display: flex;
     flex-direction: column;
+    .pane-stage {
+      padding: 0 16px;
+    }
 
     .ant-card-head {
       padding: 0 12px;

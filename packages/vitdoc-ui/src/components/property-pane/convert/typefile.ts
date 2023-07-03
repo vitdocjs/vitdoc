@@ -82,7 +82,7 @@ const filterQuotaMarkAndUndefined = (typeStr): string[] =>
 
 const REGEXP_ISMultipleTypes = /\S+(\[\])?\s*\|/g;
 const REGEXP_ISFunction = /\(.*\)\s*=>\s*.+/;
-const REGEXP_ISObject = /^\{.+}$/;
+const REGEXP_ISObject = /^\{.+}/;
 const REGEXP_ISArray = /{.+}\[]$/;
 
 class VisionSchemaTransfer {
