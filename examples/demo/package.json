@@ -38,7 +38,7 @@
     "pretty-quick": "^1.11.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "vitdoc": "workspace:*",
+    "vitdoc": "workspace:^",
     "vite-plugin-px2vw": "^1.0.2"
   },
   "sideEffects": [

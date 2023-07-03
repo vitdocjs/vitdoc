@@ -1,5 +1,17 @@
 # @vitdoc/template-default
 
+## 1.3.2
+
+### Patch Changes
+
+- fix ui issue
+
+## 1.3.1
+
+### Patch Changes
+
+- upgrade version
+
 ## 1.3.0
 
 ### Minor Changes

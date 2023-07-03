@@ -1,5 +1,22 @@
 # vitdoc
 
+## 1.3.4
+
+### Patch Changes
+
+- fix ui issue
+- Updated dependencies
+  - @vitdoc/runtime@1.3.1
+  - @vitdoc/template-default@1.3.2
+
+## 1.3.3
+
+### Patch Changes
+
+- upgrade version
+- Updated dependencies
+  - @vitdoc/template-default@1.3.1
+
 ## 1.3.2
 
 ### Patch Changes

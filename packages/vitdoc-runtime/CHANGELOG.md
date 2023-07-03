@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.3.1
+
+### Patch Changes
+
+- fix ui issue
+
 ## 1.3.0
 
 ### Minor Changes
