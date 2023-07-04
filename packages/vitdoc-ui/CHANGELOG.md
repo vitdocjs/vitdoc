@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.2.7
+
+### Patch Changes
+
+- fix the type extract
+
 ## 1.2.6
 
 ### Patch Changes

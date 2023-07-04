@@ -234,6 +234,7 @@ class VisionSchemaTransfer {
     if (
       !REGEXP_ISFunction.test(typeStr) &&
       !REGEXP_ISObject.test(typeStr) &&
+      !REGEXP_IType.test(typeStr) &&
       REGEXP_ISMultipleTypes.test(typeStr) &&
       !isNotEnumTypes(typeStr)
     ) {

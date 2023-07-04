@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.3.11
+
+### Patch Changes
+
+- fix the type extract
+  - @vitdoc/runtime@1.3.1
+  - @vitdoc/template-default@1.3.5
+
 ## 1.3.10
 
 ### Patch Changes
