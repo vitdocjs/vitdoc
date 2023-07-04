@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.3.7
+
+### Patch Changes
+
+- fix md error
+- Updated dependencies
+  - @vitdoc/template-default@1.3.5
+  - @vitdoc/runtime@1.3.1
+
 ## 1.3.6
 
 ### Patch Changes

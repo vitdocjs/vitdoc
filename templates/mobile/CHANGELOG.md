@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.3.5
+
+### Patch Changes
+
+- fix md error
+
 ## 1.3.4
 
 ### Patch Changes

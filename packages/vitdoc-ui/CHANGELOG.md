@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.2.3
+
+### Patch Changes
+
+- fix md error
+
 ## 1.2.2
 
 ### Patch Changes
