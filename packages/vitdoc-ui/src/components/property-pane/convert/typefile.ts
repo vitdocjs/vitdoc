@@ -84,7 +84,7 @@ const REGEXP_ISMultipleTypes = /\S+(\[\])?\s*\|/g;
 const REGEXP_ISFunction = /\(.*\)\s*=>\s*.+/;
 const REGEXP_ISObject = /^\{.+}/;
 
-const REGEXP_IType = /<(.+)>/;
+const REGEXP_IType = /<\S+>/;
 const REGEXP_ISArray = /{.+}\[]$/;
 
 class VisionSchemaTransfer {

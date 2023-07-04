@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.2.6
+
+### Patch Changes
+
+- fix: the allow list
+
+## 1.2.5
+
+### Patch Changes
+
+- fix: the type error
+
 ## 1.2.4
 
 ### Patch Changes

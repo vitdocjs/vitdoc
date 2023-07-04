@@ -30,7 +30,7 @@ export function vitdoc(config: ConfigType = {}): Plugin[] {
             server: {
               cors: true,
               fs: {
-                allow: [path.resolve(__dirname), cwd],
+                allow: [path.resolve(__dirname, "../../"), cwd],
               },
             },
             resolve: {

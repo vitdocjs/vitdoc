@@ -1,5 +1,21 @@
 # vitdoc
 
+## 1.3.10
+
+### Patch Changes
+
+- fix: the allow list
+  - @vitdoc/runtime@1.3.1
+  - @vitdoc/template-default@1.3.5
+
+## 1.3.9
+
+### Patch Changes
+
+- fix: the type error
+  - @vitdoc/runtime@1.3.1
+  - @vitdoc/template-default@1.3.5
+
 ## 1.3.8
 
 ### Patch Changes
