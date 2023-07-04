@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.3.4
+
+### Patch Changes
+
+- fix useless log
+
 ## 1.3.3
 
 ### Patch Changes

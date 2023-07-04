@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.3.6
+
+### Patch Changes
+
+- fix useless log
+- Updated dependencies
+  - @vitdoc/template-default@1.3.4
+  - @vitdoc/runtime@1.3.1
+
 ## 1.3.5
 
 ### Patch Changes
