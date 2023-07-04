@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.3.8
+
+### Patch Changes
+
+- fix: the type choice
+  - @vitdoc/runtime@1.3.1
+  - @vitdoc/template-default@1.3.5
+
 ## 1.3.7
 
 ### Patch Changes

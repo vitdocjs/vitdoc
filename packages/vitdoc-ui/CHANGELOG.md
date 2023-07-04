@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.2.4
+
+### Patch Changes
+
+- fix: the type choice
+
 ## 1.2.3
 
 ### Patch Changes
