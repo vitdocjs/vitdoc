@@ -6,6 +6,10 @@
   box-sizing: border-box;
   max-width: 100%;
 
+  .ant-pro-page-container-children-container {
+    padding-block-start: 0;
+  }
+
   .link-title {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.3.5
+
+### Patch Changes
+
+- upgrade template default
+- Updated dependencies
+  - @vitdoc/template-default@1.3.3
+
 ## 1.3.4
 
 ### Patch Changes

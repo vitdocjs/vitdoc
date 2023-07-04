@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.3.3
+
+### Patch Changes
+
+- upgrade template default
+
 ## 1.3.2
 
 ### Patch Changes
