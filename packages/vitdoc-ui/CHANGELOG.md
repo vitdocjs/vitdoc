@@ -1,5 +1,23 @@
 # @vitdoc/ui
 
+## 1.2.10
+
+### Patch Changes
+
+- upgrade ui
+
+## 1.2.9
+
+### Patch Changes
+
+- upgrade version
+
+## 1.2.8
+
+### Patch Changes
+
+- d
+
 ## 1.2.7
 
 ### Patch Changes
