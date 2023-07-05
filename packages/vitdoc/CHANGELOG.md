@@ -1,5 +1,19 @@
 # vitdoc
 
+## 1.3.13
+
+### Patch Changes
+
+- upgrade to lock version
+- Updated dependencies
+  - @vitdoc/template-default@1.3.6
+
+## 1.3.12
+
+### Patch Changes
+
+- fix: deps
+
 ## 1.3.11
 
 ### Patch Changes

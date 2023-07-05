@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.3.11",
+  "version": "1.3.13",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./dist/index.js",
   "bin": {
@@ -29,7 +29,7 @@
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71",
     "@vitdoc/runtime": "workspace:^",
-    "@vitdoc/template-default": "workspace:^",
+    "@vitdoc/template-default": "1.3.6",
     "@vitejs/plugin-react": "^4.0.1",
     "chalk": "^4.1.2",
     "dumi": "^2.2.1",
