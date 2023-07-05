@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- upgrade deps
+
+## 1.3.6
+
+### Patch Changes
+
 - upgrade to lock version
 
 ## 1.3.5

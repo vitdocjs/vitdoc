@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.3.14
+
+### Patch Changes
+
+- upgrade deps
+- Updated dependencies
+  - @vitdoc/template-default@1.3.6
+
 ## 1.3.13
 
 ### Patch Changes
