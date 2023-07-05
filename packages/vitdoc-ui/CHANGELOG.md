@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.2.18
+
+### Patch Changes
+
+- upgrade the ui deps
+
+## 1.2.17
+
+### Patch Changes
+
+- upgrade the type extract
+
 ## 1.2.16
 
 ### Patch Changes

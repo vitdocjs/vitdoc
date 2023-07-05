@@ -158,7 +158,7 @@ class VisionSchemaTransfer {
   }
 
   static getSetterByTSType(tsType) {
-    const typeStr = `${tsType}`.trim().replace(/\| undefined$/, "");
+    const typeStr = `${tsType}`.trim();
 
     let result;
 

@@ -1,5 +1,22 @@
 # vitdoc
 
+## 1.3.19
+
+### Patch Changes
+
+- upgrade the ui deps
+- Updated dependencies
+  - @vitdoc/template-default@1.3.9
+  - @vitdoc/runtime@1.3.1
+
+## 1.3.18
+
+### Patch Changes
+
+- upgrade the type extract
+  - @vitdoc/runtime@1.3.1
+  - @vitdoc/template-default@1.3.8
+
 ## 1.3.17
 
 ### Patch Changes

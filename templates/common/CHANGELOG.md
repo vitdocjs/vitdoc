@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.3.9
+
+### Patch Changes
+
+- upgrade the ui deps
+
 ## 1.3.8
 
 ### Patch Changes
