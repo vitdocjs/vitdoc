@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.2.14
+
+### Patch Changes
+
+- upgrade verion for pathc
+
+## 1.2.13
+
+### Patch Changes
+
+- upgrade ui version
+
 ## 1.2.12
 
 ### Patch Changes

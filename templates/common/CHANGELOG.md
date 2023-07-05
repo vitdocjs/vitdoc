@@ -1,5 +1,11 @@
 # @vitdoc/template-default
 
+## 1.3.7
+
+### Patch Changes
+
+- upgrade verion for pathc
+
 ## 1.3.6
 
 ### Patch Changes

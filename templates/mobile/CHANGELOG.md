@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 1.3.6
+
+### Patch Changes
+
+- upgrade verion for pathc
+
 ## 1.3.5
 
 ### Patch Changes
