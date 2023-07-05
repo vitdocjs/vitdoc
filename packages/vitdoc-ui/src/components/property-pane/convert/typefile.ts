@@ -84,7 +84,7 @@ const REGEXP_ISMultipleTypes = /\S+(\[\])?\s*\|/g;
 const REGEXP_ISFunction = /\(.*\)\s*=>\s*.+/;
 const REGEXP_ISObject = /^\{.+}/;
 
-const REGEXP_IType = /<\S+>/;
+const REGEXP_IType = /<[\S\s]+>/;
 const REGEXP_ISArray = /{.+}\[]$/;
 
 class VisionSchemaTransfer {
@@ -158,7 +158,7 @@ class VisionSchemaTransfer {
   }
 
   static getSetterByTSType(tsType) {
-    const typeStr = `${tsType}`.trim();
+    const typeStr = `${tsType}`.trim().replace(/\| undefined$/, "");
 
     let result;
 

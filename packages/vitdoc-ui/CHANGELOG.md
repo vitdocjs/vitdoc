@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.2.16
+
+### Patch Changes
+
+- upgrade docs
+
+## 1.2.15
+
+### Patch Changes
+
+- upgrade types
+
 ## 1.2.14
 
 ### Patch Changes

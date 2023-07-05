@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.3.17
+
+### Patch Changes
+
+- upgrade docs
+- Updated dependencies
+  - @vitdoc/template-default@1.3.8
+  - @vitdoc/runtime@1.3.1
+
 ## 1.3.16
 
 ### Patch Changes
