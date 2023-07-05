@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.2.12
+
+### Patch Changes
+
+- upgrade
+
+## 1.2.11
+
+### Patch Changes
+
+- upgrade deps
+
 ## 1.2.10
 
 ### Patch Changes
