@@ -1,8 +1,10 @@
+import { cheerio } from "@umijs/utils";
 import * as fs from "fs";
 import * as path from "path";
 import convertAliasByTsconfigPaths from "resolve-ts-alias";
 import Swig from "swig";
 import { mergeConfig, send, ViteDevServer } from "vite";
+import { VitdocInstance } from "../../core";
 import { MarkdownMeta } from "../../types";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
@@ -12,7 +14,6 @@ import {
   getPackageAlias,
 } from "../../utils/rules";
 import { resolveTheme } from "../../utils/theme";
-import { VitdocInstance } from "../../core";
 
 const isDebug = process.env.DEBUG;
 
@@ -222,7 +223,6 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
           "package.json"
         ));
 
-
         let html = createHtml({
           name,
           description,
@@ -239,7 +239,7 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
           isDebug,
         });
 
-        html = await vitdoc.pluginContainer("modifyHtml", [html]);
+        html = await vitdoc.pluginContainer("modifyHtml", [html, cheerio]);
 
         if (server) {
           html = await server.transformIndexHtml(id, html);

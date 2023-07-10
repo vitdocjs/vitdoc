@@ -12,8 +12,10 @@ export function createPluginContainer(plugins: Plugin[]) {
       ) => R;
     }
   ) => {
-    const iterate = options?.iterate ?? deepMerge;
     let prev: any = args[0];
+    const iterate =
+      options?.iterate ?? (typeof prev === "object" ? deepMerge : (a, b) => b);
+
     for (const p of plugins) {
       const handler = p[fnName] as any;
       if (handler) {

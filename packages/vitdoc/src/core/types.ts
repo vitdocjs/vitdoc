@@ -1,4 +1,6 @@
+import { cheerio } from "@umijs/utils";
 import { ConfigType as UserConfig } from "../types";
+import { CheerioAPI } from "@umijs/utils/compiled/cheerio";
 
 export { ConfigType as UserConfig } from "../types";
 export interface Plugin {
@@ -28,7 +30,11 @@ export interface Plugin {
   /**
    * Modify the html before it's served.
    */
-  modifyHtml?: (this: void, html: string) => string | Promise<string>;
+  modifyHtml?: (
+    this: void,
+    html: string,
+    cheerio: CheerioAPI
+  ) => string | Promise<string>;
 }
 
 export type PluginFunctionKeys<T = Required<Plugin>> = {
