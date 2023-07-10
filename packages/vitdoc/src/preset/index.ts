@@ -6,11 +6,14 @@ import vitDocHMR from "../plugins/hmr";
 import mdjsx from "../plugins/markdown-jsx";
 import TypeFile from "../plugins/type-file";
 import { ConfigType } from "../types";
-import { getConfig } from "../utils/config";
+import { createInstance } from "../core";
 
-export function vitdoc(config: ConfigType = {}): Plugin[] {
+const vitdocInstance = createInstance();
+
+export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
   const cwd = process.cwd();
-  config = deepmerge(getConfig(), config);
+
+  await vitdocInstance.init(config);
 
   return [
     {
@@ -48,10 +51,9 @@ export function vitdoc(config: ConfigType = {}): Plugin[] {
         );
       },
     },
-    componentsTemplate(config),
+    componentsTemplate(vitdocInstance),
     TypeFile(),
-    mdjsx(config),
-    vitDocHMR(),
-    ...(config.plugins || []),
+    mdjsx(vitdocInstance),
+    vitDocHMR(vitdocInstance),
   ] as Plugin[];
 }

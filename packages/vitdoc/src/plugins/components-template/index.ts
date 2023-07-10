@@ -12,6 +12,8 @@ import {
   getPackageAlias,
 } from "../../utils/rules";
 import { resolveTheme } from "../../utils/theme";
+import { VitdocContext } from "../../core/context";
+import { VitdocInstance } from "../../core";
 
 const isDebug = process.env.DEBUG;
 
@@ -110,20 +112,20 @@ export const getRoutes = async (docDirs: string[]) => {
 const vitdocRuntimeId = "virtual:vitdoc-runtime";
 const vitdocTemplateId = "virtual:vitdoc-template";
 
-const componentsTemplate = (
-  {
-    metaFileName: buildMetaFile = "stories.manifest.json" as false | string,
-    template: templatePath = "@vitdoc/template-default",
-    htmlAppend: externalHtml,
-    logo,
-    docDirs = ["docs", "src"],
-  } = {} as ConfigType
-) => {
+const componentsTemplate = (vitdoc: VitdocInstance) => {
   let input = {};
   let server: ViteDevServer;
   let config;
   let isBuild;
   let routeTree: any;
+
+  const {
+    metaFileName: buildMetaFile,
+    template: templatePath,
+    htmlAppend: externalHtml,
+    logo,
+    docDirs,
+  } = vitdoc.resolvedConfig;
 
   const entry = require.resolve("@vitdoc/runtime/index.html");
 

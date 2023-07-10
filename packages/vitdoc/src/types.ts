@@ -1,4 +1,6 @@
-import { Plugin } from "vite";
+import { Plugin, PluginOption } from "./core/types";
+
+export * from "./core/types";
 
 export type MarkdownMeta = {
   /**
@@ -55,9 +57,9 @@ export type ConfigType = {
   metaFileName?: string | false;
 
   /**
-   * Plugins for vite
+   * Plugin of vitdoc
    */
-  plugins?: Plugin[];
+  plugins?: PluginOption[];
 
   /**
    * Document directory

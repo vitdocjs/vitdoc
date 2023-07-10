@@ -8,6 +8,7 @@ import { resolveTheme } from "../../utils/theme";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
 import { transformAliasToDumi } from "../../utils/alias";
+import { VitdocInstance } from "../../core";
 
 const mdProxyRE = /markdown-proxy&id=(.+)$/;
 
@@ -15,14 +16,17 @@ export const isMarkdownProxy = (id) => mdProxyRE.test(id);
 export const getDemoId = (id) =>
   id.match(mdProxyRE)?.[1]?.match(/(.+?)(\.\w+)?$/)?.[1];
 
-const mdjsx = (vitdocConfig: ConfigType) => {
+const mdjsx = (vitdoc: VitdocInstance) => {
+  const { template } = vitdoc.resolvedConfig;
+
   let markdownMap: Record<string, IDemoData> = {};
   let transformPromises: Record<string, Promise<any>> = {};
   let isBuild: boolean;
   let moduleGraph: ModuleGraph;
   let config: UserConfig;
 
-  const themePromise = resolveTheme(vitdocConfig.template!);
+  const themePromise = resolveTheme(template);
+
   const getBuiltins = (async () => {
     const { theme: source } = (await themePromise)!;
     const themes = await getExportsStatic(source);
