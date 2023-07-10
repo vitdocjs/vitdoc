@@ -3,7 +3,7 @@ import * as path from "path";
 import convertAliasByTsconfigPaths from "resolve-ts-alias";
 import Swig from "swig";
 import { mergeConfig, send, ViteDevServer } from "vite";
-import { ConfigType, MarkdownMeta } from "../../types";
+import { MarkdownMeta } from "../../types";
 import { cleanUrl, isHTMLProxy, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
 import {
@@ -12,7 +12,6 @@ import {
   getPackageAlias,
 } from "../../utils/rules";
 import { resolveTheme } from "../../utils/theme";
-import { VitdocContext } from "../../core/context";
 import { VitdocInstance } from "../../core";
 
 const isDebug = process.env.DEBUG;
@@ -223,6 +222,7 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
           "package.json"
         ));
 
+
         let html = createHtml({
           name,
           description,
@@ -233,11 +233,13 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
               ([key, val]) =>
                 `"${key}": (cb) => {cb&&cb("${val}");return import("${val}")}`
             ),
-          externalHtml,
+          externalHtml: externalHtml || "",
           cwd: process.cwd(),
           base: config.base,
           isDebug,
         });
+
+        html = await vitdoc.pluginContainer("modifyHtml", [html]);
 
         if (server) {
           html = await server.transformIndexHtml(id, html);
