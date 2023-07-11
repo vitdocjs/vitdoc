@@ -12,7 +12,7 @@ import {
   useMemoizedFn,
 } from "ahooks";
 import classNames from "classnames";
-import React, { useEffect, useRef } from "react";
+import React, { CSSProperties, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import HighLight from "../highlight";
 import { copyToClipboard } from "../link-copy";
@@ -25,8 +25,10 @@ import "./index.scss";
 
 const Tooltip = _Tooltip as any;
 
-export const ComponentBlock = (props: RendererProps) => {
-  const { getModule, demoid: id = "", title } = props;
+export const ComponentBlock = (
+  props: RendererProps & { className?: string; style?: CSSProperties }
+) => {
+  const { getModule, demoid: id = "", title, className, style } = props;
 
   const { lang, renderer, content, route } = useCreation(
     () => getModule?.(id?.trim()) ?? ({} as any),
@@ -50,6 +52,8 @@ export const ComponentBlock = (props: RendererProps) => {
       <ComponentArea
         renderer={renderer}
         lang={lang}
+        className={className}
+        style={style}
         content={content}
         eventBus={eventBus}
         Provider={props.DemoProvider}
@@ -149,7 +153,7 @@ export function ComponentArea(props) {
       const finalProps = Object.assign({}, props, componentProps);
       const ele = OutReact.createElement(Component, finalProps);
       // if (Provider) {
-        // return OutReact.createElement(Provider, { children: ele });
+      // return OutReact.createElement(Provider, { children: ele });
       // }
       return ele;
     };

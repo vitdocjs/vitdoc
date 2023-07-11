@@ -6,6 +6,7 @@ import { VitDocMarkdownContext } from "../../context";
 import { useDemo, useMarkdown } from "../../hooks/loaders";
 import { ComponentBlock } from "../component-area";
 import { MarkdownArea } from "../markdown-area";
+import classNames from "classnames";
 
 import "./index.scss";
 
@@ -14,6 +15,8 @@ export function DumiPage(props) {
 }
 
 export function DumiDemo(props) {
+  const { previewerProps } = props;
+  console.log("🚀 #### ~ DumiDemo ~ previewerProps:", previewerProps);
   const id = props.demo.id;
 
   const { loading, error, data } = useDemo(props.load);
@@ -47,8 +50,17 @@ export function DumiDemo(props) {
       demoid={id}
       getModule={() => data}
       {...props.previewerProps}
-      className={props.className}
-      style={props.style}
+      className={classNames(props.className, {
+        'demo-compact': previewerProps.compact,
+      })}
+      style={{
+        ...props.style,
+        ...(previewerProps.background
+          ? {
+              background: previewerProps.background,
+            }
+          : {}),
+      }}
     />
   );
 }
