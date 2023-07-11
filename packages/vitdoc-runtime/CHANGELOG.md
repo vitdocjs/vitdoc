@@ -1,5 +1,16 @@
 # @vitdoc/runtime
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: add the plugin features
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.3.0
+
 ## 1.3.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @vitdoc/template-mobile
 
+## 2.0.0
+
+### Minor Changes
+
+- feat: add the plugin features
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.3.0
+
 ## 1.3.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: add the plugin features
+
 ## 1.2.18
 
 ### Patch Changes
