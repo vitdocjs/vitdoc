@@ -1,21 +1,14 @@
 import { ProLayout } from "@ant-design/pro-layout";
-import { LinkCopy, useRouteMap, useNavigate } from "@vitdoc/ui";
+import { LinkCopy, useNavigate, useRouteMap } from "@vitdoc/ui";
 import { useBoolean } from "ahooks";
 import classNames from "classnames";
 import React from "react";
-import ReactDOM from "react-dom";
-import {
-  HashRouter,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import ReadmePane from "./pages/readme-pane";
 
 import "./global.scss";
 
-export function App() {
+export function GlobalLayout() {
   const { tree: menuData, routes } = useRouteMap() || {};
 
   menuData?.forEach((item) => (item.icon = <span>📦</span>));
@@ -67,43 +60,20 @@ export function App() {
         if (collapsed) {
           return "";
         }
-        return React.cloneElement(dom as any, {
-          onClick: () => push(item.path!),
-          children: <LinkCopy route={item.path}>{item.name}</LinkCopy>,
-        });
+
+        return (
+          <div onClick={() => push(item.path!)}>
+            <LinkCopy route={item.path}>{item.name}</LinkCopy>
+          </div>
+        );
       }}
     >
-      <Routes>
-        {routes.map((route) => {
-          return (
-            <Route
-              key={route}
-              path={route}
-              element={
-                <div style={{ display: "flex" }} className="code-box-demo">
-                  <ReadmePane key={`${route}_readme_pane`} />
-                </div>
-              }
-            />
-          );
-        })}
-        <Route path="*" element={<Navigate to={routes[0]} replace={true} />} />
-      </Routes>
+      <Outlet />
     </ProLayout>
   );
 }
 
-export function mount({ container }) {
-  ReactDOM.render(
-    <HashRouter>
-      <App />
-    </HashRouter>,
-    container
-  );
+export function DocLayout() {
+  const { pathname } = useLocation();
+  return <ReadmePane key={pathname} />;
 }
-
-export function unmount({ container }) {
-  ReactDOM.unmountComponentAtNode(container);
-}
-
-export * as Theme from "./theme";

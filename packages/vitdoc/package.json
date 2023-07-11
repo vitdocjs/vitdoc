@@ -29,7 +29,7 @@
     "@umijs/core": "^4.0.71",
     "@umijs/utils": "^4.0.71",
     "@vitdoc/runtime": "workspace:*",
-    "@vitdoc/template-default": "workspace:*",
+    "@vitdoc/theme-default": "workspace:*",
     "@vitejs/plugin-react": "^4.0.1",
     "chalk": "^4.1.2",
     "dumi": "^2.2.1",

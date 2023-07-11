@@ -47,7 +47,7 @@ export type ConfigType = {
 
   /**
    * Page template
-   * @default "@vitdoc/template-default"
+   * @default "@vitdoc/theme-default"
    */
   template?: string;
 
@@ -67,3 +67,5 @@ export type ConfigType = {
    */
   docDirs?: string[];
 };
+
+

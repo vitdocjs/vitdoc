@@ -3,7 +3,6 @@ import identity from "lodash/identity";
 import React from "react";
 import { useEffect } from "react";
 import { useLocation, useMatch } from "react-router-dom";
-import { useHashChange } from "./hashchange";
 
 declare global {
   interface Window {

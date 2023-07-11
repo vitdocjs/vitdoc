@@ -6,7 +6,7 @@
 
 - upgrade the ui deps
 - Updated dependencies
-  - @vitdoc/template-default@1.3.9
+  - @vitdoc/theme-default@1.3.9
   - @vitdoc/runtime@1.3.1
 
 ## 1.3.18
@@ -15,7 +15,7 @@
 
 - upgrade the type extract
   - @vitdoc/runtime@1.3.1
-  - @vitdoc/template-default@1.3.8
+  - @vitdoc/theme-default@1.3.8
 
 ## 1.3.17
 
@@ -23,7 +23,7 @@
 
 - upgrade docs
 - Updated dependencies
-  - @vitdoc/template-default@1.3.8
+  - @vitdoc/theme-default@1.3.8
   - @vitdoc/runtime@1.3.1
 
 ## 1.3.16
@@ -38,7 +38,7 @@
 
 - upgrade verion for pathc
 - Updated dependencies
-  - @vitdoc/template-default@1.3.7
+  - @vitdoc/theme-default@1.3.7
   - @vitdoc/runtime@1.3.1
 
 ## 1.3.14
@@ -47,7 +47,7 @@
 
 - upgrade deps
 - Updated dependencies
-  - @vitdoc/template-default@1.3.6
+  - @vitdoc/theme-default@1.3.6
 
 ## 1.3.13
 
@@ -55,7 +55,7 @@
 
 - upgrade to lock version
 - Updated dependencies
-  - @vitdoc/template-default@1.3.6
+  - @vitdoc/theme-default@1.3.6
 
 ## 1.3.12
 
@@ -69,7 +69,7 @@
 
 - fix the type extract
   - @vitdoc/runtime@1.3.1
-  - @vitdoc/template-default@1.3.5
+  - @vitdoc/theme-default@1.3.5
 
 ## 1.3.10
 
@@ -77,7 +77,7 @@
 
 - fix: the allow list
   - @vitdoc/runtime@1.3.1
-  - @vitdoc/template-default@1.3.5
+  - @vitdoc/theme-default@1.3.5
 
 ## 1.3.9
 
@@ -85,7 +85,7 @@
 
 - fix: the type error
   - @vitdoc/runtime@1.3.1
-  - @vitdoc/template-default@1.3.5
+  - @vitdoc/theme-default@1.3.5
 
 ## 1.3.8
 
@@ -93,7 +93,7 @@
 
 - fix: the type choice
   - @vitdoc/runtime@1.3.1
-  - @vitdoc/template-default@1.3.5
+  - @vitdoc/theme-default@1.3.5
 
 ## 1.3.7
 
@@ -101,7 +101,7 @@
 
 - fix md error
 - Updated dependencies
-  - @vitdoc/template-default@1.3.5
+  - @vitdoc/theme-default@1.3.5
   - @vitdoc/runtime@1.3.1
 
 ## 1.3.6
@@ -110,7 +110,7 @@
 
 - fix useless log
 - Updated dependencies
-  - @vitdoc/template-default@1.3.4
+  - @vitdoc/theme-default@1.3.4
   - @vitdoc/runtime@1.3.1
 
 ## 1.3.5
@@ -119,7 +119,7 @@
 
 - upgrade template default
 - Updated dependencies
-  - @vitdoc/template-default@1.3.3
+  - @vitdoc/theme-default@1.3.3
 
 ## 1.3.4
 
@@ -128,7 +128,7 @@
 - fix ui issue
 - Updated dependencies
   - @vitdoc/runtime@1.3.1
-  - @vitdoc/template-default@1.3.2
+  - @vitdoc/theme-default@1.3.2
 
 ## 1.3.3
 
@@ -136,7 +136,7 @@
 
 - upgrade version
 - Updated dependencies
-  - @vitdoc/template-default@1.3.1
+  - @vitdoc/theme-default@1.3.1
 
 ## 1.3.2
 
@@ -160,7 +160,7 @@
 
 - Updated dependencies
   - @vitdoc/runtime@1.3.0
-  - @vitdoc/template-default@1.3.0
+  - @vitdoc/theme-default@1.3.0
 
 ## 1.2.5
 
@@ -169,7 +169,7 @@
 - upgrade deps
 - Updated dependencies
   - @vitdoc/runtime@1.2.4
-  - @vitdoc/template-default@1.2.5
+  - @vitdoc/theme-default@1.2.5
 
 ## 1.2.4
 
@@ -178,7 +178,7 @@
 - upgrade hashchange
 - Updated dependencies
   - @vitdoc/runtime@1.2.3
-  - @vitdoc/template-default@1.2.4
+  - @vitdoc/theme-default@1.2.4
 
 ## 1.2.3
 
@@ -187,7 +187,7 @@
 - fix: hashchange
 - Updated dependencies
   - @vitdoc/runtime@1.2.2
-  - @vitdoc/template-default@1.2.3
+  - @vitdoc/theme-default@1.2.3
 
 ## 1.2.2
 
@@ -195,7 +195,7 @@
 
 - 🐛 fix: hashchange
 - Updated dependencies
-  - @vitdoc/template-default@1.2.1
+  - @vitdoc/theme-default@1.2.1
   - @vitdoc/runtime@1.2.0
 
 ## 1.2.1
@@ -214,7 +214,7 @@
 
 - Updated dependencies
   - @vitdoc/runtime@1.2.0
-  - @vitdoc/template-default@1.2.0
+  - @vitdoc/theme-default@1.2.0
 
 ## 1.1.22
 
@@ -237,7 +237,7 @@
 - upgrade deps & fix react-dom optimizer
 - Updated dependencies
   - @vitdoc/runtime@1.1.18
-  - @vitdoc/template-default@1.1.21
+  - @vitdoc/theme-default@1.1.21
 
 ## 1.1.19
 
@@ -245,7 +245,7 @@
 
 - fix: property style
 - Updated dependencies
-  - @vitdoc/template-default@1.1.20
+  - @vitdoc/theme-default@1.1.20
   - @vitdoc/runtime@1.1.17
 
 ## 1.1.18
@@ -255,7 +255,7 @@
 - fix: antd5 route key
 - Updated dependencies
   - @vitdoc/runtime@1.1.16
-  - @vitdoc/template-default@1.1.19
+  - @vitdoc/theme-default@1.1.19
 
 ## 1.1.17
 
@@ -264,7 +264,7 @@
 - fix: style of component area
 - Updated dependencies
   - @vitdoc/runtime@1.1.14
-  - @vitdoc/template-default@1.1.17
+  - @vitdoc/theme-default@1.1.17
 
 ## 1.1.16
 
@@ -273,7 +273,7 @@
 - fix: component area style
 - Updated dependencies
   - @vitdoc/runtime@1.1.13
-  - @vitdoc/template-default@1.1.16
+  - @vitdoc/theme-default@1.1.16
 
 ## 1.1.15
 
@@ -282,7 +282,7 @@
 - fix antd css in js
 - Updated dependencies
   - @vitdoc/runtime@1.1.12
-  - @vitdoc/template-default@1.1.13
+  - @vitdoc/theme-default@1.1.13
 
 ## 1.1.14
 
@@ -290,7 +290,7 @@
 
 - fix: antd compatibility
 - Updated dependencies
-  - @vitdoc/template-default@1.1.12
+  - @vitdoc/theme-default@1.1.12
 
 ## 1.1.13
 
@@ -304,7 +304,7 @@
 
 - 🐛 fix: mobile hmr
   - @vitdoc/runtime@1.1.11
-  - @vitdoc/template-default@1.1.10
+  - @vitdoc/theme-default@1.1.10
 
 ## 1.1.11
 
@@ -312,7 +312,7 @@
 
 - fix exception of demo id
   - @vitdoc/runtime@1.1.11
-  - @vitdoc/template-default@1.1.10
+  - @vitdoc/theme-default@1.1.10
 
 ## 1.1.10
 
@@ -321,7 +321,7 @@
 - feat: add tsconfig alias resolve
 - Updated dependencies
   - @vitdoc/runtime@1.1.11
-  - @vitdoc/template-default@1.1.10
+  - @vitdoc/theme-default@1.1.10
 
 ## 1.1.9
 
@@ -330,7 +330,7 @@
 - fix all versions
 - Updated dependencies
   - @vitdoc/runtime@1.1.10
-  - @vitdoc/template-default@1.1.10
+  - @vitdoc/theme-default@1.1.10
 
 ## 2.0.0
 
@@ -342,7 +342,7 @@
 
 - fix: empty npm
   - @vitdoc/runtime@1.0.1
-  - @vitdoc/template-default@1.0.1
+  - @vitdoc/theme-default@1.0.1
 
 ## 1.1.2
 
@@ -359,4 +359,4 @@
 - Updated dependencies []:
   - @vitdoc/runtime@1.0.1
   - @vitdoc/ui@1.0.15
-  - @vitdoc/template-default@1.0.1
+  - @vitdoc/theme-default@1.0.1

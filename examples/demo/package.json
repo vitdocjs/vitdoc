@@ -30,7 +30,7 @@
     "@alifd/next": "^1.26.19",
     "@types/lodash": "^4.14.195",
     "@types/react-dom": "^16.9.19",
-    "@vitdoc/template-default": "workspace:^",
+    "@vitdoc/theme-default": "workspace:^",
     "@vitdoc/template-mobile": "workspace:^",
     "moment-timezone": "^0.5.33",
     "pre-commit": "^1.2.2",

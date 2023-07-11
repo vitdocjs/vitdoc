@@ -1,6 +1,7 @@
 import { cheerio } from "@umijs/utils";
 import { ConfigType as UserConfig } from "../types";
 import { CheerioAPI } from "@umijs/utils/compiled/cheerio";
+import { IThemeLoadResult } from "dumi/dist/features/theme/loader";
 
 export { ConfigType as UserConfig } from "../types";
 export interface Plugin {
@@ -35,6 +36,15 @@ export interface Plugin {
     html: string,
     cheerio: CheerioAPI
   ) => string | Promise<string>;
+
+  /**
+   * Modify the dumi theme before it's loaded.
+   * @param theme
+   */
+  modifyTheme?: (
+    this: void,
+    theme: IThemeLoadResult
+  ) => IThemeLoadResult | Promise<IThemeLoadResult>;
 }
 
 export type PluginFunctionKeys<T = Required<Plugin>> = {

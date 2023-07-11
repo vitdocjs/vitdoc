@@ -9,7 +9,7 @@ import { resolveConfig as esBuildResolveConfig } from "esbuild-resolve-config";
 
 export function getUserConfig(): UserConfig {
   const defaultConfig = {
-    template: "@vitdoc/template-default",
+    template: "@vitdoc/theme-default",
     metaFileName: "stories.manifest.json",
     docDirs: ["docs", "src"],
   };

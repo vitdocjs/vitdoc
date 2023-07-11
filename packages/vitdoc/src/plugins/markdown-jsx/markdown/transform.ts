@@ -41,7 +41,7 @@ export async function transformMarkdown(
       codeBlockMode: "active",
     },
     // @ts-ignore
-    routers: {} ,
+    routers: {},
   })) as IMdTransformerResult;
 
   function emit(

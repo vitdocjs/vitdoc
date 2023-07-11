@@ -1,4 +1,4 @@
-# @vitdoc/template-default
+# @vitdoc/theme-default
 
 ## 1.3.9
 

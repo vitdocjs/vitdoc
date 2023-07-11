@@ -13,7 +13,7 @@ import {
   getMainFiles,
   getPackageAlias,
 } from "../../utils/rules";
-import { resolveTheme } from "../../utils/theme";
+import { resolvePkgTheme } from "../../utils/theme";
 
 const isDebug = process.env.DEBUG;
 
@@ -129,7 +129,7 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
 
   const entry = require.resolve("@vitdoc/runtime/index.html");
 
-  const themePromise = resolveTheme(templatePath);
+  const themePromise = resolvePkgTheme(templatePath);
 
   const createHtml = Swig.compileFile(entry, {
     // cache: false,
@@ -193,12 +193,13 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
       let file = cleanUrl(id);
 
       if (id.endsWith(vitdocTemplateId)) {
-        const { js, css } = (await themePromise)!;
-        let code = `export * from '${js}';`;
-        if (css) {
-          code = `${code};\n  import '${css}';`;
-        }
-        return code;
+        const { layouts } = (await themePromise)!;
+
+        return Object.entries(layouts)
+          .map(([name, content]) => {
+            return `export ${content.specifier} from '${content.source}';`;
+          })
+          .join("\n");
       }
 
       if (isRouteMap(file)) {

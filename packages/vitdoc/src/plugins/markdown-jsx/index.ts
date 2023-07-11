@@ -1,10 +1,8 @@
-import type { IThemeComponent } from "dumi/dist/features/theme/loader";
-import { getExportsStatic } from "pkg-exports";
+import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
 import { ModuleGraph, Plugin, transformWithEsbuild, UserConfig } from "vite";
-import { ConfigType } from "../../types";
 import { cleanUrl } from "../../utils";
 import { isCSSLang } from "../../utils/lang";
-import { resolveTheme } from "../../utils/theme";
+import { resolvePkgTheme } from "../../utils/theme";
 import { IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
 import { transformAliasToDumi } from "../../utils/alias";
@@ -25,22 +23,7 @@ const mdjsx = (vitdoc: VitdocInstance) => {
   let moduleGraph: ModuleGraph;
   let config: UserConfig;
 
-  const themePromise = resolveTheme(template);
-
-  const getBuiltins = (async () => {
-    const { theme: source } = (await themePromise)!;
-    const themes = await getExportsStatic(source);
-    return themes.reduce(
-      (acc, theme) =>
-        Object.assign(acc, {
-          [theme]: {
-            specifier: `{ ${theme} }`,
-            source,
-          } as IThemeComponent,
-        }),
-      {}
-    );
-  })();
+  const themePromise = resolvePkgTheme(template);
 
   return {
     name: "vite:markdown-jsx",
@@ -92,11 +75,17 @@ const mdjsx = (vitdoc: VitdocInstance) => {
         return;
       }
 
+      let themeConfigs = (await themePromise) as IThemeLoadResult;
+
+      themeConfigs = await vitdoc.pluginContainer("modifyTheme", [
+        themeConfigs,
+      ]);
+
       transformPromises[id] = transformMarkdown.call(this, {
         alias: transformAliasToDumi(config.resolve?.alias!),
         id,
         cwd: process.cwd(),
-        builtins: await getBuiltins,
+        ...themeConfigs,
         emitDemo(info) {
           markdownMap[info.id] = info;
         },

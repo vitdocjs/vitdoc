@@ -2,6 +2,7 @@ import pkg from "@vitdoc/compile";
 const { viteIgnore } = pkg;
 import path from "path";
 import { defineConfig } from "vite";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
   build: {
@@ -10,8 +11,8 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: {
-        index: path.resolve(__dirname, "src/index.tsx"),
-        theme: path.resolve(__dirname, "src/theme.tsx"),
+        layouts: path.resolve(__dirname, "src/layouts.tsx"),
+        builtins: path.resolve(__dirname, "src/builtins.tsx"),
       },
       // the proper extensions will be added
       formats: ["es"],
@@ -23,5 +24,5 @@ export default defineConfig({
       output: {},
     },
   },
-  plugins: [viteIgnore()],
+  plugins: [viteIgnore(), cssInjectedByJsPlugin()],
 });
