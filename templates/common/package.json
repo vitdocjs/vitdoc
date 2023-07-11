@@ -7,11 +7,6 @@
   ],
   "type": "module",
   "main": "dist/index.js",
-  "exports": {
-    ".": "./dist/index.js",
-    "./builtins": "./dist/theme.js",
-    "./package.json": "./package.json"
-  },
   "scripts": {
     "dev": "father dev",
     "build": "vite build"

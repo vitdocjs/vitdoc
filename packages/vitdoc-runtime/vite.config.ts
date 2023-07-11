@@ -1,4 +1,4 @@
-import pkg from "@vitdoc/compile";
+import * as pkg from "@vitdoc/compile";
 const { viteIgnore } = pkg;
 import path from "path";
 import { defineConfig } from "vite";
@@ -15,6 +15,7 @@ export default defineConfig({
       },
       // the proper extensions will be added
       formats: ["es"],
+      fileName: (format) => "[name].js",
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -22,7 +23,11 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
+        "react-router",
+        "react-router-dom",
+        "@vitdoc/ui",
         "virtual:vitdoc-layouts",
+        "virtual:vitdoc-builtins",
         "virtual:vitdoc-hmr",
       ],
     },

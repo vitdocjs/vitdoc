@@ -12,6 +12,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: {
+        index: path.resolve(__dirname, "src/index.ts"),
         builtins: path.resolve(__dirname, "src/builtins.tsx"),
       },
       // the proper extensions will be added
@@ -20,7 +21,14 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ["react", "react-dom", "virtual:vitdoc-hmr"],
+      external: [
+        "react",
+        "react-dom",
+        "react-router",
+        "@vitdoc/ui",
+        "react-router-dom",
+        "virtual:vitdoc-hmr",
+      ],
       output: {},
     },
   },
