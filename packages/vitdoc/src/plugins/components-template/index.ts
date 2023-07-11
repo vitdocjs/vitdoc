@@ -110,7 +110,8 @@ export const getRoutes = async (docDirs: string[]) => {
 };
 
 const vitdocRuntimeId = "virtual:vitdoc-runtime";
-const vitdocTemplateId = "virtual:vitdoc-template";
+const vitdocTemplateId = "virtual:vitdoc-layouts";
+const vitdocBuiltinsId = "virtual:vitdoc-builtins";
 
 const componentsTemplate = (vitdoc: VitdocInstance) => {
   let input = {};
@@ -130,6 +131,14 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
   const entry = require.resolve("@vitdoc/runtime/index.html");
 
   const themePromise = resolvePkgTheme(templatePath);
+
+  async function resolveThemeModule(type: "layouts" | "builtins") {
+    return Object.entries((await themePromise)[type])
+      .map(([name, content]: any) => {
+        return `export ${content.specifier} from '${content.source}';`;
+      })
+      .join("\n");
+  }
 
   const createHtml = Swig.compileFile(entry, {
     // cache: false,
@@ -181,6 +190,10 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
         return vitdocTemplateId;
       }
 
+      if (vitdocBuiltinsId === id) {
+        return vitdocBuiltinsId;
+      }
+
       if (vitdocRuntimeId === id) {
         return require.resolve("@vitdoc/runtime");
       }
@@ -192,14 +205,12 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
     async load(id: string) {
       let file = cleanUrl(id);
 
-      if (id.endsWith(vitdocTemplateId)) {
-        const { layouts } = (await themePromise)!;
+      if (id === vitdocBuiltinsId) {
+        return resolveThemeModule("builtins");
+      }
 
-        return Object.entries(layouts)
-          .map(([name, content]: any) => {
-            return `export ${content.specifier} from '${content.source}';`;
-          })
-          .join("\n");
+      if (id.endsWith(vitdocTemplateId)) {
+        return resolveThemeModule("layouts");
       }
 
       if (isRouteMap(file)) {

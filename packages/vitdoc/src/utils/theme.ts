@@ -12,6 +12,7 @@ const DEFAULT_THEME = "@vitdoc/theme-default";
 
 const userThemeDir = ".vitdoc";
 
+
 export const resolvePkgTheme = memoize(
   async (themePkgName: string): Promise<IThemeLoadResult | null> => {
     const resolveOneTheme = async (themePkgName: string) => {

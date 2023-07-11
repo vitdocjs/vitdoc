@@ -1,4 +1,3 @@
-import type { Root } from "hast";
 import path from "path";
 import get from "lodash/get";
 import type { Transformer } from "unified";
@@ -18,7 +17,7 @@ let SKIP: typeof import("unist-util-visit").SKIP;
 export default function rehypeDemo(opts: {
   cwd: string;
   fileAbsPath: string;
-}): Transformer<Root> {
+}) {
   return async (tree, vFile: any) => {
     function emitDemo(demoId: any) {
       const route = removeProcessCwd(opts.fileAbsPath, opts.cwd);
@@ -32,7 +31,7 @@ export default function rehypeDemo(opts: {
       return loadFn;
     }
 
-    visit<Root, "element">(tree, "element", (node) => {
+    visit(tree, "element", (node) => {
       if (node.tagName === "DumiDemo") {
         const demoId = get(node, 'data["$demo-prop-value-key"].demo.id', "");
 

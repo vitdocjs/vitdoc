@@ -5,11 +5,12 @@ import React, { useContext } from "react";
 import { VitDocMarkdownContext } from "../../context";
 import { useDemo, useMarkdown } from "../../hooks/loaders";
 import { ComponentBlock } from "../component-area";
+import { MarkdownArea } from "../markdown-area";
 
 import "./index.scss";
 
 export function DumiPage(props) {
-  return props.children;
+  return <MarkdownArea />;
 }
 
 export function DumiDemo(props) {

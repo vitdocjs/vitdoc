@@ -12,7 +12,6 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: {
-        layouts: path.resolve(__dirname, "src/layouts.tsx"),
         builtins: path.resolve(__dirname, "src/builtins.tsx"),
       },
       // the proper extensions will be added

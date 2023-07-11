@@ -22,7 +22,7 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
-        "virtual:vitdoc-template",
+        "virtual:vitdoc-layouts",
         "virtual:vitdoc-hmr",
       ],
     },

@@ -4,7 +4,6 @@ import { Typography } from "antd";
 import React from "react";
 import {
   LinkCopy,
-  MarkdownArea,
   PropertyPane,
   Store,
   useComponentInfo,
@@ -12,6 +11,7 @@ import {
   useRoute,
   useRouteMap,
 } from "@vitdoc/ui";
+import { Outlet } from "react-router-dom";
 
 import "./index.scss";
 
@@ -62,7 +62,7 @@ export default function ReadmePane() {
           <div className="component-main">
             <div className="component-part">
               <div className="component-description">
-                <MarkdownArea />
+                <Outlet />
               </div>
             </div>
             <PropertyPane />

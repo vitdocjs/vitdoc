@@ -6,7 +6,6 @@
     "dist",
     "index.html"
   ],
-  "type": "module",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",

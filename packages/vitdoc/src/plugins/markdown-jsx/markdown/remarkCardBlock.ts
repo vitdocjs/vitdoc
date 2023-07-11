@@ -38,7 +38,7 @@ const isCode = (node: any) => {
 /**
  * rehype plugin for extract fallback description from markdown content
  */
-export function remarkCardBlock(this: any): Transformer<Root> {
+export function remarkCardBlock(this: any) {
   return (tree) => {
     const modules: any = [];
     let prevModules: any[] = [];

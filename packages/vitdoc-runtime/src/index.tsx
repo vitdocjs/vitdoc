@@ -1,7 +1,15 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useRouteMap } from "@vitdoc/ui";
+
+const DumiPage = React.lazy(() =>
+  import("virtual:vitdoc-builtins").then((r) => {
+    return {
+      default: r.DumiPage
+    };
+  })
+);
 
 if (/^#\/~\//.test(location.hash)) {
   // Pure mode
@@ -22,7 +30,18 @@ if (/^#\/~\//.test(location.hash)) {
       <Routes>
         <Route element={<GlobalLayout />}>
           {routes.map((route) => {
-            return <Route key={route} path={route} element={<DocLayout />} />;
+            return (
+              <Route key={route} path={route} element={<DocLayout />}>
+                <Route
+                  index
+                  element={
+                    <Suspense fallback="Loading...">
+                      <DumiPage />
+                    </Suspense>
+                  }
+                />
+              </Route>
+            );
           })}
           <Route
             path="*"
@@ -33,7 +52,7 @@ if (/^#\/~\//.test(location.hash)) {
     );
   };
 
-  import("virtual:vitdoc-template").then((components) => {
+  import("virtual:vitdoc-layouts").then((components) => {
     ReactDOM.render(
       <HashRouter>
         <App {...components} />

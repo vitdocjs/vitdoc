@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
+    "target": "ESNext",
+    "module": "ESNext",
     "jsx": "react",
     "strict": true,
     "declaration": true,
@@ -10,6 +11,7 @@
     "esModuleInterop": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
+    "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   }
 }

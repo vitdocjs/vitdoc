@@ -16,11 +16,11 @@ let SKIP: typeof import("unist-util-visit").SKIP;
 export default function rehypeAPI(opts: {
   cwd: string;
   fileAbsPath: string;
-}): Transformer<Root> {
+}) {
   return async (tree, vFile: any) => {
     const markdownFile = opts.fileAbsPath;
 
-    visit<Root, "element">(tree, "element", (node) => {
+    visit(tree, "element", (node) => {
       if (node.tagName === "API") {
         if (!node.properties) {
           node.properties = {};

@@ -1,5 +1,4 @@
-
-declare module "virtual:vitdoc-template" {
+declare module "virtual:vitdoc-layouts" {
   import React from "react";
   /**
    * apply for all routes
@@ -13,4 +12,12 @@ declare module "virtual:vitdoc-template" {
    * apply for demo routes /~demos/:id
    */
   export const DemoLayout: () => React.ReactNode;
+}
+
+declare module "virtual:vitdoc-builtins" {
+  import React from "react";
+
+  export const DumiDemo: React.ComponentType<any>;
+
+  export const DumiPage: React.ComponentType<any>;
 }

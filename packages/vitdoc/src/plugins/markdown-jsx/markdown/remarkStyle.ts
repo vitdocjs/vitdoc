@@ -15,10 +15,10 @@ let SKIP: typeof import("unist-util-visit").SKIP;
 export default function remarkStyle(opts: {
   cwd: string;
   fileAbsPath: string;
-}): Transformer<Root> {
+}) {
   const route = removeProcessCwd(opts.fileAbsPath, opts.cwd);
   return async (tree, vFile: any) => {
-    visit<Root, "code">(tree, "code", (node, i, parent) => {
+    visit(tree, "code", (node, i, parent) => {
       if (/[ls]?css$/.test(node.lang ?? "")) {
         if (!node.meta) {
           vFile.data.styles = [

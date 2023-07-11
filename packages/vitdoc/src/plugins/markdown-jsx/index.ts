@@ -65,6 +65,7 @@ const mdjsx = (vitdoc: VitdocInstance) => {
         const demoCode = await transformDemo(demoInfo);
 
         const vFile = `${id}.tsx`;
+
         return transformWithEsbuild(demoCode, vFile, {
           target: "esnext",
           sourcefile: vFile,
