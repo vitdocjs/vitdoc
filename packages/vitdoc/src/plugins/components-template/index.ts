@@ -196,7 +196,7 @@ const componentsTemplate = (vitdoc: VitdocInstance) => {
         const { layouts } = (await themePromise)!;
 
         return Object.entries(layouts)
-          .map(([name, content]) => {
+          .map(([name, content]: any) => {
             return `export ${content.specifier} from '${content.source}';`;
           })
           .join("\n");

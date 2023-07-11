@@ -1,4 +1,3 @@
-import deepmerge from "lodash/merge";
 import path from "path";
 import { mergeConfig, Plugin } from "vite";
 import componentsTemplate from "../plugins/components-template";
