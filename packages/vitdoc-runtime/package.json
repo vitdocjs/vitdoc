@@ -6,9 +6,9 @@
     "dist",
     "index.html"
   ],
-  "main": "dist/index",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./dist/index",
+    ".": "./dist/index.js",
     "./index.html": "./index.html",
     "./package.json": "./package.json"
   },
