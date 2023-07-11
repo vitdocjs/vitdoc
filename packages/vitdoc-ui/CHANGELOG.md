@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.1
+
+### Patch Changes
+
+- upgrade the backgound style
+
 ## 1.3.0
 
 ### Minor Changes
