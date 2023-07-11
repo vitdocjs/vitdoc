@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./dist/index.js",
   "bin": {
@@ -26,7 +26,8 @@
   },
   "files": [
     "config",
-    "dist"
+    "dist",
+    "esm"
   ],
   "dependencies": {
     "@types/node": "^14.18.53",

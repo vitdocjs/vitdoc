@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.4.1
+
+### Patch Changes
+
+- upgrade npm files
+
 ## 1.4.0
 
 ### Minor Changes
