@@ -10,7 +10,7 @@ import { MarkdownArea } from "../markdown-area";
 import "./index.scss";
 
 export function DumiPage(props) {
-  return <MarkdownArea />;
+  return <MarkdownArea renderers={props.renderers} />;
 }
 
 export function DumiDemo(props) {

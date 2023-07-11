@@ -20,4 +20,6 @@ declare module "virtual:vitdoc-builtins" {
   export const DumiDemo: React.ComponentType<any>;
 
   export const DumiPage: React.ComponentType<any>;
+
+  export const renderers: Record<string, React.ComponentType<any>>;
 }

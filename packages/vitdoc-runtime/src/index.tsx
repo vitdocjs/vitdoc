@@ -6,7 +6,7 @@ import { useRouteMap } from "@vitdoc/ui";
 const DumiPage = React.lazy(() =>
   import("virtual:vitdoc-builtins").then((r) => {
     return {
-      default: r.DumiPage
+      default: () => <r.DumiPage renderers={r.renderers} />,
     };
   })
 );
