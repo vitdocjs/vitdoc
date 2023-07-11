@@ -3,5 +3,5 @@ export default {
   logo: '',
   // plugins: [px2vw({})],
 
-  template: '@vitdoc/template-mobile',
+  // template: '@vitdoc/template-mobile',
 };

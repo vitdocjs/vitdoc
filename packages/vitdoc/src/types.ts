@@ -1,4 +1,4 @@
-import { Plugin, PluginOption } from "./core/types";
+import { PluginOption } from "./core/types";
 
 export * from "./core/types";
 
@@ -67,5 +67,3 @@ export type ConfigType = {
    */
   docDirs?: string[];
 };
-
-

@@ -1,13 +1,15 @@
 import { fileURLToPath, resolve } from "mlly";
 import path from "path";
 import { getExportsStatic } from "pkg-exports";
-import { deepmerge, glob } from "@umijs/utils";
+import { deepmerge, fsExtra, glob, logger } from "@umijs/utils";
 import type {
   IThemeComponent,
   IThemeLoadResult,
 } from "dumi/dist/features/theme/loader";
 
 const DEFAULT_THEME = "@vitdoc/theme-default";
+
+const userThemeDir = ".vitdoc";
 
 export async function resolvePkgTheme(
   themePkgName: string
@@ -32,6 +34,17 @@ export async function resolvePkgTheme(
       (await resolveOneTheme(themePkgName)) ?? {}
     );
   }
+
+  const userCustomThemeDir = path.resolve(process.cwd(), userThemeDir);
+  if (fsExtra.existsSync(userCustomThemeDir)) {
+    logger.info("Has user custom theme, will use it.");
+
+    definedPlugins = deepmerge(
+      definedPlugins,
+      await resolveTheme("userTheme", userCustomThemeDir)
+    );
+  }
+
   return definedPlugins;
 }
 

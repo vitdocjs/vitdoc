@@ -1,11 +1,10 @@
-import { Result } from "antd";
+import { Card, Result } from "antd";
 import chunk from "lodash/chunk";
 import unzip from "lodash/unzip";
 import React, { useContext } from "react";
 import { VitDocMarkdownContext } from "../../context";
-import { useDemo, useLoadModule, useMarkdown } from "../../hooks/loaders";
+import { useDemo, useMarkdown } from "../../hooks/loaders";
 import { ComponentBlock } from "../component-area";
-import { Card } from "antd";
 
 import "./index.scss";
 
