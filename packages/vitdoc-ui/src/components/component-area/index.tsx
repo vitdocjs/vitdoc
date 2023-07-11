@@ -52,6 +52,7 @@ export const ComponentBlock = (props: RendererProps) => {
         lang={lang}
         content={content}
         eventBus={eventBus}
+        Provider={props.DemoProvider}
       />
       <Divider orientation="left" dashed className="code-box-divider">
         {title}
@@ -89,7 +90,7 @@ export const ComponentBlock = (props: RendererProps) => {
 };
 
 export function ComponentArea(props) {
-  const { renderer, content, eventBus } = props;
+  const { renderer, content, eventBus, Provider } = props;
   const componentRef = useRef() as any;
 
   const invoked = useRef(false);
@@ -146,7 +147,11 @@ export function ComponentArea(props) {
         invoked.current = true;
       }
       const finalProps = Object.assign({}, props, componentProps);
-      return OutReact.createElement(Component, finalProps);
+      const ele = OutReact.createElement(Component, finalProps);
+      if (Provider) {
+        return OutReact.createElement(Provider, { children: ele });
+      }
+      return ele;
     };
     Object.assign(outputComp, Component);
 

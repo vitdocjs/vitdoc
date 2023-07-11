@@ -7,7 +7,11 @@ export default defineConfig({
     ignores: ["src/plugins/hmr/client/**"],
   },
   esm: {
-    output: "dist/plugins/hmr/client",
-    input: "src/plugins/hmr/client",
+    output: "esm",
+    overrides: {
+      "src/plugins/hmr/client": {
+        output: "dist/plugins/hmr/client",
+      },
+    },
   },
 });

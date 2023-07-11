@@ -56,3 +56,5 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
     vitDocHMR(vitdocInstance),
   ] as Plugin[];
 }
+
+export default vitdoc;

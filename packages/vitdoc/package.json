@@ -7,6 +7,11 @@
     "vitdoc": "./bin/index.mjs",
     "vdoc": "./bin/index.mjs"
   },
+  "exports": {
+    ".": "./esm/index.js",
+    "./vite": "./dist/preset/index.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "dev": "father dev",
     "build": "father build"
