@@ -16,7 +16,6 @@ export function DumiPage(props) {
 
 export function DumiDemo(props) {
   const { previewerProps } = props;
-  console.log("🚀 #### ~ DumiDemo ~ previewerProps:", previewerProps);
   const id = props.demo.id;
 
   const { loading, error, data } = useDemo(props.load);

@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.2
+
+### Patch Changes
+
+- remove log
+
 ## 1.3.1
 
 ### Patch Changes
