@@ -148,9 +148,9 @@ export function ComponentArea(props) {
       }
       const finalProps = Object.assign({}, props, componentProps);
       const ele = OutReact.createElement(Component, finalProps);
-      if (Provider) {
-        return OutReact.createElement(Provider, { children: ele });
-      }
+      // if (Provider) {
+        // return OutReact.createElement(Provider, { children: ele });
+      // }
       return ele;
     };
     Object.assign(outputComp, Component);
@@ -170,6 +170,9 @@ export function ComponentArea(props) {
     }).then((ele) => {
       if (ele) {
         // export default mode
+        if (Provider) {
+          ele = React.createElement(Provider, { children: ele });
+        }
         ReactDOM.render(ele, componentRef.current);
       }
     });
