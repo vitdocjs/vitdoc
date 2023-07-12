@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/theme-default",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "The default template for vitdoc",
   "files": [
     "dist"
@@ -15,9 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
-  "peerDependencies": {
+    "react-dom": "^17.0.2",
     "@vitdoc/ui": "workspace:*"
   },
   "devDependencies": {

@@ -1,5 +1,12 @@
 # vitdoc
 
+## 1.4.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/theme-default@2.0.4
+
 ## 1.4.4
 
 ### Patch Changes
