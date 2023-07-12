@@ -1,5 +1,11 @@
 # @vitdoc/theme-default
 
+## 2.0.5
+
+### Patch Changes
+
+- fix the build result
+
 ## 2.0.4
 
 ### Patch Changes

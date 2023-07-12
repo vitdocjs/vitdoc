@@ -24,8 +24,6 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
-        "@vitdoc/ui",
-        "@vitdoc/ui/theme",
         "react-router",
         "react-router-dom",
         "virtual:vitdoc-hmr",

@@ -1,5 +1,13 @@
 # vitdoc
 
+## 1.4.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/runtime@1.4.4
+  - @vitdoc/theme-default@2.0.5
+
 ## 1.4.5
 
 ### Patch Changes

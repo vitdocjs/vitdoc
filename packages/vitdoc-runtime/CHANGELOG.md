@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.4.4
+
+### Patch Changes
+
+- fix the build result
+
 ## 1.4.3
 
 ### Patch Changes
