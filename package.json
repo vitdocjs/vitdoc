@@ -10,6 +10,7 @@
     "prettier": "pretty-quick --staged",
     "build": "turbo --filter='./templates/*' --filter='./packages/*' build",
     "iversion": "changeset && changeset version",
+    "pre-iversion": "changeset pre enter beta && npm run iversion",
     "release": "npm run build && changeset publish",
     "release-all": "turbo build && bumpp package.json packages/**/package.json templates/**/package.json && pnpm -r --no-git-checks publish --access public"
   },
