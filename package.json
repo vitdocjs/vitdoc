@@ -30,7 +30,7 @@
     "esbuild-sass-plugin": "^2.10.0",
     "father": "^4.2.3",
     "turbo": "^1.10.7",
-    "vite": "^4.4.2",
+    "vite": "^4.4.3",
     "vitest": "^0.25.8"
   }
 }
