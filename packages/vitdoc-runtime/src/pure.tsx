@@ -21,7 +21,7 @@ export default function PureDoc() {
             key={route}
             path={`${route}/*`}
             element={
-              <MarkdownProvider route={route} renderers={renderers}>
+              <MarkdownProvider key={route} route={route} renderers={renderers}>
                 <DemoLayout />
               </MarkdownProvider>
             }

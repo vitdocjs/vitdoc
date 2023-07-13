@@ -22,7 +22,7 @@ export const MainApp: ComponentType<any> = () => {
               key={route}
               path={route}
               element={
-                <MarkdownProvider route={route} renderers={renderers}>
+                <MarkdownProvider key={route} route={route} renderers={renderers}>
                   <DocLayout />
                 </MarkdownProvider>
               }

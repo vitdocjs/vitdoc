@@ -1,13 +1,13 @@
 import { Card, Result } from "antd";
+import classNames from "classnames";
 import chunk from "lodash/chunk";
 import unzip from "lodash/unzip";
 import React, { CSSProperties, useContext } from "react";
 import { VitDocMarkdownContext } from "../../context";
-import { useDemo, useLoadModule, useMarkdown } from "../../hooks/loaders";
+import { useDemo, useMarkdown } from "../../hooks/loaders";
+import { IPreviewerProps } from "../../types";
 import { ComponentBlock } from "../component-area";
 import { MarkdownArea } from "../markdown-area";
-import classNames from "classnames";
-import { IPreviewerProps } from "../../types";
 
 import "./index.scss";
 

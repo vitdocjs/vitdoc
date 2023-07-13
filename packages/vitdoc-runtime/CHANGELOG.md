@@ -1,5 +1,13 @@
 # @vitdoc/runtime
 
+## 1.4.5-beta.5
+
+### Patch Changes
+
+- update key
+- Updated dependencies
+  - @vitdoc/ui@1.3.4-beta.5
+
 ## 1.4.5-beta.4
 
 ### Patch Changes

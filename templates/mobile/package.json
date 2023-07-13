@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/template-mobile",
-  "version": "2.0.6-beta.4",
+  "version": "2.0.6-beta.5",
   "description": "The mobile template for vitdoc",
   "type": "module",
   "main": "dist/index.js",
