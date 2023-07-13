@@ -1,18 +1,17 @@
 {
   "name": "@vitdoc/ui",
-  "version": "1.3.4-beta.3",
+  "version": "1.3.4-beta.4",
   "description": "The UI component for vitdoc theme",
   "main": "./dist/esm/index.js",
   "exports": {
     ".": "./dist/esm/index.js",
     "./theme": "./dist/esm/theme.js",
-    "./package.json": "./package.json",
-    "./runtime": "./dist/esm/runtime/index.js",
-    "./runtime/index.html": "./dist/esm/runtime/index.html"
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "father dev",
-    "build": "father build",
+    "build": "vite build",
+    "build_": "father build",
     "prettier": "pretty-quick --staged",
     "test": "vitest run"
   },
@@ -46,5 +45,9 @@
     "remark-directive": "^1.0.1",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^1.0.0"
+  },
+  "devDependencies": {
+    "vite-plugin-css-injected-by-js": "^3.2.0",
+    "@vitdoc/compile": "workspace:*"
   }
 }

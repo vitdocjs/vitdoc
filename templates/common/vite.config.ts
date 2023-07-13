@@ -17,6 +17,7 @@ export default defineConfig({
       },
       // the proper extensions will be added
       formats: ["es"],
+      fileName: (format) => "[name].js",
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

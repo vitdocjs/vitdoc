@@ -1,11 +1,10 @@
-import pkg from "@vitdoc/compile";
+import * as pkg from "@vitdoc/compile";
 const { viteIgnore } = pkg;
 import path from "path";
 import { defineConfig } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
-  resolve: {},
   build: {
     outDir: "dist",
     cssCodeSplit: false,
@@ -13,7 +12,7 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points
       entry: {
         index: path.resolve(__dirname, "src/index.ts"),
-        builtins: path.resolve(__dirname, "src/builtins.tsx"),
+        theme: path.resolve(__dirname, "src/theme.tsx"),
       },
       // the proper extensions will be added
       formats: ["es"],
@@ -25,13 +24,13 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
-        "@vitdoc/ui",
-        "@vitdoc/ui/theme",
         "react-router",
         "react-router-dom",
         "virtual:vitdoc-hmr",
       ],
-      output: {},
+      output: {
+        dir: "dist/esm",
+      },
     },
   },
   plugins: [viteIgnore(), cssInjectedByJsPlugin()],
