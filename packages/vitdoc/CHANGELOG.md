@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.4.7-beta.1
+
+### Patch Changes
+
+- upgrade the main
+
 ## 1.4.7-beta.0
 
 ### Patch Changes

@@ -11,6 +11,7 @@
     "@vitdoc/template-mobile": "2.0.5"
   },
   "changesets": [
+    "brown-hounds-mix",
     "lazy-beers-return"
   ]
 }
