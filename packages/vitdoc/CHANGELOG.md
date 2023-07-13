@@ -1,5 +1,25 @@
 # vitdoc
 
+## 1.4.7-beta.4
+
+### Patch Changes
+
+- update deps
+- Updated dependencies
+  - @vitdoc/runtime@1.4.5-beta.3
+  - @vitdoc/ui@1.3.4-beta.3
+  - @vitdoc/theme-default@2.0.4-beta.3
+
+## 1.4.7-beta.3
+
+### Patch Changes
+
+- upgrade vitdoc/ui
+- Updated dependencies
+  - @vitdoc/runtime@1.4.5-beta.2
+  - @vitdoc/ui@1.3.4-beta.2
+  - @vitdoc/theme-default@2.0.4-beta.2
+
 ## 1.4.7-beta.2
 
 ### Patch Changes
