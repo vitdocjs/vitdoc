@@ -15,3 +15,5 @@ export {
   DumiDemo,
   DumiDemoGrid,
 };
+
+export const renderers = {};

@@ -7,3 +7,4 @@ export type VitDocMarkdownContextType = {
 
 export const VitDocMarkdownContext =
   React.createContext<VitDocMarkdownContextType>({});
+

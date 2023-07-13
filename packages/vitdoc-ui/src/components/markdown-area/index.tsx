@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode, useContext } from "react";
 import {
   VitDocMarkdownContext,
   type VitDocMarkdownContextType,
@@ -9,8 +9,18 @@ import classNames from "classnames";
 
 import "./index.scss";
 
-export function MarkdownArea(props: VitDocMarkdownContextType) {
-  const { data: MarkdownContent } = useMarkdown();
+export function MarkdownArea() {
+  const MarkdownContent = useContext(VitDocMarkdownContext);
+  return <MarkdownContent.context.Markdown />;
+}
+
+export function MarkdownProvider(
+  props: Pick<VitDocMarkdownContextType, "renderers"> & {
+    route?: string;
+    children: ReactNode;
+  }
+) {
+  const { data: MarkdownContent } = useMarkdown(props.route);
 
   const renderers = { ...mdRenderers, ...props.renderers };
 
@@ -19,7 +29,7 @@ export function MarkdownArea(props: VitDocMarkdownContextType) {
       <VitDocMarkdownContext.Provider
         value={{ context: MarkdownContent, renderers }}
       >
-        <MarkdownContent.Markdown />
+        {props.children}
       </VitDocMarkdownContext.Provider>
     </div>
   ) : null;

@@ -25,6 +25,7 @@ export default defineConfig({
         "react-dom",
         "react-router",
         "react-router-dom",
+        "@vitdoc/ui",
         "virtual:vitdoc-layouts",
         "virtual:vitdoc-builtins",
         "virtual:vitdoc-hmr",

@@ -1,8 +1,9 @@
 import { useMemoizedFn, useRequest } from "ahooks";
 import identity from "lodash/identity";
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useLocation, useMatch } from "react-router-dom";
+import { VitDocMarkdownContext } from "../context";
 
 declare global {
   interface Window {
@@ -122,7 +123,14 @@ export type ModuleInfo = {
 };
 export type MarkdownResult = ReturnType<typeof useMarkdown>;
 
-export function useDemo(load: Parameters<typeof useLoadModule>[0] | undefined) {
+export function useDemo(demoId: string) {
+  const { context } = useContext(VitDocMarkdownContext)!;
+  const id = (() => {
+    const ids = demoId.split("/");
+    return ids[ids.length - 1];
+  })();
+  const load: Parameters<typeof useLoadModule>[0] = context.getModule(id);
+
   const actions = useLoadModule(load, (res) => {
     const content = res.content$.value;
     const route = load!.id.replace(/(.+\.md)\?.+/, "$1");

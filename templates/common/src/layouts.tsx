@@ -8,6 +8,10 @@ import ReadmePane from "./pages/readme-pane";
 
 import "./global.scss";
 
+export function DemoLayout() {
+  return <Outlet />;
+}
+
 export function GlobalLayout() {
   const { tree: menuData, routes } = useRouteMap() || {};
 

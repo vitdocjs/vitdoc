@@ -3,15 +3,15 @@ declare module "virtual:vitdoc-layouts" {
   /**
    * apply for all routes
    */
-  export const GlobalLayout: () => React.ReactNode;
+  export const GlobalLayout: React.ComponentType<any>;
   /**
    * apply for doc routes
    */
-  export const DocLayout: () => React.ReactNode;
+  export const DocLayout: React.ComponentType<any>;
   /**
    * apply for demo routes /~demos/:id
    */
-  export const DemoLayout: () => React.ReactNode;
+  export const DemoLayout: React.ComponentType<any>;
 }
 
 declare module "virtual:vitdoc-builtins" {

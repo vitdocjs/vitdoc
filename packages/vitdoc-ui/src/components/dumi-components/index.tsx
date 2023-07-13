@@ -1,26 +1,35 @@
 import { Card, Result } from "antd";
 import chunk from "lodash/chunk";
 import unzip from "lodash/unzip";
-import React, { useContext } from "react";
+import React, { CSSProperties, useContext } from "react";
 import { VitDocMarkdownContext } from "../../context";
-import { useDemo, useMarkdown } from "../../hooks/loaders";
+import { useDemo, useLoadModule, useMarkdown } from "../../hooks/loaders";
 import { ComponentBlock } from "../component-area";
 import { MarkdownArea } from "../markdown-area";
 import classNames from "classnames";
+import { IPreviewerProps } from "../../types";
 
 import "./index.scss";
 
-export function DumiPage(props) {
-  return <MarkdownArea renderers={props.renderers} />;
+export function DumiPage() {
+  return <MarkdownArea />;
 }
 
-export function DumiDemo(props) {
+export function DumiDemo(props: {
+  demo: {
+    id: string;
+    inline?: boolean;
+  };
+  previewerProps: IPreviewerProps;
+  className?: string;
+  style?: CSSProperties;
+}) {
   const { previewerProps } = props;
   const id = props.demo.id;
 
-  const { loading, error, data } = useDemo(props.load);
-
   const { renderers } = useContext(VitDocMarkdownContext)!;
+  const { loading, error, data } = useDemo(id);
+
   const CodeBlock = renderers?.["code-block"] ?? ComponentBlock;
 
   if (!!loading) {
@@ -48,9 +57,9 @@ export function DumiDemo(props) {
       key={id}
       demoid={id}
       getModule={() => data}
-      {...props.previewerProps}
+      {...(props.previewerProps as any)}
       className={classNames(props.className, {
-        'demo-compact': previewerProps.compact,
+        "demo-compact": previewerProps.compact,
       })}
       style={{
         ...props.style,

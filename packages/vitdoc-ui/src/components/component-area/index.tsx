@@ -26,7 +26,11 @@ import "./index.scss";
 const Tooltip = _Tooltip as any;
 
 export const ComponentBlock = (
-  props: RendererProps & { className?: string; style?: CSSProperties }
+  props: RendererProps & {
+    className?: string;
+    style?: CSSProperties;
+    pure?: boolean;
+  }
 ) => {
   const { getModule, demoid: id = "", title, className, style } = props;
 
@@ -43,21 +47,27 @@ export const ComponentBlock = (
 
   const active = current !== undefined && current === content;
 
+  const ele = (
+    <ComponentArea
+      renderer={renderer}
+      lang={lang}
+      className={className}
+      style={style}
+      content={content}
+      eventBus={eventBus}
+      Provider={props.DemoProvider}
+    />
+  );
+
+  if (props.pure) return ele;
+
   return (
     <div
       className={classNames("component-area", {
         active,
       })}
     >
-      <ComponentArea
-        renderer={renderer}
-        lang={lang}
-        className={className}
-        style={style}
-        content={content}
-        eventBus={eventBus}
-        Provider={props.DemoProvider}
-      />
+      {ele}
       <Divider orientation="left" dashed className="code-box-divider">
         {title}
       </Divider>

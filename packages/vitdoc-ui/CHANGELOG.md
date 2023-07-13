@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.4-beta.1
+
+### Patch Changes
+
+- upgrade the vitdoc
+
 ## 1.3.4-beta.0
 
 ### Patch Changes

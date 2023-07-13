@@ -1,68 +1,47 @@
-import {
-  ComponentArea,
-  useDemo,
-  useMarkdown,
-  useRoute,
-  useRouteMap,
-} from "@vitdoc/ui";
+import { MarkdownProvider, useRouteMap } from "@vitdoc/ui";
 import React from "react";
-import { Route, Routes, useParams } from "react-router";
-import { HashRouter as Router } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router";
+import { DumiDemo, renderers } from "virtual:vitdoc-builtins";
+import { DemoLayout } from "virtual:vitdoc-layouts";
 
-export function Demo() {
-  const { "*": index } = useParams();
-
-  const route = useRoute()
-    .route.replace(/^\/~/, "")
-    .replace(new RegExp(`/${index}$`), "");
-
-  const { data: demoInfo } = useMarkdown(route);
-  const { getModule, pathHash } = demoInfo ?? {};
-  const load = getModule?.(index!);
-
-  const { data } = useDemo(load);
-
-  if (!demoInfo || !data) {
-    return null;
-  }
-
-  return (
-    <ComponentArea
-      style={{ width: "100%" }}
-      pathHash={pathHash}
-      content={data.content}
-      renderer={data.renderer}
-    />
-  );
-}
-
-export function PureDoc() {
-  let { tree: menuData, routes } = useRouteMap() || {};
+export default function PureDoc() {
+  let { routes } = useRouteMap() || {};
+  const { pathname } = useLocation();
+  const demoId = pathname.replace(/^\/~/, "");
 
   if (!routes) {
     return null;
   }
 
-  routes = routes.map((route) => `/~${route}`);
-
   return (
-    <Router>
-      <Routes>
-        {routes.map((route) => {
-          return (
+    <Routes>
+      {routes.map((route) => {
+        return (
+          <Route
+            key={route}
+            path={`${route}/*`}
+            element={
+              <MarkdownProvider route={route} renderers={renderers}>
+                <DemoLayout />
+              </MarkdownProvider>
+            }
+          >
             <Route
-              key={route}
-              path={`${route}/*`}
+              path="*"
               element={
-                <div style={{ display: "flex" }} className="code-box-demo">
-                  <Demo />
-                </div>
+                <DumiDemo
+                  demo={{ id: demoId }}
+                  previewerProps={{
+                    demoUrl: pathname,
+                    pure: true,
+                  }}
+                />
               }
             />
-          );
-        })}
-        {/* <Route path="*" element={<Navigate to={routes[0]} replace={true} />} /> */}
-      </Routes>
-    </Router>
+          </Route>
+        );
+      })}
+      <Route path="*" element={<Navigate to={routes[0]} replace={true} />} />
+    </Routes>
   );
 }
