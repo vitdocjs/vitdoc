@@ -3,6 +3,7 @@ const { viteIgnore } = pkg;
 import path from "path";
 import { defineConfig } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   build: {
@@ -33,5 +34,15 @@ export default defineConfig({
       },
     },
   },
-  plugins: [viteIgnore(), cssInjectedByJsPlugin()],
+  plugins: [
+    viteIgnore(),
+    cssInjectedByJsPlugin(),
+    dts({
+      entryRoot: path.resolve(__dirname, "src"),
+      outDir: "dist/esm",
+      insertTypesEntry: true,
+      // tsconfigPath: path.resolve(__dirname, "../../", "tsconfig.json"),
+      exclude: "**/node_modules/**",
+    }),
+  ],
 });

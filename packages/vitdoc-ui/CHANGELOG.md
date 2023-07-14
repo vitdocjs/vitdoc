@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.4-beta.6
+
+### Patch Changes
+
+- upgrade the ui dts
+
 ## 1.3.4-beta.5
 
 ### Patch Changes
