@@ -1,5 +1,29 @@
 # @vitdoc/theme-default
 
+## 2.0.4
+
+### Patch Changes
+
+- fix the build issue
+- 779870e: upgrade a version
+- e56ab52: upgrade the vitdoc
+- 58b8ecb: update beta version
+- 937d50c: update key
+- f43b93a: upgrade the version
+- a1a7bc6: upgrade the ui dts
+- cf157a5: upgrade vitdoc/ui
+- cf157a5: update deps
+- Updated dependencies
+- Updated dependencies [779870e]
+- Updated dependencies [e56ab52]
+- Updated dependencies [58b8ecb]
+- Updated dependencies [937d50c]
+- Updated dependencies [f43b93a]
+- Updated dependencies [a1a7bc6]
+- Updated dependencies [cf157a5]
+- Updated dependencies [cf157a5]
+  - @vitdoc/ui@1.3.4
+
 ## 2.0.4-beta.7
 
 ### Patch Changes

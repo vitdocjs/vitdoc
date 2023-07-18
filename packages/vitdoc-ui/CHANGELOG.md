@@ -1,5 +1,19 @@
 # @vitdoc/ui
 
+## 1.3.4
+
+### Patch Changes
+
+- fix the build issue
+- 779870e: upgrade a version
+- e56ab52: upgrade the vitdoc
+- 58b8ecb: update beta version
+- 937d50c: update key
+- f43b93a: upgrade the version
+- a1a7bc6: upgrade the ui dts
+- cf157a5: upgrade vitdoc/ui
+- cf157a5: update deps
+
 ## 1.3.4-beta.7
 
 ### Patch Changes

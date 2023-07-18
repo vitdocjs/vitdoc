@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/ui",
-  "version": "1.3.4-beta.7",
+  "version": "1.3.4",
   "description": "The UI component for vitdoc theme",
   "main": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
