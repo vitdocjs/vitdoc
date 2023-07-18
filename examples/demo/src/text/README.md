@@ -4,14 +4,13 @@ Write markdown here.
 
 ```tsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import Text from './index';
 
-ReactDOM.render(
+export default () => (
   <div>
     <Text size="large" />
-  </div>,
-  mountNode,
+  </div>
 );
 ```
 

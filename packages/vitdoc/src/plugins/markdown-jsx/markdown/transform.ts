@@ -92,7 +92,6 @@ export async function transformMarkdown(
       .map((item) => `import ${item.specifier} from '${item.source}';`)
       .join("\n")}
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 const $$contentTexts = ${JSON.stringify(texts)};
 export const meta$ = ${stringifyEval(meta)};

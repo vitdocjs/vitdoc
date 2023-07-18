@@ -16,3 +16,5 @@ export * from "./types";
 
 export * as Store from "./store";
 export * from "./hooks/hashchange";
+
+export * from "./utils/react-render";

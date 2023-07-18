@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/template-mobile",
-  "version": "2.0.6",
+  "version": "2.0.7-beta.0",
   "description": "The mobile template for vitdoc",
   "type": "module",
   "main": "dist/index.js",
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react": "^17.0.2",
     "@vitdoc/ui": "workspace:*",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.8.0",

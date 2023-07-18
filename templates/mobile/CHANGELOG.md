@@ -1,5 +1,13 @@
 # @vitdoc/template-mobile
 
+## 2.0.7-beta.0
+
+### Patch Changes
+
+- react 18
+- Updated dependencies
+  - @vitdoc/ui@1.3.5-beta.0
+
 ## 2.0.6
 
 ### Patch Changes

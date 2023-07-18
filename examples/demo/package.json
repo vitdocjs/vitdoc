@@ -23,21 +23,19 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@alifd/next": "^1.26.21",
     "@types/lodash": "^4.14.195",
-    "@types/react-dom": "^16.9.19",
+    "@types/react-dom": "^18.2.7",
     "@vitdoc/template-mobile": "workspace:^",
     "@vitdoc/theme-default": "workspace:^",
     "moment-timezone": "^0.5.33",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.8",
     "pretty-quick": "^1.11.1",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
     "vitdoc": "workspace:^",
     "vite-plugin-px2vw": "^1.0.2"
   },

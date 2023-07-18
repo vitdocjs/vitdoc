@@ -3,9 +3,9 @@
 ```tsx
 import { Title as Component } from '..';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-ReactDOM.render(
+
+export default () => (
   <div style={{ display: 'flex', flexDirection: 'column' }}>
     <Component
       title="Training Material"
@@ -20,7 +20,6 @@ ReactDOM.render(
       title="PREPARE FOR 12.12 WITH 6 KEY FOCUS"
       subTitle="Ensure that you meet our campaign criteria.<br /> Click on the respective image below to unlock tips on how to soar this 12.12 !"
     />
-  </div>,
-  mountNode,
+  </div>
 );
 ```

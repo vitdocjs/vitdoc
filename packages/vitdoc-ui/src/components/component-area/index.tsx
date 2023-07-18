@@ -13,7 +13,6 @@ import {
 } from "ahooks";
 import classNames from "classnames";
 import React, { CSSProperties, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
 import HighLight from "../highlight";
 import { copyToClipboard } from "../link-copy";
 import { useAtom } from "jotai";
@@ -22,6 +21,7 @@ import { Divider, Tooltip as _Tooltip } from "antd";
 import { RendererProps } from "../../types";
 
 import "./index.scss";
+import { ReactRender } from "../../utils/react-render";
 
 const Tooltip = _Tooltip as any;
 
@@ -187,7 +187,7 @@ export function ComponentArea(props) {
         if (Provider) {
           ele = React.createElement(Provider, { children: ele });
         }
-        ReactDOM.render(ele, componentRef.current);
+        ReactRender(ele, componentRef.current);
       }
     });
   }, [renderer, componentProps]);

@@ -34,5 +34,5 @@ export default defineConfig({
       output: {},
     },
   },
-  plugins: [viteIgnore(), cssInjectedByJsPlugin()],
+  plugins: [viteIgnore(), cssInjectedByJsPlugin() as any],
 });

@@ -67,7 +67,7 @@ yarn docs:dev
 ```tsx
 import { Title as Component } from '.';
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 
 export default () => (
   <div style={{ display: 'flex', flexDirection: 'column' }}>

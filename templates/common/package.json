@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/theme-default",
-  "version": "2.0.4",
+  "version": "2.0.5-beta.0",
   "description": "The default template for vitdoc",
   "files": [
     "dist"
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react": "^17.0.2",
     "@vitdoc/ui": "workspace:*",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@ant-design/pro-layout": "^7.16.0",
