@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.4.8-beta.6
+
+### Patch Changes
+
+- upgrade the performance
+- Updated dependencies
+  - @vitdoc/runtime@1.4.6-beta.6
+  - @vitdoc/ui@1.3.5-beta.6
+  - @vitdoc/theme-default@2.0.5-beta.6
+
 ## 1.4.8-beta.5
 
 ### Patch Changes
