@@ -11,6 +11,7 @@
     "@vitdoc/template-mobile": "2.0.6"
   },
   "changesets": [
-    "gold-chicken-switch"
+    "gold-chicken-switch",
+    "shaggy-colts-kick"
   ]
 }

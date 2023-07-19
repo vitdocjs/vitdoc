@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.5-beta.1
+
+### Patch Changes
+
+- update react 18
+
 ## 1.3.5-beta.0
 
 ### Patch Changes

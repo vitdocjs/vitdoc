@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.4.8-beta.1
+
+### Patch Changes
+
+- update react 18
+- Updated dependencies
+  - @vitdoc/runtime@1.4.6-beta.1
+  - @vitdoc/ui@1.3.5-beta.1
+  - @vitdoc/theme-default@2.0.5-beta.1
+
 ## 1.4.8-beta.0
 
 ### Patch Changes

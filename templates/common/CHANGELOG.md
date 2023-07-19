@@ -1,5 +1,13 @@
 # @vitdoc/theme-default
 
+## 2.0.5-beta.1
+
+### Patch Changes
+
+- update react 18
+- Updated dependencies
+  - @vitdoc/ui@1.3.5-beta.1
+
 ## 2.0.5-beta.0
 
 ### Patch Changes
