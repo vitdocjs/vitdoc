@@ -17,3 +17,4 @@ export {
 };
 
 export const renderers = {};
+export const DemoProvider = undefined;

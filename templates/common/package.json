@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/theme-default",
-  "version": "2.0.5-beta.2",
+  "version": "2.0.5-beta.3",
   "description": "The default template for vitdoc",
   "files": [
     "dist"

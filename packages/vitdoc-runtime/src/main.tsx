@@ -1,7 +1,7 @@
 import { MarkdownProvider, useRouteMap } from "@vitdoc/ui";
 import React, { ComponentType } from "react";
 import { Navigate, Route, Routes } from "react-router";
-import { DumiPage, renderers } from "virtual:vitdoc-builtins";
+import { DumiPage, renderers, DemoProvider } from "virtual:vitdoc-builtins";
 import { DocLayout, GlobalLayout } from "virtual:vitdoc-layouts";
 
 export const MainApp: ComponentType<any> = () => {
@@ -22,7 +22,12 @@ export const MainApp: ComponentType<any> = () => {
               key={route}
               path={route}
               element={
-                <MarkdownProvider key={route} route={route} renderers={renderers}>
+                <MarkdownProvider
+                  key={route}
+                  route={route}
+                  renderers={renderers}
+                  DemoProvider={DemoProvider}
+                >
                   <DocLayout />
                 </MarkdownProvider>
               }

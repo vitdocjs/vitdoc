@@ -1,5 +1,13 @@
 # @vitdoc/runtime
 
+## 1.4.6-beta.3
+
+### Patch Changes
+
+- release
+- Updated dependencies
+  - @vitdoc/ui@1.3.5-beta.3
+
 ## 1.4.6-beta.2
 
 ### Patch Changes

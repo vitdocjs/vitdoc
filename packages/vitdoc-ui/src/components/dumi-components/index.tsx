@@ -27,7 +27,7 @@ export function DumiDemo(props: {
   const { previewerProps } = props;
   const id = props.demo.id;
 
-  const { renderers } = useContext(VitDocMarkdownContext)!;
+  const { renderers, DemoProvider } = useContext(VitDocMarkdownContext)!;
   const { loading, error, data } = useDemo(id);
 
   const CodeBlock = renderers?.["code-block"] ?? ComponentBlock;
@@ -58,6 +58,7 @@ export function DumiDemo(props: {
       demoid={id}
       getModule={() => data}
       {...(props.previewerProps as any)}
+      DemoProvider={DemoProvider}
       className={classNames(props.className, {
         "demo-compact": previewerProps.compact,
       })}
