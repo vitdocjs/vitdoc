@@ -27,7 +27,11 @@ export function MarkdownProvider(
   return MarkdownContent ? (
     <div className={classNames("markdown-area", MarkdownContent.pathHash)}>
       <VitDocMarkdownContext.Provider
-        value={{ context: MarkdownContent, renderers }}
+        value={{
+          context: MarkdownContent,
+          renderers,
+          DemoProvider: props.DemoProvider,
+        }}
       >
         {props.children}
       </VitDocMarkdownContext.Provider>

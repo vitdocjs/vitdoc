@@ -1,5 +1,13 @@
 # @vitdoc/theme-default
 
+## 2.0.5-beta.5
+
+### Patch Changes
+
+- update
+- Updated dependencies
+  - @vitdoc/ui@1.3.5-beta.5
+
 ## 2.0.5-beta.4
 
 ### Patch Changes
