@@ -1,5 +1,11 @@
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
-import { copyToClipboard, HighLighter, RendererProps, Store } from "@vitdoc/ui";
+import {
+  copyToClipboard,
+  HighLighter,
+  RendererProps,
+  Store,
+  ComponentArea,
+} from "@vitdoc/ui";
 import { useBoolean, useCreation, useMemoizedFn } from "ahooks";
 import classNames from "classnames";
 import React, { useEffect } from "react";
@@ -13,12 +19,25 @@ import "./index.scss";
 const Tooltip = _Tooltip as any;
 
 export const IframeComponentBlock = (props: RendererProps) => {
-  const { getModule, demoid: id = "" } = props;
+  const { getModule, demoid: id = "", pure, className, style } = props;
 
-  const { lang, content, route } = useCreation(
+  const { lang, renderer, content, route } = useCreation(
     () => getModule?.(id?.trim()) ?? ({} as any),
     [getModule]
   );
+
+  if (pure) {
+    return (
+      <ComponentArea
+        renderer={renderer}
+        lang={lang}
+        className={className}
+        style={style}
+        content={content}
+        Provider={props.DemoProvider}
+      />
+    );
+  }
 
   const [{ current }] = useAtom(Store.propertiesPropsStore);
 

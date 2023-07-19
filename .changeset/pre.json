@@ -12,6 +12,7 @@
   },
   "changesets": [
     "gold-chicken-switch",
-    "shaggy-colts-kick"
+    "shaggy-colts-kick",
+    "strange-goats-allow"
   ]
 }

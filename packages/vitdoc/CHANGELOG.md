@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.4.8-beta.2
+
+### Patch Changes
+
+- update mobile mode
+- Updated dependencies
+  - @vitdoc/runtime@1.4.6-beta.2
+  - @vitdoc/ui@1.3.5-beta.2
+  - @vitdoc/theme-default@2.0.5-beta.2
+
 ## 1.4.8-beta.1
 
 ### Patch Changes

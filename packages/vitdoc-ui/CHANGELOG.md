@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.5-beta.2
+
+### Patch Changes
+
+- update mobile mode
+
 ## 1.3.5-beta.1
 
 ### Patch Changes

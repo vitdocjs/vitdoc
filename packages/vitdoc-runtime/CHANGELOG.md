@@ -1,5 +1,13 @@
 # @vitdoc/runtime
 
+## 1.4.6-beta.2
+
+### Patch Changes
+
+- update mobile mode
+- Updated dependencies
+  - @vitdoc/ui@1.3.5-beta.2
+
 ## 1.4.6-beta.1
 
 ### Patch Changes
