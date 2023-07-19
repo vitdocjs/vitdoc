@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.4.8-beta.3",
+  "version": "1.4.8-beta.4",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./esm/index.js",
   "bin": {

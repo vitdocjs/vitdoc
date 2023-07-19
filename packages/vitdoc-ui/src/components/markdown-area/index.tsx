@@ -15,7 +15,7 @@ export function MarkdownArea() {
 }
 
 export function MarkdownProvider(
-  props: Pick<VitDocMarkdownContextType, "renderers"> & {
+  props: Pick<VitDocMarkdownContextType, "renderers" | "DemoProvider"> & {
     route?: string;
     children: ReactNode;
   }
