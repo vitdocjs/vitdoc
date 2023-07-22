@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.4.9
+
+### Patch Changes
+
+- feat: fix the JSX Runtime
+
 ## 1.4.8
 
 ### Patch Changes
