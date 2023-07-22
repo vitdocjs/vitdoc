@@ -13,53 +13,6 @@ export type IDemoData = {
 };
 
 export async function transformDemo(demo: IDemoData) {
-  let mainModuleId = resolveMainComponent(demo.filename);
-
-  if (!!mainModuleId) {
-    mainModuleId = removeProcessCwd(mainModuleId);
-  }
-
-  const replaceReact = (code) => {
-    const matchInfo = code.match(/import React([ ,])?.+?;/);
-    if (!matchInfo) {
-      return `var $_REF = {};;${code}`;
-    }
-    const { index: matchedIndex, "0": matchedContent } = matchInfo;
-    const index = matchedIndex + matchedContent.length;
-    const before = code.slice(0, index);
-    const after = code.slice(index);
-
-    const reactCode = before.replace(/import React([ ,])?/, (d, matchInfo) => {
-      return `import React$${matchInfo}`;
-    });
-
-    let wrappedReact = `
-      const React = {...React$};
-
-      const beforeCreateElement = React.createElement;
-      var $_REF = { wrap: null };
-      React.createElement = (Comp,...rest) => {
-        const wrap = $_REF.wrap;
-        let NextComp = Comp;
-
-        if(Object.values($_Component).includes(NextComp) && wrap) {
-          NextComp = wrap(Comp, { React: React$ });
-        }
-
-        return beforeCreateElement(NextComp, ...rest);
-      }; `;
-
-    return `${reactCode}
-      ${
-        mainModuleId
-          ? `import * as $_Component from '${mainModuleId}';`
-          : `const $_Component = {};`
-      }
-      ${wrappedReact}
-      ${after}
-      `;
-  };
-
   const replaceExport = (code) => {
     const reg = /import .+ from .+;/g;
 
@@ -70,7 +23,7 @@ export async function transformDemo(demo: IDemoData) {
     }
 
     const prependSetWrap = (code) =>
-      `export const setWrap$ = (f, s) => s.wrap && ($_REF.wrap = s.wrap); ${code}`;
+      `export const setWrap$ = (f, s) => {try{ s.wrap && ($_REF.wrap = s.wrap)}catch(e){}}; ${code}`;
 
     const codeSegment = (code) => {
       if (code.includes("export default")) {
@@ -106,11 +59,106 @@ export async function transformDemo(demo: IDemoData) {
     const DemoComponent = ${code};
     export default () => <Suspense fallback='Loading...'><DemoComponent /></Suspense>;`;
   } else {
-    code = replaceReact(code);
     code = replaceExport(code);
   }
 
   code = appendMeta(code);
 
   return code;
+}
+
+export function addWrapCode(code, demo) {
+  let mainModuleId = resolveMainComponent(demo.filename);
+
+  if (!!mainModuleId) {
+    mainModuleId = removeProcessCwd(mainModuleId);
+  }
+  const hasReactRender = /(createElement\(|jsx\()/.test(code);
+  if (!hasReactRender) return code;
+
+  const renderMethod = /React.createElement\(/.test(code)
+    ? "React.createElement"
+    : "jsx";
+
+  if (renderMethod === "jsx") {
+    // JSX-RUNTIME MODE
+    const matchInfo = code.match(/import { jsx }([ ,])?.+?;/);
+    if (!matchInfo) {
+      return code;
+    }
+    const { index: matchedIndex, "0": matchedContent } = matchInfo;
+    const index = matchedIndex + matchedContent.length;
+    const before = code.slice(0, index);
+    const after = code.slice(index);
+    const reactCode = before.replace(
+      /import { jsx }([ ,])?/,
+      (d, matchInfo) => {
+        return `import { jsx as jsx$ }${matchInfo}`;
+      }
+    );
+    let wrappedReact = `
+      const beforeRender = jsx$;
+      var $_REF = { wrap: null };
+      var jsx = (Comp,...rest) => {
+        const wrap = $_REF.wrap;
+        let NextComp = Comp;
+
+        if(Object.values($_Component).includes(NextComp) && wrap) {
+          NextComp = wrap(Comp, { React: { createElement: jsx$, jsx: jsx$ } });
+        }
+
+        return beforeRender(NextComp, ...rest);
+      }; `;
+
+    return `${reactCode}
+      ${
+        mainModuleId
+          ? `import * as $_Component from '${mainModuleId}';`
+          : `const $_Component = {};`
+      }
+      ${wrappedReact}
+      ${after}
+      `;
+  } else {
+    const matchInfo = code.match(/import React([ ,])?.+?;/);
+    if (!matchInfo) {
+      return code;
+    }
+    const { index: matchedIndex, "0": matchedContent } = matchInfo;
+    const index = matchedIndex + matchedContent.length;
+    const before = code.slice(0, index);
+    const after = code.slice(index);
+
+    const reactCode = before.replace(/import React([ ,])?/, (d, matchInfo) => {
+      return `import React$${matchInfo}`;
+    });
+
+    let wrappedReact = `
+      const React = {...React$};
+
+      const beforeCreateElement = React.createElement;
+      var $_REF = { wrap: null };
+      React.createElement = (Comp,...rest) => {
+        const wrap = $_REF.wrap;
+        let NextComp = Comp;
+
+        if(Object.values($_Component).includes(NextComp) && wrap) {
+          NextComp = wrap(Comp, { React: React$ });
+        }
+
+        return beforeCreateElement(NextComp, ...rest);
+      }; `;
+
+    return `${reactCode}
+      ${
+        mainModuleId
+          ? `import * as $_Component from '${mainModuleId}';`
+          : `const $_Component = {};`
+      }
+      ${wrappedReact}
+      ${after}
+      `;
+
+    return code;
+  }
 }

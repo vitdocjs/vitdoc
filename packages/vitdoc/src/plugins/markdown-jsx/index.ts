@@ -3,7 +3,7 @@ import { ModuleGraph, Plugin, transformWithEsbuild, UserConfig } from "vite";
 import { cleanUrl } from "../../utils";
 import { isCSSLang } from "../../utils/lang";
 import { resolvePkgTheme } from "../../utils/theme";
-import { IDemoData, transformDemo } from "./demo/transform-demo";
+import { addWrapCode, IDemoData, transformDemo } from "./demo/transform-demo";
 import { transformMarkdown } from "./markdown/transform";
 import { transformAliasToDumi } from "../../utils/alias";
 import { VitdocInstance } from "../../core";
@@ -66,10 +66,14 @@ const mdjsx = (vitdoc: VitdocInstance) => {
 
         const vFile = `${id}.tsx`;
 
-        return transformWithEsbuild(demoCode, vFile, {
+        const transformResult = await transformWithEsbuild(demoCode, vFile, {
           target: "esnext",
           sourcefile: vFile,
         });
+
+        transformResult.code = addWrapCode(transformResult.code, demoInfo);
+
+        return transformResult;
       }
 
       if (!/\.md$/.test(id)) {
