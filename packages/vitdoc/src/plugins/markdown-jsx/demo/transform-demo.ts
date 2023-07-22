@@ -82,7 +82,7 @@ export function addWrapCode(code, demo) {
 
   if (renderMethod === "jsx") {
     // JSX-RUNTIME MODE
-    const matchInfo = code.match(/import { jsx }([ ,])?.+?;/);
+    const matchInfo = code.match(/import {(.+)jsx(.+)}([ ,])?.+?;/);
     if (!matchInfo) {
       return code;
     }
@@ -91,9 +91,10 @@ export function addWrapCode(code, demo) {
     const before = code.slice(0, index);
     const after = code.slice(index);
     const reactCode = before.replace(
-      /import { jsx }([ ,])?/,
-      (d, matchInfo) => {
-        return `import { jsx as jsx$ }${matchInfo}`;
+      /import {(.+)(jsx[ ,])(.+)}([ ,])?/,
+      (d, $1, $2, $3, matchInfo) => {
+        $2 = $2.replace(/jsx/, "jsx as jsx$");
+        return `import {${$1}${$2}${$3}}${matchInfo}`;
       }
     );
     let wrappedReact = `

@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.4.10
+
+### Patch Changes
+
+- fix other payload
+
 ## 1.4.9
 
 ### Patch Changes
