@@ -22,7 +22,7 @@ export async function transformDemo(demo: IDemoData) {
   const replaceReact = (code) => {
     const matchInfo = code.match(/import React([ ,])?.+?;/);
     if (!matchInfo) {
-      return code;
+      return `var $_REF = {};;${code}`;
     }
     const { index: matchedIndex, "0": matchedContent } = matchInfo;
     const index = matchedIndex + matchedContent.length;
@@ -113,5 +113,4 @@ export async function transformDemo(demo: IDemoData) {
   code = appendMeta(code);
 
   return code;
-
 }

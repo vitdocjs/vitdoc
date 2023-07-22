@@ -1,5 +1,25 @@
 # @vitdoc/ui
 
+## 1.3.5
+
+### Patch Changes
+
+- upgrade the ui library
+- 19d67d9: update
+- 24ae2ef: upgrade the performance
+- 69059aa: react 18
+- 56f3d70: release
+- 1b534c2: update
+- bf5be7d: update react 18
+- update react18
+- 0cf04f2: update mobile mode
+
+## 1.3.5-beta.7
+
+### Patch Changes
+
+- upgrade the ui library
+
 ## 1.3.5-beta.6
 
 ### Patch Changes

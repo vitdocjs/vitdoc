@@ -1,5 +1,46 @@
 # vitdoc
 
+## 1.4.8
+
+### Patch Changes
+
+- 19d67d9: update
+- 24ae2ef: upgrade the performance
+- 69059aa: react 18
+- 56f3d70: release
+- 1b534c2: update
+- bf5be7d: update react 18
+- update react18
+- 0cf04f2: update mobile mode
+- update the title
+- Updated dependencies
+- Updated dependencies [19d67d9]
+- Updated dependencies [24ae2ef]
+- Updated dependencies [69059aa]
+- Updated dependencies [56f3d70]
+- Updated dependencies [1b534c2]
+- Updated dependencies [bf5be7d]
+- Updated dependencies
+- Updated dependencies [0cf04f2]
+  - @vitdoc/ui@1.3.5
+  - @vitdoc/runtime@1.4.6
+  - @vitdoc/theme-default@2.0.5
+
+## 1.4.8-beta.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.3.5-beta.7
+  - @vitdoc/runtime@1.4.6-beta.7
+  - @vitdoc/theme-default@2.0.5-beta.7
+
+## 1.4.8-beta.7
+
+### Patch Changes
+
+- update the title
+
 ## 1.4.8-beta.6
 
 ### Patch Changes
