@@ -90,35 +90,27 @@ export function addWrapCode(code, demo) {
     const index = matchedIndex + matchedContent.length;
     const before = code.slice(0, index);
     const after = code.slice(index);
-    const reactCode = before.replace(
-      /import {(.+)(jsx[ ,])(.+)}([ ,])?/,
-      (d, $1, $2, $3, matchInfo) => {
-        $2 = $2.replace(/jsx/, "jsx as jsx$");
-        return `import {${$1}${$2}${$3}}${matchInfo}`;
-      }
-    );
-    let wrappedReact = `
-      const beforeRender = jsx$;
-      var $_REF = { wrap: null };
-      var jsx = (Comp,...rest) => {
+    const replacedAfter = after.replace(/jsx\(/g, "jsx_vitdoc_$(");
+    let wrappedReact = `var $_REF = { wrap: null };
+      var jsx_vitdoc_$ = (Comp,...rest) => {
         const wrap = $_REF.wrap;
         let NextComp = Comp;
 
         if(Object.values($_Component).includes(NextComp) && wrap) {
-          NextComp = wrap(Comp, { React: { createElement: jsx$, jsx: jsx$ } });
+          NextComp = wrap(Comp, { React: { createElement: jsx, jsx: jsx } });
         }
 
-        return beforeRender(NextComp, ...rest);
+        return jsx(NextComp, ...rest);
       }; `;
 
-    return `${reactCode}
+    return `${before}
       ${
         mainModuleId
           ? `import * as $_Component from '${mainModuleId}';`
           : `const $_Component = {};`
       }
       ${wrappedReact}
-      ${after}
+      ${replacedAfter}
       `;
   } else {
     const matchInfo = code.match(/import React([ ,])?.+?;/);

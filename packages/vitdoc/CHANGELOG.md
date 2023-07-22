@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.4.11
+
+### Patch Changes
+
+- fix: jsx
+
 ## 1.4.10
 
 ### Patch Changes
