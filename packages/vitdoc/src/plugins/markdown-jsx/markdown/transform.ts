@@ -24,6 +24,7 @@ export async function transformMarkdown(
   const res = (await markdownTransformer(content, {
     cwd: process.cwd(),
     fileAbsPath: id,
+    locales: [],
     alias,
     techStacks: [new ReactTechStack()],
     extraRemarkPlugins: [

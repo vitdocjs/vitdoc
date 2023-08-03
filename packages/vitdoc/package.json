@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./esm/index.js",
   "bin": {
@@ -30,16 +30,16 @@
     "esm"
   ],
   "dependencies": {
-    "@types/node": "^14.18.53",
-    "@umijs/bundler-utils": "^4.0.72",
-    "@umijs/core": "^4.0.72",
-    "@umijs/utils": "^4.0.72",
+    "@types/node": "^14.18.54",
+    "@umijs/bundler-utils": "^4.0.74",
+    "@umijs/core": "^4.0.74",
+    "@umijs/utils": "^4.0.74",
     "@vitdoc/runtime": "workspace:*",
     "@vitdoc/theme-default": "workspace:*",
     "@vitdoc/ui": "workspace:*",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^4.0.4",
     "chalk": "^4.1.2",
-    "dumi": "^2.2.1",
+    "dumi": "~2.2.4",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.4.2",
     "esbuild-resolve-config": "^1.0.8",
@@ -54,14 +54,14 @@
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
     "resolve-ts-alias": "^1.0.8",
-    "sass": "^1.63.6",
+    "sass": "^1.64.2",
     "swig": "^1.4.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.2",
     "unist-util-visit-parents": "^5.1.3",
-    "vite": "^4.4.3"
+    "vite": "^4.4.8"
   },
   "devDependencies": {
     "@types/hast": "^2.3.5",

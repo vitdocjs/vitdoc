@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.6
+
+### Patch Changes
+
+- fix: update deps
+
 ## 1.3.5
 
 ### Patch Changes

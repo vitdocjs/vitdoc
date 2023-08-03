@@ -1,5 +1,13 @@
 # @vitdoc/template-mobile
 
+## 2.0.8
+
+### Patch Changes
+
+- fix: update deps
+- Updated dependencies
+  - @vitdoc/ui@1.3.6
+
 ## 2.0.7
 
 ### Patch Changes
