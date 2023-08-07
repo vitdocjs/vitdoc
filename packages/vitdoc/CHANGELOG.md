@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.4.13
+
+### Patch Changes
+
+- update vitdoc
+
 ## 1.4.12
 
 ### Patch Changes
