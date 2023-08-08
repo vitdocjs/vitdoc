@@ -33,4 +33,4 @@ export default defineConfig({
     },
   },
   plugins: [viteIgnore()],
-});
+}) as any;

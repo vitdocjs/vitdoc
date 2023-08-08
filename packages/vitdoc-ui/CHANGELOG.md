@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.3.7
+
+### Patch Changes
+
+- fix: vite esm module css load
+
 ## 1.3.6
 
 ### Patch Changes

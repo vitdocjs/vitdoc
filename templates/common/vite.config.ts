@@ -1,13 +1,11 @@
-import pkg from "@vitdoc/compile";
-const { viteIgnore } = pkg;
+import { autoLoadCSS, viteIgnore } from "@vitdoc/compile";
 import path from "path";
 import { defineConfig } from "vite";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
   build: {
     outDir: "dist",
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: {
@@ -34,5 +32,5 @@ export default defineConfig({
       output: {},
     },
   },
-  plugins: [viteIgnore(), cssInjectedByJsPlugin()],
+  plugins: [viteIgnore(), autoLoadCSS()],
 });

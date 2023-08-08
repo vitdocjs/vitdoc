@@ -1,5 +1,13 @@
 # @vitdoc/theme-default
 
+## 2.0.7
+
+### Patch Changes
+
+- fix: vite esm module css load
+- Updated dependencies
+  - @vitdoc/ui@1.3.7
+
 ## 2.0.6
 
 ### Patch Changes

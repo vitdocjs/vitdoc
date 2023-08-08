@@ -1,14 +1,12 @@
-import * as pkg from "@vitdoc/compile";
-const { viteIgnore } = pkg;
+import { autoLoadCSS, viteIgnore } from "@vitdoc/compile";
 import path from "path";
 import { defineConfig } from "vite";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
   build: {
     outDir: "dist",
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: {
@@ -36,7 +34,7 @@ export default defineConfig({
   },
   plugins: [
     viteIgnore(),
-    cssInjectedByJsPlugin(),
+    autoLoadCSS(),
     dts({
       entryRoot: path.resolve(__dirname, "src"),
       outDir: "dist/esm",

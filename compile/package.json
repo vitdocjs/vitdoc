@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/compile",
-  "version": "9.9.9",
+  "version": "9.9.10",
   "private": true,
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./dist/index.js",
@@ -9,6 +9,7 @@
     "build": "father build"
   },
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "vite": "^4.4.8"
+  }
 }

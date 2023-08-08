@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/theme-default",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "The default template for vitdoc",
   "files": [
     "dist"
@@ -28,7 +28,6 @@
     "lodash": "^4.17.21",
     "react-router-dom": "^6.14.2",
     "sass": "^1.64.2",
-    "vite": "^4.4.8",
-    "vite-plugin-css-injected-by-js": "^3.2.1"
+    "vite": "^4.4.8"
   }
 }

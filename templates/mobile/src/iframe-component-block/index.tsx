@@ -1,24 +1,23 @@
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import {
-  copyToClipboard,
+  ComponentArea,
   HighLighter,
   RendererProps,
   Store,
-  ComponentArea,
+  copyToClipboard,
 } from "@vitdoc/ui";
 import { useBoolean, useCreation, useMemoizedFn } from "ahooks";
-import classNames from "classnames";
-import React, { useEffect } from "react";
-import { useAtom } from "jotai";
-import noop from "lodash/noop";
 import { Tooltip as _Tooltip } from "antd";
+import classNames from "classnames";
+import { useAtom } from "jotai";
+import React from "react";
 import { Device } from "./device";
 
 import "./index.scss";
 
 const Tooltip = _Tooltip as any;
 
-export const IframeComponentBlock = (props: RendererProps) => {
+export const IframeComponentBlock = (props: RendererProps & any) => {
   const { getModule, demoid: id = "", pure, className, style } = props;
 
   const { lang, renderer, content, route } = useCreation(

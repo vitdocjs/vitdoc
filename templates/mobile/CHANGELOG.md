@@ -1,5 +1,13 @@
 # @vitdoc/template-mobile
 
+## 2.0.9
+
+### Patch Changes
+
+- fix: vite esm module css load
+- Updated dependencies
+  - @vitdoc/ui@1.3.7
+
 ## 2.0.8
 
 ### Patch Changes

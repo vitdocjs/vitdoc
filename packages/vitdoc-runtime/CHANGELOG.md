@@ -1,5 +1,13 @@
 # @vitdoc/runtime
 
+## 1.4.8
+
+### Patch Changes
+
+- fix: vite esm module css load
+- Updated dependencies
+  - @vitdoc/ui@1.3.7
+
 ## 1.4.7
 
 ### Patch Changes
