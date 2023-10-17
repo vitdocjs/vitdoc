@@ -11,13 +11,13 @@
   }
 
   &.vitdoc-layout-collapsed {
-    > section.ant-layout {
+    > .ant-layout {
       > aside {
         width: 0 !important;
         max-width: 0 !important;
         min-width: 0 !important;
         > .ant-layout-sider-children {
-          padding-inline: 0;
+          padding-inline: 0 !important;
         }
         .ant-pro-sider-logo {
           display: none;

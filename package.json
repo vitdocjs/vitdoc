@@ -24,14 +24,14 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
-    "@types/react": "^18.2.18",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
     "bumpp": "^8.2.1",
     "esbuild": "^0.14.54",
-    "esbuild-sass-plugin": "^2.10.0",
-    "father": "^4.3.0",
-    "turbo": "^1.10.12",
-    "vite": "^4.4.8",
+    "esbuild-sass-plugin": "^2.16.0",
+    "father": "^4.3.5",
+    "turbo": "^1.10.15",
+    "vite": "^4.4.11",
     "vitest": "^0.25.8"
   }
 }

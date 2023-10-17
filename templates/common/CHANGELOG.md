@@ -1,5 +1,13 @@
 # @vitdoc/theme-default
 
+## 2.0.8
+
+### Patch Changes
+
+- upgrade the deps
+- Updated dependencies
+  - @vitdoc/ui@1.3.8
+
 ## 2.0.7
 
 ### Patch Changes
