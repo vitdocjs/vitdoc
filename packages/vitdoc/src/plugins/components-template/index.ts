@@ -14,7 +14,6 @@ import {
   getPackageAlias,
 } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
-import { createRequire } from "node:module";
 
 const isDebug = process.env.DEBUG;
 
@@ -113,8 +112,6 @@ export const getRoutes = async (docDirs: string[]) => {
 const vitdocRuntimeId = "virtual:vitdoc-runtime";
 const vitdocTemplateId = "virtual:vitdoc-layouts";
 const vitdocBuiltinsId = "virtual:vitdoc-builtins";
-
-const require = createRequire(import.meta.url);
 
 const componentsTemplate = async (vitdoc: VitdocInstance) => {
   let input = {};

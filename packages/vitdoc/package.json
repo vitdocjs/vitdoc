@@ -2,16 +2,15 @@
   "name": "vitdoc",
   "version": "1.5.0-beta.1",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
-  "main": "./esm/index.js",
+  "main": "./dist/index.js",
   "module": "./esm/index.js",
   "bin": {
     "vitdoc": "./bin/index.mjs",
     "vdoc": "./bin/index.mjs"
   },
-  "type": "module",
   "exports": {
     ".": "./esm/index.js",
-    "./vite": "./esm/preset/index.js",
+    "./vite": "./dist/preset/index.js",
     "./package.json": "./package.json"
   },
   "scripts": {
