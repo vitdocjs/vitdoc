@@ -21,7 +21,8 @@ export async function transformMarkdown(
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 
-  const res = (await markdownTransformer(content, {
+  // @ts-ignore
+  const res = (await markdownTransformer.default(content, {
     cwd: process.cwd(),
     fileAbsPath: id,
     locales: [],

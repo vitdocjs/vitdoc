@@ -1,7 +1,7 @@
 import { cheerio } from "@umijs/utils";
 import * as fs from "fs";
 import * as path from "path";
-import convertAliasByTsconfigPaths from "resolve-ts-alias";
+import { convertAliasByTsconfigPaths } from "resolve-ts-alias";
 import Swig from "swig";
 import { mergeConfig, send, ViteDevServer } from "vite";
 import { VitdocInstance } from "../../core";
@@ -14,6 +14,7 @@ import {
   getPackageAlias,
 } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
+import { createRequire } from "node:module";
 
 const isDebug = process.env.DEBUG;
 
@@ -113,7 +114,9 @@ const vitdocRuntimeId = "virtual:vitdoc-runtime";
 const vitdocTemplateId = "virtual:vitdoc-layouts";
 const vitdocBuiltinsId = "virtual:vitdoc-builtins";
 
-const componentsTemplate = (vitdoc: VitdocInstance) => {
+const require = createRequire(import.meta.url);
+
+const componentsTemplate = async (vitdoc: VitdocInstance) => {
   let input = {};
   let server: ViteDevServer;
   let config;

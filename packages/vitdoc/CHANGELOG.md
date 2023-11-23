@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.5.0-beta.1
+
+### Patch Changes
+
+- upgrade to esm
+- Updated dependencies
+  - @vitdoc/runtime@1.5.0-beta.1
+  - @vitdoc/ui@1.4.0-beta.1
+  - @vitdoc/theme-default@2.1.0-beta.1
+
 ## 1.5.0-beta.0
 
 ### Minor Changes

@@ -1,15 +1,16 @@
 {
   "name": "vitdoc",
-  "version": "1.5.0-beta.0",
+  "version": "1.5.0-beta.1",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./esm/index.js",
   "bin": {
     "vitdoc": "./bin/index.mjs",
     "vdoc": "./bin/index.mjs"
   },
+  "type": "module",
   "exports": {
     ".": "./esm/index.js",
-    "./vite": "./dist/preset/index.js",
+    "./vite": "./esm/preset/index.js",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -43,7 +44,7 @@
     "dumi": "~2.2.14",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.5.0",
-    "esbuild-resolve-config": "^1.0.8",
+    "esbuild-resolve-config": "^1.0.9",
     "extract-typescript-types": "^1.1.1",
     "glob": "^7.2.3",
     "hast-util-to-string": "^2.0.0",
@@ -54,7 +55,7 @@
     "prettier": "^2.8.8",
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",
-    "resolve-ts-alias": "^1.0.8",
+    "resolve-ts-alias": "^1.0.9",
     "sass": "^1.69.5",
     "swig": "^1.4.2",
     "tsconfig-paths": "^4.2.0",

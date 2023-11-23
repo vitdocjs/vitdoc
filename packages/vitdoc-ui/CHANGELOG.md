@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.4.0-beta.1
+
+### Patch Changes
+
+- upgrade to esm
+
 ## 1.4.0-beta.0
 
 ### Minor Changes
