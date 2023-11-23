@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/runtime",
-  "version": "1.4.9",
+  "version": "1.5.0-beta.0",
   "description": "The runtime for vitdoc",
   "files": [
     "dist",
@@ -24,16 +24,16 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@ant-design/pro-layout": "^7.17.8",
+    "@ant-design/pro-layout": "^7.17.16",
     "@vitdoc/compile": "workspace:^",
     "ahooks": "^3.7.8",
-    "antd": "^5.10.1",
+    "antd": "^5.11.3",
     "classnames": "^2.3.2",
     "jotai": "^1.13.1",
     "lodash": "^4.17.21",
-    "react-router": "^6.17.0",
-    "react-router-dom": "^6.17.0",
-    "sass": "^1.69.3",
-    "vite": "^4.4.11"
+    "react-router": "^6.20.0",
+    "react-router-dom": "^6.20.0",
+    "sass": "^1.69.5",
+    "vite": "^5.0.2"
   }
 }
