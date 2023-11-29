@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.5.0-beta.4
+
+### Patch Changes
+
+- fix the export
+
 ## 1.5.0-beta.3
 
 ### Patch Changes

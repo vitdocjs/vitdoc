@@ -14,6 +14,8 @@ import {
   getPackageAlias,
 } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
+import { fileURLToPath, resolve } from "mlly";
+import { readFile } from "fs/promises";
 
 const isDebug = process.env.DEBUG;
 
@@ -129,7 +131,9 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     docDirs,
   } = vitdoc.resolvedConfig;
 
-  const entry = require.resolve("@vitdoc/runtime/index.html");
+  const entry = await resolve("@vitdoc/runtime/index.html", {
+    url: import.meta.url,
+  }).then(fileURLToPath);
 
   const themePromise = resolvePkgTheme(templatePath);
 
@@ -182,7 +186,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         },
       });
     },
-    resolveId(id) {
+    async resolveId(id) {
       if (isRouteMap(id)) {
         return "route-map.json";
       }
@@ -196,11 +200,15 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       }
 
       if (vitdocRouterId === id) {
-        return require.resolve("@vitdoc/runtime/router");
+        return await resolve("@vitdoc/runtime/router", {
+          url: import.meta.url,
+        }).then(fileURLToPath);
       }
 
       if (vitdocRuntimeId === id) {
-        return require.resolve("@vitdoc/runtime");
+        return await resolve("@vitdoc/runtime", {
+          url: import.meta.url,
+        }).then(fileURLToPath);
       }
 
       if (id === entry) {
@@ -235,10 +243,9 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
 
         const mdFileMap = mdFiles.map((file) => [file, file]);
 
-        const { name, description } = require(path.resolve(
-          process.cwd(),
-          "package.json"
-        ));
+        const { name, description } = await readFile(
+          path.resolve(process.cwd(), "package.json")
+        ).then((res) => JSON.parse(res.toString()!));
 
         let html = createHtml({
           name,

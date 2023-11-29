@@ -6,9 +6,10 @@ import { vitdoc } from "../esm/preset";
 const config = resolveConfig<any>("vite.config", { defaultConfig: {} });
 
 // https://vitejs.dev/config/
-export default mergeConfig(
-  {
-    plugins: [vitdoc(), react()],
-  },
-  config
-);
+export default async () =>
+  mergeConfig(
+    {
+      plugins: [vitdoc(), react()],
+    },
+    config
+  );
