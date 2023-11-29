@@ -7,6 +7,8 @@ import TypeFile from "../plugins/type-file";
 import { ConfigType } from "../types";
 import { createInstance } from "../core";
 import { fileURLToPath } from "url";
+import { getRootPath } from "../utils";
+import { resolve } from "mlly";
 
 const vitdocInstance = createInstance();
 
@@ -20,7 +22,7 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
   return [
     {
       name: "vitdoc:config",
-      config(config) {
+      async config(config) {
         return mergeConfig(
           {
             base: process.env.VITE_BASE_HOST || "/",
@@ -35,7 +37,15 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
             server: {
               cors: true,
               fs: {
-                allow: [path.resolve(__dirname, "../../"), cwd],
+                allow: [
+                  getRootPath(""),
+                  await resolve("@vitdoc/runtime", {
+                    url: import.meta.url,
+                  })
+                    .then(fileURLToPath)
+                    .then((filepath) => path.resolve(filepath, "../../")),
+                  cwd,
+                ],
               },
             },
             resolve: {
