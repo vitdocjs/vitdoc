@@ -20,7 +20,7 @@ export const resolvePkgTheme = memoize(
       const js = await resolve(themePkgName)
         .catch(() => resolve(themePkgName, { url: path.resolve(__dirname) }))
         .then((res) => fileURLToPath(res));
-
+      
       if (!js) {
         return null;
       }
