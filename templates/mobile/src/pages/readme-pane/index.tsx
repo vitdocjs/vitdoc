@@ -10,7 +10,7 @@ import {
 import { useUnmount } from "ahooks";
 import { Typography } from "antd";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "virtual:vitdoc-router";
 
 import "./index.scss";
 

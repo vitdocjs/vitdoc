@@ -9,6 +9,7 @@
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./router": "./dist/router.js",
     "./index.html": "./index.html",
     "./package.json": "./package.json"
   },
@@ -21,6 +22,8 @@
   "dependencies": {
     "@vitdoc/ui": "workspace:*",
     "react": "^18.2.0",
+    "react-router": "^6.20.0",
+    "react-router-dom": "^6.20.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

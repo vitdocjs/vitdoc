@@ -1,6 +1,6 @@
 import { ReactRender } from "@vitdoc/ui";
 import React from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "virtual:vitdoc-router";
 import Main from "./main";
 import Pure from "./pure";
 

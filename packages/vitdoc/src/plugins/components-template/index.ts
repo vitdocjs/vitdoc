@@ -112,6 +112,7 @@ export const getRoutes = async (docDirs: string[]) => {
 const vitdocRuntimeId = "virtual:vitdoc-runtime";
 const vitdocTemplateId = "virtual:vitdoc-layouts";
 const vitdocBuiltinsId = "virtual:vitdoc-builtins";
+const vitdocRouterId = "virtual:vitdoc-router";
 
 const componentsTemplate = async (vitdoc: VitdocInstance) => {
   let input = {};
@@ -192,6 +193,10 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
 
       if (vitdocBuiltinsId === id) {
         return vitdocBuiltinsId;
+      }
+
+      if (vitdocRouterId === id) {
+        return require.resolve("@vitdoc/runtime/router");
       }
 
       if (vitdocRuntimeId === id) {

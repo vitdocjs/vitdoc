@@ -11,7 +11,7 @@ import {
   useRoute,
   useRouteMap,
 } from "@vitdoc/ui";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "virtual:vitdoc-router";
 
 import "./index.scss";
 

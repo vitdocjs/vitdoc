@@ -20,7 +20,7 @@ const TypeFile = ({
   const getComponentDocs = (fileName) => {
     return new Promise((resolve, reject) => {
       // 子进程获取类型定义
-      const child = fork(path.resolve(__dirname, "parse-cli.js"), [fileName]);
+      const child = fork(path.resolve(__dirname, "parse-cli.mjs"), [fileName]);
       child.on("message", (data) => {
         resolve(data);
       });

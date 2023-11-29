@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "virtual:vitdoc-router";
 import ReadmePane from "./pages/readme-pane";
 
 export function DocLayout() {

@@ -1,6 +1,6 @@
 import { MarkdownProvider, useRouteMap } from "@vitdoc/ui";
 import React from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router";
+import { Navigate, Route, Routes, useLocation } from "virtual:vitdoc-router";
 import { DumiDemo, renderers } from "virtual:vitdoc-builtins";
 import { DemoLayout } from "virtual:vitdoc-layouts";
 

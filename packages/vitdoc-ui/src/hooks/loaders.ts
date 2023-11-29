@@ -2,7 +2,7 @@ import { useMemoizedFn, useRequest } from "ahooks";
 import identity from "lodash/identity";
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import { useLocation, useMatch } from "react-router-dom";
+import { useLocation, useMatch } from "virtual:vitdoc-router";
 import { VitDocMarkdownContext } from "../context";
 
 declare global {

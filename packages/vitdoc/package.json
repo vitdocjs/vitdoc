@@ -45,7 +45,7 @@
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.5.0",
     "esbuild-resolve-config": "^1.0.9",
-    "extract-typescript-types": "^1.1.1",
+    "extract-typescript-types": "^1.2.0",
     "glob": "^7.2.3",
     "hast-util-to-string": "^2.0.0",
     "js-yaml": "^4.1.0",

@@ -25,3 +25,8 @@ declare module "virtual:vitdoc-builtins" {
 
   export const renderers: Record<string, React.ComponentType<any>>;
 }
+
+declare module "virtual:vitdoc-router" {
+  export * from "react-router-dom";
+}
+

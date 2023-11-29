@@ -28,6 +28,7 @@ export default defineConfig({
         "@vitdoc/ui/theme",
         "react-router-dom",
         "virtual:vitdoc-hmr",
+        "virtual:vitdoc-router",
       ],
       output: {},
     },

@@ -8,10 +8,5 @@ export default defineConfig({
   },
   esm: {
     output: "esm",
-    overrides: {
-      "src/plugins/hmr/client": {
-        output: "dist/plugins/hmr/client",
-      },
-    },
   },
 });

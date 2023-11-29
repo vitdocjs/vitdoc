@@ -3,7 +3,7 @@ import { LinkCopy, useNavigate, useRouteMap } from "@vitdoc/ui";
 import { useBoolean } from "ahooks";
 import classNames from "classnames";
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "virtual:vitdoc-router";
 import ReadmePane from "./pages/readme-pane";
 
 import "./global.scss";

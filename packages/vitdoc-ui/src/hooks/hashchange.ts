@@ -1,5 +1,5 @@
 import { useMemoizedFn } from "ahooks";
-import { useNavigate as _useNavigate } from "react-router-dom";
+import { useNavigate as _useNavigate } from "virtual:vitdoc-router";
 
 export function useNavigate() {
   const push = _useNavigate();

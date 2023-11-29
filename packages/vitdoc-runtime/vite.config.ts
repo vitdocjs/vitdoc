@@ -12,6 +12,7 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points
       entry: {
         index: path.resolve(__dirname, "src/index.tsx"),
+        router: path.resolve(__dirname, "src/router.ts"),
       },
       // the proper extensions will be added
       formats: ["es"],
@@ -23,12 +24,11 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
-        "react-router",
-        "react-router-dom",
         "@vitdoc/ui",
         "virtual:vitdoc-layouts",
         "virtual:vitdoc-builtins",
         "virtual:vitdoc-hmr",
+        "virtual:vitdoc-router",
       ],
     },
   },

@@ -27,6 +27,7 @@ export default defineConfig({
         "react-router",
         "react-router-dom",
         "virtual:vitdoc-hmr",
+        "virtual:vitdoc-router",
       ],
       output: {
         dir: "dist/esm",
