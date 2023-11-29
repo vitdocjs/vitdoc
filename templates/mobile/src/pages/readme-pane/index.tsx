@@ -1,7 +1,6 @@
 import { PageContainer } from "@ant-design/pro-layout";
 import {
   LinkCopy,
-  MarkdownArea,
   Store,
   useComponentInfo,
   useMarkdown,
@@ -11,7 +10,7 @@ import {
 import { useUnmount } from "ahooks";
 import { Typography } from "antd";
 import React from "react";
-import { IframeComponentBlock } from "../../iframe-component-block";
+import { Outlet } from "react-router-dom";
 
 import "./index.scss";
 
@@ -62,11 +61,7 @@ export default function ReadmePane() {
           <div className="component-main">
             <div className="component-part">
               <div className="component-description">
-                <MarkdownArea
-                  renderers={{
-                    "code-block": IframeComponentBlock,
-                  }}
-                />
+                <Outlet />
               </div>
             </div>
           </div>

@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 2.1.0-beta.2
+
+### Patch Changes
+
+- fix: diff
+
 ## 2.1.0-beta.1
 
 ### Patch Changes
