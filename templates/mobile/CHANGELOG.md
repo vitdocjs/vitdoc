@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 2.1.0-beta.5
+
+### Patch Changes
+
+- upgrade the mobile pkg
+
 ## 2.1.0-beta.4
 
 ### Patch Changes
