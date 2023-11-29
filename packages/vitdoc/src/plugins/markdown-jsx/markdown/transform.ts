@@ -1,6 +1,4 @@
-import markdownTransformer, {
-  type IMdTransformerResult,
-} from "dumi/dist/loaders/markdown/transformer";
+import { type IMdTransformerResult } from "dumi/dist/loaders/markdown/transformer";
 import fs from "fs";
 import ReactTechStack from "./react-tech-statck";
 import type { IThemeLoadResult } from "dumi/dist/features/theme/loader";
@@ -12,6 +10,11 @@ import { appendTypes } from "../utils";
 import rehypeDemo from "./rehypeDemo";
 import { stringifyEval } from "./eval-stringify";
 import remarkStyle from "./remarkStyle";
+import jiti from "jiti";
+
+const markdownTransformer = jiti(import.meta.url, {
+  interopDefault: true,
+})("dumi/dist/loaders/markdown/transformer");
 
 export async function transformMarkdown(
   this: any,
@@ -21,8 +24,7 @@ export async function transformMarkdown(
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 
-  // @ts-ignore
-  const res = (await markdownTransformer.default(content, {
+  const res = (await markdownTransformer(content, {
     cwd: process.cwd(),
     fileAbsPath: id,
     locales: [],

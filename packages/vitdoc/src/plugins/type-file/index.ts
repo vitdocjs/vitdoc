@@ -1,8 +1,8 @@
 import { fork } from "child_process";
-import keyBy from "lodash/keyBy";
+import { keyBy } from "lodash-es";
 import * as path from "path";
 import { ModuleGraph, normalizePath, Plugin, ViteDevServer } from "vite";
-import { cleanUrl, isCSSRequest, isJsx } from "../../utils";
+import { cleanUrl, getRootPath, isCSSRequest, isJsx } from "../../utils";
 
 const TypeFile = ({
   prefix = ".type",
@@ -17,10 +17,11 @@ const TypeFile = ({
   let isBuild;
   const metas: any[] = [];
 
-  const getComponentDocs = (fileName) => {
+  const getComponentDocs = async (fileName) => {
+    const parseScript = await getRootPath("client/parse-cli.mjs");
     return new Promise((resolve, reject) => {
       // 子进程获取类型定义
-      const child = fork(path.resolve(__dirname, "parse-cli.mjs"), [fileName]);
+      const child = fork(parseScript, [fileName]);
       child.on("message", (data) => {
         resolve(data);
       });

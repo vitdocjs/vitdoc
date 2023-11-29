@@ -1,7 +1,7 @@
 import { Plugin, ResolvedConfig, UserConfig } from "./types";
 import { asyncFlatten, deepMerge } from "./utils";
 import { createPluginContainer } from "./plugin";
-import flatten from "lodash/flatten";
+import { flatten } from "lodash-es";
 
 import fs from "fs";
 

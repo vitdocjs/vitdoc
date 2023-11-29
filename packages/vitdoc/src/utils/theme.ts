@@ -6,11 +6,13 @@ import type {
   IThemeComponent,
   IThemeLoadResult,
 } from "dumi/dist/features/theme/loader";
-import memoize from "lodash/memoize";
+import { memoize } from "lodash-es";
 
 const DEFAULT_THEME = "@vitdoc/theme-default";
 
 const userThemeDir = ".vitdoc";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const resolvePkgTheme = memoize(
   async (themePkgName: string): Promise<IThemeLoadResult | null> => {

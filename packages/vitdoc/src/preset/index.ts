@@ -6,8 +6,11 @@ import mdjsx from "../plugins/markdown-jsx";
 import TypeFile from "../plugins/type-file";
 import { ConfigType } from "../types";
 import { createInstance } from "../core";
+import { fileURLToPath } from "url";
 
 const vitdocInstance = createInstance();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
   const cwd = process.cwd();

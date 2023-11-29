@@ -1,7 +1,5 @@
-import path from "path";
-import get from "lodash/get";
-import type { Transformer } from "unified";
-import { removeProcessCwd, resolveMainComponent } from "../../../utils";
+import { get } from "lodash-es";
+import { removeProcessCwd } from "../../../utils";
 import { stringifyEval } from "./eval-stringify";
 
 let visit: typeof import("unist-util-visit").visit;
@@ -14,10 +12,7 @@ let SKIP: typeof import("unist-util-visit").SKIP;
 /**
  * rehype plugin for extract fallback description from markdown content
  */
-export default function rehypeDemo(opts: {
-  cwd: string;
-  fileAbsPath: string;
-}) {
+export default function rehypeDemo(opts: { cwd: string; fileAbsPath: string }) {
   return async (tree, vFile: any) => {
     function emitDemo(demoId: any) {
       const route = removeProcessCwd(opts.fileAbsPath, opts.cwd);

@@ -1,16 +1,17 @@
 import path from "path";
 import { Plugin } from "vite";
-import { removeProcessCwd } from "../../utils";
+import { getRootPath, removeProcessCwd } from "../../utils";
 import { appendHmr } from "./utils";
 import { VitdocInstance } from "../../core";
+import { fileURLToPath, resolve } from "mlly";
 
 export default function VitDocHmr(vitdoc: VitdocInstance) {
   const key = "virtual:vitdoc-hmr";
   return {
     name: "vitdoc:hmr",
-    resolveId(id) {
+    async resolveId(id) {
       if (id === key) {
-        return path.resolve(__dirname, "client/index.js");
+        return await getRootPath("client/hmr.ts");
       }
     },
 

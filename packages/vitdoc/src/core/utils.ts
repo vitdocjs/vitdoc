@@ -1,5 +1,4 @@
-import mergeWith from "lodash/mergeWith";
-import flatten from "lodash/flatten";
+import { mergeWith, flatten } from "lodash-es";
 
 export async function asyncFlatten<T>(arr: T[]): Promise<T[]> {
   do {

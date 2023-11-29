@@ -1,5 +1,6 @@
 import { createHash } from "crypto";
 import fs from "fs";
+import { fileURLToPath, resolve } from "mlly";
 import path from "path";
 import type { ModuleNode } from "vite";
 
@@ -145,3 +146,13 @@ export function toName(name: string | undefined) {
     .replace(/^./, (s) => s.toUpperCase())
     .replace(/ \w/g, (s) => s.toUpperCase());
 }
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export const getRootPath = async (paths: string) => {
+  return path.resolve(
+    fileURLToPath(await resolve("vitdoc", { url: __dirname })),
+    "../../",
+    paths
+  );
+};

@@ -1,7 +1,7 @@
 import react from "@vitejs/plugin-react";
 import { resolveConfig } from "esbuild-resolve-config";
 import { mergeConfig } from "vite";
-import { vitdoc } from "../esm/preset";
+import { vitdoc } from "../dist/vite.mjs";
 
 const config = resolveConfig<any>("vite.config", { defaultConfig: {} });
 
