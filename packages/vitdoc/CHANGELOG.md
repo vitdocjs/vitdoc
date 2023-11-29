@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.5.0-beta.12
+
+### Patch Changes
+
+- upgrade the deps
+
 ## 1.5.0-beta.11
 
 ### Patch Changes

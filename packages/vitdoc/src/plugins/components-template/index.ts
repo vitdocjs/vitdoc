@@ -211,6 +211,18 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         }).then(fileURLToPath);
       }
 
+      if ("@vitdoc/ui" === id) {
+        return await resolve("@vitdoc/ui", {
+          url: import.meta.url,
+        }).then(fileURLToPath);
+      }
+
+      if ("@vitdoc/ui/theme" === id) {
+        return await resolve("@vitdoc/ui/theme", {
+          url: import.meta.url,
+        }).then(fileURLToPath);
+      }
+
       if (id === entry) {
         return "index.html";
       }

@@ -11,6 +11,7 @@
     "@vitdoc/template-mobile": "2.0.10"
   },
   "changesets": [
+    "chilly-bees-hide",
     "cold-hats-grow",
     "curly-falcons-jump",
     "good-terms-hunt",
