@@ -19,6 +19,7 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
 
   await vitdocInstance.init(config);
 
+  
   return [
     {
       name: "vitdoc:config",
@@ -38,7 +39,7 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
               cors: true,
               fs: {
                 allow: [
-                  getRootPath(""),
+                  await getRootPath(""),
                   await resolve("@vitdoc/runtime", {
                     url: import.meta.url,
                   })

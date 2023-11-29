@@ -1,5 +1,17 @@
 # vitdoc
 
+## 1.5.0-beta.11
+
+### Patch Changes
+
+- fix: allow fs list
+
+## 1.5.0-beta.10
+
+### Patch Changes
+
+- fix: allow list
+
 ## 1.5.0-beta.9
 
 ### Patch Changes
