@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.5.0-beta.7
+
+### Patch Changes
+
+- remove log
+- Updated dependencies
+  - @vitdoc/runtime@1.5.0-beta.3
+  - @vitdoc/ui@1.4.0-beta.3
+  - @vitdoc/theme-default@2.1.0-beta.3
+
 ## 1.5.0-beta.6
 
 ### Patch Changes
