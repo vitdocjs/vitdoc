@@ -1,25 +1,22 @@
+import { resolve } from "mlly";
 import path from "path";
+import { fileURLToPath } from "url";
 import { mergeConfig, Plugin } from "vite";
+import { createInstance } from "../core";
 import componentsTemplate from "../plugins/components-template";
 import vitDocHMR from "../plugins/hmr";
 import mdjsx from "../plugins/markdown-jsx";
 import TypeFile from "../plugins/type-file";
 import { ConfigType } from "../types";
-import { createInstance } from "../core";
-import { fileURLToPath } from "url";
 import { getRootPath } from "../utils";
-import { resolve } from "mlly";
 
 const vitdocInstance = createInstance();
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
   const cwd = process.cwd();
 
   await vitdocInstance.init(config);
 
-  
   return [
     {
       name: "vitdoc:config",

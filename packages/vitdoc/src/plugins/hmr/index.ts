@@ -1,9 +1,7 @@
-import path from "path";
 import { Plugin } from "vite";
+import { VitdocInstance } from "../../core";
 import { getRootPath, removeProcessCwd } from "../../utils";
 import { appendHmr } from "./utils";
-import { VitdocInstance } from "../../core";
-import { fileURLToPath, resolve } from "mlly";
 
 export default function VitDocHmr(vitdoc: VitdocInstance) {
   const key = "virtual:vitdoc-hmr";
