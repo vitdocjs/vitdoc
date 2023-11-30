@@ -350,15 +350,6 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         return send(req, res, html, "html", {});
       });
     },
-    transform(code, id) {
-      if (!new RegExp(`^${templatePath}`).test(id) && !/\.js$/.test(id)) {
-        return;
-      }
-
-      return code
-        .replace(/import_meta\["hot"]/g, "import.meta.hot")
-        .replace(/const __vitePreload/g, "var __vitePreload2");
-    },
     generateBundle(options, bundle) {
       if (buildMetaFile) {
         bundle[buildMetaFile as string] = {
