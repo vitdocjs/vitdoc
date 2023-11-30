@@ -192,10 +192,6 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
               find: vitdocRouterId,
               replacement: await resolvePkg("@vitdoc/runtime/router"),
             },
-            {
-              find: vitdocRuntimeId,
-              replacement: await resolvePkg("@vitdoc/runtime"),
-            },
           ],
         },
       });
@@ -226,6 +222,10 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
 
       if (vitdocBuiltinsId === id) {
         return vitdocBuiltinsId;
+      }
+
+      if (vitdocRuntimeId === id) {
+        return await resolvePkg("@vitdoc/runtime");
       }
 
       if (id === entry) {

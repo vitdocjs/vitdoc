@@ -1,5 +1,11 @@
 # @vitdoc/theme-default
 
+## 2.1.0-beta.7
+
+### Patch Changes
+
+- upgrade
+
 ## 2.1.0-beta.6
 
 ### Patch Changes
