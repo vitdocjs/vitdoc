@@ -116,6 +116,12 @@ const vitdocTemplateId = "virtual:vitdoc-layouts";
 const vitdocBuiltinsId = "virtual:vitdoc-builtins";
 const vitdocRouterId = "virtual:vitdoc-router";
 
+const resolvePkg = (pkgName) => {
+  return resolve(pkgName, {
+    url: import.meta.url,
+  }).then(fileURLToPath);
+};
+
 const componentsTemplate = async (vitdoc: VitdocInstance) => {
   let input = {};
   let server: ViteDevServer;
@@ -153,7 +159,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
   return {
     name: "vite:packages-template",
     enforce: "pre",
-    config(resolvedConfig, { command }) {
+    async config(resolvedConfig, { command }) {
       // store the resolved config
       isBuild = command === "build";
 
@@ -168,6 +174,29 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         },
         optimizeDeps: {
           entries: getMainFiles(),
+        },
+      });
+
+      config = mergeConfig(config, {
+        resolve: {
+          alias: [
+            {
+              find: /^@vitdoc\/ui\/theme$/,
+              replacement: await resolvePkg("@vitdoc/ui/theme"),
+            },
+            {
+              find: /^@vitdoc\/ui$/,
+              replacement: await resolvePkg("@vitdoc/ui"),
+            },
+            {
+              find: vitdocRouterId,
+              replacement: await resolvePkg("@vitdoc/runtime/router"),
+            },
+            {
+              find: vitdocRuntimeId,
+              replacement: await resolvePkg("@vitdoc/runtime"),
+            },
+          ],
         },
       });
 
@@ -197,30 +226,6 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
 
       if (vitdocBuiltinsId === id) {
         return vitdocBuiltinsId;
-      }
-
-      if (vitdocRouterId === id) {
-        return await resolve("@vitdoc/runtime/router", {
-          url: import.meta.url,
-        }).then(fileURLToPath);
-      }
-
-      if (vitdocRuntimeId === id) {
-        return await resolve("@vitdoc/runtime", {
-          url: import.meta.url,
-        }).then(fileURLToPath);
-      }
-
-      if ("@vitdoc/ui" === id) {
-        return await resolve("@vitdoc/ui", {
-          url: import.meta.url,
-        }).then(fileURLToPath);
-      }
-
-      if ("@vitdoc/ui/theme" === id) {
-        return await resolve("@vitdoc/ui/theme", {
-          url: import.meta.url,
-        }).then(fileURLToPath);
       }
 
       if (id === entry) {

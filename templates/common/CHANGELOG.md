@@ -1,5 +1,19 @@
 # @vitdoc/theme-default
 
+## 2.1.0-beta.6
+
+### Patch Changes
+
+- fix vitdoc ui alias
+
+## 2.1.0-beta.5
+
+### Patch Changes
+
+- upgrade
+- Updated dependencies
+  - @vitdoc/ui@1.4.0-beta.5
+
 ## 2.1.0-beta.4
 
 ### Patch Changes

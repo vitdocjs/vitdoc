@@ -1,5 +1,21 @@
 # @vitdoc/runtime
 
+## 1.5.0-beta.6
+
+### Patch Changes
+
+- fix vitdoc ui alias
+- Updated dependencies
+  - @vitdoc/ui@1.4.0-beta.6
+
+## 1.5.0-beta.5
+
+### Patch Changes
+
+- upgrade
+- Updated dependencies
+  - @vitdoc/ui@1.4.0-beta.5
+
 ## 1.5.0-beta.4
 
 ### Patch Changes

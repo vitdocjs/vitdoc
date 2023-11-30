@@ -1,5 +1,25 @@
 # vitdoc
 
+## 1.5.0-beta.15
+
+### Patch Changes
+
+- fix vitdoc ui alias
+- Updated dependencies
+  - @vitdoc/runtime@1.5.0-beta.6
+  - @vitdoc/ui@1.4.0-beta.6
+  - @vitdoc/theme-default@2.1.0-beta.6
+
+## 1.5.0-beta.14
+
+### Patch Changes
+
+- upgrade
+- Updated dependencies
+  - @vitdoc/runtime@1.5.0-beta.5
+  - @vitdoc/ui@1.4.0-beta.5
+  - @vitdoc/theme-default@2.1.0-beta.5
+
 ## 1.5.0-beta.13
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # @vitdoc/ui
 
+## 1.4.0-beta.6
+
+### Patch Changes
+
+- fix vitdoc ui alias
+
+## 1.4.0-beta.5
+
+### Patch Changes
+
+- upgrade
+
 ## 1.4.0-beta.4
 
 ### Patch Changes
