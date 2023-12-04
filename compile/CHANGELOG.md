@@ -1,5 +1,16 @@
 # @vitdoc/compile
 
+## 9.10.0
+
+### Minor Changes
+
+- 31a969e: upgrade the versions
+
+### Patch Changes
+
+- release new version
+- 4883e4f: upgrade to esm
+
 ## 9.10.0-beta.1
 
 ### Patch Changes

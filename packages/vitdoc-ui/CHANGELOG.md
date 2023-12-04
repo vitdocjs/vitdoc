@@ -1,5 +1,22 @@
 # @vitdoc/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- 31a969e: upgrade the versions
+
+### Patch Changes
+
+- release new version
+- f69a59a: upgrade
+- 7af1e3b: upgrade
+- 636a670: upgrade
+- 636a670: fix vitdoc ui alias
+- 1d0ac50: remove log
+- b3a5169: upgrade deps
+- 4883e4f: upgrade to esm
+
 ## 1.4.0-beta.7
 
 ### Patch Changes

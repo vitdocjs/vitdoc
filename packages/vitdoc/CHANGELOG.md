@@ -1,5 +1,44 @@
 # vitdoc
 
+## 1.5.0
+
+### Minor Changes
+
+- 31a969e: upgrade the versions
+
+### Patch Changes
+
+- a78ca7b: upgrade the deps
+- 0edcfa7: upgrade to new version
+- release new version
+- f69a59a: upgrade
+- 7af1e3b: upgrade
+- cf1e14c: upgrade
+- 1f76be2: fix: vite.d.ts
+- 636a670: upgrade
+- 636a670: fix vitdoc ui alias
+- bc0f088: update
+- 1d0ac50: remove log
+- bc0f088: update
+- b3a5169: upgrade deps
+- 4883e4f: upgrade to esm
+- b0b9e65: fix the export
+- 1f76be2: fix: allow list
+- d402491: fix: allow fs list
+- d402491: fix: allow list
+- Updated dependencies
+- Updated dependencies [f69a59a]
+- Updated dependencies [31a969e]
+- Updated dependencies [7af1e3b]
+- Updated dependencies [636a670]
+- Updated dependencies [636a670]
+- Updated dependencies [1d0ac50]
+- Updated dependencies [b3a5169]
+- Updated dependencies [4883e4f]
+  - @vitdoc/runtime@1.5.0
+  - @vitdoc/ui@1.4.0
+  - @vitdoc/theme-default@2.1.0
+
 ## 1.5.0-beta.17
 
 ### Patch Changes

@@ -1,5 +1,31 @@
 # @vitdoc/runtime
 
+## 1.5.0
+
+### Minor Changes
+
+- 31a969e: upgrade the versions
+
+### Patch Changes
+
+- release new version
+- 7af1e3b: upgrade
+- 636a670: upgrade
+- 636a670: fix vitdoc ui alias
+- 1d0ac50: remove log
+- b3a5169: upgrade deps
+- 4883e4f: upgrade to esm
+- Updated dependencies
+- Updated dependencies [f69a59a]
+- Updated dependencies [31a969e]
+- Updated dependencies [7af1e3b]
+- Updated dependencies [636a670]
+- Updated dependencies [636a670]
+- Updated dependencies [1d0ac50]
+- Updated dependencies [b3a5169]
+- Updated dependencies [4883e4f]
+  - @vitdoc/ui@1.4.0
+
 ## 1.5.0-beta.7
 
 ### Patch Changes

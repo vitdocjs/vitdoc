@@ -1,5 +1,27 @@
 # @vitdoc/template-mobile
 
+## 2.1.0
+
+### Minor Changes
+
+- 31a969e: upgrade the versions
+
+### Patch Changes
+
+- release new version
+- 8d6d338: upgrade the mobile pkg
+- f69a59a: upgrade
+- 7af1e3b: upgrade
+- 636a670: upgrade
+- 636a670: fix vitdoc ui alias
+- 84586bf: upgrade to beta
+- 1d0ac50: remove log
+- 84586bf: upgrade
+- 9966460: upgrade
+- b3a5169: upgrade deps
+- 4883e4f: upgrade to esm
+- 8071e19: fix: diff
+
 ## 2.1.0-beta.12
 
 ### Patch Changes
