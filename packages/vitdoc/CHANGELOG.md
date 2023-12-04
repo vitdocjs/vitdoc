@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.5.1
+
+### Patch Changes
+
+- upgrade
+
 ## 1.5.0
 
 ### Minor Changes

@@ -25,7 +25,13 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
           {
             base: process.env.VITE_BASE_HOST || "/",
             optimizeDeps: {
-              include: ["react-dom", "react"],
+              include: [
+                "react-dom",
+                "react",
+                "@vitdoc/ui",
+                "@vitdoc/ui/theme",
+                "virtual:vitdoc-router",
+              ],
             },
             build: {
               target: "esnext",
