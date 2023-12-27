@@ -22,7 +22,22 @@ export async function transformMarkdown(
 ) {
   let content = fs.readFileSync(id, "utf-8");
 
+
+  // replace ReactDocgenProps to API
+  content = content.replace(/<ReactDocgenProps/g, "<API");
+  content = content.replace(/ReactDocgenProps>/g, "API>");
+
+
+  // replace attribute name path to src
+  content = content.replace(/path=/g, "src=");
+
+  console.log('content', content)
+
+
+
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
+
+
 
   const res = (await markdownTransformer(content, {
     cwd: process.cwd(),
@@ -101,8 +116,8 @@ const $$contentTexts = ${JSON.stringify(texts)};
 export const meta$ = ${stringifyEval(meta)};
 
 ${styles
-  .map((style) => `import '${id}?markdown-proxy&id=${style.id}.scss';`)
-  .join("\n")}
+        .map((style) => `import '${id}?markdown-proxy&id=${style.id}.scss';`)
+        .join("\n")}
 
 function MarkdownContent() {
   return ${ret.content};

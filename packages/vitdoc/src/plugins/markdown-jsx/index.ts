@@ -76,6 +76,7 @@ const mdjsx = (vitdoc: VitdocInstance) => {
         return transformResult;
       }
 
+
       if (!/\.md$/.test(id)) {
         return;
       }
