@@ -24,7 +24,7 @@ export function getUserConfig(): UserConfig {
         ? fs.readFileSync(config.htmlAppend, "utf8")
         : "";
     }
-  } catch (e) {}
+  } catch (e) { }
 
   return config;
 }

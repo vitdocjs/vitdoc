@@ -66,8 +66,8 @@ export function DumiDemo(props: {
         ...props.style,
         ...(previewerProps.background
           ? {
-              background: previewerProps.background,
-            }
+            background: previewerProps.background,
+          }
           : {}),
       }}
     />

@@ -17,7 +17,7 @@ export function useRoute() {
   return { route };
 }
 
-export class ModuleLoadError extends Error {}
+export class ModuleLoadError extends Error { }
 
 const loadedMap = {};
 
@@ -42,7 +42,7 @@ export function useLoadModule<T>(
               actions.mutate(dealWithResult(newModule));
             });
           })
-          .catch(() => {});
+          .catch(() => { });
 
         return dealWithResult(res);
       });
@@ -91,14 +91,16 @@ export function useRouteMap(): any {
     });
     return result;
   };
+
   return useAsyncImport(`/route-map.json`, ({ default: items }) => ({
     ...items,
     flattenRoutes: flatRouteMap(items.tree),
   }))?.data;
 }
 
-export function useComponentInfo(): any {
-  return useAsyncImport(`/package.json`, ({ default: packageInfo }) => {
+
+export function useComponentInfo(packageJsonPath?: string): any {
+  return useAsyncImport(packageJsonPath || `/package.json`, ({ default: packageInfo }) => {
     const packageName = packageInfo.name;
     const packageVersion = packageInfo.version;
     const registry = (

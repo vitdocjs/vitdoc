@@ -20,7 +20,7 @@ import { readFile } from "fs/promises";
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = async (docDirs: string[]) => {
+export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
   let routes = getComponentFiles(docDirs);
 
   let routeInfos = await Promise.all(
@@ -51,6 +51,7 @@ export const getRoutes = async (docDirs: string[]) => {
 
     let readmePath = routeInfo.route;
 
+
     if (sidemenu === false) {
       return prev;
     }
@@ -62,9 +63,15 @@ export const getRoutes = async (docDirs: string[]) => {
       .replace(/^\/\w+\//, "")
       .replace(/(\/README)?\.md$/, "");
 
-    const matches = cleanPath.match(/^(\w+?)\/(.+)/) || [];
+    // match the first path segment as the group name
+    const matches = cleanPath.match(/^([^/]*)/) || [];
 
-    const groupName = group?.title ?? toName(matches[1]);
+    const groupName = (group?.title ?? toName(matches[1]))?.replace(/-(\w)/g, function (_, match) {
+      return match.toUpperCase();
+    });
+
+    const groupPath = readmePath.match(/^(\/.*?)(\/.*?)(?=\/)/)
+    const packageJsonPath = isMonorepo && groupPath && path.join(groupPath.slice(1, 3).join(''), "package.json");
 
     const order = metaOrder ?? index + 0.1;
 
@@ -86,6 +93,7 @@ export const getRoutes = async (docDirs: string[]) => {
         name,
         order,
         path: readmePath,
+        ...isMonorepo && { packageJsonPath },
       });
     } else {
       // 没有子目录
@@ -135,7 +143,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     htmlAppend: externalHtml,
     logo,
     docDirs,
-    customApiTag,
+    isMonorepo,
   } = vitdoc.resolvedConfig;
 
   const entry = await resolve("@vitdoc/runtime/index.html", {
@@ -245,7 +253,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       }
 
       if (isRouteMap(file)) {
-        const ctx = await getRoutes(docDirs);
+        const ctx = await getRoutes(docDirs, isMonorepo);
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }
@@ -286,6 +294,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         if (server) {
           html = await server.transformIndexHtml(id, html);
         }
+
 
         return html;
       }

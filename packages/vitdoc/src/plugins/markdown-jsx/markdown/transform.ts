@@ -38,11 +38,7 @@ export async function transformMarkdown(
   }
 
 
-
-
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
-
-
 
   const res = (await markdownTransformer(content, {
     cwd: process.cwd(),
@@ -133,6 +129,7 @@ export default MarkdownContent;
 
     return transformWithEsbuild(code, `${id}.jsx`);
   }
+
 
   return emit.call(
     this,
