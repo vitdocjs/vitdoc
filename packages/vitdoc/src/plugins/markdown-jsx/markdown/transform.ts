@@ -18,20 +18,25 @@ const markdownTransformer = jiti(import.meta.url, {
 
 export async function transformMarkdown(
   this: any,
-  { id, cwd, emitDemo, builtins, alias }
+  { id, cwd, emitDemo, builtins, alias, customApiTag }
 ) {
   let content = fs.readFileSync(id, "utf-8");
 
+  // replace API Component to custom Component
+  if (customApiTag) {
+    const { srcAttributeName, tagName } = customApiTag
 
-  // replace ReactDocgenProps to API
-  content = content.replace(/<ReactDocgenProps/g, "<API");
-  content = content.replace(/ReactDocgenProps>/g, "API>");
+    const tagNameRegex = new RegExp(`<(/)?${tagName}(.*?)>`, 'g')
+    const attributeNameRegex = new RegExp(`${srcAttributeName}=`, 'g')
 
 
-  // replace attribute name path to src
-  content = content.replace(/path=/g, "src=");
+    content = content.replace(tagNameRegex, "<$1API$2>");
 
-  console.log('content', content)
+
+    // replace attribute name path to src
+    content = content.replace(attributeNameRegex, "src=");
+  }
+
 
 
 

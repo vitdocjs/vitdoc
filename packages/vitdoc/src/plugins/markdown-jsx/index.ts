@@ -15,7 +15,7 @@ export const getDemoId = (id) =>
   id.match(mdProxyRE)?.[1]?.match(/(.+?)(\.\w+)?$/)?.[1];
 
 const mdjsx = (vitdoc: VitdocInstance) => {
-  const { template } = vitdoc.resolvedConfig;
+  const { template, customApiTag } = vitdoc.resolvedConfig;
 
   let markdownMap: Record<string, IDemoData> = {};
   let transformPromises: Record<string, Promise<any>> = {};
@@ -95,6 +95,7 @@ const mdjsx = (vitdoc: VitdocInstance) => {
         emitDemo(info) {
           markdownMap[info.id] = info;
         },
+        customApiTag
       });
 
       return transformPromises[id];

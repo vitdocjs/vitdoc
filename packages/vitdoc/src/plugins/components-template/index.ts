@@ -135,6 +135,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     htmlAppend: externalHtml,
     logo,
     docDirs,
+    customApiTag,
   } = vitdoc.resolvedConfig;
 
   const entry = await resolve("@vitdoc/runtime/index.html", {
