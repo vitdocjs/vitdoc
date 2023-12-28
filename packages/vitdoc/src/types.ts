@@ -41,9 +41,9 @@ export type ConfigType = {
   logo?: string;
 
   /**
-   * Page Icon
+   * Page Favicon
    */
-  icon?: string;
+  favicon?: string;
 
   /**
    * Expand the html

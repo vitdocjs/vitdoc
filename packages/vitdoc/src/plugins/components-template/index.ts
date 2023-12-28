@@ -142,7 +142,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     template: templatePath,
     htmlAppend: externalHtml,
     logo,
-    icon,
+    favicon,
     docDirs,
     isMonorepo,
   } = vitdoc.resolvedConfig;
@@ -278,7 +278,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
           name,
           description,
           logo,
-          icon,
+          favicon,
           moduleMaps: [...mdFileMap]
             .filter(Boolean)
             .map(
