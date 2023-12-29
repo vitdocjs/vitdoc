@@ -71,6 +71,8 @@ export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
     });
 
     const groupPath = readmePath.match(/^(\/.*?)(\/.*?)(?=\/)/)
+
+    // creating a package.json path in the monorepo
     const packageJsonPath = isMonorepo && groupPath && path.join(groupPath.slice(1, 3).join(''), "package.json");
 
     const order = metaOrder ?? index + 0.1;

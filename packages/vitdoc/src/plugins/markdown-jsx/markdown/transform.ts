@@ -22,21 +22,17 @@ export async function transformMarkdown(
 ) {
   let content = fs.readFileSync(id, "utf-8");
 
-  // replace API Component to custom Component
+  // replace to <API /> follow customApiTag
   if (customApiTag) {
     const { srcAttributeName, tagName } = customApiTag
 
     const tagNameRegex = new RegExp(`<(/)?${tagName}(.*?)>`, 'g')
     const attributeNameRegex = new RegExp(`${srcAttributeName}=`, 'g')
 
-
     content = content.replace(tagNameRegex, "<$1API$2>");
 
-
-    // replace attribute name path to src
     content = content.replace(attributeNameRegex, "src=");
   }
-
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 
