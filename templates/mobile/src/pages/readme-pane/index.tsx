@@ -33,11 +33,13 @@ export default function ReadmePane() {
     });
   });
 
-  const compInfo = useComponentInfo();
 
   const { flattenRoutes = [] } = useRouteMap() || {};
 
   const currentRoute = flattenRoutes.find(({ path }) => path === route);
+
+  const compInfo = useComponentInfo(currentRoute?.packageJsonPath);
+
 
   return (
     <div id="public-component-show-container">
