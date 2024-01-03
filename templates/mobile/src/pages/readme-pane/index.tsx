@@ -38,7 +38,7 @@ export default function ReadmePane() {
 
   const currentRoute = flattenRoutes.find(({ path }) => path === route);
 
-  const compInfo = useComponentInfo(currentRoute?.packageJsonPath);
+  const compInfo = currentRoute.packageJsonInfo || useComponentInfo();
 
 
   return (

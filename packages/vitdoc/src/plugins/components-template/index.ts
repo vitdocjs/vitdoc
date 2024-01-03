@@ -17,11 +17,13 @@ import { resolvePkgTheme } from "../../utils/theme";
 import { fileURLToPath, resolve } from "mlly";
 import { readFile } from "fs/promises";
 
+
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
 export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
   let routes = getComponentFiles(docDirs);
+
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
@@ -64,16 +66,18 @@ export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
       .replace(/(\/README)?\.md$/, "");
 
     // match the first path segment as the group name
-    const matches = cleanPath.match(/^([^/]*)/) || [];
+    const matches = cleanPath.match(/([^/][\w-]+)/) || [];
 
     const groupName = (group?.title ?? toName(matches[1]))?.replace(/-(\w)/g, function (_, match) {
       return match.toUpperCase();
     });
 
-    const groupPath = readmePath.match(/^(\/.*?)(\/.*?)(?=\/)/)
+    const groupPath = readmePath.match(/^(\/[\w-]+)(\/[\w-]+)/)
 
-    // creating a package.json path in the monorepo
     const packageJsonPath = isMonorepo && groupPath && path.join(groupPath.slice(1, 3).join(''), "package.json");
+
+    // fetch package.json in the monorepo
+    const packageJsonInfo = packageJsonPath && JSON.parse(fs.readFileSync(path.join(process.cwd(), packageJsonPath), "utf8"));
 
     const order = metaOrder ?? index + 0.1;
 
@@ -95,7 +99,12 @@ export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
         name,
         order,
         path: readmePath,
-        ...isMonorepo && { packageJsonPath },
+        ...isMonorepo && {
+          packageJsonInfo: {
+            packageName: packageJsonInfo.name,
+            packageVersion: packageJsonInfo.version,
+          }
+        },
       });
     } else {
       // 没有子目录

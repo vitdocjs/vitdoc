@@ -18,21 +18,10 @@ const markdownTransformer = jiti(import.meta.url, {
 
 export async function transformMarkdown(
   this: any,
-  { id, cwd, emitDemo, builtins, alias, customApiTag }
+  { id, cwd, emitDemo, builtins, alias }
 ) {
   let content = fs.readFileSync(id, "utf-8");
 
-  // replace to <API /> follow customApiTag
-  if (customApiTag) {
-    const { srcAttributeName, tagName } = customApiTag
-
-    const tagNameRegex = new RegExp(`<(/)?${tagName}(.*?)>`, 'g')
-    const attributeNameRegex = new RegExp(`${srcAttributeName}=`, 'g')
-
-    content = content.replace(tagNameRegex, "<$1API$2>");
-
-    content = content.replace(attributeNameRegex, "src=");
-  }
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 
@@ -125,6 +114,8 @@ export default MarkdownContent;
 
     return transformWithEsbuild(code, `${id}.jsx`);
   }
+
+
 
 
   return emit.call(

@@ -71,17 +71,4 @@ export type ConfigType = {
    * @default ["docs", "src"]
    */
   docDirs?: string[];
-
-  /**
-   * API Component Tag
-   */
-  customApiTag?: {
-    tagName?: string;
-    srcAttributeName?: string;
-  }
-
-  /**
-   * is monorepo project
-   */
-  isMonorepo?: boolean
 };

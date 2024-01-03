@@ -75,12 +75,17 @@ const TypeFile = ({
         requestedUrlMap[file.replace(matchReg, "")] = true;
 
         const mainUrl = file.replace(matchReg, "");
-        const fileName = normalizePath(mainUrl.replace(/^\//, ""));
+        const fileName = normalizePath(
+          mainUrl.replace(/^\//, "")
+            .replace(new RegExp('/?' + process.cwd().replace(/^\//, '') + '/?'), "")
+        );
 
         const componentDoc: any = await getComponentDocs(fileName);
+
         if (isBuild && componentDoc) {
           metas.push({ metas: keyBy(componentDoc, "exportName"), fileName });
         }
+
 
         if (!Object.keys(componentDoc).length) {
           return `export default {};`;
