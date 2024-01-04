@@ -1,5 +1,12 @@
 # @vitdoc/runtime
 
+## 1.5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.5.0
+
 ## 1.5.0
 
 ### Minor Changes

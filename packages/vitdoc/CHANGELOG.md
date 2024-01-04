@@ -1,5 +1,18 @@
 # vitdoc
 
+## 1.6.0
+
+### Minor Changes
+
+- support monorepo
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.5.0
+  - @vitdoc/runtime@1.5.1
+  - @vitdoc/theme-default@2.1.0
+
 ## 1.5.1
 
 ### Patch Changes

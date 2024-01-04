@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.5.0
+
+### Minor Changes
+
+- support monorepo
+
 ## 1.4.0
 
 ### Minor Changes
