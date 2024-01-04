@@ -1,0 +1,40 @@
+{
+  "name": "monorepo-demo",
+  "version": "1.0.0",
+  "description": "demo",
+  "private": true,
+  "scripts": {
+    "dev": "vitdoc",
+    "build": "vitdoc build"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "pre-commit": [
+    "prettier"
+  ],
+  "author": {
+    "name": "yee.wang"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^18.2.17",
+    "@vitdoc/template-mobile": "workspace:^",
+    "@vitdoc/theme-default": "workspace:^",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.8.8",
+    "pretty-quick": "^1.11.1",
+    "vitdoc": "workspace:^"
+  },
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ]
+}
