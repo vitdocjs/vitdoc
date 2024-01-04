@@ -6,6 +6,7 @@ import { flatten } from "lodash-es";
 import fs from "fs";
 
 import { resolveConfig as esBuildResolveConfig } from "esbuild-resolve-config";
+import { isMonorepo } from "../utils/is-monorepo";
 
 export function getUserConfig(): UserConfig {
   const defaultConfig = {
@@ -24,10 +25,11 @@ export function getUserConfig(): UserConfig {
         ? fs.readFileSync(config.htmlAppend, "utf8")
         : "";
     }
-  } catch (e) {}
+  } catch (e) { }
 
   return config;
 }
+
 
 /**
  * Resolve the config into a usable format.
@@ -54,6 +56,8 @@ export async function resolveConfig(
   ];
 
   const pluginContainer = createPluginContainer(workerUserPlugins);
+
+  workerConfig.isMonorepo = isMonorepo(process.cwd());
 
   workerConfig = await pluginContainer("config", [workerConfig], {
     iterate: mergeConfig as any,

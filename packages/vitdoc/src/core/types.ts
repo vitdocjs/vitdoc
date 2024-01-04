@@ -61,6 +61,7 @@ export type PluginOption =
 
 export interface ResolvedConfig extends Required<UserConfig> {
   plugins: Plugin[];
+  isMonorepo: boolean;
 }
 
 export const defineConfig = (config: UserConfig) => config;

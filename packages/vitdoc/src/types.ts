@@ -41,6 +41,11 @@ export type ConfigType = {
   logo?: string;
 
   /**
+   * Page Favicon
+   */
+  favicon?: string;
+
+  /**
    * Expand the html
    */
   htmlAppend?: string;

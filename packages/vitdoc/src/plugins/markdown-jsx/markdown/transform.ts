@@ -22,6 +22,7 @@ export async function transformMarkdown(
 ) {
   let content = fs.readFileSync(id, "utf-8");
 
+
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 
   const res = (await markdownTransformer(content, {
@@ -101,8 +102,8 @@ const $$contentTexts = ${JSON.stringify(texts)};
 export const meta$ = ${stringifyEval(meta)};
 
 ${styles
-  .map((style) => `import '${id}?markdown-proxy&id=${style.id}.scss';`)
-  .join("\n")}
+        .map((style) => `import '${id}?markdown-proxy&id=${style.id}.scss';`)
+        .join("\n")}
 
 function MarkdownContent() {
   return ${ret.content};
@@ -113,6 +114,9 @@ export default MarkdownContent;
 
     return transformWithEsbuild(code, `${id}.jsx`);
   }
+
+
+
 
   return emit.call(
     this,

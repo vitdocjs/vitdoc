@@ -17,11 +17,13 @@ import { resolvePkgTheme } from "../../utils/theme";
 import { fileURLToPath, resolve } from "mlly";
 import { readFile } from "fs/promises";
 
+
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = async (docDirs: string[]) => {
+export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
   let routes = getComponentFiles(docDirs);
+
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
@@ -51,6 +53,7 @@ export const getRoutes = async (docDirs: string[]) => {
 
     let readmePath = routeInfo.route;
 
+
     if (sidemenu === false) {
       return prev;
     }
@@ -62,9 +65,19 @@ export const getRoutes = async (docDirs: string[]) => {
       .replace(/^\/\w+\//, "")
       .replace(/(\/README)?\.md$/, "");
 
-    const matches = cleanPath.match(/^(\w+?)\/(.+)/) || [];
+    // match the first path segment as the group name
+    const matches = cleanPath.match(/([^/][\w-]+)/) || [];
 
-    const groupName = group?.title ?? toName(matches[1]);
+    const groupName = (group?.title ?? toName(matches[1]))?.replace(/-(\w)/g, function (_, match) {
+      return match.toUpperCase();
+    });
+
+    const groupPath = readmePath.match(/^(\/[\w-]+)(\/[\w-]+)/)
+
+    const packageJsonPath = isMonorepo && groupPath && path.join(groupPath.slice(1, 3).join(''), "package.json");
+
+    // fetch package.json in the monorepo
+    const packageJsonInfo = packageJsonPath && JSON.parse(fs.readFileSync(path.join(process.cwd(), packageJsonPath), "utf8"));
 
     const order = metaOrder ?? index + 0.1;
 
@@ -86,6 +99,12 @@ export const getRoutes = async (docDirs: string[]) => {
         name,
         order,
         path: readmePath,
+        ...isMonorepo && {
+          packageJsonInfo: {
+            packageName: packageJsonInfo.name,
+            packageVersion: packageJsonInfo.version,
+          }
+        },
       });
     } else {
       // 没有子目录
@@ -134,7 +153,9 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     template: templatePath,
     htmlAppend: externalHtml,
     logo,
+    favicon,
     docDirs,
+    isMonorepo,
   } = vitdoc.resolvedConfig;
 
   const entry = await resolve("@vitdoc/runtime/index.html", {
@@ -244,7 +265,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       }
 
       if (isRouteMap(file)) {
-        const ctx = await getRoutes(docDirs);
+        const ctx = await getRoutes(docDirs, isMonorepo);
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }
@@ -268,6 +289,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
           name,
           description,
           logo,
+          favicon,
           moduleMaps: [...mdFileMap]
             .filter(Boolean)
             .map(
@@ -285,6 +307,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         if (server) {
           html = await server.transformIndexHtml(id, html);
         }
+
 
         return html;
       }

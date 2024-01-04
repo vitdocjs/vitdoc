@@ -6,12 +6,13 @@ import {
   LinkCopy,
   PropertyPane,
   Store,
-  useComponentInfo,
   useMarkdown,
   useRoute,
   useRouteMap,
+  useComponentInfo,
 } from "@vitdoc/ui";
 import { Outlet } from "virtual:vitdoc-router";
+
 
 import "./index.scss";
 
@@ -34,11 +35,11 @@ export default function ReadmePane() {
     });
   });
 
-  const compInfo = useComponentInfo();
-
-  const { flattenRoutes = [] } = useRouteMap() || {};
+  const { flattenRoutes = [], } = useRouteMap() || {};
 
   const currentRoute = flattenRoutes.find(({ path }) => path === route);
+
+  const compInfo = currentRoute.packageJsonInfo || useComponentInfo();
 
   return (
     <div id="public-component-show-container">
