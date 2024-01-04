@@ -6,6 +6,6 @@ export default defineConfig(
     template: '@vitdoc/template-mobile',
     docDirs: ["packages/**"],
     logo: '',
-    favicon: 'https://img.alicdn.com/imgextra/i3/O1CN01sKWfJ21EBOi2JEFFV_!!6000000000313-2-tps-48-48.png',
+    favicon: '',
   }
 )
