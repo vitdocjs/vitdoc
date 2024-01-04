@@ -1,5 +1,12 @@
 # vitdoc
 
+## 1.6.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/theme-default@2.1.1
+
 ## 1.6.0
 
 ### Minor Changes
