@@ -1,5 +1,11 @@
 # @vitdoc/compile
 
+## 9.10.1
+
+### Patch Changes
+
+- upgrade deps
+
 ## 9.10.0
 
 ### Minor Changes
