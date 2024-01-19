@@ -20,13 +20,18 @@ import { readFile } from "fs/promises";
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
+export const getRoutes = async (docDirs: string[], isMonorepo = false, pluginContainer) => {
   let routes = getComponentFiles(docDirs);
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
+      console.log('pluginContainer1', await pluginContainer('preMarkdownLoad', [fs.readFileSync(route, "utf-8")]))
+      const markdownContent = await pluginContainer('preMarkdownLoad', [fs.readFileSync(route, "utf8")])
+      // const markdownContent = fs.readFileSync(route, "utf8")
+
+
       const metas: MarkdownMeta = getMetas(
-        await parseMarkdown(fs.readFileSync(route, "utf8"))
+        await parseMarkdown(markdownContent)
       );
 
       const order = metas.order ?? index + 0.1;
@@ -277,7 +282,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       }
 
       if (isRouteMap(file)) {
-        const ctx = await getRoutes(docDirs, isMonorepo);
+        const ctx = await getRoutes(docDirs, isMonorepo, vitdoc.pluginContainer);
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }

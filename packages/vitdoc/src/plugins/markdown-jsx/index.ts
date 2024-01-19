@@ -17,6 +17,7 @@ export const getDemoId = (id) =>
 const mdjsx = (vitdoc: VitdocInstance) => {
   const { template } = vitdoc.resolvedConfig;
 
+
   let markdownMap: Record<string, IDemoData> = {};
   let transformPromises: Record<string, Promise<any>> = {};
   let isBuild: boolean;
@@ -90,6 +91,7 @@ const mdjsx = (vitdoc: VitdocInstance) => {
       transformPromises[id] = transformMarkdown.call(this, {
         alias: transformAliasToDumi(config.resolve?.alias!),
         id,
+        pluginContainer: vitdoc.pluginContainer,
         cwd: process.cwd(),
         ...themeConfigs,
         emitDemo(info) {

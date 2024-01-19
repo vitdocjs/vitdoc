@@ -1,6 +1,5 @@
 import type { IParsedBlockAsset } from "dumi/dist/assetParsers/block";
 import { resolveMainComponent, removeProcessCwd } from "../../../utils";
-import { transformWithEsbuild } from "vite";
 
 export type IDemoData = {
   id: string;
@@ -104,10 +103,9 @@ export function addWrapCode(code, demo) {
       }; `;
 
     return `${before}
-      ${
-        mainModuleId
-          ? `import * as $_Component from '${mainModuleId}';`
-          : `const $_Component = {};`
+      ${mainModuleId
+        ? `import * as $_Component from '${mainModuleId}';`
+        : `const $_Component = {};`
       }
       ${wrappedReact}
       ${replacedAfter}
@@ -143,10 +141,9 @@ export function addWrapCode(code, demo) {
       }; `;
 
     return `${reactCode}
-      ${
-        mainModuleId
-          ? `import * as $_Component from '${mainModuleId}';`
-          : `const $_Component = {};`
+      ${mainModuleId
+        ? `import * as $_Component from '${mainModuleId}';`
+        : `const $_Component = {};`
       }
       ${wrappedReact}
       ${after}
