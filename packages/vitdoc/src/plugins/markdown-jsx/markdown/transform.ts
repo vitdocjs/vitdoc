@@ -20,10 +20,8 @@ export async function transformMarkdown(
   this: any,
   { id, cwd, emitDemo, builtins, alias, pluginContainer }
 ) {
-  console.log('pluginContainer2', await pluginContainer('preMarkdownLoad', [fs.readFileSync(id, "utf-8")]))
 
-  let content = await pluginContainer('preMarkdownLoad', [fs.readFileSync(id, "utf-8")])
-  // let content = fs.readFileSync(id, "utf-8")
+  let content = await pluginContainer('preMarkdownLoad', [fs.readFileSync(id, "utf-8"), id])
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 

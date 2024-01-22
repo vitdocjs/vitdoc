@@ -25,10 +25,7 @@ export const getRoutes = async (docDirs: string[], isMonorepo = false, pluginCon
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
-      console.log('pluginContainer1', await pluginContainer('preMarkdownLoad', [fs.readFileSync(route, "utf-8")]))
-      const markdownContent = await pluginContainer('preMarkdownLoad', [fs.readFileSync(route, "utf8")])
-      // const markdownContent = fs.readFileSync(route, "utf8")
-
+      const markdownContent = await pluginContainer('preMarkdownLoad', [fs.readFileSync(route, "utf8"), path.join(process.cwd(), route)])
 
       const metas: MarkdownMeta = getMetas(
         await parseMarkdown(markdownContent)
@@ -207,7 +204,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         resolve: {
           alias: {
             ...alias,
-            ...getPackageAlias(),
+            ...getPackageAlias({ isMonorepo }),
           },
         },
         optimizeDeps: {

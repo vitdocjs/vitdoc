@@ -46,7 +46,6 @@
     "@vitdoc/theme-default": "workspace:*",
     "@vitdoc/ui": "workspace:*",
     "@vitejs/plugin-react": "^4.2.0",
-    "chalk": "^4.1.2",
     "dumi": "~2.2.14",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.5.0",
