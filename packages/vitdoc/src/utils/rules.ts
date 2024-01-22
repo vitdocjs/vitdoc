@@ -53,7 +53,7 @@ export const getPackageAlias = (params: {
         entry[0],
     }
 
-    logger.info('Entry Config: ' + entryConfig)
+    logger.info('Current Entry Config: ' + entryConfig)
     logger.success('Resolve Entry Config Success:\n' + JSON.stringify(entryResult, null, 2))
     return entryResult
   } catch (e: any) {

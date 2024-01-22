@@ -1,22 +1,22 @@
 import chalk from 'chalk'
-import { consola } from 'consola'
+import { consola as log } from 'consola'
 
 
 
 function info(message: string) {
-  consola.info(chalk.bgCyan.bold(' INFO ') + ' ' + chalk.whiteBright(message))
+  log.info(chalk.bgCyan(' Vitdoc:INFO ') + ' ' + chalk.whiteBright(message))
 }
 
 function success(message: string) {
-  consola.success(chalk.bgGreen.bold(' SUCCESS ') + ' ' + chalk.whiteBright(message))
+  log.success(chalk.bgGreen(' Vitdoc:SUCCESS ') + ' ' + chalk.whiteBright(message))
 }
 
 function warn(message: string) {
-  consola.warn(chalk.whiteBright(message))
+  log.warn(chalk.whiteBright(message))
 }
 
 function error(message: string) {
-  consola.error(new Error(message))
+  log.error(new Error(message))
 }
 
 export default {
