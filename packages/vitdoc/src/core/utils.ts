@@ -1,4 +1,4 @@
-import { mergeWith, flatten } from "lodash-es";
+import { uniq, mergeWith, flatten } from "lodash-es";
 
 export async function asyncFlatten<T>(arr: T[]): Promise<T[]> {
   do {
@@ -10,7 +10,7 @@ export async function asyncFlatten<T>(arr: T[]): Promise<T[]> {
 export function deepMerge(a, b) {
   return mergeWith(a, b, (objValue: any, srcValue: any) => {
     if (Array.isArray(objValue)) {
-      return objValue.concat(srcValue);
+      return uniq(objValue.concat(srcValue));
     }
   });
 }

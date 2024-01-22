@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.5.1
+
+### Patch Changes
+
+- upgrade deps
+
 ## 1.5.0
 
 ### Minor Changes
