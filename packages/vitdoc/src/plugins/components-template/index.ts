@@ -170,6 +170,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     favicon,
     docDirs,
     isMonorepo,
+    entry: entryConfig,
   } = vitdoc.resolvedConfig;
 
   const entry = await resolve("@vitdoc/runtime/index.html", {
@@ -198,13 +199,14 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       // store the resolved config
       isBuild = command === "build";
 
+
       const { bundless: alias } = convertAliasByTsconfigPaths(process.cwd());
 
       config = mergeConfig(resolvedConfig, {
         resolve: {
           alias: {
             ...alias,
-            ...getPackageAlias({ isMonorepo }),
+            ...getPackageAlias({ isMonorepo, entryConfig }),
           },
         },
         optimizeDeps: {

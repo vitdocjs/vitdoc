@@ -71,4 +71,10 @@ export type ConfigType = {
    * @default ["docs", "src"]
    */
   docDirs?: string[];
+
+
+  /**
+   * Entry file
+   */
+  entry?: string;
 };

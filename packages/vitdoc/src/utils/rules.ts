@@ -22,13 +22,14 @@ export const getMainFiles = (path: string = "src") =>
   });
 
 export const getPackageAlias = (params: {
-  entry?: string;
+  entryConfig?: string;
   isMonorepo: boolean;
 }) => {
-  const {
-    entry: entryConfig = 'src/index',
-    isMonorepo,
-  } = params
+  let { entryConfig = 'src/index' } = params
+  const { isMonorepo } = params
+
+  entryConfig = entryConfig.replace(/\.(ts|tsx|js|jsx)?$/, '')
+
   try {
     const findPath = path.join(process.cwd(), isMonorepo ? `**/${entryConfig}.?(ts|tsx|js|jsx)` : `${entryConfig}.?(ts|tsx|js|jsx)`)
     const entry = glob.sync(findPath, {
@@ -37,10 +38,9 @@ export const getPackageAlias = (params: {
     });
     if (!entry.length) throw new Error("no entry file");
 
-
     const entryResult = isMonorepo ? entry.map(item => {
 
-      const reg = new RegExp(`${entryConfig}.[ts|tsx|js|jsx]`, 'g')
+      const reg = new RegExp(`${entryConfig}.(ts|tsx|js|jsx)`, 'g')
 
       const pkgPath = path.join(path.dirname(item.replace(reg, '')), "package.json")
 
@@ -53,10 +53,11 @@ export const getPackageAlias = (params: {
     }
 
 
+    logger.info('Entry Config: ' + entryConfig)
     logger.info('Resolve Entry Config Success:\n' + JSON.stringify(entryResult, null, 2))
     return entryResult
-  } catch (e) {
-    logger.error('Resolve Entry Config Error !!!')
+  } catch (e: any) {
+    logger.error(`Resolve Entry Config Error: ${e.message} !!!`)
     return {};
   }
 };
