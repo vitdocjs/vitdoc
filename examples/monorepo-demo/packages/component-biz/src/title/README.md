@@ -10,7 +10,7 @@ The title component is used to display the title of the page.
 
 
 ```tsx
-import Title from './index'
+import { Title } from '@ali/components-biz'
 
 import React from 'react';
 export default () => {

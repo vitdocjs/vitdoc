@@ -28,21 +28,22 @@ export const getPackageAlias = (params: {
   let { entryConfig = 'src/index' } = params
   const { isMonorepo } = params
 
-  entryConfig = entryConfig.replace(/\.(ts|tsx|js|jsx)?$/, '')
+  entryConfig = entryConfig.replace(/\.(tsx|jsx|ts|js)?$/g, '')
 
   try {
-    const findPath = path.join(process.cwd(), isMonorepo ? `**/${entryConfig}.?(ts|tsx|js|jsx)` : `${entryConfig}.?(ts|tsx|js|jsx)`)
+    const findPath = path.join(process.cwd(), isMonorepo ? `**/${entryConfig}.{tsx,jsx,ts,js}` : `${entryConfig}.{tsx,jsx,ts,js}`)
     const entry = glob.sync(findPath, {
       cwd: process.cwd(),
       ignore: '**/node_modules/**'
     });
+
     if (!entry.length) throw new Error("no entry file");
 
     const entryResult = isMonorepo ? entry.map(item => {
 
-      const reg = new RegExp(`${entryConfig}.(ts|tsx|js|jsx)`, 'g')
+      const reg = new RegExp(`${entryConfig}.(tsx|jsx|ts|js)`, 'g')
 
-      const pkgPath = path.join(path.dirname(item.replace(reg, '')), "package.json")
+      const pkgPath = path.join(item.replace(reg, ''), "package.json")
 
       return fsExtra.existsSync(pkgPath) ? {
         [fsExtra.readJSONSync(pkgPath).name]: item
@@ -52,9 +53,8 @@ export const getPackageAlias = (params: {
         entry[0],
     }
 
-
     logger.info('Entry Config: ' + entryConfig)
-    logger.info('Resolve Entry Config Success:\n' + JSON.stringify(entryResult, null, 2))
+    logger.success('Resolve Entry Config Success:\n' + JSON.stringify(entryResult, null, 2))
     return entryResult
   } catch (e: any) {
     logger.error(`Resolve Entry Config Error: ${e.message} !!!`)

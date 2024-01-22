@@ -1,7 +1,7 @@
 #### Basic Usage
 
 ```tsx
-import { Title as Component } from '..';
+import { Title as Component } from 'demo-package';
 import React from 'react';
 
 
