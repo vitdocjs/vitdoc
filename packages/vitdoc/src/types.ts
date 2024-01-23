@@ -74,7 +74,7 @@ export type ConfigType = {
 
 
   /**
-   * Entry file
+   * Entry file of component
    */
   entry?: string;
 };
