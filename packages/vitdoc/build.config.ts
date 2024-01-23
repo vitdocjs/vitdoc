@@ -9,5 +9,6 @@ export default defineBuildConfig({
     },
   ],
   declaration: true,
+  externals: ["consola", "chalk"],
   clean: true,
 });
