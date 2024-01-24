@@ -47,6 +47,7 @@
     "@vitdoc/ui": "workspace:*",
     "@vitejs/plugin-react": "^4.2.1",
     "chalk": "^4.1.2",
+    "consola": "^3.2.3",
     "dumi": "~2.2.16",
     "esbuild": "^0.14.54",
     "esbuild-register": "^3.5.0",

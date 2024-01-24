@@ -8,7 +8,6 @@ export default defineBuildConfig({
       name: "vite",
     },
   ],
-  externals: ['consola', 'chalk'],
   declaration: true,
   clean: true,
 });
