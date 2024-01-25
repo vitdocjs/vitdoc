@@ -18,10 +18,10 @@ const markdownTransformer = jiti(import.meta.url, {
 
 export async function transformMarkdown(
   this: any,
-  { id, cwd, emitDemo, builtins, alias }
+  { id, cwd, emitDemo, builtins, alias, pluginContainer }
 ) {
-  let content = fs.readFileSync(id, "utf-8");
 
+  let content = await pluginContainer('modifyMarkdown', [fs.readFileSync(id, "utf-8"), id])
 
   content = appendTypes(content, () => resolveMainComponent(id, cwd));
 

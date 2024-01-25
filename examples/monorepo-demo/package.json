@@ -1,9 +1,7 @@
 {
-  "name": "demo-package",
+  "name": "monorepo-demo",
   "version": "1.0.0",
   "description": "demo",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
   "private": true,
   "scripts": {
     "dev": "vitdoc",
@@ -21,23 +19,19 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "moment": "^2.30.1",
-    "moment-timezone": "^0.5.44",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@alifd/next": "^1.27.2",
-    "@types/lodash": "^4.14.202",
-    "@types/react-dom": "^18.2.18",
+    "@types/react-dom": "^18.2.17",
     "@vitdoc/template-mobile": "workspace:^",
     "@vitdoc/theme-default": "workspace:^",
-    "moment-timezone": "^0.5.33",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.8",
     "pretty-quick": "^1.11.1",
-    "vitdoc": "workspace:^",
-    "vite-plugin-px2vw": "^1.0.3"
+    "vitdoc": "workspace:^"
   },
   "sideEffects": [
     "*.css",

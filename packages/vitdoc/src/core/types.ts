@@ -37,6 +37,14 @@ export interface Plugin {
     cheerio: CheerioAPI
   ) => string | Promise<string>;
 
+
+  /**
+   * Modify the markdown content before load.
+   * @param html
+   * @param id
+   */
+  modifyMarkdown?: (this: void, markdownContent: string, id: string) => Promise<string> | string;
+
   /**
    * Modify the dumi theme before it's loaded.
    * @param theme

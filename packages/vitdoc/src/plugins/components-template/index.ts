@@ -11,7 +11,6 @@ import { getMetas, parseMarkdown } from "../../utils/markdown";
 import {
   getComponentFiles,
   getMainFiles,
-  getPackageAlias,
 } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
 import { fileURLToPath, resolve } from "mlly";
@@ -20,13 +19,15 @@ import { readFile } from "fs/promises";
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = async (docDirs: string[], isMonorepo = false) => {
+export const getRoutes = async (docDirs: string[], isMonorepo = false, pluginContainer) => {
   let routes = getComponentFiles(docDirs);
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
+      const markdownContent = await pluginContainer('modifyMarkdown', [fs.readFileSync(route, "utf8"), path.join(process.cwd(), route)])
+
       const metas: MarkdownMeta = getMetas(
-        await parseMarkdown(fs.readFileSync(route, "utf8"))
+        await parseMarkdown(markdownContent)
       );
 
       const order = metas.order ?? index + 0.1;
@@ -196,13 +197,14 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       // store the resolved config
       isBuild = command === "build";
 
+
       const { bundless: alias } = convertAliasByTsconfigPaths(process.cwd());
 
       config = mergeConfig(resolvedConfig, {
         resolve: {
           alias: {
             ...alias,
-            ...getPackageAlias(),
+            // ...getPackageAlias({ isMonorepo, entryConfig }),  use plugin instead
           },
         },
         optimizeDeps: {
@@ -277,7 +279,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       }
 
       if (isRouteMap(file)) {
-        const ctx = await getRoutes(docDirs, isMonorepo);
+        const ctx = await getRoutes(docDirs, isMonorepo, vitdoc.pluginContainer);
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }

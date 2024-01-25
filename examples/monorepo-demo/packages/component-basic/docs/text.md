@@ -1,3 +1,7 @@
+---
+title: Text
+---
+
 #### Basic Usage
 
 Write markdown here.
@@ -5,7 +9,7 @@ Write markdown here.
 ```tsx
 import React from 'react';
 
-import { Text } from '..';
+import { Text } from '../src';
 
 export default () => (
   <div>
@@ -16,7 +20,7 @@ export default () => (
 
 ```tsx
 import React from 'react';
-import { Text } from '..';
+import { Text } from '../src';
 
 function App() {
   return (
@@ -27,3 +31,8 @@ function App() {
 }
 export default App;
 ```
+
+
+### API
+
+<API src="../src/text/index.tsx"/>
