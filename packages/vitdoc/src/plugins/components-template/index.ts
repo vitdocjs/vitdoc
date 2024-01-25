@@ -169,7 +169,6 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
     favicon,
     docDirs,
     isMonorepo,
-    entry: entryConfig,
   } = vitdoc.resolvedConfig;
 
   const entry = await resolve("@vitdoc/runtime/index.html", {
