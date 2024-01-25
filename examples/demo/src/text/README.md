@@ -5,7 +5,7 @@ Write markdown here.
 ```tsx
 import React from 'react';
 
-import { Text } from 'demo-package';
+import { Text } from '..';
 
 export default () => (
   <div>
@@ -16,7 +16,7 @@ export default () => (
 
 ```tsx
 import React from 'react';
-import { Text } from 'demo-package';
+import { Text } from '..';
 
 function App() {
   return (
