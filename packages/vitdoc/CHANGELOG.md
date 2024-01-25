@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.7.0
+
+### Minor Changes
+
+- upgrade vitdoc ui
+
 ## 1.6.5
 
 ### Patch Changes
