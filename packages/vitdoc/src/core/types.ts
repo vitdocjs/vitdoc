@@ -43,7 +43,7 @@ export interface Plugin {
    * @param html
    * @param id
    */
-  preMarkdownLoad?: (this: void, html: string, id: string) => Promise<string> | string;
+  modifyMarkdown?: (this: void, markdownContent: string, id: string) => Promise<string> | string;
 
   /**
    * Modify the dumi theme before it's loaded.

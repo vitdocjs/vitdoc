@@ -11,7 +11,6 @@ import { getMetas, parseMarkdown } from "../../utils/markdown";
 import {
   getComponentFiles,
   getMainFiles,
-  getPackageAlias,
 } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
 import { fileURLToPath, resolve } from "mlly";
@@ -25,7 +24,7 @@ export const getRoutes = async (docDirs: string[], isMonorepo = false, pluginCon
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
-      const markdownContent = await pluginContainer('preMarkdownLoad', [fs.readFileSync(route, "utf8"), path.join(process.cwd(), route)])
+      const markdownContent = await pluginContainer('modifyMarkdown', [fs.readFileSync(route, "utf8"), path.join(process.cwd(), route)])
 
       const metas: MarkdownMeta = getMetas(
         await parseMarkdown(markdownContent)
@@ -206,7 +205,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
         resolve: {
           alias: {
             ...alias,
-            ...getPackageAlias({ isMonorepo, entryConfig }),
+            // ...getPackageAlias({ isMonorepo, entryConfig }),  use plugin instead
           },
         },
         optimizeDeps: {
