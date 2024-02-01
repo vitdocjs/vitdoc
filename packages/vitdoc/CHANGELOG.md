@@ -1,5 +1,14 @@
 # vitdoc
 
+## 1.7.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.5.3
+  - @vitdoc/runtime@1.5.4
+  - @vitdoc/theme-default@2.1.3
+
 ## 1.7.0
 
 ### Minor Changes

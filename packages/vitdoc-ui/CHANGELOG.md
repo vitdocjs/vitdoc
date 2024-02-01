@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.5.3
+
+### Patch Changes
+
+- fix react render
+
 ## 1.5.2
 
 ### Patch Changes

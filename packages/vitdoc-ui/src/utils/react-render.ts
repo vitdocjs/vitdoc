@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import * as ReactDOM from "react-dom";
+import ReactDOM from "react-dom";
 import type { Root } from "react-dom/client";
 
 // 移植自rc-util: https://github.com/react-component/util/blob/master/src/React/render.ts
@@ -9,6 +9,7 @@ type CreateRoot = (container: ContainerType) => Root;
 // Let compiler not to search module usage
 const fullClone = {
   ...ReactDOM,
+  createRoot: (ReactDOM as any).createRoot,
 } as typeof ReactDOM & {
   __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED?: {
     usingClientEntryPoint?: boolean;
