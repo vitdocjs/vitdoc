@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { mergeConfig, Plugin } from "vite";
 import { createInstance } from "../core";
-import componentsTemplate from "../plugins/components-template";
+import vitdocRuntime from "../plugins/runtime";
 import vitDocHMR from "../plugins/hmr";
 import mdjsx from "../plugins/markdown-jsx";
 import TypeFile from "../plugins/type-file";
@@ -67,7 +67,7 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
         );
       },
     },
-    componentsTemplate(vitdocInstance),
+    vitdocRuntime(vitdocInstance),
     TypeFile(),
     mdjsx(vitdocInstance),
     vitDocHMR(vitdocInstance),

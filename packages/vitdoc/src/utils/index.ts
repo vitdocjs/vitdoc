@@ -1,6 +1,6 @@
 import { createHash } from "crypto";
 import fs from "fs";
-import { fileURLToPath, resolve } from "mlly";
+import { ResolveOptions, fileURLToPath, resolve } from "mlly";
 import path from "path";
 import type { ModuleNode } from "vite";
 
@@ -155,4 +155,30 @@ export const getRootPath = async (paths: string) => {
     "../../",
     paths
   );
+};
+
+/**
+ * Get the package directory of the given package name
+ */
+export const resolvePkgDir = async (pkg: string, options: ResolveOptions) => {
+  const getPkgPath = (filePath) => {
+    const dir = path.dirname(filePath);
+    const pkgPath = path.join(dir, "package.json");
+    if (fs.existsSync(pkgPath)) {
+      return dir;
+    }
+    if (dir === "/") {
+      return;
+    }
+    return getPkgPath(dir);
+  };
+  return resolve(pkg, options)
+    .then(fileURLToPath)
+    .then((entryPath) => {
+      if (/^virtual:/.test(pkg)) {
+        return entryPath;
+      }
+      const dir = getPkgPath(entryPath);
+      return dir ?? entryPath;
+    });
 };

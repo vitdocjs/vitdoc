@@ -1,30 +1,34 @@
 import { cheerio } from "@umijs/utils";
 import * as fs from "fs";
+import { readFile } from "fs/promises";
+import { fileURLToPath, resolve, resolvePath } from "mlly";
 import * as path from "path";
 import { convertAliasByTsconfigPaths } from "resolve-ts-alias";
 import Swig from "swig";
-import { mergeConfig, send, ViteDevServer } from "vite";
+import { ViteDevServer, mergeConfig, send } from "vite";
 import { VitdocInstance } from "../../core";
 import { MarkdownMeta } from "../../types";
-import { cleanUrl, isHTMLProxy, toName } from "../../utils";
+import { cleanUrl, isHTMLProxy, resolvePkgDir, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
-import {
-  getComponentFiles,
-  getMainFiles,
-} from "../../utils/rules";
+import { getComponentFiles, getMainFiles } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
-import { fileURLToPath, resolve } from "mlly";
-import { readFile } from "fs/promises";
 
 const isDebug = process.env.DEBUG;
 
 export const isRouteMap = (id) => /route-map\.json$/.test(id);
-export const getRoutes = async (docDirs: string[], isMonorepo = false, pluginContainer) => {
+export const getRoutes = async (
+  docDirs: string[],
+  isMonorepo = false,
+  pluginContainer
+) => {
   let routes = getComponentFiles(docDirs);
 
   let routeInfos = await Promise.all(
     routes.map(async (route, index) => {
-      const markdownContent = await pluginContainer('modifyMarkdown', [fs.readFileSync(route, "utf8"), path.join(process.cwd(), route)])
+      const markdownContent = await pluginContainer("modifyMarkdown", [
+        fs.readFileSync(route, "utf8"),
+        path.join(process.cwd(), route),
+      ]);
 
       const metas: MarkdownMeta = getMetas(
         await parseMarkdown(markdownContent)
@@ -154,6 +158,12 @@ const resolvePkg = (pkgName) => {
   }).then(fileURLToPath);
 };
 
+const resolveCwdPkg = (pkgName) => {
+  return resolvePkgDir(pkgName, {
+    url: process.cwd(),
+  });
+};
+
 const componentsTemplate = async (vitdoc: VitdocInstance) => {
   let input = {};
   let server: ViteDevServer;
@@ -197,14 +207,14 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       // store the resolved config
       isBuild = command === "build";
 
-
       const { bundless: alias } = convertAliasByTsconfigPaths(process.cwd());
 
       config = mergeConfig(resolvedConfig, {
         resolve: {
           alias: {
             ...alias,
-            // ...getPackageAlias({ isMonorepo, entryConfig }),  use plugin instead
+            react: await resolveCwdPkg("react"),
+            "react-dom": await resolveCwdPkg("react-dom"),
           },
         },
         optimizeDeps: {
@@ -279,7 +289,11 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       }
 
       if (isRouteMap(file)) {
-        const ctx = await getRoutes(docDirs, isMonorepo, vitdoc.pluginContainer);
+        const ctx = await getRoutes(
+          docDirs,
+          isMonorepo,
+          vitdoc.pluginContainer
+        );
         routeTree = ctx.tree;
         return JSON.stringify(ctx);
       }
