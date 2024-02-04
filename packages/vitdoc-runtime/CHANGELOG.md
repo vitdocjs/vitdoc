@@ -1,5 +1,16 @@
 # @vitdoc/runtime
 
+## 1.6.0-beta.0
+
+### Minor Changes
+
+- fix: react dev mode
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/ui@1.6.0-beta.0
+
 ## 1.5.4
 
 ### Patch Changes

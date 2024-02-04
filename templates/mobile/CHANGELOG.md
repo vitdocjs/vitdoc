@@ -1,5 +1,11 @@
 # @vitdoc/template-mobile
 
+## 2.2.0-beta.0
+
+### Minor Changes
+
+- fix: react dev mode
+
 ## 2.1.3
 
 ### Patch Changes

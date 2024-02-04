@@ -34,6 +34,7 @@
     </script>
 
     <script type="module">
+
       globalThis.RuntimeModuleMap$ = {
         "/route-map.json": (cb)=>{cb&&cb("/route-map.json");return import("/route-map.json")},
         "/package.json": (cb)=>{cb&&cb("/package.json");return import("/package.json")},

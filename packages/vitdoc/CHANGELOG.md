@@ -1,5 +1,18 @@
 # vitdoc
 
+## 1.8.0-beta.0
+
+### Minor Changes
+
+- fix: react dev mode
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/runtime@1.6.0-beta.0
+  - @vitdoc/ui@1.6.0-beta.0
+  - @vitdoc/theme-default@2.2.0-beta.0
+
 ## 1.7.1
 
 ### Patch Changes

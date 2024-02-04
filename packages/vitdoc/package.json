@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.7.1",
+  "version": "1.8.0-beta.0",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./dist/index.mjs",
   "type": "module",
@@ -37,6 +37,10 @@
     "dist",
     "vite.d.ts"
   ],
+  "peerDependencies": {
+    "react": "^16.7.0 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.7.0 || ^17.0.2 || ^18.0.0"
+  },
   "dependencies": {
     "@types/node": "^14.18.63",
     "@umijs/bundler-utils": "^4.1.1",
@@ -46,6 +50,7 @@
     "@vitdoc/theme-default": "workspace:*",
     "@vitdoc/ui": "workspace:*",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "chalk": "^4.1.2",
     "dumi": "~2.2.17",
     "esbuild": "^0.14.54",
@@ -73,7 +78,7 @@
     "vite": "^5.0.12"
   },
   "devDependencies": {
-    "@types/hast": "^2.3.9",
+    "@types/hast": "^2.3.10",
     "@types/mdast": "^3.0.15"
   }
 }

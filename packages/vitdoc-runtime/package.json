@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/runtime",
-  "version": "1.5.4",
+  "version": "1.6.0-beta.0",
   "description": "The runtime for vitdoc",
   "files": [
     "dist",
@@ -19,18 +19,20 @@
   },
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "react": "^16.7.0 || ^17.0.2 || ^18.0.0",
+    "react-dom": "^16.7.0 || ^17.0.2 || ^18.0.0"
+  },
   "dependencies": {
     "@vitdoc/ui": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router": "^6.21.3",
-    "react-router-dom": "^6.21.3"
+    "react-router": "^6.22.0",
+    "react-router-dom": "^6.22.0"
   },
   "devDependencies": {
     "@ant-design/pro-layout": "^7.17.19",
     "@vitdoc/compile": "workspace:^",
-    "ahooks": "^3.7.8",
-    "antd": "^5.13.2",
+    "ahooks": "^3.7.10",
+    "antd": "^5.14.0",
     "classnames": "^2.5.1",
     "jotai": "^1.13.1",
     "lodash": "^4.17.21",

@@ -1,0 +1,17 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@vitdoc/compile": "9.10.1",
+    "demo-package": "1.0.0",
+    "monorepo-demo": "1.0.0",
+    "vitdoc": "1.7.1",
+    "@vitdoc/runtime": "1.5.4",
+    "@vitdoc/ui": "1.5.3",
+    "@vitdoc/theme-default": "2.1.3",
+    "@vitdoc/template-mobile": "2.1.3"
+  },
+  "changesets": [
+    "plenty-snails-chew"
+  ]
+}

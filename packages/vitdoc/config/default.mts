@@ -1,4 +1,4 @@
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import { resolveConfig } from "esbuild-resolve-config";
 import { mergeConfig } from "vite";
 import { vitdoc } from "../dist/vite.mjs";
@@ -9,7 +9,13 @@ const config = resolveConfig<any>("vite.config", { defaultConfig: {} });
 export default async () =>
   mergeConfig(
     {
-      plugins: [vitdoc(), react()],
+      plugins: [
+        vitdoc(),
+        react({
+          tsDecorators: true,
+        }),
+        
+      ],
     },
     config
   );

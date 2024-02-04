@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.6.0-beta.0
+
+### Minor Changes
+
+- fix: react dev mode
+
 ## 1.5.3
 
 ### Patch Changes
