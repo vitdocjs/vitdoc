@@ -12,6 +12,7 @@
     "@vitdoc/template-mobile": "2.1.3"
   },
   "changesets": [
+    "kind-icons-act",
     "plenty-snails-chew",
     "slimy-dancers-battle"
   ]

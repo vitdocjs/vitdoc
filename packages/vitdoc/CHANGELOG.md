@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.0-beta.2
+
+### Patch Changes
+
+- upgrade workspace
+
 ## 1.8.0-beta.1
 
 ### Patch Changes

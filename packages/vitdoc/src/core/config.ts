@@ -6,7 +6,7 @@ import { flatten } from "lodash-es";
 import fs from "fs";
 
 import { resolveConfig as esBuildResolveConfig } from "esbuild-resolve-config";
-import { isMonorepo } from "../utils/is-monorepo";
+import { isMonorepo } from "../utils/monorepo";
 
 export function getUserConfig(): UserConfig {
   const defaultConfig = {
