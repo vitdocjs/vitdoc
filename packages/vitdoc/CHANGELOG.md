@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.8.0-beta.1
+
+### Patch Changes
+
+- fix: react-hmr
+- Updated dependencies
+  - @vitdoc/runtime@1.6.0-beta.1
+  - @vitdoc/ui@1.6.0-beta.1
+  - @vitdoc/theme-default@2.2.0-beta.1
+
 ## 1.8.0-beta.0
 
 ### Minor Changes
