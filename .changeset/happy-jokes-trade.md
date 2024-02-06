@@ -1,0 +1,5 @@
+---
+"vitdoc": patch
+---
+
+upgrade monorepo

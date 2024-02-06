@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.0-beta.4
+
+### Patch Changes
+
+- upgrade monorepo
+
 ## 1.8.0-beta.3
 
 ### Patch Changes

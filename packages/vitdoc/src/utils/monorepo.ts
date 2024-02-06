@@ -7,5 +7,5 @@ export const getWorkspaceInfo: typeof getPackages = memoize((params) => {
 
 export const isMonorepo = memoize(async (path: string) => {
   const workspaceInfo = await getWorkspaceInfo(path);
-  return workspaceInfo.tool.type === "root";
+  return workspaceInfo.rootDir !== path;
 });
