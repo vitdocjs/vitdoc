@@ -1,5 +1,0 @@
----
-"vitdoc": patch
----
-
-upgrade workspace

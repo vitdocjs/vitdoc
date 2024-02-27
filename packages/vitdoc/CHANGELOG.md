@@ -1,5 +1,26 @@
 # vitdoc
 
+## 1.8.0
+
+### Minor Changes
+
+- 9a96bc5: fix: react dev mode
+
+### Patch Changes
+
+- c873e35: update
+- 23cbb9e: upgrade monorepo
+- 107b16a: upgrade workspace
+- affbce2: update
+- 9807393: fix: react-hmr
+- update react hmr
+- Updated dependencies [9a96bc5]
+- Updated dependencies [9807393]
+- Updated dependencies
+  - @vitdoc/runtime@1.6.0
+  - @vitdoc/ui@1.6.0
+  - @vitdoc/theme-default@2.2.0
+
 ## 1.8.0-beta.5
 
 ### Patch Changes

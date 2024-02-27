@@ -1,5 +1,16 @@
 # @vitdoc/template-mobile
 
+## 2.2.0
+
+### Minor Changes
+
+- 9a96bc5: fix: react dev mode
+
+### Patch Changes
+
+- 9807393: fix: react-hmr
+- update react hmr
+
 ## 2.2.0-beta.1
 
 ### Patch Changes

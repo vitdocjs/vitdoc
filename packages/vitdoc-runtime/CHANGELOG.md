@@ -1,5 +1,20 @@
 # @vitdoc/runtime
 
+## 1.6.0
+
+### Minor Changes
+
+- 9a96bc5: fix: react dev mode
+
+### Patch Changes
+
+- 9807393: fix: react-hmr
+- update react hmr
+- Updated dependencies [9a96bc5]
+- Updated dependencies [9807393]
+- Updated dependencies
+  - @vitdoc/ui@1.6.0
+
 ## 1.6.0-beta.1
 
 ### Patch Changes

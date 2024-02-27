@@ -1,5 +1,16 @@
 # @vitdoc/ui
 
+## 1.6.0
+
+### Minor Changes
+
+- 9a96bc5: fix: react dev mode
+
+### Patch Changes
+
+- 9807393: fix: react-hmr
+- update react hmr
+
 ## 1.6.0-beta.1
 
 ### Patch Changes
