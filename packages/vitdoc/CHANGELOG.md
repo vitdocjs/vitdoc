@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.0-beta.5
+
+### Patch Changes
+
+- update
+
 ## 1.8.0-beta.4
 
 ### Patch Changes
