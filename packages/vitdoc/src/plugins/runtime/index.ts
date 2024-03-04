@@ -211,11 +211,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
 
       config = mergeConfig(resolvedConfig, {
         resolve: {
-          alias: {
-            ...alias,
-            react: await resolveCwdPkg("react"),
-            "react-dom": await resolveCwdPkg("react-dom"),
-          },
+          alias,
         },
         optimizeDeps: {
           entries: getMainFiles(),
@@ -225,6 +221,14 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       config = mergeConfig(config, {
         resolve: {
           alias: [
+            {
+              find: /^react-dom$/,
+              replacement: await resolveCwdPkg("react-dom"),
+            },
+            {
+              find: /^react$/,
+              replacement: await resolveCwdPkg("react"),
+            },
             {
               find: /^@vitdoc\/ui\/theme$/,
               replacement: await resolvePkg("@vitdoc/ui/theme"),
