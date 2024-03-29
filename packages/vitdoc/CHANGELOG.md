@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.3
+
+### Patch Changes
+
+- fix exception
+
 ## 1.8.2
 
 ### Patch Changes
