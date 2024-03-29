@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.4
+
+### Patch Changes
+
+- upgrade
+
 ## 1.8.3
 
 ### Patch Changes
