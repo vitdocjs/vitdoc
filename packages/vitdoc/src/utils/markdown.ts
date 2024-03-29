@@ -1,10 +1,11 @@
 import yaml from "js-yaml";
 
 export async function parseMarkdown(content: string) {
-  const { unified } = await import("unified");
+  const unified = await import("unified");
   const { default: remarkParse } = await import("remark-parse");
   const { default: remarkFrontMatter } = await import("remark-frontmatter");
 
+  // @ts-ignore
   return unified()
     .use(remarkParse as any)
     .use(remarkFrontMatter)
