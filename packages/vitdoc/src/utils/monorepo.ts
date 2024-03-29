@@ -9,7 +9,8 @@ export const getWorkspaceInfo: typeof getPackages = memoize((params) => {
 export const isMonorepo = memoize(async (path: string) => {
   try {
     const workspaceInfo = await getWorkspaceInfo(path);
-    return workspaceInfo.rootDir === path;
+    const isMonorepoRoot = await workspaceInfo.tool.isMonorepoRoot(path);
+    return isMonorepoRoot;
   } catch (e) {
     logger.info("Monorepo detection failed. Will use single package mode.");
     return false;

@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.5
+
+### Patch Changes
+
+- fix monorepo
+
 ## 1.8.4
 
 ### Patch Changes
