@@ -1,6 +1,6 @@
 {
   "name": "vitdoc",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "description": "Seamlessly generate a lightweight, fast and beautiful component documentation.",
   "main": "./dist/index.mjs",
   "type": "module",

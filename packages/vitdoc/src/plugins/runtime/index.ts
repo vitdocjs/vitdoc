@@ -207,7 +207,9 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       // store the resolved config
       isBuild = command === "build";
 
-      const { bundless: alias } = convertAliasByTsconfigPaths(process.cwd());
+      const { bundle: alias } = convertAliasByTsconfigPaths(
+        process.cwd()
+      );
 
       config = mergeConfig(resolvedConfig, {
         resolve: {
