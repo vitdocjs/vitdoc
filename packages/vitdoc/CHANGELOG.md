@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.8.7
+
+### Patch Changes
+
+- feat: support get version from env
+- Updated dependencies
+  - @vitdoc/ui@1.6.1
+  - @vitdoc/runtime@1.6.1
+  - @vitdoc/theme-default@2.2.0
+
 ## 1.8.6
 
 ### Patch Changes

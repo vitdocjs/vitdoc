@@ -17,7 +17,7 @@ export function useRoute() {
   return { route };
 }
 
-export class ModuleLoadError extends Error { }
+export class ModuleLoadError extends Error {}
 
 const loadedMap = {};
 
@@ -42,7 +42,7 @@ export function useLoadModule<T>(
               actions.mutate(dealWithResult(newModule));
             });
           })
-          .catch(() => { });
+          .catch(() => {});
 
         return dealWithResult(res);
       });
@@ -98,22 +98,25 @@ export function useRouteMap(): any {
   }))?.data;
 }
 
-
 export function useComponentInfo(packageJsonPath?: string): any {
-  return useAsyncImport(packageJsonPath || `/package.json`, ({ default: packageInfo }) => {
-    const packageName = packageInfo.name;
-    const packageVersion = packageInfo.version;
-    const registry = (
-      packageInfo.publishConfig?.registry || "https://npmjs.com"
-    ).replace("registry.", "");
-    return {
-      packageName,
-      packageVersion,
-      registry,
-      npmLink: `${registry}/package/${packageName}/v/${packageVersion}`,
-      logo: packageInfo.componentConfig?.logo,
-    };
-  })?.data;
+  return useAsyncImport(
+    packageJsonPath || `/package.json`,
+    ({ default: packageInfo }) => {
+      const packageName = packageInfo.name;
+      // @ts-ignore
+      const packageVersion = __PACKAGE_VERSION__ || packageInfo.version;
+      const registry = (
+        packageInfo.publishConfig?.registry || "https://npmjs.com"
+      ).replace("registry.", "");
+      return {
+        packageName,
+        packageVersion,
+        registry,
+        npmLink: `${registry}/package/${packageName}/v/${packageVersion}`,
+        logo: packageInfo.componentConfig?.logo,
+      };
+    }
+  )?.data;
 }
 
 export type ModuleInfo = {

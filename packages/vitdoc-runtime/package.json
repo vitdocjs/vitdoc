@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/runtime",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "The runtime for vitdoc",
   "files": [
     "dist",

@@ -1,5 +1,11 @@
 # @vitdoc/ui
 
+## 1.6.1
+
+### Patch Changes
+
+- feat: support get version from env
+
 ## 1.6.0
 
 ### Minor Changes

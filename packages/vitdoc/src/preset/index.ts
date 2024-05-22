@@ -1,7 +1,7 @@
 import { resolve } from "mlly";
 import path from "path";
 import { fileURLToPath } from "url";
-import { mergeConfig, Plugin } from "vite";
+import { mergeConfig, Plugin, UserConfig } from "vite";
 import { createInstance } from "../core";
 import vitdocRuntime from "../plugins/runtime";
 import vitDocHMR from "../plugins/hmr";
@@ -17,6 +17,7 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
 
   await vitdocInstance.init(config);
 
+
   return [
     {
       name: "vitdoc:config",
@@ -24,6 +25,9 @@ export async function vitdoc(config: ConfigType = {}): Promise<Plugin[]> {
         return mergeConfig(
           {
             base: process.env.VITE_BASE_HOST || "/",
+            define: {
+              __PACKAGE_VERSION__: JSON.stringify(process.env.PACKAGE_VERSION || ""),
+            },
             optimizeDeps: {
               include: [
                 "react-dom",
