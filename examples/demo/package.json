@@ -22,14 +22,14 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
-    "moment-timezone": "^0.5.44",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "moment-timezone": "^0.5.45",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@alifd/next": "^1.27.2",
-    "@types/lodash": "^4.14.202",
-    "@types/react-dom": "^18.2.18",
+    "@alifd/next": "^1.27.11",
+    "@types/lodash": "^4.17.4",
+    "@types/react-dom": "^18.3.0",
     "@vitdoc/template-mobile": "workspace:^",
     "@vitdoc/theme-default": "workspace:^",
     "moment-timezone": "^0.5.33",

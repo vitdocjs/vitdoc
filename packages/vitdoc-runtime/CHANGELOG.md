@@ -1,5 +1,13 @@
 # @vitdoc/runtime
 
+## 1.6.2
+
+### Patch Changes
+
+- upgrade deps
+- Updated dependencies
+  - @vitdoc/ui@1.6.2
+
 ## 1.6.1
 
 ### Patch Changes

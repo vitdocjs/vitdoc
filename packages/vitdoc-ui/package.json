@@ -1,6 +1,6 @@
 {
   "name": "@vitdoc/ui",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "The UI component for vitdoc theme",
   "main": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -32,9 +32,9 @@
     "react-dom": "^16.7.0 || ^17.0.2 || ^18.0.0"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.8.1",
-    "ahooks": "^3.7.10",
-    "antd": "^5.14.0",
+    "@ant-design/icons": "^4.8.3",
+    "ahooks": "^3.7.11",
+    "antd": "^5.17.3",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
     "eventemitter3": "^4.0.7",
@@ -42,8 +42,8 @@
     "lodash": "^4.17.21",
     "react-copy-to-clipboard": "^5.1.0",
     "react-markdown": "^5.0.3",
-    "react-router": "^6.22.0",
-    "react-router-dom": "^6.22.0",
+    "react-router": "^6.23.1",
+    "react-router-dom": "^6.23.1",
     "react-syntax-highlighter": "^15.5.0",
     "remark-directive": "^1.0.1",
     "remark-frontmatter": "^4.0.1",
@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@vitdoc/compile": "workspace:*",
-    "vite": "^5.0.12",
-    "vite-plugin-dts": "^3.7.2"
+    "vite": "^5.2.11",
+    "vite-plugin-dts": "^3.9.1"
   }
 }

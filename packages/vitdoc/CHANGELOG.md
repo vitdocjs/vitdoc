@@ -1,5 +1,15 @@
 # vitdoc
 
+## 1.8.8
+
+### Patch Changes
+
+- upgrade deps
+- Updated dependencies
+  - @vitdoc/runtime@1.6.2
+  - @vitdoc/ui@1.6.2
+  - @vitdoc/theme-default@2.2.1
+
 ## 1.8.7
 
 ### Patch Changes

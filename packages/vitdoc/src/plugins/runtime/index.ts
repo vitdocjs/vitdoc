@@ -12,6 +12,7 @@ import { cleanUrl, isHTMLProxy, resolvePkgDir, toName } from "../../utils";
 import { getMetas, parseMarkdown } from "../../utils/markdown";
 import { getComponentFiles, getMainFiles } from "../../utils/rules";
 import { resolvePkgTheme } from "../../utils/theme";
+import { pathToFileURL } from "url";
 
 const isDebug = process.env.DEBUG;
 
@@ -160,7 +161,7 @@ const resolvePkg = (pkgName) => {
 
 const resolveCwdPkg = (pkgName) => {
   return resolvePkgDir(pkgName, {
-    url: process.cwd(),
+    url: pathToFileURL(process.cwd()),
   });
 };
 
@@ -207,9 +208,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
       // store the resolved config
       isBuild = command === "build";
 
-      const { bundle: alias } = convertAliasByTsconfigPaths(
-        process.cwd()
-      );
+      const { bundle: alias } = convertAliasByTsconfigPaths(process.cwd());
 
       config = mergeConfig(resolvedConfig, {
         resolve: {

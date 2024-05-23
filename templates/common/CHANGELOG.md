@@ -1,5 +1,11 @@
 # @vitdoc/theme-default
 
+## 2.2.1
+
+### Patch Changes
+
+- upgrade deps
+
 ## 2.2.0
 
 ### Minor Changes
