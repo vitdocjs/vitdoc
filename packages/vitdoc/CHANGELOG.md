@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.9
+
+### Patch Changes
+
+- fix: types alias
+
 ## 1.8.8
 
 ### Patch Changes
