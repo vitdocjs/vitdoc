@@ -40,10 +40,12 @@
         "/package.json": (cb)=>{cb&&cb("/package.json");return import("/package.json")},
         {{moduleMaps}}
       };
-
-      import("virtual:vitdoc-runtime");
     </script>
 
     {{ externalHtml }}
+
+    <script type="module">
+      import("virtual:vitdoc-runtime");
+    </script>
   </body>
 </html>

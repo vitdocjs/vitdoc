@@ -1,5 +1,12 @@
 # vitdoc
 
+## 1.8.10
+
+### Patch Changes
+
+- Updated dependencies
+  - @vitdoc/runtime@1.6.3
+
 ## 1.8.9
 
 ### Patch Changes

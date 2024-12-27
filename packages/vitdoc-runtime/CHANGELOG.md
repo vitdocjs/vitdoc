@@ -1,5 +1,11 @@
 # @vitdoc/runtime
 
+## 1.6.3
+
+### Patch Changes
+
+- upgrade runtime
+
 ## 1.6.2
 
 ### Patch Changes
