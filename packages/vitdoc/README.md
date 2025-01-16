@@ -14,7 +14,9 @@
 <p align="center">
   <a href="https://stackblitz.com/edit/vitdoc?file=src/README.md"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
 </p>
-
+<p align="center">
+  <a href="https://app.codeanywhere.com/#https://github.com/vitdocjs/vitdoc"><img src="https://codeanywhere.com/img/open-in-codeanywhere-btn.svg" alt=""></a>
+</p>
 
 Based on [Vite](https://github.com/vitejs/vite), use `markdown` to write React component documentation, and automatically extract component interface definitions.
 
