@@ -1,5 +1,11 @@
 # vitdoc
 
+## 1.8.11
+
+### Patch Changes
+
+- Compatible with vite6
+
 ## 1.8.10
 
 ### Patch Changes

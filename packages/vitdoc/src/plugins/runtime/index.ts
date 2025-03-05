@@ -413,6 +413,7 @@ const componentsTemplate = async (vitdoc: VitdocInstance) => {
 			if (buildMetaFile) {
 				bundle[buildMetaFile as string] = {
 					type: "asset",
+					names: [],
 					fileName: buildMetaFile,
 					source: JSON.stringify(routeTree),
 				};
