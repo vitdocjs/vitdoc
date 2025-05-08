@@ -57,7 +57,8 @@ export function DumiDemo(props: {
       key={id}
       demoid={id}
       getModule={() => data}
-      {...(props.previewerProps as any)}
+      {...(previewerProps as any)}
+      previewerProps={previewerProps}
       DemoProvider={DemoProvider}
       className={classNames(props.className, {
         "demo-compact": previewerProps.compact,
